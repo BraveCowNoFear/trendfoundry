@@ -79,6 +79,7 @@ async function checkLocal() {
   assertCheck("daily ops workflow has schedule", dailyOpsWorkflow.includes("schedule:") && dailyOpsWorkflow.includes("15 7 * * *"));
   assertCheck("daily ops workflow has manual dispatch", dailyOpsWorkflow.includes("workflow_dispatch:"));
   assertCheck("daily ops workflow can commit tracked files", dailyOpsWorkflow.includes("contents: write") && dailyOpsWorkflow.includes("git add -u"));
+  assertCheck("daily ops workflow can deploy pages", dailyOpsWorkflow.includes("pages: write") && dailyOpsWorkflow.includes("actions/deploy-pages"));
   assertCheck("daily ops workflow runs operate", dailyOpsWorkflow.includes("npm run operate"));
   assertCheck("daily ops workflow avoids ignored lead docs", !dailyOpsWorkflow.includes("git add ."));
 

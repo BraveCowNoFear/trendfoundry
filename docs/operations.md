@@ -38,7 +38,7 @@ The existing Windows task `TrendFoundryDaily` calls `scripts/run_daily.ps1`, whi
 
 `.github/workflows/daily-ops.yml` runs `npm run operate` every day at 07:15 UTC and on manual `workflow_dispatch`.
 
-If tracked product files change, the workflow commits them to `main` as `github-actions[bot]`. That push triggers the existing Pages deployment workflow. Ignored local files such as `dist/`, `logs/`, `data/leads.json`, `docs/lead-pipeline.md`, and `docs/lead-replies.md` are not committed.
+If tracked product files change, the workflow commits them to `main` as `github-actions[bot]`, then deploys the current `site/` directory to GitHub Pages in the same workflow. This direct deploy is required because pushes made with `GITHUB_TOKEN` do not trigger the separate Pages workflow. Ignored local files such as `dist/`, `logs/`, `data/leads.json`, `docs/lead-pipeline.md`, and `docs/lead-replies.md` are not committed.
 
 ## Safety
 
@@ -47,4 +47,4 @@ If tracked product files change, the workflow commits them to `main` as `github-
 - No files are uploaded.
 - No GitHub labels are changed.
 - Buyer delivery still excludes `prospects.csv`, `outreach-board.md`, and `latest.json`.
-- The GitHub Actions run only refreshes tracked product files and pushes a commit when there are changes.
+- The GitHub Actions run only refreshes tracked product files, pushes a commit when there are changes, and deploys the public static site.
