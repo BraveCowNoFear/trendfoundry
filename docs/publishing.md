@@ -6,6 +6,14 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
+Latest verified Pages run: `27080134248`
+
+Verified public paths:
+
+- `https://bravecownofear.github.io/trendfoundry/`
+- `https://bravecownofear.github.io/trendfoundry/daily-brief.md`
+- `https://bravecownofear.github.io/trendfoundry/sales-page-copy.md`
+
 The repository is intended to be public so the sample product page can be inspected without account access.
 
 ## GitHub Pages
