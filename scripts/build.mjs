@@ -338,7 +338,7 @@ const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-lab
         <div class="flow-orbit" aria-hidden="true">
           <span></span><span></span><span></span><span></span>
         </div>
-        <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
+        <ol class="flow-steps">${decisionFlowSteps}</ol>
       </div>
     </section>`;
 const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
@@ -351,7 +351,7 @@ const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-l
         <div class="flow-orbit" aria-hidden="true">
           <span></span><span></span><span></span><span></span>
         </div>
-        <ol class="flow-steps">${decisionFlowSteps}</ol>
+        <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
       </div>
     </section>`;
 
