@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27081350046`
+Latest verified Pages run: `27081594685`
 
-Latest verified commit: `537c75c Refresh daily run with outreach drafts`
+Latest verified commit: `d01be0f Add commerce listing exports`
 
 Verified public paths:
 
@@ -21,9 +21,9 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27081350046` completed successfully for commit `537c75cd542115863aae630bcd4a636d4d6a1d83`.
-- Public page, `public-sample.md`, and `public-sample.csv` returned HTTP 200.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; request and email CTAs were visible.
+- Pages workflow `27081594685` completed successfully for commit `d01be0f4d678ca703b5f4ef3ade938cd3c67d248`.
+- Public `sales-page-copy.md` returned HTTP 200 with Markdown/CSV/HTML delivery language.
+- Public sales copy no longer lists `prospects.csv` as a buyer deliverable and no longer promises PDF delivery.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
