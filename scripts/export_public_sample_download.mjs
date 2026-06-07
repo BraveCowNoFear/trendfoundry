@@ -16,6 +16,7 @@ const sourceFiles = [
   ["public-sample.zh-CN.csv", "public-sample.zh-CN.csv", "text/csv"],
   ["ready-to-record-script.md", "ready-to-record-script.md", "text/markdown"],
   ["signal-board.png", "signal-board.png", "image/png"],
+  ["signal-demo.svg", "signal-demo.svg", "image/svg+xml"],
   ["signal-board.meta.json", "signal-board.meta.json", "application/json"]
 ];
 
@@ -29,6 +30,7 @@ This ZIP contains the public proof assets only. It is safe to share with potenti
 - public-sample.en.csv / public-sample.zh-CN.csv: the same sample in spreadsheet-friendly form.
 - ready-to-record-script.md: one scene-by-scene script example.
 - signal-board.png: the current visual signal board.
+- signal-demo.svg: an animated workflow preview showing signal-to-pack flow.
 - signal-board.meta.json: data timestamp and top-item provenance for the board image.
 
 ## Upgrade

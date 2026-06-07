@@ -1,7 +1,8 @@
 {
-  "generatedAt": "2026-06-07T16:16:38.561Z",
+  "generatedAt": "2026-06-07T16:47:31.581Z",
   "dataGeneratedAt": "2026-06-07T16:16:38.285Z",
   "image": "signal-board.png",
+  "demo": "signal-demo.svg",
   "width": 1200,
   "height": 760,
   "topItems": [

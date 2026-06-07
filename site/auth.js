@@ -33,7 +33,7 @@ function buildAuthUrl(provider) {
   const config = providerConfig(provider.id);
   if (authConfig.brokerBaseUrl) {
     const broker = authConfig.brokerBaseUrl.replace(/\/+$/, "");
-    const url = new URL(broker + "/oauth/start/" + encodeURIComponent(provider.id));
+    const url = new URL(broker + "/oauth/start/" + encodeURIComponent(provider.id), window.location.href);
     url.searchParams.set("return_to", authReturnUrl());
     return url.href;
   }
@@ -108,6 +108,13 @@ function renderProviders() {
 
 function handleCallback() {
   const params = new URLSearchParams(window.location.search);
+  if (params.get("tf_auth") === "error") {
+    const provider = params.get("provider") || "provider";
+    const message = params.get("message") || "auth_error";
+    window.history.replaceState({}, "", window.location.pathname);
+    setNotice(provider + " login could not start: " + message.replace(/_/g, " ") + ".", "warning");
+    return true;
+  }
   if (params.get("tf_auth") === "ok") {
     saveSession({
       provider: params.get("provider") || "broker",
@@ -117,7 +124,7 @@ function handleCallback() {
     });
     window.history.replaceState({}, "", window.location.pathname);
     setNotice("Signed in through the configured auth gateway.", "success");
-    return;
+    return true;
   }
   if (params.get("code")) {
     const state = params.get("state") || "";
@@ -126,7 +133,9 @@ function handleCallback() {
     saveSession({ provider, name: "Pending OAuth exchange", mode: "pending" });
     window.history.replaceState({}, "", window.location.pathname);
     setNotice(expected && state !== expected ? "State mismatch. Do not trust this callback until the backend validates it." : "Code received. A backend must exchange it for a secure session.", expected && state !== expected ? "danger" : "warning");
+    return true;
   }
+  return false;
 }
 
 async function loadConfig() {
@@ -136,9 +145,24 @@ async function loadConfig() {
   } catch {
     authConfig = { providers: {} };
   }
-  handleCallback();
+  if (authConfig.brokerBaseUrl) {
+    try {
+      const sessionUrl = new URL(authConfig.brokerBaseUrl.replace(/\/+$/, "") + "/session", window.location.href);
+      const sessionResponse = await fetch(sessionUrl, { cache: "no-store", credentials: "same-origin" });
+      if (sessionResponse.ok) {
+        const session = await sessionResponse.json();
+        if (session.authenticated && session.profile) saveSession({ ...session.profile, mode: "active" });
+      }
+    } catch {
+      // The static page can still render even when the broker is temporarily unavailable.
+    }
+  }
+  const callbackHandled = handleCallback();
   renderProviders();
   renderSession();
+  if (callbackHandled) {
+    return;
+  }
   if (authConfig.brokerBaseUrl) {
     setNotice("OAuth gateway configured. Provider buttons are ready.", "success");
   } else {
@@ -174,7 +198,13 @@ emailForm.addEventListener("submit", async (event) => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ email, returnTo: authReturnUrl() })
   });
-  setNotice(response.ok ? "Sign-in link requested. Check your email." : "Email endpoint returned an error.", response.ok ? "success" : "danger");
+  let payload = {};
+  try {
+    payload = await response.json();
+  } catch {
+    payload = {};
+  }
+  setNotice(response.ok ? (payload.message || "Sign-in link requested. Check your email.") : (payload.message || "Email endpoint returned an error."), response.ok && payload.ok !== false ? "success" : "warning");
 });
 
 signOutButton.addEventListener("click", () => {

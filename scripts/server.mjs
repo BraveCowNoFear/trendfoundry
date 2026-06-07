@@ -1,6 +1,7 @@
 import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
 import path from "node:path";
+import { buildAuthClientConfig, handleAuthApi } from "./lib/auth_broker.mjs";
 
 const port = Number(process.env.PORT || 4173);
 const siteDir = process.env.SITE_DIR ? path.resolve(process.env.SITE_DIR) : path.join(process.cwd(), "site");
@@ -12,8 +13,22 @@ const types = {
   ".md": "text/markdown; charset=utf-8"
 };
 
-createServer((request, response) => {
-  const safePath = decodeURIComponent(new URL(request.url, `http://localhost:${port}`).pathname)
+function sendJson(response, payload) {
+  response.setHeader("content-type", "application/json; charset=utf-8");
+  response.setHeader("cache-control", "no-store");
+  response.end(JSON.stringify(payload, null, 2));
+}
+
+createServer(async (request, response) => {
+  if (await handleAuthApi(request, response)) return;
+
+  const url = new URL(request.url, `http://localhost:${port}`);
+  if (url.pathname === "/auth/auth.config.json") {
+    sendJson(response, buildAuthClientConfig(request));
+    return;
+  }
+
+  const safePath = decodeURIComponent(url.pathname)
     .replace(/^\/+/, "")
     .replace(/\.\./g, "");
   const filePath = path.join(siteDir, safePath || "index.html");

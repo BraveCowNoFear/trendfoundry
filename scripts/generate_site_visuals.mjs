@@ -10,6 +10,7 @@ const distDir = path.join(root, "dist", "visuals");
 const htmlPath = path.join(distDir, "signal-board.html");
 const pngPath = path.join(siteDir, "signal-board.png");
 const metaPath = path.join(siteDir, "signal-board.meta.json");
+const demoPath = path.join(siteDir, "signal-demo.svg");
 const htmlUrl = `file:///${htmlPath.replace(/\\/g, "/")}`;
 
 const browserCandidates = [
@@ -95,6 +96,97 @@ const itemRows = top.slice(0, 8)
     </article>`
   )
   .join("");
+
+const demoItems = top.slice(0, 4);
+const demoRows = demoItems
+  .map((item, index) => {
+    const y = 196 + index * 58;
+    const delay = `${(index * 0.45).toFixed(2)}s`;
+    const title = escapeHtml(item.title).slice(0, 58);
+    return `<g class="demo-row" style="animation-delay:${delay}">
+      <rect x="72" y="${y}" width="290" height="42" rx="7"></rect>
+      <text x="90" y="${y + 17}">${escapeHtml(sourceLabel(item.source))} / score ${escapeHtml(item.score)}</text>
+      <text x="90" y="${y + 33}" class="muted">${title}</text>
+    </g>`;
+  })
+  .join("");
+
+const demoSvg = `<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc" viewBox="0 0 960 540" width="960" height="540">
+  <title id="title">TrendFoundry workflow animation</title>
+  <desc id="desc">Animated walkthrough showing public signals becoming ranked ideas, scripts, sample packs, and orders.</desc>
+  <style>
+    svg { background: #f7f8fa; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .panel { fill: #fff; stroke: #dfe3e8; stroke-width: 1.4; }
+    .label { fill: #66717d; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .title { fill: #15171a; font-size: 31px; font-weight: 860; }
+    .body { fill: #4f5a66; font-size: 16px; }
+    .muted { fill: #66717d; font-size: 12px; }
+    .accent { fill: #0f6b5f; }
+    .demo-row rect { fill: #fbfcfd; stroke: #dfe3e8; }
+    .demo-row text { fill: #15171a; font-size: 13px; font-weight: 760; }
+    .demo-row { opacity: .18; animation: rowPulse 4.8s ease-in-out infinite; }
+    .node { fill: #fff; stroke: #dfe3e8; stroke-width: 1.3; }
+    .node-title { fill: #15171a; font-size: 17px; font-weight: 850; }
+    .node-small { fill: #66717d; font-size: 12px; }
+    .pipe { fill: none; stroke: #b8c2cc; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 16 16; animation: dash 2.4s linear infinite; }
+    .dot { fill: #0f6b5f; animation: travel 4.8s ease-in-out infinite; }
+    .metric { fill: #e8f2f0; stroke: #c8ddd8; }
+    .metric text { fill: #0f6b5f; font-weight: 850; }
+    @keyframes rowPulse {
+      0%, 100% { opacity: .22; transform: translateX(0); }
+      25%, 65% { opacity: 1; transform: translateX(7px); }
+    }
+    @keyframes dash { to { stroke-dashoffset: -32; } }
+    @keyframes travel {
+      0% { transform: translate(0, 0); opacity: 0; }
+      12% { opacity: 1; }
+      34% { transform: translate(170px, 0); }
+      58% { transform: translate(350px, 0); }
+      82% { transform: translate(528px, 0); opacity: 1; }
+      100% { transform: translate(628px, 0); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .demo-row, .pipe, .dot { animation: none; opacity: 1; }
+    }
+  </style>
+  <rect x="0" y="0" width="960" height="540" fill="#f7f8fa"/>
+  <rect class="panel" x="36" y="34" width="888" height="472" rx="12"/>
+  <text class="label" x="72" y="80">TrendFoundry motion proof</text>
+  <text class="title" x="72" y="122">Public signal to buyer-ready pack</text>
+  <text class="body" x="72" y="154">The animated flow is generated from the same current issue as the signal board.</text>
+  ${demoRows}
+  <path class="pipe" d="M390 238 C450 210, 470 210, 526 238 S612 266, 672 238 S750 210, 820 238"/>
+  <circle class="dot" cx="400" cy="238" r="9"/>
+  <g transform="translate(480 172)">
+    <rect class="node" width="128" height="92" rx="9"/>
+    <text class="node-title" x="18" y="32">Rank</text>
+    <text class="node-small" x="18" y="56">${top.length} signals</text>
+    <text class="node-small" x="18" y="75">${highFit} high-fit</text>
+  </g>
+  <g transform="translate(650 172)">
+    <rect class="node" width="128" height="92" rx="9"/>
+    <text class="node-title" x="18" y="32">Shape</text>
+    <text class="node-small" x="18" y="56">titles</text>
+    <text class="node-small" x="18" y="75">demo steps</text>
+  </g>
+  <g transform="translate(780 310)">
+    <rect class="metric" width="96" height="62" rx="9"/>
+    <text x="18" y="28" font-size="22">${highFit}</text>
+    <text x="18" y="47" font-size="12">high-fit</text>
+  </g>
+  <g transform="translate(650 310)">
+    <rect class="node" width="128" height="92" rx="9"/>
+    <text class="node-title" x="18" y="32">Pack</text>
+    <text class="node-small" x="18" y="56">sample ZIP</text>
+    <text class="node-small" x="18" y="75">recording script</text>
+  </g>
+  <g transform="translate(480 310)">
+    <rect class="node" width="128" height="92" rx="9"/>
+    <text class="node-title" x="18" y="32">Order</text>
+    <text class="node-small" x="18" y="56">email draft</text>
+    <text class="node-small" x="18" y="75">buyer delivery</text>
+  </g>
+</svg>`;
 
 const html = `<!doctype html>
 <html lang="en">
@@ -307,6 +399,7 @@ const html = `<!doctype html>
 await mkdir(siteDir, { recursive: true });
 await mkdir(distDir, { recursive: true });
 await writeFile(htmlPath, html, "utf8");
+await writeFile(demoPath, demoSvg, "utf8");
 await writeFile(
   metaPath,
   JSON.stringify(
@@ -314,6 +407,7 @@ await writeFile(
       generatedAt: new Date().toISOString(),
       dataGeneratedAt: data.generatedAt,
       image: "signal-board.png",
+      demo: "signal-demo.svg",
       width: 1200,
       height: 760,
       topItems: top.slice(0, 8).map((item, index) => ({
@@ -350,5 +444,6 @@ if (result.status !== 0) {
 }
 
 console.log(`Wrote ${pngPath}`);
+console.log(`Wrote ${demoPath}`);
 console.log(`Wrote ${metaPath}`);
 console.log(`Source board: ${htmlPath}`);

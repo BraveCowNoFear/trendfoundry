@@ -1,5 +1,6 @@
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { AUTH_PROVIDERS, publicProvider } from "./lib/auth_providers.mjs";
 
 const root = process.cwd();
 const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "utf8"));
@@ -28,22 +29,7 @@ await mkdir(authDir, { recursive: true });
 await mkdir(siteIssuesDir, { recursive: true });
 await mkdir(docsIssuesDir, { recursive: true });
 
-const authProviders = [
-  { id: "google", region: "Global", label: "Google", description: "Gmail and Google Workspace accounts.", scope: "openid email profile", authUrl: "https://accounts.google.com/o/oauth2/v2/auth" },
-  { id: "apple", region: "Global", label: "Apple", description: "Apple ID and private relay email.", scope: "name email", authUrl: "https://appleid.apple.com/auth/authorize" },
-  { id: "microsoft", region: "Global", label: "Microsoft", description: "Outlook, Microsoft 365, and Azure AD.", scope: "openid email profile User.Read", authUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize" },
-  { id: "github", region: "Global", label: "GitHub", description: "Developer accounts and public issue buyers.", scope: "read:user user:email", authUrl: "https://github.com/login/oauth/authorize" },
-  { id: "facebook", region: "Global", label: "Facebook", description: "Meta social login.", scope: "email public_profile", authUrl: "https://www.facebook.com/v19.0/dialog/oauth" },
-  { id: "x", region: "Global", label: "X", description: "Creator and social audience accounts.", scope: "users.read tweet.read offline.access", authUrl: "https://twitter.com/i/oauth2/authorize" },
-  { id: "linkedin", region: "Global", label: "LinkedIn", description: "Professional creator accounts.", scope: "openid profile email", authUrl: "https://www.linkedin.com/oauth/v2/authorization" },
-  { id: "wechat", region: "China", label: "WeChat", description: "WeChat Open Platform QR login.", scope: "snsapi_login", authUrl: "https://open.weixin.qq.com/connect/qrconnect" },
-  { id: "qq", region: "China", label: "QQ", description: "Tencent QQ Connect accounts.", scope: "get_user_info", authUrl: "https://graph.qq.com/oauth2.0/authorize" },
-  { id: "weibo", region: "China", label: "Weibo", description: "Sina Weibo OAuth login.", scope: "email", authUrl: "https://api.weibo.com/oauth2/authorize" },
-  { id: "alipay", region: "China", label: "Alipay", description: "Alipay Open Platform authorization.", scope: "auth_user", authUrl: "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm" },
-  { id: "dingtalk", region: "China", label: "DingTalk", description: "Alibaba DingTalk organization accounts.", scope: "openid corpid", authUrl: "https://login.dingtalk.com/oauth2/auth" },
-  { id: "feishu", region: "China", label: "Feishu", description: "Feishu and Lark workplace accounts.", scope: "contact:user.base:readonly", authUrl: "https://accounts.feishu.cn/open-apis/authen/v1/authorize" },
-  { id: "line", region: "Asia", label: "LINE", description: "LINE accounts for Japan and Southeast Asia.", scope: "openid profile email", authUrl: "https://access.line.me/oauth2/v2.1/authorize" }
-];
+const authProviders = AUTH_PROVIDERS.map(publicProvider);
 
 const authProviderCards = authProviders
   .map(
@@ -89,11 +75,13 @@ ${authProviders.map((provider) => `- ${provider.label}: ${provider.description}`
 
 ## Production model
 
-This repository is a static GitHub Pages site, so it cannot safely exchange OAuth codes for tokens by itself. Use one of these patterns:
+This repository can run as static GitHub Pages or as a Node-served site. Static GitHub Pages cannot safely exchange OAuth codes for tokens by itself. The included \`npm start\` server now exposes a small OAuth broker at \`/api/auth\` for self-hosted deployments.
 
-1. Preferred: deploy an OAuth broker or hosted auth service, then set \`brokerBaseUrl\` in \`site/auth.config.json\`. The broker should handle provider secrets, token exchange, session cookies, and redirect back to \`${publicSiteUrl}auth/?tf_auth=ok&provider=...\`.
-2. Direct authorization preview: set a provider \`clientId\`, \`authorizationEndpoint\`, \`scope\`, and \`enabled: true\`. This only starts the provider flow; a backend is still required to exchange the returned code.
-3. Email login: set \`emailSignInEndpoint\` to a backend route that sends magic links.
+1. Static GitHub Pages: leave \`site/auth/auth.config.json\` public and empty, or point \`brokerBaseUrl\` to a hosted auth service.
+2. Node/self-hosted: run \`npm start\`. The server dynamically serves \`/auth/auth.config.json\`, starts provider redirects at \`/api/auth/oauth/start/:provider\`, receives callbacks at \`/api/auth/oauth/callback/:provider\`, and exposes \`/api/auth/session\` plus \`/api/auth/logout\`.
+3. Provider credentials: set environment variables with this shape: \`TRENDFOUNDRY_AUTH_GOOGLE_CLIENT_ID\`, \`TRENDFOUNDRY_AUTH_GOOGLE_CLIENT_SECRET\`, \`TRENDFOUNDRY_AUTH_WECHAT_CLIENT_ID\`, \`TRENDFOUNDRY_AUTH_WECHAT_CLIENT_SECRET\`, etc. Use the provider id in uppercase. Optional variables: \`TRENDFOUNDRY_AUTH_<PROVIDER>_SCOPE\`, \`TRENDFOUNDRY_AUTH_<PROVIDER>_AUTH_URL\`, \`TRENDFOUNDRY_AUTH_<PROVIDER>_TOKEN_URL\`, \`TRENDFOUNDRY_AUTH_<PROVIDER>_USERINFO_URL\`.
+4. Session signing: set \`TRENDFOUNDRY_AUTH_SESSION_SECRET\` in production.
+5. Email login: connect a mailer to \`/api/auth/email\` before promising real magic-link delivery.
 
 Never commit provider client secrets, OAuth app secrets, signing keys, refresh tokens, or buyer private payment details to this repository.
 `;
@@ -299,6 +287,72 @@ const socialProof = `<section class="visual-proof" aria-label="Product preview">
         ${dual("The board image is generated from the current ranked issue so buyers can see source lanes, scores, and idea density before opening the sample files.", "这张看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。", "p")}
       </div>
       <img src="./signal-board.png" alt="TrendFoundry product signal board preview" width="1200" height="760">
+    </section>`;
+const motionProof = `<section class="motion-proof" id="workflow-motion" aria-label="Animated workflow preview">
+      <div>
+        ${dual("Workflow in motion", "动态工作流", "p", ' class="section-label"')}
+        ${dual("See how public signals become a buyer-ready pack.", "看公开信号如何变成可交付情报包。", "h2")}
+        ${dual("This animated preview is regenerated from the same current issue as the signal board, so the product feels inspectable before a buyer downloads or orders.", "这个动态预览与信号看板来自同一期当前数据，买家下载或下单前就能看到产品如何从信号变成交付物。", "p")}
+      </div>
+      <img class="motion-preview" src="./signal-demo.svg" alt="Animated TrendFoundry workflow: rank signals, shape ideas, package samples, and prepare orders" width="960" height="540">
+    </section>`;
+const zhMotionProof = `<section class="motion-proof" id="workflow-motion" aria-label="Animated workflow preview">
+      <div>
+        <p class="section-label">动态工作流</p>
+        <h2>看公开信号如何变成可交付情报包。</h2>
+        <p>这个动态预览与信号看板来自同一期当前数据，买家下载或下单前就能看到产品如何从信号变成交付物。</p>
+      </div>
+      <img class="motion-preview" src="../signal-demo.svg" alt="TrendFoundry 动态工作流：排序信号、整理选题、打包样品并准备订单" width="960" height="540">
+    </section>`;
+const decisionFlowItems = [
+  ["01", "Proof first", "先看证据", "A signal enters the pack only when the original public source stays attached.", "只有保留原始公开来源的信号，才进入情报包。"],
+  ["02", "Creator fit", "创作者匹配", "Novelty, recordability, audience pain, and rights risk are scored before an idea reaches the queue.", "先评估新鲜度、可录制性、观众痛点和版权风险，再进入选题队列。"],
+  ["03", "Recording kit", "录制组件", "Each accepted idea becomes title angles, a hook, a demo path, and a limitation note.", "每个通过筛选的机会都会变成标题角度、钩子、演示路径和限制说明。"],
+  ["04", "Buyer handoff", "买家交付", "The weekly pack lands as a sample, CSV, script, and current issue so a creator can act quickly.", "周更包以样品、CSV、脚本和当前期刊形式交付，让创作者快速开录。"]
+];
+const decisionFlowSteps = decisionFlowItems
+  .map(([number, label, labelZh, text, textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
+          <button class="flow-step-button" type="button">
+            <span>${number}</span>
+            <strong>${dual(label, labelZh)}</strong>
+            ${dual(text, textZh, "em")}
+          </button>
+        </li>`)
+  .join("");
+const zhDecisionFlowSteps = decisionFlowItems
+  .map(([number, , labelZh, , textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
+          <button class="flow-step-button" type="button">
+            <span>${number}</span>
+            <strong>${escapeHtml(labelZh)}</strong>
+            <em>${escapeHtml(textZh)}</em>
+          </button>
+        </li>`)
+  .join("");
+const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
+      <div class="decision-copy">
+        ${dual("Decision system", "决策系统", "p", ' class="section-label"')}
+        ${dual("The product is the filter, not the feed.", "产品的价值在筛选，不在搬运信息流。", "h2")}
+        ${dual("TrendFoundry sells the judgment layer between public noise and a creator's next recording session: proof, fit, angle, and handoff all travel together.", "TrendFoundry 卖的是公开噪声和下一次录制之间的判断层：证据、匹配度、创作角度和交付物必须一起出现。", "p")}
+      </div>
+      <div class="decision-panel">
+        <div class="flow-orbit" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
+      </div>
+    </section>`;
+const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
+      <div class="decision-copy">
+        <p class="section-label">决策系统</p>
+        <h2>产品的价值在筛选，不在搬运信息流。</h2>
+        <p>TrendFoundry 卖的是公开噪声和下一次录制之间的判断层：证据、匹配度、创作角度和交付物必须一起出现。</p>
+      </div>
+      <div class="decision-panel">
+        <div class="flow-orbit" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <ol class="flow-steps">${decisionFlowSteps}</ol>
+      </div>
     </section>`;
 
 function csvEscape(value) {
@@ -1192,6 +1246,11 @@ const html = `<!doctype html>
       </div>
       ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
       ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
+      <div class="hero-metrics" aria-label="Product proof points">
+        <span><strong>12</strong>${dual("ranked opportunities", "条排序机会")}</span>
+        <span><strong>5</strong>${dual("source lanes", "个来源入口")}</span>
+        <span><strong>1</strong>${dual("recordable script", "份可录制脚本")}</span>
+      </div>
       <div class="hero-actions">
         <a class="action primary" href="./public-sample.en.md">${dual("View free sample", "查看免费样品")}</a>
         <a class="action strong" href="./order/">${dual("Order without login", "无登录下单")}</a>
@@ -1233,6 +1292,9 @@ const html = `<!doctype html>
         <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
       </div>
     </section>
+    ${socialProof}
+    ${motionProof}
+    ${decisionFlow}
     <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
       <div class="finder-head">
         <div>
@@ -1269,7 +1331,6 @@ const html = `<!doctype html>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
-    ${socialProof}
     <section class="seo-hub" aria-label="Search landing pages">
       <div>
         ${dual("Search pages", "搜索页", "p", ' class="section-label"')}
@@ -1353,6 +1414,11 @@ const zhHtml = `<!doctype html>
       </div>
       <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
       <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
+      <div class="hero-metrics" aria-label="Product proof points">
+        <span><strong>12</strong>条排序机会</span>
+        <span><strong>5</strong>个来源入口</span>
+        <span><strong>1</strong>份可录制脚本</span>
+      </div>
       <div class="hero-actions">
         <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
         <a class="action strong" href="../order/">无登录下单</a>
@@ -1394,6 +1460,16 @@ const zhHtml = `<!doctype html>
         <a class="action" href="../public-sample.en.csv">English CSV</a>
       </div>
     </section>
+    <section class="visual-proof" aria-label="Product preview">
+      <div>
+        <p class="section-label">产品预览</p>
+        <h2>这是一张真实信号看板，不是只有文字的销售页。</h2>
+        <p>看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。</p>
+      </div>
+      <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
+    </section>
+    ${zhMotionProof}
+    ${zhDecisionFlow}
     <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
       <div class="finder-head">
         <div>
@@ -1429,14 +1505,6 @@ const zhHtml = `<!doctype html>
         <h2>这是创作者情报包，不是 AI 新闻摘要。</h2>
       </div>
       <ul>${deliveryChecklist}</ul>
-    </section>
-    <section class="visual-proof" aria-label="Product preview">
-      <div>
-        <p class="section-label">产品预览</p>
-        <h2>这是一张真实信号看板，不是只有文字的销售页。</h2>
-        <p>看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。</p>
-      </div>
-      <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
     </section>
     <section class="seo-hub" aria-label="Chinese discovery links">
       <div>
@@ -1757,7 +1825,7 @@ function buildAuthUrl(provider) {
   const config = providerConfig(provider.id);
   if (authConfig.brokerBaseUrl) {
     const broker = authConfig.brokerBaseUrl.replace(/\/+$/, "");
-    const url = new URL(broker + "/oauth/start/" + encodeURIComponent(provider.id));
+    const url = new URL(broker + "/oauth/start/" + encodeURIComponent(provider.id), window.location.href);
     url.searchParams.set("return_to", authReturnUrl());
     return url.href;
   }
@@ -1832,6 +1900,13 @@ function renderProviders() {
 
 function handleCallback() {
   const params = new URLSearchParams(window.location.search);
+  if (params.get("tf_auth") === "error") {
+    const provider = params.get("provider") || "provider";
+    const message = params.get("message") || "auth_error";
+    window.history.replaceState({}, "", window.location.pathname);
+    setNotice(provider + " login could not start: " + message.replace(/_/g, " ") + ".", "warning");
+    return true;
+  }
   if (params.get("tf_auth") === "ok") {
     saveSession({
       provider: params.get("provider") || "broker",
@@ -1841,7 +1916,7 @@ function handleCallback() {
     });
     window.history.replaceState({}, "", window.location.pathname);
     setNotice("Signed in through the configured auth gateway.", "success");
-    return;
+    return true;
   }
   if (params.get("code")) {
     const state = params.get("state") || "";
@@ -1850,7 +1925,9 @@ function handleCallback() {
     saveSession({ provider, name: "Pending OAuth exchange", mode: "pending" });
     window.history.replaceState({}, "", window.location.pathname);
     setNotice(expected && state !== expected ? "State mismatch. Do not trust this callback until the backend validates it." : "Code received. A backend must exchange it for a secure session.", expected && state !== expected ? "danger" : "warning");
+    return true;
   }
+  return false;
 }
 
 async function loadConfig() {
@@ -1860,9 +1937,24 @@ async function loadConfig() {
   } catch {
     authConfig = { providers: {} };
   }
-  handleCallback();
+  if (authConfig.brokerBaseUrl) {
+    try {
+      const sessionUrl = new URL(authConfig.brokerBaseUrl.replace(/\/+$/, "") + "/session", window.location.href);
+      const sessionResponse = await fetch(sessionUrl, { cache: "no-store", credentials: "same-origin" });
+      if (sessionResponse.ok) {
+        const session = await sessionResponse.json();
+        if (session.authenticated && session.profile) saveSession({ ...session.profile, mode: "active" });
+      }
+    } catch {
+      // The static page can still render even when the broker is temporarily unavailable.
+    }
+  }
+  const callbackHandled = handleCallback();
   renderProviders();
   renderSession();
+  if (callbackHandled) {
+    return;
+  }
   if (authConfig.brokerBaseUrl) {
     setNotice("OAuth gateway configured. Provider buttons are ready.", "success");
   } else {
@@ -1898,7 +1990,13 @@ emailForm.addEventListener("submit", async (event) => {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ email, returnTo: authReturnUrl() })
   });
-  setNotice(response.ok ? "Sign-in link requested. Check your email." : "Email endpoint returned an error.", response.ok ? "success" : "danger");
+  let payload = {};
+  try {
+    payload = await response.json();
+  } catch {
+    payload = {};
+  }
+  setNotice(response.ok ? (payload.message || "Sign-in link requested. Check your email.") : (payload.message || "Email endpoint returned an error."), response.ok && payload.ok !== false ? "success" : "warning");
 });
 
 signOutButton.addEventListener("click", () => {
@@ -1912,22 +2010,25 @@ loadConfig();
 
 const css = `:root {
   color-scheme: light;
-  --ink: #15171a;
-  --muted: #666d75;
-  --line: #dfe3e8;
-  --paper: #f7f8fa;
+  --ink: #111114;
+  --muted: #64666d;
+  --line: #e4e7ec;
+  --paper: #f5f5f7;
   --panel: #ffffff;
-  --accent: #0f6b5f;
-  --accent-2: #8a5a18;
-  --accent-soft: #e8f2f0;
-  --shadow: 0 1px 2px rgba(21, 23, 26, 0.04);
+  --accent: #0071e3;
+  --accent-2: #7a5a00;
+  --accent-soft: #eaf4ff;
+  --success: #0f7b63;
+  --radius: 8px;
+  --shadow: 0 1px 2px rgba(17, 17, 20, 0.04), 0 18px 46px rgba(17, 17, 20, 0.07);
 }
 
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #fbfbfd 0%, var(--paper) 42%, #ffffff 100%);
   color: var(--ink);
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -1944,13 +2045,27 @@ small {
   overflow-wrap: anywhere;
 }
 .topbar {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.72fr);
   gap: clamp(28px, 5vw, 64px);
-  padding: 34px clamp(20px, 5vw, 72px) 28px;
+  min-height: min(760px, 100svh);
+  align-items: center;
+  padding: 34px clamp(20px, 5vw, 72px) 46px;
   border-bottom: 1px solid var(--line);
   background:
-    linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
+    radial-gradient(circle at 78% 18%, rgba(0, 113, 227, 0.14), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #f7f8fb 58%, #ffffff 100%);
+  isolation: isolate;
+}
+.topbar::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  height: 34%;
+  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.86));
+  pointer-events: none;
 }
 .brandline {
   display: flex;
@@ -1969,7 +2084,7 @@ small {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin: 0 0 18px;
+  margin: 0 0 22px;
 }
 .language-switch {
   display: inline-flex;
@@ -2008,16 +2123,42 @@ body[data-lang="zh"] .lang-zh { display: inline; }
 h1 {
   max-width: 900px;
   margin: 0;
-  font-size: clamp(34px, 4.6vw, 58px);
-  line-height: 0.98;
+  font-size: clamp(46px, 6.8vw, 92px);
+  line-height: 0.96;
   letter-spacing: 0;
 }
 .sub {
-  max-width: 780px;
-  margin: 20px 0 0;
+  max-width: 720px;
+  margin: 24px 0 0;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.36;
+}
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 640px;
+  margin-top: 26px;
+}
+.hero-metrics > span {
+  display: grid;
+  gap: 3px;
+  min-height: 76px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: var(--radius);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+  box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
+  backdrop-filter: blur(20px);
+}
+.hero-metrics > span > strong {
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1;
 }
 .hero-actions,
 .handoff-links {
@@ -2047,10 +2188,10 @@ h1 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
+  min-height: 42px;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 8px 13px;
+  border-radius: 999px;
+  padding: 9px 17px;
   background: #fff;
   color: var(--ink);
   font: inherit;
@@ -2058,6 +2199,11 @@ h1 {
   text-decoration: none;
   box-shadow: var(--shadow);
   cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(17, 17, 20, 0.1);
 }
 .action.primary {
   border-color: var(--accent);
@@ -2065,7 +2211,7 @@ h1 {
   color: #fff;
 }
 .action.strong {
-  border-color: #b9c3cc;
+  border-color: #111114;
   background: #15171a;
   color: #fff;
 }
@@ -2075,9 +2221,10 @@ h1 {
   color: var(--accent);
 }
 .topbar aside {
-  align-self: end;
+  align-self: center;
   display: grid;
   gap: 8px;
+  perspective: 1200px;
 }
 .topbar aside span,
 .meta span {
@@ -2123,19 +2270,32 @@ h1 {
   display: grid;
   gap: 10px;
   min-width: 0;
+  transform-style: preserve-3d;
+  transition: transform 260ms ease;
 }
 .product-screen {
   position: relative;
   overflow: hidden;
-  border: 1px solid #cbd4dc;
-  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.66);
+  border-radius: 18px;
   background: #101418;
-  box-shadow: 0 14px 34px rgba(21, 23, 26, 0.14);
+  box-shadow: 0 32px 90px rgba(17, 17, 20, 0.26), inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+.product-screen::before {
+  content: "";
+  display: block;
+  height: 28px;
+  background:
+    radial-gradient(circle at 18px 50%, #ff5f57 0 4px, transparent 5px),
+    radial-gradient(circle at 36px 50%, #ffbd2e 0 4px, transparent 5px),
+    radial-gradient(circle at 54px 50%, #28c840 0 4px, transparent 5px),
+    linear-gradient(180deg, #262b31, #171b20);
 }
 .product-screen img {
   display: block;
   width: 100%;
   height: auto;
+  transform: translateZ(0);
 }
 .signal-ticker {
   position: absolute;
@@ -2181,11 +2341,13 @@ h1 {
   gap: 2px;
   margin: 0;
   border: 1px solid var(--line);
-  border-radius: 7px;
+  border-radius: var(--radius);
   padding: 8px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.78);
   color: var(--muted);
   font-size: 12px;
+  box-shadow: 0 8px 22px rgba(17, 17, 20, 0.05);
+  backdrop-filter: blur(16px);
 }
 .board-summary strong {
   color: var(--ink);
@@ -2200,13 +2362,24 @@ h1 {
   0%, 100% { transform: translateY(0); opacity: 0.72; }
   50% { transform: translateY(-5px); opacity: 1; }
 }
+@keyframes boardFloat {
+  0%, 100% { transform: translateY(0) rotateX(0deg); }
+  50% { transform: translateY(-8px) rotateX(1.2deg); }
+}
+.product-visual {
+  animation: boardFloat 7s ease-in-out infinite;
+}
 @media (prefers-reduced-motion: reduce) {
-  .signal-ticker span {
+  .signal-ticker span,
+  .product-visual,
+  .flow-orbit,
+  .reveal-item {
     animation: none;
+    transition: none;
   }
 }
 main {
-  padding: 24px clamp(20px, 5vw, 72px) 60px;
+  padding: 34px clamp(20px, 5vw, 72px) 70px;
 }
 .offer {
   display: grid;
@@ -2214,8 +2387,8 @@ main {
   gap: 24px;
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 4px 0 24px;
-  margin-bottom: 22px;
+  padding: 0 0 34px;
+  margin-bottom: 34px;
 }
 .section-label {
   margin: 0 0 8px;
@@ -2225,21 +2398,31 @@ main {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.offer h2 { max-width: 780px; margin: 0 0 8px; font-size: 26px; line-height: 1.18; }
+.offer h2 { max-width: 780px; margin: 0 0 8px; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.08; }
 .offer p { margin: 0; color: var(--muted); }
 .price {
   text-align: right;
   color: var(--accent-2);
 }
-.price > span { display: block; font-size: 32px; font-weight: 850; }
+.price > span { display: block; font-size: clamp(34px, 4.4vw, 56px); font-weight: 850; color: var(--ink); }
 .price small { color: var(--muted); }
 .pricing,
 .sample-preview,
 .visual-proof,
+.motion-proof,
 .delivery {
   border-bottom: 1px solid var(--line);
-  padding: 2px 0 24px;
-  margin-bottom: 22px;
+  padding: 2px 0 34px;
+  margin-bottom: 34px;
+}
+.reveal-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 620ms ease, transform 620ms ease;
+}
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 .sample-preview {
   display: grid;
@@ -2253,12 +2436,20 @@ main {
   gap: 24px;
   align-items: center;
 }
-.visual-proof h2 {
+.motion-proof {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
+  gap: 24px;
+  align-items: center;
+}
+.visual-proof h2,
+.motion-proof h2 {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 1.2;
 }
-.visual-proof p:not(.section-label) {
+.visual-proof p:not(.section-label),
+.motion-proof p:not(.section-label) {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
@@ -2271,8 +2462,150 @@ main {
   height: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 1px rgba(17, 17, 20, 0.04);
+  backdrop-filter: blur(18px);
+}
+.motion-preview {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f7f8fa;
   box-shadow: var(--shadow);
+}
+.decision-flow {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.44fr) minmax(0, 0.56fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0 44px;
+  margin-bottom: 34px;
+}
+.decision-copy {
+  position: sticky;
+  top: 22px;
+}
+.decision-copy h2 {
+  max-width: 620px;
+  margin: 0 0 12px;
+  font-size: clamp(34px, 4.8vw, 68px);
+  line-height: 0.98;
+}
+.decision-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.decision-panel {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: clamp(16px, 2.4vw, 28px);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.86), rgba(246,249,252,0.72)),
+    radial-gradient(circle at 72% 22%, rgba(0, 113, 227, 0.12), transparent 34%);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+.flow-orbit {
+  position: absolute;
+  inset: 26px;
+  border: 1px solid rgba(0, 113, 227, 0.16);
+  border-radius: 50%;
+  opacity: 0.86;
+  animation: orbitTurn 18s linear infinite;
+}
+.flow-orbit::before,
+.flow-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 17%;
+  border: 1px solid rgba(17, 17, 20, 0.07);
+  border-radius: 50%;
+}
+.flow-orbit::after {
+  inset: 33%;
+}
+.flow-orbit span {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 8px rgba(0, 113, 227, 0.1);
+}
+.flow-orbit span:nth-child(1) { top: 11%; left: 23%; }
+.flow-orbit span:nth-child(2) { top: 24%; right: 13%; background: var(--success); }
+.flow-orbit span:nth-child(3) { right: 24%; bottom: 12%; background: #a45a00; }
+.flow-orbit span:nth-child(4) { bottom: 25%; left: 12%; background: #111114; }
+@keyframes orbitTurn {
+  to { transform: rotate(360deg); }
+}
+.flow-steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flow-steps li {
+  margin: 0;
+}
+.flow-step-button {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 8px 14px;
+  width: 100%;
+  min-height: 104px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  box-shadow: 0 8px 24px rgba(17, 17, 20, 0.04);
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.flow-step-button:hover,
+.flow-steps li.is-current .flow-step-button {
+  transform: translateX(-4px);
+  border-color: rgba(0, 113, 227, 0.42);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
+}
+.flow-step-button span {
+  grid-row: span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 850;
+}
+.flow-step-button strong {
+  align-self: end;
+  font-size: 19px;
+  line-height: 1.15;
+}
+.flow-step-button em {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 1.4;
 }
 .sample-preview h2 {
   margin: 0 0 8px;
@@ -2323,10 +2656,16 @@ main {
   padding: 18px;
   background: #fff;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.tier:hover {
+  transform: translateY(-3px);
+  border-color: #b8c8d9;
+  box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
 }
 .tier.featured {
-  border-color: #94aaa5;
-  background: #fbfdfc;
+  border-color: rgba(0, 113, 227, 0.38);
+  background: linear-gradient(180deg, #ffffff, #f5faff);
 }
 .tier-kicker {
   margin: 0 0 8px;
@@ -2622,10 +2961,10 @@ main {
 .opportunity-finder {
   display: grid;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 26px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 22px 0;
+  padding: 30px 0;
 }
 .finder-head {
   display: grid;
@@ -2656,10 +2995,11 @@ main {
   gap: 10px;
   align-content: start;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 12px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.78);
   box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
 }
 .control-label {
   display: flex;
@@ -2708,19 +3048,25 @@ input[type="search"]:focus {
   gap: 4px;
   min-height: 96px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 12px;
   background: #fff;
   color: var(--muted);
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+.filter-button:hover {
+  transform: translateY(-2px);
+  border-color: #b8c8d9;
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.07);
 }
 .filter-button.active {
-  border-color: #153f37;
-  background: #f3faf8;
+  border-color: var(--accent);
+  background: var(--accent-soft);
   color: var(--accent);
-  box-shadow: inset 0 0 0 1px #153f37;
+  box-shadow: inset 0 0 0 1px var(--accent), 0 14px 30px rgba(0, 113, 227, 0.1);
 }
 .filter-title {
   color: var(--ink);
@@ -2751,6 +3097,11 @@ input[type="search"]:focus {
   font-size: 13px;
   font-weight: 800;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, background 180ms ease;
+}
+.result-count.bump {
+  transform: scale(1.03);
+  background: var(--accent-soft);
 }
 .grid {
   display: grid;
@@ -2760,10 +3111,16 @@ input[type="search"]:focus {
 .card {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 18px;
   min-height: 320px;
   box-shadow: var(--shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #b8c8d9;
+  box-shadow: 0 20px 46px rgba(17, 17, 20, 0.11);
 }
 .card.hidden {
   display: none;
@@ -2979,6 +3336,8 @@ input[type="email"] {
   .offer,
   .sample-preview,
   .visual-proof,
+  .motion-proof,
+  .decision-flow,
   .section-head,
   .tier-grid,
   .delivery,
@@ -3008,6 +3367,37 @@ input[type="email"] {
   .sample-actions { justify-content: flex-start; }
   .feed-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
+  .motion-preview { max-width: 100%; }
+  .decision-flow {
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+  .decision-copy {
+    position: static;
+  }
+  .decision-copy h2 {
+    font-size: clamp(32px, 10vw, 46px);
+  }
+  .decision-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .decision-panel {
+    min-height: 0;
+    border-radius: 14px;
+  }
+  .flow-orbit {
+    inset: 18px;
+    opacity: 0.5;
+  }
+  .flow-step-button {
+    grid-template-columns: 46px minmax(0, 1fr);
+    min-height: 96px;
+    padding: 13px;
+  }
+  .flow-step-button span {
+    width: 38px;
+    height: 38px;
+  }
   .result-count { justify-self: stretch; margin: 0; white-space: normal; text-align: center; }
   .brandrow { align-items: flex-start; }
   .topbar {
@@ -3025,8 +3415,8 @@ input[type="email"] {
   h1 {
     width: 100%;
     max-width: 100%;
-    font-size: 23px;
-    line-height: 1.08;
+    font-size: clamp(31px, 8.8vw, 42px);
+    line-height: 1.02;
     white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
@@ -3034,9 +3424,21 @@ input[type="email"] {
   .sub {
     width: 100%;
     max-width: 100%;
-    font-size: 16px;
+    font-size: 17px;
     white-space: normal;
     overflow-wrap: anywhere;
+  }
+  .hero-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 100%;
+  }
+  .hero-metrics > span {
+    min-height: 62px;
+    padding: 9px;
+    font-size: 11px;
+  }
+  .hero-metrics strong {
+    font-size: 24px;
   }
   body[data-lang="zh"] h1 {
     word-break: break-all;
@@ -3048,10 +3450,10 @@ input[type="email"] {
     max-width: 100%;
   }
   .product-screen {
-    max-height: 190px;
+    max-height: 150px;
   }
   .product-screen img {
-    min-height: 190px;
+    min-height: 150px;
     object-fit: cover;
   }
   .signal-ticker {
@@ -3131,6 +3533,9 @@ function applyFilters() {
     if (show) visible += 1;
   }
   resultCount.textContent = countLabel(visible);
+  resultCount.classList.remove("bump");
+  window.requestAnimationFrame(() => resultCount.classList.add("bump"));
+  window.setTimeout(() => resultCount.classList.remove("bump"), 220);
 }
 
 for (const button of buttons) {
@@ -3151,6 +3556,54 @@ for (const button of languageButtons) {
 
 search.addEventListener("input", applyFilters);
 setLanguage(currentLanguage);
+const revealTargets = [...document.querySelectorAll("main > section, .topbar > div, .topbar aside")];
+for (const target of revealTargets) target.classList.add("reveal-item");
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    }
+  }, { threshold: 0.14 });
+  for (const target of revealTargets) revealObserver.observe(target);
+} else {
+  for (const target of revealTargets) target.classList.add("is-visible");
+}
+
+const flowSteps = [...document.querySelectorAll("[data-flow-step]")];
+function activateFlowStep(step) {
+  for (const item of flowSteps) item.classList.toggle("is-current", item === step);
+}
+for (const step of flowSteps) {
+  const button = step.querySelector("button");
+  if (button) button.addEventListener("click", () => activateFlowStep(step));
+}
+if ("IntersectionObserver" in window && flowSteps.length) {
+  const flowObserver = new IntersectionObserver((entries) => {
+    const visibleEntries = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (visibleEntries[0]) activateFlowStep(visibleEntries[0].target);
+  }, { threshold: [0.42, 0.7] });
+  for (const step of flowSteps) flowObserver.observe(step);
+}
+
+const hero = document.querySelector(".topbar");
+const productVisualNode = document.querySelector(".product-visual");
+const motionSafe = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (hero && productVisualNode && motionSafe) {
+  hero.addEventListener("pointermove", (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    productVisualNode.style.transform = "rotateY(" + (x * -6).toFixed(2) + "deg) rotateX(" + (y * 4).toFixed(2) + "deg) translateY(-4px)";
+  });
+  hero.addEventListener("pointerleave", () => {
+    productVisualNode.style.transform = "";
+  });
+}
 `;
 
 await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
@@ -3201,6 +3654,7 @@ const sitemapUrls = [
   "public-sample.csv",
   "public-sample.en.csv",
   "public-sample.zh-CN.csv",
+  "signal-demo.svg",
   "trendfoundry-free-sample-pack.zip",
   "trendfoundry-free-sample-pack.json",
   "ready-to-record-script.md",
