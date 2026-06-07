@@ -12,6 +12,7 @@ This is the lowest-dependency buyer-intent path currently available:
 - No payment processor.
 - No private form service.
 - Buyers can request the USD 9 sample pack, weekly brief, or custom niche brief.
+- GitHub sign-in is required to submit the issue form; use the email CTA for buyers who do not want to log in.
 
 ## Manual Triage
 

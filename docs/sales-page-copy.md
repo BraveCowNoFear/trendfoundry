@@ -55,3 +55,5 @@ Email button URL:
 GitHub request form URL:
 
 `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
+
+Note: GitHub requests require sign-in. Keep the email order CTA visible as the no-login fallback.

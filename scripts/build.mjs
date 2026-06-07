@@ -202,7 +202,8 @@ const html = `<!doctype html>
       <div class="hero-actions">
         <a class="action primary" href="./daily-brief.md">Download sample brief</a>
         <a class="action" href="./ready-to-record-script.md">Open script</a>
-        <a class="action strong" href="${issueOrderHref}">Request $9 sample</a>
+        <a class="action strong" href="${issueOrderHref}">Request on GitHub</a>
+        <a class="action" href="${orderHref}">Email order</a>
       </div>
     </div>
     <aside>
@@ -222,7 +223,7 @@ const html = `<!doctype html>
       </div>
       <div class="price">
         <span>$19/mo</span>
-        <small><a href="${issueOrderHref}">or request a $9 sample</a></small>
+        <small><a href="${issueOrderHref}">GitHub request</a> / <a href="${orderHref}">email order</a></small>
       </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
