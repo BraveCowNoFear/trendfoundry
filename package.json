@@ -12,6 +12,7 @@
     "fulfill-ready": "node scripts/fulfill_ready_leads.mjs",
     "draft-outreach": "node scripts/draft_outreach.mjs",
     "commerce": "node scripts/export_commerce.mjs",
+    "ops-report": "node scripts/report_ops.mjs",
     "leads": "node scripts/sync_leads.mjs",
     "start": "node scripts/server.mjs",
     "daily": "node scripts/collect.mjs && node scripts/build.mjs && node scripts/export_pack.mjs && node scripts/draft_outreach.mjs"

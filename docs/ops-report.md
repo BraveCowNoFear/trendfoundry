@@ -1,0 +1,35 @@
+# Ops Report
+
+Use this when checking whether TrendFoundry is ready for sales, fulfillment, and outreach today.
+
+## Command
+
+```bash
+npm run ops-report
+```
+
+Generated local outputs:
+
+- `dist/ops-report/ops-report.md`
+- `dist/ops-report/ops-report.json`
+
+The report reads local state only. It does not send messages, charge buyers, upload files, or change GitHub labels.
+
+## Inputs
+
+- `data/latest.json`
+- `data/leads.json`
+- `dist/outreach-drafts/`
+- `dist/commerce/products.json`
+- `dist/orders/`
+- `docs/publishing.md`
+
+## What It Shows
+
+- latest verified public deployment
+- current source snapshot and item count
+- lead stage counts
+- local outreach draft count
+- commerce SKU count
+- prepared order directories
+- next actions with safety reminders
