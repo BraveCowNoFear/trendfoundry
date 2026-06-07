@@ -2,6 +2,8 @@
 
 Use this step after `npm run daily` when the product needs fresh creator-specific sales drafts.
 
+`npm run daily` already runs this step after collection, build, and pack export. Use the command below only when drafts need to be regenerated from the current `data/latest.json` without collecting new signals.
+
 ## Command
 
 ```bash
