@@ -29,6 +29,7 @@ TrendFoundry Weekly AI Creator Brief:
 - YouTube: publish the same sample as a short practical test.
 - Reddit/Hacker News-adjacent communities: share as a free weekly sample, not spam.
 - Direct outreach: send a concise sample to 20 small AI/dev creators with a custom first idea.
+- Manual order CTA: ask interested buyers to email `rivan_Britain@outlook.com` with subject `TrendFoundry sample pack order` for the USD 9 sample pack.
 
 ## No-Account-Needed Assets Already Ready
 
@@ -38,10 +39,12 @@ TrendFoundry Weekly AI Creator Brief:
 - Static demo page.
 - Sales page copy.
 - Local daily automation.
+- Buyer-ready exported sample pack under `dist/trendfoundry-sample-pack/`.
+- 20-prospect outreach board generated from current Bilibili/YouTube signals.
 
 ## Account-Gated Assets To Create Later
 
-- Payment link: Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Link, or Buy Me a Coffee.
+- Hosted payment link: Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Link, or Buy Me a Coffee.
 - Email delivery: Buttondown, Beehiiv, Substack, or simple Gmail automation.
 - Public repo and landing page hosting: GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
 

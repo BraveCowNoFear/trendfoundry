@@ -11,6 +11,9 @@ npm start
 
 Then open `http://localhost:4173`.
 
+`npm run export` writes a buyer-ready sample pack under `dist/trendfoundry-sample-pack/`.
+Preview an exported pack with `PORT=4174 SITE_DIR=dist/trendfoundry-sample-pack npm start`.
+
 ## Automation
 
 On Windows, `scripts/run_daily.ps1` refreshes the pack and writes logs under `logs/`.

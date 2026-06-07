@@ -36,6 +36,25 @@ function daysAgo(dateString) {
   return Math.max(0, (Date.now() - then) / 86400000);
 }
 
+function parseRelativePublishedDate(text) {
+  const normalized = String(text || "").toLowerCase();
+  const match = normalized.match(/(\d+)\s+(second|minute|hour|day|week|month|year)s?\s+ago/);
+  if (!match) return undefined;
+  const amount = Number(match[1]);
+  const unit = match[2];
+  const days =
+    unit === "second" || unit === "minute" || unit === "hour"
+      ? 0
+      : unit === "day"
+        ? amount
+        : unit === "week"
+          ? amount * 7
+          : unit === "month"
+            ? amount * 30
+            : amount * 365;
+  return new Date(Date.now() - days * 86400000).toISOString();
+}
+
 function scoreItem(item) {
   const recency = Math.max(0, 45 - daysAgo(item.updatedAt || item.publishedAt || item.createdAt));
   const stars = Math.log10((item.stars || item.points || 0) + 1) * 12;
@@ -53,7 +72,8 @@ function scoreItem(item) {
   )
     ? 24
     : 0;
-  return Math.round(recency + stars + comments + sourceWeight + creatorFit);
+  const stalePenalty = item.stale ? -28 : 0;
+  return Math.max(0, Math.round(recency + stars + comments + sourceWeight + creatorFit + stalePenalty));
 }
 
 function ideaAngles(item) {
@@ -66,18 +86,52 @@ function ideaAngles(item) {
   ];
 }
 
+function whyNow(item) {
+  const source = item.source === "hn" ? "discussion" : item.source === "arxiv" ? "research" : "trend";
+  return `${item.title} is appearing in a current ${source} signal for ${item.sourceQuery}, which makes it a timely candidate for a practical creator test.`;
+}
+
+function demoSteps(item) {
+  return [
+    `Open and verify the source: ${item.url}`,
+    "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+    "Compare the before/after creator workflow: research time, production time, or output quality.",
+    "State exactly who should use it and who should skip it."
+  ];
+}
+
+function limitation(item) {
+  if (item.stale) {
+    return "This item comes from cached fallback data, so verify freshness before using it as a headline trend.";
+  }
+  if (item.source === "youtube" || item.source === "bilibili") {
+    return "Platform popularity is not proof of quality; validate the workflow before recommending it.";
+  }
+  if (item.source === "github") {
+    return "Stars and recent activity can overstate production readiness; test install friction and maintenance quality.";
+  }
+  if (item.source === "arxiv") {
+    return "Research papers may be too early for mainstream creators; translate into a practical demo or skip.";
+  }
+  return "Treat this as a signal, not a guarantee of views, revenue, or technical maturity.";
+}
+
 function packageItem(item) {
   const score = scoreItem(item);
+  const fit = item.stale
+    ? score >= 80
+      ? "medium"
+      : "watch"
+    : score >= 95
+      ? "high"
+      : score >= 70
+        ? "medium"
+        : "watch";
   return {
     ...item,
     score,
     stale: Boolean(item.stale),
-    monetizationFit:
-      score >= 80
-        ? "high"
-        : score >= 60
-          ? "medium"
-          : "watch",
+    monetizationFit: fit,
     targetCreator: /developer|github|repo|agent|framework/i.test(`${item.title} ${item.summary}`)
       ? "tech explainer / developer educator"
       : "AI workflow creator",
@@ -85,6 +139,8 @@ function packageItem(item) {
       bilibiliTitles: ideaAngles(item).map((angle) => `【实测】${angle}`),
       youtubeTitles: ideaAngles(item).map((angle) => `${angle} (practical test)`),
       hook: `这期不讲概念，直接验证 ${item.title} 是否能进入真实创作工作流。`,
+      whyNow: whyNow(item),
+      demoSteps: demoSteps(item),
       outline: [
         "30 秒问题开场: 观众为什么现在会关心它",
         "3 分钟最小可复现实测: 安装、输入、输出",
@@ -92,7 +148,8 @@ function packageItem(item) {
         "1 分钟变现角度: 内容、模板、咨询或工具包",
         "结尾: 给观众一个可复制的小任务"
       ],
-      thumbnailPrompt: `A clean tech explainer thumbnail about ${item.title}, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos`
+      thumbnailPrompt: `A clean tech explainer thumbnail about ${item.title}, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos`,
+      limitation: limitation(item)
     }
   };
 }
@@ -316,9 +373,11 @@ async function collectYoutube(queries) {
           const videoId = video.videoId;
           const title = video.title?.runs?.map((run) => run.text).join("") || video.title?.simpleText;
           if (!videoId || !title) continue;
+          const publishedText = video.publishedTimeText?.simpleText;
+          const estimatedPublished = parseRelativePublishedDate(publishedText);
           const summary = [
             video.ownerText?.runs?.map((run) => run.text).join(""),
-            video.publishedTimeText?.simpleText,
+            publishedText,
             video.viewCountText?.simpleText
           ]
             .filter(Boolean)
@@ -332,8 +391,8 @@ async function collectYoutube(queries) {
             url: `https://www.youtube.com/watch?v=${videoId}`,
             points: Number(String(video.viewCountText?.simpleText || "").replace(/\D/g, "")) || 0,
             comments: 0,
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            createdAt: estimatedPublished,
+            updatedAt: estimatedPublished
           });
         } catch {
           // Keep parsing the remaining renderer objects.

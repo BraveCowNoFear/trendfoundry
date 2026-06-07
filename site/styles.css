@@ -188,6 +188,12 @@ input[type="search"] {
   color: var(--muted);
   line-height: 1.5;
 }
+.card .why {
+  color: var(--ink);
+  background: #f3f7fb;
+  border-radius: 6px;
+  padding: 10px;
+}
 .idea {
   border-left: 3px solid var(--accent);
   padding-left: 12px;

@@ -11,6 +11,9 @@ npm start
 
 然后打开 `http://localhost:4173`。
 
+`npm run export` 会在 `dist/trendfoundry-sample-pack/` 生成可发给买家的样品包。
+可以用 `PORT=4174 SITE_DIR=dist/trendfoundry-sample-pack npm start` 预览导出的样品包。
+
 ## 自动化
 
 Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `logs/`。

@@ -38,3 +38,16 @@ PDF or Markdown brief by email every Monday.
 Refund policy:
 
 If the first issue does not give you at least three recordable ideas, email within 7 days for a refund.
+
+## Manual Order CTA
+
+Until a hosted payment page is connected, use this low-dependency order path:
+
+- Buyer emails: `rivan_Britain@outlook.com`
+- Subject: `TrendFoundry sample pack order`
+- Price: USD 9 for the latest sample pack
+- Delivery: `daily-brief.md`, `ready-to-record-script.md`, `opportunities.csv`, and `prospects.csv`
+
+Email button URL:
+
+`mailto:rivan_Britain@outlook.com?subject=TrendFoundry%20sample%20pack%20order&body=Hi%2C%20I%20want%20to%20order%20the%20TrendFoundry%20%249%20sample%20pack.%20Please%20send%20the%20latest%20issue%20and%20payment%20instructions.`

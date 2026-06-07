@@ -7,8 +7,9 @@
   "scripts": {
     "collect": "node scripts/collect.mjs",
     "build": "node scripts/build.mjs",
+    "export": "node scripts/export_pack.mjs",
     "start": "node scripts/server.mjs",
-    "daily": "node scripts/collect.mjs && node scripts/build.mjs"
+    "daily": "node scripts/collect.mjs && node scripts/build.mjs && node scripts/export_pack.mjs"
   },
   "keywords": [
     "creator-economy",

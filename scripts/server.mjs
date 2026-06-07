@@ -3,7 +3,7 @@ import { createServer } from "node:http";
 import path from "node:path";
 
 const port = Number(process.env.PORT || 4173);
-const siteDir = path.join(process.cwd(), "site");
+const siteDir = process.env.SITE_DIR ? path.resolve(process.env.SITE_DIR) : path.join(process.cwd(), "site");
 const types = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",

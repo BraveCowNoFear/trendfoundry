@@ -5,6 +5,10 @@ const root = process.cwd();
 const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "utf8"));
 const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
+const contactEmail = "rivan_Britain@outlook.com";
+const orderSubject = encodeURIComponent("TrendFoundry sample pack order");
+const orderBody = encodeURIComponent("Hi, I want to order the TrendFoundry $9 sample pack. Please send the latest issue and payment instructions.");
+const orderHref = `mailto:${contactEmail}?subject=${orderSubject}&body=${orderBody}`;
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 
@@ -78,9 +82,14 @@ ${top
 - Link: ${item.url}
 - Why it matters: ${item.summary || "No summary available."}
 - Creator target: ${item.targetCreator}
+- Why now: ${item.deliverables.whyNow}
 - Bilibili title: ${item.deliverables.bilibiliTitles[0]}
 - YouTube title: ${item.deliverables.youtubeTitles[0]}
 - Hook: ${item.deliverables.hook}
+- Demo steps:
+${item.deliverables.demoSteps.map((step) => `  - ${step}`).join("\n")}
+- Thumbnail prompt: ${item.deliverables.thumbnailPrompt}
+- Limitation: ${item.deliverables.limitation}
 `
   )
   .join("\n")}
@@ -94,6 +103,8 @@ The product should be sold as a weekly creator intelligence pack:
 - Bonus: one ready-to-record script for the highest-scoring item.
 
 Suggested initial price: USD 9 for a single pack, USD 19/month for weekly delivery, USD 49/month for a niche custom pack.
+
+Manual order CTA: email ${contactEmail} with the subject "TrendFoundry sample pack order".
 
 ## Operating Rule
 
@@ -141,6 +152,7 @@ const cards = top
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span>${item.stale ? "<span>cached</span>" : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
+  <p class="why"><strong>Why now:</strong> ${escapeHtml(item.deliverables.whyNow)}</p>
   <div class="idea">
     <strong>Bilibili:</strong> ${escapeHtml(item.deliverables.bilibiliTitles[0])}<br>
     <strong>YouTube:</strong> ${escapeHtml(item.deliverables.youtubeTitles[0])}
@@ -148,7 +160,9 @@ const cards = top
   <details>
     <summary>Production outline</summary>
     <ol>${item.deliverables.outline.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ol>
+    <p><strong>Demo:</strong> ${escapeHtml(item.deliverables.demoSteps[1])}</p>
     <p><strong>Thumbnail:</strong> ${escapeHtml(item.deliverables.thumbnailPrompt)}</p>
+    <p><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</p>
   </details>
 </article>`
   )
@@ -176,6 +190,7 @@ const html = `<!doctype html>
       <div class="hero-actions">
         <a class="action primary" href="./daily-brief.md">Download sample brief</a>
         <a class="action" href="./ready-to-record-script.md">Open script</a>
+        <a class="action" href="${orderHref}">$9 order email</a>
       </div>
     </div>
     <aside>
@@ -193,7 +208,7 @@ const html = `<!doctype html>
       </div>
       <div class="price">
         <span>$19/mo</span>
-        <small>starter subscription target</small>
+        <small><a href="${orderHref}">or $9 sample by email</a></small>
       </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
@@ -213,6 +228,7 @@ const html = `<!doctype html>
       <div class="handoff-links">
         <a class="action primary" href="./launch-plan.md">Launch plan</a>
         <a class="action" href="./sales-page-copy.md">Sales copy</a>
+        <a class="action" href="${orderHref}">Manual order</a>
       </div>
     </section>
   </main>
@@ -408,6 +424,12 @@ input[type="search"] {
 .card p {
   color: var(--muted);
   line-height: 1.5;
+}
+.card .why {
+  color: var(--ink);
+  background: #f3f7fb;
+  border-radius: 6px;
+  padding: 10px;
 }
 .idea {
   border-left: 3px solid var(--accent);
