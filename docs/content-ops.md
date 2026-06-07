@@ -1,0 +1,41 @@
+# TrendFoundry Content Ops
+
+Generated: 2026-06-07T20:55:11.242Z
+
+Status: success
+
+Refresh public sources: no
+
+Dataset: 2026-06-07T20:33:58.416Z
+
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, and buyer content pack without sending messages, collecting payment, or building the frontend.
+
+## Steps
+
+| Step | Status | Exit |
+| --- | --- | --- |
+| content-audit | success | 0 |
+| episode-workbench | success | 0 |
+| full-script | success | 0 |
+| buyer-pack | success | 0 |
+
+## Current Content State
+
+- Total source items: 126
+- Source errors: 2
+- Primary episode: NousResearch/hermes-agent
+- Buyer deliverables: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
+- Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, payment credentials, account data
+
+## Safety Boundary
+
+- Does not send messages.
+- Does not collect payment.
+- Does not build or overwrite the frontend.
+- Does not include seller-only files in buyer deliverables.
+
+## Next Operator Action
+
+1. Review `docs/buyer-content-pack.md`.
+2. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+3. If the buyer requests a custom niche, run `npm run content-ops -- --refresh` after updating source queries.
