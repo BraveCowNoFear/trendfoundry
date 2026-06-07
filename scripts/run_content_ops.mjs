@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "content-listing"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -57,6 +57,7 @@ const latest = await readJson("data/latest.json", {});
 const buyerManifest = await readJson("dist/buyer-content-pack/manifest.json", {});
 const fullScript = await readJson("dist/full-episode-script/latest.json", {});
 const audit = await readJson("dist/content-audit/latest.json", {});
+const listing = await readJson("dist/content-listing/products.json", {});
 const allSucceeded = steps.every((step) => step.status === "success");
 
 const run = {
@@ -71,6 +72,7 @@ const run = {
     auditSummary: audit.summary || {},
     primaryEpisode: fullScript.title,
     buyerDeliverables: buyerManifest.buyerDeliverables || [],
+    listingSkus: (listing.products || []).map((product) => product.sku),
     sellerOnlyExcluded: buyerManifest.sellerOnlyExcluded || []
   },
   safety: {
@@ -91,7 +93,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, and buyer content pack without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, and content product listing without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -105,6 +107,7 @@ ${stepSummary(steps)}
 - Source errors: ${latest.errorCount ?? "unknown"}
 - Primary episode: ${compact(fullScript.title, "unknown")}
 - Buyer deliverables: ${(buyerManifest.buyerDeliverables || []).join(", ") || "unknown"}
+- Listing SKUs: ${((listing.products || []).map((product) => product.sku)).join(", ") || "unknown"}
 - Seller-only exclusions: ${(buyerManifest.sellerOnlyExcluded || []).join(", ") || "unknown"}
 
 ## Safety Boundary
@@ -117,8 +120,9 @@ ${stepSummary(steps)}
 ## Next Operator Action
 
 1. Review \`docs/buyer-content-pack.md\`.
-2. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-3. If the buyer requests a custom niche, run \`npm run content-ops -- --refresh\` after updating source queries.
+2. Review \`docs/content-product-listing.md\` before publishing or copying payment-platform fields.
+3. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+4. If the buyer requests a custom niche, run \`npm run content-ops -- --refresh\` after updating source queries.
 `;
 
 await mkdir(docsDir, { recursive: true });
