@@ -13,6 +13,7 @@ This runs:
 - `npm run daily`
 - `npm run commerce`
 - `npm run leads`
+- `npm run intake-email-orders`
 - `npm run fulfill-ready`
 - `npm run launch-assets`
 - `npm run ops-report`
@@ -58,3 +59,19 @@ npm run payment-reply -- --tier="sample-issue" --buyer="Buyer Name" --contact="b
 ```
 
 Review `dist/payment-replies/<order-id>/payment-reply.md`, insert a verified hosted checkout link or manual invoice reference, then send manually. The generated packet keeps payment credentials out of email/public issues and reminds the seller to run fulfillment only after payment confirmation.
+
+## Email Order Intake
+
+For copied buyer emails or saved `.eml`/`.txt`/`.md` order messages, place files under ignored `data/email-orders/`, then run:
+
+```bash
+npm run intake-email-orders
+```
+
+Generated local outputs:
+
+- `dist/email-order-intake/orders.json`
+- `dist/email-order-intake/pipeline.md`
+- matching `dist/payment-replies/<order-id>/...` packets
+
+The intake script only parses local files. It does not connect to an inbox, send email, create payment links, charge buyers, upload files, or change GitHub state.

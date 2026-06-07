@@ -38,6 +38,12 @@ For no-login email orders, generate a reviewed payment reply packet:
 npm run payment-reply -- --tier="weekly-brief" --buyer="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@channel"
 ```
 
+For copied buyer emails, place local `.txt`, `.md`, or `.eml` files under ignored `data/email-orders/`, then run:
+
+```bash
+npm run intake-email-orders
+```
+
 ## Automation
 
 On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and writes logs under `logs/`. GitHub Actions also runs the same operation daily through `.github/workflows/daily-ops.yml` and commits tracked product refreshes when they change.
@@ -56,6 +62,7 @@ On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and
 - `docs/qa.md`: local and online checks for delivery boundaries, visual assets, script quality, and scheduled operations.
 - `docs/launch-posts.md`: draft launch posts and warm outreach copy generated for manual review.
 - `dist/payment-replies/<order-id>/`: local payment reply, invoice draft, and checklist for buyer email orders.
+- `dist/email-order-intake/`: local parsed order pipeline from copied buyer email text.
 
 ## Monetization Plan
 

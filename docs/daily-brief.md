@@ -1,6 +1,6 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T10:09:48.622Z
+Generated: 2026-06-07T14:49:17.118Z
 
 ## Executive Read
 
@@ -110,7 +110,7 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Why it matters: Youri van Hofwegen / 4 days ago / 34,919 views
+- Why it matters: Youri van Hofwegen / 4 days ago / 35,214 views
 - Creator target: AI workflow creator
 - Why now: The Only AI Video Prompt Generator You'll Ever Need is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注
@@ -132,7 +132,7 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=JQzF5LP4VTs
-- Why it matters: Tao Prompts / 4 days ago / 33,522 views
+- Why it matters: Tao Prompts / 4 days ago / 33,849 views
 - Creator target: AI workflow creator
 - Why now: The ONLY 3 Tools You Need to Create ANY AI Video is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注
@@ -148,7 +148,7 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 
 ### 7. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
 
-- Score: 134
+- Score: 135
 - Fit: high
 - Source: bilibili / B站AI工作流
 - Freshness: fresh
@@ -168,31 +168,9 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 8. Ask HN: What is your (AI) dev tech stack / workflow?
+### 8. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
 
 - Score: 131
-- Fit: high
-- Source: hn / creator tools
-- Freshness: fresh
-- Quality: normal
-- Link: https://news.ycombinator.com/item?id=48413629
-- Why it matters: Ask HN: What is your (AI) dev tech stack / workflow?
-- Creator target: AI workflow creator
-- Why now: Ask HN: What is your (AI) dev tech stack / workflow? is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注
-- YouTube title: 为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 Ask HN: What is your (AI) dev tech stack / workflow? 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: https://news.ycombinator.com/item?id=48413629
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
-
-### 9. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
-
-- Score: 129
 - Fit: high
 - Source: bilibili / B站AI工作流
 - Freshness: fresh
@@ -212,9 +190,9 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 10. 【赛博古董】21年前 YouTube 被上传的第一个视频
+### 9. 【赛博古董】21年前 YouTube 被上传的第一个视频
 
-- Score: 124
+- Score: 125
 - Fit: high
 - Source: bilibili / YouTube 创作者 AI
 - Freshness: fresh
@@ -234,9 +212,9 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about 【赛博古董】21年前 YouTube 被上传的第一个视频, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 11. Ask HN: Why is the HN crowd so anti-AI?
+### 10. Ask HN: Why is the HN crowd so anti-AI?
 
-- Score: 119
+- Score: 120
 - Fit: high
 - Source: hn / creator tools
 - Freshness: fresh
@@ -254,6 +232,28 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
   - Compare the before/after creator workflow: research time, production time, or output quality.
   - State exactly who should use it and who should skip it.
 - Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: Why is the HN crowd so anti-AI?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
+
+### 11. Show HN: Version Control for AI Agents
+
+- Score: 99
+- Fit: high
+- Source: hn / AI agents
+- Freshness: fresh
+- Quality: normal
+- Link: https://cognatoai.com
+- Why it matters: Show HN: Version Control for AI Agents
+- Creator target: tech explainer / developer educator
+- Why now: Show HN: Version Control for AI Agents is appearing in a current discussion signal for AI agents, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 Show HN: Version Control for AI Agents 现在值得创作者关注
+- YouTube title: 为什么 Show HN: Version Control for AI Agents 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 Show HN: Version Control for AI Agents 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: https://cognatoai.com
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: Version Control for AI Agents, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
 ### 12. HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers

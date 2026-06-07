@@ -94,6 +94,7 @@ ${leadCounts}
 - Launch asset files: ${report.assets.launchAssetCount}
 - Commerce products: ${report.assets.commerceProductCount}
 - Payment reply packets: ${report.assets.paymentReplyCount}
+- Email order intake records: ${report.assets.emailOrderCount}
 - Prepared order directories: ${report.assets.orderCount}
 - Latest payment reply packets: ${report.assets.latestPaymentReplies.join(", ") || "none"}
 - Latest order directories: ${report.assets.latestOrders.join(", ") || "none"}
@@ -116,6 +117,7 @@ const commerceData = await readJsonIfExists(path.join(root, "dist", "commerce", 
 const qaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-qa.json"), { checks: [] });
 const onlineQaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-online-qa.json"), qaData);
 const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "latest-run.json"), { steps: [] });
+const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
 const outreachFiles = await listFilesIfExists(path.join(root, "dist", "outreach-drafts"));
 const launchAssetFiles = await listFilesIfExists(path.join(root, "dist", "launch-assets"));
@@ -170,6 +172,7 @@ const report = {
     launchAssetCount: launchAssetFiles.length,
     commerceProductCount: commerceData.products?.length || 0,
     paymentReplyCount: paymentReplyDirs.length,
+    emailOrderCount: emailOrderData.orders?.length || 0,
     latestPaymentReplies: paymentReplyDirs.slice(-5),
     orderCount: orderDirs.length,
     latestOrders: orderDirs.slice(-5)
@@ -180,6 +183,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
+    "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."
   ]
 };

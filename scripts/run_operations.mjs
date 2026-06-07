@@ -28,40 +28,48 @@ function runStep(name, args) {
 }
 
 const steps = [];
-try {
-  if (runSocial) {
-    steps.push(runStep("social", ["social"]));
-  }
-  steps.push(runStep("daily", ["daily"]));
-  steps.push(runStep("commerce", ["commerce"]));
-  steps.push(runStep("leads", ["leads"]));
-  steps.push(runStep("fulfill-ready", ["fulfill-ready"]));
-  steps.push(runStep("launch-assets", ["launch-assets"]));
-  steps.push(runStep("ops-report", ["ops-report"]));
-  steps.push(runStep("qa", ["qa", "--", "--skip-scheduler"]));
-
+async function persistRun(status = "running", extra = {}) {
   await mkdir(distDir, { recursive: true });
   const summary = {
     generatedAt: new Date().toISOString(),
     mode: runSocial ? "with-social" : "standard",
+    status,
     steps,
     safety: [
       "No outreach messages were sent.",
       "No payment action was attempted.",
       "No files were uploaded.",
       "No GitHub labels were changed."
-    ]
+    ],
+    ...extra
   };
   await writeFile(path.join(distDir, "latest-run.json"), JSON.stringify(summary, null, 2), "utf8");
+}
+
+try {
+  if (runSocial) {
+    steps.push(runStep("social", ["social"]));
+    await persistRun();
+  }
+  steps.push(runStep("daily", ["daily"]));
+  await persistRun();
+  steps.push(runStep("commerce", ["commerce"]));
+  await persistRun();
+  steps.push(runStep("leads", ["leads"]));
+  await persistRun();
+  steps.push(runStep("intake-email-orders", ["intake-email-orders"]));
+  await persistRun();
+  steps.push(runStep("fulfill-ready", ["fulfill-ready"]));
+  await persistRun();
+  steps.push(runStep("launch-assets", ["launch-assets"]));
+  await persistRun();
+  steps.push(runStep("ops-report", ["ops-report"]));
+  await persistRun();
+  steps.push(runStep("qa", ["qa", "--", "--skip-scheduler"]));
+  await persistRun("success");
+
   console.log(`\n[TrendFoundry operate] wrote ${path.join(distDir, "latest-run.json")}`);
 } catch (error) {
-  await mkdir(distDir, { recursive: true });
-  const failure = {
-    generatedAt: new Date().toISOString(),
-    mode: runSocial ? "with-social" : "standard",
-    steps,
-    error: error.message
-  };
-  await writeFile(path.join(distDir, "latest-run.json"), JSON.stringify(failure, null, 2), "utf8");
+  await persistRun("failed", { error: error.message });
   throw error;
 }

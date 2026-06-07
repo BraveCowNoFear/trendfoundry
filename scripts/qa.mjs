@@ -22,6 +22,7 @@ const requiredScripts = [
   "fulfill",
   "fulfill-ready",
   "payment-reply",
+  "intake-email-orders",
   "draft-outreach",
   "ops-report",
   "launch-assets",
@@ -105,6 +106,9 @@ async function checkLocal() {
   assertCheck("daily ops workflow can deploy pages", dailyOpsWorkflow.includes("pages: write") && dailyOpsWorkflow.includes("actions/deploy-pages"));
   assertCheck("daily ops workflow runs operate", dailyOpsWorkflow.includes("npm run operate"));
   assertCheck("daily ops workflow avoids ignored lead docs", !dailyOpsWorkflow.includes("git add ."));
+
+  const runOperations = await readText(path.join(root, "scripts", "run_operations.mjs"));
+  assertCheck("operate runs email order intake", runOperations.includes("intake-email-orders"));
 
   const latest = await readJson(path.join(root, "data", "latest.json"));
   const issueSlug = issueSlugFromGeneratedAt(latest.generatedAt);
@@ -271,10 +275,53 @@ async function checkLocal() {
   assertCheck("payment reply manifest lists buyer deliverables", ["daily-brief.md", "ready-to-record-script.md", "opportunities.csv"].every((file) => (paymentManifest.buyerDeliverablesAfterPayment || []).includes(file)));
   await rm(paymentReplyDir, { recursive: true, force: true });
 
+  const intakeInboxDir = path.join(root, "dist", "qa", "email-order-inbox");
+  const intakeOutDir = path.join(root, "dist", "qa", "email-order-intake");
+  const intakePaymentDir = path.join(root, "dist", "qa", "email-payment-replies");
+  await rm(intakeInboxDir, { recursive: true, force: true });
+  await rm(intakeOutDir, { recursive: true, force: true });
+  await rm(intakePaymentDir, { recursive: true, force: true });
+  await mkdir(intakeInboxDir, { recursive: true });
+  await writeFile(
+    path.join(intakeInboxDir, "weekly-order.txt"),
+    [
+      "From: QA Buyer <qa@example.com>",
+      "Tier: weekly brief",
+      "Buyer: QA Buyer",
+      "Contact: qa@example.com",
+      "Channel: https://example.com/qa",
+      "Niche: AI developer tools",
+      "Delivery route: email"
+    ].join("\n"),
+    "utf8"
+  );
+  const intakeResult = spawnSync(process.execPath, [
+    path.join(root, "scripts", "intake_email_orders.mjs"),
+    `--inbox-dir=${intakeInboxDir}`,
+    `--out-dir=${intakeOutDir}`,
+    `--payment-replies-dir=${intakePaymentDir}`
+  ], {
+    cwd: root,
+    encoding: "utf8"
+  });
+  assertCheck("email order intake exits", intakeResult.status === 0, intakeResult.stderr || intakeResult.stdout);
+  const intakeJson = existsSync(path.join(intakeOutDir, "orders.json")) ? await readJson(path.join(intakeOutDir, "orders.json")) : {};
+  const intakePipeline = existsSync(path.join(intakeOutDir, "pipeline.md")) ? await readText(path.join(intakeOutDir, "pipeline.md")) : "";
+  const intakeOrder = intakeJson.orders?.[0] || {};
+  const intakeReply = intakeOrder.paymentReplyDir ? await readText(path.join(intakeOrder.paymentReplyDir, "payment-reply.md")) : "";
+  assertCheck("email order intake parses one weekly order", intakeJson.total === 1 && intakeOrder.tier === "weekly-brief" && intakeOrder.buyerContact === "qa@example.com");
+  assertCheck("email order intake writes pipeline", intakePipeline.includes("Email Order Intake") && intakePipeline.includes("QA Buyer"));
+  assertCheck("email order intake generates payment reply", intakeReply.includes("USD 19 / month") && intakeReply.includes("Please do not send card numbers"));
+  assertCheck("email order intake records no external actions", (intakeJson.safety || []).includes("No inbox connection was opened.") && (intakeJson.safety || []).includes("No payment action was attempted."));
+  await rm(intakeInboxDir, { recursive: true, force: true });
+  await rm(intakeOutDir, { recursive: true, force: true });
+  await rm(intakePaymentDir, { recursive: true, force: true });
+
   const opsReport = await readText(path.join(root, "dist", "ops-report", "ops-report.md"));
   assertCheck("ops report safety says no messages sent", opsReport.includes("No messages were sent."));
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
   assertCheck("ops report has payment reply count", /Payment reply packets:\s+\d+/.test(opsReport));
+  assertCheck("ops report has email order intake count", /Email order intake records:\s+\d+/.test(opsReport));
   assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 

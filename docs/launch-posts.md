@@ -1,10 +1,10 @@
 # TrendFoundry Launch Assets
 
-Generated: 2026-06-07T10:36:06.815Z
+Generated: 2026-06-07T14:49:19.632Z
 
 Safety: these are draft assets only. Review before posting or sending. Do not bulk-send identical messages, do not promise views/revenue, and do not ask for payment card details in public replies.
 
-Source snapshot: 2026-06-07T10:09:48.622Z
+Source snapshot: 2026-06-07T14:49:17.118Z
 Top opportunity: NousResearch/hermes-agent
 Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
@@ -34,7 +34,7 @@ Status: draft_review_before_posting
 ```text
 Most AI newsletters summarize what happened. TrendFoundry tries to answer a more useful creator question: what should I record next, and what proof do I need before recommending it?
 
-This week's pack collected 126 public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around NousResearch/hermes-agent.
+This week's pack collected 125 public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around NousResearch/hermes-agent.
 
 Free samples:
 - English: https://bravecownofear.github.io/trendfoundry/public-sample.en.md

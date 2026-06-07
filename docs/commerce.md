@@ -34,6 +34,14 @@ Generated local outputs:
 
 The script only writes local drafts. It does not send email, charge a buyer, create a payment link, upload files, or change GitHub state.
 
+For multiple saved buyer emails, copy `.txt`, `.md`, or `.eml` files into ignored `data/email-orders/` and run:
+
+```bash
+npm run intake-email-orders
+```
+
+This creates `dist/email-order-intake/pipeline.md` and matching local payment reply packets without connecting to an inbox.
+
 ## Product SKUs
 
 - `trendfoundry-sample-issue`: USD 9 one-off.

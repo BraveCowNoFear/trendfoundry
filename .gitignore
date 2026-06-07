@@ -1,6 +1,7 @@
 node_modules/
 logs/
 data/raw/
+data/email-orders/
 data/leads.json
 docs/lead-pipeline.md
 docs/lead-replies.md

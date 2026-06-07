@@ -39,8 +39,9 @@ Generated local outputs:
 - sales copy does not promise PDF delivery or attach `prospects.csv`
 - commerce products exist, mention the scene-by-scene script, and exclude seller-only files from buyer fulfillment
 - payment reply packet generation works locally, does not attempt payment, avoids credential collection, and preserves buyer/seller file boundaries
+- email order intake parses copied local order text, generates a pipeline report, and creates matching payment reply packets without external actions
 - a temporary fulfillment order excludes seller-only files
-- ops report includes safety, commerce status, payment reply packet count, and QA gate summary
+- ops report includes safety, commerce status, email order intake count, payment reply packet count, and QA gate summary
 - Windows scheduled tasks point to the expected scripts and last result is 0
 - `--skip-scheduler` omits scheduled task checks for in-task self-checks
 - optional online checks verify public page, public sample, ready-to-record script sections, UTF-8 hook text, and OG image dimensions
