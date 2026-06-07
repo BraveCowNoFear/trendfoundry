@@ -12,6 +12,8 @@ This is the lowest-dependency buyer-intent path currently available:
 - No payment processor.
 - No private form service.
 - Buyers can request the USD 9 sample pack, weekly brief, or custom niche brief.
+- The form captures creator channel, primary platform, desired pack, preferred contact, preferred delivery route, niche preference, and safety acknowledgement.
+- The form states that the paid pack includes 12 source-backed opportunities, one scene-by-scene ready-to-record script, CSV planning files, and quality-risk notes.
 - GitHub sign-in is required to submit the issue form; use the email CTA for buyers who do not want to log in.
 
 ## Manual Triage
@@ -40,7 +42,7 @@ The sync reads public GitHub issues from `BraveCowNoFear/trendfoundry`, parses t
 
 These files are intentionally ignored by Git because they may contain buyer contact details. Commit `docs/lead-pipeline.example.md` only.
 
-`docs/lead-replies.md` contains GitHub and email reply drafts. Review them before sending; the automation does not post messages or transmit buyer data.
+`docs/lead-replies.md` contains GitHub and email reply drafts. The drafts include the buyer's preferred delivery route and describe the script as a scene-by-scene ready-to-record asset. Review them before sending; the automation does not post messages or transmit buyer data.
 
 ## Scheduled Sync
 

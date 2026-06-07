@@ -92,10 +92,10 @@ function githubReplyFor(lead) {
 What you will receive:
 - 12 source-backed AI/developer video opportunities
 - Bilibili and YouTube title angles
-- one ready-to-record script
+- one scene-by-scene ready-to-record script
 - opportunity CSV with quality-risk notes
 
-Please do not post payment card details or private IDs here. Use the preferred contact route you provided for payment and delivery details.`;
+Please do not post payment card details or private IDs here. I will use your preferred delivery route (${safeLine(lead.deliveryRoute, "provided contact route")}) for payment and delivery details.`;
 }
 
 function emailSubjectFor(lead) {
@@ -110,7 +110,7 @@ function emailReplyFor(lead) {
 
 Thanks for ordering TrendFoundry.
 
-I am preparing the current pack for ${channel}. It includes the Markdown brief, one ready-to-record script, opportunities CSV, and quality-risk notes.
+I am preparing the current pack for ${channel}. It includes the Markdown brief, one scene-by-scene ready-to-record script, opportunities CSV, and quality-risk notes.
 
 Before I deliver the next weekly issue, please reply with the narrowest audience you want the brief to optimize for.
 
@@ -133,11 +133,11 @@ The best next step is the ${priceFor(lead)}. The current pack includes:
 
 - 12 source-backed AI/developer video opportunities
 - Bilibili and YouTube title angles
-- one ready-to-record script
+- one scene-by-scene ready-to-record script
 - opportunities CSV with quality-risk notes
 - clear limitations so the ideas do not turn into low-quality AI slop${niche}
 
-If you want to proceed, reply with the preferred payment route for delivery. Please do not send card details by email.
+If you want to proceed, reply with the preferred payment route for delivery via ${safeLine(lead.deliveryRoute, "your preferred contact route")}. Please do not send card details by email.
 
 Best,
 TrendFoundry`;
@@ -159,7 +159,9 @@ function issueToLead(issue) {
     platform: fields.primary_platform || "",
     packType: fields.what_do_you_want || "",
     contact: fields.preferred_contact || "",
+    deliveryRoute: fields.preferred_delivery_route || "",
     niche: fields.niche_or_topic_preference || "",
+    safetyAcknowledgement: fields.safety_acknowledgement || "",
     nextAction: ""
   };
   lead.nextAction = nextActionFor(lead);
@@ -180,7 +182,7 @@ function pipelineMarkdown(leads) {
 
   const rows = leads.map((lead) => {
     const safe = (value) => String(value || "").replace(/\|/g, "/").replace(/\r?\n/g, " ");
-    return `| #${lead.issueNumber} | ${safe(lead.stage)} | ${safe(lead.packType)} | ${safe(lead.platform)} | ${safe(lead.creatorChannel)} | ${safe(lead.contact)} | ${safe(lead.nextAction)} |`;
+    return `| #${lead.issueNumber} | ${safe(lead.stage)} | ${safe(lead.packType)} | ${safe(lead.platform)} | ${safe(lead.creatorChannel)} | ${safe(lead.contact)} | ${safe(lead.deliveryRoute)} | ${safe(lead.nextAction)} |`;
   });
 
   return `# TrendFoundry Lead Pipeline
@@ -197,9 +199,9 @@ ${Object.keys(counts).length ? Object.entries(counts).map(([stage, count]) => `-
 
 ## Leads
 
-| Issue | Stage | Pack | Platform | Creator Channel | Contact | Next Action |
-|---|---|---|---|---|---|---|
-${rows.length ? rows.join("\n") : "| - | - | - | - | - | - | Watch for new GitHub Issue Form submissions. |"}
+| Issue | Stage | Pack | Platform | Creator Channel | Contact | Delivery Route | Next Action |
+|---|---|---|---|---|---|---|---|
+${rows.length ? rows.join("\n") : "| - | - | - | - | - | - | - | Watch for new GitHub Issue Form submissions. |"}
 `;
 }
 
@@ -210,6 +212,7 @@ function repliesMarkdown(leads) {
 - Stage: ${lead.stage}
 - Issue: ${lead.issueUrl}
 - Contact: ${safeLine(lead.contact, "not provided")}
+- Delivery route: ${safeLine(lead.deliveryRoute, "not provided")}
 - Pack: ${safeLine(lead.packType, "not provided")}
 - Next action: ${lead.nextAction}
 

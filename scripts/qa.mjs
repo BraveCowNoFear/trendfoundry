@@ -78,6 +78,14 @@ async function checkLocal() {
   assertCheck("latest data item count", (latest.totalItems || 0) >= 50, String(latest.totalItems || 0));
   assertCheck("latest displayed source errors <= 3", (latest.errorCount || 0) <= 3, String(latest.errorCount || 0));
 
+  const issueTemplate = await readText(path.join(root, ".github", "ISSUE_TEMPLATE", "order-sample-pack.yml"));
+  assertCheck("issue form has delivery route field", issueTemplate.includes("id: delivery_route"));
+  assertCheck("issue form has safety acknowledgement", issueTemplate.includes("id: safety_acknowledgement"));
+  assertCheck("issue form mentions scene-by-scene script", issueTemplate.includes("scene-by-scene ready-to-record script"));
+
+  const syncLeads = await readText(path.join(root, "scripts", "sync_leads.mjs"));
+  assertCheck("lead replies mention scene-by-scene script", syncLeads.includes("one scene-by-scene ready-to-record script"));
+
   const siteIndex = await readText(path.join(root, "site", "index.html"));
   assertCheck("site has email order CTA", siteIndex.includes("Email order"));
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));

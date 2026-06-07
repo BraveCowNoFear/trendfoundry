@@ -7,6 +7,8 @@ body:
       value: |
         Thanks for your interest in TrendFoundry. This form is for sample-pack requests and custom brief inquiries.
 
+        The paid pack includes 12 source-backed opportunities, one scene-by-scene ready-to-record script, CSV planning files, and quality-risk notes.
+
         Do not include passwords, payment card details, private IDs, or sensitive account information.
   - type: input
     id: creator_channel
@@ -46,6 +48,17 @@ body:
       placeholder: "email@example.com"
     validations:
       required: true
+  - type: dropdown
+    id: delivery_route
+    attributes:
+      label: Preferred delivery route
+      description: Choose where you want payment/delivery details handled after the request is reviewed.
+      options:
+        - Email
+        - GitHub issue comment
+        - Other public contact route
+    validations:
+      required: true
   - type: textarea
     id: niche
     attributes:
@@ -54,3 +67,12 @@ body:
       placeholder: "AI agents for office workflows, open-source video tools, coding agents..."
     validations:
       required: false
+  - type: checkboxes
+    id: safety_acknowledgement
+    attributes:
+      label: Safety acknowledgement
+      options:
+        - label: I will not post payment card details, passwords, private IDs, or sensitive account information in this issue.
+          required: true
+        - label: I understand TrendFoundry is a creator planning aid and does not guarantee views, subscribers, revenue, or platform growth.
+          required: true
