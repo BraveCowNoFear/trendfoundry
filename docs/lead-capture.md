@@ -39,6 +39,16 @@ The sync reads public GitHub issues from `BraveCowNoFear/trendfoundry`, parses t
 
 Both files are intentionally ignored by Git because they may contain buyer contact details. Commit `docs/lead-pipeline.example.md` only.
 
+## Scheduled Sync
+
+Local scheduled task:
+
+- `TrendFoundryLeadSync`
+- Script: `scripts/run_leads.ps1`
+- Log pattern: `logs/leads-*.log`
+
+Keep this separate from `TrendFoundryDaily` so a GitHub API hiccup does not block the daily content pack.
+
 ## Safety
 
 - Do not ask buyers to post payment card details or private identifiers in GitHub issues.
