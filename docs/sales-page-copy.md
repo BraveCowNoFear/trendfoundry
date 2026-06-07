@@ -23,6 +23,26 @@ Most AI newsletters summarize news. TrendFoundry turns signals into creator asse
 - Weekly subscription: USD 19/month.
 - Custom niche pack: USD 49/month.
 
+## Tier Details
+
+### Starter sample - USD 9 one-off
+
+Best for: creators who want to test fit before subscribing.
+
+Includes: 12 ranked opportunities, one ready-to-record script, opportunity CSV, and quality-risk notes.
+
+### Weekly brief - USD 19/month
+
+Best for: creators who need a dependable weekly topic pipeline.
+
+Includes: weekly 12-item issue, fresh source mix, Bilibili and YouTube title angles, and recording outline per item.
+
+### Custom niche - USD 49/month
+
+Best for: teams focused on one narrow audience or technical vertical.
+
+Includes: custom source queries, niche-specific ranking, stricter quality filtering, and lead/outreach angle notes.
+
 ## First Checkout Page Draft
 
 Title: TrendFoundry Weekly AI Creator Brief

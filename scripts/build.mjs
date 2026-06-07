@@ -51,6 +51,64 @@ const sourceBars = Object.entries(bySource)
   .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
   .join("");
 
+const pricingTiers = [
+  {
+    name: "Sample issue",
+    price: "$9",
+    cadence: "one-off",
+    bestFor: "Test whether the brief fits your channel before subscribing.",
+    includes: ["12 ranked opportunities", "1 ready-to-record script", "CSV opportunity table", "Quality-risk notes"],
+    action: "Request sample",
+    href: issueOrderHref,
+    featured: false
+  },
+  {
+    name: "Weekly brief",
+    price: "$19",
+    cadence: "per month",
+    bestFor: "Creators who need a dependable weekly topic pipeline.",
+    includes: ["Weekly 12-item issue", "Fresh source mix", "Bilibili + YouTube title angles", "Recording outline per item"],
+    action: "Start weekly",
+    href: orderHref,
+    featured: true
+  },
+  {
+    name: "Custom niche",
+    price: "$49",
+    cadence: "per month",
+    bestFor: "Teams focused on one narrow audience or technical vertical.",
+    includes: ["Custom source queries", "Niche-specific ranking", "Stricter quality filtering", "Lead/outreach angle notes"],
+    action: "Ask for custom",
+    href: issueOrderHref,
+    featured: false
+  }
+];
+
+const pricingCards = pricingTiers
+  .map(
+    (tier) => `<article class="tier${tier.featured ? " featured" : ""}">
+  <div>
+    <p class="tier-kicker">${escapeHtml(tier.cadence)}</p>
+    <h3>${escapeHtml(tier.name)}</h3>
+    <p class="tier-price">${escapeHtml(tier.price)}</p>
+    <p>${escapeHtml(tier.bestFor)}</p>
+  </div>
+  <ul>${tier.includes.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+  <a class="action${tier.featured ? " primary" : ""}" href="${tier.href}">${escapeHtml(tier.action)}</a>
+</article>`
+  )
+  .join("");
+
+const deliveryItems = [
+  ["Proof links", "Every idea keeps the original public source attached."],
+  ["Recordable angle", "Titles, hook, outline, demo step, and limitation are generated together."],
+  ["Quality control", "Hype, rights-risk, and too-broad signals are flagged before they reach the display pack."],
+  ["No-backend intake", "GitHub Issue Form and email order paths work before payment automation is connected."]
+];
+const deliveryChecklist = deliveryItems
+  .map(([label, text]) => `<li><strong>${escapeHtml(label)}</strong><span>${escapeHtml(text)}</span></li>`)
+  .join("");
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -231,6 +289,21 @@ const html = `<!doctype html>
         <small><a href="${issueOrderHref}">GitHub request</a> / <a href="${orderHref}">email order</a></small>
       </div>
     </section>
+    <section class="pricing" aria-label="Pricing tiers">
+      <div class="section-head">
+        <p class="section-label">Pricing</p>
+        <h2>Three buyer paths, all deliverable without a backend.</h2>
+        <p>Each tier sells the same core advantage: fewer weak topics, faster planning, and a clearer recording queue.</p>
+      </div>
+      <div class="tier-grid">${pricingCards}</div>
+    </section>
+    <section class="delivery" aria-label="What the buyer receives">
+      <div>
+        <p class="section-label">What arrives</p>
+        <h2>A compact intelligence pack, not another AI news digest.</h2>
+      </div>
+      <ul>${deliveryChecklist}</ul>
+    </section>
     <section class="toolbelt" aria-label="Opportunity controls">
       <div class="search-wrap">
         <label for="opportunity-search">Search opportunities</label>
@@ -405,6 +478,104 @@ main {
 }
 .price span { display: block; font-size: 32px; font-weight: 850; }
 .price small { color: var(--muted); }
+.pricing,
+.delivery {
+  border-bottom: 1px solid var(--line);
+  padding: 2px 0 24px;
+  margin-bottom: 22px;
+}
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.7fr);
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+.section-head h2,
+.delivery h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.section-head p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.tier {
+  display: grid;
+  gap: 14px;
+  align-content: space-between;
+  min-height: 330px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.tier.featured {
+  border-color: #94aaa5;
+  background: #fbfdfc;
+}
+.tier-kicker {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tier h3 {
+  margin: 0;
+  font-size: 19px;
+}
+.tier-price {
+  margin: 8px 0;
+  color: var(--ink);
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 850;
+}
+.tier p:not(.tier-kicker):not(.tier-price) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.tier ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+.delivery {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.delivery ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.delivery li {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+.delivery li span {
+  color: var(--muted);
+  line-height: 1.45;
+}
 .toolbelt {
   display: grid;
   grid-template-columns: minmax(220px, 360px) minmax(0, 1fr) auto;
@@ -524,6 +695,10 @@ li { margin: 6px 0; }
 @media (max-width: 960px) {
   .topbar,
   .offer,
+  .section-head,
+  .tier-grid,
+  .delivery,
+  .delivery ul,
   .toolbelt,
   .handoff,
   .grid {
