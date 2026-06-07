@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-07T03:18:56.242Z",
+  "generatedAt": "2026-06-07T03:46:38.382Z",
   "product": "TrendFoundry Creator Intelligence",
   "totalItems": 124,
   "errorCount": 0,
@@ -12,8 +12,8 @@
       "title": "NousResearch/hermes-agent",
       "summary": "The agent that grows with you",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 184849,
-      "comments": 18716,
+      "stars": 184866,
+      "comments": 18726,
       "language": "Python",
       "updatedAt": "2026-06-07T03:08:59Z",
       "createdAt": "2025-07-22T22:22:28Z",
@@ -62,7 +62,7 @@
       "title": "infiniflow/ragflow",
       "summary": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
       "url": "https://github.com/infiniflow/ragflow",
-      "stars": 82051,
+      "stars": 82053,
       "comments": 3303,
       "language": "Python",
       "updatedAt": "2026-06-05T13:59:26Z",
@@ -112,7 +112,7 @@
       "title": "google-gemini/gemini-cli",
       "summary": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
       "url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 105016,
+      "stars": 105017,
       "comments": 1276,
       "language": "TypeScript",
       "updatedAt": "2026-06-05T23:58:52Z",
@@ -162,7 +162,7 @@
       "title": "langchain-ai/langchain",
       "summary": "The agent engineering platform.",
       "url": "https://github.com/langchain-ai/langchain",
-      "stars": 138681,
+      "stars": 138682,
       "comments": 552,
       "language": "Python",
       "updatedAt": "2026-06-06T08:53:46Z",
@@ -262,7 +262,7 @@
       "title": "affaan-m/ECC",
       "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "url": "https://github.com/affaan-m/ECC",
-      "stars": 209218,
+      "stars": 209228,
       "comments": 111,
       "language": "JavaScript",
       "updatedAt": "2026-06-05T22:31:37Z",
@@ -312,7 +312,7 @@
       "title": "thedotmack/claude-mem",
       "summary": "Persistent Context Across Sessions for Every Agent – Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode ",
       "url": "https://github.com/thedotmack/claude-mem",
-      "stars": 80995,
+      "stars": 80998,
       "comments": 95,
       "language": "TypeScript",
       "updatedAt": "2026-06-06T06:23:50Z",
@@ -362,7 +362,7 @@
       "title": "AIDC-AI/Pixelle-Video",
       "summary": "🚀 AI 全自动短视频引擎 | AI Fully Automated Short Video Engine",
       "url": "https://github.com/AIDC-AI/Pixelle-Video",
-      "stars": 21591,
+      "stars": 21592,
       "comments": 123,
       "language": "Python",
       "updatedAt": "2026-06-03T16:14:16Z",
@@ -462,7 +462,7 @@
       "title": "firecrawl/firecrawl",
       "summary": "The API to search, scrape, and interact with the web at scale. 🔥",
       "url": "https://github.com/firecrawl/firecrawl",
-      "stars": 129570,
+      "stars": 129576,
       "comments": 365,
       "language": "TypeScript",
       "updatedAt": "2026-06-06T18:04:47Z",
@@ -512,7 +512,7 @@
       "title": "Anil-matcha/Open-Generative-AI",
       "summary": "Open-source alternative to AI video platforms — Free AI image & video generation studio with 200+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed.",
       "url": "https://github.com/Anil-matcha/Open-Generative-AI",
-      "stars": 18319,
+      "stars": 18320,
       "comments": 23,
       "language": "JavaScript",
       "updatedAt": "2026-06-03T08:50:15Z",
@@ -562,7 +562,7 @@
       "title": "HKUDS/ViMax",
       "summary": "\"ViMax: Agentic Video Generation (Director, Screenwriter, Producer, and Video Generator All-in-One)\"",
       "url": "https://github.com/HKUDS/ViMax",
-      "stars": 8939,
+      "stars": 8940,
       "comments": 35,
       "language": "Python",
       "updatedAt": "2026-06-01T16:39:16Z",
@@ -607,64 +607,15 @@
     },
     {
       "source": "youtube",
-      "sourceQuery": "AI agents tutorial open source",
-      "id": "n5cYS6KuyK8",
-      "title": "Building Programmable AI Agents Just Got 10x Cheaper",
-      "summary": "Better Stack / 3 days ago / 29,774 views",
-      "url": "https://www.youtube.com/watch?v=n5cYS6KuyK8",
-      "points": 29774,
-      "comments": 0,
-      "createdAt": "2026-06-04T03:18:36.096Z",
-      "updatedAt": "2026-06-04T03:18:36.096Z",
-      "score": 138,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "high",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 Building Programmable AI Agents Just Got 10x Cheaper 现在值得创作者关注",
-          "【实测】Building Programmable AI Agents Just Got 10x Cheaper 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Building Programmable AI Agents Just Got 10x Cheaper 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Building Programmable AI Agents Just Got 10x Cheaper: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 Building Programmable AI Agents Just Got 10x Cheaper 现在值得创作者关注 (practical test)",
-          "Building Programmable AI Agents Just Got 10x Cheaper 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Building Programmable AI Agents Just Got 10x Cheaper 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Building Programmable AI Agents Just Got 10x Cheaper: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 Building Programmable AI Agents Just Got 10x Cheaper 是否能进入真实创作工作流。",
-        "whyNow": "Building Programmable AI Agents Just Got 10x Cheaper is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://www.youtube.com/watch?v=n5cYS6KuyK8",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Building Programmable AI Agents Just Got 10x Cheaper, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "youtube",
       "sourceQuery": "AI video tools creator workflow",
       "id": "oT-2VO8Jzpk",
       "title": "The Only AI Video Prompt Generator You'll Ever Need",
-      "summary": "Youri van Hofwegen / 4 days ago / 34,415 views",
+      "summary": "Youri van Hofwegen / 4 days ago / 34,427 views",
       "url": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
-      "points": 34415,
+      "points": 34427,
       "comments": 0,
-      "createdAt": "2026-06-03T03:18:35.647Z",
-      "updatedAt": "2026-06-03T03:18:35.647Z",
+      "createdAt": "2026-06-03T03:46:17.078Z",
+      "updatedAt": "2026-06-03T03:46:17.078Z",
       "score": 137,
       "stale": false,
       "qualityFlags": [],
@@ -708,12 +659,12 @@
       "sourceQuery": "AI video tools creator workflow",
       "id": "JQzF5LP4VTs",
       "title": "The ONLY 3 Tools You Need to Create ANY AI Video",
-      "summary": "Tao Prompts / 4 days ago / 33,121 views",
+      "summary": "Tao Prompts / 4 days ago / 33,141 views",
       "url": "https://www.youtube.com/watch?v=JQzF5LP4VTs",
-      "points": 33121,
+      "points": 33141,
       "comments": 0,
-      "createdAt": "2026-06-03T03:18:35.647Z",
-      "updatedAt": "2026-06-03T03:18:35.647Z",
+      "createdAt": "2026-06-03T03:46:17.078Z",
+      "updatedAt": "2026-06-03T03:46:17.078Z",
       "score": 137,
       "stale": false,
       "qualityFlags": [],
@@ -757,12 +708,12 @@
       "sourceQuery": "AI video tools creator workflow",
       "id": "uQulSf5Mci0",
       "title": "Best AI Video Agents in 2026 (Most Realistic)",
-      "summary": "Youri van Hofwegen / 2 days ago / 14,458 views",
+      "summary": "Youri van Hofwegen / 2 days ago / 14,476 views",
       "url": "https://www.youtube.com/watch?v=uQulSf5Mci0",
-      "points": 14458,
+      "points": 14476,
       "comments": 0,
-      "createdAt": "2026-06-05T03:18:35.646Z",
-      "updatedAt": "2026-06-05T03:18:35.646Z",
+      "createdAt": "2026-06-05T03:46:17.078Z",
+      "updatedAt": "2026-06-05T03:46:17.078Z",
       "score": 135,
       "stale": false,
       "qualityFlags": [],
@@ -806,12 +757,12 @@
       "sourceQuery": "AI video tools creator workflow",
       "id": "0v534yAyhwg",
       "title": "EXACTLY How to Make an AI Short Film (Full Workflow)",
-      "summary": "Youri van Hofwegen / 5 days ago / 22,827 views",
+      "summary": "Youri van Hofwegen / 5 days ago / 22,834 views",
       "url": "https://www.youtube.com/watch?v=0v534yAyhwg",
-      "points": 22827,
+      "points": 22834,
       "comments": 0,
-      "createdAt": "2026-06-02T03:18:35.647Z",
-      "updatedAt": "2026-06-02T03:18:35.647Z",
+      "createdAt": "2026-06-02T03:46:17.078Z",
+      "updatedAt": "2026-06-02T03:46:17.078Z",
       "score": 134,
       "stale": false,
       "qualityFlags": [],
@@ -859,8 +810,8 @@
       "url": "https://www.youtube.com/watch?v=RwynWBXuRaA",
       "points": 10490,
       "comments": 0,
-      "createdAt": "2026-06-05T03:18:35.647Z",
-      "updatedAt": "2026-06-05T03:18:35.647Z",
+      "createdAt": "2026-06-05T03:46:17.078Z",
+      "updatedAt": "2026-06-05T03:46:17.078Z",
       "score": 133,
       "stale": false,
       "qualityFlags": [],
@@ -906,7 +857,7 @@
       "title": "Ask HN: What is your (AI) dev tech stack / workflow?",
       "summary": "Ask HN: What is your (AI) dev tech stack / workflow?",
       "url": "https://news.ycombinator.com/item?id=48413629",
-      "points": 146,
+      "points": 147,
       "comments": 128,
       "createdAt": "2026-06-05T15:13:54Z",
       "updatedAt": "2026-06-05T15:13:54Z",
@@ -949,16 +900,67 @@
       }
     },
     {
+      "source": "bilibili",
+      "sourceQuery": "AI视频工具",
+      "id": "BV1BQEs6JEZP",
+      "title": "GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长",
+      "summary": "-",
+      "url": "http://www.bilibili.com/video/av116706441763035",
+      "points": 443,
+      "comments": 9,
+      "author": "清华姜学长",
+      "collectionAttempts": 3,
+      "createdAt": "2026-06-07T02:28:12.000Z",
+      "updatedAt": "2026-06-07T02:28:12.000Z",
+      "score": 129,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注",
+          "【实测】GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注 (practical test)",
+          "GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 是否能进入真实创作工作流。",
+        "whyNow": "GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116706441763035",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
       "source": "youtube",
       "sourceQuery": "AI video tools creator workflow",
       "id": "Hjj-yiDJXTw",
       "title": "AI Filmmaking Workflow: How To Create AI Videos With Full Automation",
-      "summary": "AI Master / 1 day ago / 3,651 views",
+      "summary": "AI Master / 1 day ago / 3,680 views",
       "url": "https://www.youtube.com/watch?v=Hjj-yiDJXTw",
-      "points": 3651,
+      "points": 3680,
       "comments": 0,
-      "createdAt": "2026-06-06T03:18:35.646Z",
-      "updatedAt": "2026-06-06T03:18:35.646Z",
+      "createdAt": "2026-06-06T03:46:17.078Z",
+      "updatedAt": "2026-06-06T03:46:17.078Z",
       "score": 129,
       "stale": false,
       "qualityFlags": [],
@@ -1104,7 +1106,7 @@
       "title": "HBAI-Ltd/Toonflow-app",
       "summary": "Toonflow 是开源一站式 AI 短剧创作工具，将小说、剧本快速转化为动画短剧。集成 AI 编剧、智能分镜、角色与视频生成，跨平台桌面端轻量部署，助力创作者低成本批量产出视觉内容。Toonflow is an open-source AI tool that turns stories and scripts into animated short dramas. Features AI scriptwriting, storyboarding, character and video generation. ",
       "url": "https://github.com/HBAI-Ltd/Toonflow-app",
-      "stars": 9691,
+      "stars": 9692,
       "comments": 0,
       "language": "HTML",
       "updatedAt": "2026-06-05T13:33:10Z",
@@ -1298,57 +1300,6 @@
       }
     },
     {
-      "source": "bilibili",
-      "sourceQuery": "AI视频工具",
-      "id": "BV1BQEs6JEZP",
-      "title": "GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长",
-      "summary": "-",
-      "url": "http://www.bilibili.com/video/av116706441763035",
-      "points": 354,
-      "comments": 6,
-      "author": "清华姜学长",
-      "collectionAttempts": 2,
-      "createdAt": "2026-06-07T02:28:12.000Z",
-      "updatedAt": "2026-06-07T02:28:12.000Z",
-      "score": 126,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "high",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注",
-          "【实测】GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注 (practical test)",
-          "GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 是否能进入真实创作工作流。",
-        "whyNow": "GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706441763035",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
       "source": "github",
       "sourceQuery": "content-creation",
       "id": "modelscope/FunClip",
@@ -1401,63 +1352,12 @@
     {
       "source": "youtube",
       "sourceQuery": "AI agents tutorial open source",
-      "id": "M-NTwkM3VwM",
-      "title": "Local AI Agents In 26 Minutes",
-      "summary": "Tina Huang / 1 month ago / 264,797 views",
-      "url": "https://www.youtube.com/watch?v=M-NTwkM3VwM",
-      "points": 264797,
-      "comments": 0,
-      "createdAt": "2026-05-08T03:18:36.095Z",
-      "updatedAt": "2026-05-08T03:18:36.095Z",
-      "score": 122,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "high",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 Local AI Agents In 26 Minutes 现在值得创作者关注",
-          "【实测】Local AI Agents In 26 Minutes 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Local AI Agents In 26 Minutes 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Local AI Agents In 26 Minutes: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 Local AI Agents In 26 Minutes 现在值得创作者关注 (practical test)",
-          "Local AI Agents In 26 Minutes 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Local AI Agents In 26 Minutes 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Local AI Agents In 26 Minutes: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。",
-        "whyNow": "Local AI Agents In 26 Minutes is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://www.youtube.com/watch?v=M-NTwkM3VwM",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Local AI Agents In 26 Minutes, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "youtube",
-      "sourceQuery": "AI agents tutorial open source",
       "id": "EH5jx5qPabU",
       "title": "From Zero to Your First AI Agent in 25 Minutes (No Coding)",
-      "summary": "Futurepedia and AI Agent Lab / 1 year ago / 3,778,814 views",
+      "summary": "Futurepedia and AI Agent Lab / 1y ago / 3,778,862 views",
       "url": "https://www.youtube.com/watch?v=EH5jx5qPabU",
-      "points": 3778814,
+      "points": 3778862,
       "comments": 0,
-      "createdAt": "2025-06-07T03:18:36.095Z",
-      "updatedAt": "2025-06-07T03:18:36.095Z",
       "score": 121,
       "stale": false,
       "qualityFlags": [],
@@ -1603,8 +1503,8 @@
       "title": "Ask HN: Why is the HN crowd so anti-AI?",
       "summary": "Ask HN: Why is the HN crowd so anti-AI?",
       "url": "https://news.ycombinator.com/item?id=48420827",
-      "points": 398,
-      "comments": 662,
+      "points": 400,
+      "comments": 664,
       "createdAt": "2026-06-06T02:31:51Z",
       "updatedAt": "2026-06-06T02:31:51Z",
       "score": 119,
@@ -1652,10 +1552,10 @@
       "title": "[中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI",
       "summary": "原标题：A Billion 3D Splats Rendering in Your Browser (And It&#x27;s Open Source) 作者：Stefan 3D AI 原链接：https://www.youtube.com/watch?v=2t-PLeenqqA 上传日期：2026-06-06 简介：本视频介绍了一款开创性的开源库，可在网页浏览器内直接渲染十亿个3D高斯点，无需高端显卡或软件安装。演讲者指出，通过借鉴游戏开发中的细节层次和流式传输技术，如今能在笔记本和移动设备上流畅运行大规模3",
       "url": "http://www.bilibili.com/video/av116705468618655",
-      "points": 253,
+      "points": 263,
       "comments": 1,
       "author": "声译看世界",
-      "collectionAttempts": 1,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-06T22:19:10.000Z",
       "updatedAt": "2026-06-06T22:19:10.000Z",
       "score": 119,
@@ -1698,15 +1598,66 @@
     },
     {
       "source": "bilibili",
+      "sourceQuery": "B站AI工作流",
+      "id": "BV1NKEJ61EHd",
+      "title": "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程",
+      "summary": "一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~",
+      "url": "http://www.bilibili.com/video/av116703774115351",
+      "points": 474,
+      "comments": 0,
+      "author": "AI图生视频工作流",
+      "collectionAttempts": 2,
+      "createdAt": "2026-06-07T03:25:00.000Z",
+      "updatedAt": "2026-06-07T03:25:00.000Z",
+      "score": 119,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注",
+          "【实测】【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)",
+          "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 是否能进入真实创作工作流。",
+        "whyNow": "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116703774115351",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
+      "source": "bilibili",
       "sourceQuery": "AI智能体教程",
       "id": "BV1C9EJ6kEhY",
       "title": "Agent入门学习_伪去中心化多 智能体 协作系统",
       "summary": "纯Python单人手搓伪去中心化多智能体协作系统,中心化协作模式已经验证,基本工具调用,会话管理,插件加载,节点发现,已经成功实现,深度的消息追踪,容错冗余,护栏,有待考究,用于单人简单任务,以及agent代码大致流程了解快速入门没有问题,但用作准确度高要求的生产环境仍然需要调整",
       "url": "http://www.bilibili.com/video/av116703186915719",
-      "points": 140,
+      "points": 143,
       "comments": 1,
       "author": "活火山MOE",
-      "collectionAttempts": 2,
+      "collectionAttempts": 1,
       "createdAt": "2026-06-06T12:38:00.000Z",
       "updatedAt": "2026-06-06T12:38:00.000Z",
       "score": 115,
@@ -1804,7 +1755,7 @@
       "title": "duixcom/Duix-Avatar",
       "summary": "🚀 Truly open-source AI avatar(digital human) toolkit for offline video generation and digital human cloning.",
       "url": "https://github.com/duixcom/Duix-Avatar",
-      "stars": 13518,
+      "stars": 13517,
       "comments": 414,
       "language": "C",
       "updatedAt": "2026-04-21T07:06:36Z",
@@ -1854,7 +1805,7 @@
       "title": "calesthio/OpenMontage",
       "summary": "World's first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio.",
       "url": "https://github.com/calesthio/OpenMontage",
-      "stars": 4450,
+      "stars": 4451,
       "comments": 54,
       "language": "Python",
       "updatedAt": "2026-05-07T12:12:36Z",
@@ -1948,13 +1899,60 @@
       }
     },
     {
+      "source": "youtube",
+      "sourceQuery": "AI agents tutorial open source",
+      "id": "eur8dUO9mvE",
+      "title": "What is MCP? Integrate AI Agents with Databases & APIs",
+      "summary": "IBM Technology / 1y ago / 599,431 views",
+      "url": "https://www.youtube.com/watch?v=eur8dUO9mvE",
+      "points": 599431,
+      "comments": 0,
+      "score": 111,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 What is MCP? Integrate AI Agents with Databases & APIs 现在值得创作者关注",
+          "【实测】What is MCP? Integrate AI Agents with Databases & APIs 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 What is MCP? Integrate AI Agents with Databases & APIs 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】What is MCP? Integrate AI Agents with Databases & APIs: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 What is MCP? Integrate AI Agents with Databases & APIs 现在值得创作者关注 (practical test)",
+          "What is MCP? Integrate AI Agents with Databases & APIs 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 What is MCP? Integrate AI Agents with Databases & APIs 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "What is MCP? Integrate AI Agents with Databases & APIs: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 What is MCP? Integrate AI Agents with Databases & APIs 是否能进入真实创作工作流。",
+        "whyNow": "What is MCP? Integrate AI Agents with Databases & APIs is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://www.youtube.com/watch?v=eur8dUO9mvE",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about What is MCP? Integrate AI Agents with Databases & APIs, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
       "source": "github",
       "sourceQuery": "remotion",
       "id": "digitalsamba/claude-code-video-toolkit",
       "title": "digitalsamba/claude-code-video-toolkit",
       "summary": "AI-native video production toolkit for Claude Code",
       "url": "https://github.com/digitalsamba/claude-code-video-toolkit",
-      "stars": 1342,
+      "stars": 1343,
       "comments": 6,
       "language": "Python",
       "updatedAt": "2026-05-20T21:16:18Z",
@@ -2004,13 +2002,13 @@
       "title": "用 AI 重构一个.NET开源项目的经历分享",
       "summary": "杨中科 / 计算机技术",
       "url": "http://www.bilibili.com/video/av116706357876729",
-      "points": 1031,
+      "points": 1120,
       "comments": 9,
       "author": "杨中科",
-      "collectionAttempts": 1,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-07T02:06:05.000Z",
       "updatedAt": "2026-06-07T02:06:05.000Z",
-      "score": 109,
+      "score": 110,
       "stale": false,
       "qualityFlags": [],
       "qualityRisk": "normal",
@@ -2045,6 +2043,53 @@
           "结尾: 给观众一个可复制的小任务"
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 用 AI 重构一个.NET开源项目的经历分享, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
+      "source": "youtube",
+      "sourceQuery": "AI agents tutorial open source",
+      "id": "M-NTwkM3VwM",
+      "title": "Local AI Agents In 26 Minutes",
+      "summary": "Tina Huang / 1mo ago / 264,850 views",
+      "url": "https://www.youtube.com/watch?v=M-NTwkM3VwM",
+      "points": 264850,
+      "comments": 0,
+      "score": 107,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Local AI Agents In 26 Minutes 现在值得创作者关注",
+          "【实测】Local AI Agents In 26 Minutes 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Local AI Agents In 26 Minutes 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Local AI Agents In 26 Minutes: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Local AI Agents In 26 Minutes 现在值得创作者关注 (practical test)",
+          "Local AI Agents In 26 Minutes 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Local AI Agents In 26 Minutes 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Local AI Agents In 26 Minutes: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。",
+        "whyNow": "Local AI Agents In 26 Minutes is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://www.youtube.com/watch?v=M-NTwkM3VwM",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Local AI Agents In 26 Minutes, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -2150,13 +2195,60 @@
       }
     },
     {
+      "source": "youtube",
+      "sourceQuery": "AI agents tutorial open source",
+      "id": "L7FF8Zgab3M",
+      "title": "What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop",
+      "summary": "IBM Technology and IBM Developer / 1mo ago / 203,885 views",
+      "url": "https://www.youtube.com/watch?v=L7FF8Zgab3M",
+      "points": 203885,
+      "comments": 0,
+      "score": 106,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 现在值得创作者关注",
+          "【实测】What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 现在值得创作者关注 (practical test)",
+          "What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop 是否能进入真实创作工作流。",
+        "whyNow": "What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://www.youtube.com/watch?v=L7FF8Zgab3M",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
       "source": "bilibili",
       "sourceQuery": "YouTube 创作者 AI",
       "id": "BV1otEH6MEdx",
       "title": "【双语】特朗普宣布：美国民众即将成为 AI 公司合伙人？",
       "summary": "https://www.youtube.com/watch?v=k7lQEpKzVY4 Trump Announces AI Leaders White House Visit 你是否想过有一天能直接持有世界顶尖人工智能公司的股权？ 近日，特朗普在彭博电视采访中提出了一项引人注目的计划：让所有美国民众都能获得人工智能公司的股权，从而成为这些科技巨头的合作伙伴。这一想法已经得到了多家AI公司高层的支持，白宫也正在筹划一场史无前例的会议，邀请所有主要的人工智能企业参与讨论。 这场备受瞩目的会议预计下周在白宫举",
       "url": "http://www.bilibili.com/video/av116704646537210",
-      "points": 17,
+      "points": 18,
       "comments": 1,
       "author": "Youtube金融精選",
       "collectionAttempts": 1,
@@ -2301,60 +2393,6 @@
       }
     },
     {
-      "source": "bilibili",
-      "sourceQuery": "B站AI工作流",
-      "id": "BV1G17Q6LEzw",
-      "title": "【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦",
-      "summary": "领取秋叶ComfyUI V9.5整合包（含工作流、模型、插件、lora等） ，三联+评论区留言666",
-      "url": "http://www.bilibili.com/video/av116702012575933",
-      "points": 2028,
-      "comments": 26,
-      "author": "ai漫剧--",
-      "collectionAttempts": 3,
-      "createdAt": "2026-06-06T07:44:43.000Z",
-      "updatedAt": "2026-06-06T07:44:43.000Z",
-      "score": 104,
-      "stale": false,
-      "qualityFlags": [
-        "engagement-bait",
-        "too-broad"
-      ],
-      "qualityRisk": "review",
-      "monetizationFit": "high",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 现在值得创作者关注",
-          "【实测】【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 现在值得创作者关注 (practical test)",
-          "【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 是否能进入真实创作工作流。",
-        "whyNow": "【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116702012575933",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 【 AI 漫剧教程】 AI 漫剧教程+ComfyUI教程+即梦+剪映！ ai 漫剧制作全教程，手把手教你从0到1制作 AI 短片！手把手教你玩转 AI 漫剧ComfyUI教程+即梦, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Quality-risk signals detected (engagement-bait, too-broad). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
-      }
-    },
-    {
       "source": "youtube",
       "sourceQuery": "creator economy AI tools",
       "id": "Li-6QMs9_G4",
@@ -2363,8 +2401,8 @@
       "url": "https://www.youtube.com/watch?v=Li-6QMs9_G4",
       "points": 157264,
       "comments": 0,
-      "createdAt": "2025-06-07T03:18:36.975Z",
-      "updatedAt": "2025-06-07T03:18:36.975Z",
+      "createdAt": "2025-06-07T03:46:18.598Z",
+      "updatedAt": "2025-06-07T03:46:18.598Z",
       "score": 104,
       "stale": false,
       "qualityFlags": [],
@@ -2406,62 +2444,11 @@
     {
       "source": "bilibili",
       "sourceQuery": "YouTube 创作者 AI",
-      "id": "BV1kdEJ63Eyv",
-      "title": "【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮 | Closing Bell 2026/06/05 | 彭博社",
-      "summary": "https://www.youtube.com/watch?v=w91k5PAcL1Y AI-Led Rout as Yields Climb | Closing Bell 彭博社 — Closing Bell 收盘铃 纳斯达克指数单日暴跌4.6%，这是自解放日以来的最大跌幅。科技股为何遭遇如此猛烈的抛售？节目中，彭博社主持人Tim Stenevek指出，这背后是市场对科技公司估值的担忧加剧，尤其是在美国国债收益率上升的环境下。嘉宾Romain Bostick进一步分析称，投资者正在重新评估高成长型股票",
-      "url": "http://www.bilibili.com/video/av116703237247047",
-      "points": 12,
-      "comments": 1,
-      "author": "Youtube金融精選",
-      "collectionAttempts": 1,
-      "createdAt": "2026-06-06T12:57:12.000Z",
-      "updatedAt": "2026-06-06T12:57:12.000Z",
-      "score": 103,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "high",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 现在值得创作者关注",
-          "【实测】【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 现在值得创作者关注 (practical test)",
-          "【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮  Closing Bell 2026/06/05  彭博社: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮 | Closing Bell 2026/06/05 | 彭博社 是否能进入真实创作工作流。",
-        "whyNow": "【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮 | Closing Bell 2026/06/05 | 彭博社 is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116703237247047",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮 | Closing Bell 2026/06/05 | 彭博社, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "bilibili",
-      "sourceQuery": "YouTube 创作者 AI",
       "id": "BV1EHEJ6vEXy",
       "title": "【双语】 AI 正在改变就业市场！贝莱德首席：这些行业即将被颠覆",
       "summary": "https://www.youtube.com/watch?v=5ItJdM3I1yM BlackRock&#x27;s Rieder Talks Jobs Report, AI and Markets 人工智能正在重塑全球经济格局，但你是否知道它对就业市场的具体影响？本期视频中，全球最大的资产管理公司贝莱德的首席投资官里克·里德深入解读了最新非农就业报告，并揭示了AI技术如何重构不同行业的就业前景。他指出，在当前经济环境下，医疗保健和地方政府部门表现强劲，而建筑业的繁荣则显示出人工智能基础设施建设正在加速发展。与",
       "url": "http://www.bilibili.com/video/av116703807739418",
-      "points": 10,
+      "points": 11,
       "comments": 1,
       "author": "Youtube金融精選",
       "collectionAttempts": 1,
@@ -2502,6 +2489,57 @@
           "结尾: 给观众一个可复制的小任务"
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 【双语】 AI 正在改变就业市场！贝莱德首席：这些行业即将被颠覆, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "开源AI项目",
+      "id": "BV1vGVd6UEAT",
+      "title": "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点",
+      "summary": "如果你用 Claude Code 或其他编码 agent，你一定遇到过这些问题：agent 写出来的东西不是你想要的，输出啰嗦到爆炸，代码跑不通，项目变成一团乱麻。今天介绍的 Matt Pocock Skills 就是来解这些痛的。 Matt Pocock 是 Total TypeScript 创始人，TypeScript 社区最有影响力的人物之一，约六万开发者订阅他的通讯。2026年初他从 80% 手写代码转为 80% agent 编码，这个仓库就是他实战中提炼的方法论。 核心理念：不接管你的开发流程，",
+      "url": "http://www.bilibili.com/video/av116673776458446",
+      "points": 14,
+      "comments": 0,
+      "author": "AI技术投降派",
+      "collectionAttempts": 2,
+      "createdAt": "2026-06-07T03:00:00.000Z",
+      "updatedAt": "2026-06-07T03:00:00.000Z",
+      "score": 101,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 现在值得创作者关注",
+          "【实测】Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 现在值得创作者关注 (practical test)",
+          "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 是否能进入真实创作工作流。",
+        "whyNow": "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116673776458446",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -2657,57 +2695,6 @@
       }
     },
     {
-      "source": "bilibili",
-      "sourceQuery": "YouTube 创作者 AI",
-      "id": "BV1hA7S6KE4T",
-      "title": "【双语】科技股震荡背后： AI 投资还能稳吗？ | Market Talk 2026/06/05 | 路透社",
-      "summary": "https://www.youtube.com/watch?v=ZhjxuMbQ9Po Market Talk: AI trade is ‘still intact’ 路透社 — Market Talk 市场对话 近期，博通业绩未达标引发全球科技股剧烈波动，尤其是人工智能领域。市场对AI公司的高预期是否过热？视频中，麦格纳斯首席投资官罗里·麦克弗森深入分析指出，尽管短期调整不可避免，但AI领域的基本面依然稳固，盈利增长远超预期。投资者该如何应对当前市场的高度敏感性？长期来看，科技股仍具吸引力。 You",
-      "url": "http://www.bilibili.com/video/av116701307933912",
-      "points": 6,
-      "comments": 1,
-      "author": "Youtube金融精選",
-      "collectionAttempts": 1,
-      "createdAt": "2026-06-06T04:45:45.000Z",
-      "updatedAt": "2026-06-06T04:45:45.000Z",
-      "score": 99,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "high",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 现在值得创作者关注",
-          "【实测】【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 现在值得创作者关注 (practical test)",
-          "【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "【双语】科技股震荡背后： AI 投资还能稳吗？  Market Talk 2026/06/05  路透社: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 【双语】科技股震荡背后： AI 投资还能稳吗？ | Market Talk 2026/06/05 | 路透社 是否能进入真实创作工作流。",
-        "whyNow": "【双语】科技股震荡背后： AI 投资还能稳吗？ | Market Talk 2026/06/05 | 路透社 is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116701307933912",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 【双语】科技股震荡背后： AI 投资还能稳吗？ | Market Talk 2026/06/05 | 路透社, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
       "source": "hn",
       "sourceQuery": "AI agents",
       "id": "48430616",
@@ -2763,13 +2750,13 @@
       "title": "翻遍整个B站，这绝对是2026讲的最好的 AI Agent 智能体教程 ，手把手教你从0基础开始搭建企业级Agent 智能体 ，全程干货无废话，让你少走99%的弯路！",
       "summary": "【视频配套籽料,学习路线、系统学习，实战项目案例、电子书+问题解答问题解答请看”平论区置顶”自取哦】 视频制作不易，如果视频对你有用的话请一键三连【长按点赞】支持一下up哦，拜托，这对我真的很重要！",
       "url": "http://www.bilibili.com/video/av116703220535567",
-      "points": 3200,
-      "comments": 33,
+      "points": 3694,
+      "comments": 35,
       "author": "AI学习课堂",
-      "collectionAttempts": 2,
+      "collectionAttempts": 1,
       "createdAt": "2026-06-06T12:49:16.000Z",
       "updatedAt": "2026-06-06T12:49:16.000Z",
-      "score": 96,
+      "score": 97,
       "stale": false,
       "qualityFlags": [
         "engagement-bait",
@@ -2810,6 +2797,57 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 翻遍整个B站，这绝对是2026讲的最好的 AI Agent 智能体教程 ，手把手教你从0基础开始搭建企业级Agent 智能体 ，全程干货无废话，让你少走99%的弯路！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Quality-risk signals detected (engagement-bait, overclaim, template-hype, too-broad). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "YouTube 创作者 AI",
+      "id": "BV1h4Es6iEh3",
+      "title": "【赛博古董】 YouTube 历史被上传的第一个视频",
+      "summary": "https://youtu.be/jNQXAC9IVRw?si=A7KyLmhEFYX890nb 我在动物园 240p",
+      "url": "http://www.bilibili.com/video/av116706710132732",
+      "points": 5,
+      "comments": 0,
+      "author": "哈基杏压抑",
+      "collectionAttempts": 1,
+      "createdAt": "2026-06-07T03:36:12.000Z",
+      "updatedAt": "2026-06-07T03:36:12.000Z",
+      "score": 96,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "high",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 【赛博古董】 YouTube 历史被上传的第一个视频 现在值得创作者关注",
+          "【实测】【赛博古董】 YouTube 历史被上传的第一个视频 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 【赛博古董】 YouTube 历史被上传的第一个视频 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】【赛博古董】 YouTube 历史被上传的第一个视频: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 【赛博古董】 YouTube 历史被上传的第一个视频 现在值得创作者关注 (practical test)",
+          "【赛博古董】 YouTube 历史被上传的第一个视频 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 【赛博古董】 YouTube 历史被上传的第一个视频 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "【赛博古董】 YouTube 历史被上传的第一个视频: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 【赛博古董】 YouTube 历史被上传的第一个视频 是否能进入真实创作工作流。",
+        "whyNow": "【赛博古董】 YouTube 历史被上传的第一个视频 is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116706710132732",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 【赛博古董】 YouTube 历史被上传的第一个视频, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
     {
@@ -2864,40 +2902,40 @@
     },
     {
       "source": "bilibili",
-      "sourceQuery": "开源AI项目",
-      "id": "BV1vGVd6UEAT",
-      "title": "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点",
-      "summary": "如果你用 Claude Code 或其他编码 agent，你一定遇到过这些问题：agent 写出来的东西不是你想要的，输出啰嗦到爆炸，代码跑不通，项目变成一团乱麻。今天介绍的 Matt Pocock Skills 就是来解这些痛的。 Matt Pocock 是 Total TypeScript 创始人，TypeScript 社区最有影响力的人物之一，约六万开发者订阅他的通讯。2026年初他从 80% 手写代码转为 80% agent 编码，这个仓库就是他实战中提炼的方法论。 核心理念：不接管你的开发流程，",
-      "url": "http://www.bilibili.com/video/av116673776458446",
-      "points": 4,
-      "comments": 0,
-      "author": "AI技术投降派",
+      "sourceQuery": "YouTube 创作者 AI",
+      "id": "BV1JsEH63Evv",
+      "title": "【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！",
+      "summary": "https://www.youtube.com/watch?v=RvecIMaffAw Pointed News Quiz | AI, Securities Fraud, Movies 你知道AI技术正在如何改变金融市场吗？证券欺诈案件频发背后隐藏着哪些风险？好莱坞电影又与投资理财有什么关系？这些问题的答案可能比你想象的更贴近生活。在这期节目中，两位参与者将通过新闻问答环节展开竞争，用扑克筹码押注他们对这三个领域的了解程度。从AI技术到电影产业，主持人将会引导观众思考这些看似无关领域之间的深层联系。 本期",
+      "url": "http://www.bilibili.com/video/av116704613044225",
+      "points": 2,
+      "comments": 1,
+      "author": "Youtube金融精選",
       "collectionAttempts": 1,
-      "createdAt": "2026-06-07T03:00:00.000Z",
-      "updatedAt": "2026-06-07T03:00:00.000Z",
+      "createdAt": "2026-06-06T18:43:12.000Z",
+      "updatedAt": "2026-06-06T18:43:12.000Z",
       "score": 95,
       "stale": false,
       "qualityFlags": [],
       "qualityRisk": "normal",
       "monetizationFit": "high",
-      "targetCreator": "tech explainer / developer educator",
+      "targetCreator": "AI workflow creator",
       "deliverables": {
         "bilibiliTitles": [
-          "【实测】为什么 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 现在值得创作者关注",
-          "【实测】Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点: 热度、坑点、可复现演示"
+          "【实测】为什么 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 现在值得创作者关注",
+          "【实测】【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！: 热度、坑点、可复现演示"
         ],
         "youtubeTitles": [
-          "为什么 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 现在值得创作者关注 (practical test)",
-          "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点: 热度、坑点、可复现演示 (practical test)"
+          "为什么 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 现在值得创作者关注 (practical test)",
+          "【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！: 热度、坑点、可复现演示 (practical test)"
         ],
-        "hook": "这期不讲概念，直接验证 Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 是否能进入真实创作工作流。",
-        "whyNow": "Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
+        "hook": "这期不讲概念，直接验证 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ 是否能进入真实创作工作流。",
+        "whyNow": "【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.",
         "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116673776458446",
+          "Open and verify the source: http://www.bilibili.com/video/av116704613044225",
           "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
           "Compare the before/after creator workflow: research time, production time, or output quality.",
           "State exactly who should use it and who should skip it."
@@ -2909,7 +2947,7 @@
           "1 分钟变现角度: 内容、模板、咨询或工具包",
           "结尾: 给观众一个可复制的小任务"
         ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -2960,6 +2998,57 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: I made an emergency page for my family, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "AI视频工具",
+      "id": "BV1zUEs6HExh",
+      "title": "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～",
+      "summary": "文枢AIGC / 职业职场",
+      "url": "http://www.bilibili.com/video/av116706408205187",
+      "points": 3,
+      "comments": 0,
+      "author": "文枢AIGC",
+      "collectionAttempts": 3,
+      "createdAt": "2026-06-07T02:21:47.000Z",
+      "updatedAt": "2026-06-07T02:21:47.000Z",
+      "score": 94,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "medium",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 现在值得创作者关注",
+          "【实测】KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 现在值得创作者关注 (practical test)",
+          "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 是否能进入真实创作工作流。",
+        "whyNow": "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116706408205187",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
     {
@@ -3167,8 +3256,8 @@
       "url": "https://www.youtube.com/watch?v=8n8IxamTb5w",
       "points": 16865,
       "comments": 0,
-      "createdAt": "2023-06-08T03:18:36.975Z",
-      "updatedAt": "2023-06-08T03:18:36.975Z",
+      "createdAt": "2023-06-08T03:46:18.598Z",
+      "updatedAt": "2023-06-08T03:46:18.598Z",
       "score": 93,
       "stale": false,
       "qualityFlags": [],
@@ -3307,18 +3396,18 @@
     },
     {
       "source": "bilibili",
-      "sourceQuery": "AI视频工具",
-      "id": "BV1zUEs6HExh",
-      "title": "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～",
-      "summary": "文枢AIGC / 职业职场",
-      "url": "http://www.bilibili.com/video/av116706408205187",
-      "points": 1,
+      "sourceQuery": "开源AI项目",
+      "id": "BV1saEp6sE2X",
+      "title": "这个开源项目，可以让 AI 在你睡觉时一直干活",
+      "summary": "-",
+      "url": "http://www.bilibili.com/video/av116706022263534",
+      "points": 254,
       "comments": 0,
-      "author": "文枢AIGC",
+      "author": "BRIZER",
       "collectionAttempts": 2,
-      "createdAt": "2026-06-07T02:21:47.000Z",
-      "updatedAt": "2026-06-07T02:21:47.000Z",
-      "score": 91,
+      "createdAt": "2026-06-07T00:40:41.000Z",
+      "updatedAt": "2026-06-07T00:40:41.000Z",
+      "score": 92,
       "stale": false,
       "qualityFlags": [],
       "qualityRisk": "normal",
@@ -3326,21 +3415,21 @@
       "targetCreator": "AI workflow creator",
       "deliverables": {
         "bilibiliTitles": [
-          "【实测】为什么 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 现在值得创作者关注",
-          "【实测】KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～: 热度、坑点、可复现演示"
+          "【实测】为什么 这个开源项目，可以让 AI 在你睡觉时一直干活 现在值得创作者关注",
+          "【实测】这个开源项目，可以让 AI 在你睡觉时一直干活 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 这个开源项目，可以让 AI 在你睡觉时一直干活 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】这个开源项目，可以让 AI 在你睡觉时一直干活: 热度、坑点、可复现演示"
         ],
         "youtubeTitles": [
-          "为什么 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 现在值得创作者关注 (practical test)",
-          "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～: 热度、坑点、可复现演示 (practical test)"
+          "为什么 这个开源项目，可以让 AI 在你睡觉时一直干活 现在值得创作者关注 (practical test)",
+          "这个开源项目，可以让 AI 在你睡觉时一直干活 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 这个开源项目，可以让 AI 在你睡觉时一直干活 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "这个开源项目，可以让 AI 在你睡觉时一直干活: 热度、坑点、可复现演示 (practical test)"
         ],
-        "hook": "这期不讲概念，直接验证 KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ 是否能进入真实创作工作流。",
-        "whyNow": "KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～ is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "hook": "这期不讲概念，直接验证 这个开源项目，可以让 AI 在你睡觉时一直干活 是否能进入真实创作工作流。",
+        "whyNow": "这个开源项目，可以让 AI 在你睡觉时一直干活 is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
         "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706408205187",
+          "Open and verify the source: http://www.bilibili.com/video/av116706022263534",
           "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
           "Compare the before/after creator workflow: research time, production time, or output quality.",
           "State exactly who should use it and who should skip it."
@@ -3352,56 +3441,7 @@
           "1 分钟变现角度: 内容、模板、咨询或工具包",
           "结尾: 给观众一个可复制的小任务"
         ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about KOC口播带货视频，生产力提升必备！ 把你脑海里的想法，变成会飞的故事，视频制作不易，请认真观看～, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "youtube",
-      "sourceQuery": "AI agents tutorial open source",
-      "id": "6sk-q79-zZE",
-      "title": "Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative!",
-      "summary": "WorldofAI / 7 months ago / 11,428 views",
-      "url": "https://www.youtube.com/watch?v=6sk-q79-zZE",
-      "points": 11428,
-      "comments": 0,
-      "createdAt": "2025-11-09T03:18:36.096Z",
-      "updatedAt": "2025-11-09T03:18:36.096Z",
-      "score": 91,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "medium",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 现在值得创作者关注",
-          "【实测】Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative!: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 现在值得创作者关注 (practical test)",
-          "Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative!: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! 是否能进入真实创作工作流。",
-        "whyNow": "Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative! is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://www.youtube.com/watch?v=6sk-q79-zZE",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Open Agent Builder: Easily Create AI Agents That Can Automate Anything! Opensource n8n Alternative!, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 这个开源项目，可以让 AI 在你睡觉时一直干活, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -3410,9 +3450,9 @@
       "sourceQuery": "GitHub trending AI projects",
       "id": "366lsOXiHAU",
       "title": "16 Trending AI Agent Projects on GitHub: sim, Astron, Code2Video, mcp-use, ART, AutoAgent, CrewAI",
-      "summary": "Github Awesome / 7mo ago / 11,801 views",
+      "summary": "Github Awesome / 7mo ago / 11,803 views",
       "url": "https://www.youtube.com/watch?v=366lsOXiHAU",
-      "points": 11801,
+      "points": 11803,
       "comments": 0,
       "score": 91,
       "stale": false,
@@ -3699,16 +3739,63 @@
       }
     },
     {
+      "source": "hn",
+      "sourceQuery": "creator tools",
+      "id": "48415595",
+      "title": "Show HN: PMB – Local-first memory for AI coding agents",
+      "summary": "Show HN: PMB – Local-first memory for AI coding agents",
+      "url": "https://github.com/oleksiijko/pmb",
+      "points": 2,
+      "comments": 0,
+      "createdAt": "2026-06-05T17:24:31Z",
+      "updatedAt": "2026-06-05T17:24:31Z",
+      "score": 89,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "medium",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Show HN: PMB – Local-first memory for AI coding agents 现在值得创作者关注",
+          "【实测】Show HN: PMB – Local-first memory for AI coding agents 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Show HN: PMB – Local-first memory for AI coding agents 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Show HN: PMB – Local-first memory for AI coding agents: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Show HN: PMB – Local-first memory for AI coding agents 现在值得创作者关注 (practical test)",
+          "Show HN: PMB – Local-first memory for AI coding agents 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Show HN: PMB – Local-first memory for AI coding agents 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Show HN: PMB – Local-first memory for AI coding agents: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Show HN: PMB – Local-first memory for AI coding agents 是否能进入真实创作工作流。",
+        "whyNow": "Show HN: PMB – Local-first memory for AI coding agents is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://github.com/oleksiijko/pmb",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: PMB – Local-first memory for AI coding agents, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
+      }
+    },
+    {
       "source": "youtube",
       "sourceQuery": "AI agents tutorial open source",
       "id": "Xn-gtHDsaPY",
       "title": "7 new open source AI tools you need right now…",
-      "summary": "Fireship / 2 months ago / 847,132 views",
+      "summary": "Fireship / 2mo ago / 847,141 views",
       "url": "https://www.youtube.com/watch?v=Xn-gtHDsaPY",
-      "points": 847132,
+      "points": 847141,
       "comments": 0,
-      "createdAt": "2026-04-08T03:18:36.096Z",
-      "updatedAt": "2026-04-08T03:18:36.096Z",
       "score": 89,
       "stale": false,
       "qualityFlags": [],
@@ -3754,10 +3841,10 @@
       "title": "6月7日GitHub开源项目榜",
       "summary": "-",
       "url": "http://www.bilibili.com/video/av116706273922695",
-      "points": 111,
+      "points": 120,
       "comments": 0,
       "author": "funnanyin",
-      "collectionAttempts": 1,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-07T01:44:02.000Z",
       "updatedAt": "2026-06-07T01:44:02.000Z",
       "score": 88,
@@ -3799,114 +3886,16 @@
       }
     },
     {
-      "source": "hn",
-      "sourceQuery": "creator tools",
-      "id": "48415595",
-      "title": "Show HN: PMB – Local-first memory for AI coding agents",
-      "summary": "Show HN: PMB – Local-first memory for AI coding agents",
-      "url": "https://github.com/oleksiijko/pmb",
-      "points": 1,
-      "comments": 0,
-      "createdAt": "2026-06-05T17:24:31Z",
-      "updatedAt": "2026-06-05T17:24:31Z",
-      "score": 87,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "medium",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 Show HN: PMB – Local-first memory for AI coding agents 现在值得创作者关注",
-          "【实测】Show HN: PMB – Local-first memory for AI coding agents 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Show HN: PMB – Local-first memory for AI coding agents 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Show HN: PMB – Local-first memory for AI coding agents: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 Show HN: PMB – Local-first memory for AI coding agents 现在值得创作者关注 (practical test)",
-          "Show HN: PMB – Local-first memory for AI coding agents 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Show HN: PMB – Local-first memory for AI coding agents 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Show HN: PMB – Local-first memory for AI coding agents: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 Show HN: PMB – Local-first memory for AI coding agents 是否能进入真实创作工作流。",
-        "whyNow": "Show HN: PMB – Local-first memory for AI coding agents is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://github.com/oleksiijko/pmb",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: PMB – Local-first memory for AI coding agents, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
-      }
-    },
-    {
-      "source": "hn",
-      "sourceQuery": "GitHub trending",
-      "id": "48387674",
-      "title": "PineForge – PineScript v6 to C++, trade-for-trade with TradingView",
-      "summary": "PineForge – PineScript v6 to C++, trade-for-trade with Trading View",
-      "url": "https://github.com/pineforge-4pass/pineforge-engine",
-      "points": 2,
-      "comments": 0,
-      "createdAt": "2026-06-03T18:19:25Z",
-      "updatedAt": "2026-06-03T18:19:25Z",
-      "score": 87,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "medium",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 PineForge – PineScript v6 to C++, trade-for-trade with TradingView 现在值得创作者关注",
-          "【实测】PineForge – PineScript v6 to C++, trade-for-trade with TradingView 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 PineForge – PineScript v6 to C++, trade-for-trade with TradingView 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】PineForge – PineScript v6 to C++, trade-for-trade with TradingView: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 PineForge – PineScript v6 to C++, trade-for-trade with TradingView 现在值得创作者关注 (practical test)",
-          "PineForge – PineScript v6 to C++, trade-for-trade with TradingView 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 PineForge – PineScript v6 to C++, trade-for-trade with TradingView 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "PineForge – PineScript v6 to C++, trade-for-trade with TradingView: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 PineForge – PineScript v6 to C++, trade-for-trade with TradingView 是否能进入真实创作工作流。",
-        "whyNow": "PineForge – PineScript v6 to C++, trade-for-trade with TradingView is appearing in a current discussion signal for GitHub trending, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://github.com/pineforge-4pass/pineforge-engine",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about PineForge – PineScript v6 to C++, trade-for-trade with TradingView, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
-      }
-    },
-    {
       "source": "bilibili",
       "sourceQuery": "B站AI工作流",
       "id": "BV1567k6oEQX",
       "title": "【ComfyUI】Qwen-Edit-2511，最低8G显存可运行，超绝图片编辑黑科技，支持单 | 双 | 三图编辑，支持一键多场景多角度分镜生成，一致性大提升",
       "summary": "-",
       "url": "http://www.bilibili.com/video/av116697163892540",
-      "points": 117,
+      "points": 118,
       "comments": 0,
       "author": "AI绘小彭",
-      "collectionAttempts": 3,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-06T11:55:00.000Z",
       "updatedAt": "2026-06-06T11:55:00.000Z",
       "score": 87,
@@ -3954,10 +3943,10 @@
       "title": "【 AI 漫剧】吊打付费！目前B站最全最细的 AI 视频制作保姆级教程！2026最新版 AI 视频生成全流程教学！手把手教你从0到1制作 AI 漫剧，轻松学会！玩转 AI 视频赛道",
       "summary": "一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流，关注+评论掉落~",
       "url": "http://www.bilibili.com/video/av116702834595842",
-      "points": 808,
-      "comments": 22,
+      "points": 831,
+      "comments": 24,
       "author": "哔哩AI漫剧芝麻官",
-      "collectionAttempts": 3,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-06T11:10:54.000Z",
       "updatedAt": "2026-06-06T11:10:54.000Z",
       "score": 87,
@@ -4101,69 +4090,18 @@
     },
     {
       "source": "bilibili",
-      "sourceQuery": "开源AI项目",
-      "id": "BV1saEp6sE2X",
-      "title": "这个开源项目，可以让 AI 在你睡觉时一直干活",
-      "summary": "-",
-      "url": "http://www.bilibili.com/video/av116706022263534",
-      "points": 83,
-      "comments": 0,
-      "author": "BRIZER",
-      "collectionAttempts": 1,
-      "createdAt": "2026-06-07T00:40:41.000Z",
-      "updatedAt": "2026-06-07T00:40:41.000Z",
-      "score": 86,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "medium",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 这个开源项目，可以让 AI 在你睡觉时一直干活 现在值得创作者关注",
-          "【实测】这个开源项目，可以让 AI 在你睡觉时一直干活 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 这个开源项目，可以让 AI 在你睡觉时一直干活 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】这个开源项目，可以让 AI 在你睡觉时一直干活: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 这个开源项目，可以让 AI 在你睡觉时一直干活 现在值得创作者关注 (practical test)",
-          "这个开源项目，可以让 AI 在你睡觉时一直干活 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 这个开源项目，可以让 AI 在你睡觉时一直干活 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "这个开源项目，可以让 AI 在你睡觉时一直干活: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 这个开源项目，可以让 AI 在你睡觉时一直干活 是否能进入真实创作工作流。",
-        "whyNow": "这个开源项目，可以让 AI 在你睡觉时一直干活 is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706022263534",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 这个开源项目，可以让 AI 在你睡觉时一直干活, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "bilibili",
       "sourceQuery": "AI智能体教程",
       "id": "BV1NuEH6HEv5",
       "title": "单人搞定行业深度报道？拆解我的 AI Agent 工作流，稳定落地可复用",
       "summary": "每天追踪 AI 行业热点、产出行业报告，还在手动整理新闻？单纯让单个 AI 干活，要么编造信息，要么因上下文过载任务崩盘。本期视频完整分享我落地已久的AI 情报部架构：搭建关键词库、双库数据存储、四大专职 Agent 分工（采集员 + 筛选员 + 报告员 + 质检员），搭配行为准则与流程脚本，从数据源、存储、运行、质检全流程规避 AI 造假、上下文污染等问题。整套工作流不依赖复杂技术，可直接套用在资讯追踪、行业调研、内容汇总等各类工作场景，新手也能一步步搭建。欢迎点赞收藏，评论区聊聊你的 AI 工作流思路",
       "url": "http://www.bilibili.com/video/av116704579422901",
-      "points": 23,
+      "points": 24,
       "comments": 1,
       "author": "琪琪不慌_",
-      "collectionAttempts": 2,
+      "collectionAttempts": 1,
       "createdAt": "2026-06-07T00:50:00.000Z",
       "updatedAt": "2026-06-07T00:50:00.000Z",
-      "score": 84,
+      "score": 85,
       "stale": false,
       "qualityFlags": [
         "engagement-bait"
@@ -4208,12 +4146,10 @@
       "sourceQuery": "AI agents tutorial open source",
       "id": "1uCE0uoKXL8",
       "title": "Open Source AI In 17 Minutes",
-      "summary": "Tina Huang / 3 months ago / 220,359 views",
+      "summary": "Tina Huang / 3mo ago / 220,366 views",
       "url": "https://www.youtube.com/watch?v=1uCE0uoKXL8",
-      "points": 220359,
+      "points": 220366,
       "comments": 0,
-      "createdAt": "2026-03-09T03:18:36.096Z",
-      "updatedAt": "2026-03-09T03:18:36.096Z",
       "score": 82,
       "stale": false,
       "qualityFlags": [],
@@ -4447,13 +4383,13 @@
       "title": "【GPT image2+Coze】一键复刻爆款的电商产品主图，零基础搭建 教程 ~小白也能轻松学会！生成的效果质量都很不错~",
       "summary": "文档资料，视频三连置顶评论区自取！",
       "url": "http://www.bilibili.com/video/av116703388376892",
-      "points": 144,
+      "points": 152,
       "comments": 1,
       "author": "江海AI智能体",
-      "collectionAttempts": 2,
+      "collectionAttempts": 1,
       "createdAt": "2026-06-06T13:27:44.000Z",
       "updatedAt": "2026-06-06T13:27:44.000Z",
-      "score": 79,
+      "score": 80,
       "stale": false,
       "qualityFlags": [
         "engagement-bait",
@@ -4495,16 +4431,16 @@
       }
     },
     {
-      "source": "youtube",
-      "sourceQuery": "creator economy AI tools",
-      "id": "F2vaRI68NOE",
-      "title": "Top 12 Ai Tools For Content Creators And Youtubers Today",
-      "summary": "AI Velocity / 3 months ago / 1,100 views",
-      "url": "https://www.youtube.com/watch?v=F2vaRI68NOE",
-      "points": 1100,
-      "comments": 0,
-      "createdAt": "2026-03-09T03:18:36.975Z",
-      "updatedAt": "2026-03-09T03:18:36.975Z",
+      "source": "hn",
+      "sourceQuery": "creator tools",
+      "id": "48407998",
+      "title": "Show HN: Lessons learned from running Claude Code swarms at scale",
+      "summary": "Show HN: Lessons learned from running Claude Code swarms at scale",
+      "url": "https://news.ycombinator.com/item?id=48407998",
+      "points": 10,
+      "comments": 5,
+      "createdAt": "2026-06-05T04:34:09Z",
+      "updatedAt": "2026-06-05T04:34:09Z",
       "score": 79,
       "stale": false,
       "qualityFlags": [],
@@ -4513,21 +4449,21 @@
       "targetCreator": "AI workflow creator",
       "deliverables": {
         "bilibiliTitles": [
-          "【实测】为什么 Top 12 Ai Tools For Content Creators And Youtubers Today 现在值得创作者关注",
-          "【实测】Top 12 Ai Tools For Content Creators And Youtubers Today 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Top 12 Ai Tools For Content Creators And Youtubers Today 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Top 12 Ai Tools For Content Creators And Youtubers Today: 热度、坑点、可复现演示"
+          "【实测】为什么 Show HN: Lessons learned from running Claude Code swarms at scale 现在值得创作者关注",
+          "【实测】Show HN: Lessons learned from running Claude Code swarms at scale 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Show HN: Lessons learned from running Claude Code swarms at scale 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Show HN: Lessons learned from running Claude Code swarms at scale: 热度、坑点、可复现演示"
         ],
         "youtubeTitles": [
-          "为什么 Top 12 Ai Tools For Content Creators And Youtubers Today 现在值得创作者关注 (practical test)",
-          "Top 12 Ai Tools For Content Creators And Youtubers Today 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Top 12 Ai Tools For Content Creators And Youtubers Today 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Top 12 Ai Tools For Content Creators And Youtubers Today: 热度、坑点、可复现演示 (practical test)"
+          "为什么 Show HN: Lessons learned from running Claude Code swarms at scale 现在值得创作者关注 (practical test)",
+          "Show HN: Lessons learned from running Claude Code swarms at scale 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Show HN: Lessons learned from running Claude Code swarms at scale 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Show HN: Lessons learned from running Claude Code swarms at scale: 热度、坑点、可复现演示 (practical test)"
         ],
-        "hook": "这期不讲概念，直接验证 Top 12 Ai Tools For Content Creators And Youtubers Today 是否能进入真实创作工作流。",
-        "whyNow": "Top 12 Ai Tools For Content Creators And Youtubers Today is appearing in a current trend signal for creator economy AI tools, which makes it a timely candidate for a practical creator test.",
+        "hook": "这期不讲概念，直接验证 Show HN: Lessons learned from running Claude Code swarms at scale 是否能进入真实创作工作流。",
+        "whyNow": "Show HN: Lessons learned from running Claude Code swarms at scale is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.",
         "demoSteps": [
-          "Open and verify the source: https://www.youtube.com/watch?v=F2vaRI68NOE",
+          "Open and verify the source: https://news.ycombinator.com/item?id=48407998",
           "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
           "Compare the before/after creator workflow: research time, production time, or output quality.",
           "State exactly who should use it and who should skip it."
@@ -4539,8 +4475,57 @@
           "1 分钟变现角度: 内容、模板、咨询或工具包",
           "结尾: 给观众一个可复制的小任务"
         ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Top 12 Ai Tools For Content Creators And Youtubers Today, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: Lessons learned from running Claude Code swarms at scale, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
+      }
+    },
+    {
+      "source": "hn",
+      "sourceQuery": "GitHub trending",
+      "id": "48271942",
+      "title": "Show HN: Fungible – A local personal finance app in the terminal",
+      "summary": "Show HN: Fungible – A local personal finance app in the terminal",
+      "url": "https://github.com/tomfunk/fungible",
+      "points": 30,
+      "comments": 15,
+      "createdAt": "2026-05-25T21:35:51Z",
+      "updatedAt": "2026-05-25T21:35:51Z",
+      "score": 79,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "medium",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Show HN: Fungible – A local personal finance app in the terminal 现在值得创作者关注",
+          "【实测】Show HN: Fungible – A local personal finance app in the terminal 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Show HN: Fungible – A local personal finance app in the terminal 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Show HN: Fungible – A local personal finance app in the terminal: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Show HN: Fungible – A local personal finance app in the terminal 现在值得创作者关注 (practical test)",
+          "Show HN: Fungible – A local personal finance app in the terminal 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Show HN: Fungible – A local personal finance app in the terminal 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Show HN: Fungible – A local personal finance app in the terminal: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Show HN: Fungible – A local personal finance app in the terminal 是否能进入真实创作工作流。",
+        "whyNow": "Show HN: Fungible – A local personal finance app in the terminal is appearing in a current discussion signal for GitHub trending, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://github.com/tomfunk/fungible",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: Fungible – A local personal finance app in the terminal, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
       }
     },
     {
@@ -4550,13 +4535,13 @@
       "title": "【2026最新版】目前B站最全最细的 CurSor AI 编程零基础全套教程，手把手教你搭建高效Cursor 工作流 ，全程干货无废话！让你少走99%的弯路！！",
       "summary": "制作不易，大家喜欢视频记得点点关注，一键三连呀【点赞、投币、收藏】感谢支持~",
       "url": "http://www.bilibili.com/video/av116696023041855",
-      "points": 513,
-      "comments": 4,
+      "points": 546,
+      "comments": 5,
       "author": "小笙编程a",
-      "collectionAttempts": 3,
+      "collectionAttempts": 2,
       "createdAt": "2026-06-06T08:00:00.000Z",
       "updatedAt": "2026-06-06T08:00:00.000Z",
-      "score": 78,
+      "score": 79,
       "stale": false,
       "qualityFlags": [
         "engagement-bait",
@@ -4659,7 +4644,7 @@
       "points": 5,
       "comments": 1,
       "author": "烟于尘",
-      "collectionAttempts": 2,
+      "collectionAttempts": 3,
       "createdAt": "2026-06-07T02:15:32.000Z",
       "updatedAt": "2026-06-07T02:15:32.000Z",
       "score": 77,
@@ -4700,6 +4685,57 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 告别水印！小烟Go无印豆包工具演示，豆包图片/视频一键解析, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Quality-risk signals detected (rights-risk). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "AI视频工具",
+      "id": "BV1MX7k6UEbh",
+      "title": "全自动语言模型去审查工具，让模型变得配合",
+      "summary": "AI小蔡狗 / 软件应用",
+      "url": "http://www.bilibili.com/video/av116696761241509",
+      "points": 9,
+      "comments": 0,
+      "author": "AI小蔡狗",
+      "collectionAttempts": 3,
+      "createdAt": "2026-06-07T02:10:00.000Z",
+      "updatedAt": "2026-06-07T02:10:00.000Z",
+      "score": 75,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "medium",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 全自动语言模型去审查工具，让模型变得配合 现在值得创作者关注",
+          "【实测】全自动语言模型去审查工具，让模型变得配合 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 全自动语言模型去审查工具，让模型变得配合 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】全自动语言模型去审查工具，让模型变得配合: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 全自动语言模型去审查工具，让模型变得配合 现在值得创作者关注 (practical test)",
+          "全自动语言模型去审查工具，让模型变得配合 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 全自动语言模型去审查工具，让模型变得配合 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "全自动语言模型去审查工具，让模型变得配合: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 全自动语言模型去审查工具，让模型变得配合 是否能进入真实创作工作流。",
+        "whyNow": "全自动语言模型去审查工具，让模型变得配合 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116696761241509",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 全自动语言模型去审查工具，让模型变得配合, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
     {
@@ -4753,40 +4789,40 @@
     },
     {
       "source": "bilibili",
-      "sourceQuery": "AI视频工具",
-      "id": "BV1MX7k6UEbh",
-      "title": "全自动语言模型去审查工具，让模型变得配合",
-      "summary": "AI小蔡狗 / 软件应用",
-      "url": "http://www.bilibili.com/video/av116696761241509",
-      "points": 7,
+      "sourceQuery": "开源AI项目",
+      "id": "BV1ggEx6TEWD",
+      "title": "Planning with Files：把 AI 计划写进文件，22.8k stars",
+      "summary": "大模型api中转站：https://api.ssopen.top，0.95一刀，cc分组，codex分组已经上线！ cc企业开发专用：https://www.claude-code.top 本期项目地址：https://github.com/OthmanAdi/planning-with-files Planning with Files 是一个 Claude Code skill / plugin，用三个 Markdown 文件记录 AI 长任务里的计划、发现和进度：`task_plan.md`、`f",
+      "url": "http://www.bilibili.com/video/av116706508806140",
+      "points": 8,
       "comments": 0,
-      "author": "AI小蔡狗",
+      "author": "Charaplay",
       "collectionAttempts": 2,
-      "createdAt": "2026-06-07T02:10:00.000Z",
-      "updatedAt": "2026-06-07T02:10:00.000Z",
+      "createdAt": "2026-06-07T02:51:53.000Z",
+      "updatedAt": "2026-06-07T02:51:53.000Z",
       "score": 74,
       "stale": false,
       "qualityFlags": [],
       "qualityRisk": "normal",
       "monetizationFit": "medium",
-      "targetCreator": "AI workflow creator",
+      "targetCreator": "tech explainer / developer educator",
       "deliverables": {
         "bilibiliTitles": [
-          "【实测】为什么 全自动语言模型去审查工具，让模型变得配合 现在值得创作者关注",
-          "【实测】全自动语言模型去审查工具，让模型变得配合 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 全自动语言模型去审查工具，让模型变得配合 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】全自动语言模型去审查工具，让模型变得配合: 热度、坑点、可复现演示"
+          "【实测】为什么 Planning with Files：把 AI 计划写进文件，22.8k stars 现在值得创作者关注",
+          "【实测】Planning with Files：把 AI 计划写进文件，22.8k stars 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Planning with Files：把 AI 计划写进文件，22.8k stars 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Planning with Files：把 AI 计划写进文件，22.8k stars: 热度、坑点、可复现演示"
         ],
         "youtubeTitles": [
-          "为什么 全自动语言模型去审查工具，让模型变得配合 现在值得创作者关注 (practical test)",
-          "全自动语言模型去审查工具，让模型变得配合 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 全自动语言模型去审查工具，让模型变得配合 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "全自动语言模型去审查工具，让模型变得配合: 热度、坑点、可复现演示 (practical test)"
+          "为什么 Planning with Files：把 AI 计划写进文件，22.8k stars 现在值得创作者关注 (practical test)",
+          "Planning with Files：把 AI 计划写进文件，22.8k stars 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Planning with Files：把 AI 计划写进文件，22.8k stars 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Planning with Files：把 AI 计划写进文件，22.8k stars: 热度、坑点、可复现演示 (practical test)"
         ],
-        "hook": "这期不讲概念，直接验证 全自动语言模型去审查工具，让模型变得配合 是否能进入真实创作工作流。",
-        "whyNow": "全自动语言模型去审查工具，让模型变得配合 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "hook": "这期不讲概念，直接验证 Planning with Files：把 AI 计划写进文件，22.8k stars 是否能进入真实创作工作流。",
+        "whyNow": "Planning with Files：把 AI 计划写进文件，22.8k stars is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
         "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116696761241509",
+          "Open and verify the source: http://www.bilibili.com/video/av116706508806140",
           "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
           "Compare the before/after creator workflow: research time, production time, or output quality.",
           "State exactly who should use it and who should skip it."
@@ -4798,7 +4834,7 @@
           "1 分钟变现角度: 内容、模板、咨询或工具包",
           "结尾: 给观众一个可复制的小任务"
         ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 全自动语言模型去审查工具，让模型变得配合, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Planning with Files：把 AI 计划写进文件，22.8k stars, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -4852,57 +4888,6 @@
       }
     },
     {
-      "source": "bilibili",
-      "sourceQuery": "开源AI项目",
-      "id": "BV1ggEx6TEWD",
-      "title": "Planning with Files：把 AI 计划写进文件，22.8k stars",
-      "summary": "大模型api中转站：https://api.ssopen.top，0.95一刀，cc分组，codex分组已经上线！ cc企业开发专用：https://www.claude-code.top 本期项目地址：https://github.com/OthmanAdi/planning-with-files Planning with Files 是一个 Claude Code skill / plugin，用三个 Markdown 文件记录 AI 长任务里的计划、发现和进度：`task_plan.md`、`f",
-      "url": "http://www.bilibili.com/video/av116706508806140",
-      "points": 5,
-      "comments": 0,
-      "author": "Charaplay",
-      "collectionAttempts": 1,
-      "createdAt": "2026-06-07T02:51:53.000Z",
-      "updatedAt": "2026-06-07T02:51:53.000Z",
-      "score": 72,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "medium",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 Planning with Files：把 AI 计划写进文件，22.8k stars 现在值得创作者关注",
-          "【实测】Planning with Files：把 AI 计划写进文件，22.8k stars 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 Planning with Files：把 AI 计划写进文件，22.8k stars 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】Planning with Files：把 AI 计划写进文件，22.8k stars: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 Planning with Files：把 AI 计划写进文件，22.8k stars 现在值得创作者关注 (practical test)",
-          "Planning with Files：把 AI 计划写进文件，22.8k stars 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 Planning with Files：把 AI 计划写进文件，22.8k stars 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "Planning with Files：把 AI 计划写进文件，22.8k stars: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 Planning with Files：把 AI 计划写进文件，22.8k stars 是否能进入真实创作工作流。",
-        "whyNow": "Planning with Files：把 AI 计划写进文件，22.8k stars is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706508806140",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about Planning with Files：把 AI 计划写进文件，22.8k stars, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
       "source": "hn",
       "sourceQuery": "AI agents",
       "id": "48427178",
@@ -4949,6 +4934,60 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about A wild idea: Abstract reality using ontology, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "AI智能体教程",
+      "id": "BV15ZEs6LEpZ",
+      "title": "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！",
+      "summary": "如果视频对你有用的话请一键三连【长按点赞】支持一下UP哦，拜托，这对我真的很重要！ 【视频配套籽料+问题解答请看\"评论区置顶\"自取哦】",
+      "url": "http://www.bilibili.com/video/av116706374584543",
+      "points": 25,
+      "comments": 1,
+      "author": "AI大模型升升",
+      "collectionAttempts": 1,
+      "createdAt": "2026-06-07T02:16:03.000Z",
+      "updatedAt": "2026-06-07T02:16:03.000Z",
+      "score": 71,
+      "stale": false,
+      "qualityFlags": [
+        "engagement-bait",
+        "overclaim"
+      ],
+      "qualityRisk": "review",
+      "monetizationFit": "medium",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 现在值得创作者关注",
+          "【实测】【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 现在值得创作者关注 (practical test)",
+          "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 是否能进入真实创作工作流。",
+        "whyNow": "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ is appearing in a current trend signal for AI智能体教程, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116706374584543",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Quality-risk signals detected (engagement-bait, overclaim). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
       }
     },
     {
@@ -4999,61 +5038,6 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about FelippeChemello/podcast-maker, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Stars and recent activity can overstate production readiness; test install friction and maintenance quality."
-      }
-    },
-    {
-      "source": "bilibili",
-      "sourceQuery": "AI视频工具",
-      "id": "BV1F8Ex6WEsc",
-      "title": "2026最新版保姆级claude code | Cursor | trae | hermes | Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor",
-      "summary": "claude code | Cursor | trae | hermes | Codex保姆级教学【收藏起来不会错！】 从上手安装，到高级用法，这期一次讲全～ 花了三周做教程，希望能帮到你嘻嘻，感谢朋友们的三连+关注啦～ 杨老师连载更新哦",
-      "url": "http://www.bilibili.com/video/av116706223595170",
-      "points": 145,
-      "comments": 2,
-      "author": "杨淑娟Python",
-      "collectionAttempts": 2,
-      "createdAt": "2026-06-07T02:02:52.000Z",
-      "updatedAt": "2026-06-07T02:02:52.000Z",
-      "score": 70,
-      "stale": false,
-      "qualityFlags": [
-        "engagement-bait",
-        "overclaim",
-        "template-hype"
-      ],
-      "qualityRisk": "review",
-      "monetizationFit": "medium",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 现在值得创作者关注",
-          "【实测】2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 现在值得创作者关注 (practical test)",
-          "2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "2026最新版保姆级claude code  Cursor  trae  hermes  Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 2026最新版保姆级claude code | Cursor | trae | hermes | Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor 是否能进入真实创作工作流。",
-        "whyNow": "2026最新版保姆级claude code | Cursor | trae | hermes | Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706223595170",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 2026最新版保姆级claude code | Cursor | trae | hermes | Codex，安装教程来啦！史上最强 AI 编程 AI 工具Cursor, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Quality-risk signals detected (engagement-bait, overclaim, template-hype). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
       }
     },
     {
@@ -5115,7 +5099,7 @@
       "points": 2,
       "comments": 0,
       "author": "xiegangqingn_com",
-      "collectionAttempts": 2,
+      "collectionAttempts": 3,
       "createdAt": "2026-06-07T02:56:46.000Z",
       "updatedAt": "2026-06-07T02:56:46.000Z",
       "score": 69,
@@ -5154,6 +5138,59 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 智慧养虾：如何让 AI 替你“卷”_ AI 工具的应用与思考0319, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
+      "source": "bilibili",
+      "sourceQuery": "B站AI工作流",
+      "id": "BV1RGEn68E7L",
+      "title": "你说什么？你居然花100块包了deepseek一晚上然后有了它？",
+      "summary": "纯ai自动化游戏开发，小白也能轻松上手，一键三连免费教学喔！也可私信直接咨询。",
+      "url": "http://www.bilibili.com/video/av116703254089982",
+      "points": 235,
+      "comments": 0,
+      "author": "Lililitooony",
+      "collectionAttempts": 2,
+      "createdAt": "2026-06-06T12:56:41.000Z",
+      "updatedAt": "2026-06-06T12:56:41.000Z",
+      "score": 69,
+      "stale": false,
+      "qualityFlags": [
+        "engagement-bait"
+      ],
+      "qualityRisk": "review",
+      "monetizationFit": "watch",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 现在值得创作者关注",
+          "【实测】你说什么？你居然花100块包了deepseek一晚上然后有了它？ 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】你说什么？你居然花100块包了deepseek一晚上然后有了它？: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 现在值得创作者关注 (practical test)",
+          "你说什么？你居然花100块包了deepseek一晚上然后有了它？ 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "你说什么？你居然花100块包了deepseek一晚上然后有了它？: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 是否能进入真实创作工作流。",
+        "whyNow": "你说什么？你居然花100块包了deepseek一晚上然后有了它？ is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116703254089982",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 你说什么？你居然花100块包了deepseek一晚上然后有了它？, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Quality-risk signals detected (engagement-bait). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
       }
     },
     {
@@ -5203,53 +5240,6 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: Word-by-word translation aligner tool, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
-      }
-    },
-    {
-      "source": "youtube",
-      "sourceQuery": "GitHub trending AI projects",
-      "id": "IS9PcrqLvIQ",
-      "title": "30 trending self-hosted projects on GitHub",
-      "summary": "Github Awesome / 3mo ago / 15,667 views",
-      "url": "https://www.youtube.com/watch?v=IS9PcrqLvIQ",
-      "points": 15667,
-      "comments": 0,
-      "score": 68,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "watch",
-      "targetCreator": "tech explainer / developer educator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 30 trending self-hosted projects on GitHub 现在值得创作者关注",
-          "【实测】30 trending self-hosted projects on GitHub 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 30 trending self-hosted projects on GitHub 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】30 trending self-hosted projects on GitHub: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 30 trending self-hosted projects on GitHub 现在值得创作者关注 (practical test)",
-          "30 trending self-hosted projects on GitHub 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 30 trending self-hosted projects on GitHub 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "30 trending self-hosted projects on GitHub: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 30 trending self-hosted projects on GitHub 是否能进入真实创作工作流。",
-        "whyNow": "30 trending self-hosted projects on GitHub is appearing in a current trend signal for GitHub trending AI projects, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://www.youtube.com/watch?v=IS9PcrqLvIQ",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 30 trending self-hosted projects on GitHub, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
     {
@@ -5303,113 +5293,6 @@
       }
     },
     {
-      "source": "bilibili",
-      "sourceQuery": "AI智能体教程",
-      "id": "BV15ZEs6LEpZ",
-      "title": "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！",
-      "summary": "如果视频对你有用的话请一键三连【长按点赞】支持一下UP哦，拜托，这对我真的很重要！ 【视频配套籽料+问题解答请看\"评论区置顶\"自取哦】",
-      "url": "http://www.bilibili.com/video/av116706374584543",
-      "points": 12,
-      "comments": 1,
-      "author": "AI大模型升升",
-      "collectionAttempts": 2,
-      "createdAt": "2026-06-07T02:16:03.000Z",
-      "updatedAt": "2026-06-07T02:16:03.000Z",
-      "score": 67,
-      "stale": false,
-      "qualityFlags": [
-        "engagement-bait",
-        "overclaim"
-      ],
-      "qualityRisk": "review",
-      "monetizationFit": "watch",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 现在值得创作者关注",
-          "【实测】【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 现在值得创作者关注 (practical test)",
-          "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ 是否能进入真实创作工作流。",
-        "whyNow": "【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！ is appearing in a current trend signal for AI智能体教程, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116706374584543",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 【2026最新版】零基础也能学！n8n入门到精通 教程 ，手把手带你练完30+企业级实战项目，一周轻松搞定 AI 应用搭建，少走99%弯路！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Quality-risk signals detected (engagement-bait, overclaim). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
-      }
-    },
-    {
-      "source": "bilibili",
-      "sourceQuery": "B站AI工作流",
-      "id": "BV1RGEn68E7L",
-      "title": "你说什么？你居然花100块包了deepseek一晚上然后有了它？",
-      "summary": "纯ai自动化游戏开发，小白也能轻松上手，一键三连免费教学喔！也可私信直接咨询。",
-      "url": "http://www.bilibili.com/video/av116703254089982",
-      "points": 176,
-      "comments": 0,
-      "author": "Lililitooony",
-      "collectionAttempts": 3,
-      "createdAt": "2026-06-06T12:56:41.000Z",
-      "updatedAt": "2026-06-06T12:56:41.000Z",
-      "score": 67,
-      "stale": false,
-      "qualityFlags": [
-        "engagement-bait"
-      ],
-      "qualityRisk": "review",
-      "monetizationFit": "watch",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 现在值得创作者关注",
-          "【实测】你说什么？你居然花100块包了deepseek一晚上然后有了它？ 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】你说什么？你居然花100块包了deepseek一晚上然后有了它？: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 现在值得创作者关注 (practical test)",
-          "你说什么？你居然花100块包了deepseek一晚上然后有了它？ 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "你说什么？你居然花100块包了deepseek一晚上然后有了它？: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 你说什么？你居然花100块包了deepseek一晚上然后有了它？ 是否能进入真实创作工作流。",
-        "whyNow": "你说什么？你居然花100块包了deepseek一晚上然后有了它？ is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: http://www.bilibili.com/video/av116703254089982",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about 你说什么？你居然花100块包了deepseek一晚上然后有了它？, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Quality-risk signals detected (engagement-bait). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
-      }
-    },
-    {
       "source": "youtube",
       "sourceQuery": "creator economy AI tools",
       "id": "FdC6CDHkclc",
@@ -5418,8 +5301,8 @@
       "url": "https://www.youtube.com/watch?v=FdC6CDHkclc",
       "points": 117,
       "comments": 0,
-      "createdAt": "2025-06-07T03:18:36.976Z",
-      "updatedAt": "2025-06-07T03:18:36.976Z",
+      "createdAt": "2025-06-07T03:46:18.599Z",
+      "updatedAt": "2025-06-07T03:46:18.599Z",
       "score": 67,
       "stale": false,
       "qualityFlags": [],
@@ -5557,19 +5440,68 @@
       }
     },
     {
+      "source": "hn",
+      "sourceQuery": "GitHub trending",
+      "id": "48268406",
+      "title": "Show HN: Hackobar – One feed for AI news",
+      "summary": "Show HN: Hackobar – One feed for AI news",
+      "url": "https://hackobar.com/",
+      "points": 5,
+      "comments": 4,
+      "createdAt": "2026-05-25T16:02:57Z",
+      "updatedAt": "2026-05-25T16:02:57Z",
+      "score": 65,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "watch",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Show HN: Hackobar – One feed for AI news 现在值得创作者关注",
+          "【实测】Show HN: Hackobar – One feed for AI news 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Show HN: Hackobar – One feed for AI news 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Show HN: Hackobar – One feed for AI news: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Show HN: Hackobar – One feed for AI news 现在值得创作者关注 (practical test)",
+          "Show HN: Hackobar – One feed for AI news 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Show HN: Hackobar – One feed for AI news 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Show HN: Hackobar – One feed for AI news: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Show HN: Hackobar – One feed for AI news 是否能进入真实创作工作流。",
+        "whyNow": "Show HN: Hackobar – One feed for AI news is appearing in a current discussion signal for GitHub trending, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://hackobar.com/",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Show HN: Hackobar – One feed for AI news, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
+      }
+    },
+    {
       "source": "bilibili",
       "sourceQuery": "AI智能体教程",
       "id": "BV12DEH6pEjP",
       "title": "【Coze工作流 智能体 实战】 B站最细 AI 一键生成“产品宣传种草视频”happyhours+即梦 通用版支持任何产品，零基础小白 AI智能体 保姆级实操搭建 教程 ！",
       "summary": "一：工作流不限时长，分辨率可自由调节，内容超级干可放心观看！ 二：工作流生成思路 1、大模型生成产品信息 2、大模型9宫格图片提示词 3、参考图格式转换 4、生成9宫格图片 5、大模型生成视频提示词 6、调用happyhorse(快乐马插件)生成视频 7、视频链接处理，获取最终链接 三： 视频制作不易，需要交流和学习的伙伴，一键三联以后+评论区留言“三联学习”，撕.我学习吧！！",
       "url": "http://www.bilibili.com/video/av116704327768131",
-      "points": 38,
+      "points": 45,
       "comments": 3,
       "author": "大航Ai智能体",
-      "collectionAttempts": 2,
+      "collectionAttempts": 1,
       "createdAt": "2026-06-06T23:00:00.000Z",
       "updatedAt": "2026-06-06T23:00:00.000Z",
-      "score": 64,
+      "score": 65,
       "stale": false,
       "qualityFlags": [
         "engagement-bait",
@@ -5609,55 +5541,6 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 【Coze工作流 智能体 实战】 B站最细 AI 一键生成“产品宣传种草视频”happyhours+即梦 通用版支持任何产品，零基础小白 AI智能体 保姆级实操搭建 教程 ！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Quality-risk signals detected (engagement-bait, template-hype, too-broad). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
-      }
-    },
-    {
-      "source": "hn",
-      "sourceQuery": "creator tools",
-      "id": "48411528",
-      "title": "We built Tixio to replace 5 other expensive tools",
-      "summary": "We built Tixio to replace 5 other expensive tools",
-      "url": "https://news.ycombinator.com/item?id=48411528",
-      "points": 1,
-      "comments": 0,
-      "createdAt": "2026-06-05T12:32:20Z",
-      "updatedAt": "2026-06-05T12:32:20Z",
-      "score": 63,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "watch",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 We built Tixio to replace 5 other expensive tools 现在值得创作者关注",
-          "【实测】We built Tixio to replace 5 other expensive tools 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 We built Tixio to replace 5 other expensive tools 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】We built Tixio to replace 5 other expensive tools: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 We built Tixio to replace 5 other expensive tools 现在值得创作者关注 (practical test)",
-          "We built Tixio to replace 5 other expensive tools 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 We built Tixio to replace 5 other expensive tools 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "We built Tixio to replace 5 other expensive tools: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 We built Tixio to replace 5 other expensive tools 是否能进入真实创作工作流。",
-        "whyNow": "We built Tixio to replace 5 other expensive tools is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://news.ycombinator.com/item?id=48411528",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about We built Tixio to replace 5 other expensive tools, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
       }
     },
     {
@@ -5704,6 +5587,53 @@
           "结尾: 给观众一个可复制的小任务"
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 22 Trending AI Projects on GitHub: Hopx, Nocturne, AIPEXBASE, MiniOneRec, ReCode, HoloCine, Ditto, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
+      "source": "youtube",
+      "sourceQuery": "GitHub trending AI projects",
+      "id": "v-6nm3gnh6g",
+      "title": "Trending AI Projects #3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako",
+      "summary": "Github Awesome / 2mo ago / 5,450 views",
+      "url": "https://www.youtube.com/watch?v=v-6nm3gnh6g",
+      "points": 5450,
+      "comments": 0,
+      "score": 63,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "watch",
+      "targetCreator": "tech explainer / developer educator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 现在值得创作者关注",
+          "【实测】Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 现在值得创作者关注 (practical test)",
+          "Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "Trending AI Projects 3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 Trending AI Projects #3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako 是否能进入真实创作工作流。",
+        "whyNow": "Trending AI Projects #3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako is appearing in a current trend signal for GitHub trending AI projects, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://www.youtube.com/watch?v=v-6nm3gnh6g",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about Trending AI Projects #3: NVIDIA NemoClaw, nightingale, OpenViktor, AutoResearchClaw, OpenHanako, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
       }
     },
@@ -5810,8 +5740,8 @@
       "url": "https://www.youtube.com/watch?v=NqIOMibI9V8",
       "points": 31,
       "comments": 0,
-      "createdAt": "2025-06-07T03:18:36.975Z",
-      "updatedAt": "2025-06-07T03:18:36.975Z",
+      "createdAt": "2025-06-07T03:46:18.598Z",
+      "updatedAt": "2025-06-07T03:46:18.598Z",
       "score": 60,
       "stale": false,
       "qualityFlags": [],
@@ -5848,55 +5778,6 @@
         ],
         "thumbnailPrompt": "A clean tech explainer thumbnail about 9 essential AI tools for Course Creators in the Creator Economy, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
         "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
-      }
-    },
-    {
-      "source": "hn",
-      "sourceQuery": "GitHub trending",
-      "id": "48336440",
-      "title": "I tested 7 crypto trading strategies against 24 months of data – none worked",
-      "summary": "I tested 7 crypto trading strategies against 24 months of data – none worked",
-      "url": "https://github.com/francisx1999/crypto-trading-bot-postmortem",
-      "points": 2,
-      "comments": 0,
-      "createdAt": "2026-05-30T14:15:14Z",
-      "updatedAt": "2026-05-30T14:15:14Z",
-      "score": 59,
-      "stale": false,
-      "qualityFlags": [],
-      "qualityRisk": "normal",
-      "monetizationFit": "watch",
-      "targetCreator": "AI workflow creator",
-      "deliverables": {
-        "bilibiliTitles": [
-          "【实测】为什么 I tested 7 crypto trading strategies against 24 months of data – none worked 现在值得创作者关注",
-          "【实测】I tested 7 crypto trading strategies against 24 months of data – none worked 背后的工作流能不能帮你省 10 小时",
-          "【实测】把 I tested 7 crypto trading strategies against 24 months of data – none worked 做成一期 B 站/YouTube 视频的三种切入",
-          "【实测】I tested 7 crypto trading strategies against 24 months of data – none worked: 热度、坑点、可复现演示"
-        ],
-        "youtubeTitles": [
-          "为什么 I tested 7 crypto trading strategies against 24 months of data – none worked 现在值得创作者关注 (practical test)",
-          "I tested 7 crypto trading strategies against 24 months of data – none worked 背后的工作流能不能帮你省 10 小时 (practical test)",
-          "把 I tested 7 crypto trading strategies against 24 months of data – none worked 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
-          "I tested 7 crypto trading strategies against 24 months of data – none worked: 热度、坑点、可复现演示 (practical test)"
-        ],
-        "hook": "这期不讲概念，直接验证 I tested 7 crypto trading strategies against 24 months of data – none worked 是否能进入真实创作工作流。",
-        "whyNow": "I tested 7 crypto trading strategies against 24 months of data – none worked is appearing in a current discussion signal for GitHub trending, which makes it a timely candidate for a practical creator test.",
-        "demoSteps": [
-          "Open and verify the source: https://github.com/francisx1999/crypto-trading-bot-postmortem",
-          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
-          "Compare the before/after creator workflow: research time, production time, or output quality.",
-          "State exactly who should use it and who should skip it."
-        ],
-        "outline": [
-          "30 秒问题开场: 观众为什么现在会关心它",
-          "3 分钟最小可复现实测: 安装、输入、输出",
-          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
-          "1 分钟变现角度: 内容、模板、咨询或工具包",
-          "结尾: 给观众一个可复制的小任务"
-        ],
-        "thumbnailPrompt": "A clean tech explainer thumbnail about I tested 7 crypto trading strategies against 24 months of data – none worked, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
-        "limitation": "Treat this as a signal, not a guarantee of views, revenue, or technical maturity."
       }
     },
     {
@@ -6135,6 +6016,110 @@
       }
     },
     {
+      "source": "bilibili",
+      "sourceQuery": "AI视频工具",
+      "id": "BV1tYEs6aECT",
+      "title": "【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！",
+      "summary": "【视频配套籽料+问题解答请看”平论区置顶”自取哦】 视频制作不易，如果视频对你有用的话请一键三连【长按点赞】支持一下up哦，拜托，这对我真的很重要",
+      "url": "http://www.bilibili.com/video/av116706643022068",
+      "points": 26,
+      "comments": 0,
+      "author": "从0开始学AI大模型",
+      "collectionAttempts": 3,
+      "createdAt": "2026-06-07T03:26:26.000Z",
+      "updatedAt": "2026-06-07T03:26:26.000Z",
+      "score": 56,
+      "stale": false,
+      "qualityFlags": [
+        "engagement-bait",
+        "overclaim",
+        "template-hype"
+      ],
+      "qualityRisk": "review",
+      "monetizationFit": "watch",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 现在值得创作者关注",
+          "【实测】【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 现在值得创作者关注 (practical test)",
+          "【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ 是否能进入真实创作工作流。",
+        "whyNow": "【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！ is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: http://www.bilibili.com/video/av116706643022068",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about 【2026年最新版】Claude Code 零基础入门到精通，2025 最强 AI 编程工具保姆级教程，从安装配置到企业级实战全覆盖，学完直接就业！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Quality-risk signals detected (engagement-bait, overclaim, template-hype). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim."
+      }
+    },
+    {
+      "source": "youtube",
+      "sourceQuery": "creator economy AI tools",
+      "id": "ZjjLE2J5Qow",
+      "title": "How Creators Use AI to Save Time and Scale Fast",
+      "summary": "Creator Economy / 1 year ago / 15 views",
+      "url": "https://www.youtube.com/watch?v=ZjjLE2J5Qow",
+      "points": 15,
+      "comments": 0,
+      "createdAt": "2025-06-07T03:46:18.599Z",
+      "updatedAt": "2025-06-07T03:46:18.599Z",
+      "score": 56,
+      "stale": false,
+      "qualityFlags": [],
+      "qualityRisk": "normal",
+      "monetizationFit": "watch",
+      "targetCreator": "AI workflow creator",
+      "deliverables": {
+        "bilibiliTitles": [
+          "【实测】为什么 How Creators Use AI to Save Time and Scale Fast 现在值得创作者关注",
+          "【实测】How Creators Use AI to Save Time and Scale Fast 背后的工作流能不能帮你省 10 小时",
+          "【实测】把 How Creators Use AI to Save Time and Scale Fast 做成一期 B 站/YouTube 视频的三种切入",
+          "【实测】How Creators Use AI to Save Time and Scale Fast: 热度、坑点、可复现演示"
+        ],
+        "youtubeTitles": [
+          "为什么 How Creators Use AI to Save Time and Scale Fast 现在值得创作者关注 (practical test)",
+          "How Creators Use AI to Save Time and Scale Fast 背后的工作流能不能帮你省 10 小时 (practical test)",
+          "把 How Creators Use AI to Save Time and Scale Fast 做成一期 B 站/YouTube 视频的三种切入 (practical test)",
+          "How Creators Use AI to Save Time and Scale Fast: 热度、坑点、可复现演示 (practical test)"
+        ],
+        "hook": "这期不讲概念，直接验证 How Creators Use AI to Save Time and Scale Fast 是否能进入真实创作工作流。",
+        "whyNow": "How Creators Use AI to Save Time and Scale Fast is appearing in a current trend signal for creator economy AI tools, which makes it a timely candidate for a practical creator test.",
+        "demoSteps": [
+          "Open and verify the source: https://www.youtube.com/watch?v=ZjjLE2J5Qow",
+          "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+          "Compare the before/after creator workflow: research time, production time, or output quality.",
+          "State exactly who should use it and who should skip it."
+        ],
+        "outline": [
+          "30 秒问题开场: 观众为什么现在会关心它",
+          "3 分钟最小可复现实测: 安装、输入、输出",
+          "2 分钟对比: 它替代了哪一步，不能替代哪一步",
+          "1 分钟变现角度: 内容、模板、咨询或工具包",
+          "结尾: 给观众一个可复制的小任务"
+        ],
+        "thumbnailPrompt": "A clean tech explainer thumbnail about How Creators Use AI to Save Time and Scale Fast, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos",
+        "limitation": "Platform popularity is not proof of quality; validate the workflow before recommending it."
+      }
+    },
+    {
       "source": "youtube",
       "sourceQuery": "creator economy AI tools",
       "id": "APJnCV-FFBo",
@@ -6143,8 +6128,8 @@
       "url": "https://www.youtube.com/watch?v=APJnCV-FFBo",
       "points": 51,
       "comments": 0,
-      "createdAt": "2025-06-07T03:18:36.975Z",
-      "updatedAt": "2025-06-07T03:18:36.975Z",
+      "createdAt": "2025-06-07T03:46:18.598Z",
+      "updatedAt": "2025-06-07T03:46:18.598Z",
       "score": 39,
       "stale": false,
       "qualityFlags": [],
