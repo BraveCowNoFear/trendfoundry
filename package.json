@@ -15,6 +15,7 @@
     "ops-report": "node scripts/report_ops.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "operate": "node scripts/run_operations.mjs",
+    "qa": "node scripts/qa.mjs",
     "leads": "node scripts/sync_leads.mjs",
     "start": "node scripts/server.mjs",
     "daily": "node scripts/collect.mjs && node scripts/build.mjs && node scripts/export_pack.mjs && node scripts/draft_outreach.mjs"

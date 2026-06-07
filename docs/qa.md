@@ -1,0 +1,33 @@
+# QA
+
+Use this before or after an operations run to verify the business-critical invariants.
+
+## Local QA
+
+```bash
+npm run qa
+```
+
+## Local + Public QA
+
+```bash
+npm run qa -- --online
+```
+
+Generated local outputs:
+
+- `dist/qa/latest-qa.md`
+- `dist/qa/latest-qa.json`
+
+## Covered Checks
+
+- required package scripts exist
+- latest data has enough items and low source errors
+- site has buyer CTAs, OG metadata, visual preview, and 12 cards
+- `site/og-image.png` is 1200x630
+- sales copy does not promise PDF delivery or attach `prospects.csv`
+- commerce products exist and exclude seller-only files from buyer fulfillment
+- a temporary fulfillment order excludes seller-only files
+- ops report includes safety and commerce status
+- Windows scheduled tasks point to the expected scripts and last result is 0
+- optional online checks verify public page, public sample, UTF-8 hook text, and OG image dimensions
