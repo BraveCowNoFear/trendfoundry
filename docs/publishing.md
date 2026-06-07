@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27089726907`
+Latest verified Pages run: `27089829822`
 
-Latest verified commit: `7becba6 Polish landing page source mix messaging`
+Latest verified commit: `8df6662 Simplify source mix legend`
 
 Verified public paths:
 
@@ -30,12 +30,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27089726907` completed successfully for commit `7becba6 Polish landing page source mix messaging`.
+- Pages workflow `27089829822` completed successfully for commit `8df6662 Simplify source mix legend`.
 - Public page, `zh/`, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
 - `npm run qa -- --online` passed 138/138.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the homepage language switch works, `/zh/` defaults to Simplified Chinese, source mix renders as a compact legend panel, 12 cards render, Bilibili filtering works, zero-result search count stays localized, OG preview loads, and core order CTAs remain visible. Screenshots: `dist/qa/online-source-polish-home-*-7becba6.png` and `dist/qa/online-source-polish-zh-*-7becba6.png`.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the homepage language switch works, `/zh/` defaults to Simplified Chinese, source mix renders as a compact text legend, 12 cards render, Bilibili filtering works, zero-result search count stays localized, OG preview loads, and core order CTAs remain visible. Screenshots: `dist/qa/online-source-legend-home-*-8df6662.png` and `dist/qa/online-source-legend-zh-*-8df6662.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
