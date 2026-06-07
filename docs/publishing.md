@@ -6,14 +6,15 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27090187226`
+Latest verified Pages run: `27090368455`
 
-Latest verified commit: `44472ef Clean English public sample titles`
+Latest verified commit: `78aff21 Add no-login order page`
 
 Verified public paths:
 
 - `https://bravecownofear.github.io/trendfoundry/`
 - `https://bravecownofear.github.io/trendfoundry/zh/`
+- `https://bravecownofear.github.io/trendfoundry/order/`
 - `https://bravecownofear.github.io/trendfoundry/daily-brief.md`
 - `https://bravecownofear.github.io/trendfoundry/sales-page-copy.md`
 - `https://bravecownofear.github.io/trendfoundry/public-sample.md`
@@ -34,12 +35,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27090187226` completed successfully for commit `44472ef Clean English public sample titles`.
-- Public page, `zh/`, bilingual sample Markdown/CSV files, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
+- Pages workflow `27090368455` completed successfully for commit `78aff21 Add no-login order page`.
+- Public page, `zh/`, `order/`, bilingual sample Markdown/CSV files, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 145/145.
+- `npm run qa -- --online` passed 155/155.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; `/zh/` links directly to Chinese and English public samples, English samples no longer mix Chinese titles, source mix renders as a compact text legend, 12 cards render, Bilibili filtering works, zero-result search count stays localized, OG preview loads, and core order CTAs remain visible. Screenshots: `dist/qa/online-bilingual-sample-zh-*-64507a5.png`.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; `/order/` renders three tiers, prepared English/Chinese order emails, safety copy that avoids public payment details, and at least six mailto CTAs. Screenshots: `dist/qa/online-order-*-78aff21.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
