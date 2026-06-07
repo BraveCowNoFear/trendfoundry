@@ -9,6 +9,7 @@ const siteDir = path.join(root, "site");
 const distDir = path.join(root, "dist", "visuals");
 const htmlPath = path.join(distDir, "signal-board.html");
 const pngPath = path.join(siteDir, "signal-board.png");
+const metaPath = path.join(siteDir, "signal-board.meta.json");
 const htmlUrl = `file:///${htmlPath.replace(/\\/g, "/")}`;
 
 const browserCandidates = [
@@ -306,6 +307,29 @@ const html = `<!doctype html>
 await mkdir(siteDir, { recursive: true });
 await mkdir(distDir, { recursive: true });
 await writeFile(htmlPath, html, "utf8");
+await writeFile(
+  metaPath,
+  JSON.stringify(
+    {
+      generatedAt: new Date().toISOString(),
+      dataGeneratedAt: data.generatedAt,
+      image: "signal-board.png",
+      width: 1200,
+      height: 760,
+      topItems: top.slice(0, 8).map((item, index) => ({
+        rank: index + 1,
+        id: item.id || "",
+        url: item.url || "",
+        source: item.source || "",
+        score: item.score,
+        title: item.title || ""
+      }))
+    },
+    null,
+    2
+  ),
+  "utf8"
+);
 
 const browser = findBrowser();
 if (!browser) {
@@ -326,4 +350,5 @@ if (result.status !== 0) {
 }
 
 console.log(`Wrote ${pngPath}`);
+console.log(`Wrote ${metaPath}`);
 console.log(`Source board: ${htmlPath}`);

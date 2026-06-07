@@ -1,6 +1,6 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T15:06:51.100Z
+Generated: 2026-06-07T16:03:03.911Z
 
 ## Executive Read
 
@@ -10,7 +10,7 @@ Portfolio source mix among the first 12 opportunities: github: 4, bilibili: 3, y
 
 High-fit opportunities: 11.
 
-Collection health: 1 fresh collection errors, 0 cached fallback items in the displayed portfolio.
+Collection health: 2 fresh collection errors, 0 cached fallback items in the displayed portfolio.
 
 ## Top Opportunities
 
@@ -146,29 +146,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 7. Local AI Agents In 26 Minutes
-
-- Score: 122
-- Fit: high
-- Source: youtube / AI agents tutorial open source
-- Freshness: fresh
-- Quality: normal
-- Link: https://www.youtube.com/watch?v=M-NTwkM3VwM
-- Why it matters: Tina Huang / 1 month ago / 266,694 views
-- Creator target: tech explainer / developer educator
-- Why now: Local AI Agents In 26 Minutes is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 Local AI Agents In 26 Minutes 现在值得创作者关注
-- YouTube title: 为什么 Local AI Agents In 26 Minutes 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=M-NTwkM3VwM
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about Local AI Agents In 26 Minutes, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 8. From Zero to Your First AI Agent in 25 Minutes (No Coding)
+### 7. From Zero to Your First AI Agent in 25 Minutes (No Coding)
 
 - Score: 121
 - Fit: high
@@ -176,7 +154,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=EH5jx5qPabU
-- Why it matters: Futurepedia and AI Agent Lab / 1 year ago / 3,780,980 views
+- Why it matters: Futurepedia and AI Agent Lab / 1y ago / 3,781,213 views
 - Creator target: tech explainer / developer educator
 - Why now: From Zero to Your First AI Agent in 25 Minutes (No Coding) is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 From Zero to Your First AI Agent in 25 Minutes (No Coding) 现在值得创作者关注
@@ -190,7 +168,51 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about From Zero to Your First AI Agent in 25 Minutes (No Coding), showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 9. Ask HN: Why is the HN crowd so anti-AI?
+### 8. 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！
+
+- Score: 120
+- Fit: high
+- Source: bilibili / 开源AI项目
+- Freshness: fresh
+- Quality: normal
+- Link: http://www.bilibili.com/video/av116709042167306
+- Why it matters: 最近发现了一个让我非常兴奋的开源项目：gnhf（good night, have fun）。 它最吸引我的地方在于一个非常简单但又极具想象力的理念：白天由人工作，晚上由 AI 工作。 以前使用 Claude Code、Codex 或其他 AI Coding Agent 的时候，我们通常是坐在电脑前不断交互，AI停下来，我们继续输入指令。而 gnhf 的思路完全不同，它把 AI Agent 变成了一个可以长期运行的自动执行系统。你只需要在睡觉前给它设定一个明确目标，它就会在后台持续迭代工作，每完成一步就自动
+- Creator target: tech explainer / developer educator
+- Why now: 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 现在值得创作者关注
+- YouTube title: 为什么 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: http://www.bilibili.com/video/av116709042167306
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 9. GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord
+
+- Score: 120
+- Fit: high
+- Source: youtube / GitHub trending AI projects
+- Freshness: fresh
+- Quality: normal
+- Link: https://www.youtube.com/watch?v=DlwsYrtZFas
+- Why it matters: Github Awesome / 12 days ago / 5,462 views
+- Creator target: tech explainer / developer educator
+- Why now: GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord is appearing in a current trend signal for GitHub trending AI projects, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 GitHub Trending Today 34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 现在值得创作者关注
+- YouTube title: 为什么 GitHub Trending Today 34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: https://www.youtube.com/watch?v=DlwsYrtZFas
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 10. Ask HN: Why is the HN crowd so anti-AI?
 
 - Score: 120
 - Fit: high
@@ -212,48 +234,26 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: Why is the HN crowd so anti-AI?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
-### 10. 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！
+### 11. Show HN: We built a tool to dub any video in the original voice in 40 languages
 
-- Score: 115
+- Score: 100
 - Fit: high
-- Source: bilibili / 开源AI项目
+- Source: hn / creator tools
 - Freshness: fresh
 - Quality: normal
-- Link: http://www.bilibili.com/video/av116709042167306
-- Why it matters: 最近发现了一个让我非常兴奋的开源项目：gnhf（good night, have fun）。 它最吸引我的地方在于一个非常简单但又极具想象力的理念：白天由人工作，晚上由 AI 工作。 以前使用 Claude Code、Codex 或其他 AI Coding Agent 的时候，我们通常是坐在电脑前不断交互，AI停下来，我们继续输入指令。而 gnhf 的思路完全不同，它把 AI Agent 变成了一个可以长期运行的自动执行系统。你只需要在睡觉前给它设定一个明确目标，它就会在后台持续迭代工作，每完成一步就自动
-- Creator target: tech explainer / developer educator
-- Why now: 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 现在值得创作者关注
-- YouTube title: 为什么 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 是否能进入真实创作工作流。
+- Link: https://vaani.media
+- Why it matters: Show HN: We built a tool to dub any video in the original voice in 40 languages
+- Creator target: AI workflow creator
+- Why now: Show HN: We built a tool to dub any video in the original voice in 40 languages is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 Show HN: We built a tool to dub any video in the original voice in 40 languages 现在值得创作者关注
+- YouTube title: 为什么 Show HN: We built a tool to dub any video in the original voice in 40 languages 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 Show HN: We built a tool to dub any video in the original voice in 40 languages 是否能进入真实创作工作流。
 - Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116709042167306
+  - Open and verify the source: https://vaani.media
   - Reproduce the smallest useful workflow or summarize the core claim with evidence.
   - Compare the before/after creator workflow: research time, production time, or output quality.
   - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 11. Show HN: Version Control for AI Agents
-
-- Score: 99
-- Fit: high
-- Source: hn / AI agents
-- Freshness: fresh
-- Quality: normal
-- Link: https://cognatoai.com
-- Why it matters: Show HN: Version Control for AI Agents
-- Creator target: tech explainer / developer educator
-- Why now: Show HN: Version Control for AI Agents is appearing in a current discussion signal for AI agents, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 Show HN: Version Control for AI Agents 现在值得创作者关注
-- YouTube title: 为什么 Show HN: Version Control for AI Agents 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 Show HN: Version Control for AI Agents 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: https://cognatoai.com
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: Version Control for AI Agents, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: We built a tool to dub any video in the original voice in 40 languages, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
 ### 12. HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers

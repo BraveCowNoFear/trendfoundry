@@ -6,12 +6,12 @@
     <atom:link href="https://bravecownofear.github.io/trendfoundry/feed.xml" rel="self" type="application/rss+xml" />
     <description>Source-backed AI and developer creator opportunities with hooks, demo angles, and limitations.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 15:06:51 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 16:03:03 GMT</lastBuildDate>
     <item>
       <title>#1 NousResearch/hermes-agent</title>
       <link>https://github.com/NousResearch/hermes-agent</link>
       <guid isPermaLink="false">https://github.com/NousResearch/hermes-agent</guid>
-      <pubDate>Sun, 07 Jun 2026 15:03:38 GMT</pubDate>
+      <pubDate>Sun, 07 Jun 2026 15:36:50 GMT</pubDate>
       <description><![CDATA[The agent that grows with you
 
 Creator hook: 这期不讲概念，直接验证 NousResearch/hermes-agent 是否能进入真实创作工作流。
@@ -98,26 +98,11 @@ Limitation: Platform popularity is not proof of quality; validate the workflow b
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#7 Local AI Agents In 26 Minutes</title>
-      <link>https://www.youtube.com/watch?v=M-NTwkM3VwM</link>
-      <guid isPermaLink="false">https://www.youtube.com/watch?v=M-NTwkM3VwM</guid>
-      <pubDate>Fri, 08 May 2026 15:06:27 GMT</pubDate>
-      <description><![CDATA[Tina Huang / 1 month ago / 266,694 views
-
-Creator hook: 这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。
-
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-
-Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
-    </item>
-    <item>
-      <title>#8 From Zero to Your First AI Agent in 25 Minutes (No Coding)</title>
+      <title>#7 From Zero to Your First AI Agent in 25 Minutes (No Coding)</title>
       <link>https://www.youtube.com/watch?v=EH5jx5qPabU</link>
       <guid isPermaLink="false">https://www.youtube.com/watch?v=EH5jx5qPabU</guid>
-      <pubDate>Sat, 07 Jun 2025 15:06:27 GMT</pubDate>
-      <description><![CDATA[Futurepedia and AI Agent Lab / 1 year ago / 3,780,980 views
+      <pubDate>Sun, 07 Jun 2026 16:03:03 GMT</pubDate>
+      <description><![CDATA[Futurepedia and AI Agent Lab / 1y ago / 3,781,213 views
 
 Creator hook: 这期不讲概念，直接验证 From Zero to Your First AI Agent in 25 Minutes (No Coding) 是否能进入真实创作工作流。
 
@@ -128,22 +113,7 @@ Limitation: Platform popularity is not proof of quality; validate the workflow b
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#9 Ask HN: Why is the HN crowd so anti-AI?</title>
-      <link>https://news.ycombinator.com/item?id=48420827</link>
-      <guid isPermaLink="false">https://news.ycombinator.com/item?id=48420827</guid>
-      <pubDate>Sat, 06 Jun 2026 02:31:51 GMT</pubDate>
-      <description><![CDATA[Ask HN: Why is the HN crowd so anti-AI?
-
-Creator hook: 这期不讲概念，直接验证 Ask HN: Why is the HN crowd so anti-AI? 是否能进入真实创作工作流。
-
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-
-Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
-
-Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
-    </item>
-    <item>
-      <title>#10 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！</title>
+      <title>#8 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！</title>
       <link>http://www.bilibili.com/video/av116709042167306</link>
       <guid isPermaLink="false">http://www.bilibili.com/video/av116709042167306</guid>
       <pubDate>Sun, 07 Jun 2026 13:24:45 GMT</pubDate>
@@ -158,13 +128,43 @@ Limitation: Platform popularity is not proof of quality; validate the workflow b
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#11 Show HN: Version Control for AI Agents</title>
-      <link>https://cognatoai.com</link>
-      <guid isPermaLink="false">https://cognatoai.com</guid>
-      <pubDate>Sun, 07 Jun 2026 11:32:21 GMT</pubDate>
-      <description><![CDATA[Show HN: Version Control for AI Agents
+      <title>#9 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord</title>
+      <link>https://www.youtube.com/watch?v=DlwsYrtZFas</link>
+      <guid isPermaLink="false">https://www.youtube.com/watch?v=DlwsYrtZFas</guid>
+      <pubDate>Tue, 26 May 2026 16:02:41 GMT</pubDate>
+      <description><![CDATA[Github Awesome / 12 days ago / 5,462 views
 
-Creator hook: 这期不讲概念，直接验证 Show HN: Version Control for AI Agents 是否能进入真实创作工作流。
+Creator hook: 这期不讲概念，直接验证 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 是否能进入真实创作工作流。
+
+Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+
+Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
+    </item>
+    <item>
+      <title>#10 Ask HN: Why is the HN crowd so anti-AI?</title>
+      <link>https://news.ycombinator.com/item?id=48420827</link>
+      <guid isPermaLink="false">https://news.ycombinator.com/item?id=48420827</guid>
+      <pubDate>Sat, 06 Jun 2026 02:31:51 GMT</pubDate>
+      <description><![CDATA[Ask HN: Why is the HN crowd so anti-AI?
+
+Creator hook: 这期不讲概念，直接验证 Ask HN: Why is the HN crowd so anti-AI? 是否能进入真实创作工作流。
+
+Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+
+Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
+
+Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
+    </item>
+    <item>
+      <title>#11 Show HN: We built a tool to dub any video in the original voice in 40 languages</title>
+      <link>https://vaani.media</link>
+      <guid isPermaLink="false">https://vaani.media</guid>
+      <pubDate>Sun, 07 Jun 2026 11:51:18 GMT</pubDate>
+      <description><![CDATA[Show HN: We built a tool to dub any video in the original voice in 40 languages
+
+Creator hook: 这期不讲概念，直接验证 Show HN: We built a tool to dub any video in the original voice in 40 languages 是否能进入真实创作工作流。
 
 Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
 

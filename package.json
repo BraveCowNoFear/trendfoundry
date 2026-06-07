@@ -23,7 +23,7 @@
     "qa": "node scripts/qa.mjs",
     "leads": "node scripts/sync_leads.mjs",
     "start": "node scripts/server.mjs",
-    "daily": "node scripts/collect.mjs && node scripts/build.mjs && node scripts/export_pack.mjs && node scripts/draft_outreach.mjs"
+    "daily": "node scripts/collect.mjs && node scripts/build.mjs && node scripts/generate_site_visuals.mjs && node scripts/export_pack.mjs && node scripts/draft_outreach.mjs"
   },
   "keywords": [
     "creator-economy",

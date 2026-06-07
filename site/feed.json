@@ -11,7 +11,7 @@
       "url": "https://github.com/NousResearch/hermes-agent",
       "title": "#1 NousResearch/hermes-agent",
       "content_text": "The agent that grows with you\n\nCreator hook: 这期不讲概念，直接验证 NousResearch/hermes-agent 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T15:03:38Z",
+      "date_published": "2026-06-07T15:36:50Z",
       "tags": [
         "github",
         "high",
@@ -79,37 +79,13 @@
       ]
     },
     {
-      "id": "https://www.youtube.com/watch?v=M-NTwkM3VwM",
-      "url": "https://www.youtube.com/watch?v=M-NTwkM3VwM",
-      "title": "#7 Local AI Agents In 26 Minutes",
-      "content_text": "Tina Huang / 1 month ago / 266,694 views\n\nCreator hook: 这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-05-08T15:06:27.093Z",
-      "tags": [
-        "youtube",
-        "high",
-        "normal"
-      ]
-    },
-    {
       "id": "https://www.youtube.com/watch?v=EH5jx5qPabU",
       "url": "https://www.youtube.com/watch?v=EH5jx5qPabU",
-      "title": "#8 From Zero to Your First AI Agent in 25 Minutes (No Coding)",
-      "content_text": "Futurepedia and AI Agent Lab / 1 year ago / 3,780,980 views\n\nCreator hook: 这期不讲概念，直接验证 From Zero to Your First AI Agent in 25 Minutes (No Coding) 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2025-06-07T15:06:27.093Z",
+      "title": "#7 From Zero to Your First AI Agent in 25 Minutes (No Coding)",
+      "content_text": "Futurepedia and AI Agent Lab / 1y ago / 3,781,213 views\n\nCreator hook: 这期不讲概念，直接验证 From Zero to Your First AI Agent in 25 Minutes (No Coding) 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-07T16:03:03.911Z",
       "tags": [
         "youtube",
-        "high",
-        "normal"
-      ]
-    },
-    {
-      "id": "https://news.ycombinator.com/item?id=48420827",
-      "url": "https://news.ycombinator.com/item?id=48420827",
-      "title": "#9 Ask HN: Why is the HN crowd so anti-AI?",
-      "content_text": "Ask HN: Why is the HN crowd so anti-AI?\n\nCreator hook: 这期不讲概念，直接验证 Ask HN: Why is the HN crowd so anti-AI? 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-06T02:31:51Z",
-      "tags": [
-        "hn",
         "high",
         "normal"
       ]
@@ -117,7 +93,7 @@
     {
       "id": "http://www.bilibili.com/video/av116709042167306",
       "url": "http://www.bilibili.com/video/av116709042167306",
-      "title": "#10 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！",
+      "title": "#8 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！",
       "content_text": "最近发现了一个让我非常兴奋的开源项目：gnhf（good night, have fun）。 它最吸引我的地方在于一个非常简单但又极具想象力的理念：白天由人工作，晚上由 AI 工作。 以前使用 Claude Code、Codex 或其他 AI Coding Agent 的时候，我们通常是坐在电脑前不断交互，AI停下来，我们继续输入指令。而 gnhf 的思路完全不同，它把 AI Agent 变成了一个可以长期运行的自动执行系统。你只需要在睡觉前给它设定一个明确目标，它就会在后台持续迭代工作，每完成一步就自动\n\nCreator hook: 这期不讲概念，直接验证 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
       "date_published": "2026-06-07T13:24:45.000Z",
       "tags": [
@@ -127,11 +103,35 @@
       ]
     },
     {
-      "id": "https://cognatoai.com",
-      "url": "https://cognatoai.com",
-      "title": "#11 Show HN: Version Control for AI Agents",
-      "content_text": "Show HN: Version Control for AI Agents\n\nCreator hook: 这期不讲概念，直接验证 Show HN: Version Control for AI Agents 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T11:32:21Z",
+      "id": "https://www.youtube.com/watch?v=DlwsYrtZFas",
+      "url": "https://www.youtube.com/watch?v=DlwsYrtZFas",
+      "title": "#9 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord",
+      "content_text": "Github Awesome / 12 days ago / 5,462 views\n\nCreator hook: 这期不讲概念，直接验证 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-05-26T16:02:41.850Z",
+      "tags": [
+        "youtube",
+        "high",
+        "normal"
+      ]
+    },
+    {
+      "id": "https://news.ycombinator.com/item?id=48420827",
+      "url": "https://news.ycombinator.com/item?id=48420827",
+      "title": "#10 Ask HN: Why is the HN crowd so anti-AI?",
+      "content_text": "Ask HN: Why is the HN crowd so anti-AI?\n\nCreator hook: 这期不讲概念，直接验证 Ask HN: Why is the HN crowd so anti-AI? 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-06T02:31:51Z",
+      "tags": [
+        "hn",
+        "high",
+        "normal"
+      ]
+    },
+    {
+      "id": "https://vaani.media",
+      "url": "https://vaani.media",
+      "title": "#11 Show HN: We built a tool to dub any video in the original voice in 40 languages",
+      "content_text": "Show HN: We built a tool to dub any video in the original voice in 40 languages\n\nCreator hook: 这期不讲概念，直接验证 Show HN: We built a tool to dub any video in the original voice in 40 languages 是否能进入真实创作工作流。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-07T11:51:18Z",
       "tags": [
         "hn",
         "high",

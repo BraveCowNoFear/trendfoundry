@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-06-07T16:03:04.080Z",
+  "dataGeneratedAt": "2026-06-07T16:03:03.911Z",
+  "image": "signal-board.png",
+  "width": 1200,
+  "height": 760,
+  "topItems": [
+    {
+      "rank": 1,
+      "id": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "source": "github",
+      "score": 187,
+      "title": "NousResearch/hermes-agent"
+    },
+    {
+      "rank": 2,
+      "id": "infiniflow/ragflow",
+      "url": "https://github.com/infiniflow/ragflow",
+      "source": "github",
+      "score": 173,
+      "title": "infiniflow/ragflow"
+    },
+    {
+      "rank": 3,
+      "id": "google-gemini/gemini-cli",
+      "url": "https://github.com/google-gemini/gemini-cli",
+      "source": "github",
+      "score": 171,
+      "title": "google-gemini/gemini-cli"
+    },
+    {
+      "rank": 4,
+      "id": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "source": "github",
+      "score": 170,
+      "title": "langchain-ai/langchain"
+    },
+    {
+      "rank": 5,
+      "id": "BV1NKEJ61EHd",
+      "url": "http://www.bilibili.com/video/av116703774115351",
+      "source": "bilibili",
+      "score": 135,
+      "title": "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
+    },
+    {
+      "rank": 6,
+      "id": "BV1d4EJ6cENS",
+      "url": "http://www.bilibili.com/video/av116703824447305",
+      "source": "bilibili",
+      "score": 131,
+      "title": "【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
+    },
+    {
+      "rank": 7,
+      "id": "EH5jx5qPabU",
+      "url": "https://www.youtube.com/watch?v=EH5jx5qPabU",
+      "source": "youtube",
+      "score": 121,
+      "title": "From Zero to Your First AI Agent in 25 Minutes (No Coding)"
+    },
+    {
+      "rank": 8,
+      "id": "BV1KnEt6MECH",
+      "url": "http://www.bilibili.com/video/av116709042167306",
+      "source": "bilibili",
+      "score": 120,
+      "title": "我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！"
+    }
+  ]
+}

@@ -72,6 +72,30 @@ function pngSize(file) {
   return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20), bytes: buffer.length };
 }
 
+function selectPortfolio(items) {
+  const quotas = { github: 4, bilibili: 3, youtube: 2, hn: 2, arxiv: 1 };
+  const selected = [];
+  const used = new Set();
+  for (const [source, quota] of Object.entries(quotas)) {
+    const sourceItems = items
+      .filter((candidate) => candidate.source === source)
+      .sort((a, b) => Number(Boolean(a.qualityFlags?.length)) - Number(Boolean(b.qualityFlags?.length)) || b.score - a.score);
+    for (const item of sourceItems.slice(0, quota)) {
+      selected.push(item);
+      used.add(item.url || item.id);
+    }
+  }
+  for (const item of items) {
+    if (selected.length >= 12) break;
+    const key = item.url || item.id;
+    if (!used.has(key)) {
+      selected.push(item);
+      used.add(key);
+    }
+  }
+  return selected.sort((a, b) => b.score - a.score);
+}
+
 function requireFsRead(file) {
   return spawnSync(process.execPath, ["-e", `process.stdout.write(require('fs').readFileSync(${JSON.stringify(file)}))`], {
     encoding: "buffer",
@@ -93,6 +117,7 @@ async function checkLocal() {
   for (const script of requiredScripts) {
     assertCheck(`package script: ${script}`, Boolean(pkg.scripts?.[script]), pkg.scripts?.[script] || "missing");
   }
+  assertCheck("daily regenerates visual board", pkg.scripts?.daily?.includes("generate_site_visuals.mjs") || pkg.scripts?.daily?.includes("npm run visuals"), pkg.scripts?.daily || "missing");
 
   const readme = await readText(path.join(root, "README.md"));
   const readmeZh = await readText(path.join(root, "README.zh-CN.md"));
@@ -115,6 +140,7 @@ async function checkLocal() {
 
   const latest = await readJson(path.join(root, "data", "latest.json"));
   const issueSlug = issueSlugFromGeneratedAt(latest.generatedAt);
+  const currentTop = selectPortfolio(latest.items || []);
   assertCheck("latest data item count", (latest.totalItems || 0) >= 50, String(latest.totalItems || 0));
   assertCheck("latest displayed source errors <= 3", (latest.errorCount || 0) <= 3, String(latest.errorCount || 0));
 
@@ -224,6 +250,13 @@ async function checkLocal() {
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
   const signalBoard = pngSize(path.join(root, "site", "signal-board.png"));
   assertCheck("signal board image is 1200x760", signalBoard?.width === 1200 && signalBoard?.height === 760, signalBoard ? `${signalBoard.width}x${signalBoard.height}, ${signalBoard.bytes} bytes` : "missing");
+  const signalBoardMeta = await readJson(path.join(root, "site", "signal-board.meta.json"));
+  assertCheck("signal board meta matches latest data", signalBoardMeta.dataGeneratedAt === latest.generatedAt, `${signalBoardMeta.dataGeneratedAt || "missing"} vs ${latest.generatedAt}`);
+  assertCheck(
+    "signal board meta lists current top items",
+    (signalBoardMeta.topItems || []).slice(0, 5).every((item, index) => item.url === (currentTop[index]?.url || "") && item.score === currentTop[index]?.score),
+    JSON.stringify((signalBoardMeta.topItems || []).slice(0, 3))
+  );
 
   const packManifest = await readJson(path.join(root, "dist", "trendfoundry-sample-pack", "manifest.json"));
   assertCheck("sample pack manifest classifies buyer deliverables", sellerOnly.every((file) => !(packManifest.buyerDeliverables || []).includes(file)));
@@ -464,6 +497,14 @@ async function checkOnline() {
   const signalHeight = signalImage.bytes.length >= 24 ? signalImage.bytes.readUInt32BE(20) : 0;
   assertCheck("online signal board image HTTP 200", signalImage.status === 200, String(signalImage.status));
   assertCheck("online signal board image 1200x760", signalWidth === 1200 && signalHeight === 760, `${signalWidth}x${signalHeight}`);
+  const signalMeta = await fetchText(`${publicBase}signal-board.meta.json?qa=${Date.now()}`);
+  assertCheck("online signal board meta HTTP 200", signalMeta.status === 200, String(signalMeta.status));
+  try {
+    const parsedSignalMeta = JSON.parse(signalMeta.text);
+    assertCheck("online signal board meta matches current data", parsedSignalMeta.dataGeneratedAt === (await readJson(path.join(root, "data", "latest.json"))).generatedAt, parsedSignalMeta.dataGeneratedAt || "missing");
+  } catch (error) {
+    assertCheck("online signal board meta parses", false, error.message);
+  }
 
   const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);
   assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
