@@ -442,6 +442,80 @@ main {
   color: var(--muted);
   line-height: 1.5;
 }
+.order-hero .sub {
+  max-width: 900px;
+}
+.order-summary {
+  align-items: stretch;
+}
+.order-steps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.order-steps li {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: #fff;
+}
+.order-steps span {
+  color: var(--muted);
+}
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.order-copy {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+.order-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.mail-drafts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mail-drafts article {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.mail-drafts h3 {
+  margin: 0;
+}
+.mail-drafts pre {
+  min-height: 240px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  background: #f7f9fb;
+  color: var(--ink);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
 .topic-rank {
   margin: 0 0 8px;
   color: var(--accent);
@@ -609,6 +683,8 @@ li { margin: 6px 0; }
   .feed-box,
   .archive-box,
   .issue-summary,
+  .order-copy,
+  .mail-drafts,
   .topic-links,
   .topic-list,
   .issue-list,
@@ -629,6 +705,8 @@ li { margin: 6px 0; }
   }
   .language-switch { width: 100%; }
   .language-option { flex: 1 1 0; }
+  .order-steps li { grid-template-columns: 1fr; }
+  .mail-drafts pre { min-height: 180px; }
   h1 {
     width: calc(100vw - 48px);
     max-width: calc(100vw - 48px);
@@ -664,7 +742,8 @@ li { margin: 6px 0; }
   .hero-actions .action,
   .handoff-links .action,
   .sample-actions .action,
-  .feed-actions .action {
+  .feed-actions .action,
+  .order-actions .action {
     flex: 1 1 100%;
     width: 100%;
     min-width: 0;

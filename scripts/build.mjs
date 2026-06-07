@@ -7,6 +7,7 @@ const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
 const topicsDir = path.join(siteDir, "topics");
 const zhDir = path.join(siteDir, "zh");
+const orderDir = path.join(siteDir, "order");
 const siteIssuesDir = path.join(siteDir, "issues");
 const docsIssuesDir = path.join(docsDir, "issues");
 const contactEmail = "rivan_Britain@outlook.com";
@@ -20,6 +21,7 @@ await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 await mkdir(topicsDir, { recursive: true });
 await mkdir(zhDir, { recursive: true });
+await mkdir(orderDir, { recursive: true });
 await mkdir(siteIssuesDir, { recursive: true });
 await mkdir(docsIssuesDir, { recursive: true });
 
@@ -125,6 +127,15 @@ function langAttr(en, zh, name = "placeholder") {
   return `data-i18n-${name}-en="${escapeHtml(en)}" data-i18n-${name}-zh="${escapeHtml(zh)}" ${name}="${escapeHtml(en)}"`;
 }
 
+function tierOrderHref(tier, lang = "en") {
+  const subject = encodeURIComponent(`TrendFoundry order: ${tier.name}`);
+  const body =
+    lang === "zh"
+      ? `你好，我想订购 TrendFoundry ${tier.nameZh}（${tier.price} ${tier.cadenceZh}）。\n\n我的频道：\n主要平台：Bilibili / YouTube / other\n我想要的主题方向：\n偏好交付方式：email / GitHub issue\n\n请发送付款说明和下一步交付流程。`
+      : `Hi, I want to order TrendFoundry ${tier.name} (${tier.price} ${tier.cadence}).\n\nMy channel:\nMain platform: YouTube / Bilibili / other\nNiche preference:\nPreferred delivery route: email / GitHub issue\n\nPlease send payment instructions and the next delivery step.`;
+  return `mailto:${contactEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
+}
+
 const pricingCards = pricingTiers
   .map(
     (tier) => `<article class="tier${tier.featured ? " featured" : ""}">
@@ -136,6 +147,23 @@ const pricingCards = pricingTiers
   </div>
   <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
   <a class="action${tier.featured ? " primary" : ""}" href="${tier.href}">${dual(tier.action, tier.actionZh)}</a>
+</article>`
+  )
+  .join("");
+
+const orderTierCards = pricingTiers
+  .map(
+    (tier) => `<article class="tier${tier.featured ? " featured" : ""}">
+  <div>
+    ${dual(tier.name, tier.nameZh, "h3")}
+    <p class="tier-price">${escapeHtml(tier.price)}</p>
+    ${dual(tier.bestFor, tier.bestForZh, "p")}
+  </div>
+  <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
+  <div class="order-actions">
+    <a class="action${tier.featured ? " primary" : ""}" href="${tierOrderHref(tier)}">${dual("Order by email", "邮件下单")}</a>
+    <a class="action" href="${tierOrderHref(tier, "zh")}">${dual("Chinese email draft", "中文邮件草稿")}</a>
+  </div>
 </article>`
   )
   .join("");
@@ -987,6 +1015,7 @@ const html = `<!doctype html>
         <a class="action primary" href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
         <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
         <a class="action" href="./ready-to-record-script.md">${dual("Open script", "打开脚本")}</a>
+        <a class="action primary" href="./order/">${dual("Order without login", "无登录下单")}</a>
         <a class="action strong" href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
         <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
@@ -1087,6 +1116,7 @@ const html = `<!doctype html>
       <div class="handoff-links">
         <a class="action primary" href="./launch-plan.md">${dual("Launch plan", "发布计划")}</a>
         <a class="action" href="./sales-page-copy.md">${dual("Sales copy", "销售文案")}</a>
+        <a class="action primary" href="./order/">${dual("Order page", "下单页")}</a>
         <a class="action strong" href="${issueOrderHref}">${dual("Request sample", "申请样品")}</a>
         <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
@@ -1136,6 +1166,7 @@ const zhHtml = `<!doctype html>
         <a class="action primary" href="../public-sample.en.md">English sample</a>
         <a class="action" href="../public-sample.en.csv">English CSV</a>
         <a class="action" href="../ready-to-record-script.md">打开可录制脚本</a>
+        <a class="action primary" href="../order/">无登录下单</a>
         <a class="action strong" href="${issueOrderHref}">在 GitHub 申请</a>
         <a class="action" href="${orderHref}">邮件下单</a>
       </div>
@@ -1227,7 +1258,110 @@ const zhHtml = `<!doctype html>
       <div class="handoff-links">
         <a class="action primary" href="${issueOrderHref}">申请样品</a>
         <a class="action" href="../sales-page-copy.md">销售文案</a>
+        <a class="action primary" href="../order/">下单页</a>
         <a class="action strong" href="${orderHref}">邮件下单</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>`;
+
+const orderHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order TrendFoundry creator-intelligence packs by email without a payment account or GitHub login.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${publicSiteUrl}order/">
+  <meta property="og:title" content="Order TrendFoundry without login">
+  <meta property="og:description" content="Choose a sample issue, weekly brief, or custom niche pack and send a prepared order email.">
+  <meta property="og:image" content="${ogImageUrl}">
+  <title>Order TrendFoundry</title>
+  <link rel="canonical" href="${publicSiteUrl}order/">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-lang="en">
+  <header class="topic-hero order-hero">
+    <div class="brandline"><span>TrendFoundry</span><span>No-login order</span></div>
+    <h1>Order a creator-intelligence pack without creating another account.</h1>
+    <p class="sub">Pick a tier, send the prepared email, and receive payment instructions plus the next delivery step. The GitHub form remains available for buyers who prefer public issue tracking.</p>
+    <div class="hero-actions">
+      <a class="action primary" href="#tiers">Choose tier</a>
+      <a class="action" href="../public-sample.en.md">English sample</a>
+      <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
+      <a class="action strong" href="${issueOrderHref}">GitHub request</a>
+    </div>
+  </header>
+  <main>
+    <section class="offer order-summary">
+      <div>
+        <p class="section-label">How ordering works</p>
+        <h2>Manual checkout first, automation later.</h2>
+        <p>No card details, private ID, passwords, or payment credentials are collected on this public site. The public page only opens a prepared email; payment and delivery details happen privately after review.</p>
+      </div>
+      <ol class="order-steps">
+        <li><strong>Choose</strong><span>Pick sample, weekly, or custom niche.</span></li>
+        <li><strong>Email</strong><span>Send the prepared order draft.</span></li>
+        <li><strong>Receive</strong><span>Get payment instructions and delivery timing.</span></li>
+      </ol>
+    </section>
+    <section id="tiers" class="pricing" aria-label="Order tiers">
+      <div class="section-head">
+        <p class="section-label">Order tiers / 下单档位</p>
+        <h2>Start small, then subscribe only if the brief fits your channel.</h2>
+        <p>Each email draft includes the tier, price, channel, niche preference, and delivery route so a buyer can act without logging into GitHub.</p>
+      </div>
+      <div class="tier-grid">${orderTierCards}</div>
+    </section>
+    <section class="order-copy" aria-label="Prepared order drafts">
+      <div>
+        <p class="section-label">Prepared email / 邮件草稿</p>
+        <h2>Copy-safe text for manual review.</h2>
+        <p>These drafts are intentionally plain. They avoid income promises and keep private payment information out of public issues.</p>
+      </div>
+      <div class="mail-drafts">
+        <article>
+          <h3>English draft</h3>
+          <pre>Subject: TrendFoundry order: Weekly brief
+
+Hi, I want to order TrendFoundry Weekly brief ($19 per month).
+
+My channel:
+Main platform:
+Niche preference:
+Preferred delivery route:
+
+Please send payment instructions and the next delivery step.</pre>
+          <a class="action primary" href="${tierOrderHref(pricingTiers[1])}">Open English email</a>
+        </article>
+        <article>
+          <h3>中文草稿</h3>
+          <pre>Subject: TrendFoundry order: 周更情报
+
+你好，我想订购 TrendFoundry 周更情报（$19 每月）。
+
+我的频道：
+主要平台：
+主题方向：
+偏好交付方式：
+
+请发送付款说明和下一步交付流程。</pre>
+          <a class="action primary" href="${tierOrderHref(pricingTiers[1], "zh")}">打开中文邮件</a>
+        </article>
+      </div>
+    </section>
+    <section class="handoff">
+      <div>
+        <p class="section-label">Trust path</p>
+        <h2>Inspect before ordering.</h2>
+        <p>Use the public samples, latest issue archive, and RSS/JSON feeds to check the format and source quality before buying.</p>
+      </div>
+      <div class="handoff-links">
+        <a class="action primary" href="../issues/latest.html">Latest issue</a>
+        <a class="action" href="../feed.xml">RSS feed</a>
+        <a class="action" href="../zh/">中文入口</a>
+        <a class="action strong" href="../">Dashboard</a>
       </div>
     </section>
   </main>
@@ -1678,6 +1812,80 @@ main {
   color: var(--muted);
   line-height: 1.5;
 }
+.order-hero .sub {
+  max-width: 900px;
+}
+.order-summary {
+  align-items: stretch;
+}
+.order-steps {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.order-steps li {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: #fff;
+}
+.order-steps span {
+  color: var(--muted);
+}
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.order-copy {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+}
+.order-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.mail-drafts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mail-drafts article {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.mail-drafts h3 {
+  margin: 0;
+}
+.mail-drafts pre {
+  min-height: 240px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  background: #f7f9fb;
+  color: var(--ink);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
 .topic-rank {
   margin: 0 0 8px;
   color: var(--accent);
@@ -1845,6 +2053,8 @@ li { margin: 6px 0; }
   .feed-box,
   .archive-box,
   .issue-summary,
+  .order-copy,
+  .mail-drafts,
   .topic-links,
   .topic-list,
   .issue-list,
@@ -1865,6 +2075,8 @@ li { margin: 6px 0; }
   }
   .language-switch { width: 100%; }
   .language-option { flex: 1 1 0; }
+  .order-steps li { grid-template-columns: 1fr; }
+  .mail-drafts pre { min-height: 180px; }
   h1 {
     width: calc(100vw - 48px);
     max-width: calc(100vw - 48px);
@@ -1900,7 +2112,8 @@ li { margin: 6px 0; }
   .hero-actions .action,
   .handoff-links .action,
   .sample-actions .action,
-  .feed-actions .action {
+  .feed-actions .action,
+  .order-actions .action {
     flex: 1 1 100%;
     width: 100%;
     min-width: 0;
@@ -1984,6 +2197,7 @@ await writeFile(path.join(docsDir, "public-sample.en.md"), publicSampleReportEn,
 await writeFile(path.join(docsDir, "public-sample.zh-CN.md"), publicSampleReportZh, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
 await writeFile(path.join(zhDir, "index.html"), zhHtml, "utf8");
+await writeFile(path.join(orderDir, "index.html"), orderHtml, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
 await writeFile(path.join(siteDir, "app.js"), app, "utf8");
 await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
@@ -2012,6 +2226,7 @@ await writeFile(
 const sitemapUrls = [
   "",
   "zh/",
+  "order/",
   "public-sample.md",
   "public-sample.en.md",
   "public-sample.zh-CN.md",

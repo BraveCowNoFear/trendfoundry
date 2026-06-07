@@ -9,6 +9,7 @@ const qaDir = path.join(root, "dist", "qa");
 const online = process.argv.includes("--online");
 const skipScheduler = process.argv.includes("--skip-scheduler");
 const publicBase = "https://bravecownofear.github.io/trendfoundry/";
+const contactEmail = "rivan_Britain@outlook.com";
 const sellerOnly = ["prospects.csv", "outreach-board.md", "latest.json"];
 const homeChineseTitle = "\u7ed9 AI \u548c\u5f00\u53d1\u8005\u89c6\u9891\u9891\u9053\u7684\u521b\u4f5c\u8005\u60c5\u62a5\u5305";
 const zhLandingTitle = "\u7ed9 B \u7ad9\u548c\u4e2d\u6587\u6280\u672f\u9891\u9053\u7684 AI \u521b\u4f5c\u8005\u60c5\u62a5\u5305";
@@ -129,6 +130,7 @@ async function checkLocal() {
   assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
   assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
   assertCheck("site has issue archive box", siteIndex.includes('class="archive-box"') && siteIndex.includes("Latest issue") && siteIndex.includes("Issue archive"));
+  assertCheck("site links no-login order page", siteIndex.includes("./order/") && siteIndex.includes("Order without login"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
   assertCheck("site offers separate sample languages", siteIndex.includes("public-sample.en.md") && siteIndex.includes("public-sample.zh-CN.md") && siteIndex.includes("public-sample.en.csv") && siteIndex.includes("public-sample.zh-CN.csv"));
@@ -142,6 +144,13 @@ async function checkLocal() {
   assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
   assertCheck("Chinese landing page has 12 cards", (zhIndex.match(/<article class="card"/g) || []).length === 12);
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
+  assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
+
+  const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
+  assertCheck("order page exists", orderIndex.includes('<link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/order/">') && orderIndex.includes("Order TrendFoundry"));
+  assertCheck("order page has all tiers", ["Sample issue", "Weekly brief", "Custom niche"].every((tier) => orderIndex.includes(tier)));
+  assertCheck("order page has email drafts", orderIndex.includes("Open English email") && orderIndex.includes("打开中文邮件") && orderIndex.includes(`mailto:${contactEmail}`));
+  assertCheck("order page has safety copy", orderIndex.includes("No card details") && orderIndex.includes("payment credentials"));
 
   const sampleEn = await readText(path.join(root, "site", "public-sample.en.md"));
   const sampleZh = await readText(path.join(root, "site", "public-sample.zh-CN.md"));
@@ -166,6 +175,7 @@ async function checkLocal() {
   assertCheck("robots points to sitemap", robots.includes(`Sitemap: ${publicBase}sitemap.xml`));
   assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
   assertCheck("sitemap includes Chinese landing page", sitemap.includes(`${publicBase}zh/`));
+  assertCheck("sitemap includes order page", sitemap.includes(`${publicBase}order/`));
   assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
   assertCheck("sitemap includes issue archive", sitemap.includes(`${publicBase}issues/`) && sitemap.includes(`${publicBase}issues/latest.html`) && sitemap.includes(`${publicBase}issues/${issueSlug}.html`));
 
@@ -284,6 +294,11 @@ async function checkOnline() {
   assertCheck("online Chinese landing page HTTP 200", zhIndex.status === 200, String(zhIndex.status));
   assertCheck("online Chinese landing page has Chinese copy", zhIndex.text.includes(zhLandingTitle) && zhIndex.text.includes(emailOrderZh));
   assertCheck("online Chinese landing page has 12 cards", (zhIndex.text.match(/<article class="card"/g) || []).length === 12);
+
+  const orderIndex = await fetchText(`${publicBase}order/?qa=${Date.now()}`);
+  assertCheck("online order page HTTP 200", orderIndex.status === 200, String(orderIndex.status));
+  assertCheck("online order page has email CTAs", orderIndex.text.includes("Order by email") && orderIndex.text.includes("Open English email") && orderIndex.text.includes("打开中文邮件"));
+  assertCheck("online order page avoids public payment details", orderIndex.text.includes("No card details") && orderIndex.text.includes("payment credentials"));
 
   const sampleEn = await fetchText(`${publicBase}public-sample.en.md?qa=${Date.now()}`);
   assertCheck("online English public sample HTTP 200", sampleEn.status === 200, String(sampleEn.status));
