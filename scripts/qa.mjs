@@ -166,6 +166,12 @@ async function checkOnline() {
   assertCheck("online public sample HTTP 200", sample.status === 200, String(sample.status));
   assertCheck("online public sample has UTF-8 hook", sample.text.includes("\u8fd9\u671f\u4e0d\u8bb2\u6982\u5ff5"));
 
+  const readyScript = await fetchText(`${publicBase}ready-to-record-script.md?qa=${Date.now()}`);
+  assertCheck("online ready script HTTP 200", readyScript.status === 200, String(readyScript.status));
+  assertCheck("online ready script has scene-by-scene section", readyScript.text.includes("## Scene-By-Scene Script"));
+  assertCheck("online ready script has asset checklist", readyScript.text.includes("## Asset Checklist"));
+  assertCheck("online ready script has fact safety notes", readyScript.text.includes("## Fact Safety Notes"));
+
   const image = await fetchBytes(`${publicBase}og-image.png?qa=${Date.now()}`);
   const width = image.bytes.length >= 24 ? image.bytes.readUInt32BE(16) : 0;
   const height = image.bytes.length >= 24 ? image.bytes.readUInt32BE(20) : 0;

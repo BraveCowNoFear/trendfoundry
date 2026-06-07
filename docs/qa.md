@@ -40,4 +40,4 @@ Generated local outputs:
 - ops report includes safety and commerce status
 - Windows scheduled tasks point to the expected scripts and last result is 0
 - `--skip-scheduler` omits scheduled task checks for in-task self-checks
-- optional online checks verify public page, public sample, UTF-8 hook text, and OG image dimensions
+- optional online checks verify public page, public sample, ready-to-record script sections, UTF-8 hook text, and OG image dimensions
