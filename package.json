@@ -28,6 +28,7 @@
     "content-prospects": "node scripts/generate_content_prospecting.mjs",
     "content-crm": "node scripts/generate_content_sales_crm.mjs",
     "content-subscription": "node scripts/generate_content_subscription_plan.mjs",
+    "content-revenue": "node scripts/generate_content_revenue_model.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "visuals": "node scripts/generate_site_visuals.mjs",
