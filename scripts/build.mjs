@@ -8,6 +8,7 @@ const docsDir = path.join(root, "docs");
 const topicsDir = path.join(siteDir, "topics");
 const zhDir = path.join(siteDir, "zh");
 const orderDir = path.join(siteDir, "order");
+const authDir = path.join(siteDir, "auth");
 const siteIssuesDir = path.join(siteDir, "issues");
 const docsIssuesDir = path.join(docsDir, "issues");
 const contactEmail = "rivan_Britain@outlook.com";
@@ -17,13 +18,85 @@ const orderSubject = encodeURIComponent("TrendFoundry sample pack order");
 const orderBody = encodeURIComponent("Hi, I want to order the TrendFoundry $9 sample pack. Please send the latest issue and payment instructions.");
 const orderHref = `mailto:${contactEmail}?subject=${orderSubject}&body=${orderBody}`;
 const issueOrderHref = "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20";
+const authHref = `${publicSiteUrl}auth/`;
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 await mkdir(topicsDir, { recursive: true });
 await mkdir(zhDir, { recursive: true });
 await mkdir(orderDir, { recursive: true });
+await mkdir(authDir, { recursive: true });
 await mkdir(siteIssuesDir, { recursive: true });
 await mkdir(docsIssuesDir, { recursive: true });
+
+const authProviders = [
+  { id: "google", region: "Global", label: "Google", description: "Gmail and Google Workspace accounts.", scope: "openid email profile", authUrl: "https://accounts.google.com/o/oauth2/v2/auth" },
+  { id: "apple", region: "Global", label: "Apple", description: "Apple ID and private relay email.", scope: "name email", authUrl: "https://appleid.apple.com/auth/authorize" },
+  { id: "microsoft", region: "Global", label: "Microsoft", description: "Outlook, Microsoft 365, and Azure AD.", scope: "openid email profile User.Read", authUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize" },
+  { id: "github", region: "Global", label: "GitHub", description: "Developer accounts and public issue buyers.", scope: "read:user user:email", authUrl: "https://github.com/login/oauth/authorize" },
+  { id: "facebook", region: "Global", label: "Facebook", description: "Meta social login.", scope: "email public_profile", authUrl: "https://www.facebook.com/v19.0/dialog/oauth" },
+  { id: "x", region: "Global", label: "X", description: "Creator and social audience accounts.", scope: "users.read tweet.read offline.access", authUrl: "https://twitter.com/i/oauth2/authorize" },
+  { id: "linkedin", region: "Global", label: "LinkedIn", description: "Professional creator accounts.", scope: "openid profile email", authUrl: "https://www.linkedin.com/oauth/v2/authorization" },
+  { id: "wechat", region: "China", label: "WeChat", description: "WeChat Open Platform QR login.", scope: "snsapi_login", authUrl: "https://open.weixin.qq.com/connect/qrconnect" },
+  { id: "qq", region: "China", label: "QQ", description: "Tencent QQ Connect accounts.", scope: "get_user_info", authUrl: "https://graph.qq.com/oauth2.0/authorize" },
+  { id: "weibo", region: "China", label: "Weibo", description: "Sina Weibo OAuth login.", scope: "email", authUrl: "https://api.weibo.com/oauth2/authorize" },
+  { id: "alipay", region: "China", label: "Alipay", description: "Alipay Open Platform authorization.", scope: "auth_user", authUrl: "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm" },
+  { id: "dingtalk", region: "China", label: "DingTalk", description: "Alibaba DingTalk organization accounts.", scope: "openid corpid", authUrl: "https://login.dingtalk.com/oauth2/auth" },
+  { id: "feishu", region: "China", label: "Feishu", description: "Feishu and Lark workplace accounts.", scope: "contact:user.base:readonly", authUrl: "https://accounts.feishu.cn/open-apis/authen/v1/authorize" },
+  { id: "line", region: "Asia", label: "LINE", description: "LINE accounts for Japan and Southeast Asia.", scope: "openid profile email", authUrl: "https://access.line.me/oauth2/v2.1/authorize" }
+];
+
+const authProviderCards = authProviders
+  .map(
+    (provider) => `<button class="provider-button" type="button" data-provider="${provider.id}">
+  <span class="provider-mark">${escapeHtml(provider.label.slice(0, 1))}</span>
+  <span><strong>${escapeHtml(provider.label)}</strong><small>${escapeHtml(provider.description)}</small></span>
+  <em>${escapeHtml(provider.region)}</em>
+</button>`
+  )
+  .join("");
+
+const authProviderConfig = Object.fromEntries(
+  authProviders.map((provider) => [
+    provider.id,
+    {
+      label: provider.label,
+      authorizationEndpoint: provider.authUrl,
+      clientId: "",
+      scope: provider.scope,
+      enabled: false
+    }
+  ])
+);
+
+const authConfigExample = JSON.stringify(
+  {
+    brokerBaseUrl: "",
+    redirectUri: `${publicSiteUrl}auth/`,
+    emailSignInEndpoint: "",
+    providers: authProviderConfig
+  },
+  null,
+  2
+);
+
+const authSetupDoc = `# TrendFoundry Auth Setup
+
+The public site now includes a static account page at ${publicSiteUrl}auth/.
+
+Supported account providers:
+
+${authProviders.map((provider) => `- ${provider.label}: ${provider.description}`).join("\n")}
+
+## Production model
+
+This repository is a static GitHub Pages site, so it cannot safely exchange OAuth codes for tokens by itself. Use one of these patterns:
+
+1. Preferred: deploy an OAuth broker or hosted auth service, then set \`brokerBaseUrl\` in \`site/auth.config.json\`. The broker should handle provider secrets, token exchange, session cookies, and redirect back to \`${publicSiteUrl}auth/?tf_auth=ok&provider=...\`.
+2. Direct authorization preview: set a provider \`clientId\`, \`authorizationEndpoint\`, \`scope\`, and \`enabled: true\`. This only starts the provider flow; a backend is still required to exchange the returned code.
+3. Email login: set \`emailSignInEndpoint\` to a backend route that sends magic links.
+
+Never commit provider client secrets, OAuth app secrets, signing keys, refresh tokens, or buyer private payment details to this repository.
+`;
 
 function selectPortfolio(items) {
   const quotas = { github: 4, bilibili: 3, youtube: 2, hn: 2, arxiv: 1 };
@@ -70,6 +143,35 @@ const sourceMixPanel = `<div class="source-mix-panel">
         <div class="source-legend" aria-label="Source mix">${sourceLegend}</div>
       </div>`;
 const publicSample = top.slice(0, 3);
+const boardItems = top.slice(0, 5);
+const boardRows = boardItems
+  .map(
+    (item, index) => `<li>
+      <span>#${index + 1}</span>
+      <strong>${escapeHtml(sourceLabel(item))}</strong>
+      <em>${escapeHtml(String(item.score))}</em>
+    </li>`
+  )
+  .join("");
+const boardTicker = boardItems
+  .map(
+    (item, index) => `<span style="--delay:${index * 0.55}s"><strong>${escapeHtml(sourceLabel(item))}</strong>${escapeHtml(englishSampleTitle(item))}</span>`
+  )
+  .join("");
+const productVisual = `<div class="product-visual" aria-label="TrendFoundry signal board preview">
+        <div class="product-screen">
+          <img src="./signal-board.png" alt="TrendFoundry ranked signal board with source lanes and current creator opportunities" width="1200" height="760">
+          <div class="signal-ticker" aria-hidden="true">${boardTicker}</div>
+        </div>
+        <ul class="board-summary">${boardRows}</ul>
+      </div>`;
+const zhProductVisual = `<div class="product-visual" aria-label="TrendFoundry signal board preview">
+        <div class="product-screen">
+          <img src="../signal-board.png" alt="TrendFoundry 按来源和评分整理的当前创作者机会看板" width="1200" height="760">
+          <div class="signal-ticker" aria-hidden="true">${boardTicker}</div>
+        </div>
+        <ul class="board-summary">${boardRows}</ul>
+      </div>`;
 
 const pricingTiers = [
   {
@@ -129,11 +231,23 @@ function langAttr(en, zh, name = "placeholder") {
 
 function tierOrderHref(tier, lang = "en") {
   const subject = encodeURIComponent(`TrendFoundry order: ${tier.name}`);
-  const body =
-    lang === "zh"
-      ? `你好，我想订购 TrendFoundry ${tier.nameZh}（${tier.price} ${tier.cadenceZh}）。\n\n我的频道：\n主要平台：Bilibili / YouTube / other\n我想要的主题方向：\n偏好交付方式：email / GitHub issue\n\n请发送付款说明和下一步交付流程。`
-      : `Hi, I want to order TrendFoundry ${tier.name} (${tier.price} ${tier.cadence}).\n\nMy channel:\nMain platform: YouTube / Bilibili / other\nNiche preference:\nPreferred delivery route: email / GitHub issue\n\nPlease send payment instructions and the next delivery step.`;
+  const body = orderDraftBody(tier, lang);
   return `mailto:${contactEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
+}
+
+function orderDraftBody(tier, lang = "en") {
+  return lang === "zh"
+    ? `你好，我想订购 TrendFoundry ${tier.nameZh}（${tier.price} ${tier.cadenceZh}）。\n\n我的频道：\n主要平台：Bilibili / YouTube / other\n我想要的主题方向：\n偏好交付方式：email / GitHub issue\n\n请发送付款说明和下一步交付流程。`
+    : `Hi, I want to order TrendFoundry ${tier.name} (${tier.price} ${tier.cadence}).\n\nMy channel:\nMain platform: YouTube / Bilibili / other\nNiche preference:\nPreferred delivery route: email / GitHub issue\n\nPlease send payment instructions and the next delivery step.`;
+}
+
+function orderDraftText(tier, lang = "en") {
+  const subject = `Subject: TrendFoundry order: ${lang === "zh" ? tier.nameZh : tier.name}`;
+  return `${subject}\n\n${orderDraftBody(tier, lang)}`;
+}
+
+function copyOrderButton(tier, lang = "en", label = "Copy draft", labelZh = "复制草稿", extraClass = "") {
+  return `<button class="action copy-action${extraClass}" type="button" data-copy-order="${escapeHtml(orderDraftText(tier, lang))}" data-copy-label="${escapeHtml(label)}" data-copy-success="${lang === "zh" ? "已复制" : "Copied"}">${dual(label, labelZh)}</button>`;
 }
 
 const pricingCards = pricingTiers
@@ -162,6 +276,7 @@ const orderTierCards = pricingTiers
   <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
   <div class="order-actions">
     <a class="action${tier.featured ? " primary" : ""}" href="${tierOrderHref(tier)}">${dual("Order by email", "邮件下单")}</a>
+    ${copyOrderButton(tier, "en", "Copy draft", "复制草稿")}
     <a class="action" href="${tierOrderHref(tier, "zh")}">${dual("Chinese email draft", "中文邮件草稿")}</a>
   </div>
 </article>`
@@ -177,13 +292,13 @@ const deliveryItems = [
 const deliveryChecklist = deliveryItems
   .map(([label, labelZh, text, textZh]) => `<li><strong>${dual(label, labelZh)}</strong>${dual(text, textZh, "span")}</li>`)
   .join("");
-const socialProof = `<section class="visual-proof" aria-label="Share preview">
+const socialProof = `<section class="visual-proof" aria-label="Product preview">
       <div>
-        ${dual("Share preview", "分享预览", "p", ' class="section-label"')}
-        ${dual("A cleaner link card for outreach, checkout pages, and social posts.", "给外联、收款页和社交动态准备一张更清楚的链接卡片。", "h2")}
-        ${dual("Every buyer-facing link should explain the product before anyone clicks through. This preview image carries the offer, source mix, and no-hype positioning.", "每个面向买家的链接都应该在点击前说明产品价值。这张预览图同时承载报价、来源组合和不夸张的定位。", "p")}
+        ${dual("Product preview", "产品预览", "p", ' class="section-label"')}
+        ${dual("A real signal board, not a text-only sales page.", "这是一个真实信号看板，不是只有文字的销售页。", "h2")}
+        ${dual("The board image is generated from the current ranked issue so buyers can see source lanes, scores, and idea density before opening the sample files.", "这张看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。", "p")}
       </div>
-      <img src="./og-image.png" alt="TrendFoundry social preview" width="1200" height="630">
+      <img src="./signal-board.png" alt="TrendFoundry product signal board preview" width="1200" height="760">
     </section>`;
 
 function csvEscape(value) {
@@ -596,12 +711,71 @@ ${item.qualityFlags?.length ? `    <p><strong>${dual("Quality flags:", "质量�
   )
   .join("\n");
 
+const sourceNavMeta = {
+  all: {
+    en: "All signals",
+    zh: "全部信号",
+    noteEn: "Start here for the full weekly mix.",
+    noteZh: "先看完整周更组合。"
+  },
+  github: {
+    en: "GitHub",
+    zh: "GitHub",
+    noteEn: "Repos and tools ready for demos.",
+    noteZh: "适合做实测演示的项目。"
+  },
+  bilibili: {
+    en: "Bilibili",
+    zh: "B 站",
+    noteEn: "Chinese creator demand signals.",
+    noteZh: "中文创作者需求信号。"
+  },
+  youtube: {
+    en: "YouTube",
+    zh: "YouTube",
+    noteEn: "Formats and angles already watched.",
+    noteZh: "已验证的视频角度。"
+  },
+  hn: {
+    en: "Hacker News",
+    zh: "Hacker News",
+    noteEn: "Technical debate and early objections.",
+    noteZh: "技术讨论和早期异议。"
+  },
+  arxiv: {
+    en: "arXiv",
+    zh: "arXiv",
+    noteEn: "Research signals before the demos spread.",
+    noteZh: "演示扩散前的研究信号。"
+  }
+};
+
+function sourceNavButton(source, lang = "en") {
+  const meta = sourceNavMeta[source] || {
+    en: source,
+    zh: source,
+    noteEn: "Source-backed trend signals.",
+    noteZh: "有来源支撑的趋势信号。"
+  };
+  const count = source === "all" ? top.length : bySource[source] || 0;
+  const countTextEn = count === 1 ? "1 item" : `${count} items`;
+  const countTextZh = `${count} 条`;
+  const label = lang === "zh" ? meta.zh : meta.en;
+  const note = lang === "zh" ? meta.noteZh : meta.noteEn;
+  const countText = lang === "zh" ? countTextZh : countTextEn;
+  return `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${escapeHtml(source)}" aria-pressed="${source === "all" ? "true" : "false"}">
+    <span class="filter-title" data-i18n-en="${escapeHtml(meta.en)}" data-i18n-zh="${escapeHtml(meta.zh)}">${escapeHtml(label)}</span>
+    <span class="filter-note" data-i18n-en="${escapeHtml(meta.noteEn)}" data-i18n-zh="${escapeHtml(meta.noteZh)}">${escapeHtml(note)}</span>
+    <span class="filter-count" data-i18n-en="${escapeHtml(countTextEn)}" data-i18n-zh="${escapeHtml(countTextZh)}">${escapeHtml(countText)}</span>
+  </button>`;
+}
+
 const sourceButtons = ["all", ...Object.keys(bySource)]
-  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? dual("All", "全部") : source}</button>`)
+  .map((source) => sourceNavButton(source, "en"))
   .join("");
 
 const zhSourceButtons = ["all", ...Object.keys(bySource)]
-  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? "全部" : source}</button>`)
+  .map((source) => sourceNavButton(source, "zh"))
   .join("");
 
 const zhCards = top
@@ -722,6 +896,7 @@ function buildTopicPage(topic) {
     <a class="action primary" href="../public-sample.en.md">English sample</a>
     <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
     <a class="action" href="../ready-to-record-script.md">Open script</a>
+    <a class="action" href="../auth/">Sign in</a>
     <a class="action strong" href="${issueOrderHref}">Request current pack</a>
     <a class="action" href="../index.html">Back to dashboard</a>
   </div>
@@ -891,6 +1066,7 @@ function buildIssuePage() {
     <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
     <a class="action" href="../ready-to-record-script.md">Open script</a>
     <a class="action" href="./index.html">Issue archive</a>
+    <a class="action" href="../auth/">Sign in</a>
     <a class="action strong" href="${issueOrderHref}">Request current pack</a>
   </div>
 </header>
@@ -950,6 +1126,7 @@ function buildIssueArchivePage(slugs) {
   <div class="hero-actions">
     <a class="action primary" href="./latest.html">Latest issue</a>
     <a class="action" href="../feed.xml">RSS feed</a>
+    <a class="action" href="../auth/">Sign in</a>
     <a class="action" href="../index.html">Dashboard</a>
   </div>
 </header>
@@ -1010,22 +1187,19 @@ const html = `<!doctype html>
       ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
       ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
       <div class="hero-actions">
-        <a class="action primary" href="./public-sample.en.md">${dual("English sample", "英文样品")}</a>
-        <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
-        <a class="action primary" href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
-        <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
-        <a class="action" href="./ready-to-record-script.md">${dual("Open script", "打开脚本")}</a>
-        <a class="action primary" href="./order/">${dual("Order without login", "无登录下单")}</a>
-        <a class="action strong" href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
-        <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
+        <a class="action primary" href="./public-sample.en.md">${dual("View free sample", "查看免费样品")}</a>
+        <a class="action strong" href="./order/">${dual("Order without login", "无登录下单")}</a>
+      </div>
+      <div class="utility-links" aria-label="Secondary landing links">
+        <a href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
+        <a href="./public-sample.en.csv">${dual("CSV", "CSV")}</a>
+        <a href="./ready-to-record-script.md">${dual("Script", "脚本")}</a>
+        <a href="./auth/">${dual("Sign in", "账号登录")}</a>
+        <a href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
+        <a href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
     </div>
-    <aside>
-      <span><strong>${top.length}</strong> ${dual("opportunities", "个机会")}</span>
-      <span><strong>${high.length}</strong> ${dual("high-fit", "高匹配")}</span>
-      <span><strong>${data.errorCount || 0}</strong> ${dual("source errors", "个来源错误")}</span>
-      ${sourceMixPanel}
-    </aside>
+    <aside>${productVisual}</aside>
   </header>
   <main>
     <section class="offer">
@@ -1038,14 +1212,6 @@ const html = `<!doctype html>
         <span>$19/mo</span>
         <small><a href="${issueOrderHref}">${dual("GitHub request", "GitHub 申请")}</a> / <a href="${orderHref}">${dual("email order", "邮件下单")}</a></small>
       </div>
-    </section>
-    <section class="pricing" aria-label="Pricing tiers">
-      <div class="section-head">
-        ${dual("Pricing", "定价", "p", ' class="section-label"')}
-        ${dual("Choose the depth that matches your publishing cadence.", "按你的更新节奏选择交付深度。", "h2")}
-        ${dual("Every tier is built around the same promise: fewer weak topics, faster planning, and a clearer recording queue.", "每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。", "p")}
-      </div>
-      <div class="tier-grid">${pricingCards}</div>
     </section>
     <section class="sample-preview" aria-label="Free public sample">
       <div>
@@ -1060,7 +1226,35 @@ const html = `<!doctype html>
         <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
       </div>
     </section>
-    ${socialProof}
+    <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
+      <div class="finder-head">
+        <div>
+          ${dual("Opportunity finder", "机会筛选器", "p", ' class="section-label"')}
+          ${dual("Pick a source lane, then search inside it.", "先选来源，再在里面搜索。", "h2", ' id="opportunity-finder-title"')}
+          ${dual("The controls work like a product category wall: choose the lane that matches your recording intent before opening the cards.", "这里像商品分类墙一样工作：先按录制意图选入口，再展开具体机会。", "p")}
+        </div>
+        <p id="result-count" class="result-count" data-count="${top.length}">${top.length} visible opportunities</p>
+      </div>
+      <div class="finder-controls">
+        <div class="source-picker">
+          <div class="control-label"><span>1</span>${dual("Pick a source lane", "选择来源入口", "strong")}</div>
+          <div class="filters" aria-label="Source filters">${sourceButtons}</div>
+        </div>
+        <div class="search-wrap">
+          <div class="control-label"><span>2</span><label for="opportunity-search">${dual("Search within results", "在结果里搜索")}</label></div>
+          <input id="opportunity-search" type="search" ${langAttr("agent, video, workflow, arxiv...", "智能体、视频、工作流、arxiv...")}>
+        </div>
+      </div>
+    </section>
+    <section class="grid" id="opportunity-grid">${cards}</section>
+    <section class="pricing" aria-label="Pricing tiers">
+      <div class="section-head">
+        ${dual("Pricing", "定价", "p", ' class="section-label"')}
+        ${dual("Choose the depth that matches your publishing cadence.", "按你的更新节奏选择交付深度。", "h2")}
+        ${dual("Every tier is built around the same promise: fewer weak topics, faster planning, and a clearer recording queue.", "每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。", "p")}
+      </div>
+      <div class="tier-grid">${pricingCards}</div>
+    </section>
     <section class="delivery" aria-label="What the buyer receives">
       <div>
         ${dual("What arrives", "交付内容", "p", ' class="section-label"')}
@@ -1068,6 +1262,7 @@ const html = `<!doctype html>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
+    ${socialProof}
     <section class="seo-hub" aria-label="Search landing pages">
       <div>
         ${dual("Search pages", "搜索页", "p", ' class="section-label"')}
@@ -1098,15 +1293,6 @@ const html = `<!doctype html>
         <a class="action" href="./issues/index.html">${dual("Issue archive", "期刊归档")}</a>
       </div>
     </section>
-    <section class="toolbelt" aria-label="Opportunity controls">
-      <div class="search-wrap">
-        <label for="opportunity-search">${dual("Search opportunities", "搜索机会")}</label>
-        <input id="opportunity-search" type="search" ${langAttr("agent, video, workflow, arxiv...", "智能体、视频、工作流、arxiv...")}>
-      </div>
-      <div class="filters" aria-label="Source filters">${sourceButtons}</div>
-      <p id="result-count" class="result-count" data-count="${top.length}">${top.length} visible opportunities</p>
-    </section>
-    <section class="grid" id="opportunity-grid">${cards}</section>
     <section class="handoff">
       <div>
         ${dual("Handoff", "交接", "p", ' class="section-label"')}
@@ -1161,22 +1347,19 @@ const zhHtml = `<!doctype html>
       <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
       <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
       <div class="hero-actions">
-        <a class="action primary" href="../public-sample.zh-CN.md">中文样品</a>
-        <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
-        <a class="action primary" href="../public-sample.en.md">English sample</a>
-        <a class="action" href="../public-sample.en.csv">English CSV</a>
-        <a class="action" href="../ready-to-record-script.md">打开可录制脚本</a>
-        <a class="action primary" href="../order/">无登录下单</a>
-        <a class="action strong" href="${issueOrderHref}">在 GitHub 申请</a>
-        <a class="action" href="${orderHref}">邮件下单</a>
+        <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
+        <a class="action strong" href="../order/">无登录下单</a>
+      </div>
+      <div class="utility-links" aria-label="Secondary landing links">
+        <a href="../public-sample.en.md">English sample</a>
+        <a href="../public-sample.zh-CN.csv">CSV</a>
+        <a href="../ready-to-record-script.md">脚本</a>
+        <a href="../auth/">账号登录</a>
+        <a href="${issueOrderHref}">在 GitHub 申请</a>
+        <a href="${orderHref}">邮件下单</a>
       </div>
     </div>
-    <aside>
-      <span><strong>${top.length}</strong> 个机会</span>
-      <span><strong>${high.length}</strong> 高匹配</span>
-      <span><strong>${data.errorCount || 0}</strong> 个来源错误</span>
-      ${sourceMixPanel}
-    </aside>
+    <aside>${zhProductVisual}</aside>
   </header>
   <main>
     <section class="offer">
@@ -1189,14 +1372,6 @@ const zhHtml = `<!doctype html>
         <span>$19/mo</span>
         <small><a href="${issueOrderHref}">GitHub 申请</a> / <a href="${orderHref}">邮件下单</a></small>
       </div>
-    </section>
-    <section class="pricing" aria-label="Pricing tiers">
-      <div class="section-head">
-        <p class="section-label">定价</p>
-        <h2>按你的更新节奏选择交付深度。</h2>
-        <p>每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。</p>
-      </div>
-      <div class="tier-grid">${pricingCards}</div>
     </section>
     <section class="sample-preview" aria-label="Free public sample">
       <div>
@@ -1211,13 +1386,34 @@ const zhHtml = `<!doctype html>
         <a class="action" href="../public-sample.en.csv">English CSV</a>
       </div>
     </section>
-    <section class="visual-proof" aria-label="Share preview">
-      <div>
-        <p class="section-label">分享预览</p>
-        <h2>适合外联、社交动态和收款页的清楚链接卡片。</h2>
-        <p>买家点击前就能看到报价、来源组合和“不夸张承诺”的定位。</p>
+    <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
+      <div class="finder-head">
+        <div>
+          <p class="section-label">机会筛选器</p>
+          <h2 id="opportunity-finder-title">先选来源，再在里面搜索。</h2>
+          <p>这里像商品分类墙一样工作：先按录制意图选入口，再展开具体机会。</p>
+        </div>
+        <p id="result-count" class="result-count" data-count="${top.length}">${top.length} 个可见机会</p>
       </div>
-      <img src="../og-image.png" alt="TrendFoundry social preview" width="1200" height="630">
+      <div class="finder-controls">
+        <div class="source-picker">
+          <div class="control-label"><span>1</span><strong>选择来源入口</strong></div>
+          <div class="filters" aria-label="Source filters">${zhSourceButtons}</div>
+        </div>
+        <div class="search-wrap">
+          <div class="control-label"><span>2</span><label for="opportunity-search">在结果里搜索</label></div>
+          <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
+        </div>
+      </div>
+    </section>
+    <section class="grid" id="opportunity-grid">${zhCards}</section>
+    <section class="pricing" aria-label="Pricing tiers">
+      <div class="section-head">
+        <p class="section-label">定价</p>
+        <h2>按你的更新节奏选择交付深度。</h2>
+        <p>每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。</p>
+      </div>
+      <div class="tier-grid">${pricingCards}</div>
     </section>
     <section class="delivery" aria-label="What the buyer receives">
       <div>
@@ -1225,6 +1421,14 @@ const zhHtml = `<!doctype html>
         <h2>这是创作者情报包，不是 AI 新闻摘要。</h2>
       </div>
       <ul>${deliveryChecklist}</ul>
+    </section>
+    <section class="visual-proof" aria-label="Product preview">
+      <div>
+        <p class="section-label">产品预览</p>
+        <h2>这是一张真实信号看板，不是只有文字的销售页。</h2>
+        <p>看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。</p>
+      </div>
+      <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
     </section>
     <section class="seo-hub" aria-label="Chinese discovery links">
       <div>
@@ -1240,15 +1444,6 @@ const zhHtml = `<!doctype html>
         <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
       </div>
     </section>
-    <section class="toolbelt" aria-label="Opportunity controls">
-      <div class="search-wrap">
-        <label for="opportunity-search">搜索机会</label>
-        <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
-      </div>
-      <div class="filters" aria-label="Source filters">${zhSourceButtons}</div>
-      <p id="result-count" class="result-count" data-count="${top.length}">${top.length} 个可见机会</p>
-    </section>
-    <section class="grid" id="opportunity-grid">${zhCards}</section>
     <section class="handoff">
       <div>
         <p class="section-label">下一步</p>
@@ -1346,6 +1541,7 @@ Preferred delivery route:
 
 Please send payment instructions and the next delivery step.</pre>
           <a class="action primary" href="${tierOrderHref(pricingTiers[1])}">Open English email</a>
+          ${copyOrderButton(pricingTiers[1], "en", "Copy English draft", "复制英文草稿")}
         </article>
         <article>
           <h3>中文草稿</h3>
@@ -1360,6 +1556,7 @@ Please send payment instructions and the next delivery step.</pre>
 
 请发送付款说明和下一步交付流程。</pre>
           <a class="action primary" href="${tierOrderHref(pricingTiers[1], "zh")}">打开中文邮件</a>
+          ${copyOrderButton(pricingTiers[1], "zh", "Copy Chinese draft", "复制中文草稿")}
         </article>
       </div>
     </section>
@@ -1377,8 +1574,332 @@ Please send payment instructions and the next delivery step.</pre>
       </div>
     </section>
   </main>
+  <script>
+    const copyButtons = [...document.querySelectorAll("[data-copy-order]")];
+    function fallbackCopy(text) {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.setAttribute("readonly", "");
+      area.style.position = "fixed";
+      area.style.left = "-9999px";
+      document.body.appendChild(area);
+      area.select();
+      const copied = document.execCommand("copy");
+      area.remove();
+      return copied;
+    }
+    function showManualCopy(button, text) {
+      const container = button.closest("article") || button.parentElement || document.body;
+      let area = container.querySelector(".copy-fallback");
+      if (!area) {
+        area = document.createElement("textarea");
+        area.className = "copy-fallback";
+        area.setAttribute("readonly", "");
+        button.insertAdjacentElement("afterend", area);
+      }
+      area.value = text;
+      area.hidden = false;
+      area.focus();
+      area.select();
+    }
+    async function copyOrder(button) {
+      const text = button.dataset.copyOrder || "";
+      if (!text.trim()) return;
+      const original = button.textContent;
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else if (!fallbackCopy(text)) {
+          throw new Error("copy failed");
+        }
+        button.textContent = button.dataset.copySuccess || "Copied";
+        button.classList.add("copied");
+        const container = button.closest("article") || button.parentElement;
+        const fallback = container ? container.querySelector(".copy-fallback") : null;
+        if (fallback) fallback.hidden = true;
+        window.setTimeout(() => {
+          button.textContent = original;
+          button.classList.remove("copied");
+        }, 1600);
+      } catch {
+        showManualCopy(button, text);
+        button.textContent = "Draft selected";
+        window.setTimeout(() => {
+          button.textContent = original;
+        }, 2200);
+      }
+    }
+    for (const button of copyButtons) {
+      button.addEventListener("click", () => copyOrder(button));
+    }
+  </script>
 </body>
 </html>`;
+
+const authHtml = `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TrendFoundry account login with global and China social providers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${publicSiteUrl}auth/">
+  <meta property="og:title" content="Sign in to TrendFoundry">
+  <meta property="og:description" content="Use common international and China account providers to access TrendFoundry.">
+  <meta property="og:image" content="${ogImageUrl}">
+  <title>Sign in to TrendFoundry</title>
+  <link rel="canonical" href="${publicSiteUrl}auth/">
+  <link rel="stylesheet" href="../styles.css">
+  <script>window.TRENDFOUNDRY_AUTH_PROVIDERS = ${JSON.stringify(authProviders)};</script>
+  <script src="../auth.js" defer></script>
+</head>
+<body data-page="auth">
+  <header class="topic-hero auth-hero">
+    <div class="brandline"><span>TrendFoundry</span><span>Account access</span></div>
+    <h1>Sign in with the account you already use.</h1>
+    <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
+    <div class="hero-actions">
+      <a class="action primary" href="#providers">Choose provider</a>
+      <a class="action" href="../order/">Order page</a>
+      <a class="action" href="../zh/">Chinese entry</a>
+      <a class="action strong" href="../">Dashboard</a>
+    </div>
+  </header>
+  <main>
+    <section class="auth-status-panel" aria-label="Account status">
+      <div>
+        <p class="section-label">Session</p>
+        <h2 id="auth-status-title">Not signed in.</h2>
+        <p id="auth-status-copy">Choose a provider below. If the OAuth gateway is not configured yet, the page will show the exact missing setup instead of failing silently.</p>
+      </div>
+      <div class="account-card" id="account-card">
+        <span class="account-avatar" id="account-avatar">TF</span>
+        <div>
+          <strong id="account-name">Guest visitor</strong>
+          <small id="account-provider">No active provider</small>
+        </div>
+        <button class="action" type="button" id="sign-out-button">Sign out</button>
+      </div>
+    </section>
+    <section class="auth-shell" id="providers" aria-label="Login providers">
+      <div class="auth-panel">
+        <div class="section-head compact">
+          <p class="section-label">Global accounts</p>
+          <h2>One gateway, many providers.</h2>
+          <p>Provider buttons use the same redirect contract. Enable them in <code>auth.config.json</code> or route every provider through a broker.</p>
+        </div>
+        <div class="provider-grid">${authProviderCards}</div>
+      </div>
+      <aside class="auth-panel">
+        <p class="section-label">Email access</p>
+        <h2>Email magic link</h2>
+        <p class="auth-muted">Use this for buyers who do not want a social account. It needs a backend endpoint before production sending is enabled.</p>
+        <form class="email-login" id="email-login-form">
+          <label for="auth-email">Email</label>
+          <input id="auth-email" name="email" type="email" autocomplete="email" placeholder="buyer@example.com" required>
+          <button class="action primary" type="submit">Send sign-in link</button>
+        </form>
+        <p class="auth-notice" id="auth-notice" role="status">Loading auth configuration...</p>
+      </aside>
+    </section>
+    <section class="auth-setup-note" aria-label="Production setup">
+      <div>
+        <p class="section-label">Production setup</p>
+        <h2>Secrets stay off the static site.</h2>
+      </div>
+      <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+    </section>
+  </main>
+</body>
+</html>`;
+
+const authScript = String.raw`const providerGrid = document.querySelector(".provider-grid");
+const notice = document.querySelector("#auth-notice");
+const statusTitle = document.querySelector("#auth-status-title");
+const statusCopy = document.querySelector("#auth-status-copy");
+const accountName = document.querySelector("#account-name");
+const accountProvider = document.querySelector("#account-provider");
+const accountAvatar = document.querySelector("#account-avatar");
+const signOutButton = document.querySelector("#sign-out-button");
+const emailForm = document.querySelector("#email-login-form");
+const providers = window.TRENDFOUNDRY_AUTH_PROVIDERS || [];
+const sessionKey = "trendfoundry.auth.session";
+let authConfig = { providers: {} };
+
+function setNotice(message, tone) {
+  notice.textContent = message;
+  notice.dataset.tone = tone || "neutral";
+}
+
+function providerConfig(providerId) {
+  return (authConfig.providers && authConfig.providers[providerId]) || {};
+}
+
+function providerReady(providerId) {
+  const config = providerConfig(providerId);
+  return Boolean(authConfig.brokerBaseUrl || (config.enabled && config.clientId && (config.authorizationEndpoint || config.authUrl)));
+}
+
+function authReturnUrl() {
+  return authConfig.redirectUri || new URL("./", window.location.href).href;
+}
+
+function buildAuthUrl(provider) {
+  const config = providerConfig(provider.id);
+  if (authConfig.brokerBaseUrl) {
+    const broker = authConfig.brokerBaseUrl.replace(/\/+$/, "");
+    const url = new URL(broker + "/oauth/start/" + encodeURIComponent(provider.id));
+    url.searchParams.set("return_to", authReturnUrl());
+    return url.href;
+  }
+  const endpoint = config.authorizationEndpoint || config.authUrl || provider.authUrl;
+  if (!config.enabled || !config.clientId || !endpoint) return "";
+  const state = provider.id + "." + Math.random().toString(36).slice(2);
+  sessionStorage.setItem("trendfoundry.auth.state", state);
+  const url = new URL(endpoint);
+  url.searchParams.set("response_type", "code");
+  url.searchParams.set("client_id", config.clientId);
+  url.searchParams.set("redirect_uri", authReturnUrl());
+  url.searchParams.set("scope", config.scope || provider.scope || "openid email profile");
+  url.searchParams.set("state", state);
+  return url.href;
+}
+
+function saveSession(session) {
+  localStorage.setItem(sessionKey, JSON.stringify({
+    provider: session.provider || "account",
+    name: session.name || "TrendFoundry member",
+    email: session.email || "",
+    mode: session.mode || "active",
+    updatedAt: new Date().toISOString()
+  }));
+}
+
+function readSession() {
+  try {
+    return JSON.parse(localStorage.getItem(sessionKey) || "null");
+  } catch {
+    return null;
+  }
+}
+
+function renderSession() {
+  const session = readSession();
+  if (!session) {
+    statusTitle.textContent = "Not signed in.";
+    statusCopy.textContent = "Choose a provider below. Configured providers redirect through the OAuth gateway; unconfigured providers explain what is missing.";
+    accountName.textContent = "Guest visitor";
+    accountProvider.textContent = "No active provider";
+    accountAvatar.textContent = "TF";
+    signOutButton.disabled = true;
+    return;
+  }
+  const provider = providers.find((item) => item.id === session.provider);
+  if (session.mode === "pending" && session.provider === "email") {
+    statusTitle.textContent = "Email sign-in pending.";
+    statusCopy.textContent = "Configure emailSignInEndpoint to send real magic links. This static preview only stores the requested email locally.";
+  } else if (session.mode === "pending") {
+    statusTitle.textContent = "Authorization code received.";
+    statusCopy.textContent = "The provider returned to the static page. Complete backend token exchange in the OAuth broker to create a secure production session.";
+  } else {
+    statusTitle.textContent = "Signed in.";
+    statusCopy.textContent = "Your account marker is stored locally for this static preview. Production sessions should be issued by the auth backend.";
+  }
+  accountName.textContent = session.name || session.email || "TrendFoundry member";
+  accountProvider.textContent = provider ? provider.label : session.provider;
+  accountAvatar.textContent = (session.name || provider?.label || "TF").slice(0, 2).toUpperCase();
+  signOutButton.disabled = false;
+}
+
+function renderProviders() {
+  for (const button of providerGrid.querySelectorAll("[data-provider]")) {
+    const id = button.dataset.provider;
+    const ready = providerReady(id);
+    button.classList.toggle("configured", ready);
+    button.dataset.ready = ready ? "true" : "false";
+    button.title = ready ? "Start login" : "Set brokerBaseUrl or provider clientId in auth.config.json";
+  }
+}
+
+function handleCallback() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("tf_auth") === "ok") {
+    saveSession({
+      provider: params.get("provider") || "broker",
+      name: params.get("name") || params.get("email") || "TrendFoundry member",
+      email: params.get("email") || "",
+      mode: "active"
+    });
+    window.history.replaceState({}, "", window.location.pathname);
+    setNotice("Signed in through the configured auth gateway.", "success");
+    return;
+  }
+  if (params.get("code")) {
+    const state = params.get("state") || "";
+    const expected = sessionStorage.getItem("trendfoundry.auth.state") || "";
+    const provider = state.split(".")[0] || "provider";
+    saveSession({ provider, name: "Pending OAuth exchange", mode: "pending" });
+    window.history.replaceState({}, "", window.location.pathname);
+    setNotice(expected && state !== expected ? "State mismatch. Do not trust this callback until the backend validates it." : "Code received. A backend must exchange it for a secure session.", expected && state !== expected ? "danger" : "warning");
+  }
+}
+
+async function loadConfig() {
+  try {
+    const response = await fetch("./auth.config.json", { cache: "no-store" });
+    if (response.ok) authConfig = await response.json();
+  } catch {
+    authConfig = { providers: {} };
+  }
+  handleCallback();
+  renderProviders();
+  renderSession();
+  if (authConfig.brokerBaseUrl) {
+    setNotice("OAuth gateway configured. Provider buttons are ready.", "success");
+  } else {
+    const enabled = Object.values(authConfig.providers || {}).filter((item) => item.enabled && item.clientId).length;
+    setNotice(enabled ? enabled + " direct provider(s) configured. Backend token exchange is still required." : "No OAuth gateway configured yet. Add brokerBaseUrl or provider client IDs in auth.config.json.", enabled ? "warning" : "neutral");
+  }
+}
+
+providerGrid.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-provider]");
+  if (!button) return;
+  const provider = providers.find((item) => item.id === button.dataset.provider);
+  if (!provider) return;
+  const url = buildAuthUrl(provider);
+  if (!url) {
+    setNotice(provider.label + " needs brokerBaseUrl or an enabled clientId in auth.config.json.", "warning");
+    return;
+  }
+  window.location.href = url;
+});
+
+emailForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = new FormData(emailForm).get("email");
+  if (!authConfig.emailSignInEndpoint) {
+    saveSession({ provider: "email", name: String(email), email: String(email), mode: "pending" });
+    renderSession();
+    setNotice("Email captured locally. Configure emailSignInEndpoint to send real magic links.", "warning");
+    return;
+  }
+  const response = await fetch(authConfig.emailSignInEndpoint, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ email, returnTo: authReturnUrl() })
+  });
+  setNotice(response.ok ? "Sign-in link requested. Check your email." : "Email endpoint returned an error.", response.ok ? "success" : "danger");
+});
+
+signOutButton.addEventListener("click", () => {
+  localStorage.removeItem(sessionKey);
+  renderSession();
+  setNotice("Signed out on this device.", "neutral");
+});
+
+loadConfig();
+`;
 
 const css = `:root {
   color-scheme: light;
@@ -1415,11 +1936,12 @@ small {
 }
 .topbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
-  gap: clamp(28px, 5vw, 72px);
-  padding: 40px clamp(20px, 5vw, 72px) 30px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 0.72fr);
+  gap: clamp(28px, 5vw, 64px);
+  padding: 34px clamp(20px, 5vw, 72px) 28px;
   border-bottom: 1px solid var(--line);
-  background: #fff;
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fbfcfd 100%);
 }
 .brandline {
   display: flex;
@@ -1475,10 +1997,10 @@ small {
 body[data-lang="zh"] .lang-en { display: none; }
 body[data-lang="zh"] .lang-zh { display: inline; }
 h1 {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0;
-  font-size: clamp(34px, 5vw, 64px);
-  line-height: 1;
+  font-size: clamp(34px, 4.6vw, 58px);
+  line-height: 0.98;
   letter-spacing: 0;
 }
 .sub {
@@ -1495,6 +2017,23 @@ h1 {
   gap: 10px;
   margin-top: 22px;
 }
+.utility-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.utility-links a {
+  text-decoration: none;
+  border-bottom: 1px solid #c8d0d7;
+}
+.utility-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
 .action {
   display: inline-flex;
   align-items: center;
@@ -1505,9 +2044,11 @@ h1 {
   padding: 8px 13px;
   background: #fff;
   color: var(--ink);
+  font: inherit;
   font-weight: 700;
   text-decoration: none;
   box-shadow: var(--shadow);
+  cursor: pointer;
 }
 .action.primary {
   border-color: var(--accent);
@@ -1518,6 +2059,11 @@ h1 {
   border-color: #b9c3cc;
   background: #15171a;
   color: #fff;
+}
+.action.copied {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 .topbar aside {
   align-self: end;
@@ -1563,6 +2109,92 @@ h1 {
   background: transparent;
   color: var(--muted);
   font-size: 12px;
+}
+.product-visual {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.product-screen {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #cbd4dc;
+  border-radius: 8px;
+  background: #101418;
+  box-shadow: 0 14px 34px rgba(21, 23, 26, 0.14);
+}
+.product-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.signal-ticker {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  pointer-events: none;
+}
+.signal-ticker span {
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  padding: 7px 9px;
+  background: rgba(16, 20, 24, 0.76);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 12px;
+  line-height: 1.2;
+  animation: signalPulse 4.8s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+.signal-ticker span:nth-child(n+3) {
+  display: none;
+}
+.signal-ticker strong {
+  display: block;
+  color: #9fd4ca;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.board-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.board-summary li {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+}
+.board-summary strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+.board-summary em {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 850;
+}
+@keyframes signalPulse {
+  0%, 100% { transform: translateY(0); opacity: 0.72; }
+  50% { transform: translateY(-5px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-ticker span {
+    animation: none;
+  }
 }
 main {
   padding: 24px clamp(20px, 5vw, 72px) 60px;
@@ -1879,6 +2511,26 @@ main {
   flex-wrap: wrap;
   gap: 8px;
 }
+.copy-action {
+  min-width: 112px;
+}
+.copy-fallback {
+  grid-column: 1 / -1;
+  flex: 1 1 100%;
+  width: 100%;
+  min-height: 132px;
+  margin: 2px 0 0;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px 11px;
+  background: #fbfdfc;
+  color: var(--ink);
+  font: 13px/1.45 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  resize: vertical;
+}
+.copy-fallback[hidden] {
+  display: none;
+}
 .order-copy {
   display: grid;
   grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1fr);
@@ -1958,58 +2610,138 @@ main {
   color: var(--muted);
   line-height: 1.45;
 }
-.toolbelt {
+.opportunity-finder {
   display: grid;
-  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr) auto;
-  gap: 14px;
-  align-items: end;
-  margin-bottom: 18px;
+  gap: 16px;
+  margin-bottom: 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
 }
+.finder-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) auto;
+  gap: 18px;
+  align-items: end;
+}
+.finder-head h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.finder-head p:not(.section-label):not(.result-count) {
+  margin: 0;
+  max-width: 760px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.finder-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+  gap: 12px;
+  align-items: stretch;
+}
+.source-picker,
 .search-wrap {
   display: grid;
-  gap: 6px;
+  gap: 10px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+  box-shadow: var(--shadow);
 }
-.search-wrap label {
-  color: var(--muted);
+.control-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
+}
+.control-label > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+}
+.control-label label {
+  font: inherit;
 }
 input[type="search"] {
-  min-height: 42px;
+  min-height: 48px;
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid #c8d0d7;
   border-radius: 6px;
-  padding: 8px 11px;
+  padding: 10px 12px;
   color: var(--ink);
   font: inherit;
   background: #fff;
 }
+input[type="search"]:focus {
+  outline: 3px solid rgba(15, 107, 95, 0.14);
+  border-color: var(--accent);
+}
 .filters {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 .filter-button {
-  min-height: 42px;
+  position: relative;
+  display: grid;
+  gap: 4px;
+  min-height: 96px;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 8px 11px;
+  border-radius: 8px;
+  padding: 12px;
   background: #fff;
   color: var(--muted);
   font: inherit;
-  font-weight: 700;
+  text-align: left;
   cursor: pointer;
 }
 .filter-button.active {
-  border-color: var(--accent);
-  background: var(--accent-soft);
+  border-color: #153f37;
+  background: #f3faf8;
   color: var(--accent);
+  box-shadow: inset 0 0 0 1px #153f37;
+}
+.filter-title {
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+.filter-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.filter-count {
+  align-self: end;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
 }
 .result-count {
-  margin: 0 0 10px;
+  justify-self: end;
+  margin: 0;
   white-space: nowrap;
-  color: var(--muted);
+  border: 1px solid #c8d0d7;
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: #fff;
+  color: var(--ink);
   font-size: 13px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
 }
 .grid {
   display: grid;
@@ -2074,6 +2806,165 @@ li { margin: 6px 0; }
   margin: 0;
   color: var(--muted);
 }
+.auth-hero .sub {
+  max-width: 880px;
+}
+.auth-status-panel,
+.auth-shell,
+.auth-setup-note {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.48fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  padding: 2px 0 24px;
+  margin-bottom: 22px;
+}
+.auth-status-panel h2,
+.auth-panel h2,
+.auth-setup-note h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.auth-status-panel p:not(.section-label),
+.auth-panel p,
+.auth-setup-note p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.account-card,
+.auth-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.account-card {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+}
+.account-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 850;
+}
+.account-card small,
+.auth-muted {
+  display: block;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.auth-panel {
+  padding: 16px;
+}
+.section-head.compact {
+  display: block;
+  margin-bottom: 14px;
+}
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.provider-button {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 82px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.provider-button.configured {
+  border-color: #94aaa5;
+  background: #fbfdfc;
+}
+.provider-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 7px;
+  background: #f1f4f6;
+  color: var(--accent);
+  font-weight: 850;
+}
+.provider-button strong,
+.provider-button small {
+  display: block;
+}
+.provider-button small {
+  margin-top: 3px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.provider-button em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.email-login {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+.email-login label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+input[type="email"] {
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 11px;
+  color: var(--ink);
+  font: inherit;
+  background: #fff;
+}
+.auth-notice {
+  margin-top: 14px !important;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 10px 12px;
+  background: #f7f9fb;
+}
+.auth-notice[data-tone="success"] {
+  border-color: #94aaa5;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.auth-notice[data-tone="warning"] {
+  border-color: #d8b46d;
+  background: #fff7e8;
+  color: #7b4e0c;
+}
+.auth-notice[data-tone="danger"] {
+  border-color: #d09a9a;
+  background: #fff0f0;
+  color: #8b2727;
+}
 @media (max-width: 960px) {
   .topbar,
   .offer,
@@ -2088,12 +2979,18 @@ li { margin: 6px 0; }
   .feed-box,
   .archive-box,
   .issue-summary,
+  .auth-status-panel,
+  .auth-shell,
+  .auth-setup-note,
+  .account-card,
+  .provider-grid,
   .order-copy,
   .mail-drafts,
   .topic-links,
   .topic-list,
   .issue-list,
-  .toolbelt,
+  .finder-head,
+  .finder-controls,
   .handoff,
   .grid {
     grid-template-columns: 1fr;
@@ -2102,8 +2999,12 @@ li { margin: 6px 0; }
   .sample-actions { justify-content: flex-start; }
   .feed-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
-  .result-count { margin: 0; white-space: normal; }
+  .result-count { justify-self: stretch; margin: 0; white-space: normal; text-align: center; }
   .brandrow { align-items: flex-start; }
+  .topbar {
+    gap: 18px;
+    padding: 24px clamp(20px, 5vw, 72px) 18px;
+  }
   .topbar > * {
     min-width: 0;
     max-width: 100%;
@@ -2137,6 +3038,19 @@ li { margin: 6px 0; }
     min-width: 0;
     max-width: 100%;
   }
+  .product-screen {
+    max-height: 190px;
+  }
+  .product-screen img {
+    min-height: 190px;
+    object-fit: cover;
+  }
+  .signal-ticker {
+    display: none;
+  }
+  .board-summary {
+    display: none;
+  }
   .topbar aside span {
     min-width: 0;
     max-width: 100%;
@@ -2157,7 +3071,8 @@ li { margin: 6px 0; }
     text-align: center;
     overflow-wrap: anywhere;
   }
-  .filter-button { flex: 1 1 auto; }
+  .filters { grid-template-columns: 1fr; }
+  .filter-button { min-height: 86px; }
 }
 `;
 
@@ -2174,8 +3089,8 @@ const forcedLanguage = document.body.dataset.forceLang;
 let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
 
 function countLabel(count) {
-  if (currentLanguage === "zh") return count + " 个可见机会";
-  return count === 1 ? "1 visible opportunity" : count + " visible opportunities";
+  if (currentLanguage === "zh") return "正在显示 " + count + " 条机会";
+  return count === 1 ? "Showing 1 opportunity" : "Showing " + count + " opportunities";
 }
 
 function setLanguage(language) {
@@ -2212,7 +3127,11 @@ function applyFilters() {
 for (const button of buttons) {
   button.addEventListener("click", () => {
     activeSource = button.dataset.sourceFilter;
-    for (const other of buttons) other.classList.toggle("active", other === button);
+    for (const other of buttons) {
+      const active = other === button;
+      other.classList.toggle("active", active);
+      other.setAttribute("aria-pressed", active ? "true" : "false");
+    }
     applyFilters();
   });
 }
@@ -2230,11 +3149,15 @@ await writeFile(path.join(docsDir, "ready-to-record-script.md"), script, "utf8")
 await writeFile(path.join(docsDir, "public-sample.md"), publicSampleReportEn, "utf8");
 await writeFile(path.join(docsDir, "public-sample.en.md"), publicSampleReportEn, "utf8");
 await writeFile(path.join(docsDir, "public-sample.zh-CN.md"), publicSampleReportZh, "utf8");
+await writeFile(path.join(docsDir, "auth-setup.md"), authSetupDoc, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
 await writeFile(path.join(zhDir, "index.html"), zhHtml, "utf8");
 await writeFile(path.join(orderDir, "index.html"), orderHtml, "utf8");
+await writeFile(path.join(authDir, "index.html"), authHtml, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
 await writeFile(path.join(siteDir, "app.js"), app, "utf8");
+await writeFile(path.join(siteDir, "auth.js"), authScript, "utf8");
+await writeFile(path.join(authDir, "auth.config.json"), authConfigExample, "utf8");
 await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
 await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReportEn, "utf8");
@@ -2262,6 +3185,7 @@ const sitemapUrls = [
   "",
   "zh/",
   "order/",
+  "auth/",
   "public-sample.md",
   "public-sample.en.md",
   "public-sample.zh-CN.md",

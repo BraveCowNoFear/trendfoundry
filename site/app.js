@@ -11,8 +11,8 @@ const forcedLanguage = document.body.dataset.forceLang;
 let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
 
 function countLabel(count) {
-  if (currentLanguage === "zh") return count + " 个可见机会";
-  return count === 1 ? "1 visible opportunity" : count + " visible opportunities";
+  if (currentLanguage === "zh") return "正在显示 " + count + " 条机会";
+  return count === 1 ? "Showing 1 opportunity" : "Showing " + count + " opportunities";
 }
 
 function setLanguage(language) {
@@ -49,7 +49,11 @@ function applyFilters() {
 for (const button of buttons) {
   button.addEventListener("click", () => {
     activeSource = button.dataset.sourceFilter;
-    for (const other of buttons) other.classList.toggle("active", other === button);
+    for (const other of buttons) {
+      const active = other === button;
+      other.classList.toggle("active", active);
+      other.setAttribute("aria-pressed", active ? "true" : "false");
+    }
     applyFilters();
   });
 }

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TrendFoundry account login with global and China social providers.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bravecownofear.github.io/trendfoundry/auth/">
+  <meta property="og:title" content="Sign in to TrendFoundry">
+  <meta property="og:description" content="Use common international and China account providers to access TrendFoundry.">
+  <meta property="og:image" content="https://bravecownofear.github.io/trendfoundry/og-image.png">
+  <title>Sign in to TrendFoundry</title>
+  <link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/auth/">
+  <link rel="stylesheet" href="../styles.css">
+  <script>window.TRENDFOUNDRY_AUTH_PROVIDERS = [{"id":"google","region":"Global","label":"Google","description":"Gmail and Google Workspace accounts.","scope":"openid email profile","authUrl":"https://accounts.google.com/o/oauth2/v2/auth"},{"id":"apple","region":"Global","label":"Apple","description":"Apple ID and private relay email.","scope":"name email","authUrl":"https://appleid.apple.com/auth/authorize"},{"id":"microsoft","region":"Global","label":"Microsoft","description":"Outlook, Microsoft 365, and Azure AD.","scope":"openid email profile User.Read","authUrl":"https://login.microsoftonline.com/common/oauth2/v2.0/authorize"},{"id":"github","region":"Global","label":"GitHub","description":"Developer accounts and public issue buyers.","scope":"read:user user:email","authUrl":"https://github.com/login/oauth/authorize"},{"id":"facebook","region":"Global","label":"Facebook","description":"Meta social login.","scope":"email public_profile","authUrl":"https://www.facebook.com/v19.0/dialog/oauth"},{"id":"x","region":"Global","label":"X","description":"Creator and social audience accounts.","scope":"users.read tweet.read offline.access","authUrl":"https://twitter.com/i/oauth2/authorize"},{"id":"linkedin","region":"Global","label":"LinkedIn","description":"Professional creator accounts.","scope":"openid profile email","authUrl":"https://www.linkedin.com/oauth/v2/authorization"},{"id":"wechat","region":"China","label":"WeChat","description":"WeChat Open Platform QR login.","scope":"snsapi_login","authUrl":"https://open.weixin.qq.com/connect/qrconnect"},{"id":"qq","region":"China","label":"QQ","description":"Tencent QQ Connect accounts.","scope":"get_user_info","authUrl":"https://graph.qq.com/oauth2.0/authorize"},{"id":"weibo","region":"China","label":"Weibo","description":"Sina Weibo OAuth login.","scope":"email","authUrl":"https://api.weibo.com/oauth2/authorize"},{"id":"alipay","region":"China","label":"Alipay","description":"Alipay Open Platform authorization.","scope":"auth_user","authUrl":"https://openauth.alipay.com/oauth2/publicAppAuthorize.htm"},{"id":"dingtalk","region":"China","label":"DingTalk","description":"Alibaba DingTalk organization accounts.","scope":"openid corpid","authUrl":"https://login.dingtalk.com/oauth2/auth"},{"id":"feishu","region":"China","label":"Feishu","description":"Feishu and Lark workplace accounts.","scope":"contact:user.base:readonly","authUrl":"https://accounts.feishu.cn/open-apis/authen/v1/authorize"},{"id":"line","region":"Asia","label":"LINE","description":"LINE accounts for Japan and Southeast Asia.","scope":"openid profile email","authUrl":"https://access.line.me/oauth2/v2.1/authorize"}];</script>
+  <script src="../auth.js" defer></script>
+</head>
+<body data-page="auth">
+  <header class="topic-hero auth-hero">
+    <div class="brandline"><span>TrendFoundry</span><span>Account access</span></div>
+    <h1>Sign in with the account you already use.</h1>
+    <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
+    <div class="hero-actions">
+      <a class="action primary" href="#providers">Choose provider</a>
+      <a class="action" href="../order/">Order page</a>
+      <a class="action" href="../zh/">Chinese entry</a>
+      <a class="action strong" href="../">Dashboard</a>
+    </div>
+  </header>
+  <main>
+    <section class="auth-status-panel" aria-label="Account status">
+      <div>
+        <p class="section-label">Session</p>
+        <h2 id="auth-status-title">Not signed in.</h2>
+        <p id="auth-status-copy">Choose a provider below. If the OAuth gateway is not configured yet, the page will show the exact missing setup instead of failing silently.</p>
+      </div>
+      <div class="account-card" id="account-card">
+        <span class="account-avatar" id="account-avatar">TF</span>
+        <div>
+          <strong id="account-name">Guest visitor</strong>
+          <small id="account-provider">No active provider</small>
+        </div>
+        <button class="action" type="button" id="sign-out-button">Sign out</button>
+      </div>
+    </section>
+    <section class="auth-shell" id="providers" aria-label="Login providers">
+      <div class="auth-panel">
+        <div class="section-head compact">
+          <p class="section-label">Global accounts</p>
+          <h2>One gateway, many providers.</h2>
+          <p>Provider buttons use the same redirect contract. Enable them in <code>auth.config.json</code> or route every provider through a broker.</p>
+        </div>
+        <div class="provider-grid"><button class="provider-button" type="button" data-provider="google">
+  <span class="provider-mark">G</span>
+  <span><strong>Google</strong><small>Gmail and Google Workspace accounts.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="apple">
+  <span class="provider-mark">A</span>
+  <span><strong>Apple</strong><small>Apple ID and private relay email.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="microsoft">
+  <span class="provider-mark">M</span>
+  <span><strong>Microsoft</strong><small>Outlook, Microsoft 365, and Azure AD.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="github">
+  <span class="provider-mark">G</span>
+  <span><strong>GitHub</strong><small>Developer accounts and public issue buyers.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="facebook">
+  <span class="provider-mark">F</span>
+  <span><strong>Facebook</strong><small>Meta social login.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="x">
+  <span class="provider-mark">X</span>
+  <span><strong>X</strong><small>Creator and social audience accounts.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="linkedin">
+  <span class="provider-mark">L</span>
+  <span><strong>LinkedIn</strong><small>Professional creator accounts.</small></span>
+  <em>Global</em>
+</button><button class="provider-button" type="button" data-provider="wechat">
+  <span class="provider-mark">W</span>
+  <span><strong>WeChat</strong><small>WeChat Open Platform QR login.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="qq">
+  <span class="provider-mark">Q</span>
+  <span><strong>QQ</strong><small>Tencent QQ Connect accounts.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="weibo">
+  <span class="provider-mark">W</span>
+  <span><strong>Weibo</strong><small>Sina Weibo OAuth login.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="alipay">
+  <span class="provider-mark">A</span>
+  <span><strong>Alipay</strong><small>Alipay Open Platform authorization.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="dingtalk">
+  <span class="provider-mark">D</span>
+  <span><strong>DingTalk</strong><small>Alibaba DingTalk organization accounts.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="feishu">
+  <span class="provider-mark">F</span>
+  <span><strong>Feishu</strong><small>Feishu and Lark workplace accounts.</small></span>
+  <em>China</em>
+</button><button class="provider-button" type="button" data-provider="line">
+  <span class="provider-mark">L</span>
+  <span><strong>LINE</strong><small>LINE accounts for Japan and Southeast Asia.</small></span>
+  <em>Asia</em>
+</button></div>
+      </div>
+      <aside class="auth-panel">
+        <p class="section-label">Email access</p>
+        <h2>Email magic link</h2>
+        <p class="auth-muted">Use this for buyers who do not want a social account. It needs a backend endpoint before production sending is enabled.</p>
+        <form class="email-login" id="email-login-form">
+          <label for="auth-email">Email</label>
+          <input id="auth-email" name="email" type="email" autocomplete="email" placeholder="buyer@example.com" required>
+          <button class="action primary" type="submit">Send sign-in link</button>
+        </form>
+        <p class="auth-notice" id="auth-notice" role="status">Loading auth configuration...</p>
+      </aside>
+    </section>
+    <section class="auth-setup-note" aria-label="Production setup">
+      <div>
+        <p class="section-label">Production setup</p>
+        <h2>Secrets stay off the static site.</h2>
+      </div>
+      <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+    </section>
+  </main>
+</body>
+</html>

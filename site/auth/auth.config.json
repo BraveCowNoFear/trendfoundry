@@ -1,0 +1,105 @@
+{
+  "brokerBaseUrl": "",
+  "redirectUri": "https://bravecownofear.github.io/trendfoundry/auth/",
+  "emailSignInEndpoint": "",
+  "providers": {
+    "google": {
+      "label": "Google",
+      "authorizationEndpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+      "clientId": "",
+      "scope": "openid email profile",
+      "enabled": false
+    },
+    "apple": {
+      "label": "Apple",
+      "authorizationEndpoint": "https://appleid.apple.com/auth/authorize",
+      "clientId": "",
+      "scope": "name email",
+      "enabled": false
+    },
+    "microsoft": {
+      "label": "Microsoft",
+      "authorizationEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "clientId": "",
+      "scope": "openid email profile User.Read",
+      "enabled": false
+    },
+    "github": {
+      "label": "GitHub",
+      "authorizationEndpoint": "https://github.com/login/oauth/authorize",
+      "clientId": "",
+      "scope": "read:user user:email",
+      "enabled": false
+    },
+    "facebook": {
+      "label": "Facebook",
+      "authorizationEndpoint": "https://www.facebook.com/v19.0/dialog/oauth",
+      "clientId": "",
+      "scope": "email public_profile",
+      "enabled": false
+    },
+    "x": {
+      "label": "X",
+      "authorizationEndpoint": "https://twitter.com/i/oauth2/authorize",
+      "clientId": "",
+      "scope": "users.read tweet.read offline.access",
+      "enabled": false
+    },
+    "linkedin": {
+      "label": "LinkedIn",
+      "authorizationEndpoint": "https://www.linkedin.com/oauth/v2/authorization",
+      "clientId": "",
+      "scope": "openid profile email",
+      "enabled": false
+    },
+    "wechat": {
+      "label": "WeChat",
+      "authorizationEndpoint": "https://open.weixin.qq.com/connect/qrconnect",
+      "clientId": "",
+      "scope": "snsapi_login",
+      "enabled": false
+    },
+    "qq": {
+      "label": "QQ",
+      "authorizationEndpoint": "https://graph.qq.com/oauth2.0/authorize",
+      "clientId": "",
+      "scope": "get_user_info",
+      "enabled": false
+    },
+    "weibo": {
+      "label": "Weibo",
+      "authorizationEndpoint": "https://api.weibo.com/oauth2/authorize",
+      "clientId": "",
+      "scope": "email",
+      "enabled": false
+    },
+    "alipay": {
+      "label": "Alipay",
+      "authorizationEndpoint": "https://openauth.alipay.com/oauth2/publicAppAuthorize.htm",
+      "clientId": "",
+      "scope": "auth_user",
+      "enabled": false
+    },
+    "dingtalk": {
+      "label": "DingTalk",
+      "authorizationEndpoint": "https://login.dingtalk.com/oauth2/auth",
+      "clientId": "",
+      "scope": "openid corpid",
+      "enabled": false
+    },
+    "feishu": {
+      "label": "Feishu",
+      "authorizationEndpoint": "https://accounts.feishu.cn/open-apis/authen/v1/authorize",
+      "clientId": "",
+      "scope": "contact:user.base:readonly",
+      "enabled": false
+    },
+    "line": {
+      "label": "LINE",
+      "authorizationEndpoint": "https://access.line.me/oauth2/v2.1/authorize",
+      "clientId": "",
+      "scope": "openid profile email",
+      "enabled": false
+    }
+  }
+}

@@ -18,6 +18,7 @@
     "ops-report": "node scripts/report_ops.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
+    "visuals": "node scripts/generate_site_visuals.mjs",
     "operate": "node scripts/run_operations.mjs",
     "qa": "node scripts/qa.mjs",
     "leads": "node scripts/sync_leads.mjs",

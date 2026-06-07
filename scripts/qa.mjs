@@ -28,6 +28,7 @@ const requiredScripts = [
   "ops-report",
   "launch-assets",
   "social",
+  "visuals",
   "qa"
 ];
 const seoTopicSlugs = [
@@ -133,6 +134,7 @@ async function checkLocal() {
   assertCheck("site card copy is localized", siteIndex.includes("为什么现在") && siteIndex.includes("制作大纲") && siteIndex.includes("B 站角度"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
+  assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
   assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
@@ -143,7 +145,7 @@ async function checkLocal() {
   assertCheck("site offers separate sample languages", siteIndex.includes("public-sample.en.md") && siteIndex.includes("public-sample.zh-CN.md") && siteIndex.includes("public-sample.en.csv") && siteIndex.includes("public-sample.zh-CN.csv"));
   const appJs = await readText(path.join(root, "site", "app.js"));
   assertCheck("site app persists language choice", appJs.includes("trendfoundry-language") && appJs.includes("setLanguage"));
-  assertCheck("site app localizes result count", appJs.includes("个可见机会") && appJs.includes("visible opportunity"));
+  assertCheck("site app localizes result count", appJs.includes("条机会") && appJs.includes("Showing"));
   assertCheck("site app supports forced Chinese landing page", appJs.includes("data-force-lang") || appJs.includes("forcedLanguage"));
 
   const zhIndex = await readText(path.join(root, "site", "zh", "index.html"));
@@ -152,13 +154,26 @@ async function checkLocal() {
   assertCheck("Chinese landing page has 12 cards", (zhIndex.match(/<article class="card"/g) || []).length === 12);
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
+  assertCheck("Chinese landing page has product signal board", zhIndex.includes("../signal-board.png") && zhIndex.includes('class="product-visual"'));
 
   const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
   assertCheck("order page exists", orderIndex.includes('<link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/order/">') && orderIndex.includes("Order TrendFoundry"));
   assertCheck("order page has all tiers", ["Sample issue", "Weekly brief", "Custom niche"].every((tier) => orderIndex.includes(tier)));
   assertCheck("order page has email drafts", orderIndex.includes("Open English email") && orderIndex.includes("打开中文邮件") && orderIndex.includes(`mailto:${contactEmail}`));
+  assertCheck("order page has copyable drafts", (orderIndex.match(/data-copy-order=/g) || []).length >= 5 && orderIndex.includes("navigator.clipboard") && orderIndex.includes("copy-fallback") && orderIndex.includes("Copy English draft") && orderIndex.includes("复制中文草稿"));
   assertCheck("order page has safety copy", orderIndex.includes("No card details") && orderIndex.includes("payment credentials"));
   assertCheck("order page explains payment reply packet", orderIndex.includes("payment reply packet") && orderIndex.includes("manual invoice reference"));
+
+  const authIndex = await readText(path.join(root, "site", "auth", "index.html"));
+  const authConfigText = await readText(path.join(root, "site", "auth", "auth.config.json"));
+  const authConfig = JSON.parse(authConfigText);
+  const authScript = await readText(path.join(root, "site", "auth.js"));
+  assertCheck("auth page exists", authIndex.includes("Sign in with the account you already use.") && authIndex.includes("Google") && authIndex.includes("WeChat") && authIndex.includes("Alipay"));
+  assertCheck("auth page keeps static safety copy", authIndex.includes("Secrets stay off the static site") && authIndex.includes("static site cannot complete OAuth token exchange"));
+  assertCheck("auth config has empty broker defaults", authConfig.brokerBaseUrl === "" && authConfig.emailSignInEndpoint === "");
+  assertCheck("auth config has providers disabled by default", Object.values(authConfig.providers || {}).every((provider) => provider.clientId === "" && provider.enabled === false));
+  assertCheck("auth config avoids committed secrets", !/(client_secret|clientSecret|refreshToken|password|signingKey)/i.test(authConfigText));
+  assertCheck("auth script blocks unconfigured providers", authScript.includes("needs brokerBaseUrl") && authScript.includes("emailSignInEndpoint"));
 
   const sampleEn = await readText(path.join(root, "site", "public-sample.en.md"));
   const sampleZh = await readText(path.join(root, "site", "public-sample.zh-CN.md"));
@@ -184,6 +199,7 @@ async function checkLocal() {
   assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
   assertCheck("sitemap includes Chinese landing page", sitemap.includes(`${publicBase}zh/`));
   assertCheck("sitemap includes order page", sitemap.includes(`${publicBase}order/`));
+  assertCheck("sitemap includes auth page", sitemap.includes(`${publicBase}auth/`));
   assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
   assertCheck("sitemap includes issue archive", sitemap.includes(`${publicBase}issues/`) && sitemap.includes(`${publicBase}issues/latest.html`) && sitemap.includes(`${publicBase}issues/${issueSlug}.html`));
 
@@ -206,6 +222,8 @@ async function checkLocal() {
 
   const og = pngSize(path.join(root, "site", "og-image.png"));
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
+  const signalBoard = pngSize(path.join(root, "site", "signal-board.png"));
+  assertCheck("signal board image is 1200x760", signalBoard?.width === 1200 && signalBoard?.height === 760, signalBoard ? `${signalBoard.width}x${signalBoard.height}, ${signalBoard.bytes} bytes` : "missing");
 
   const packManifest = await readJson(path.join(root, "dist", "trendfoundry-sample-pack", "manifest.json"));
   assertCheck("sample pack manifest classifies buyer deliverables", sellerOnly.every((file) => !(packManifest.buyerDeliverables || []).includes(file)));
@@ -403,6 +421,7 @@ async function checkOnline() {
   assertCheck("online index HTTP 200", index.status === 200, String(index.status));
   assertCheck("online index has OG image", index.text.includes("og-image.png"));
   assertCheck("online index has email CTA", index.text.includes("Email order"));
+  assertCheck("online index has product signal board", index.text.includes("signal-board.png") && index.text.includes('class="product-visual"'));
 
   const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);
   assertCheck("online Chinese landing page HTTP 200", zhIndex.status === 200, String(zhIndex.status));
@@ -412,8 +431,13 @@ async function checkOnline() {
   const orderIndex = await fetchText(`${publicBase}order/?qa=${Date.now()}`);
   assertCheck("online order page HTTP 200", orderIndex.status === 200, String(orderIndex.status));
   assertCheck("online order page has email CTAs", orderIndex.text.includes("Order by email") && orderIndex.text.includes("Open English email") && orderIndex.text.includes("打开中文邮件"));
+  assertCheck("online order page has copyable drafts", (orderIndex.text.match(/data-copy-order=/g) || []).length >= 5 && orderIndex.text.includes("navigator.clipboard") && orderIndex.text.includes("copy-fallback") && orderIndex.text.includes("Copy English draft"));
   assertCheck("online order page avoids public payment details", orderIndex.text.includes("No card details") && orderIndex.text.includes("payment credentials"));
   assertCheck("online order page explains payment reply packet", orderIndex.text.includes("payment reply packet") && orderIndex.text.includes("manual invoice reference"));
+
+  const authIndex = await fetchText(`${publicBase}auth/?qa=${Date.now()}`);
+  assertCheck("online auth page HTTP 200", authIndex.status === 200, String(authIndex.status));
+  assertCheck("online auth page keeps static safety copy", authIndex.text.includes("Secrets stay off the static site") && authIndex.text.includes("Google") && authIndex.text.includes("WeChat"));
 
   const sampleEn = await fetchText(`${publicBase}public-sample.en.md?qa=${Date.now()}`);
   assertCheck("online English public sample HTTP 200", sampleEn.status === 200, String(sampleEn.status));
@@ -435,10 +459,17 @@ async function checkOnline() {
   assertCheck("online OG image HTTP 200", image.status === 200, String(image.status));
   assertCheck("online OG image 1200x630", width === 1200 && height === 630, `${width}x${height}`);
 
+  const signalImage = await fetchBytes(`${publicBase}signal-board.png?qa=${Date.now()}`);
+  const signalWidth = signalImage.bytes.length >= 24 ? signalImage.bytes.readUInt32BE(16) : 0;
+  const signalHeight = signalImage.bytes.length >= 24 ? signalImage.bytes.readUInt32BE(20) : 0;
+  assertCheck("online signal board image HTTP 200", signalImage.status === 200, String(signalImage.status));
+  assertCheck("online signal board image 1200x760", signalWidth === 1200 && signalHeight === 760, `${signalWidth}x${signalHeight}`);
+
   const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);
   assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
   assertCheck("online sitemap has SEO topics", seoTopicSlugs.every((slug) => sitemap.text.includes(`${publicBase}topics/${slug}.html`)));
   assertCheck("online sitemap has Chinese landing page", sitemap.text.includes(`${publicBase}zh/`));
+  assertCheck("online sitemap has auth page", sitemap.text.includes(`${publicBase}auth/`));
   assertCheck("online sitemap has feeds", sitemap.text.includes(`${publicBase}feed.xml`) && sitemap.text.includes(`${publicBase}feed.json`));
   assertCheck("online sitemap has issue archive", sitemap.text.includes(`${publicBase}issues/`) && sitemap.text.includes(`${publicBase}issues/latest.html`));
 
