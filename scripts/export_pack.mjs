@@ -104,6 +104,8 @@ await cp(path.join(dataDir, "latest.json"), path.join(packDir, "latest.json"));
 await cp(path.join(siteDir, "index.html"), path.join(packDir, "index.html"));
 await cp(path.join(siteDir, "styles.css"), path.join(packDir, "styles.css"));
 await cp(path.join(siteDir, "app.js"), path.join(packDir, "app.js"));
+await cp(path.join(siteDir, "public-sample.md"), path.join(packDir, "public-sample.md"));
+await cp(path.join(siteDir, "public-sample.csv"), path.join(packDir, "public-sample.csv"));
 
 await writeFile(
   path.join(packDir, "opportunities.csv"),
@@ -160,6 +162,8 @@ const manifest = {
     "index.html",
     "styles.css",
     "app.js",
+    "public-sample.md",
+    "public-sample.csv",
     "daily-brief.md",
     "ready-to-record-script.md",
     "launch-plan.md",
