@@ -1,4 +1,4 @@
-# Publishing
+﻿# Publishing
 
 ## Public Repository
 
@@ -35,12 +35,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27090368455` completed successfully for commit `78aff21 Add no-login order page`.
+- Pages workflow `27090835761` completed successfully for commit `32879d1 Add payment reply draft workflow`.
 - Public page, `zh/`, `order/`, bilingual sample Markdown/CSV files, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 155/155.
+- `npm run qa -- --online` passed 164/164.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; `/order/` renders three tiers, prepared English/Chinese order emails, safety copy that avoids public payment details, and at least six mailto CTAs. Screenshots: `dist/qa/online-order-*-78aff21.png`.
+- Browser QA with Edge CDP: desktop 1280px and mobile 390px had no horizontal overflow on `/order/`; the page renders three tiers, prepared English/Chinese order emails, safety copy that avoids public payment details, and the new payment reply packet section with manual invoice reference guidance. Screenshots: `dist/qa/online-payment-order-*-32879d1.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
