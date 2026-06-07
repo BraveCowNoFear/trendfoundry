@@ -18,6 +18,8 @@ Verified public paths:
 - `https://bravecownofear.github.io/trendfoundry/public-sample.md`
 - `https://bravecownofear.github.io/trendfoundry/public-sample.csv`
 - `https://bravecownofear.github.io/trendfoundry/ready-to-record-script.md`
+- `https://bravecownofear.github.io/trendfoundry/sitemap.xml`
+- `https://bravecownofear.github.io/trendfoundry/topics/ai-video-ideas.html`
 - `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
 
 Latest verification:
@@ -28,6 +30,8 @@ Latest verification:
 - `npm run qa -- --online` passed 68/68.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
 - Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
+
+Pending next deployment: the next Pages publish after `936afe6` should add `sitemap.xml`, `robots.txt`, and five SEO topic pages under `/topics/`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 

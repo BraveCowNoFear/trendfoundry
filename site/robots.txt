@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bravecownofear.github.io/trendfoundry/sitemap.xml

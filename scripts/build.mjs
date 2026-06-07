@@ -5,6 +5,7 @@ const root = process.cwd();
 const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "utf8"));
 const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
+const topicsDir = path.join(siteDir, "topics");
 const contactEmail = "rivan_Britain@outlook.com";
 const publicSiteUrl = "https://bravecownofear.github.io/trendfoundry/";
 const ogImageUrl = `${publicSiteUrl}og-image.png`;
@@ -14,6 +15,7 @@ const orderHref = `mailto:${contactEmail}?subject=${orderSubject}&body=${orderBo
 const issueOrderHref = "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20";
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
+await mkdir(topicsDir, { recursive: true });
 
 function selectPortfolio(items) {
   const quotas = { github: 4, bilibili: 3, youtube: 2, hn: 2, arxiv: 1 };
@@ -388,6 +390,129 @@ const sourceButtons = ["all", ...Object.keys(bySource)]
   .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? "All" : source}</button>`)
   .join("");
 
+const topicDefinitions = [
+  {
+    slug: "ai-video-ideas",
+    title: "AI video ideas for creator channels",
+    description: "A weekly source-backed list of AI and developer video ideas with hooks, demos, titles, and limitations.",
+    filter: () => true
+  },
+  {
+    slug: "github-ai-projects",
+    title: "GitHub AI projects worth turning into videos",
+    description: "Fresh GitHub signals converted into recordable demos for technical creators.",
+    filter: (item) => item.source === "github"
+  },
+  {
+    slug: "bilibili-ai-topics",
+    title: "Bilibili AI topics for technical explainers",
+    description: "Chinese creator angles shaped from Bilibili-facing AI and developer signals.",
+    filter: (item) => item.source === "bilibili"
+  },
+  {
+    slug: "youtube-ai-workflows",
+    title: "YouTube AI workflow ideas for weekly videos",
+    description: "YouTube-ready AI workflow opportunities with proof links and practical demos.",
+    filter: (item) => item.source === "youtube"
+  },
+  {
+    slug: "developer-trend-brief",
+    title: "Developer trend brief for creator newsletters",
+    description: "Hacker News, arXiv, GitHub, YouTube, and Bilibili signals turned into a compact creator brief.",
+    filter: () => true
+  }
+];
+
+function pageShell({ title, description, body, canonicalPath = "" }) {
+  const canonicalUrl = `${publicSiteUrl}${canonicalPath}`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="${escapeHtml(description)}">
+  <link rel="canonical" href="${escapeHtml(canonicalUrl)}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${escapeHtml(canonicalUrl)}">
+  <meta property="og:title" content="${escapeHtml(title)}">
+  <meta property="og:description" content="${escapeHtml(description)}">
+  <meta property="og:image" content="${ogImageUrl}">
+  <title>${escapeHtml(title)} | TrendFoundry</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+${body}
+</body>
+</html>`;
+}
+
+function topicCards(items) {
+  return items
+    .slice(0, 8)
+    .map(
+      (item, index) => `<article class="topic-card">
+  <p class="topic-rank">#${index + 1} / ${escapeHtml(item.source)} / score ${escapeHtml(item.score)}</p>
+  <h2><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h2>
+  <p>${escapeHtml(item.summary || "No summary available.")}</p>
+  <ul>
+    <li><strong>Creator hook:</strong> ${escapeHtml(item.deliverables.hook)}</li>
+    <li><strong>Demo angle:</strong> ${escapeHtml(item.deliverables.demoSteps?.[1] || item.deliverables.whyNow)}</li>
+    <li><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</li>
+  </ul>
+</article>`
+    )
+    .join("");
+}
+
+function buildTopicPage(topic) {
+  const items = top.filter(topic.filter);
+  const seen = new Set(items.map((item) => item.url || item.id));
+  const fallback = top.filter((item) => !seen.has(item.url || item.id));
+  const featured = [...items, ...fallback].slice(0, 8);
+  const body = `<header class="topic-hero">
+  <div class="brandline"><span>TrendFoundry</span><span>SEO brief</span></div>
+  <h1>${escapeHtml(topic.title)}</h1>
+  <p class="sub">${escapeHtml(topic.description)} Updated from the same source-backed dataset used for the paid weekly brief.</p>
+  <div class="hero-actions">
+    <a class="action primary" href="../public-sample.md">View free sample</a>
+    <a class="action" href="../ready-to-record-script.md">Open script</a>
+    <a class="action strong" href="${issueOrderHref}">Request current pack</a>
+    <a class="action" href="../index.html">Back to dashboard</a>
+  </div>
+</header>
+<main>
+  <section class="seo-summary">
+    <div>
+      <p class="section-label">Search intent</p>
+      <h2>Useful when a creator searches for topics, not just tools.</h2>
+    </div>
+    <p>Each item keeps the proof link, hook, demo angle, and limitation together. That makes the page indexable while still leading serious buyers to the current sample pack.</p>
+  </section>
+  <section class="topic-list">${topicCards(featured)}</section>
+  <section class="handoff">
+    <div>
+      <p class="section-label">Paid pack</p>
+      <h2>Need the current 12-item brief?</h2>
+      <p>The paid pack adds the full ranked list, CSV, and one ready-to-record scene-by-scene script.</p>
+    </div>
+    <div class="handoff-links">
+      <a class="action primary" href="${issueOrderHref}">Request sample</a>
+      <a class="action" href="${orderHref}">Email order</a>
+    </div>
+  </section>
+</main>`;
+  return pageShell({
+    title: topic.title,
+    description: topic.description,
+    body,
+    canonicalPath: `topics/${topic.slug}.html`
+  });
+}
+
+const topicLinks = topicDefinitions
+  .map((topic) => `<a class="topic-link" href="./topics/${topic.slug}.html"><span>${escapeHtml(topic.title)}</span><small>${escapeHtml(topic.description)}</small></a>`)
+  .join("");
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -473,6 +598,14 @@ const html = `<!doctype html>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
+    <section class="seo-hub" aria-label="Search landing pages">
+      <div>
+        <p class="section-label">Search pages</p>
+        <h2>Evergreen entry points for creators searching by platform or workflow.</h2>
+        <p>These pages refresh with the same daily source data and route qualified readers back to the sample pack.</p>
+      </div>
+      <div class="topic-links">${topicLinks}</div>
+    </section>
     <section class="toolbelt" aria-label="Opportunity controls">
       <div class="search-wrap">
         <label for="opportunity-search">Search opportunities</label>
@@ -519,8 +652,19 @@ body {
   background: var(--paper);
   color: var(--ink);
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 a { color: inherit; }
+h1,
+h2,
+h3,
+p,
+li,
+a,
+span,
+small {
+  overflow-wrap: anywhere;
+}
 .topbar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 260px;
@@ -777,6 +921,88 @@ main {
   gap: 24px;
   align-items: start;
 }
+.seo-hub,
+.seo-summary {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.5fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  padding: 2px 0 24px;
+  margin-bottom: 22px;
+}
+.seo-hub h2,
+.seo-summary h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.seo-hub p:not(.section-label),
+.seo-summary p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.topic-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.topic-link {
+  display: grid;
+  gap: 5px;
+  min-height: 104px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+}
+.topic-link span {
+  font-weight: 800;
+  line-height: 1.3;
+}
+.topic-link small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+.topic-hero {
+  padding: 40px clamp(20px, 5vw, 72px) 30px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.topic-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.topic-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.topic-rank {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.topic-card h2 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  line-height: 1.3;
+}
+.topic-card p,
+.topic-card li {
+  color: var(--muted);
+  line-height: 1.5;
+}
 .delivery ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -921,6 +1147,10 @@ li { margin: 6px 0; }
   .tier-grid,
   .delivery,
   .delivery ul,
+  .seo-hub,
+  .seo-summary,
+  .topic-links,
+  .topic-list,
   .toolbelt,
   .handoff,
   .grid {
@@ -930,6 +1160,17 @@ li { margin: 6px 0; }
   .sample-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
+  .hero-actions .action,
+  .handoff-links .action,
+  .sample-actions .action {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+  }
   .filter-button { flex: 1 1 auto; }
 }
 `;
@@ -974,6 +1215,29 @@ await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
 await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReport, "utf8");
 await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsv, "utf8");
+for (const topic of topicDefinitions) {
+  await writeFile(path.join(topicsDir, `${topic.slug}.html`), buildTopicPage(topic), "utf8");
+}
+await writeFile(
+  path.join(siteDir, "robots.txt"),
+  `User-agent: *\nAllow: /\nSitemap: ${publicSiteUrl}sitemap.xml\n`,
+  "utf8"
+);
+const sitemapUrls = [
+  "",
+  "public-sample.md",
+  "public-sample.csv",
+  "ready-to-record-script.md",
+  "sales-page-copy.md",
+  ...topicDefinitions.map((topic) => `topics/${topic.slug}.html`)
+];
+await writeFile(
+  path.join(siteDir, "sitemap.xml"),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls
+    .map((urlPath) => `  <url><loc>${publicSiteUrl}${urlPath}</loc></url>`)
+    .join("\n")}\n</urlset>\n`,
+  "utf8"
+);
 await writeFile(path.join(siteDir, "launch-plan.md"), await readFile(path.join(docsDir, "launch-plan.md"), "utf8"), "utf8");
 await writeFile(path.join(siteDir, "sales-page-copy.md"), await readFile(path.join(docsDir, "sales-page-copy.md"), "utf8"), "utf8");
 console.log(`Built ${top.length} cards.`);

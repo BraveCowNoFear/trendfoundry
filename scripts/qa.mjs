@@ -23,6 +23,13 @@ const requiredScripts = [
   "social",
   "qa"
 ];
+const seoTopicSlugs = [
+  "ai-video-ideas",
+  "github-ai-projects",
+  "bilibili-ai-topics",
+  "youtube-ai-workflows",
+  "developer-trend-brief"
+];
 
 const checks = [];
 
@@ -101,7 +108,23 @@ async function checkLocal() {
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
+  assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
+
+  for (const slug of seoTopicSlugs) {
+    const topicFile = path.join(root, "site", "topics", `${slug}.html`);
+    assertCheck(`SEO topic exists: ${slug}`, existsSync(topicFile), topicFile);
+    if (existsSync(topicFile)) {
+      const topicText = await readText(topicFile);
+      assertCheck(`SEO topic has canonical: ${slug}`, topicText.includes(`<link rel="canonical" href="${publicBase}topics/${slug}.html">`));
+      assertCheck(`SEO topic has paid CTA: ${slug}`, topicText.includes("Request current pack") && topicText.includes("Request sample"));
+      assertCheck(`SEO topic has source cards: ${slug}`, (topicText.match(/class="topic-card"/g) || []).length >= 4);
+    }
+  }
+  const robots = await readText(path.join(root, "site", "robots.txt"));
+  const sitemap = await readText(path.join(root, "site", "sitemap.xml"));
+  assertCheck("robots points to sitemap", robots.includes(`Sitemap: ${publicBase}sitemap.xml`));
+  assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
 
   const og = pngSize(path.join(root, "site", "og-image.png"));
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
@@ -211,6 +234,14 @@ async function checkOnline() {
   const height = image.bytes.length >= 24 ? image.bytes.readUInt32BE(20) : 0;
   assertCheck("online OG image HTTP 200", image.status === 200, String(image.status));
   assertCheck("online OG image 1200x630", width === 1200 && height === 630, `${width}x${height}`);
+
+  const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);
+  assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
+  assertCheck("online sitemap has SEO topics", seoTopicSlugs.every((slug) => sitemap.text.includes(`${publicBase}topics/${slug}.html`)));
+
+  const topic = await fetchText(`${publicBase}topics/ai-video-ideas.html?qa=${Date.now()}`);
+  assertCheck("online SEO topic HTTP 200", topic.status === 200, String(topic.status));
+  assertCheck("online SEO topic has paid CTA", topic.text.includes("Request current pack") && topic.text.includes("Request sample"));
 }
 
 function markdownReport() {
