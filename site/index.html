@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -12,6 +13,10 @@
       <p class="eyebrow">TrendFoundry</p>
       <h1>Creator intelligence packs for AI and developer video channels</h1>
       <p class="sub">Fresh public signals from GitHub, Hacker News, and arXiv converted into ranked Bilibili/YouTube ideas with titles, hooks, outlines, and thumbnail prompts.</p>
+      <div class="hero-actions">
+        <a class="action primary" href="./daily-brief.md">Download sample brief</a>
+        <a class="action" href="./ready-to-record-script.md">Open script</a>
+      </div>
     </div>
     <aside>
       <span>12 opportunities</span>
@@ -30,7 +35,15 @@
         <small>starter subscription target</small>
       </div>
     </section>
-    <section class="grid"><article class="card">
+    <section class="toolbelt" aria-label="Opportunity controls">
+      <div class="search-wrap">
+        <label for="opportunity-search">Search opportunities</label>
+        <input id="opportunity-search" type="search" placeholder="agent, video, workflow, arxiv...">
+      </div>
+      <div class="filters" aria-label="Source filters"><button class="filter-button active" type="button" data-source-filter="all">All</button><button class="filter-button" type="button" data-source-filter="github">github</button><button class="filter-button" type="button" data-source-filter="hn">hn</button><button class="filter-button" type="button" data-source-filter="arxiv">arxiv</button></div>
+      <p id="result-count" class="result-count">12 visible opportunities</p>
+    </section>
+    <section class="grid" id="opportunity-grid"><article class="card" data-source="github" data-fit="high" data-search="nousresearch/hermes-agent the agent that grows with you ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 187</span><span>high</span></div>
   <h3>1. <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">NousResearch/hermes-agent</a></h3>
   <p>The agent that grows with you</p>
@@ -44,7 +57,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about NousResearch/hermes-agent, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="github" data-fit="high" data-search="infiniflow/ragflow ragflow is a leading open-source retrieval-augmented generation (rag) engine that fuses cutting-edge rag with agent capabilities to create a superior context layer for llms ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 174</span><span>high</span></div>
   <h3>2. <a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer">infiniflow/ragflow</a></h3>
   <p>RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs</p>
@@ -58,7 +71,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about infiniflow/ragflow, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="github" data-fit="high" data-search="google-gemini/gemini-cli an open-source ai agent that brings the power of gemini directly into your terminal. ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 171</span><span>high</span></div>
   <h3>3. <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noreferrer">google-gemini/gemini-cli</a></h3>
   <p>An open-source AI agent that brings the power of Gemini directly into your terminal.</p>
@@ -72,7 +85,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about google-gemini/gemini-cli, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="github" data-fit="high" data-search="langchain-ai/langchain the agent engineering platform. ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 169</span><span>high</span></div>
   <h3>4. <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noreferrer">langchain-ai/langchain</a></h3>
   <p>The agent engineering platform.</p>
@@ -86,7 +99,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about langchain-ai/langchain, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="github" data-fit="high" data-search="browser-use/browser-use 🌐 make websites accessible for ai agents. automate tasks online with ease. ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 165</span><span>high</span></div>
   <h3>5. <a href="https://github.com/browser-use/browser-use" target="_blank" rel="noreferrer">browser-use/browser-use</a></h3>
   <p>🌐 Make websites accessible for AI agents. Automate tasks online with ease.</p>
@@ -100,7 +113,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about browser-use/browser-use, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="github" data-fit="high" data-search="affaan-m/ecc the agent harness performance optimization system. skills, instincts, memory, security, and research-first development for claude code, codex, opencode, cursor and beyond. ai-agents tech explainer / developer educator">
   <div class="meta"><span>github</span><span>Score 164</span><span>high</span></div>
   <h3>6. <a href="https://github.com/affaan-m/ECC" target="_blank" rel="noreferrer">affaan-m/ECC</a></h3>
   <p>The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.</p>
@@ -114,7 +127,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about affaan-m/ECC, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="hn" data-fit="high" data-search="ask hn: what is your (ai) dev tech stack / workflow? ask hn: what is your (ai) dev tech stack / workflow? creator tools ai workflow creator">
   <div class="meta"><span>hn</span><span>Score 131</span><span>high</span></div>
   <h3>7. <a href="https://news.ycombinator.com/item?id=48413629" target="_blank" rel="noreferrer">Ask HN: What is your (AI) dev tech stack / workflow?</a></h3>
   <p>Ask HN: What is your (AI) dev tech stack / workflow?</p>
@@ -128,7 +141,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="hn" data-fit="high" data-search="ask hn: why is the hn crowd so anti-ai? ask hn: why is the hn crowd so anti-ai? creator tools ai workflow creator">
   <div class="meta"><span>hn</span><span>Score 119</span><span>high</span></div>
   <h3>8. <a href="https://news.ycombinator.com/item?id=48420827" target="_blank" rel="noreferrer">Ask HN: Why is the HN crowd so anti-AI?</a></h3>
   <p>Ask HN: Why is the HN crowd so anti-AI?</p>
@@ -142,7 +155,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Ask HN: Why is the HN crowd so anti-AI?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="hn" data-fit="high" data-search="show hn: persist – an ai agent that follows up accrued channels till they reply show hn: persist – an &lt;em&gt;ai&lt;/em&gt; &lt;em&gt;agent&lt;/em&gt; that follows up accrued channels till they reply ai agents tech explainer / developer educator">
   <div class="meta"><span>hn</span><span>Score 95</span><span>high</span></div>
   <h3>9. <a href="https://persist.chat" target="_blank" rel="noreferrer">Show HN: Persist – an AI agent that follows up accrued channels till they reply</a></h3>
   <p>Show HN: Persist – an &lt;em&gt;AI&lt;/em&gt; &lt;em&gt;agent&lt;/em&gt; that follows up accrued channels till they reply</p>
@@ -156,7 +169,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Show HN: Persist – an AI agent that follows up accrued channels till they reply, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="hn" data-fit="high" data-search="what do you do when ai is working the project and sit down? [video] what do you do when &lt;em&gt;ai&lt;/em&gt; is working the project and sit down? [&lt;em&gt;video&lt;/em&gt;] ai video ai workflow creator">
   <div class="meta"><span>hn</span><span>Score 93</span><span>high</span></div>
   <h3>10. <a href="https://www.youtube.com/watch?v=X99Rq2wIm4o" target="_blank" rel="noreferrer">What do you do when AI is working the project and sit down? [video]</a></h3>
   <p>What do you do when &lt;em&gt;AI&lt;/em&gt; is working the project and sit down? [&lt;em&gt;video&lt;/em&gt;]</p>
@@ -170,7 +183,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about What do you do when AI is working the project and sit down? [video], showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="arxiv" data-fit="high" data-search="handoff: humanoid agentic task-space whole-body control via distilled complementary teachers for a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. we instead propose a compact, explicit interface that creator economy generative ai tech explainer / developer educator">
   <div class="meta"><span>arxiv</span><span>Score 81</span><span>high</span></div>
   <h3>11. <a href="http://arxiv.org/abs/2606.06493v1" target="_blank" rel="noreferrer">HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers</a></h3>
   <p>For a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. Existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. We instead propose a compact, explicit interface that</p>
@@ -184,7 +197,7 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article>
-<article class="card">
+<article class="card" data-source="arxiv" data-fit="high" data-search="operation-guided progressive human-to-ai text transformation benchmark for multi-granularity ai-text detection as ai writing assistants become increasingly integrated into real-world drafting and revision workflows, many documents are no longer purely human-written or ai-generated, but instead result from progressive human-ai co-editing. however, existing ai-text detection benchmarks largely focus on final outputs and provide limited understanding of how ai authorshi ai agents content creation ai workflow creator">
   <div class="meta"><span>arxiv</span><span>Score 81</span><span>high</span></div>
   <h3>12. <a href="http://arxiv.org/abs/2606.06481v1" target="_blank" rel="noreferrer">Operation-Guided Progressive Human-to-AI Text Transformation Benchmark for Multi-Granularity AI-Text Detection</a></h3>
   <p>As AI writing assistants become increasingly integrated into real-world drafting and revision workflows, many documents are no longer purely human-written or AI-generated, but instead result from progressive human-AI co-editing. However, existing AI-text detection benchmarks largely focus on final outputs and provide limited understanding of how AI authorshi</p>
@@ -198,6 +211,16 @@
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Operation-Guided Progressive Human-to-AI Text Transformation Benchmark for Multi-Granularity AI-Text Detection, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
   </details>
 </article></section>
+    <section class="handoff">
+      <div>
+        <h2>Next buyer-facing action</h2>
+        <p>Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.</p>
+      </div>
+      <div class="handoff-links">
+        <a class="action primary" href="./launch-plan.md">Launch plan</a>
+        <a class="action" href="./sales-page-copy.md">Sales copy</a>
+      </div>
+    </section>
   </main>
 </body>
 </html>

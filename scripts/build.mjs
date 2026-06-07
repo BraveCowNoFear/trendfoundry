@@ -133,7 +133,7 @@ Source: ${mdLink(winner)}
 
 const cards = top
   .map(
-    (item, index) => `<article class="card">
+    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span></div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
@@ -150,6 +150,10 @@ const cards = top
   )
   .join("\n");
 
+const sourceButtons = ["all", ...Object.keys(bySource)]
+  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? "All" : source}</button>`)
+  .join("");
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -157,6 +161,7 @@ const html = `<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <header class="topbar">
@@ -164,6 +169,10 @@ const html = `<!doctype html>
       <p class="eyebrow">TrendFoundry</p>
       <h1>Creator intelligence packs for AI and developer video channels</h1>
       <p class="sub">Fresh public signals from GitHub, Hacker News, and arXiv converted into ranked Bilibili/YouTube ideas with titles, hooks, outlines, and thumbnail prompts.</p>
+      <div class="hero-actions">
+        <a class="action primary" href="./daily-brief.md">Download sample brief</a>
+        <a class="action" href="./ready-to-record-script.md">Open script</a>
+      </div>
     </div>
     <aside>
       <span>${top.length} opportunities</span>
@@ -182,7 +191,25 @@ const html = `<!doctype html>
         <small>starter subscription target</small>
       </div>
     </section>
-    <section class="grid">${cards}</section>
+    <section class="toolbelt" aria-label="Opportunity controls">
+      <div class="search-wrap">
+        <label for="opportunity-search">Search opportunities</label>
+        <input id="opportunity-search" type="search" placeholder="agent, video, workflow, arxiv...">
+      </div>
+      <div class="filters" aria-label="Source filters">${sourceButtons}</div>
+      <p id="result-count" class="result-count">${top.length} visible opportunities</p>
+    </section>
+    <section class="grid" id="opportunity-grid">${cards}</section>
+    <section class="handoff">
+      <div>
+        <h2>Next buyer-facing action</h2>
+        <p>Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.</p>
+      </div>
+      <div class="handoff-links">
+        <a class="action primary" href="./launch-plan.md">Launch plan</a>
+        <a class="action" href="./sales-page-copy.md">Sales copy</a>
+      </div>
+    </section>
   </main>
 </body>
 </html>`;
@@ -196,6 +223,7 @@ const css = `:root {
   --panel: #ffffff;
   --accent: #0f766e;
   --accent-2: #b45309;
+  --accent-soft: #e7f4f2;
 }
 
 * { box-sizing: border-box; }
@@ -234,6 +262,31 @@ h1 {
   font-size: 18px;
   line-height: 1.55;
 }
+.hero-actions,
+.handoff-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.action.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
 .topbar aside {
   align-self: end;
   display: grid;
@@ -268,6 +321,59 @@ main {
 }
 .price span { display: block; font-size: 30px; font-weight: 800; }
 .price small { color: var(--muted); }
+.toolbelt {
+  display: grid;
+  grid-template-columns: minmax(220px, 360px) minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+.search-wrap {
+  display: grid;
+  gap: 6px;
+}
+.search-wrap label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+input[type="search"] {
+  min-height: 42px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 11px;
+  color: var(--ink);
+  font: inherit;
+  background: #fff;
+}
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-button {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 11px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.filter-button.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.result-count {
+  margin: 0 0 10px;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 13px;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -279,6 +385,9 @@ main {
   border-radius: 8px;
   padding: 18px;
   min-height: 320px;
+}
+.card.hidden {
+  display: none;
 }
 .meta {
   display: flex;
@@ -303,18 +412,74 @@ main {
 }
 summary { cursor: pointer; font-weight: 700; }
 li { margin: 6px 0; }
+.handoff {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.handoff h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+.handoff p {
+  margin: 0;
+  color: var(--muted);
+}
 @media (max-width: 960px) {
   .topbar,
   .offer,
+  .toolbelt,
+  .handoff,
   .grid {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .result-count { margin: 0; white-space: normal; }
+  .filter-button { flex: 1 1 auto; }
 }
+`;
+
+const app = `const cards = [...document.querySelectorAll(".card")];
+const buttons = [...document.querySelectorAll("[data-source-filter]")];
+const search = document.querySelector("#opportunity-search");
+const resultCount = document.querySelector("#result-count");
+let activeSource = "all";
+
+function applyFilters() {
+  const query = (search.value || "").trim().toLowerCase();
+  let visible = 0;
+  for (const card of cards) {
+    const sourceMatch = activeSource === "all" || card.dataset.source === activeSource;
+    const textMatch = !query || card.dataset.search.includes(query);
+    const show = sourceMatch && textMatch;
+    card.classList.toggle("hidden", !show);
+    if (show) visible += 1;
+  }
+  resultCount.textContent = visible === 1 ? "1 visible opportunity" : visible + " visible opportunities";
+}
+
+for (const button of buttons) {
+  button.addEventListener("click", () => {
+    activeSource = button.dataset.sourceFilter;
+    for (const other of buttons) other.classList.toggle("active", other === button);
+    applyFilters();
+  });
+}
+
+search.addEventListener("input", applyFilters);
 `;
 
 await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(docsDir, "ready-to-record-script.md"), script, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
+await writeFile(path.join(siteDir, "app.js"), app, "utf8");
+await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
+await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
+await writeFile(path.join(siteDir, "launch-plan.md"), await readFile(path.join(docsDir, "launch-plan.md"), "utf8"), "utf8");
+await writeFile(path.join(siteDir, "sales-page-copy.md"), await readFile(path.join(docsDir, "sales-page-copy.md"), "utf8"), "utf8");
 console.log(`Built ${top.length} cards.`);
