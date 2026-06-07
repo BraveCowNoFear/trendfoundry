@@ -60,15 +60,11 @@ const sourceMix = Object.entries(bySource)
 const sourceMixZh = Object.entries(bySource)
   .map(([source, count]) => `${source} ${count} 个`)
   .join(" / ");
-const sourceBars = Object.entries(bySource)
-  .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
-  .join("");
 const sourceLegend = Object.entries(bySource)
   .map(([source, count]) => `<span>${escapeHtml(source)} <strong>${count}</strong></span>`)
   .join("");
 const sourceMixPanel = `<div class="source-mix-panel">
         ${dual("Source mix", "来源组合", "p", ' class="source-mix-label"')}
-        <div class="source-bars" aria-hidden="true">${sourceBars}</div>
         <div class="source-legend" aria-label="Source mix">${sourceLegend}</div>
       </div>`;
 const publicSample = top.slice(0, 3);
@@ -1304,22 +1300,6 @@ h1 {
   color: var(--muted);
   font-size: 12px;
 }
-.source-bars {
-  display: flex;
-  height: 5px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: #edf1f4;
-}
-.source-bars span {
-  display: block;
-  width: var(--w);
-  background: var(--accent);
-}
-.source-bars span:nth-child(2) { background: #46515c; }
-.source-bars span:nth-child(3) { background: #8a5a18; }
-.source-bars span:nth-child(4) { background: #8b949e; }
-.source-bars span:nth-child(5) { background: #b6bdc5; }
 main {
   padding: 24px clamp(20px, 5vw, 72px) 60px;
 }
@@ -1346,7 +1326,7 @@ main {
   text-align: right;
   color: var(--accent-2);
 }
-.price span { display: block; font-size: 32px; font-weight: 850; }
+.price > span { display: block; font-size: 32px; font-weight: 850; }
 .price small { color: var(--muted); }
 .pricing,
 .sample-preview,
