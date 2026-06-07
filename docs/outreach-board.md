@@ -14,16 +14,16 @@ Goal: get 5 replies and 1 paid USD 9 sample order.
 | 8 | youtube | AI Master | AI Agents Explained: How to Create and Use AI Agents in 2026 | not_contacted | 2026-06-10 |
 | 9 | youtube | Tina Huang | Local AI Agents In 26 Minutes | not_contacted | 2026-06-10 |
 | 10 | youtube | Futurepedia and AI Agent Lab | From Zero to Your First AI Agent in 25 Minutes (No Coding) | not_contacted | 2026-06-10 |
-| 11 | youtube | IBM Technology and IBM Developer | What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop | not_contacted | 2026-06-10 |
-| 12 | bilibili | Youtube金融精選 | 【双语】特朗普：美国政府将研究入股 AI 公司，民众能否分一杯羹？ | not_contacted | 2026-06-10 |
-| 13 | bilibili | Youtube金融精選 | 【双语】特朗普宣布：美国民众即将成为 AI 公司合伙人？ | not_contacted | 2026-06-10 |
-| 14 | youtube | Dan Koe | The creator economy is dying thanks to AI | not_contacted | 2026-06-10 |
-| 15 | bilibili | 郭宏志-老郭 | 2026年 AI 编程工具第一梯队：Claude Code、Cursor、Codex、Trae、Qoder、CodeBuddy六大工具横评 | not_contacted | 2026-06-10 |
-| 16 | bilibili | Youtube金融精選 | 【双语】 AI 正在改变就业市场！贝莱德首席：这些行业即将被颠覆 | not_contacted | 2026-06-10 |
-| 17 | bilibili | Youtube金融精選 | 【双语】特朗普提议：美国政府入股顶尖 AI 实验室 | not_contacted | 2026-06-10 |
-| 18 | bilibili | Youtube金融精選 | 【双语】科技股震荡背后： AI 投资还能稳吗？ / Market Talk 2026/06/05 / 路透社 | not_contacted | 2026-06-10 |
-| 19 | bilibili | AI学习课堂 | 翻遍整个B站，这绝对是2026讲的最好的 AI Agent 智能体教程 ，手把手教你从0基础开始搭建企业级Agent 智能体 ，全程干货无废话，让你少走99%的弯路！ | not_contacted | 2026-06-10 |
-| 20 | bilibili | Youtube金融精選 | 【双语】你知道 AI 、证券欺诈和电影之间的联系吗？彭博问答挑战来了！ | not_contacted | 2026-06-10 |
+| 11 | youtube | Github Awesome | GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord | not_contacted | 2026-06-10 |
+| 12 | bilibili | 依然杏压抑 | 【赛博古董】21年前 YouTube 被上传的第一个视频 | not_contacted | 2026-06-10 |
+| 13 | bilibili | 声译看世界 | [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI | not_contacted | 2026-06-10 |
+| 14 | bilibili | 杨中科 | 用 AI 重构一个.NET开源项目的经历分享 | not_contacted | 2026-06-10 |
+| 15 | youtube | Nick Saraev | AI Agents Full Course 2026: Master Agentic AI (2 Hours) | not_contacted | 2026-06-10 |
+| 16 | bilibili | Youtube金融精選 | 【双语】特朗普：美国政府将研究入股 AI 公司，民众能否分一杯羹？ | not_contacted | 2026-06-10 |
+| 17 | bilibili | AI技术投降派 | Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 | not_contacted | 2026-06-10 |
+| 18 | bilibili | Youtube金融精選 | 【双语】纳斯达克暴跌4.6%， AI 引发科技股抛售潮 / Closing Bell 2026/06/05 / 彭博社 | not_contacted | 2026-06-10 |
+| 19 | bilibili | Youtube金融精選 | 【双语】特朗普提议：美国政府入股顶尖 AI 实验室 | not_contacted | 2026-06-10 |
+| 20 | bilibili | Youtube金融精選 | 【双语】科技股震荡背后： AI 投资还能稳吗？ / Market Talk 2026/06/05 / 路透社 | not_contacted | 2026-06-10 |
 
 ## Message Template
 
