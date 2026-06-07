@@ -7,9 +7,9 @@ Goal: get 5 replies and 1 paid USD 9 sample order.
 | 1 | youtube | Youri van Hofwegen | The Only AI Video Prompt Generator You'll Ever Need | not_contacted | 2026-06-10 |
 | 2 | youtube | Tao Prompts | The ONLY 3 Tools You Need to Create ANY AI Video | not_contacted | 2026-06-10 |
 | 3 | youtube | Youri van Hofwegen | Best AI Video Agents in 2026 (Most Realistic) | not_contacted | 2026-06-10 |
-| 4 | youtube | Youri van Hofwegen | EXACTLY How to Make an AI Short Film (Full Workflow) | not_contacted | 2026-06-10 |
-| 5 | bilibili | AI图生视频工作流 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | not_contacted | 2026-06-10 |
-| 6 | youtube | Mira AI | I Fully Automated Video Editing With AI (here’s how) | not_contacted | 2026-06-10 |
+| 4 | bilibili | AI图生视频工作流 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | not_contacted | 2026-06-10 |
+| 5 | youtube | Mira AI | I Fully Automated Video Editing With AI (here’s how) | not_contacted | 2026-06-10 |
+| 6 | youtube | Paul Ponna Official | Create Unlimited Viral Animated With AI (Full Workflow) | not_contacted | 2026-06-10 |
 | 7 | bilibili | PR教程- | 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | not_contacted | 2026-06-10 |
 | 8 | youtube | AI Master | AI Filmmaking Workflow: How To Create AI Videos With Full Automation | not_contacted | 2026-06-10 |
 | 9 | youtube | ManuAGI - AutoGPT Tutorials | Top Open-Source GitHub Projects : Hermes Agent, CopilotKit, Cosmos, PaddleOCR & MemPalace #263 | not_contacted | 2026-06-10 |
@@ -20,10 +20,10 @@ Goal: get 5 replies and 1 paid USD 9 sample order.
 | 14 | youtube | Github Awesome | GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord | not_contacted | 2026-06-10 |
 | 15 | bilibili | 你的米老鼠大爹 | 当我尝试下载 YouTube 时 | not_contacted | 2026-06-10 |
 | 16 | bilibili | Odoo老杨 | 开源 ERP 进阶：基于 ThinkAI Agent 打造 Odoo 全场景自动化系统，可支持国产开源大模型！ | not_contacted | 2026-06-10 |
-| 17 | youtube | IBM Technology | What is MCP? Integrate AI Agents with Databases & APIs | not_contacted | 2026-06-10 |
+| 17 | bilibili | FastCar冲呀 | 炸裂！ AI 搬运视频！自动下载+翻译+发布，一条龙 | not_contacted | 2026-06-10 |
 | 18 | bilibili | AI技术投降派 | Matt Pocock Skills 开源项目！20K星，解决 Agent 编码四大痛点 | not_contacted | 2026-06-10 |
-| 19 | bilibili | Youtube金融精選 | 【双语】特朗普宣布：美国民众即将成为 AI 公司合伙人？ | not_contacted | 2026-06-10 |
-| 20 | bilibili | Youtube金融精選 | 【双语】特朗普：美国政府将研究入股 AI 公司，民众能否分一杯羹？ | not_contacted | 2026-06-10 |
+| 19 | bilibili | Youtube金融精選 | 【双语】特朗普：美国政府将研究入股 AI 公司，民众能否分一杯羹？ | not_contacted | 2026-06-10 |
+| 20 | bilibili | Youtube金融精選 | 【双语】特朗普提议：美国政府入股顶尖 AI 实验室 | not_contacted | 2026-06-10 |
 
 ## Message Template
 

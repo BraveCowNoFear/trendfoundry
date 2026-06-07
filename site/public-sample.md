@@ -1,6 +1,6 @@
 # TrendFoundry Public Sample
 
-Generated: 2026-06-07T09:41:30.199Z
+Generated: 2026-06-07T10:09:48.622Z
 
 This free sample shows the format and quality bar. The paid issue expands this into 12 ranked opportunities, one ready-to-record script, CSV tables, and delivery notes.
 

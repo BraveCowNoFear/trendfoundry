@@ -1,6 +1,6 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T09:41:30.199Z
+Generated: 2026-06-07T10:09:48.622Z
 
 ## Executive Read
 
@@ -10,7 +10,7 @@ Portfolio source mix among the first 12 opportunities: github: 4, youtube: 2, bi
 
 High-fit opportunities: 11.
 
-Collection health: 1 fresh collection errors, 0 cached fallback items in the displayed portfolio.
+Collection health: 0 fresh collection errors, 0 cached fallback items in the displayed portfolio.
 
 ## Top Opportunities
 
@@ -110,7 +110,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Why it matters: Youri van Hofwegen / 4 days ago / 34,866 views
+- Why it matters: Youri van Hofwegen / 4 days ago / 34,919 views
 - Creator target: AI workflow creator
 - Why now: The Only AI Video Prompt Generator You'll Ever Need is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注
@@ -132,7 +132,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=JQzF5LP4VTs
-- Why it matters: Tao Prompts / 4 days ago / 33,492 views
+- Why it matters: Tao Prompts / 4 days ago / 33,522 views
 - Creator target: AI workflow creator
 - Why now: The ONLY 3 Tools You Need to Create ANY AI Video is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注
@@ -148,7 +148,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 
 ### 7. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
 
-- Score: 133
+- Score: 134
 - Fit: high
 - Source: bilibili / B站AI工作流
 - Freshness: fresh
@@ -214,7 +214,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 
 ### 10. 【赛博古董】21年前 YouTube 被上传的第一个视频
 
-- Score: 123
+- Score: 124
 - Fit: high
 - Source: bilibili / YouTube 创作者 AI
 - Freshness: fresh

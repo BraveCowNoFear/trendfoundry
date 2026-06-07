@@ -1,10 +1,10 @@
 # TrendFoundry Launch Assets
 
-Generated: 2026-06-07T09:41:32.428Z
+Generated: 2026-06-07T10:09:49.872Z
 
 Safety: these are draft assets only. Review before posting or sending. Do not bulk-send identical messages, do not promise views/revenue, and do not ask for payment card details in public replies.
 
-Source snapshot: 2026-06-07T09:41:30.199Z
+Source snapshot: 2026-06-07T10:09:48.622Z
 Top opportunity: NousResearch/hermes-agent
 Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
