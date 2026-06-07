@@ -1,6 +1,6 @@
 # TrendFoundry Weekly Subscription Plan
 
-Generated: 2026-06-07T21:51:18.850Z
+Generated: 2026-06-07T22:05:38.771Z
 
 This turns the USD 19/month weekly proof pack into a repeatable four-week fulfillment plan. It creates reviewable delivery and retention drafts; it does not send messages, collect payment, or upload files.
 

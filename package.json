@@ -30,6 +30,7 @@
     "content-subscription": "node scripts/generate_content_subscription_plan.mjs",
     "content-revenue": "node scripts/generate_content_revenue_model.mjs",
     "content-feedback": "node scripts/generate_content_feedback_loop.mjs",
+    "content-close": "node scripts/generate_content_close_pack.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "visuals": "node scripts/generate_site_visuals.mjs",

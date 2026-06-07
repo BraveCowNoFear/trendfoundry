@@ -1,6 +1,6 @@
 # TrendFoundry Content Feedback Loop
 
-Generated: 2026-06-07T21:51:20.655Z
+Generated: 2026-06-07T22:05:40.228Z
 
 This is the learning loop for first-customer sales. It reads local CRM outputs and optional ignored reply summaries, then turns them into product hypotheses and next feedback questions. It does not expose private replies in public docs.
 

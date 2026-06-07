@@ -1,6 +1,6 @@
 # TrendFoundry Content Product Listing
 
-Generated: 2026-06-07T21:51:18.485Z
+Generated: 2026-06-07T22:05:38.428Z
 
 This is the listing layer for the current buyer content pack. Use it to set up Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Links, Buy Me a Coffee, or manual invoice copy.
 

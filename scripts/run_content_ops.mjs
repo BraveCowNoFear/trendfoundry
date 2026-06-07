@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -65,6 +65,7 @@ const prospectManifest = await readJson("dist/content-prospecting/manifest.json"
 const crmManifest = await readJson("dist/content-sales-crm/manifest.json", {});
 const revenueManifest = await readJson("dist/content-revenue-model/manifest.json", {});
 const feedbackManifest = await readJson("dist/content-feedback-loop/manifest.json", {});
+const closeManifest = await readJson("dist/content-close-pack/manifest.json", {});
 const allSucceeded = steps.every((step) => step.status === "success");
 
 const run = {
@@ -116,6 +117,12 @@ const run = {
       privateReplyRows: feedbackManifest.privateReplyRows,
       categories: feedbackManifest.categories || []
     },
+    closePack: {
+      selectedCount: closeManifest.selectedCount,
+      cleanTextCount: closeManifest.cleanTextCount,
+      needsCleanupCount: closeManifest.needsCleanupCount,
+      offerSkus: closeManifest.offerSkus || []
+    },
     listingSkus: (listing.products || []).map((product) => product.sku),
     sellerOnlyExcluded: buyerManifest.sellerOnlyExcluded || []
   },
@@ -137,7 +144,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, and feedback learning loop without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, and daily close pack without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -158,6 +165,7 @@ ${stepSummary(steps)}
 - CRM: ${crmManifest.count ?? "unknown"} rows, ${crmManifest.dueToday ?? "unknown"} due today, ${crmManifest.dueThisWeek ?? "unknown"} due this week
 - Revenue model: base new MRR USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.new_mrr_usd) ?? "unknown"}, base month-one cash USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.month_one_cash_usd) ?? "unknown"}
 - Feedback loop: ${feedbackManifest.learningCount ?? "unknown"} learnings, ${feedbackManifest.questionCount ?? "unknown"} questions, ${feedbackManifest.privateReplyRows ?? "unknown"} private replies
+- Close pack: ${closeManifest.selectedCount ?? "unknown"} selected, ${closeManifest.cleanTextCount ?? "unknown"} clean, ${closeManifest.needsCleanupCount ?? "unknown"} needing cleanup
 - Listing SKUs: ${((listing.products || []).map((product) => product.sku)).join(", ") || "unknown"}
 - Seller-only exclusions: ${(buyerManifest.sellerOnlyExcluded || []).join(", ") || "unknown"}
 
@@ -178,8 +186,9 @@ ${stepSummary(steps)}
 6. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
 7. Review \`docs/content-revenue-model.md\` for weekly sales targets.
 8. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
-9. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-10. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+9. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
+10. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+11. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });
