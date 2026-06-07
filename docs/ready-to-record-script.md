@@ -10,7 +10,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 
 ## 60-Second Opening
 
-今天这期我不做 AI 工具盘点，也不念 GitHub README。我们只验证一个问题：NousResearch/hermes-agent 到底能不能帮一个真实创作者省时间，还是只是又一个看起来很热闹的项目。
+验证 NousResearch/hermes-agent 的真实价值：它能不能帮创作者省时间，还是只是在趋势榜上看起来热闹。
 
 我会用三个标准判断它：第一，能不能在普通工作流里复现；第二，它替代的是哪一步，而不是笼统说提高效率；第三，如果把它做成内容或产品，观众为什么愿意收藏甚至付费。
 
