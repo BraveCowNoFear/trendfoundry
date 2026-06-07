@@ -11,6 +11,8 @@ Subscribe:
 - RSS: https://bravecownofear.github.io/trendfoundry/feed.xml
 - JSON Feed: https://bravecownofear.github.io/trendfoundry/feed.json
 
+Public archive: https://bravecownofear.github.io/trendfoundry/issues/
+
 ## Run
 
 ```bash
@@ -41,6 +43,7 @@ On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and
 - `site/index.html`: sales/demo page for the current pack.
 - `site/topics/*.html`: SEO landing pages for creator search traffic.
 - `site/feed.xml` and `site/feed.json`: subscription feeds for the current top 12 opportunities.
+- `site/issues/*.html`: durable public issue archive pages for trust, SEO, and repeat inspection.
 - `docs/design-system.md`: minimal design standards for product and delivery assets.
 - `docs/lead-capture.md`: public intake and triage flow for sample-pack requests.
 - `docs/qa.md`: local and online checks for delivery boundaries, visual assets, script quality, and scheduled operations.

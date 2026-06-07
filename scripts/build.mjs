@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const root = process.cwd();
@@ -6,6 +6,8 @@ const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "
 const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
 const topicsDir = path.join(siteDir, "topics");
+const siteIssuesDir = path.join(siteDir, "issues");
+const docsIssuesDir = path.join(docsDir, "issues");
 const contactEmail = "rivan_Britain@outlook.com";
 const publicSiteUrl = "https://bravecownofear.github.io/trendfoundry/";
 const ogImageUrl = `${publicSiteUrl}og-image.png`;
@@ -16,6 +18,8 @@ const issueOrderHref = "https://github.com/BraveCowNoFear/trendfoundry/issues/ne
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 await mkdir(topicsDir, { recursive: true });
+await mkdir(siteIssuesDir, { recursive: true });
+await mkdir(docsIssuesDir, { recursive: true });
 
 function selectPortfolio(items) {
   const quotas = { github: 4, bilibili: 3, youtube: 2, hn: 2, arxiv: 1 };
@@ -536,6 +540,10 @@ function feedDescription(item) {
 
 const feedItems = top.slice(0, 12);
 const feedUpdated = new Date(data.generatedAt).toISOString();
+const issueDate = feedUpdated.slice(0, 10);
+const issueTitle = `TrendFoundry Issue ${issueDate}`;
+const issuePath = `issues/${issueDate}.html`;
+const issueMarkdownPath = `${issueDate}.md`;
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -576,6 +584,150 @@ const jsonFeed = {
     tags: [item.source, item.monetizationFit, item.qualityRisk].filter(Boolean)
   }))
 };
+
+const issueMarkdown = `# ${issueTitle}
+
+Generated: ${data.generatedAt}
+
+This public issue is a durable snapshot of the current TrendFoundry brief. The paid pack adds the buyer-ready CSV, delivery notes, and the full scene-by-scene script.
+
+## Source Mix
+
+${Object.entries(bySource)
+  .map(([source, count]) => `- ${source}: ${count}`)
+  .join("\n")}
+
+## Top Opportunities
+
+${top
+  .map(
+    (item, index) => `### ${index + 1}. ${item.title}
+
+- Score: ${item.score}
+- Source: ${item.source} / ${item.sourceQuery}
+- Fit: ${item.monetizationFit}
+- Quality: ${item.qualityRisk}
+- Link: ${item.url}
+- Hook: ${item.deliverables.hook}
+- Demo angle: ${item.deliverables.demoSteps?.[1] || item.deliverables.whyNow}
+- Limitation: ${item.deliverables.limitation}
+`
+  )
+  .join("\n")}
+
+## Order
+
+- Public sample: ${publicSiteUrl}public-sample.md
+- Ready-to-record script: ${publicSiteUrl}ready-to-record-script.md
+- Request current pack: ${issueOrderHref}
+- Email order: ${contactEmail}
+`;
+
+function issueCards(items) {
+  return items
+    .map(
+      (item, index) => `<article class="issue-card">
+  <p class="topic-rank">#${index + 1} / ${escapeHtml(item.source)} / score ${escapeHtml(item.score)}</p>
+  <h2><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h2>
+  <p>${escapeHtml(item.summary || "No summary available.")}</p>
+  <ul>
+    <li><strong>Hook:</strong> ${escapeHtml(item.deliverables.hook)}</li>
+    <li><strong>Demo angle:</strong> ${escapeHtml(item.deliverables.demoSteps?.[1] || item.deliverables.whyNow)}</li>
+    <li><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</li>
+  </ul>
+</article>`
+    )
+    .join("");
+}
+
+function buildIssuePage() {
+  const body = `<header class="topic-hero">
+  <div class="brandline"><span>TrendFoundry</span><span>Public issue</span></div>
+  <h1>${escapeHtml(issueTitle)}</h1>
+  <p class="sub">A durable public snapshot of 12 source-backed creator opportunities. Use it to inspect proof links, hooks, demo angles, and limitations before requesting the full pack.</p>
+  <div class="hero-actions">
+    <a class="action primary" href="../public-sample.md">View free sample</a>
+    <a class="action" href="../ready-to-record-script.md">Open script</a>
+    <a class="action" href="./index.html">Issue archive</a>
+    <a class="action strong" href="${issueOrderHref}">Request current pack</a>
+  </div>
+</header>
+<main>
+  <section class="issue-summary">
+    <div>
+      <p class="section-label">Snapshot</p>
+      <h2>${escapeHtml(sourceMix)}.</h2>
+    </div>
+    <p>Generated ${escapeHtml(data.generatedAt)}. Source errors: ${escapeHtml(data.errorCount || 0)}. High-fit opportunities: ${escapeHtml(high.length)}.</p>
+  </section>
+  <section class="issue-list">${issueCards(top)}</section>
+  <section class="handoff">
+    <div>
+      <p class="section-label">Paid pack</p>
+      <h2>Want the buyer-ready version?</h2>
+      <p>The paid pack includes CSV, delivery notes, and one ready-to-record scene-by-scene script.</p>
+    </div>
+    <div class="handoff-links">
+      <a class="action primary" href="${issueOrderHref}">Request sample</a>
+      <a class="action" href="${orderHref}">Email order</a>
+    </div>
+  </section>
+</main>`;
+  return pageShell({
+    title: issueTitle,
+    description: "A durable public TrendFoundry issue with source-backed creator opportunities, hooks, demo angles, and limitations.",
+    body,
+    canonicalPath: issuePath
+  });
+}
+
+async function issueArchiveLinks() {
+  const files = new Set([`${issueDate}.html`, "latest.html"]);
+  try {
+    for (const file of await readdir(siteIssuesDir)) {
+      if (/^\d{4}-\d{2}-\d{2}\.html$/.test(file)) files.add(file);
+    }
+  } catch {
+    // Directory is created above, but keep this tolerant for first-run portability.
+  }
+  return [...files]
+    .filter((file) => file !== "latest.html")
+    .sort()
+    .reverse()
+    .map((file) => file.replace(/\.html$/, ""));
+}
+
+function buildIssueArchivePage(slugs) {
+  const links = slugs
+    .map((slug) => `<a class="topic-link" href="./${slug}.html"><span>TrendFoundry Issue ${escapeHtml(slug)}</span><small>Public snapshot with 12 source-backed opportunities, hooks, demo angles, and limitations.</small></a>`)
+    .join("");
+  const body = `<header class="topic-hero">
+  <div class="brandline"><span>TrendFoundry</span><span>Issue archive</span></div>
+  <h1>Public issue archive</h1>
+  <p class="sub">Durable snapshots make the product inspectable, indexable, and easier to trust before a buyer requests the current pack.</p>
+  <div class="hero-actions">
+    <a class="action primary" href="./latest.html">Latest issue</a>
+    <a class="action" href="../feed.xml">RSS feed</a>
+    <a class="action" href="../index.html">Dashboard</a>
+  </div>
+</header>
+<main>
+  <section class="seo-hub" aria-label="Issue archive">
+    <div>
+      <p class="section-label">Archive</p>
+      <h2>${slugs.length} public issue${slugs.length === 1 ? "" : "s"} available.</h2>
+      <p>Each issue keeps source links, creator hooks, demo angles, and limitation notes together as a permanent proof asset.</p>
+    </div>
+    <div class="topic-links">${links}</div>
+  </section>
+</main>`;
+  return pageShell({
+    title: "TrendFoundry public issue archive",
+    description: "Public archive of TrendFoundry creator-intelligence issues.",
+    body,
+    canonicalPath: "issues/"
+  });
+}
 
 const html = `<!doctype html>
 <html lang="en">
@@ -681,6 +833,17 @@ const html = `<!doctype html>
       <div class="feed-actions">
         <a class="action primary" href="./feed.xml">RSS feed</a>
         <a class="action" href="./feed.json">JSON feed</a>
+      </div>
+    </section>
+    <section class="archive-box" aria-label="Public issue archive">
+      <div>
+        <p class="section-label">Archive</p>
+        <h2>Durable public issues build trust before purchase.</h2>
+        <p>Each issue freezes the top 12 opportunities, proof links, hooks, demo angles, and limitations for buyers who want to inspect the track record.</p>
+      </div>
+      <div class="feed-actions">
+        <a class="action primary" href="./issues/latest.html">Latest issue</a>
+        <a class="action" href="./issues/index.html">Issue archive</a>
       </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
@@ -1000,7 +1163,9 @@ main {
 }
 .seo-hub,
 .seo-summary,
-.feed-box {
+.feed-box,
+.archive-box,
+.issue-summary {
   display: grid;
   grid-template-columns: minmax(260px, 0.5fr) minmax(0, 1fr);
   gap: 24px;
@@ -1011,14 +1176,18 @@ main {
 }
 .seo-hub h2,
 .seo-summary h2,
-.feed-box h2 {
+.feed-box h2,
+.archive-box h2,
+.issue-summary h2 {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 1.2;
 }
 .seo-hub p:not(.section-label),
 .seo-summary p,
-.feed-box p:not(.section-label) {
+.feed-box p:not(.section-label),
+.archive-box p:not(.section-label),
+.issue-summary p {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
@@ -1071,6 +1240,28 @@ main {
   padding: 18px;
   background: #fff;
   box-shadow: var(--shadow);
+}
+.issue-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.issue-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.issue-card h2 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  line-height: 1.3;
+}
+.issue-card p,
+.issue-card li {
+  color: var(--muted);
+  line-height: 1.5;
 }
 .topic-rank {
   margin: 0 0 8px;
@@ -1237,8 +1428,11 @@ li { margin: 6px 0; }
   .seo-hub,
   .seo-summary,
   .feed-box,
+  .archive-box,
+  .issue-summary,
   .topic-links,
   .topic-list,
+  .issue-list,
   .toolbelt,
   .handoff,
   .grid {
@@ -1307,6 +1501,11 @@ await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReport, "utf
 await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsv, "utf8");
 await writeFile(path.join(siteDir, "feed.xml"), rssFeed, "utf8");
 await writeFile(path.join(siteDir, "feed.json"), JSON.stringify(jsonFeed, null, 2), "utf8");
+await writeFile(path.join(docsIssuesDir, issueMarkdownPath), issueMarkdown, "utf8");
+await writeFile(path.join(siteIssuesDir, `${issueDate}.html`), buildIssuePage(), "utf8");
+await writeFile(path.join(siteIssuesDir, "latest.html"), buildIssuePage(), "utf8");
+const issueSlugs = await issueArchiveLinks();
+await writeFile(path.join(siteIssuesDir, "index.html"), buildIssueArchivePage(issueSlugs), "utf8");
 for (const topic of topicDefinitions) {
   await writeFile(path.join(topicsDir, `${topic.slug}.html`), buildTopicPage(topic), "utf8");
 }
@@ -1323,6 +1522,9 @@ const sitemapUrls = [
   "sales-page-copy.md",
   "feed.xml",
   "feed.json",
+  "issues/",
+  "issues/latest.html",
+  issuePath,
   ...topicDefinitions.map((topic) => `topics/${topic.slug}.html`)
 ];
 await writeFile(

@@ -21,6 +21,8 @@ Verified public paths:
 - `https://bravecownofear.github.io/trendfoundry/sitemap.xml`
 - `https://bravecownofear.github.io/trendfoundry/feed.xml`
 - `https://bravecownofear.github.io/trendfoundry/feed.json`
+- `https://bravecownofear.github.io/trendfoundry/issues/`
+- `https://bravecownofear.github.io/trendfoundry/issues/latest.html`
 - `https://bravecownofear.github.io/trendfoundry/topics/ai-video-ideas.html`
 - `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
 
@@ -49,6 +51,17 @@ The build output includes:
 - `site/feed.json`: JSON Feed 1.1 mirror for tools that prefer structured feed ingestion.
 
 Both feeds include proof links, creator hooks, demo angles, limitations, and the current sample-pack request CTA.
+
+## Issue Archive
+
+The build output includes:
+
+- `site/issues/latest.html`: the newest public issue.
+- `site/issues/<YYYY-MM-DD>.html`: a dated immutable public issue snapshot.
+- `site/issues/index.html`: archive index.
+- `docs/issues/<YYYY-MM-DD>.md`: Markdown mirror for repository readers.
+
+The scheduled operations workflow explicitly stages `docs/issues` and `site/issues` so new daily issue files are committed without staging ignored lead, raw, log, or dist files.
 
 ## Pre-Publish Checklist
 

@@ -31,6 +31,10 @@ const seoTopicSlugs = [
   "developer-trend-brief"
 ];
 
+function issueSlugFromGeneratedAt(value) {
+  return new Date(value).toISOString().slice(0, 10);
+}
+
 const checks = [];
 
 function pass(name, detail = "") {
@@ -92,11 +96,13 @@ async function checkLocal() {
   assertCheck("daily ops workflow has schedule", dailyOpsWorkflow.includes("schedule:") && dailyOpsWorkflow.includes("15 7 * * *"));
   assertCheck("daily ops workflow has manual dispatch", dailyOpsWorkflow.includes("workflow_dispatch:"));
   assertCheck("daily ops workflow can commit tracked files", dailyOpsWorkflow.includes("contents: write") && dailyOpsWorkflow.includes("git add -u"));
+  assertCheck("daily ops workflow can add issue archives", dailyOpsWorkflow.includes("git add docs/issues site/issues"));
   assertCheck("daily ops workflow can deploy pages", dailyOpsWorkflow.includes("pages: write") && dailyOpsWorkflow.includes("actions/deploy-pages"));
   assertCheck("daily ops workflow runs operate", dailyOpsWorkflow.includes("npm run operate"));
   assertCheck("daily ops workflow avoids ignored lead docs", !dailyOpsWorkflow.includes("git add ."));
 
   const latest = await readJson(path.join(root, "data", "latest.json"));
+  const issueSlug = issueSlugFromGeneratedAt(latest.generatedAt);
   assertCheck("latest data item count", (latest.totalItems || 0) >= 50, String(latest.totalItems || 0));
   assertCheck("latest displayed source errors <= 3", (latest.errorCount || 0) <= 3, String(latest.errorCount || 0));
 
@@ -116,6 +122,7 @@ async function checkLocal() {
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
   assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
+  assertCheck("site has issue archive box", siteIndex.includes('class="archive-box"') && siteIndex.includes("Latest issue") && siteIndex.includes("Issue archive"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
 
@@ -134,6 +141,16 @@ async function checkLocal() {
   assertCheck("robots points to sitemap", robots.includes(`Sitemap: ${publicBase}sitemap.xml`));
   assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
   assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
+  assertCheck("sitemap includes issue archive", sitemap.includes(`${publicBase}issues/`) && sitemap.includes(`${publicBase}issues/latest.html`) && sitemap.includes(`${publicBase}issues/${issueSlug}.html`));
+
+  const issueMarkdown = await readText(path.join(root, "docs", "issues", `${issueSlug}.md`));
+  const issuePage = await readText(path.join(root, "site", "issues", `${issueSlug}.html`));
+  const latestIssuePage = await readText(path.join(root, "site", "issues", "latest.html"));
+  const issueIndexPage = await readText(path.join(root, "site", "issues", "index.html"));
+  assertCheck("docs issue markdown exists", issueMarkdown.includes(`# TrendFoundry Issue ${issueSlug}`) && (issueMarkdown.match(/^### /gm) || []).length === 12);
+  assertCheck("site issue page has 12 cards", (issuePage.match(/class="issue-card"/g) || []).length === 12);
+  assertCheck("site latest issue mirrors issue page", latestIssuePage.includes(`TrendFoundry Issue ${issueSlug}`) && (latestIssuePage.match(/class="issue-card"/g) || []).length === 12);
+  assertCheck("site issue archive index links current issue", issueIndexPage.includes(`./${issueSlug}.html`) && issueIndexPage.includes("Latest issue"));
 
   const rss = await readText(path.join(root, "site", "feed.xml"));
   const jsonFeed = await readJson(path.join(root, "site", "feed.json"));
@@ -256,6 +273,7 @@ async function checkOnline() {
   assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
   assertCheck("online sitemap has SEO topics", seoTopicSlugs.every((slug) => sitemap.text.includes(`${publicBase}topics/${slug}.html`)));
   assertCheck("online sitemap has feeds", sitemap.text.includes(`${publicBase}feed.xml`) && sitemap.text.includes(`${publicBase}feed.json`));
+  assertCheck("online sitemap has issue archive", sitemap.text.includes(`${publicBase}issues/`) && sitemap.text.includes(`${publicBase}issues/latest.html`));
 
   const topic = await fetchText(`${publicBase}topics/ai-video-ideas.html?qa=${Date.now()}`);
   assertCheck("online SEO topic HTTP 200", topic.status === 200, String(topic.status));
@@ -273,6 +291,14 @@ async function checkOnline() {
   } catch (error) {
     assertCheck("online JSON feed parses", false, error.message);
   }
+
+  const latestIssue = await fetchText(`${publicBase}issues/latest.html?qa=${Date.now()}`);
+  assertCheck("online latest issue HTTP 200", latestIssue.status === 200, String(latestIssue.status));
+  assertCheck("online latest issue has 12 cards", (latestIssue.text.match(/class="issue-card"/g) || []).length === 12);
+
+  const issueIndex = await fetchText(`${publicBase}issues/?qa=${Date.now()}`);
+  assertCheck("online issue archive index HTTP 200", issueIndex.status === 200, String(issueIndex.status));
+  assertCheck("online issue archive index has latest link", issueIndex.text.includes("Latest issue") && issueIndex.text.includes("Public issue archive"));
 }
 
 function markdownReport() {
