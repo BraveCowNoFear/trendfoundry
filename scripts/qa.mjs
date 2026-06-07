@@ -117,6 +117,9 @@ async function checkLocal() {
   const siteIndex = await readText(path.join(root, "site", "index.html"));
   assertCheck("site has email order CTA", siteIndex.includes("Email order"));
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));
+  assertCheck("site has language switch", siteIndex.includes('data-language-toggle="en"') && siteIndex.includes('data-language-toggle="zh"'));
+  assertCheck("site has Chinese product copy", siteIndex.includes("给 AI 和开发者视频频道的创作者情报包") && siteIndex.includes("邮件下单"));
+  assertCheck("site card copy is localized", siteIndex.includes("为什么现在") && siteIndex.includes("制作大纲") && siteIndex.includes("B 站角度"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
@@ -125,6 +128,9 @@ async function checkLocal() {
   assertCheck("site has issue archive box", siteIndex.includes('class="archive-box"') && siteIndex.includes("Latest issue") && siteIndex.includes("Issue archive"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
+  const appJs = await readText(path.join(root, "site", "app.js"));
+  assertCheck("site app persists language choice", appJs.includes("trendfoundry-language") && appJs.includes("setLanguage"));
+  assertCheck("site app localizes result count", appJs.includes("个可见机会") && appJs.includes("visible opportunity"));
 
   for (const slug of seoTopicSlugs) {
     const topicFile = path.join(root, "site", "topics", `${slug}.html`);

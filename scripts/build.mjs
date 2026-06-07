@@ -55,6 +55,9 @@ const bySource = top.reduce((acc, item) => {
 const sourceMix = Object.entries(bySource)
   .map(([source, count]) => `${source} ${count}`)
   .join(" / ");
+const sourceMixZh = Object.entries(bySource)
+  .map(([source, count]) => `${source} ${count} 个`)
+  .join(" / ");
 const sourceBars = Object.entries(bySource)
   .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
   .join("");
@@ -63,67 +66,90 @@ const publicSample = top.slice(0, 3);
 const pricingTiers = [
   {
     name: "Sample issue",
+    nameZh: "单期样品",
     price: "$9",
     cadence: "one-off",
+    cadenceZh: "一次性",
     bestFor: "Test whether the brief fits your channel before subscribing.",
+    bestForZh: "先测试这份情报包是否适合你的频道，再决定是否订阅。",
     includes: ["12 ranked opportunities", "1 ready-to-record script", "CSV opportunity table", "Quality-risk notes"],
+    includesZh: ["12 个排序后的选题机会", "1 份可直接录制的脚本", "CSV 机会表", "质量风险备注"],
     action: "Request sample",
+    actionZh: "申请样品",
     href: issueOrderHref,
     featured: false
   },
   {
     name: "Weekly brief",
+    nameZh: "周更情报",
     price: "$19",
     cadence: "per month",
+    cadenceZh: "每月",
     bestFor: "Creators who need a dependable weekly topic pipeline.",
+    bestForZh: "适合需要稳定周更选题管线的创作者。",
     includes: ["Weekly 12-item issue", "Fresh source mix", "Bilibili + YouTube title angles", "Recording outline per item"],
+    includesZh: ["每周 12 条机会", "新鲜来源组合", "B 站 + YouTube 标题角度", "每条都有录制大纲"],
     action: "Start weekly",
+    actionZh: "开始周更",
     href: orderHref,
     featured: true
   },
   {
     name: "Custom niche",
+    nameZh: "垂直定制",
     price: "$49",
     cadence: "per month",
+    cadenceZh: "每月",
     bestFor: "Teams focused on one narrow audience or technical vertical.",
+    bestForZh: "适合聚焦单一受众或技术垂类的小团队。",
     includes: ["Custom source queries", "Niche-specific ranking", "Stricter quality filtering", "Lead/outreach angle notes"],
+    includesZh: ["定制来源查询", "垂类专属排序", "更严格质量过滤", "线索/外联角度备注"],
     action: "Ask for custom",
+    actionZh: "咨询定制",
     href: issueOrderHref,
     featured: false
   }
 ];
 
+function dual(en, zh, tag = "span", attrs = "") {
+  return `<${tag}${attrs} data-i18n-en="${escapeHtml(en)}" data-i18n-zh="${escapeHtml(zh)}">${escapeHtml(en)}</${tag}>`;
+}
+
+function langAttr(en, zh, name = "placeholder") {
+  return `data-i18n-${name}-en="${escapeHtml(en)}" data-i18n-${name}-zh="${escapeHtml(zh)}" ${name}="${escapeHtml(en)}"`;
+}
+
 const pricingCards = pricingTiers
   .map(
     (tier) => `<article class="tier${tier.featured ? " featured" : ""}">
   <div>
-    <p class="tier-kicker">${escapeHtml(tier.cadence)}</p>
-    <h3>${escapeHtml(tier.name)}</h3>
+    ${dual(tier.cadence, tier.cadenceZh, "p", ' class="tier-kicker"')}
+    ${dual(tier.name, tier.nameZh, "h3")}
     <p class="tier-price">${escapeHtml(tier.price)}</p>
-    <p>${escapeHtml(tier.bestFor)}</p>
+    ${dual(tier.bestFor, tier.bestForZh, "p")}
   </div>
-  <ul>${tier.includes.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
-  <a class="action${tier.featured ? " primary" : ""}" href="${tier.href}">${escapeHtml(tier.action)}</a>
+  <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
+  <a class="action${tier.featured ? " primary" : ""}" href="${tier.href}">${dual(tier.action, tier.actionZh)}</a>
 </article>`
   )
   .join("");
 
 const deliveryItems = [
-  ["Proof links", "Every idea keeps the original public source attached."],
-  ["Recordable angle", "Titles, hook, outline, demo step, and limitation are generated together."],
-  ["Quality control", "Hype, rights-risk, and too-broad signals are flagged before they reach the display pack."],
-  ["No-backend intake", "GitHub Issue Form and email order paths work before payment automation is connected."]
+  ["Proof links", "来源链接", "Every idea keeps the original public source attached.", "每个选题都保留原始公开来源，方便买家核验。"],
+  ["Recordable angle", "可录制角度", "Titles, hook, outline, demo step, and limitation are generated together.", "标题、钩子、大纲、演示步骤和限制说明一起生成。"],
+  ["Quality control", "质量控制", "Hype, rights-risk, and too-broad signals are flagged before they reach the display pack.", "炒作、版权风险和过宽泛信号会在进入展示包前被标记。"],
+  ["No-backend intake", "轻量接单", "GitHub Issue Form and email order paths work before payment automation is connected.", "在支付自动化接入前，GitHub 表单和邮件下单路径已经可用。"]
 ];
 const deliveryChecklist = deliveryItems
-  .map(([label, text]) => `<li><strong>${escapeHtml(label)}</strong><span>${escapeHtml(text)}</span></li>`)
+  .map(([label, labelZh, text, textZh]) => `<li><strong>${dual(label, labelZh)}</strong>${dual(text, textZh, "span")}</li>`)
   .join("");
 const socialProof = `<section class="visual-proof" aria-label="Share preview">
       <div>
-        <p class="section-label">Share preview</p>
-        <h2>A cleaner link card for outreach, checkout pages, and social posts.</h2>
-        <p>Every buyer-facing link should explain the product before anyone clicks through. This preview image carries the offer, source mix, and no-hype positioning.</p>
+        ${dual("Share preview", "分享预览", "p", ' class="section-label"')}
+        ${dual("A cleaner link card for outreach, checkout pages, and social posts.", "给外联、收款页和社交动态准备一张更清楚的链接卡片。", "h2")}
+        ${dual("Every buyer-facing link should explain the product before anyone clicks through. This preview image carries the offer, source mix, and no-hype positioning.", "每个面向买家的链接都应该在点击前说明产品价值。这张预览图同时承载报价、来源组合和不夸张的定位。", "p")}
       </div>
-      <img src="./og-image.png" alt="TrendFoundry social preview showing source-backed creator intelligence metrics" width="1200" height="630">
+      <img src="./og-image.png" alt="TrendFoundry social preview" width="1200" height="630">
     </section>`;
 
 function csvEscape(value) {
@@ -367,62 +393,112 @@ ${fullScriptSections(winner)}
 如果你想要这类 AI/开发者创作选题包，我会每周整理 12 个有来源、有演示角度、有标题和脚本结构的机会。你只需要选择最适合自己频道的那一个开始录。
 `;
 
+function fitLabel(value, lang = "en") {
+  const labels = {
+    high: { en: "high", zh: "高匹配" },
+    medium: { en: "medium", zh: "中匹配" },
+    low: { en: "low", zh: "低匹配" }
+  };
+  return labels[value]?.[lang] || value || "";
+}
+
+function englishOutline(item) {
+  return [
+    `Open with the audience problem behind ${item.title}.`,
+    "Run the smallest reproducible test: install, input, output.",
+    "Compare the workflow before and after the tool.",
+    "Turn the finding into a content angle, template, or checklist.",
+    "Close with one practical next step for the viewer."
+  ];
+}
+
+function zhWhyNow(item) {
+  return `${item.title} 正出现在 ${item.source} / ${item.sourceQuery} 的趋势信号里，适合做一次可复现的创作者工作流测试。`;
+}
+
+function zhDemo(item) {
+  return item.deliverables.demoSteps?.[1]?.includes("Reproduce")
+    ? "复现最小可用流程，记录输入、输出和卡住的位置。"
+    : "用公开证据验证核心主张，并说明适合谁、不适合谁。";
+}
+
+function zhLimitation(item) {
+  if (item.source === "github") return "不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。";
+  if (item.source === "bilibili") return "不要只看热度；要检查素材版权、观点边界和是否能做出原创实测。";
+  if (item.source === "youtube") return "不要复制原视频；要保留来源，并重新做自己的演示、判断和限制说明。";
+  return "公开热度不等于生产可用；录制前需要核验来源、复现路径和事实边界。";
+}
+
+function englishVideoAngle(item) {
+  return `Practical test: should creators pay attention to ${item.title} now?`;
+}
+
 const cards = top
   .map(
     (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
-  <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span>${item.stale ? "<span>cached</span>" : ""}${item.qualityFlags?.length ? "<span>review</span>" : ""}</div>
+  <div class="meta"><span>${escapeHtml(item.source)}</span><span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span><span>${dual(fitLabel(item.monetizationFit), fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? `<span>${dual("cached", "缓存")}</span>` : ""}${item.qualityFlags?.length ? `<span>${dual("review", "需复核")}</span>` : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
-  <p>${escapeHtml(item.summary || "No summary available.")}</p>
-  <p class="why"><strong>Why now:</strong> ${escapeHtml(item.deliverables.whyNow)}</p>
+  ${dual(item.summary || "No summary available.", `创作切入：${item.deliverables.hook}`, "p")}
+  <p class="why"><strong>${dual("Why now:", "为什么现在：")}</strong> ${dual(item.deliverables.whyNow, zhWhyNow(item))}</p>
   <div class="idea">
-    <strong>Bilibili:</strong> ${escapeHtml(item.deliverables.bilibiliTitles[0])}<br>
-    <strong>YouTube:</strong> ${escapeHtml(item.deliverables.youtubeTitles[0])}
+    <span class="lang-en"><strong>YouTube angle:</strong> ${escapeHtml(englishVideoAngle(item))}</span>
+    <span class="lang-zh"><strong>B 站角度：</strong>${escapeHtml(item.deliverables.bilibiliTitles[0])}</span>
   </div>
   <details>
-    <summary>Production outline</summary>
-    <ol>${item.deliverables.outline.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ol>
-    <p><strong>Demo:</strong> ${escapeHtml(item.deliverables.demoSteps[1])}</p>
-${item.qualityFlags?.length ? `    <p><strong>Quality flags:</strong> ${escapeHtml(item.qualityFlags.join(", "))}</p>` : ""}
-    <p><strong>Thumbnail:</strong> ${escapeHtml(item.deliverables.thumbnailPrompt)}</p>
-    <p><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</p>
+    <summary>${dual("Production outline", "制作大纲")}</summary>
+    <ol>${item.deliverables.outline.map((line, lineIndex) => `<li>${dual(englishOutline(item)[lineIndex] || line, line)}</li>`).join("")}</ol>
+    <p><strong>${dual("Demo:", "演示：")}</strong> ${dual(item.deliverables.demoSteps[1], zhDemo(item))}</p>
+${item.qualityFlags?.length ? `    <p><strong>${dual("Quality flags:", "质量标记：")}</strong> ${escapeHtml(item.qualityFlags.join(", "))}</p>` : ""}
+    <p><strong>${dual("Thumbnail:", "封面：")}</strong> ${dual(item.deliverables.thumbnailPrompt, `一张干净的技术讲解封面，突出 ${item.title}、趋势信号和中文标题区域，避免假 logo。`)}</p>
+    <p><strong>${dual("Limitation:", "限制：")}</strong> ${dual(item.deliverables.limitation, zhLimitation(item))}</p>
   </details>
 </article>`
   )
   .join("\n");
 
 const sourceButtons = ["all", ...Object.keys(bySource)]
-  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? "All" : source}</button>`)
+  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? dual("All", "全部") : source}</button>`)
   .join("");
 
 const topicDefinitions = [
   {
     slug: "ai-video-ideas",
     title: "AI video ideas for creator channels",
+    titleZh: "面向创作者频道的 AI 视频选题",
     description: "A weekly source-backed list of AI and developer video ideas with hooks, demos, titles, and limitations.",
+    descriptionZh: "每周更新、有来源支撑的 AI 和开发者视频选题列表，包含钩子、演示、标题和限制说明。",
     filter: () => true
   },
   {
     slug: "github-ai-projects",
     title: "GitHub AI projects worth turning into videos",
+    titleZh: "值得做成视频的 GitHub AI 项目",
     description: "Fresh GitHub signals converted into recordable demos for technical creators.",
+    descriptionZh: "把新鲜 GitHub 信号转成技术创作者可以录制的演示选题。",
     filter: (item) => item.source === "github"
   },
   {
     slug: "bilibili-ai-topics",
     title: "Bilibili AI topics for technical explainers",
+    titleZh: "适合技术讲解的 B 站 AI 选题",
     description: "Chinese creator angles shaped from Bilibili-facing AI and developer signals.",
+    descriptionZh: "从面向 B 站的 AI 和开发者信号里整理中文创作者角度。",
     filter: (item) => item.source === "bilibili"
   },
   {
     slug: "youtube-ai-workflows",
     title: "YouTube AI workflow ideas for weekly videos",
+    titleZh: "适合周更视频的 YouTube AI 工作流选题",
     description: "YouTube-ready AI workflow opportunities with proof links and practical demos.",
+    descriptionZh: "面向 YouTube 的 AI 工作流机会，包含证明链接和可操作演示。",
     filter: (item) => item.source === "youtube"
   },
   {
     slug: "developer-trend-brief",
     title: "Developer trend brief for creator newsletters",
+    titleZh: "面向创作者 newsletter 的开发者趋势 brief",
     description: "Hacker News, arXiv, GitHub, YouTube, and Bilibili signals turned into a compact creator brief.",
+    descriptionZh: "把 HN、arXiv、GitHub、YouTube 和 Bilibili 信号整理成紧凑创作者 brief。",
     filter: () => true
   }
 ];
@@ -516,7 +592,7 @@ function buildTopicPage(topic) {
 }
 
 const topicLinks = topicDefinitions
-  .map((topic) => `<a class="topic-link" href="./topics/${topic.slug}.html"><span>${escapeHtml(topic.title)}</span><small>${escapeHtml(topic.description)}</small></a>`)
+  .map((topic) => `<a class="topic-link" href="./topics/${topic.slug}.html">${dual(topic.title, topic.titleZh)}${dual(topic.description, topic.descriptionZh, "small")}</a>`)
   .join("");
 
 function escapeXml(value) {
@@ -752,120 +828,126 @@ const html = `<!doctype html>
   <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="./feed.json">
   <script src="./app.js" defer></script>
 </head>
-<body>
+<body data-lang="en">
   <header class="topbar">
     <div>
-      <div class="brandline">
-        <span>TrendFoundry</span>
-        <span>Issue ${new Date(data.generatedAt).toLocaleDateString("en-GB")}</span>
+      <div class="brandrow">
+        <div class="brandline">
+          <span>TrendFoundry</span>
+          <span>${dual(`Issue ${new Date(data.generatedAt).toLocaleDateString("en-GB")}`, `期次 ${new Date(data.generatedAt).toLocaleDateString("zh-CN")}`)}</span>
+        </div>
+        <div class="language-switch" aria-label="Language">
+          <button class="language-option active" type="button" data-language-toggle="en">EN</button>
+          <button class="language-option" type="button" data-language-toggle="zh">中文</button>
+        </div>
       </div>
-      <h1>Creator intelligence packs for AI and developer video channels</h1>
-      <p class="sub">Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.</p>
+      ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
+      ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
       <div class="hero-actions">
-        <a class="action primary" href="./public-sample.md">View free sample</a>
-        <a class="action" href="./public-sample.csv">Download CSV sample</a>
-        <a class="action" href="./ready-to-record-script.md">Open script</a>
-        <a class="action strong" href="${issueOrderHref}">Request on GitHub</a>
-        <a class="action" href="${orderHref}">Email order</a>
+        <a class="action primary" href="./public-sample.md">${dual("View free sample", "查看免费样品")}</a>
+        <a class="action" href="./public-sample.csv">${dual("Download CSV sample", "下载 CSV 样品")}</a>
+        <a class="action" href="./ready-to-record-script.md">${dual("Open script", "打开脚本")}</a>
+        <a class="action strong" href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
+        <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
     </div>
     <aside>
-      <span><strong>${top.length}</strong> opportunities</span>
-      <span><strong>${high.length}</strong> high-fit</span>
-      <span><strong>${data.errorCount || 0}</strong> source errors</span>
-      <span>${escapeHtml(sourceMix)}</span>
+      <span><strong>${top.length}</strong> ${dual("opportunities", "个机会")}</span>
+      <span><strong>${high.length}</strong> ${dual("high-fit", "高匹配")}</span>
+      <span><strong>${data.errorCount || 0}</strong> ${dual("source errors", "个来源错误")}</span>
+      <span>${dual(sourceMix, sourceMixZh)}</span>
       <div class="source-bars" aria-label="Source mix">${sourceBars}</div>
     </aside>
   </header>
   <main>
     <section class="offer">
       <div>
-        <p class="section-label">Current offer</p>
-        <h2>Sell a source-backed weekly brief before building a heavier SaaS.</h2>
-        <p>Start with a manual $9 sample order, prove demand, then convert repeat buyers into the $19/month weekly delivery.</p>
+        ${dual("Current offer", "当前报价", "p", ' class="section-label"')}
+        ${dual("Sell a source-backed weekly brief before building a heavier SaaS.", "先卖有来源的周更情报包，再考虑做更重的 SaaS。", "h2")}
+        ${dual("Start with a manual $9 sample order, prove demand, then convert repeat buyers into the $19/month weekly delivery.", "先用人工交付的 9 美元样品包验证需求，再把复购买家转成每月 19 美元的周更交付。", "p")}
       </div>
       <div class="price">
         <span>$19/mo</span>
-        <small><a href="${issueOrderHref}">GitHub request</a> / <a href="${orderHref}">email order</a></small>
+        <small><a href="${issueOrderHref}">${dual("GitHub request", "GitHub 申请")}</a> / <a href="${orderHref}">${dual("email order", "邮件下单")}</a></small>
       </div>
     </section>
     <section class="pricing" aria-label="Pricing tiers">
       <div class="section-head">
-        <p class="section-label">Pricing</p>
-        <h2>Three buyer paths, all deliverable without a backend.</h2>
-        <p>Each tier sells the same core advantage: fewer weak topics, faster planning, and a clearer recording queue.</p>
+        ${dual("Pricing", "定价", "p", ' class="section-label"')}
+        ${dual("Three buyer paths, all deliverable without a backend.", "三条购买路径，都可以在没有后台系统时交付。", "h2")}
+        ${dual("Each tier sells the same core advantage: fewer weak topics, faster planning, and a clearer recording queue.", "每一档卖的都是同一个核心优势：少踩弱选题、更快规划、录制队列更清楚。", "p")}
       </div>
       <div class="tier-grid">${pricingCards}</div>
     </section>
     <section class="sample-preview" aria-label="Free public sample">
       <div>
-        <p class="section-label">Free sample</p>
-        <h2>Inspect three current opportunities before ordering.</h2>
-        <p>The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.</p>
+        ${dual("Free sample", "免费样品", "p", ' class="section-label"')}
+        ${dual("Inspect three current opportunities before ordering.", "下单前先检查 3 个当前机会。", "h2")}
+        ${dual("The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.", "公开样品展示格式、评分、来源链接和质量备注，但不暴露完整付费包。", "p")}
       </div>
       <div class="sample-actions">
-        <a class="action primary" href="./public-sample.md">Open sample</a>
-        <a class="action" href="./public-sample.csv">CSV sample</a>
+        <a class="action primary" href="./public-sample.md">${dual("Open sample", "打开样品")}</a>
+        <a class="action" href="./public-sample.csv">${dual("CSV sample", "CSV 样品")}</a>
       </div>
     </section>
     ${socialProof}
     <section class="delivery" aria-label="What the buyer receives">
       <div>
-        <p class="section-label">What arrives</p>
-        <h2>A compact intelligence pack, not another AI news digest.</h2>
+        ${dual("What arrives", "交付内容", "p", ' class="section-label"')}
+        ${dual("A compact intelligence pack, not another AI news digest.", "这是紧凑的创作者情报包，不是又一份 AI 新闻摘要。", "h2")}
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
     <section class="seo-hub" aria-label="Search landing pages">
       <div>
-        <p class="section-label">Search pages</p>
-        <h2>Evergreen entry points for creators searching by platform or workflow.</h2>
-        <p>These pages refresh with the same daily source data and route qualified readers back to the sample pack.</p>
+        ${dual("Search pages", "搜索页", "p", ' class="section-label"')}
+        ${dual("Evergreen entry points for creators searching by platform or workflow.", "面向按平台或工作流搜索的创作者，提供长期入口。", "h2")}
+        ${dual("These pages refresh with the same daily source data and route qualified readers back to the sample pack.", "这些页面使用同一份每日来源数据刷新，并把合格读者引回样品包。", "p")}
       </div>
       <div class="topic-links">${topicLinks}</div>
     </section>
     <section class="feed-box" aria-label="Subscribe to updates">
       <div>
-        <p class="section-label">Subscribe</p>
-        <h2>Turn one-time visitors into repeat readers.</h2>
-        <p>The RSS and JSON feeds publish the top 12 current opportunities, each with a proof link, hook, demo angle, and limitation.</p>
+        ${dual("Subscribe", "订阅", "p", ' class="section-label"')}
+        ${dual("Turn one-time visitors into repeat readers.", "把一次性访问者变成持续读者。", "h2")}
+        ${dual("The RSS and JSON feeds publish the top 12 current opportunities, each with a proof link, hook, demo angle, and limitation.", "RSS 和 JSON Feed 发布当前 Top 12 机会，每条都包含来源链接、钩子、演示角度和限制说明。", "p")}
       </div>
       <div class="feed-actions">
-        <a class="action primary" href="./feed.xml">RSS feed</a>
-        <a class="action" href="./feed.json">JSON feed</a>
+        <a class="action primary" href="./feed.xml">${dual("RSS feed", "RSS Feed")}</a>
+        <a class="action" href="./feed.json">${dual("JSON feed", "JSON Feed")}</a>
       </div>
     </section>
     <section class="archive-box" aria-label="Public issue archive">
       <div>
-        <p class="section-label">Archive</p>
-        <h2>Durable public issues build trust before purchase.</h2>
-        <p>Each issue freezes the top 12 opportunities, proof links, hooks, demo angles, and limitations for buyers who want to inspect the track record.</p>
+        ${dual("Archive", "归档", "p", ' class="section-label"')}
+        ${dual("Durable public issues build trust before purchase.", "持久公开期刊能在购买前建立信任。", "h2")}
+        ${dual("Each issue freezes the top 12 opportunities, proof links, hooks, demo angles, and limitations for buyers who want to inspect the track record.", "每一期都会冻结 Top 12 机会、来源链接、钩子、演示角度和限制说明，方便买家检查历史记录。", "p")}
       </div>
       <div class="feed-actions">
-        <a class="action primary" href="./issues/latest.html">Latest issue</a>
-        <a class="action" href="./issues/index.html">Issue archive</a>
+        <a class="action primary" href="./issues/latest.html">${dual("Latest issue", "最新一期")}</a>
+        <a class="action" href="./issues/index.html">${dual("Issue archive", "期刊归档")}</a>
       </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
       <div class="search-wrap">
-        <label for="opportunity-search">Search opportunities</label>
-        <input id="opportunity-search" type="search" placeholder="agent, video, workflow, arxiv...">
+        <label for="opportunity-search">${dual("Search opportunities", "搜索机会")}</label>
+        <input id="opportunity-search" type="search" ${langAttr("agent, video, workflow, arxiv...", "智能体、视频、工作流、arxiv...")}>
       </div>
       <div class="filters" aria-label="Source filters">${sourceButtons}</div>
-      <p id="result-count" class="result-count">${top.length} visible opportunities</p>
+      <p id="result-count" class="result-count" data-count="${top.length}">${top.length} visible opportunities</p>
     </section>
     <section class="grid" id="opportunity-grid">${cards}</section>
     <section class="handoff">
       <div>
-        <p class="section-label">Handoff</p>
-        <h2>Next buyer-facing action</h2>
-        <p>Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.</p>
+        ${dual("Handoff", "交接", "p", ' class="section-label"')}
+        ${dual("Next buyer-facing action", "下一步面向买家的动作", "h2")}
+        ${dual("Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.", "把样品 brief 和可录制脚本作为免费证明资产，再按发布计划销售周更交付。", "p")}
       </div>
       <div class="handoff-links">
-        <a class="action primary" href="./launch-plan.md">Launch plan</a>
-        <a class="action" href="./sales-page-copy.md">Sales copy</a>
-        <a class="action strong" href="${issueOrderHref}">Request sample</a>
-        <a class="action" href="${orderHref}">Email order</a>
+        <a class="action primary" href="./launch-plan.md">${dual("Launch plan", "发布计划")}</a>
+        <a class="action" href="./sales-page-copy.md">${dual("Sales copy", "销售文案")}</a>
+        <a class="action strong" href="${issueOrderHref}">${dual("Request sample", "申请样品")}</a>
+        <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
     </section>
   </main>
@@ -917,13 +999,51 @@ small {
   display: flex;
   flex-wrap: wrap;
   gap: 10px 16px;
-  margin: 0 0 18px;
+  margin: 0;
   color: var(--accent);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.brandrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 18px;
+}
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 3px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.language-option {
+  min-width: 46px;
+  min-height: 30px;
+  border: 0;
+  border-radius: 5px;
+  padding: 5px 9px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.language-option.active {
+  background: var(--accent);
+  color: #fff;
+}
+.lang-zh { display: none; }
+body[data-lang="zh"] .lang-en { display: none; }
+body[data-lang="zh"] .lang-zh { display: inline; }
 h1 {
   max-width: 1000px;
   margin: 0;
@@ -1443,6 +1563,9 @@ li { margin: 6px 0; }
   .feed-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
+  .brandrow { align-items: flex-start; }
+  .language-switch { width: 100%; }
+  .language-option { flex: 1 1 0; }
   .hero-actions .action,
   .handoff-links .action,
   .sample-actions .action,
@@ -1463,7 +1586,34 @@ const app = `const cards = [...document.querySelectorAll(".card")];
 const buttons = [...document.querySelectorAll("[data-source-filter]")];
 const search = document.querySelector("#opportunity-search");
 const resultCount = document.querySelector("#result-count");
+const languageButtons = [...document.querySelectorAll("[data-language-toggle]")];
+const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
+const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
 let activeSource = "all";
+let currentLanguage = localStorage.getItem("trendfoundry-language") || "en";
+
+function countLabel(count) {
+  if (currentLanguage === "zh") return count + " 个可见机会";
+  return count === 1 ? "1 visible opportunity" : count + " visible opportunities";
+}
+
+function setLanguage(language) {
+  currentLanguage = language === "zh" ? "zh" : "en";
+  document.body.dataset.lang = currentLanguage;
+  document.documentElement.lang = currentLanguage === "zh" ? "zh-CN" : "en";
+  localStorage.setItem("trendfoundry-language", currentLanguage);
+  for (const node of translatable) {
+    node.textContent = node.dataset[currentLanguage === "zh" ? "i18nZh" : "i18nEn"];
+  }
+  for (const node of placeholderTargets) {
+    node.setAttribute("placeholder", node.dataset[currentLanguage === "zh" ? "i18nPlaceholderZh" : "i18nPlaceholderEn"]);
+  }
+  for (const button of languageButtons) {
+    button.classList.toggle("active", button.dataset.languageToggle === currentLanguage);
+  }
+  const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
+  resultCount.textContent = countLabel(visible);
+}
 
 function applyFilters() {
   const query = (search.value || "").trim().toLowerCase();
@@ -1475,7 +1625,7 @@ function applyFilters() {
     card.classList.toggle("hidden", !show);
     if (show) visible += 1;
   }
-  resultCount.textContent = visible === 1 ? "1 visible opportunity" : visible + " visible opportunities";
+  resultCount.textContent = countLabel(visible);
 }
 
 for (const button of buttons) {
@@ -1486,7 +1636,12 @@ for (const button of buttons) {
   });
 }
 
+for (const button of languageButtons) {
+  button.addEventListener("click", () => setLanguage(button.dataset.languageToggle));
+}
+
 search.addEventListener("input", applyFilters);
+setLanguage(currentLanguage);
 `;
 
 await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
