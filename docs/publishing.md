@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27081881130`
+Latest verified Pages run: `27081979080`
 
-Latest verified commit: `bb776f2 Add one-command operations pipeline`
+Latest verified commit: `cf943b3 Run full operations from daily task`
 
 Verified public paths:
 
@@ -21,7 +21,7 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27081881130` completed successfully for commit `bb776f21dcb1b0cf4982d8cd18aa58301713a1b9`.
+- Pages workflow `27081979080` completed successfully for commit `cf943b30c8a8d2c6654298ccecf2be452490c61f`.
 - Public page, `public-sample.md`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
 - Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, core CTAs remained visible, and source errors showed 0.
