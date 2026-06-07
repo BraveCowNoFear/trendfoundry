@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27080533257`
+Latest verified Pages run: `27080634271`
 
-Latest verified commit: `3c9dddc Harden Bilibili collection retries`
+Latest verified commit: `159ec31 Add quality risk scoring for creator signals`
 
 Verified public paths:
 
