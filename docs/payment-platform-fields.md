@@ -45,6 +45,30 @@ Public request form:
 
 Markdown, CSV, and browser-readable HTML sample pack delivered weekly.
 
+Buyer delivery files:
+
+- `daily-brief.md`
+- `ready-to-record-script.md`
+- `opportunities.csv`
+- `public-sample.md`
+- `public-sample.csv`
+
+Seller-only files that must not be attached to buyers:
+
+- `prospects.csv`
+- `outreach-board.md`
+- `latest.json`
+
+## Commerce Export
+
+Run:
+
+```bash
+npm run commerce
+```
+
+This writes copy-paste product fields and manual invoice drafts to `dist/commerce/`.
+
 ## Refund Policy
 
 If the first paid issue does not include at least three recordable ideas for your channel, email within 7 days for a refund.

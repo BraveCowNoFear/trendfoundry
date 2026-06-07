@@ -53,7 +53,7 @@ Get a weekly pack of 12 AI/developer video opportunities with source links, Bili
 
 Delivery:
 
-PDF or Markdown brief by email every Monday.
+Markdown brief, opportunities CSV, and browser-readable sample pack by email every Monday.
 
 Refund policy:
 
@@ -66,7 +66,7 @@ Until a hosted payment page is connected, use this low-dependency order path:
 - Buyer emails: `rivan_Britain@outlook.com`
 - Subject: `TrendFoundry sample pack order`
 - Price: USD 9 for the latest sample pack
-- Delivery: `daily-brief.md`, `ready-to-record-script.md`, `opportunities.csv`, and `prospects.csv`
+- Delivery: `daily-brief.md`, `ready-to-record-script.md`, `opportunities.csv`, `public-sample.md`, and `public-sample.csv`
 
 Email button URL:
 
