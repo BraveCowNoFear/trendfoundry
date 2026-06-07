@@ -24,6 +24,7 @@
     "content-ops": "node scripts/run_content_ops.mjs",
     "content-listing": "node scripts/generate_content_listing.mjs",
     "custom-proof-pack": "node scripts/generate_custom_proof_pack.mjs",
+    "content-sales": "node scripts/generate_content_sales_sequence.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "visuals": "node scripts/generate_site_visuals.mjs",
