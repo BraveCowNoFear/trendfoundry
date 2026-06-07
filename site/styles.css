@@ -623,8 +623,44 @@ li { margin: 6px 0; }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
   .brandrow { align-items: flex-start; }
+  .topbar > * {
+    min-width: 0;
+    max-width: 100%;
+  }
   .language-switch { width: 100%; }
   .language-option { flex: 1 1 0; }
+  h1 {
+    width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+    font-size: 23px;
+    line-height: 1.08;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .sub {
+    width: calc(100vw - 48px);
+    max-width: calc(100vw - 48px);
+    font-size: 16px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  body[data-lang="zh"] h1 {
+    word-break: break-all;
+  }
+  .topbar aside,
+  .source-mix-panel,
+  .source-legend {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .topbar aside span {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .source-legend span {
+    flex: 1 1 calc(50% - 5px);
+  }
   .hero-actions .action,
   .handoff-links .action,
   .sample-actions .action,
