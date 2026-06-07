@@ -1,6 +1,6 @@
 # TrendFoundry Content Revenue Model
 
-Generated: 2026-06-07T22:05:39.939Z
+Generated: 2026-06-07T22:10:55.357Z
 
 This is a planning model for the content product ladder. It uses current local prospecting, CRM, product listing, and subscription plan outputs. It is not a financial guarantee, performance promise, or investment advice.
 
