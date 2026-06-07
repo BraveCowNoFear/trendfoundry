@@ -75,6 +75,13 @@ async function checkLocal() {
     assertCheck(`package script: ${script}`, Boolean(pkg.scripts?.[script]), pkg.scripts?.[script] || "missing");
   }
 
+  const dailyOpsWorkflow = await readText(path.join(root, ".github", "workflows", "daily-ops.yml"));
+  assertCheck("daily ops workflow has schedule", dailyOpsWorkflow.includes("schedule:") && dailyOpsWorkflow.includes("15 7 * * *"));
+  assertCheck("daily ops workflow has manual dispatch", dailyOpsWorkflow.includes("workflow_dispatch:"));
+  assertCheck("daily ops workflow can commit tracked files", dailyOpsWorkflow.includes("contents: write") && dailyOpsWorkflow.includes("git add -u"));
+  assertCheck("daily ops workflow runs operate", dailyOpsWorkflow.includes("npm run operate"));
+  assertCheck("daily ops workflow avoids ignored lead docs", !dailyOpsWorkflow.includes("git add ."));
+
   const latest = await readJson(path.join(root, "data", "latest.json"));
   assertCheck("latest data item count", (latest.totalItems || 0) >= 50, String(latest.totalItems || 0));
   assertCheck("latest displayed source errors <= 3", (latest.errorCount || 0) <= 3, String(latest.errorCount || 0));

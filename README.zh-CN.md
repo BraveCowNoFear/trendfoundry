@@ -25,7 +25,7 @@ npm start
 
 ## 自动化
 
-Windows 上的 `scripts/run_daily.ps1` 会运行完整 `npm run operate` 流水线，并把日志写入 `logs/`。流水线会刷新产品、上架资产、线索、ready 订单交付、运营报告和 QA 守门。
+Windows 上的 `scripts/run_daily.ps1` 会运行完整 `npm run operate` 流水线，并把日志写入 `logs/`。GitHub Actions 也会通过 `.github/workflows/daily-ops.yml` 每天运行同一套流程；当 tracked 产品文件变化时，自动提交刷新结果。
 
 ## 产物
 

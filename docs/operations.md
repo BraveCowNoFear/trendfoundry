@@ -34,6 +34,12 @@ The wrapper writes logs to `logs/ops-*.log`.
 
 The existing Windows task `TrendFoundryDaily` calls `scripts/run_daily.ps1`, which now runs the full `npm run operate` pipeline and writes `logs/daily-ops-*.log`.
 
+## GitHub Actions
+
+`.github/workflows/daily-ops.yml` runs `npm run operate` every day at 07:15 UTC and on manual `workflow_dispatch`.
+
+If tracked product files change, the workflow commits them to `main` as `github-actions[bot]`. That push triggers the existing Pages deployment workflow. Ignored local files such as `dist/`, `logs/`, `data/leads.json`, `docs/lead-pipeline.md`, and `docs/lead-replies.md` are not committed.
+
 ## Safety
 
 - No outreach messages are sent.
@@ -41,3 +47,4 @@ The existing Windows task `TrendFoundryDaily` calls `scripts/run_daily.ps1`, whi
 - No files are uploaded.
 - No GitHub labels are changed.
 - Buyer delivery still excludes `prospects.csv`, `outreach-board.md`, and `latest.json`.
+- The GitHub Actions run only refreshes tracked product files and pushes a commit when there are changes.

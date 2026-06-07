@@ -26,7 +26,7 @@ Preview an exported pack with `PORT=4174 SITE_DIR=dist/trendfoundry-sample-pack 
 
 ## Automation
 
-On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and writes logs under `logs/`. The pipeline refreshes the product, commerce exports, leads, ready-order handoff, ops report, and QA gate.
+On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and writes logs under `logs/`. GitHub Actions also runs the same operation daily through `.github/workflows/daily-ops.yml` and commits tracked product refreshes when they change.
 
 ## What It Produces
 
