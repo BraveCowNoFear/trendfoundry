@@ -8,7 +8,7 @@ TrendFoundry Weekly AI Creator Brief
 
 ## Short Description
 
-12 source-backed AI/developer video opportunities every week, with Bilibili and YouTube titles, hooks, outlines, and thumbnail prompts.
+12 source-backed AI/developer video opportunities every week, with Bilibili and YouTube titles, hooks, outlines, thumbnail prompts, and one scene-by-scene ready-to-record script.
 
 ## Long Description
 
@@ -21,7 +21,7 @@ Each weekly issue includes:
 - Bilibili and YouTube title options.
 - A hook and recording outline.
 - Thumbnail prompt.
-- One ready-to-record script for the strongest opportunity.
+- One scene-by-scene ready-to-record script for the strongest opportunity.
 
 This is not generic AI news and not bulk AI content. It is a practical production input for creators who want technically grounded ideas before the same demos are recycled everywhere.
 
@@ -43,7 +43,7 @@ Public request form:
 
 ## Delivery
 
-Markdown, CSV, and browser-readable HTML sample pack delivered weekly.
+Markdown, CSV, scene-by-scene script, and browser-readable HTML sample pack delivered weekly.
 
 Buyer delivery files:
 

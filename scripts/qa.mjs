@@ -100,6 +100,7 @@ async function checkLocal() {
 
   const commerce = await readJson(path.join(root, "dist", "commerce", "products.json"));
   assertCheck("commerce has 3 products", commerce.products?.length === 3, String(commerce.products?.length || 0));
+  assertCheck("commerce mentions scene-by-scene script", JSON.stringify(commerce).includes("scene-by-scene ready-to-record script"));
   const badCommerce = (commerce.products || []).filter((product) => sellerOnly.some((file) => String(product.fulfillment || "").includes(file)));
   assertCheck("commerce fulfillment excludes seller-only files", badCommerce.length === 0, badCommerce.map((product) => product.sku).join(", "));
 

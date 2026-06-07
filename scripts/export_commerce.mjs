@@ -38,7 +38,7 @@ const products = [
     bestFor: "Creators who want to test TrendFoundry before subscribing.",
     includes: [
       "12 ranked AI/developer video opportunities",
-      "one ready-to-record script",
+      "one scene-by-scene ready-to-record script",
       "opportunities CSV",
       "quality-risk notes",
       "public sample files for quick review"
@@ -56,6 +56,7 @@ const products = [
       "fresh GitHub, YouTube, Bilibili, HN, and arXiv source mix",
       "Bilibili and YouTube title angles",
       "hook and recording outline per item",
+      "one scene-by-scene script for the strongest opportunity",
       "quality-risk notes"
     ]
   },
@@ -86,7 +87,7 @@ Best for: ${product.bestFor}
 Includes:
 ${product.includes.map((item) => `- ${item}`).join("\n")}
 
-Delivery: Markdown brief, ready-to-record script, opportunities CSV, and public sample files by email or agreed delivery route.
+Delivery: Markdown brief, scene-by-scene ready-to-record script, opportunities CSV, and public sample files by email or agreed delivery route.
 
 Sample: ${sampleUrl}
 

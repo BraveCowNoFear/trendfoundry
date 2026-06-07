@@ -35,7 +35,7 @@ Generated local outputs:
 - `site/og-image.png` is 1200x630
 - ready-to-record script is linked from the site and includes scene-by-scene, asset checklist, and fact-safety sections
 - sales copy does not promise PDF delivery or attach `prospects.csv`
-- commerce products exist and exclude seller-only files from buyer fulfillment
+- commerce products exist, mention the scene-by-scene script, and exclude seller-only files from buyer fulfillment
 - a temporary fulfillment order excludes seller-only files
 - ops report includes safety and commerce status
 - Windows scheduled tasks point to the expected scripts and last result is 0
