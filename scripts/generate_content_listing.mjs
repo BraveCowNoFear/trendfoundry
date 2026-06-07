@@ -13,6 +13,14 @@ async function readJson(relativePath) {
   return JSON.parse(await readFile(path.join(root, relativePath), "utf8"));
 }
 
+async function readJsonMaybe(relativePath, fallback = null) {
+  try {
+    return JSON.parse(await readFile(path.join(root, relativePath), "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
 async function readText(relativePath) {
   return readFile(path.join(root, relativePath), "utf8");
 }
@@ -30,25 +38,38 @@ function toCsv(rows, columns) {
   return [columns.join(","), ...rows.map((row) => columns.map((column) => csvEscape(row[column])).join(","))].join("\n");
 }
 
-function listingDescription(product, manifest) {
+function listingDescription(product, manifest, customManifest) {
+  const deliverables = product.sku === "trendfoundry-proof-custom" && customManifest?.buyerDeliverables?.length
+    ? customManifest.buyerDeliverables
+    : manifest.buyerDeliverables;
+  const primary = product.sku === "trendfoundry-proof-custom" && customManifest?.primaryEpisode
+    ? customManifest.primaryEpisode
+    : manifest.primaryEpisode;
   return `${product.name}
 
 ${product.shortDescription}
 
 What the buyer receives:
-${manifest.buyerDeliverables.map((file) => `- ${file}`).join("\n")}
+${deliverables.map((file) => `- ${file}`).join("\n")}
 
 Primary episode:
-- ${manifest.primaryEpisode.title}
-- Source: ${manifest.primaryEpisode.sourceUrl}
-- Proof asset: ${manifest.primaryEpisode.proofAsset}
+- ${primary.title}
+- Source: ${primary.sourceUrl || primary.url}
+- Proof asset: ${primary.proofAsset}
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
 Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.`;
 }
 
+function deliverablesFor(product, manifest, customManifest) {
+  return product.sku === "trendfoundry-proof-custom" && customManifest?.buyerDeliverables?.length
+    ? customManifest.buyerDeliverables
+    : manifest.buyerDeliverables;
+}
+
 const manifest = await readJson("dist/buyer-content-pack/manifest.json");
+const customManifest = await readJsonMaybe("dist/custom-proof-pack/manifest.json");
 await readText("docs/buyer-content-pack.md");
 
 const products = [
@@ -84,8 +105,10 @@ const rows = products.map((product) => ({
   price_usd: product.priceUsd,
   billing: product.billing,
   short_description: product.shortDescription,
-  long_description: listingDescription(product, manifest),
-  fulfillment: `Deliver ${manifest.buyerDeliverables.join(", ")} from dist/buyer-content-pack after payment is externally confirmed.`,
+  long_description: listingDescription(product, manifest, customManifest),
+  fulfillment: product.sku === "trendfoundry-proof-custom" && customManifest?.buyerDeliverables?.length
+    ? `Deliver ${customManifest.buyerDeliverables.join(", ")} from dist/custom-proof-pack after payment is externally confirmed. Optional attachments: ${(customManifest.optionalAttachments || []).join(", ")}.`
+    : `Deliver ${manifest.buyerDeliverables.join(", ")} from dist/buyer-content-pack after payment is externally confirmed.`,
   refund_policy: "If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.",
   tags: "AI tools, creator workflow, YouTube, Bilibili, GitHub, video script, content planning",
   product_url: publicSite,
@@ -136,6 +159,8 @@ Product: ${rows[0].title}
 Price: USD ${rows[0].price_usd}
 Delivery: ${manifest.buyerDeliverables.join(", ")}
 
+Custom pack delivery: ${customManifest?.buyerDeliverables?.join(", ") || "custom-proof-pack.md"} from dist/custom-proof-pack after external payment confirmation.
+
 Terms:
 - External payment confirmation required before delivery.
 - Do not send sensitive payment or account data by email.
@@ -147,7 +172,10 @@ Terms:
 I put together a proof-first AI/developer video script pack: one complete 6-8 minute script, five ready episode candidates, and the editorial quality gate behind them. It is built for creators who want a recordable idea rather than a trend recap. Free sample: ${samplePack}
 `;
 
-const invoices = rows.map((row) => `# Manual Invoice Draft: ${row.title}
+const invoices = rows.map((row) => {
+  const product = products.find((candidate) => candidate.sku === row.sku);
+  const deliverables = deliverablesFor(product, manifest, customManifest);
+  return `# Manual Invoice Draft: ${row.title}
 
 Buyer:
 Contact:
@@ -157,7 +185,7 @@ Item: ${row.title}
 Price: USD ${row.price_usd}${row.billing === "monthly" ? " / month" : ""}
 
 Delivery:
-${manifest.buyerDeliverables.map((file) => `- ${file}`).join("\n")}
+${deliverables.map((file) => `- ${file}`).join("\n")}
 
 Terms:
 - External payment confirmation required before delivery.
@@ -166,7 +194,8 @@ Terms:
 - Refund policy: ${row.refund_policy}
 
 Support: ${contactEmail}
-`).join("\n---\n");
+`;
+}).join("\n---\n");
 
 await mkdir(docsDir, { recursive: true });
 await mkdir(outDir, { recursive: true });

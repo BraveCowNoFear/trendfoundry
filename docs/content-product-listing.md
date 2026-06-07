@@ -1,6 +1,6 @@
 # TrendFoundry Content Product Listing
 
-Generated: 2026-06-07T21:12:02.819Z
+Generated: 2026-06-07T21:20:28.964Z
 
 This is the listing layer for the current buyer content pack. Use it to set up Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Links, Buy Me a Coffee, or manual invoice copy.
 
@@ -83,7 +83,7 @@ Important: this is a creator planning and production aid. It does not promise vi
 - Billing: monthly
 - Best use: Teams or creators focused on one narrow niche.
 - Short description: A custom-niche proof-first script pack tuned to one creator audience or technical lane.
-- Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
+- Fulfillment: Deliver custom-proof-pack.md from dist/custom-proof-pack after payment is externally confirmed. Optional attachments: full-episode-script.md, episode-workbench.md, content-editorial-audit.md.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
 - Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
@@ -94,14 +94,12 @@ TrendFoundry Custom Proof Pack
 A custom-niche proof-first script pack tuned to one creator audience or technical lane.
 
 What the buyer receives:
-- full-episode-script.md
-- episode-workbench.md
-- content-editorial-audit.md
+- custom-proof-pack.md
 
 Primary episode:
 - NousResearch/hermes-agent
 - Source: https://github.com/NousResearch/hermes-agent
-- Proof asset: Terminal proof / README quickstart, install command, first output, and one blocker note.
+- Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
@@ -116,6 +114,8 @@ Channel:
 Product: TrendFoundry Proof-First Script Pack
 Price: USD 9
 Delivery: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
+
+Custom pack delivery: custom-proof-pack.md from dist/custom-proof-pack after external payment confirmation.
 
 Terms:
 - External payment confirmation required before delivery.
