@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-07T21:44:56.952Z
+Generated: 2026-06-07T21:51:20.683Z
 
 Status: success
 
@@ -8,7 +8,7 @@ Refresh public sources: no
 
 Dataset: 2026-06-07T20:33:58.416Z
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, and revenue model without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, and feedback learning loop without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -25,6 +25,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-prospects | success | 0 |
 | content-crm | success | 0 |
 | content-revenue | success | 0 |
+| content-feedback | success | 0 |
 
 ## Current Content State
 
@@ -38,6 +39,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Prospects: 20 local drafts across YouTube, Bilibili
 - CRM: 20 rows, 5 due today, 20 due this week
 - Revenue model: base new MRR USD 70, base month-one cash USD 92.5
+- Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -57,5 +59,6 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 5. Review `dist/content-prospecting/prospect-board.md` for one-by-one outreach.
 6. Review `dist/content-sales-crm/pipeline.md` for today's follow-up queue.
 7. Review `docs/content-revenue-model.md` for weekly sales targets.
-8. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-9. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+8. Review `docs/content-feedback-loop.md` before editing product copy or sales objections.
+9. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+10. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
