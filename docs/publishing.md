@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27081775883`
+Latest verified Pages run: `27081881130`
 
-Latest verified commit: `7a844d7 Add social preview asset`
+Latest verified commit: `bb776f2 Add one-command operations pipeline`
 
 Verified public paths:
 
@@ -21,10 +21,10 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27081775883` completed successfully for commit `7a844d7bc934c7cad353c53498073e3234350999`.
-- Public page and `og-image.png` returned HTTP 200.
+- Pages workflow `27081881130` completed successfully for commit `bb776f21dcb1b0cf4982d8cd18aa58301713a1b9`.
+- Public page, `public-sample.md`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded and core CTAs remained visible.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, core CTAs remained visible, and source errors showed 0.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
