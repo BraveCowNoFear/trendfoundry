@@ -65,6 +65,12 @@ ${rows[0]?.message || "No prospects available."}
 `;
 }
 
+function compactHook(item) {
+  if (item.source === "github") return "验证安装、输出和适用边界。";
+  if (item.source === "bilibili" || item.source === "youtube") return "验证方法是否可复现，避免照搬原视频。";
+  return "验证来源、证据和可讲边界。";
+}
+
 function opportunityRows(items) {
   return items.slice(0, 50).map((item, index) => ({
     rank: index + 1,
@@ -76,7 +82,7 @@ function opportunityRows(items) {
     target_creator: item.targetCreator,
     bilibili_title: item.deliverables?.bilibiliTitles?.[0] || "",
     youtube_title: item.deliverables?.youtubeTitles?.[0] || "",
-    hook: item.deliverables?.hook || "",
+    hook: compactHook(item),
     why_now: item.deliverables?.whyNow || "",
     demo_step: item.deliverables?.demoSteps?.[1] || "",
     thumbnail_prompt: item.deliverables?.thumbnailPrompt || "",

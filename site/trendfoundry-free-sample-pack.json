@@ -1,0 +1,33 @@
+{
+  "product": "TrendFoundry Free Sample Pack",
+  "generatedAt": "2026-06-07T16:18:15.768Z",
+  "publicSiteUrl": "https://bravecownofear.github.io/trendfoundry/",
+  "orderPage": "https://bravecownofear.github.io/trendfoundry/order/",
+  "githubRequest": "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+  "contactEmail": "rivan_Britain@outlook.com",
+  "zip": "trendfoundry-free-sample-pack.zip",
+  "files": [
+    "README.txt",
+    "order-instructions.md",
+    "public-sample.en.md",
+    "public-sample.zh-CN.md",
+    "public-sample.en.csv",
+    "public-sample.zh-CN.csv",
+    "ready-to-record-script.md",
+    "signal-board.png",
+    "signal-board.meta.json",
+    "manifest.json"
+  ],
+  "excludedSellerOnlyFiles": [
+    "prospects.csv",
+    "outreach-board.md",
+    "latest.json",
+    "data/leads.json",
+    "docs/lead-pipeline.md"
+  ],
+  "safety": [
+    "Public proof assets only.",
+    "No seller-only prospect list or private order data included.",
+    "No payment credentials are requested in the public pack."
+  ]
+}

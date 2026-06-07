@@ -29,6 +29,7 @@ const requiredScripts = [
   "launch-assets",
   "social",
   "visuals",
+  "free-pack",
   "qa"
 ];
 const seoTopicSlugs = [
@@ -70,6 +71,42 @@ function pngSize(file) {
   const buffer = existsSync(file) ? Buffer.from(requireFsRead(file)) : null;
   if (!buffer) return null;
   return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20), bytes: buffer.length };
+}
+
+function zipEntries(file) {
+  const buffer = existsSync(file) ? Buffer.from(requireFsRead(file)) : null;
+  if (!buffer) return [];
+  const names = [];
+  for (let offset = 0; offset + 46 <= buffer.length;) {
+    const signature = buffer.readUInt32LE(offset);
+    if (signature === 0x02014b50) {
+      const nameLength = buffer.readUInt16LE(offset + 28);
+      const extraLength = buffer.readUInt16LE(offset + 30);
+      const commentLength = buffer.readUInt16LE(offset + 32);
+      names.push(buffer.slice(offset + 46, offset + 46 + nameLength).toString("utf8"));
+      offset += 46 + nameLength + extraLength + commentLength;
+    } else {
+      offset += 1;
+    }
+  }
+  return names;
+}
+
+function zipEntryNamesFromBytes(buffer) {
+  const names = [];
+  for (let offset = 0; offset + 46 <= buffer.length;) {
+    const signature = buffer.readUInt32LE(offset);
+    if (signature === 0x02014b50) {
+      const nameLength = buffer.readUInt16LE(offset + 28);
+      const extraLength = buffer.readUInt16LE(offset + 30);
+      const commentLength = buffer.readUInt16LE(offset + 32);
+      names.push(buffer.slice(offset + 46, offset + 46 + nameLength).toString("utf8"));
+      offset += 46 + nameLength + extraLength + commentLength;
+    } else {
+      offset += 1;
+    }
+  }
+  return names;
 }
 
 function selectPortfolio(items) {
@@ -118,6 +155,7 @@ async function checkLocal() {
     assertCheck(`package script: ${script}`, Boolean(pkg.scripts?.[script]), pkg.scripts?.[script] || "missing");
   }
   assertCheck("daily regenerates visual board", pkg.scripts?.daily?.includes("generate_site_visuals.mjs") || pkg.scripts?.daily?.includes("npm run visuals"), pkg.scripts?.daily || "missing");
+  assertCheck("daily regenerates free sample pack", pkg.scripts?.daily?.includes("export_public_sample_download.mjs") || pkg.scripts?.daily?.includes("npm run free-pack"), pkg.scripts?.daily || "missing");
 
   const readme = await readText(path.join(root, "README.md"));
   const readmeZh = await readText(path.join(root, "README.zh-CN.md"));
@@ -161,6 +199,7 @@ async function checkLocal() {
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
   assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
+  assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
   assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
@@ -181,12 +220,14 @@ async function checkLocal() {
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
   assertCheck("Chinese landing page has product signal board", zhIndex.includes("../signal-board.png") && zhIndex.includes('class="product-visual"'));
+  assertCheck("Chinese landing page links downloadable sample pack", zhIndex.includes("../trendfoundry-free-sample-pack.zip") && zhIndex.includes("下载样品包"));
 
   const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
   assertCheck("order page exists", orderIndex.includes('<link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/order/">') && orderIndex.includes("Order TrendFoundry"));
   assertCheck("order page has all tiers", ["Sample issue", "Weekly brief", "Custom niche"].every((tier) => orderIndex.includes(tier)));
   assertCheck("order page has email drafts", orderIndex.includes("Open English email") && orderIndex.includes("打开中文邮件") && orderIndex.includes(`mailto:${contactEmail}`));
   assertCheck("order page has copyable drafts", (orderIndex.match(/data-copy-order=/g) || []).length >= 5 && orderIndex.includes("navigator.clipboard") && orderIndex.includes("copy-fallback") && orderIndex.includes("Copy English draft") && orderIndex.includes("复制中文草稿"));
+  assertCheck("order page links downloadable sample pack", orderIndex.includes("../trendfoundry-free-sample-pack.zip") && orderIndex.includes("Download sample pack"));
   assertCheck("order page has safety copy", orderIndex.includes("No card details") && orderIndex.includes("payment credentials"));
   assertCheck("order page explains payment reply packet", orderIndex.includes("payment reply packet") && orderIndex.includes("manual invoice reference"));
 
@@ -226,6 +267,7 @@ async function checkLocal() {
   assertCheck("sitemap includes Chinese landing page", sitemap.includes(`${publicBase}zh/`));
   assertCheck("sitemap includes order page", sitemap.includes(`${publicBase}order/`));
   assertCheck("sitemap includes auth page", sitemap.includes(`${publicBase}auth/`));
+  assertCheck("sitemap includes downloadable sample pack", sitemap.includes(`${publicBase}trendfoundry-free-sample-pack.zip`) && sitemap.includes(`${publicBase}trendfoundry-free-sample-pack.json`));
   assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
   assertCheck("sitemap includes issue archive", sitemap.includes(`${publicBase}issues/`) && sitemap.includes(`${publicBase}issues/latest.html`) && sitemap.includes(`${publicBase}issues/${issueSlug}.html`));
 
@@ -257,6 +299,12 @@ async function checkLocal() {
     (signalBoardMeta.topItems || []).slice(0, 5).every((item, index) => item.url === (currentTop[index]?.url || "") && item.score === currentTop[index]?.score),
     JSON.stringify((signalBoardMeta.topItems || []).slice(0, 3))
   );
+  const freePackManifest = await readJson(path.join(root, "site", "trendfoundry-free-sample-pack.json"));
+  const freePackEntries = zipEntries(path.join(root, "site", "trendfoundry-free-sample-pack.zip"));
+  const requiredFreePackFiles = ["README.txt", "order-instructions.md", "public-sample.en.md", "public-sample.zh-CN.md", "public-sample.en.csv", "public-sample.zh-CN.csv", "ready-to-record-script.md", "signal-board.png", "signal-board.meta.json", "manifest.json"];
+  assertCheck("free sample pack manifest exists", freePackManifest.product === "TrendFoundry Free Sample Pack" && freePackManifest.zip === "trendfoundry-free-sample-pack.zip");
+  assertCheck("free sample pack zip includes public files", requiredFreePackFiles.every((file) => freePackEntries.includes(file)), freePackEntries.join(", "));
+  assertCheck("free sample pack excludes seller-only files", sellerOnly.every((file) => !freePackEntries.includes(file)) && (freePackManifest.excludedSellerOnlyFiles || []).includes("prospects.csv"), freePackEntries.join(", "));
 
   const packManifest = await readJson(path.join(root, "dist", "trendfoundry-sample-pack", "manifest.json"));
   assertCheck("sample pack manifest classifies buyer deliverables", sellerOnly.every((file) => !(packManifest.buyerDeliverables || []).includes(file)));
@@ -455,6 +503,7 @@ async function checkOnline() {
   assertCheck("online index has OG image", index.text.includes("og-image.png"));
   assertCheck("online index has email CTA", index.text.includes("Email order"));
   assertCheck("online index has product signal board", index.text.includes("signal-board.png") && index.text.includes('class="product-visual"'));
+  assertCheck("online index links downloadable sample pack", index.text.includes("trendfoundry-free-sample-pack.zip"));
 
   const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);
   assertCheck("online Chinese landing page HTTP 200", zhIndex.status === 200, String(zhIndex.status));
@@ -465,6 +514,7 @@ async function checkOnline() {
   assertCheck("online order page HTTP 200", orderIndex.status === 200, String(orderIndex.status));
   assertCheck("online order page has email CTAs", orderIndex.text.includes("Order by email") && orderIndex.text.includes("Open English email") && orderIndex.text.includes("打开中文邮件"));
   assertCheck("online order page has copyable drafts", (orderIndex.text.match(/data-copy-order=/g) || []).length >= 5 && orderIndex.text.includes("navigator.clipboard") && orderIndex.text.includes("copy-fallback") && orderIndex.text.includes("Copy English draft"));
+  assertCheck("online order page links downloadable sample pack", orderIndex.text.includes("../trendfoundry-free-sample-pack.zip") || orderIndex.text.includes("trendfoundry-free-sample-pack.zip"));
   assertCheck("online order page avoids public payment details", orderIndex.text.includes("No card details") && orderIndex.text.includes("payment credentials"));
   assertCheck("online order page explains payment reply packet", orderIndex.text.includes("payment reply packet") && orderIndex.text.includes("manual invoice reference"));
 
@@ -504,6 +554,21 @@ async function checkOnline() {
     assertCheck("online signal board meta matches current data", parsedSignalMeta.dataGeneratedAt === (await readJson(path.join(root, "data", "latest.json"))).generatedAt, parsedSignalMeta.dataGeneratedAt || "missing");
   } catch (error) {
     assertCheck("online signal board meta parses", false, error.message);
+  }
+
+  const freePack = await fetchBytes(`${publicBase}trendfoundry-free-sample-pack.zip?qa=${Date.now()}`);
+  const freePackNames = zipEntryNamesFromBytes(freePack.bytes);
+  assertCheck("online free sample pack HTTP 200", freePack.status === 200, String(freePack.status));
+  assertCheck("online free sample pack includes public files", ["README.txt", "order-instructions.md", "public-sample.en.md", "public-sample.zh-CN.md", "manifest.json"].every((file) => freePackNames.includes(file)), freePackNames.join(", "));
+  assertCheck("online free sample pack excludes seller-only files", sellerOnly.every((file) => !freePackNames.includes(file)), freePackNames.join(", "));
+
+  const freePackManifest = await fetchText(`${publicBase}trendfoundry-free-sample-pack.json?qa=${Date.now()}`);
+  assertCheck("online free sample pack manifest HTTP 200", freePackManifest.status === 200, String(freePackManifest.status));
+  try {
+    const parsedFreePackManifest = JSON.parse(freePackManifest.text);
+    assertCheck("online free sample pack manifest has safety", parsedFreePackManifest.product === "TrendFoundry Free Sample Pack" && (parsedFreePackManifest.excludedSellerOnlyFiles || []).includes("prospects.csv"));
+  } catch (error) {
+    assertCheck("online free sample pack manifest parses", false, error.message);
   }
 
   const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);

@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-07T16:03:04.080Z",
-  "dataGeneratedAt": "2026-06-07T16:03:03.911Z",
+  "generatedAt": "2026-06-07T16:16:38.561Z",
+  "dataGeneratedAt": "2026-06-07T16:16:38.285Z",
   "image": "signal-board.png",
   "width": 1200,
   "height": 760,
@@ -39,6 +39,22 @@
     },
     {
       "rank": 5,
+      "id": "JQzF5LP4VTs",
+      "url": "https://www.youtube.com/watch?v=JQzF5LP4VTs",
+      "source": "youtube",
+      "score": 137,
+      "title": "The ONLY 3 Tools You Need to Create ANY AI Video"
+    },
+    {
+      "rank": 6,
+      "id": "oT-2VO8Jzpk",
+      "url": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
+      "source": "youtube",
+      "score": 137,
+      "title": "The Only AI Video Prompt Generator You'll Ever Need"
+    },
+    {
+      "rank": 7,
       "id": "BV1NKEJ61EHd",
       "url": "http://www.bilibili.com/video/av116703774115351",
       "source": "bilibili",
@@ -46,28 +62,12 @@
       "title": "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
     },
     {
-      "rank": 6,
+      "rank": 8,
       "id": "BV1d4EJ6cENS",
       "url": "http://www.bilibili.com/video/av116703824447305",
       "source": "bilibili",
       "score": 131,
       "title": "【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
-    },
-    {
-      "rank": 7,
-      "id": "EH5jx5qPabU",
-      "url": "https://www.youtube.com/watch?v=EH5jx5qPabU",
-      "source": "youtube",
-      "score": 121,
-      "title": "From Zero to Your First AI Agent in 25 Minutes (No Coding)"
-    },
-    {
-      "rank": 8,
-      "id": "BV1KnEt6MECH",
-      "url": "http://www.bilibili.com/video/av116709042167306",
-      "source": "bilibili",
-      "score": 120,
-      "title": "我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！"
     }
   ]
 }

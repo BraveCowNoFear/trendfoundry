@@ -39,7 +39,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 
 | Time | Screen | Narration | Purpose |
 |---|---|---|---|
-| 0:00-0:20 | Title card + source page | 今天不做泛泛的 AI 盘点，只验证 NousResearch/hermes-agent 是否值得进入真实创作工作流。 | Set the practical test frame. |
+| 0:00-0:20 | Title card + source page | 实测 NousResearch/hermes-agent：看它能替代创作流程里的哪一步。 | Set the practical test frame. |
 | 0:20-0:55 | Source page close-up | 先看原始信号：The agent that grows with you。热度只是入口，不是结论。 | Ground the claim in evidence. |
 | 0:55-1:40 | Problem map | 观众真正关心的是它能替代哪一步：选题、资料整理、脚本、演示，还是发布资产。 | Translate trend into workflow pain. |
 | 1:40-3:50 | Demo or reproducible walkthrough | Reproduce the smallest useful workflow or summarize the core claim with evidence. | Create the main value segment. |
@@ -81,7 +81,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 
 - Bilibili title: 【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注
 - YouTube title: 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
-- Description opener: 这期用公开来源验证 NousResearch/hermes-agent，重点看它能否进入真实创作工作流。
+- Description opener: 实测 NousResearch/hermes-agent：来源、复现步骤、适用场景和限制。
 - Tags: AI工具, 创作者工作流, GitHub, Bilibili, YouTube, TrendFoundry
 
 ## Fact Safety Notes

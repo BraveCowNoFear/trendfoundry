@@ -61,7 +61,7 @@ const sourceMix = portfolio.reduce((acc, item) => {
 }, {});
 const sourceMixText = Object.entries(sourceMix).map(([source, count]) => `${source} ${count}`).join(" / ");
 const topTitle = compact(top.title, "the top AI/developer trend");
-const topHook = compact(top.deliverables?.hook, `This issue turns ${topTitle} into a recordable creator workflow.`);
+const topHook = "Verify the source, reproduction path, and limits before recording.";
 const topLimitation = compact(top.deliverables?.limitation, "Each idea includes a limitation so it stays practical.");
 
 const posts = [

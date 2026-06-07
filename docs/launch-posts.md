@@ -1,12 +1,12 @@
 # TrendFoundry Launch Assets
 
-Generated: 2026-06-07T16:03:15.893Z
+Generated: 2026-06-07T16:18:27.846Z
 
 Safety: these are draft assets only. Review before posting or sending. Do not bulk-send identical messages, do not promise views/revenue, and do not ask for payment card details in public replies.
 
-Source snapshot: 2026-06-07T16:03:03.911Z
+Source snapshot: 2026-06-07T16:16:38.285Z
 Top opportunity: NousResearch/hermes-agent
-Source mix: github 4 / bilibili 3 / youtube 2 / hn 2 / arxiv 1
+Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
 ## x: Launch thread
 
@@ -55,7 +55,7 @@ Status: draft_review_before_posting
 3. demo 步骤和限制说明
 4. 1 份 6-8 分钟分镜式成片脚本
 
-本期 source mix：github 4 / bilibili 3 / youtube 2 / hn 2 / arxiv 1
+本期 source mix：github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 免费样品：https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 English sample: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
 ```
@@ -68,7 +68,7 @@ Status: draft_review_before_posting
 TrendFoundry converts public AI/dev trend signals into buyer-ready creator planning assets.
 
 Latest top opportunity: NousResearch/hermes-agent
-Hook: 这期不讲概念，直接验证 NousResearch/hermes-agent 是否能进入真实创作工作流。
+Hook: Verify the source, reproduction path, and limits before recording.
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 Try the English sample: https://bravecownofear.github.io/trendfoundry/public-sample.en.md

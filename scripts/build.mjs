@@ -357,6 +357,12 @@ function englishSampleHook(item) {
   return `This episode turns ${englishSampleTitle(item)} into a practical workflow test instead of a trend recap.`;
 }
 
+function zhHook(item) {
+  if (item.source === "github") return "验证安装、输出和适用边界。";
+  if (item.source === "bilibili" || item.source === "youtube") return "验证方法是否可复现，避免照搬原视频。";
+  return "验证来源、证据和可讲边界。";
+}
+
 function englishSampleDemo() {
   return "Run the smallest reproducible test, then compare the workflow before and after the tool.";
 }
@@ -432,7 +438,7 @@ ${publicSample
 - 链接：${item.url}
 - 目标创作者：${item.targetCreator}
 - 为什么现在：${zhWhyNow(item)}
-- 钩子：${item.deliverables.hook}
+- 钩子：${zhHook(item)}
 - 演示：${zhDemo(item)}
 - 限制：${zhLimitation(item)}
 `
@@ -475,7 +481,7 @@ const publicSampleCsvZh = toCsv(
     "匹配度": fitLabel(item.monetizationFit, "zh"),
     "质量": item.qualityFlags?.length ? `需复核：${item.qualityFlags.join("；")}` : "正常",
     "标题": zhSampleTitle(item),
-    "钩子": item.deliverables.hook,
+    "钩子": zhHook(item),
     "为什么现在": zhWhyNow(item),
     "演示": zhDemo(item),
     "限制": zhLimitation(item),
@@ -517,7 +523,7 @@ ${top
 - Why now: ${item.deliverables.whyNow}
 - Bilibili title: ${item.deliverables.bilibiliTitles[0]}
 - YouTube title: ${item.deliverables.youtubeTitles[0]}
-- Hook: ${item.deliverables.hook}
+- Hook: ${zhHook(item)}
 - Demo steps:
 ${item.deliverables.demoSteps.map((step) => `  - ${step}`).join("\n")}
 - Thumbnail prompt: ${item.deliverables.thumbnailPrompt}
@@ -565,7 +571,7 @@ function fullScriptSections(item) {
 
 | Time | Screen | Narration | Purpose |
 |---|---|---|---|
-| 0:00-0:20 | Title card + source page | 今天不做泛泛的 AI 盘点，只验证 ${item.title} 是否值得进入真实创作工作流。 | Set the practical test frame. |
+| 0:00-0:20 | Title card + source page | 实测 ${item.title}：看它能替代创作流程里的哪一步。 | Set the practical test frame. |
 | 0:20-0:55 | Source page close-up | 先看原始信号：${item.summary || "这个项目/内容正在获得公开关注"}。热度只是入口，不是结论。 | Ground the claim in evidence. |
 | 0:55-1:40 | Problem map | 观众真正关心的是它能替代哪一步：选题、资料整理、脚本、演示，还是发布资产。 | Translate trend into workflow pain. |
 | 1:40-3:50 | Demo or reproducible walkthrough | ${demoSteps[1] || "复现一个最小可用流程，并记录输入、输出和卡住的位置。"} | Create the main value segment. |
@@ -600,7 +606,7 @@ ${numberedList(outline)}
 
 - Bilibili title: ${item.deliverables.bilibiliTitles?.[0] || item.title}
 - YouTube title: ${item.deliverables.youtubeTitles?.[0] || item.title}
-- Description opener: 这期用公开来源验证 ${item.title}，重点看它能否进入真实创作工作流。
+- Description opener: 实测 ${item.title}：来源、复现步骤、适用场景和限制。
 - Tags: AI工具, 创作者工作流, GitHub, Bilibili, YouTube, TrendFoundry
 
 ## Fact Safety Notes
@@ -693,7 +699,7 @@ const cards = top
     (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span><span>${dual(fitLabel(item.monetizationFit), fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? `<span>${dual("cached", "缓存")}</span>` : ""}${item.qualityFlags?.length ? `<span>${dual("review", "需复核")}</span>` : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
-  ${dual(item.summary || "No summary available.", `创作切入：${item.deliverables.hook}`, "p")}
+  ${dual(item.summary || "No summary available.", `创作切入：${zhHook(item)}`, "p")}
   <p class="why"><strong>${dual("Why now:", "为什么现在：")}</strong> ${dual(item.deliverables.whyNow, zhWhyNow(item))}</p>
   <div class="idea">
     <span class="lang-en"><strong>YouTube angle:</strong> ${escapeHtml(englishVideoAngle(item))}</span>
@@ -780,10 +786,10 @@ const zhSourceButtons = ["all", ...Object.keys(bySource)]
 
 const zhCards = top
   .map(
-    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.deliverables.hook} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${zhHook(item)} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>评分 ${item.score}</span><span>${escapeHtml(fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? "<span>缓存</span>" : ""}${item.qualityFlags?.length ? "<span>需复核</span>" : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
-  <p>创作切入：${escapeHtml(item.deliverables.hook)}</p>
+  <p>创作切入：${escapeHtml(zhHook(item))}</p>
   <p class="why"><strong>为什么现在：</strong>${escapeHtml(zhWhyNow(item))}</p>
   <div class="idea"><strong>B 站角度：</strong>${escapeHtml(item.deliverables.bilibiliTitles[0])}</div>
   <details>
@@ -874,7 +880,7 @@ function topicCards(items) {
   <h2><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h2>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
   <ul>
-    <li><strong>Creator hook:</strong> ${escapeHtml(item.deliverables.hook)}</li>
+    <li><strong>Creator hook:</strong> ${escapeHtml(zhHook(item))}</li>
     <li><strong>Demo angle:</strong> ${escapeHtml(item.deliverables.demoSteps?.[1] || item.deliverables.whyNow)}</li>
     <li><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</li>
   </ul>
@@ -946,7 +952,7 @@ function escapeXml(value) {
 function feedDescription(item) {
   return [
     item.summary || "No summary available.",
-    `Creator hook: ${item.deliverables.hook}`,
+    `Creator hook: ${zhHook(item)}`,
     `Demo angle: ${item.deliverables.demoSteps?.[1] || item.deliverables.whyNow}`,
     `Limitation: ${item.deliverables.limitation}`,
     "Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20"
@@ -1023,7 +1029,7 @@ ${top
 - Fit: ${item.monetizationFit}
 - Quality: ${item.qualityRisk}
 - Link: ${item.url}
-- Hook: ${item.deliverables.hook}
+- Hook: ${zhHook(item)}
 - Demo angle: ${item.deliverables.demoSteps?.[1] || item.deliverables.whyNow}
 - Limitation: ${item.deliverables.limitation}
 `
@@ -1047,7 +1053,7 @@ function issueCards(items) {
   <h2><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h2>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
   <ul>
-    <li><strong>Hook:</strong> ${escapeHtml(item.deliverables.hook)}</li>
+    <li><strong>Hook:</strong> ${escapeHtml(zhHook(item))}</li>
     <li><strong>Demo angle:</strong> ${escapeHtml(item.deliverables.demoSteps?.[1] || item.deliverables.whyNow)}</li>
     <li><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</li>
   </ul>
@@ -1192,7 +1198,7 @@ const html = `<!doctype html>
       </div>
       <div class="utility-links" aria-label="Secondary landing links">
         <a href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
-        <a href="./public-sample.en.csv">${dual("CSV", "CSV")}</a>
+        <a href="./trendfoundry-free-sample-pack.zip">${dual("Sample pack", "样品包")}</a>
         <a href="./ready-to-record-script.md">${dual("Script", "脚本")}</a>
         <a href="./auth/">${dual("Sign in", "账号登录")}</a>
         <a href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
@@ -1220,6 +1226,7 @@ const html = `<!doctype html>
         ${dual("The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.", "公开样品展示格式、评分、来源链接和质量备注，但不暴露完整付费包。", "p")}
       </div>
       <div class="sample-actions">
+        <a class="action strong" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
         <a class="action primary" href="./public-sample.en.md">${dual("Open English sample", "打开英文样品")}</a>
         <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
         <a class="action primary" href="./public-sample.zh-CN.md">${dual("Open Chinese sample", "打开中文样品")}</a>
@@ -1352,7 +1359,7 @@ const zhHtml = `<!doctype html>
       </div>
       <div class="utility-links" aria-label="Secondary landing links">
         <a href="../public-sample.en.md">English sample</a>
-        <a href="../public-sample.zh-CN.csv">CSV</a>
+        <a href="../trendfoundry-free-sample-pack.zip">样品包</a>
         <a href="../ready-to-record-script.md">脚本</a>
         <a href="../auth/">账号登录</a>
         <a href="${issueOrderHref}">在 GitHub 申请</a>
@@ -1380,6 +1387,7 @@ const zhHtml = `<!doctype html>
         <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
       </div>
       <div class="sample-actions">
+        <a class="action strong" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
         <a class="action primary" href="../public-sample.zh-CN.md">打开中文样品</a>
         <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
         <a class="action primary" href="../public-sample.en.md">Open English sample</a>
@@ -1483,6 +1491,7 @@ const orderHtml = `<!doctype html>
     <p class="sub">Pick a tier, send the prepared email, and receive payment instructions plus the next delivery step. The GitHub form remains available for buyers who prefer public issue tracking.</p>
     <div class="hero-actions">
       <a class="action primary" href="#tiers">Choose tier</a>
+      <a class="action strong" href="../trendfoundry-free-sample-pack.zip">Download sample pack</a>
       <a class="action" href="../public-sample.en.md">English sample</a>
       <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
       <a class="action strong" href="${issueOrderHref}">GitHub request</a>
@@ -3192,6 +3201,8 @@ const sitemapUrls = [
   "public-sample.csv",
   "public-sample.en.csv",
   "public-sample.zh-CN.csv",
+  "trendfoundry-free-sample-pack.zip",
+  "trendfoundry-free-sample-pack.json",
   "ready-to-record-script.md",
   "sales-page-copy.md",
   "feed.xml",

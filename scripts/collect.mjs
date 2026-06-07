@@ -195,7 +195,7 @@ function packageItem(item) {
     deliverables: {
       bilibiliTitles: ideaAngles(item).map((angle) => `【实测】${angle}`),
       youtubeTitles: ideaAngles(item).map((angle) => `${angle} (practical test)`),
-      hook: `这期不讲概念，直接验证 ${item.title} 是否能进入真实创作工作流。`,
+      hook: `这期不追热点，直接复现 ${item.title} 的可用步骤、限制和创作价值。`,
       whyNow: whyNow(item),
       demoSteps: demoSteps(item),
       outline: [
