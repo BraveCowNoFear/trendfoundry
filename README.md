@@ -37,6 +37,7 @@ On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and
 - `docs/design-system.md`: minimal design standards for product and delivery assets.
 - `docs/lead-capture.md`: public intake and triage flow for sample-pack requests.
 - `docs/qa.md`: local and online checks for delivery boundaries, visual assets, script quality, and scheduled operations.
+- `docs/launch-posts.md`: draft launch posts and warm outreach copy generated for manual review.
 
 ## Monetization Plan
 

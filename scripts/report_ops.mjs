@@ -91,6 +91,7 @@ ${leadCounts}
 ## Local Assets
 
 - Outreach drafts: ${report.assets.outreachDraftCount}
+- Launch asset files: ${report.assets.launchAssetCount}
 - Commerce products: ${report.assets.commerceProductCount}
 - Prepared order directories: ${report.assets.orderCount}
 - Latest order directories: ${report.assets.latestOrders.join(", ") || "none"}
@@ -115,6 +116,7 @@ const onlineQaData = await readJsonIfExists(path.join(root, "dist", "qa", "lates
 const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "latest-run.json"), { steps: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
 const outreachFiles = await listFilesIfExists(path.join(root, "dist", "outreach-drafts"));
+const launchAssetFiles = await listFilesIfExists(path.join(root, "dist", "launch-assets"));
 const orderDirs = await listDirsIfExists(path.join(root, "dist", "orders"));
 
 const items = latest.items || [];
@@ -162,6 +164,7 @@ const report = {
   },
   assets: {
     outreachDraftCount: outreachFiles.filter((file) => file.endsWith(".md") && file !== "outreach-drafts.md").length,
+    launchAssetCount: launchAssetFiles.length,
     commerceProductCount: commerceData.products?.length || 0,
     orderCount: orderDirs.length,
     latestOrders: orderDirs.slice(-5)
@@ -170,6 +173,7 @@ const report = {
     paidReadyCount ? `Run npm run fulfill-ready for ${paidReadyCount} paid lead(s).` : "No paid leads are waiting for fulfillment.",
     qualifiedCount ? `Review ${qualifiedCount} qualified lead(s); use npm run fulfill-ready -- --include-qualified only if sample delivery is approved.` : "No qualified leads require approval.",
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
+    launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page."
   ]
 };

@@ -19,6 +19,7 @@ const requiredScripts = [
   "fulfill-ready",
   "draft-outreach",
   "ops-report",
+  "launch-assets",
   "social",
   "qa"
 ];
@@ -110,6 +111,12 @@ async function checkLocal() {
   assertCheck("sales copy has no PDF promise", !/PDF or Markdown|PDF brief/.test(salesCopy));
   assertCheck("sales copy does not deliver prospects.csv", !/Delivery:[\s\S]{0,220}prospects\.csv/.test(salesCopy));
 
+  const launchPosts = `${await readText(path.join(root, "docs", "launch-posts.md"))}\n${await readText(path.join(root, "dist", "launch-assets", "launch-posts.md"))}`;
+  assertCheck("launch assets are draft-only", launchPosts.includes("draft_review_before_posting") && launchPosts.includes("Review before posting or sending"));
+  assertCheck("launch assets include public sample link", launchPosts.includes("https://bravecownofear.github.io/trendfoundry/public-sample.md"));
+  assertCheck("launch assets include no-guarantee warning", launchPosts.includes("do not promise views/revenue") || launchPosts.includes("No promises about views or revenue"));
+  assertCheck("launch assets avoid positive view/revenue promises", !/guaranteed (views|revenue)|will get (views|revenue)|grow your (views|revenue)/i.test(launchPosts));
+
   const commerce = await readJson(path.join(root, "dist", "commerce", "products.json"));
   assertCheck("commerce has 3 products", commerce.products?.length === 3, String(commerce.products?.length || 0));
   assertCheck("commerce mentions scene-by-scene script", JSON.stringify(commerce).includes("scene-by-scene ready-to-record script"));
@@ -137,6 +144,7 @@ async function checkLocal() {
   const opsReport = await readText(path.join(root, "dist", "ops-report", "ops-report.md"));
   assertCheck("ops report safety says no messages sent", opsReport.includes("No messages were sent."));
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
+  assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 
   if (skipScheduler) {

@@ -36,6 +36,7 @@ try {
   steps.push(runStep("commerce", ["commerce"]));
   steps.push(runStep("leads", ["leads"]));
   steps.push(runStep("fulfill-ready", ["fulfill-ready"]));
+  steps.push(runStep("launch-assets", ["launch-assets"]));
   steps.push(runStep("ops-report", ["ops-report"]));
   steps.push(runStep("qa", ["qa", "--", "--skip-scheduler"]));
 

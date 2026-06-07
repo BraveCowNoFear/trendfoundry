@@ -13,6 +13,7 @@
     "draft-outreach": "node scripts/draft_outreach.mjs",
     "commerce": "node scripts/export_commerce.mjs",
     "ops-report": "node scripts/report_ops.mjs",
+    "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "operate": "node scripts/run_operations.mjs",
     "qa": "node scripts/qa.mjs",

@@ -20,6 +20,7 @@ The report reads local state only. It does not send messages, charge buyers, upl
 - `data/latest.json`
 - `data/leads.json`
 - `dist/outreach-drafts/`
+- `dist/launch-assets/`
 - `dist/commerce/products.json`
 - `dist/qa/latest-qa.json`
 - `dist/ops-run/latest-run.json`
@@ -34,6 +35,7 @@ The report reads local state only. It does not send messages, charge buyers, upl
 - most recent `npm run operate` step statuses
 - lead stage counts
 - local outreach draft count
+- launch asset count
 - commerce SKU count
 - prepared order directories
 - next actions with safety reminders

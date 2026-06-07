@@ -14,6 +14,7 @@ This runs:
 - `npm run commerce`
 - `npm run leads`
 - `npm run fulfill-ready`
+- `npm run launch-assets`
 - `npm run ops-report`
 - `npm run qa -- --skip-scheduler`
 
