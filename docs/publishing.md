@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27088765850`
+Latest verified Pages run: `27089007093`
 
-Latest verified commit: `a6a263e Add subscription feeds for creator opportunities`
+Latest verified commit: `860f10d Add durable public issue archive`
 
 Verified public paths:
 
@@ -23,17 +23,18 @@ Verified public paths:
 - `https://bravecownofear.github.io/trendfoundry/feed.json`
 - `https://bravecownofear.github.io/trendfoundry/issues/`
 - `https://bravecownofear.github.io/trendfoundry/issues/latest.html`
+- `https://bravecownofear.github.io/trendfoundry/issues/2026-06-07.html`
 - `https://bravecownofear.github.io/trendfoundry/topics/ai-video-ideas.html`
 - `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
 
 Latest verification:
 
-- Pages workflow `27088765850` completed successfully for commit `a6a263ee7034f3b910e24f4a10c6f9a126580224`.
-- Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
+- Pages workflow `27089007093` completed successfully for commit `860f10d4e60d34ff9c660c344be41e0de0eea560`.
+- Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 111/111.
+- `npm run qa -- --online` passed 123/123.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, 5 SEO topic links rendered on the homepage, 2 Feed buttons rendered on the homepage, the SEO topic page rendered 8 cards, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, 5 SEO topic links rendered on the homepage, 2 Feed buttons rendered on the homepage, the Archive box rendered on the homepage, the latest issue rendered 12 cards, the archive index rendered, the SEO topic page rendered 8 cards, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
