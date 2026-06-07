@@ -34,3 +34,7 @@ Start as a weekly paid brief:
 - USD 49/month custom niche pack for a creator or small channel team.
 
 The product promise is not bulk AI content. It is source-backed topic selection plus a recording-ready production angle. Fresh collection errors are isolated into `errors`, and historical cache fallbacks keep the brief usable when a public source rate-limits.
+
+## Publishing
+
+The `site/` directory is deployable through GitHub Pages using `.github/workflows/pages.yml`. See `docs/publishing.md`.

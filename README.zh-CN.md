@@ -34,3 +34,7 @@ Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `
 - 垂直频道定制包 USD 49/month。
 
 核心承诺不是批量 AI 灌水，而是有真实来源、有复现实测角度、有视频生产结构的高信号选题。外部源采集失败会进入 `errors`，并用历史缓存兜底，避免公开 API 限流时污染成品报告。
+
+## 发布
+
+`site/` 目录可通过 `.github/workflows/pages.yml` 发布到 GitHub Pages。详情见 `docs/publishing.md`。
