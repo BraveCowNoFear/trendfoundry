@@ -1,0 +1,22 @@
+{
+  "name": "trendfoundry",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Autonomous creator-intelligence product that turns public AI/dev trends into sellable video idea packs.",
+  "scripts": {
+    "collect": "node scripts/collect.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/server.mjs",
+    "daily": "node scripts/collect.mjs && node scripts/build.mjs"
+  },
+  "keywords": [
+    "creator-economy",
+    "trend-intelligence",
+    "youtube",
+    "bilibili",
+    "github",
+    "ai-video"
+  ],
+  "license": "UNLICENSED"
+}

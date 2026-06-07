@@ -1,0 +1,32 @@
+# TrendFoundry
+
+TrendFoundry 是一个自动化创作者情报产品：从 GitHub、Hacker News、arXiv 等公开信号抓取 AI/开发者趋势，评分后生成可售卖的 B 站/YouTube 选题包。
+
+## 运行
+
+```bash
+npm run daily
+npm start
+```
+
+然后打开 `http://localhost:4173`。
+
+## 自动化
+
+Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `logs/`。
+
+## 产物
+
+- `data/latest.json`：带来源链接的机会列表。
+- `docs/daily-brief.md`：可作为付费样品的日报。
+- `site/index.html`：当前情报包的销售/展示页。
+
+## 变现路径
+
+先卖周更情报包：
+
+- 单期样品 USD 9。
+- 周更订阅 USD 19/month。
+- 垂直频道定制包 USD 49/month。
+
+核心承诺不是批量 AI 灌水，而是有真实来源、有复现实测角度、有视频生产结构的高信号选题。
