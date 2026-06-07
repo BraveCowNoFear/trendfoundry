@@ -50,6 +50,7 @@ const sourceMix = Object.entries(bySource)
 const sourceBars = Object.entries(bySource)
   .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
   .join("");
+const publicSample = top.slice(0, 3);
 
 const pricingTiers = [
   {
@@ -109,6 +110,18 @@ const deliveryChecklist = deliveryItems
   .map(([label, text]) => `<li><strong>${escapeHtml(label)}</strong><span>${escapeHtml(text)}</span></li>`)
   .join("");
 
+function csvEscape(value) {
+  const text = String(value ?? "");
+  return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+}
+
+function toCsv(rows, columns) {
+  return [
+    columns.join(","),
+    ...rows.map((row) => columns.map((column) => csvEscape(row[column])).join(","))
+  ].join("\n");
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -120,6 +133,59 @@ function escapeHtml(value) {
 function mdLink(item) {
   return `[${item.title}](${item.url})`;
 }
+
+const publicSampleReport = `# TrendFoundry Public Sample
+
+Generated: ${data.generatedAt}
+
+This free sample shows the format and quality bar. The paid issue expands this into 12 ranked opportunities, one ready-to-record script, CSV tables, and delivery notes.
+
+## Sample Opportunities
+
+${publicSample
+  .map(
+    (item, index) => `### ${index + 1}. ${item.title}
+
+- Score: ${item.score}
+- Fit: ${item.monetizationFit}
+- Source: ${item.source} / ${item.sourceQuery}
+- Quality: ${item.qualityFlags?.length ? `review (${item.qualityFlags.join(", ")})` : "normal"}
+- Link: ${item.url}
+- Creator target: ${item.targetCreator}
+- Why now: ${item.deliverables.whyNow}
+- Hook: ${item.deliverables.hook}
+- Demo: ${item.deliverables.demoSteps[1]}
+- Limitation: ${item.deliverables.limitation}
+`
+  )
+  .join("\n")}
+
+## Upgrade
+
+- Sample issue: USD 9 one-off.
+- Weekly brief: USD 19/month.
+- Custom niche: USD 49/month.
+
+Request the current issue: ${issueOrderHref}
+
+Email order: ${contactEmail}
+`;
+
+const publicSampleCsv = toCsv(
+  publicSample.map((item, index) => ({
+    rank: index + 1,
+    score: item.score,
+    source: item.source,
+    fit: item.monetizationFit,
+    quality: item.qualityFlags?.length ? `review: ${item.qualityFlags.join("; ")}` : "normal",
+    title: item.title,
+    hook: item.deliverables.hook,
+    demo: item.deliverables.demoSteps[1],
+    limitation: item.deliverables.limitation,
+    url: item.url
+  })),
+  ["rank", "score", "source", "fit", "quality", "title", "hook", "demo", "limitation", "url"]
+);
 
 const report = `# TrendFoundry Daily Creator Intelligence
 
@@ -263,7 +329,8 @@ const html = `<!doctype html>
       <h1>Creator intelligence packs for AI and developer video channels</h1>
       <p class="sub">Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.</p>
       <div class="hero-actions">
-        <a class="action primary" href="./daily-brief.md">Download sample brief</a>
+        <a class="action primary" href="./public-sample.md">View free sample</a>
+        <a class="action" href="./public-sample.csv">Download CSV sample</a>
         <a class="action" href="./ready-to-record-script.md">Open script</a>
         <a class="action strong" href="${issueOrderHref}">Request on GitHub</a>
         <a class="action" href="${orderHref}">Email order</a>
@@ -296,6 +363,17 @@ const html = `<!doctype html>
         <p>Each tier sells the same core advantage: fewer weak topics, faster planning, and a clearer recording queue.</p>
       </div>
       <div class="tier-grid">${pricingCards}</div>
+    </section>
+    <section class="sample-preview" aria-label="Free public sample">
+      <div>
+        <p class="section-label">Free sample</p>
+        <h2>Inspect three current opportunities before ordering.</h2>
+        <p>The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.</p>
+      </div>
+      <div class="sample-actions">
+        <a class="action primary" href="./public-sample.md">Open sample</a>
+        <a class="action" href="./public-sample.csv">CSV sample</a>
+      </div>
     </section>
     <section class="delivery" aria-label="What the buyer receives">
       <div>
@@ -479,10 +557,33 @@ main {
 .price span { display: block; font-size: 32px; font-weight: 850; }
 .price small { color: var(--muted); }
 .pricing,
+.sample-preview,
 .delivery {
   border-bottom: 1px solid var(--line);
   padding: 2px 0 24px;
   margin-bottom: 22px;
+}
+.sample-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+}
+.sample-preview h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.sample-preview p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.sample-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
 }
 .section-head {
   display: grid;
@@ -695,6 +796,7 @@ li { margin: 6px 0; }
 @media (max-width: 960px) {
   .topbar,
   .offer,
+  .sample-preview,
   .section-head,
   .tier-grid,
   .delivery,
@@ -705,6 +807,7 @@ li { margin: 6px 0; }
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .sample-actions { justify-content: flex-start; }
   .result-count { margin: 0; white-space: normal; }
   .filter-button { flex: 1 1 auto; }
 }
@@ -742,11 +845,14 @@ search.addEventListener("input", applyFilters);
 
 await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(docsDir, "ready-to-record-script.md"), script, "utf8");
+await writeFile(path.join(docsDir, "public-sample.md"), publicSampleReport, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
 await writeFile(path.join(siteDir, "app.js"), app, "utf8");
 await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
+await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReport, "utf8");
+await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsv, "utf8");
 await writeFile(path.join(siteDir, "launch-plan.md"), await readFile(path.join(docsDir, "launch-plan.md"), "utf8"), "utf8");
 await writeFile(path.join(siteDir, "sales-page-copy.md"), await readFile(path.join(docsDir, "sales-page-copy.md"), "utf8"), "utf8");
 console.log(`Built ${top.length} cards.`);

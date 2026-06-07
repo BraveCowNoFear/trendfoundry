@@ -1,12 +1,12 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T02:41:08.027Z
+Generated: 2026-06-07T02:58:35.830Z
 
 ## Executive Read
 
 Today's best monetizable wedge is not generic AI video generation. It is a paid signal pack for creators who need trustworthy, technically grounded topics before everyone else copies the same demos. The strongest opportunities combine GitHub traction, current technical debate, and a clear creator workflow.
 
-Portfolio source mix among the first 12 opportunities: github: 4, hn: 2, youtube: 2, bilibili: 3, arxiv: 1.
+Portfolio source mix among the first 12 opportunities: github: 4, hn: 2, bilibili: 3, youtube: 2, arxiv: 1.
 
 High-fit opportunities: 11.
 
@@ -124,7 +124,51 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
-### 6. From Zero to Your First AI Agent in 25 Minutes (No Coding)
+### 6. GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长
+
+- Score: 123
+- Fit: high
+- Source: bilibili / AI视频工具
+- Freshness: fresh
+- Quality: normal
+- Link: http://www.bilibili.com/video/av116706441763035
+- Why it matters: -
+- Creator target: AI workflow creator
+- Why now: GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注
+- YouTube title: 为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: http://www.bilibili.com/video/av116706441763035
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 7. Local AI Agents In 26 Minutes
+
+- Score: 122
+- Fit: high
+- Source: youtube / AI agents tutorial open source
+- Freshness: fresh
+- Quality: normal
+- Link: https://www.youtube.com/watch?v=M-NTwkM3VwM
+- Why it matters: Tina Huang / 1 month ago / 264,746 views
+- Creator target: tech explainer / developer educator
+- Why now: Local AI Agents In 26 Minutes is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 Local AI Agents In 26 Minutes 现在值得创作者关注
+- YouTube title: 为什么 Local AI Agents In 26 Minutes 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: https://www.youtube.com/watch?v=M-NTwkM3VwM
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about Local AI Agents In 26 Minutes, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 8. From Zero to Your First AI Agent in 25 Minutes (No Coding)
 
 - Score: 121
 - Fit: high
@@ -132,7 +176,7 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=EH5jx5qPabU
-- Why it matters: Futurepedia and AI Agent Lab / 1y ago / 3,778,719 views
+- Why it matters: Futurepedia and AI Agent Lab / 1 year ago / 3,778,777 views
 - Creator target: tech explainer / developer educator
 - Why now: From Zero to Your First AI Agent in 25 Minutes (No Coding) is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
 - Bilibili title: 【实测】为什么 From Zero to Your First AI Agent in 25 Minutes (No Coding) 现在值得创作者关注
@@ -146,29 +190,29 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about From Zero to Your First AI Agent in 25 Minutes (No Coding), showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 7. GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord
+### 9. [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI
 
-- Score: 121
+- Score: 119
 - Fit: high
-- Source: youtube / GitHub trending AI projects
+- Source: bilibili / 开源AI项目
 - Freshness: fresh
 - Quality: normal
-- Link: https://www.youtube.com/watch?v=DlwsYrtZFas
-- Why it matters: Github Awesome / 11 days ago / 5,438 views
-- Creator target: tech explainer / developer educator
-- Why now: GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord is appearing in a current trend signal for GitHub trending AI projects, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 GitHub Trending Today 34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 现在值得创作者关注
-- YouTube title: 为什么 GitHub Trending Today 34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord 是否能进入真实创作工作流。
+- Link: http://www.bilibili.com/video/av116705468618655
+- Why it matters: 原标题：A Billion 3D Splats Rendering in Your Browser (And It&#x27;s Open Source) 作者：Stefan 3D AI 原链接：https://www.youtube.com/watch?v=2t-PLeenqqA 上传日期：2026-06-06 简介：本视频介绍了一款开创性的开源库，可在网页浏览器内直接渲染十亿个3D高斯点，无需高端显卡或软件安装。演讲者指出，通过借鉴游戏开发中的细节层次和流式传输技术，如今能在笔记本和移动设备上流畅运行大规模3
+- Creator target: AI workflow creator
+- Why now: [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注
+- YouTube title: 为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 是否能进入真实创作工作流。
 - Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=DlwsYrtZFas
+  - Open and verify the source: http://www.bilibili.com/video/av116705468618655
   - Reproduce the smallest useful workflow or summarize the core claim with evidence.
   - Compare the before/after creator workflow: research time, production time, or output quality.
   - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Thumbnail prompt: A clean tech explainer thumbnail about [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 8. Ask HN: Why is the HN crowd so anti-AI?
+### 10. Ask HN: Why is the HN crowd so anti-AI?
 
 - Score: 119
 - Fit: high
@@ -190,53 +234,9 @@ Collection health: 1 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: Why is the HN crowd so anti-AI?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
-### 9. GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长
-
-- Score: 118
-- Fit: high
-- Source: bilibili / AI视频工具
-- Freshness: fresh
-- Quality: normal
-- Link: http://www.bilibili.com/video/av116706441763035
-- Why it matters: -
-- Creator target: AI workflow creator
-- Why now: GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 is appearing in a current trend signal for AI视频工具, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注
-- YouTube title: 为什么 GlowaveX焕新上线，来听听我对 AI 工具的思考 人工智能  ai 工具  ai 视频 Glowave 姜学长 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116706441763035
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 10. [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI
-
-- Score: 118
-- Fit: high
-- Source: bilibili / 开源AI项目
-- Freshness: fresh
-- Quality: normal
-- Link: http://www.bilibili.com/video/av116705468618655
-- Why it matters: 原标题：A Billion 3D Splats Rendering in Your Browser (And It&#x27;s Open Source) 作者：Stefan 3D AI 原链接：https://www.youtube.com/watch?v=2t-PLeenqqA 上传日期：2026-06-06 简介：本视频介绍了一款开创性的开源库，可在网页浏览器内直接渲染十亿个3D高斯点，无需高端显卡或软件安装。演讲者指出，通过借鉴游戏开发中的细节层次和流式传输技术，如今能在笔记本和移动设备上流畅运行大规模3
-- Creator target: AI workflow creator
-- Why now: [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注
-- YouTube title: 为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116705468618655
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
 ### 11. 用 AI 重构一个.NET开源项目的经历分享
 
-- Score: 105
+- Score: 107
 - Fit: high
 - Source: bilibili / 开源AI项目
 - Freshness: fresh
