@@ -6,13 +6,14 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27089286112`
+Latest verified Pages run: `27089726907`
 
-Latest verified commit: `f0d66d1 Add bilingual landing page toggle`
+Latest verified commit: `7becba6 Polish landing page source mix messaging`
 
 Verified public paths:
 
 - `https://bravecownofear.github.io/trendfoundry/`
+- `https://bravecownofear.github.io/trendfoundry/zh/`
 - `https://bravecownofear.github.io/trendfoundry/daily-brief.md`
 - `https://bravecownofear.github.io/trendfoundry/sales-page-copy.md`
 - `https://bravecownofear.github.io/trendfoundry/public-sample.md`
@@ -29,12 +30,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27089286112` completed successfully for commit `f0d66d1 Add bilingual landing page toggle`.
-- Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
+- Pages workflow `27089726907` completed successfully for commit `7becba6 Polish landing page source mix messaging`.
+- Public page, `zh/`, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 128/128.
+- `npm run qa -- --online` passed 138/138.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the homepage language switch changed the public landing page to Simplified Chinese, persisted after reload with `localStorage`, kept the zero-result search count localized, and preserved 12 cards, topic links, Feed buttons, Archive links, script CTA, and core order CTAs. Screenshots: `dist/qa/online-i18n-home-desktop-f0d66d1.png` and `dist/qa/online-i18n-home-mobile-f0d66d1.png`.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the homepage language switch works, `/zh/` defaults to Simplified Chinese, source mix renders as a compact legend panel, 12 cards render, Bilibili filtering works, zero-result search count stays localized, OG preview loads, and core order CTAs remain visible. Screenshots: `dist/qa/online-source-polish-home-*-7becba6.png` and `dist/qa/online-source-polish-zh-*-7becba6.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
