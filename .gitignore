@@ -1,6 +1,8 @@
 node_modules/
 logs/
 data/raw/
+data/leads.json
+docs/lead-pipeline.md
 dist/
 .DS_Store
 Thumbs.db

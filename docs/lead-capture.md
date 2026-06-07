@@ -24,6 +24,21 @@ When a new issue appears:
 4. Label the issue as `lead`, `sample-pack`, `qualified`, `paid`, or `not-fit`.
 5. Track conversion in `docs/outreach-board.md` or a future CRM export.
 
+## Local Lead Sync
+
+Run:
+
+```bash
+npm run leads
+```
+
+The sync reads public GitHub issues from `BraveCowNoFear/trendfoundry`, parses the Issue Form fields, and writes:
+
+- `data/leads.json`
+- `docs/lead-pipeline.md`
+
+Both files are intentionally ignored by Git because they may contain buyer contact details. Commit `docs/lead-pipeline.example.md` only.
+
 ## Safety
 
 - Do not ask buyers to post payment card details or private identifiers in GitHub issues.

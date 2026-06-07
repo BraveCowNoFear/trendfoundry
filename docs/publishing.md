@@ -6,13 +6,16 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27080162950`
+Latest verified Pages run: `27080307584`
+
+Latest verified commit: `7284af1 Add no-backend lead capture path`
 
 Verified public paths:
 
 - `https://bravecownofear.github.io/trendfoundry/`
 - `https://bravecownofear.github.io/trendfoundry/daily-brief.md`
 - `https://bravecownofear.github.io/trendfoundry/sales-page-copy.md`
+- `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
