@@ -17,7 +17,7 @@ Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `
 
 ## 产物
 
-- `data/latest.json`：带来源链接的机会列表。
+- `data/latest.json`：来自 GitHub、YouTube、Bilibili、Hacker News、arXiv 的带来源链接机会列表。
 - `docs/daily-brief.md`：可作为付费样品的日报。
 - `site/index.html`：当前情报包的销售/展示页。
 
@@ -29,4 +29,4 @@ Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `
 - 周更订阅 USD 19/month。
 - 垂直频道定制包 USD 49/month。
 
-核心承诺不是批量 AI 灌水，而是有真实来源、有复现实测角度、有视频生产结构的高信号选题。
+核心承诺不是批量 AI 灌水，而是有真实来源、有复现实测角度、有视频生产结构的高信号选题。外部源采集失败会进入 `errors`，并用历史缓存兜底，避免公开 API 限流时污染成品报告。

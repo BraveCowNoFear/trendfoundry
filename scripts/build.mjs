@@ -9,7 +9,7 @@ await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 
 function selectPortfolio(items) {
-  const quotas = { github: 6, hn: 4, arxiv: 2 };
+  const quotas = { github: 4, bilibili: 3, youtube: 2, hn: 2, arxiv: 1 };
   const selected = [];
   const used = new Set();
   for (const [source, quota] of Object.entries(quotas)) {
@@ -31,6 +31,7 @@ function selectPortfolio(items) {
 
 const top = selectPortfolio(data.items);
 const high = top.filter((item) => item.monetizationFit === "high");
+const cached = top.filter((item) => item.stale);
 const bySource = top.reduce((acc, item) => {
   acc[item.source] = (acc[item.source] || 0) + 1;
   return acc;
@@ -62,6 +63,8 @@ Portfolio source mix among the first 12 opportunities: ${Object.entries(bySource
 
 High-fit opportunities: ${high.length}.
 
+Collection health: ${data.errorCount || 0} fresh collection errors, ${cached.length} cached fallback items in the displayed portfolio.
+
 ## Top Opportunities
 
 ${top
@@ -71,6 +74,7 @@ ${top
 - Score: ${item.score}
 - Fit: ${item.monetizationFit}
 - Source: ${item.source} / ${item.sourceQuery}
+- Freshness: ${item.stale ? "cached fallback" : "fresh"}
 - Link: ${item.url}
 - Why it matters: ${item.summary || "No summary available."}
 - Creator target: ${item.targetCreator}
@@ -134,7 +138,7 @@ Source: ${mdLink(winner)}
 const cards = top
   .map(
     (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
-  <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span></div>
+  <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span>${item.stale ? "<span>cached</span>" : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
   <div class="idea">
@@ -177,6 +181,7 @@ const html = `<!doctype html>
     <aside>
       <span>${top.length} opportunities</span>
       <span>${high.length} high-fit</span>
+      <span>${data.errorCount || 0} source errors</span>
       <span>${new Date(data.generatedAt).toLocaleDateString("en-GB")}</span>
     </aside>
   </header>
