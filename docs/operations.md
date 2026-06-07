@@ -30,6 +30,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_ops.ps1
 
 The wrapper writes logs to `logs/ops-*.log`.
 
+The existing Windows task `TrendFoundryDaily` calls `scripts/run_daily.ps1`, which now runs the full `npm run operate` pipeline and writes `logs/daily-ops-*.log`.
+
 ## Safety
 
 - No outreach messages are sent.

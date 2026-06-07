@@ -1,12 +1,12 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T03:46:38.382Z
+Generated: 2026-06-07T03:51:52.738Z
 
 ## Executive Read
 
 Today's best monetizable wedge is not generic AI video generation. It is a paid signal pack for creators who need trustworthy, technically grounded topics before everyone else copies the same demos. The strongest opportunities combine GitHub traction, current technical debate, and a clear creator workflow.
 
-Portfolio source mix among the first 12 opportunities: github: 4, youtube: 2, hn: 2, bilibili: 3, arxiv: 1.
+Portfolio source mix among the first 12 opportunities: github: 4, hn: 2, bilibili: 3, youtube: 2, arxiv: 1.
 
 High-fit opportunities: 11.
 
@@ -102,51 +102,7 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about langchain-ai/langchain, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-### 5. The Only AI Video Prompt Generator You'll Ever Need
-
-- Score: 137
-- Fit: high
-- Source: youtube / AI video tools creator workflow
-- Freshness: fresh
-- Quality: normal
-- Link: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Why it matters: Youri van Hofwegen / 4 days ago / 34,427 views
-- Creator target: AI workflow creator
-- Why now: The Only AI Video Prompt Generator You'll Ever Need is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注
-- YouTube title: 为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 The Only AI Video Prompt Generator You'll Ever Need 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about The Only AI Video Prompt Generator You'll Ever Need, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 6. The ONLY 3 Tools You Need to Create ANY AI Video
-
-- Score: 137
-- Fit: high
-- Source: youtube / AI video tools creator workflow
-- Freshness: fresh
-- Quality: normal
-- Link: https://www.youtube.com/watch?v=JQzF5LP4VTs
-- Why it matters: Tao Prompts / 4 days ago / 33,141 views
-- Creator target: AI workflow creator
-- Why now: The ONLY 3 Tools You Need to Create ANY AI Video is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注
-- YouTube title: 为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 The ONLY 3 Tools You Need to Create ANY AI Video 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=JQzF5LP4VTs
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about The ONLY 3 Tools You Need to Create ANY AI Video, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 7. Ask HN: What is your (AI) dev tech stack / workflow?
+### 5. Ask HN: What is your (AI) dev tech stack / workflow?
 
 - Score: 131
 - Fit: high
@@ -168,7 +124,7 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
-### 8. GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长
+### 6. GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长
 
 - Score: 129
 - Fit: high
@@ -190,7 +146,73 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Thumbnail prompt: A clean tech explainer thumbnail about GlowaveX焕新上线，来听听我对 AI 工具的思考 #人工智能 # ai 工具 # ai 视频 #Glowave #姜学长, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 9. [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI
+### 7. Local AI Agents In 26 Minutes
+
+- Score: 122
+- Fit: high
+- Source: youtube / AI agents tutorial open source
+- Freshness: fresh
+- Quality: normal
+- Link: https://www.youtube.com/watch?v=M-NTwkM3VwM
+- Why it matters: Tina Huang / 1 month ago / 264,860 views
+- Creator target: tech explainer / developer educator
+- Why now: Local AI Agents In 26 Minutes is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 Local AI Agents In 26 Minutes 现在值得创作者关注
+- YouTube title: 为什么 Local AI Agents In 26 Minutes 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 Local AI Agents In 26 Minutes 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: https://www.youtube.com/watch?v=M-NTwkM3VwM
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about Local AI Agents In 26 Minutes, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 8. From Zero to Your First AI Agent in 25 Minutes (No Coding)
+
+- Score: 121
+- Fit: high
+- Source: youtube / AI agents tutorial open source
+- Freshness: fresh
+- Quality: normal
+- Link: https://www.youtube.com/watch?v=EH5jx5qPabU
+- Why it matters: Futurepedia and AI Agent Lab / 1 year ago / 3,778,885 views
+- Creator target: tech explainer / developer educator
+- Why now: From Zero to Your First AI Agent in 25 Minutes (No Coding) is appearing in a current trend signal for AI agents tutorial open source, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 From Zero to Your First AI Agent in 25 Minutes (No Coding) 现在值得创作者关注
+- YouTube title: 为什么 From Zero to Your First AI Agent in 25 Minutes (No Coding) 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 From Zero to Your First AI Agent in 25 Minutes (No Coding) 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: https://www.youtube.com/watch?v=EH5jx5qPabU
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about From Zero to Your First AI Agent in 25 Minutes (No Coding), showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 9. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+
+- Score: 120
+- Fit: high
+- Source: bilibili / B站AI工作流
+- Freshness: fresh
+- Quality: normal
+- Link: http://www.bilibili.com/video/av116703774115351
+- Why it matters: 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
+- Creator target: AI workflow creator
+- Why now: 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.
+- Bilibili title: 【实测】为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
+- YouTube title: 为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)
+- Hook: 这期不讲概念，直接验证 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 是否能进入真实创作工作流。
+- Demo steps:
+  - Open and verify the source: http://www.bilibili.com/video/av116703774115351
+  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
+  - Compare the before/after creator workflow: research time, production time, or output quality.
+  - State exactly who should use it and who should skip it.
+- Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 10. [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI
 
 - Score: 119
 - Fit: high
@@ -210,28 +232,6 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
   - Compare the before/after creator workflow: research time, production time, or output quality.
   - State exactly who should use it and who should skip it.
 - Thumbnail prompt: A clean tech explainer thumbnail about [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 10. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
-
-- Score: 119
-- Fit: high
-- Source: bilibili / B站AI工作流
-- Freshness: fresh
-- Quality: normal
-- Link: http://www.bilibili.com/video/av116703774115351
-- Why it matters: 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
-- Creator target: AI workflow creator
-- Why now: 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
-- YouTube title: 为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)
-- Hook: 这期不讲概念，直接验证 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 是否能进入真实创作工作流。
-- Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116703774115351
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 ### 11. Ask HN: Why is the HN crowd so anti-AI?
