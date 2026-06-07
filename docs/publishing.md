@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27081176164`
+Latest verified Pages run: `27081350046`
 
-Latest verified commit: `2eda286 Add local order fulfillment workflow`
+Latest verified commit: `537c75c Refresh daily run with outreach drafts`
 
 Verified public paths:
 
@@ -21,7 +21,7 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27081176164` completed successfully for commit `2eda286716842d606a953e34b2ae7d9c99a6e895`.
+- Pages workflow `27081350046` completed successfully for commit `537c75cd542115863aae630bcd4a636d4d6a1d83`.
 - Public page, `public-sample.md`, and `public-sample.csv` returned HTTP 200.
 - Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; request and email CTAs were visible.
 
