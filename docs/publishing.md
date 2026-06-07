@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27090368455`
+Latest verified Pages run: `27096347501`
 
-Latest verified commit: `78aff21 Add no-login order page`
+Latest verified commit: `6ff4a46 Add paid email order fulfillment workflow`
 
 Verified public paths:
 
@@ -35,12 +35,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27095892299` completed successfully for commit `a873b29 Add local email order intake workflow`.
+- Pages workflow `27096347501` completed successfully for commit `6ff4a46 Add paid email order fulfillment workflow`.
 - Public page, `zh/`, `order/`, bilingual sample Markdown/CSV files, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 172/172.
+- `npm run qa -- --online` passed 178/178.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge CDP: desktop 1280px and mobile 390px had no horizontal overflow on public home and `/order/`; home renders 12 cards, order links, and sample links; `/order/` renders the payment reply packet section with manual invoice reference guidance. Screenshots: `dist/qa/online-intake-*-a873b29.png`.
+- Browser QA with the in-app browser: desktop 1280px and mobile 390px had no horizontal overflow on public home and `/order/`; home renders order/sample links, `/order/` renders 8 mailto CTAs, and both pages have a single H1. Viewport screenshots: `dist/qa/online-email-fulfillment-*-viewport-6ff4a46.png`; full-page captures: `dist/qa/online-email-fulfillment-*-6ff4a46.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
