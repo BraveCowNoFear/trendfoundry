@@ -42,6 +42,12 @@ npm run intake-email-orders
 
 This creates `dist/email-order-intake/pipeline.md` and matching local payment reply packets without connecting to an inbox.
 
+If payment is externally verified and the copied order text includes `Paid: yes`, `Payment confirmed`, or `Stage: paid`, prepare local buyer delivery files with:
+
+```bash
+npm run fulfill-email-orders
+```
+
 ## Product SKUs
 
 - `trendfoundry-sample-issue`: USD 9 one-off.

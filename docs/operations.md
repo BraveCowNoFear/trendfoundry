@@ -14,6 +14,7 @@ This runs:
 - `npm run commerce`
 - `npm run leads`
 - `npm run intake-email-orders`
+- `npm run fulfill-email-orders`
 - `npm run fulfill-ready`
 - `npm run launch-assets`
 - `npm run ops-report`
@@ -75,3 +76,19 @@ Generated local outputs:
 - matching `dist/payment-replies/<order-id>/...` packets
 
 The intake script only parses local files. It does not connect to an inbox, send email, create payment links, charge buyers, upload files, or change GitHub state.
+
+## Paid Email Fulfillment
+
+If an intake file includes `Paid: yes`, `Payment confirmed`, or `Stage: paid`, the parsed order stage becomes `paid_needs_fulfillment`. After verifying payment externally, generate the local buyer delivery folder:
+
+```bash
+npm run fulfill-email-orders
+```
+
+Generated local outputs:
+
+- `dist/email-fulfillment/email-orders.json`
+- `dist/email-fulfillment/email-orders.md`
+- matching `dist/orders/<order-id>/...` buyer delivery packages
+
+The fulfillment script only creates local delivery drafts. It does not send email, upload files, charge buyers, or change GitHub state.

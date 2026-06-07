@@ -42,6 +42,7 @@ For copied buyer emails, place local `.txt`, `.md`, or `.eml` files under ignore
 
 ```bash
 npm run intake-email-orders
+npm run fulfill-email-orders
 ```
 
 ## Automation
@@ -63,6 +64,7 @@ On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and
 - `docs/launch-posts.md`: draft launch posts and warm outreach copy generated for manual review.
 - `dist/payment-replies/<order-id>/`: local payment reply, invoice draft, and checklist for buyer email orders.
 - `dist/email-order-intake/`: local parsed order pipeline from copied buyer email text.
+- `dist/email-fulfillment/`: local buyer delivery report for paid email orders.
 
 ## Monetization Plan
 

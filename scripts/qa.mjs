@@ -21,6 +21,7 @@ const requiredScripts = [
   "leads",
   "fulfill",
   "fulfill-ready",
+  "fulfill-email-orders",
   "payment-reply",
   "intake-email-orders",
   "draft-outreach",
@@ -109,6 +110,7 @@ async function checkLocal() {
 
   const runOperations = await readText(path.join(root, "scripts", "run_operations.mjs"));
   assertCheck("operate runs email order intake", runOperations.includes("intake-email-orders"));
+  assertCheck("operate runs paid email fulfillment", runOperations.includes("fulfill-email-orders"));
 
   const latest = await readJson(path.join(root, "data", "latest.json"));
   const issueSlug = issueSlugFromGeneratedAt(latest.generatedAt);
@@ -295,6 +297,20 @@ async function checkLocal() {
     ].join("\n"),
     "utf8"
   );
+  await writeFile(
+    path.join(intakeInboxDir, "paid-custom-order.txt"),
+    [
+      "From: Paid Buyer <paid@example.com>",
+      "Tier: custom niche",
+      "Buyer: Paid Buyer",
+      "Contact: paid@example.com",
+      "Channel: https://example.com/paid",
+      "Niche: robotics AI demos",
+      "Delivery route: email",
+      "Paid: yes"
+    ].join("\n"),
+    "utf8"
+  );
   const intakeResult = spawnSync(process.execPath, [
     path.join(root, "scripts", "intake_email_orders.mjs"),
     `--inbox-dir=${intakeInboxDir}`,
@@ -308,11 +324,32 @@ async function checkLocal() {
   const intakeJson = existsSync(path.join(intakeOutDir, "orders.json")) ? await readJson(path.join(intakeOutDir, "orders.json")) : {};
   const intakePipeline = existsSync(path.join(intakeOutDir, "pipeline.md")) ? await readText(path.join(intakeOutDir, "pipeline.md")) : "";
   const intakeOrder = intakeJson.orders?.[0] || {};
+  const paidIntakeOrder = (intakeJson.orders || []).find((order) => order.stage === "paid_needs_fulfillment") || {};
   const intakeReply = intakeOrder.paymentReplyDir ? await readText(path.join(intakeOrder.paymentReplyDir, "payment-reply.md")) : "";
-  assertCheck("email order intake parses one weekly order", intakeJson.total === 1 && intakeOrder.tier === "weekly-brief" && intakeOrder.buyerContact === "qa@example.com");
-  assertCheck("email order intake writes pipeline", intakePipeline.includes("Email Order Intake") && intakePipeline.includes("QA Buyer"));
-  assertCheck("email order intake generates payment reply", intakeReply.includes("USD 19 / month") && intakeReply.includes("Please do not send card numbers"));
+  assertCheck("email order intake parses weekly and paid orders", intakeJson.total === 2 && intakeOrder.tier === "custom-niche" && paidIntakeOrder.buyerContact === "paid@example.com");
+  assertCheck("email order intake writes pipeline", intakePipeline.includes("Email Order Intake") && intakePipeline.includes("QA Buyer") && intakePipeline.includes("Paid Buyer"));
+  assertCheck("email order intake generates payment reply", intakeReply.includes("USD 49 / month") && intakeReply.includes("Please do not send card numbers"));
   assertCheck("email order intake records no external actions", (intakeJson.safety || []).includes("No inbox connection was opened.") && (intakeJson.safety || []).includes("No payment action was attempted."));
+
+  const emailFulfillmentOutDir = path.join(root, "dist", "qa", "email-fulfillment");
+  await rm(emailFulfillmentOutDir, { recursive: true, force: true });
+  const emailFulfillmentResult = spawnSync(process.execPath, [
+    path.join(root, "scripts", "fulfill_email_orders.mjs"),
+    `--intake-file=${path.join(intakeOutDir, "orders.json")}`,
+    `--out-dir=${emailFulfillmentOutDir}`
+  ], {
+    cwd: root,
+    encoding: "utf8"
+  });
+  assertCheck("email fulfillment exits", emailFulfillmentResult.status === 0, emailFulfillmentResult.stderr || emailFulfillmentResult.stdout);
+  const emailFulfillment = existsSync(path.join(emailFulfillmentOutDir, "email-orders.json")) ? await readJson(path.join(emailFulfillmentOutDir, "email-orders.json")) : {};
+  const preparedEmailOrder = emailFulfillment.prepared?.[0] || {};
+  const preparedEmailOrderFiles = preparedEmailOrder.orderDir && existsSync(preparedEmailOrder.orderDir) ? await readdir(preparedEmailOrder.orderDir) : [];
+  const forbiddenEmailOrderFiles = preparedEmailOrderFiles.filter((file) => sellerOnly.includes(file));
+  assertCheck("email fulfillment prepares only paid order", emailFulfillment.prepared?.length === 1 && preparedEmailOrder.buyerContact === "paid@example.com" && emailFulfillment.skippedCount === 1);
+  assertCheck("email fulfillment excludes seller-only files", forbiddenEmailOrderFiles.length === 0, forbiddenEmailOrderFiles.join(", "));
+  if (preparedEmailOrder.orderDir) await rm(preparedEmailOrder.orderDir, { recursive: true, force: true });
+  await rm(emailFulfillmentOutDir, { recursive: true, force: true });
   await rm(intakeInboxDir, { recursive: true, force: true });
   await rm(intakeOutDir, { recursive: true, force: true });
   await rm(intakePaymentDir, { recursive: true, force: true });
@@ -322,6 +359,7 @@ async function checkLocal() {
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
   assertCheck("ops report has payment reply count", /Payment reply packets:\s+\d+/.test(opsReport));
   assertCheck("ops report has email order intake count", /Email order intake records:\s+\d+/.test(opsReport));
+  assertCheck("ops report has email fulfillment count", /Email fulfillment prepared:\s+\d+/.test(opsReport));
   assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 
