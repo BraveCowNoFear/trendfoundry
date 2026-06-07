@@ -148,6 +148,7 @@ main {
 .price small { color: var(--muted); }
 .pricing,
 .sample-preview,
+.visual-proof,
 .delivery {
   border-bottom: 1px solid var(--line);
   padding: 2px 0 24px;
@@ -158,6 +159,33 @@ main {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: center;
+}
+.visual-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 0.64fr) minmax(280px, 0.36fr);
+  gap: 24px;
+  align-items: center;
+}
+.visual-proof h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.visual-proof p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.visual-proof img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
 }
 .sample-preview h2 {
   margin: 0 0 8px;
@@ -387,6 +415,7 @@ li { margin: 6px 0; }
   .topbar,
   .offer,
   .sample-preview,
+  .visual-proof,
   .section-head,
   .tier-grid,
   .delivery,
@@ -398,6 +427,7 @@ li { margin: 6px 0; }
   }
   .price { text-align: left; }
   .sample-actions { justify-content: flex-start; }
+  .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
   .filter-button { flex: 1 1 auto; }
 }

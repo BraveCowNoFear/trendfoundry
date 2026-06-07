@@ -6,6 +6,8 @@ const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "
 const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
 const contactEmail = "rivan_Britain@outlook.com";
+const publicSiteUrl = "https://bravecownofear.github.io/trendfoundry/";
+const ogImageUrl = `${publicSiteUrl}og-image.png`;
 const orderSubject = encodeURIComponent("TrendFoundry sample pack order");
 const orderBody = encodeURIComponent("Hi, I want to order the TrendFoundry $9 sample pack. Please send the latest issue and payment instructions.");
 const orderHref = `mailto:${contactEmail}?subject=${orderSubject}&body=${orderBody}`;
@@ -109,6 +111,14 @@ const deliveryItems = [
 const deliveryChecklist = deliveryItems
   .map(([label, text]) => `<li><strong>${escapeHtml(label)}</strong><span>${escapeHtml(text)}</span></li>`)
   .join("");
+const socialProof = `<section class="visual-proof" aria-label="Share preview">
+      <div>
+        <p class="section-label">Share preview</p>
+        <h2>A cleaner link card for outreach, checkout pages, and social posts.</h2>
+        <p>Every buyer-facing link should explain the product before anyone clicks through. This preview image carries the offer, source mix, and no-hype positioning.</p>
+      </div>
+      <img src="./og-image.png" alt="TrendFoundry social preview showing source-backed creator intelligence metrics" width="1200" height="630">
+    </section>`;
 
 function csvEscape(value) {
   const text = String(value ?? "");
@@ -315,6 +325,18 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Source-backed AI and developer video opportunities shaped into titles, hooks, demos, limitations, and buyer-ready weekly briefs.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${publicSiteUrl}">
+  <meta property="og:title" content="TrendFoundry Creator Intelligence">
+  <meta property="og:description" content="Source-backed video ideas before the demos get copied.">
+  <meta property="og:image" content="${ogImageUrl}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TrendFoundry Creator Intelligence">
+  <meta name="twitter:description" content="AI and developer trend signals shaped into creator-ready weekly briefs.">
+  <meta name="twitter:image" content="${ogImageUrl}">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
@@ -375,6 +397,7 @@ const html = `<!doctype html>
         <a class="action" href="./public-sample.csv">CSV sample</a>
       </div>
     </section>
+    ${socialProof}
     <section class="delivery" aria-label="What the buyer receives">
       <div>
         <p class="section-label">What arrives</p>
@@ -558,6 +581,7 @@ main {
 .price small { color: var(--muted); }
 .pricing,
 .sample-preview,
+.visual-proof,
 .delivery {
   border-bottom: 1px solid var(--line);
   padding: 2px 0 24px;
@@ -568,6 +592,33 @@ main {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: center;
+}
+.visual-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 0.64fr) minmax(280px, 0.36fr);
+  gap: 24px;
+  align-items: center;
+}
+.visual-proof h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.visual-proof p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.visual-proof img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  justify-self: end;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
 }
 .sample-preview h2 {
   margin: 0 0 8px;
@@ -797,6 +848,7 @@ li { margin: 6px 0; }
   .topbar,
   .offer,
   .sample-preview,
+  .visual-proof,
   .section-head,
   .tier-grid,
   .delivery,
@@ -808,6 +860,7 @@ li { margin: 6px 0; }
   }
   .price { text-align: left; }
   .sample-actions { justify-content: flex-start; }
+  .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
   .filter-button { flex: 1 1 auto; }
 }
