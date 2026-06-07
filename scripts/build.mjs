@@ -63,6 +63,14 @@ const sourceMixZh = Object.entries(bySource)
 const sourceBars = Object.entries(bySource)
   .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
   .join("");
+const sourceLegend = Object.entries(bySource)
+  .map(([source, count]) => `<span>${escapeHtml(source)} <strong>${count}</strong></span>`)
+  .join("");
+const sourceMixPanel = `<div class="source-mix-panel">
+        ${dual("Source mix", "来源组合", "p", ' class="source-mix-label"')}
+        <div class="source-bars" aria-hidden="true">${sourceBars}</div>
+        <div class="source-legend" aria-label="Source mix">${sourceLegend}</div>
+      </div>`;
 const publicSample = top.slice(0, 3);
 
 const pricingTiers = [
@@ -140,7 +148,7 @@ const deliveryItems = [
   ["Proof links", "来源链接", "Every idea keeps the original public source attached.", "每个选题都保留原始公开来源，方便买家核验。"],
   ["Recordable angle", "可录制角度", "Titles, hook, outline, demo step, and limitation are generated together.", "标题、钩子、大纲、演示步骤和限制说明一起生成。"],
   ["Quality control", "质量控制", "Hype, rights-risk, and too-broad signals are flagged before they reach the display pack.", "炒作、版权风险和过宽泛信号会在进入展示包前被标记。"],
-  ["No-backend intake", "轻量接单", "GitHub Issue Form and email order paths work before payment automation is connected.", "在支付自动化接入前，GitHub 表单和邮件下单路径已经可用。"]
+  ["Simple ordering", "轻量下单", "Request the current issue through GitHub or email and get the delivery details directly.", "通过 GitHub 或邮件申请当前期次，并直接收到交付说明。"]
 ];
 const deliveryChecklist = deliveryItems
   .map(([label, labelZh, text, textZh]) => `<li><strong>${dual(label, labelZh)}</strong>${dual(text, textZh, "span")}</li>`)
@@ -880,16 +888,15 @@ const html = `<!doctype html>
       <span><strong>${top.length}</strong> ${dual("opportunities", "个机会")}</span>
       <span><strong>${high.length}</strong> ${dual("high-fit", "高匹配")}</span>
       <span><strong>${data.errorCount || 0}</strong> ${dual("source errors", "个来源错误")}</span>
-      <span>${dual(sourceMix, sourceMixZh)}</span>
-      <div class="source-bars" aria-label="Source mix">${sourceBars}</div>
+      ${sourceMixPanel}
     </aside>
   </header>
   <main>
     <section class="offer">
       <div>
-        ${dual("Current offer", "当前报价", "p", ' class="section-label"')}
-        ${dual("Sell a source-backed weekly brief before building a heavier SaaS.", "先卖有来源的周更情报包，再考虑做更重的 SaaS。", "h2")}
-        ${dual("Start with a manual $9 sample order, prove demand, then convert repeat buyers into the $19/month weekly delivery.", "先用人工交付的 9 美元样品包验证需求，再把复购买家转成每月 19 美元的周更交付。", "p")}
+        ${dual("Weekly brief", "周更情报", "p", ' class="section-label"')}
+        ${dual("Fresh AI and developer video opportunities, ready to turn into scripts.", "每周拿到可核验、可录制的 AI/开发者视频选题。", "h2")}
+        ${dual("Each issue gives you 12 ranked ideas with source links, Bilibili and YouTube title angles, outlines, risk notes, CSV, and one ready-to-record script.", "每期包含 12 条排序后的机会、来源链接、B 站和 YouTube 标题角度、录制大纲、风险备注、CSV，以及 1 份可直接录制的脚本。", "p")}
       </div>
       <div class="price">
         <span>$19/mo</span>
@@ -899,8 +906,8 @@ const html = `<!doctype html>
     <section class="pricing" aria-label="Pricing tiers">
       <div class="section-head">
         ${dual("Pricing", "定价", "p", ' class="section-label"')}
-        ${dual("Three buyer paths, all deliverable without a backend.", "三条购买路径，都可以在没有后台系统时交付。", "h2")}
-        ${dual("Each tier sells the same core advantage: fewer weak topics, faster planning, and a clearer recording queue.", "每一档卖的都是同一个核心优势：少踩弱选题、更快规划、录制队列更清楚。", "p")}
+        ${dual("Choose the depth that matches your publishing cadence.", "按你的更新节奏选择交付深度。", "h2")}
+        ${dual("Every tier is built around the same promise: fewer weak topics, faster planning, and a clearer recording queue.", "每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。", "p")}
       </div>
       <div class="tier-grid">${pricingCards}</div>
     </section>
@@ -1026,16 +1033,15 @@ const zhHtml = `<!doctype html>
       <span><strong>${top.length}</strong> 个机会</span>
       <span><strong>${high.length}</strong> 高匹配</span>
       <span><strong>${data.errorCount || 0}</strong> 个来源错误</span>
-      <span>${escapeHtml(sourceMixZh)}</span>
-      <div class="source-bars" aria-label="Source mix">${sourceBars}</div>
+      ${sourceMixPanel}
     </aside>
   </header>
   <main>
     <section class="offer">
       <div>
-        <p class="section-label">中文买家入口</p>
-        <h2>先卖有来源、能复现、能直接录的周更选题包。</h2>
-        <p>目标买家是持续做 AI 工具、开发者项目、工作流教程的中文创作者：他们缺的不是新闻，而是能节省选题和验证时间的结构化 brief。</p>
+        <p class="section-label">周更情报</p>
+        <h2>每周拿到可核验、可录制的 AI/开发者视频选题。</h2>
+        <p>每期包含 12 条排序后的机会、来源链接、B 站和 YouTube 标题角度、录制大纲、风险备注、CSV，以及 1 份可直接录制的脚本。</p>
       </div>
       <div class="price">
         <span>$19/mo</span>
@@ -1045,8 +1051,8 @@ const zhHtml = `<!doctype html>
     <section class="pricing" aria-label="Pricing tiers">
       <div class="section-head">
         <p class="section-label">定价</p>
-        <h2>三条购买路径，都可以先人工交付。</h2>
-        <p>先用 9 美元样品验证信任，再把复购买家转成 19 美元/月的周更情报，垂类团队走 49 美元/月定制。</p>
+        <h2>按你的更新节奏选择交付深度。</h2>
+        <p>每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。</p>
       </div>
       <div class="tier-grid">${pricingCards}</div>
     </section>
@@ -1270,13 +1276,40 @@ h1 {
 .topbar aside strong {
   color: var(--ink);
 }
+.source-mix-panel {
+  display: grid;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+}
+.source-mix-label {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+.source-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.source-legend span {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+}
 .source-bars {
   display: flex;
-  height: 7px;
+  height: 5px;
   overflow: hidden;
-  border: 1px solid var(--line);
   border-radius: 999px;
-  background: #f4f6f8;
+  background: #edf1f4;
 }
 .source-bars span {
   display: block;

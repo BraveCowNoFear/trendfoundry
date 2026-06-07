@@ -154,13 +154,40 @@ h1 {
 .topbar aside strong {
   color: var(--ink);
 }
+.source-mix-panel {
+  display: grid;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
+}
+.source-mix-label {
+  margin: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+.source-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.source-legend span {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+}
 .source-bars {
   display: flex;
-  height: 7px;
+  height: 5px;
   overflow: hidden;
-  border: 1px solid var(--line);
   border-radius: 999px;
-  background: #f4f6f8;
+  background: #edf1f4;
 }
 .source-bars span {
   display: block;
