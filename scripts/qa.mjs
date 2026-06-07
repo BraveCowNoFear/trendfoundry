@@ -7,6 +7,7 @@ import { prepareOrder } from "./lib/fulfillment.mjs";
 const root = process.cwd();
 const qaDir = path.join(root, "dist", "qa");
 const online = process.argv.includes("--online");
+const skipScheduler = process.argv.includes("--skip-scheduler");
 const publicBase = "https://bravecownofear.github.io/trendfoundry/";
 const sellerOnly = ["prospects.csv", "outreach-board.md", "latest.json"];
 const requiredScripts = [
@@ -114,22 +115,26 @@ async function checkLocal() {
   assertCheck("ops report safety says no messages sent", opsReport.includes("No messages were sent."));
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
 
-  const dailyTask = schtasks("TrendFoundryDaily");
-  if (dailyTask.skipped) {
-    pass("scheduled task: TrendFoundryDaily skipped", "non-Windows");
+  if (skipScheduler) {
+    pass("scheduled task checks skipped", "--skip-scheduler");
   } else {
-    assertCheck("scheduled task: TrendFoundryDaily ready/existing", dailyTask.status === 0, `status ${dailyTask.status}`);
-    assertCheck("scheduled task: TrendFoundryDaily uses run_daily.ps1", dailyTask.output.includes("scripts\\run_daily.ps1"));
-    assertCheck("scheduled task: TrendFoundryDaily last result 0", /Last Result:\s+0/.test(dailyTask.output));
-  }
+    const dailyTask = schtasks("TrendFoundryDaily");
+    if (dailyTask.skipped) {
+      pass("scheduled task: TrendFoundryDaily skipped", "non-Windows");
+    } else {
+      assertCheck("scheduled task: TrendFoundryDaily ready/existing", dailyTask.status === 0, `status ${dailyTask.status}`);
+      assertCheck("scheduled task: TrendFoundryDaily uses run_daily.ps1", dailyTask.output.includes("scripts\\run_daily.ps1"));
+      assertCheck("scheduled task: TrendFoundryDaily last result 0", /Last Result:\s+0/.test(dailyTask.output));
+    }
 
-  const leadTask = schtasks("TrendFoundryLeadSync");
-  if (leadTask.skipped) {
-    pass("scheduled task: TrendFoundryLeadSync skipped", "non-Windows");
-  } else {
-    assertCheck("scheduled task: TrendFoundryLeadSync ready/existing", leadTask.status === 0, `status ${leadTask.status}`);
-    assertCheck("scheduled task: TrendFoundryLeadSync uses run_leads.ps1", leadTask.output.includes("scripts\\run_leads.ps1"));
-    assertCheck("scheduled task: TrendFoundryLeadSync last result 0", /Last Result:\s+0/.test(leadTask.output));
+    const leadTask = schtasks("TrendFoundryLeadSync");
+    if (leadTask.skipped) {
+      pass("scheduled task: TrendFoundryLeadSync skipped", "non-Windows");
+    } else {
+      assertCheck("scheduled task: TrendFoundryLeadSync ready/existing", leadTask.status === 0, `status ${leadTask.status}`);
+      assertCheck("scheduled task: TrendFoundryLeadSync uses run_leads.ps1", leadTask.output.includes("scripts\\run_leads.ps1"));
+      assertCheck("scheduled task: TrendFoundryLeadSync last result 0", /Last Result:\s+0/.test(leadTask.output));
+    }
   }
 }
 
@@ -169,7 +174,7 @@ function markdownReport() {
 
 Generated: ${new Date().toISOString()}
 
-Mode: ${online ? "local + online" : "local"}
+Mode: ${online ? "local + online" : "local"}${skipScheduler ? " / scheduler skipped" : ""}
 
 Summary: ${checks.length - failed.length}/${checks.length} passed.
 

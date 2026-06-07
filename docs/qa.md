@@ -14,6 +14,14 @@ npm run qa
 npm run qa -- --online
 ```
 
+## Inside Scheduled Operations
+
+```bash
+npm run qa -- --skip-scheduler
+```
+
+Use this mode inside `npm run operate`, because a scheduled task cannot reliably assert its own final `Last Result` while it is still running.
+
 Generated local outputs:
 
 - `dist/qa/latest-qa.md`
@@ -30,4 +38,5 @@ Generated local outputs:
 - a temporary fulfillment order excludes seller-only files
 - ops report includes safety and commerce status
 - Windows scheduled tasks point to the expected scripts and last result is 0
+- `--skip-scheduler` omits scheduled task checks for in-task self-checks
 - optional online checks verify public page, public sample, UTF-8 hook text, and OG image dimensions

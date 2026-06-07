@@ -15,6 +15,7 @@ This runs:
 - `npm run leads`
 - `npm run fulfill-ready`
 - `npm run ops-report`
+- `npm run qa -- --skip-scheduler`
 
 If `site/og-image.png` is missing, it also runs `npm run social`. To force social preview regeneration:
 
