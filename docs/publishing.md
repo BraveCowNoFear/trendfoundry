@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27083053568`
+Latest verified Pages run: `27083399504`
 
-Latest verified commit: `9710a60 Run scheduled TrendFoundry operations`
+Latest verified commit: `f1486f6 Add SEO landing pages for creator search traffic`
 
 Verified public paths:
 
@@ -24,14 +24,12 @@ Verified public paths:
 
 Latest verification:
 
-- GitHub Actions operations workflow `27083053568` completed successfully and deployed Pages for commit `9710a6013000994bbbb20aff1903596cdd38432a`.
-- Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, and `og-image.png` returned HTTP 200.
+- Pages workflow `27083399504` completed successfully for commit `f1486f6778c410e35ca1e208341df4f192021345`.
+- Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 68/68.
+- `npm run qa -- --online` passed 95/95.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
-
-Pending next deployment: the next Pages publish after `936afe6` should add `sitemap.xml`, `robots.txt`, and five SEO topic pages under `/topics/`.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, 5 SEO topic links rendered on the homepage, the SEO topic page rendered 8 cards, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
