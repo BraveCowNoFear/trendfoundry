@@ -2,6 +2,8 @@
 
 TrendFoundry 是一个自动化创作者情报产品：从 GitHub、Hacker News、arXiv 等公开信号抓取 AI/开发者趋势，评分后生成可售卖的 B 站/YouTube 选题包。
 
+在线演示：https://bravecownofear.github.io/trendfoundry/
+
 ## 运行
 
 ```bash
@@ -37,4 +39,4 @@ Windows 上的 `scripts/run_daily.ps1` 会刷新情报包，并把日志写入 `
 
 ## 发布
 
-`site/` 目录可通过 `.github/workflows/pages.yml` 发布到 GitHub Pages。详情见 `docs/publishing.md`。
+`site/` 目录通过 `.github/workflows/pages.yml` 发布到 GitHub Pages。详情见 `docs/publishing.md`。

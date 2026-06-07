@@ -2,7 +2,9 @@
 
 ## Public Repository
 
-Target repository: `Clr168/trendfoundry`
+Repository: `BraveCowNoFear/trendfoundry`
+
+Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 

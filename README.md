@@ -2,6 +2,8 @@
 
 TrendFoundry is a small autonomous creator-intelligence product. It collects public AI/developer trend signals, scores them for creator monetization fit, and builds a sellable Bilibili/YouTube idea pack.
 
+Live demo: https://bravecownofear.github.io/trendfoundry/
+
 ## Run
 
 ```bash
@@ -37,4 +39,4 @@ The product promise is not bulk AI content. It is source-backed topic selection 
 
 ## Publishing
 
-The `site/` directory is deployable through GitHub Pages using `.github/workflows/pages.yml`. See `docs/publishing.md`.
+The `site/` directory is deployed through GitHub Pages using `.github/workflows/pages.yml`. See `docs/publishing.md`.
