@@ -6,7 +6,9 @@ const languageButtons = [...document.querySelectorAll("[data-language-toggle]")]
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
 let activeSource = "all";
-let currentLanguage = localStorage.getItem("trendfoundry-language") || "en";
+const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+const forcedLanguage = document.body.dataset.forceLang;
+let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
 
 function countLabel(count) {
   if (currentLanguage === "zh") return count + " 个可见机会";

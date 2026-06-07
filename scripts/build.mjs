@@ -6,6 +6,7 @@ const data = JSON.parse(await readFile(path.join(root, "data", "latest.json"), "
 const siteDir = path.join(root, "site");
 const docsDir = path.join(root, "docs");
 const topicsDir = path.join(siteDir, "topics");
+const zhDir = path.join(siteDir, "zh");
 const siteIssuesDir = path.join(siteDir, "issues");
 const docsIssuesDir = path.join(docsDir, "issues");
 const contactEmail = "rivan_Britain@outlook.com";
@@ -18,6 +19,7 @@ const issueOrderHref = "https://github.com/BraveCowNoFear/trendfoundry/issues/ne
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 await mkdir(topicsDir, { recursive: true });
+await mkdir(zhDir, { recursive: true });
 await mkdir(siteIssuesDir, { recursive: true });
 await mkdir(docsIssuesDir, { recursive: true });
 
@@ -460,6 +462,29 @@ const sourceButtons = ["all", ...Object.keys(bySource)]
   .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? dual("All", "全部") : source}</button>`)
   .join("");
 
+const zhSourceButtons = ["all", ...Object.keys(bySource)]
+  .map((source) => `<button class="filter-button${source === "all" ? " active" : ""}" type="button" data-source-filter="${source}">${source === "all" ? "全部" : source}</button>`)
+  .join("");
+
+const zhCards = top
+  .map(
+    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.deliverables.hook} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+  <div class="meta"><span>${escapeHtml(item.source)}</span><span>评分 ${item.score}</span><span>${escapeHtml(fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? "<span>缓存</span>" : ""}${item.qualityFlags?.length ? "<span>需复核</span>" : ""}</div>
+  <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
+  <p>创作切入：${escapeHtml(item.deliverables.hook)}</p>
+  <p class="why"><strong>为什么现在：</strong>${escapeHtml(zhWhyNow(item))}</p>
+  <div class="idea"><strong>B 站角度：</strong>${escapeHtml(item.deliverables.bilibiliTitles[0])}</div>
+  <details>
+    <summary>制作大纲</summary>
+    <ol>${item.deliverables.outline.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ol>
+    <p><strong>演示：</strong>${escapeHtml(zhDemo(item))}</p>
+    <p><strong>封面：</strong>${escapeHtml(`一张干净的技术讲解封面，突出 ${item.title}、趋势信号和中文标题区域，避免假 logo。`)}</p>
+    <p><strong>限制：</strong>${escapeHtml(zhLimitation(item))}</p>
+  </details>
+</article>`
+  )
+  .join("\n");
+
 const topicDefinitions = [
   {
     slug: "ai-video-ideas",
@@ -828,7 +853,7 @@ const html = `<!doctype html>
   <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="./feed.json">
   <script src="./app.js" defer></script>
 </head>
-<body data-lang="en">
+<body data-lang="en" data-default-lang="en">
   <header class="topbar">
     <div>
       <div class="brandrow">
@@ -954,6 +979,141 @@ const html = `<!doctype html>
 </body>
 </html>`;
 
+const zhHtml = `<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="面向 B 站和中文 AI/开发者视频创作者的有来源选题情报包，包含可录制标题、钩子、演示角度、限制说明和样品交付资产。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="${publicSiteUrl}zh/">
+  <meta property="og:title" content="TrendFoundry 中文创作者情报包">
+  <meta property="og:description" content="把公开 AI/开发者趋势整理成可录制、可复核、可购买的创作者选题包。">
+  <meta property="og:image" content="${ogImageUrl}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <title>TrendFoundry 中文创作者情报包</title>
+  <link rel="canonical" href="${publicSiteUrl}zh/">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="../feed.xml">
+  <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="../feed.json">
+  <script src="../app.js" defer></script>
+</head>
+<body data-lang="zh" data-default-lang="zh" data-force-lang="zh">
+  <header class="topbar">
+    <div>
+      <div class="brandrow">
+        <div class="brandline">
+          <span>TrendFoundry</span>
+          <span>中文入口 · 期次 ${new Date(data.generatedAt).toLocaleDateString("zh-CN")}</span>
+        </div>
+        <div class="language-switch" aria-label="Language">
+          <a class="language-option" href="../?lang=en">EN</a>
+          <span class="language-option active">中文</span>
+        </div>
+      </div>
+      <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
+      <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
+      <div class="hero-actions">
+        <a class="action primary" href="../public-sample.md">查看免费样品</a>
+        <a class="action" href="../public-sample.csv">下载 CSV 样品</a>
+        <a class="action" href="../ready-to-record-script.md">打开可录制脚本</a>
+        <a class="action strong" href="${issueOrderHref}">在 GitHub 申请</a>
+        <a class="action" href="${orderHref}">邮件下单</a>
+      </div>
+    </div>
+    <aside>
+      <span><strong>${top.length}</strong> 个机会</span>
+      <span><strong>${high.length}</strong> 高匹配</span>
+      <span><strong>${data.errorCount || 0}</strong> 个来源错误</span>
+      <span>${escapeHtml(sourceMixZh)}</span>
+      <div class="source-bars" aria-label="Source mix">${sourceBars}</div>
+    </aside>
+  </header>
+  <main>
+    <section class="offer">
+      <div>
+        <p class="section-label">中文买家入口</p>
+        <h2>先卖有来源、能复现、能直接录的周更选题包。</h2>
+        <p>目标买家是持续做 AI 工具、开发者项目、工作流教程的中文创作者：他们缺的不是新闻，而是能节省选题和验证时间的结构化 brief。</p>
+      </div>
+      <div class="price">
+        <span>$19/mo</span>
+        <small><a href="${issueOrderHref}">GitHub 申请</a> / <a href="${orderHref}">邮件下单</a></small>
+      </div>
+    </section>
+    <section class="pricing" aria-label="Pricing tiers">
+      <div class="section-head">
+        <p class="section-label">定价</p>
+        <h2>三条购买路径，都可以先人工交付。</h2>
+        <p>先用 9 美元样品验证信任，再把复购买家转成 19 美元/月的周更情报，垂类团队走 49 美元/月定制。</p>
+      </div>
+      <div class="tier-grid">${pricingCards}</div>
+    </section>
+    <section class="sample-preview" aria-label="Free public sample">
+      <div>
+        <p class="section-label">免费样品</p>
+        <h2>下单前先看 3 个当前机会。</h2>
+        <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
+      </div>
+      <div class="sample-actions">
+        <a class="action primary" href="../public-sample.md">打开样品</a>
+        <a class="action" href="../public-sample.csv">CSV 样品</a>
+      </div>
+    </section>
+    <section class="visual-proof" aria-label="Share preview">
+      <div>
+        <p class="section-label">分享预览</p>
+        <h2>适合外联、社交动态和收款页的清楚链接卡片。</h2>
+        <p>买家点击前就能看到报价、来源组合和“不夸张承诺”的定位。</p>
+      </div>
+      <img src="../og-image.png" alt="TrendFoundry social preview" width="1200" height="630">
+    </section>
+    <section class="delivery" aria-label="What the buyer receives">
+      <div>
+        <p class="section-label">交付内容</p>
+        <h2>这是创作者情报包，不是 AI 新闻摘要。</h2>
+      </div>
+      <ul>${deliveryChecklist}</ul>
+    </section>
+    <section class="seo-hub" aria-label="Chinese discovery links">
+      <div>
+        <p class="section-label">复访入口</p>
+        <h2>中文买家可以从样品、Feed、公开归档继续检查质量。</h2>
+        <p>每个入口都保留公开来源、钩子、演示角度和限制说明，降低首次购买前的不确定性。</p>
+      </div>
+      <div class="topic-links">
+        <a class="topic-link" href="../public-sample.md"><span>免费样品</span><small>先检查 3 条当前机会和 CSV 格式。</small></a>
+        <a class="topic-link" href="../issues/latest.html"><span>最新公开期刊</span><small>查看 Top 12 机会的公开快照。</small></a>
+        <a class="topic-link" href="../feed.xml"><span>RSS Feed</span><small>订阅每期更新，减少一次性访问流失。</small></a>
+        <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
+      </div>
+    </section>
+    <section class="toolbelt" aria-label="Opportunity controls">
+      <div class="search-wrap">
+        <label for="opportunity-search">搜索机会</label>
+        <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
+      </div>
+      <div class="filters" aria-label="Source filters">${zhSourceButtons}</div>
+      <p id="result-count" class="result-count" data-count="${top.length}">${top.length} 个可见机会</p>
+    </section>
+    <section class="grid" id="opportunity-grid">${zhCards}</section>
+    <section class="handoff">
+      <div>
+        <p class="section-label">下一步</p>
+        <h2>把这页作为中文外联和 B 站动态的主链接。</h2>
+        <p>先给对方免费样品和公开归档，再引导申请当前完整包或邮件下单。</p>
+      </div>
+      <div class="handoff-links">
+        <a class="action primary" href="${issueOrderHref}">申请样品</a>
+        <a class="action" href="../sales-page-copy.md">销售文案</a>
+        <a class="action strong" href="${orderHref}">邮件下单</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>`;
+
 const css = `:root {
   color-scheme: light;
   --ink: #15171a;
@@ -1025,6 +1185,9 @@ small {
   box-shadow: var(--shadow);
 }
 .language-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 46px;
   min-height: 30px;
   border: 0;
@@ -1035,6 +1198,7 @@ small {
   font: inherit;
   font-size: 12px;
   font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
 }
 .language-option.active {
@@ -1590,7 +1754,9 @@ const languageButtons = [...document.querySelectorAll("[data-language-toggle]")]
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
 let activeSource = "all";
-let currentLanguage = localStorage.getItem("trendfoundry-language") || "en";
+const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+const forcedLanguage = document.body.dataset.forceLang;
+let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
 
 function countLabel(count) {
   if (currentLanguage === "zh") return count + " 个可见机会";
@@ -1648,6 +1814,7 @@ await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(docsDir, "ready-to-record-script.md"), script, "utf8");
 await writeFile(path.join(docsDir, "public-sample.md"), publicSampleReport, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
+await writeFile(path.join(zhDir, "index.html"), zhHtml, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
 await writeFile(path.join(siteDir, "app.js"), app, "utf8");
 await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
@@ -1671,6 +1838,7 @@ await writeFile(
 );
 const sitemapUrls = [
   "",
+  "zh/",
   "public-sample.md",
   "public-sample.csv",
   "ready-to-record-script.md",

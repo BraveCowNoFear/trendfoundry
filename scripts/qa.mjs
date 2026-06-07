@@ -131,6 +131,13 @@ async function checkLocal() {
   const appJs = await readText(path.join(root, "site", "app.js"));
   assertCheck("site app persists language choice", appJs.includes("trendfoundry-language") && appJs.includes("setLanguage"));
   assertCheck("site app localizes result count", appJs.includes("个可见机会") && appJs.includes("visible opportunity"));
+  assertCheck("site app supports forced Chinese landing page", appJs.includes("data-force-lang") || appJs.includes("forcedLanguage"));
+
+  const zhIndex = await readText(path.join(root, "site", "zh", "index.html"));
+  assertCheck("Chinese landing page exists", zhIndex.includes('<html lang="zh-CN">') && zhIndex.includes("给 B 站和中文技术频道的 AI 创作者情报包"));
+  assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
+  assertCheck("Chinese landing page has 12 cards", (zhIndex.match(/<article class="card"/g) || []).length === 12);
+  assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.md"));
 
   for (const slug of seoTopicSlugs) {
     const topicFile = path.join(root, "site", "topics", `${slug}.html`);
@@ -146,6 +153,7 @@ async function checkLocal() {
   const sitemap = await readText(path.join(root, "site", "sitemap.xml"));
   assertCheck("robots points to sitemap", robots.includes(`Sitemap: ${publicBase}sitemap.xml`));
   assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
+  assertCheck("sitemap includes Chinese landing page", sitemap.includes(`${publicBase}zh/`));
   assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
   assertCheck("sitemap includes issue archive", sitemap.includes(`${publicBase}issues/`) && sitemap.includes(`${publicBase}issues/latest.html`) && sitemap.includes(`${publicBase}issues/${issueSlug}.html`));
 
@@ -259,6 +267,11 @@ async function checkOnline() {
   assertCheck("online index has OG image", index.text.includes("og-image.png"));
   assertCheck("online index has email CTA", index.text.includes("Email order"));
 
+  const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);
+  assertCheck("online Chinese landing page HTTP 200", zhIndex.status === 200, String(zhIndex.status));
+  assertCheck("online Chinese landing page has Chinese copy", zhIndex.text.includes("给 B 站和中文技术频道的 AI 创作者情报包") && zhIndex.text.includes("邮件下单"));
+  assertCheck("online Chinese landing page has 12 cards", (zhIndex.text.match(/<article class="card"/g) || []).length === 12);
+
   const sample = await fetchText(`${publicBase}public-sample.md?qa=${Date.now()}`);
   assertCheck("online public sample HTTP 200", sample.status === 200, String(sample.status));
   assertCheck("online public sample has UTF-8 hook", sample.text.includes("\u8fd9\u671f\u4e0d\u8bb2\u6982\u5ff5"));
@@ -278,6 +291,7 @@ async function checkOnline() {
   const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);
   assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
   assertCheck("online sitemap has SEO topics", seoTopicSlugs.every((slug) => sitemap.text.includes(`${publicBase}topics/${slug}.html`)));
+  assertCheck("online sitemap has Chinese landing page", sitemap.text.includes(`${publicBase}zh/`));
   assertCheck("online sitemap has feeds", sitemap.text.includes(`${publicBase}feed.xml`) && sitemap.text.includes(`${publicBase}feed.json`));
   assertCheck("online sitemap has issue archive", sitemap.text.includes(`${publicBase}issues/`) && sitemap.text.includes(`${publicBase}issues/latest.html`));
 

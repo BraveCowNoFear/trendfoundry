@@ -69,6 +69,9 @@ small {
   box-shadow: var(--shadow);
 }
 .language-option {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 46px;
   min-height: 30px;
   border: 0;
@@ -79,6 +82,7 @@ small {
   font: inherit;
   font-size: 12px;
   font-weight: 800;
+  text-decoration: none;
   cursor: pointer;
 }
 .language-option.active {

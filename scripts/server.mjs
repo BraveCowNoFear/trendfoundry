@@ -1,4 +1,4 @@
-import { createReadStream, existsSync } from "node:fs";
+import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
 import path from "node:path";
 
@@ -17,7 +17,11 @@ createServer((request, response) => {
     .replace(/^\/+/, "")
     .replace(/\.\./g, "");
   const filePath = path.join(siteDir, safePath || "index.html");
-  const finalPath = existsSync(filePath) ? filePath : path.join(siteDir, "index.html");
+  const finalPath = existsSync(filePath)
+    ? statSync(filePath).isDirectory()
+      ? path.join(filePath, "index.html")
+      : filePath
+    : path.join(siteDir, "index.html");
   response.setHeader("content-type", types[path.extname(finalPath)] || "application/octet-stream");
   createReadStream(finalPath).pipe(response);
 }).listen(port, () => {
