@@ -10,42 +10,42 @@ Chinese version: https://bravecownofear.github.io/trendfoundry/public-sample.zh-
 
 ## Sample Opportunities
 
-### 1. 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
+### 1. NousResearch/hermes-agent
 
 - Score: 187
 - Fit: high
-- Source: github / ai-agents
+- Source: GitHub / ai-agents
 - Quality: normal
 - Link: https://github.com/NousResearch/hermes-agent
 - Creator target: tech explainer / developer educator
-- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
-- Hook: This episode turns 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Why now: A current GitHub signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns NousResearch/hermes-agent into a practical workflow test instead of a trend recap.
 - Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
 - Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 
-### 2. 为什么 infiniflow/ragflow 现在值得创作者关注 (practical test)
+### 2. infiniflow/ragflow
 
 - Score: 173
 - Fit: high
-- Source: github / ai-agents
+- Source: GitHub / ai-agents
 - Quality: normal
 - Link: https://github.com/infiniflow/ragflow
 - Creator target: tech explainer / developer educator
-- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
-- Hook: This episode turns 为什么 infiniflow/ragflow 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Why now: A current GitHub signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns infiniflow/ragflow into a practical workflow test instead of a trend recap.
 - Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
 - Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 
-### 3. 为什么 google-gemini/gemini-cli 现在值得创作者关注 (practical test)
+### 3. google-gemini/gemini-cli
 
 - Score: 171
 - Fit: high
-- Source: github / ai-agents
+- Source: GitHub / ai-agents
 - Quality: normal
 - Link: https://github.com/google-gemini/gemini-cli
 - Creator target: tech explainer / developer educator
-- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
-- Hook: This episode turns 为什么 google-gemini/gemini-cli 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Why now: A current GitHub signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns google-gemini/gemini-cli into a practical workflow test instead of a trend recap.
 - Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
 - Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 

@@ -182,8 +182,24 @@ function mdLink(item) {
   return `[${item.title}](${item.url})`;
 }
 
+function hasCjk(value) {
+  return /[\u3400-\u9fff]/.test(String(value || ""));
+}
+
+function sourceLabel(item) {
+  const labels = {
+    github: "GitHub",
+    bilibili: "Bilibili",
+    youtube: "YouTube",
+    hn: "Hacker News",
+    arxiv: "arXiv"
+  };
+  return labels[item.source] || item.source || "public";
+}
+
 function englishSampleTitle(item) {
-  return item.deliverables.youtubeTitles?.[0] || item.title;
+  const candidates = [item.deliverables.youtubeTitles?.[0], item.title].filter(Boolean);
+  return candidates.find((value) => !hasCjk(value)) || `${sourceLabel(item)} creator workflow signal`;
 }
 
 function zhSampleTitle(item) {
@@ -191,7 +207,7 @@ function zhSampleTitle(item) {
 }
 
 function englishSampleWhyNow(item) {
-  return `A current ${item.source} signal makes this a timely candidate for a practical creator workflow test.`;
+  return `A current ${sourceLabel(item)} signal makes this a timely candidate for a practical creator workflow test.`;
 }
 
 function englishSampleHook(item) {
@@ -227,7 +243,7 @@ ${publicSample
 
 - Score: ${item.score}
 - Fit: ${item.monetizationFit}
-- Source: ${item.source} / ${item.sourceQuery}
+- Source: ${sourceLabel(item)}${hasCjk(item.sourceQuery) ? "" : ` / ${item.sourceQuery}`}
 - Quality: ${item.qualityFlags?.length ? `review (${item.qualityFlags.join(", ")})` : "normal"}
 - Link: ${item.url}
 - Creator target: ${item.targetCreator}
