@@ -83,10 +83,16 @@ async function checkLocal() {
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
+  assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
 
   const og = pngSize(path.join(root, "site", "og-image.png"));
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
+
+  const scriptText = `${await readText(path.join(root, "docs", "ready-to-record-script.md"))}\n${await readText(path.join(root, "site", "ready-to-record-script.md"))}`;
+  assertCheck("ready script has scene-by-scene section", scriptText.includes("## Scene-By-Scene Script"));
+  assertCheck("ready script has asset checklist", scriptText.includes("## Asset Checklist"));
+  assertCheck("ready script has fact safety notes", scriptText.includes("## Fact Safety Notes"));
 
   const salesCopy = `${await readText(path.join(root, "docs", "sales-page-copy.md"))}\n${await readText(path.join(root, "site", "sales-page-copy.md"))}`;
   assertCheck("sales copy has no PDF promise", !/PDF or Markdown|PDF brief/.test(salesCopy));

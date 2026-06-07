@@ -6,7 +6,7 @@ Weekly creator intelligence for AI and developer video channels.
 
 ## Promise
 
-Stop guessing what to record next. Get 12 source-backed AI/dev opportunities every week, each converted into Bilibili titles, YouTube titles, a hook, a recording outline, and a thumbnail prompt.
+Stop guessing what to record next. Get 12 source-backed AI/dev opportunities every week, each converted into Bilibili titles, YouTube titles, a hook, a recording outline, and a thumbnail prompt, plus one scene-by-scene ready-to-record script.
 
 ## Why It Is Different
 
@@ -29,7 +29,7 @@ Most AI newsletters summarize news. TrendFoundry turns signals into creator asse
 
 Best for: creators who want to test fit before subscribing.
 
-Includes: 12 ranked opportunities, one ready-to-record script, opportunity CSV, and quality-risk notes.
+Includes: 12 ranked opportunities, one scene-by-scene ready-to-record script, opportunity CSV, and quality-risk notes.
 
 ### Weekly brief - USD 19/month
 
@@ -53,7 +53,7 @@ Get a weekly pack of 12 AI/developer video opportunities with source links, Bili
 
 Delivery:
 
-Markdown brief, opportunities CSV, and browser-readable sample pack by email every Monday.
+Markdown brief, scene-by-scene script, opportunities CSV, and browser-readable sample pack by email every Monday.
 
 Refund policy:
 
