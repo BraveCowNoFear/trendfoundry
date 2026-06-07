@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27089007093`
+Latest verified Pages run: `27089286112`
 
-Latest verified commit: `860f10d Add durable public issue archive`
+Latest verified commit: `f0d66d1 Add bilingual landing page toggle`
 
 Verified public paths:
 
@@ -29,12 +29,12 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27089007093` completed successfully for commit `860f10d4e60d34ff9c660c344be41e0de0eea560`.
+- Pages workflow `27089286112` completed successfully for commit `f0d66d1 Add bilingual landing page toggle`.
 - Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 123/123.
+- `npm run qa -- --online` passed 128/128.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
-- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, 5 SEO topic links rendered on the homepage, 2 Feed buttons rendered on the homepage, the Archive box rendered on the homepage, the latest issue rendered 12 cards, the archive index rendered, the SEO topic page rendered 8 cards, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
+- Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the homepage language switch changed the public landing page to Simplified Chinese, persisted after reload with `localStorage`, kept the zero-result search count localized, and preserved 12 cards, topic links, Feed buttons, Archive links, script CTA, and core order CTAs. Screenshots: `dist/qa/online-i18n-home-desktop-f0d66d1.png` and `dist/qa/online-i18n-home-mobile-f0d66d1.png`.
 
 The repository is intended to be public so the sample product page can be inspected without account access.
 
