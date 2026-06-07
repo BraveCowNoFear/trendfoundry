@@ -85,6 +85,18 @@ function parseRelativePublishedDate(text) {
   return new Date(Date.now() - days * 86400000).toISOString();
 }
 
+function qualityFlagsFor(item) {
+  const text = `${item.title || ""} ${item.summary || ""}`.toLowerCase();
+  const checks = [
+    ["engagement-bait", /三连|评论区|留言\s*666|666|自取|领取/],
+    ["overclaim", /全网最|最全最细|吊打付费|少走\s*99%|99%的弯路|最强|天花板/],
+    ["template-hype", /保姆级|零基础小白|一键复刻|爆款|无废话/],
+    ["rights-risk", /去水印|无水印|告别水印|无印|一键解析|视频解析/],
+    ["too-broad", /任何产品|全套教程|从0到1|从0基础/]
+  ];
+  return checks.filter(([, pattern]) => pattern.test(text)).map(([label]) => label);
+}
+
 function scoreItem(item) {
   const recency = Math.max(0, 45 - daysAgo(item.updatedAt || item.publishedAt || item.createdAt));
   const stars = Math.log10((item.stars || item.points || 0) + 1) * 12;
@@ -102,8 +114,10 @@ function scoreItem(item) {
   )
     ? 24
     : 0;
+  const qualityFlags = qualityFlagsFor(item);
+  const qualityPenalty = Math.min(48, qualityFlags.length * 14 + (item.source === "bilibili" && qualityFlags.length ? 8 : 0));
   const stalePenalty = item.stale ? -28 : 0;
-  return Math.max(0, Math.round(recency + stars + comments + sourceWeight + creatorFit + stalePenalty));
+  return Math.max(0, Math.round(recency + stars + comments + sourceWeight + creatorFit - qualityPenalty + stalePenalty));
 }
 
 function ideaAngles(item) {
@@ -134,6 +148,10 @@ function limitation(item) {
   if (item.stale) {
     return "This item comes from cached fallback data, so verify freshness before using it as a headline trend.";
   }
+  const qualityFlags = qualityFlagsFor(item);
+  if (qualityFlags.length) {
+    return `Quality-risk signals detected (${qualityFlags.join(", ")}). Treat this as market demand evidence, not as a script template; rewrite the angle with proof and a narrower claim.`;
+  }
   if (item.source === "youtube" || item.source === "bilibili") {
     return "Platform popularity is not proof of quality; validate the workflow before recommending it.";
   }
@@ -148,6 +166,7 @@ function limitation(item) {
 
 function packageItem(item) {
   const score = scoreItem(item);
+  const qualityFlags = qualityFlagsFor(item);
   const fit = item.stale
     ? score >= 80
       ? "medium"
@@ -161,6 +180,8 @@ function packageItem(item) {
     ...item,
     score,
     stale: Boolean(item.stale),
+    qualityFlags,
+    qualityRisk: qualityFlags.length ? "review" : "normal",
     monetizationFit: fit,
     targetCreator: /developer|github|repo|agent|framework/i.test(`${item.title} ${item.summary}`)
       ? "tech explainer / developer educator"

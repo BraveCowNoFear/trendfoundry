@@ -81,6 +81,8 @@ function opportunityRows(items) {
     demo_step: item.deliverables?.demoSteps?.[1] || "",
     thumbnail_prompt: item.deliverables?.thumbnailPrompt || "",
     limitation: item.deliverables?.limitation || "",
+    quality_risk: item.qualityRisk || "normal",
+    quality_flags: (item.qualityFlags || []).join("; "),
     url: item.url
   }));
 }
@@ -120,8 +122,10 @@ await writeFile(
     "demo_step",
     "thumbnail_prompt",
     "limitation",
+    "quality_risk",
+    "quality_flags",
     "url"
-  ]),
+  ]), 
   "utf8"
 );
 

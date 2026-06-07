@@ -18,7 +18,10 @@ function selectPortfolio(items) {
   const selected = [];
   const used = new Set();
   for (const [source, quota] of Object.entries(quotas)) {
-    for (const item of items.filter((candidate) => candidate.source === source).slice(0, quota)) {
+    const sourceItems = items
+      .filter((candidate) => candidate.source === source)
+      .sort((a, b) => Number(Boolean(a.qualityFlags?.length)) - Number(Boolean(b.qualityFlags?.length)) || b.score - a.score);
+    for (const item of sourceItems.slice(0, quota)) {
       selected.push(item);
       used.add(item.url || item.id);
     }
@@ -86,6 +89,7 @@ ${top
 - Fit: ${item.monetizationFit}
 - Source: ${item.source} / ${item.sourceQuery}
 - Freshness: ${item.stale ? "cached fallback" : "fresh"}
+- Quality: ${item.qualityFlags?.length ? `review (${item.qualityFlags.join(", ")})` : "normal"}
 - Link: ${item.url}
 - Why it matters: ${item.summary || "No summary available."}
 - Creator target: ${item.targetCreator}
@@ -158,7 +162,7 @@ Source: ${mdLink(winner)}
 const cards = top
   .map(
     (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
-  <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span>${item.stale ? "<span>cached</span>" : ""}</div>
+  <div class="meta"><span>${escapeHtml(item.source)}</span><span>Score ${item.score}</span><span>${escapeHtml(item.monetizationFit)}</span>${item.stale ? "<span>cached</span>" : ""}${item.qualityFlags?.length ? "<span>review</span>" : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>${escapeHtml(item.summary || "No summary available.")}</p>
   <p class="why"><strong>Why now:</strong> ${escapeHtml(item.deliverables.whyNow)}</p>
@@ -170,6 +174,7 @@ const cards = top
     <summary>Production outline</summary>
     <ol>${item.deliverables.outline.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}</ol>
     <p><strong>Demo:</strong> ${escapeHtml(item.deliverables.demoSteps[1])}</p>
+    ${item.qualityFlags?.length ? `<p><strong>Quality flags:</strong> ${escapeHtml(item.qualityFlags.join(", "))}</p>` : ""}
     <p><strong>Thumbnail:</strong> ${escapeHtml(item.deliverables.thumbnailPrompt)}</p>
     <p><strong>Limitation:</strong> ${escapeHtml(item.deliverables.limitation)}</p>
   </details>
