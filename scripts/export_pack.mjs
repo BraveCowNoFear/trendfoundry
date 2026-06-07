@@ -91,6 +91,20 @@ const data = JSON.parse(await readFile(path.join(dataDir, "latest.json"), "utf8"
 await rm(packDir, { recursive: true, force: true });
 await mkdir(packDir, { recursive: true });
 
+const buyerDeliverables = [
+  "daily-brief.md",
+  "ready-to-record-script.md",
+  "opportunities.csv",
+  "public-sample.md",
+  "public-sample.csv"
+];
+
+const sellerOnlyFiles = [
+  "outreach-board.md",
+  "prospects.csv",
+  "latest.json"
+];
+
 const docs = [
   "daily-brief.md",
   "ready-to-record-script.md",
@@ -158,6 +172,8 @@ const manifest = {
   sourceSnapshot: data.generatedAt,
   itemCount: data.totalItems,
   errorCount: data.errorCount || 0,
+  buyerDeliverables,
+  sellerOnlyFiles,
   files: [
     "index.html",
     "styles.css",
@@ -174,9 +190,10 @@ const manifest = {
     "latest.json"
   ],
   suggestedUse: [
-    "Send daily-brief.md and ready-to-record-script.md as a free sample.",
+    "Send only buyerDeliverables after payment or approved sample delivery.",
+    "Use daily-brief.md and the scene-by-scene ready-to-record-script.md as the core buyer value.",
     "Use opportunities.csv for paid issue fulfillment.",
-    "Use prospects.csv to personalize creator outreach without scraping private contact data."
+    "Use sellerOnlyFiles only for local operations and outreach preparation."
   ]
 };
 await writeFile(path.join(packDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");

@@ -25,7 +25,7 @@ Latest verification:
 - Pages workflow `27082360189` completed successfully for commit `2316ff984ddda2a0a00a05dfbd06cb75ff19ea5f`.
 - Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 48/48.
+- `npm run qa -- --online` passed 52/52.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
 - Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, script CTA and core order CTAs remained visible, and source errors showed 0.
 

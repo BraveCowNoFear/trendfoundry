@@ -87,8 +87,14 @@ export async function prepareOrder({
     },
     sourceSnapshot: sourceManifest.sourceSnapshot,
     files: deliverables,
+    buyerDeliverables: deliverables,
     copiedFrom,
     excludedSellerOnlyFiles: sellerOnlyFiles,
+    primaryValue: [
+      "daily-brief.md: 12 ranked source-backed opportunities.",
+      "ready-to-record-script.md: one 6-8 minute scene-by-scene script with demo checklist, asset checklist, publishing metadata, and fact-safety notes.",
+      "opportunities.csv: structured table for filtering and planning."
+    ],
     reviewBeforeSending: [
       "Confirm buyer contact and payment status.",
       "Do not send prospects.csv or seller outreach notes to buyers.",
@@ -109,12 +115,12 @@ Thanks for ordering TrendFoundry for ${channel}.
 Your delivery pack is ready. It includes:
 
 - daily-brief.md
-- ready-to-record-script.md
+- ready-to-record-script.md (6-8 minute scene-by-scene script with demo checklist, asset checklist, publishing metadata, and fact-safety notes)
 - opportunities.csv
 - public-sample.md
 - public-sample.csv
 
-The brief includes source links, Bilibili/YouTube title angles, recording hooks, demo steps, quality-risk notes, and limitations. Please treat it as a creator planning aid, not a guarantee of views or revenue.
+The brief includes source links, Bilibili/YouTube title angles, recording hooks, demo steps, quality-risk notes, and limitations. Start with the script if you want one immediately recordable episode, then use the CSV to pick the next topic. Please treat it as a creator planning aid, not a guarantee of views or revenue.
 
 If you want the next issue to be more targeted, reply with the narrowest audience or topic lane you want optimized.
 

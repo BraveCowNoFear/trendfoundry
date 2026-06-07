@@ -21,6 +21,8 @@ Generated output:
 
 `dist/` is ignored by Git. Buyer-specific contact details and delivery drafts should stay local.
 
+The order `manifest.json` includes `buyerDeliverables`, `excludedSellerOnlyFiles`, and `primaryValue` so the delivery boundary and core buyer value are explicit before sending.
+
 ## Ready Leads
 
 After syncing GitHub issue leads, prepare local delivery folders for paid leads:
@@ -57,6 +59,7 @@ They are internal operations files, not buyer deliverables.
 ## Safety
 
 - Review the delivery email before sending.
+- Confirm the email describes `ready-to-record-script.md` as a scene-by-scene script, not just a loose outline.
 - Do not include payment card details or private IDs.
 - Do not promise views, revenue, or platform growth.
 - Update the GitHub issue label or local lead stage after sending.

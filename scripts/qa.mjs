@@ -89,6 +89,10 @@ async function checkLocal() {
   const og = pngSize(path.join(root, "site", "og-image.png"));
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
 
+  const packManifest = await readJson(path.join(root, "dist", "trendfoundry-sample-pack", "manifest.json"));
+  assertCheck("sample pack manifest classifies buyer deliverables", sellerOnly.every((file) => !(packManifest.buyerDeliverables || []).includes(file)));
+  assertCheck("sample pack manifest classifies seller-only files", sellerOnly.every((file) => (packManifest.sellerOnlyFiles || []).includes(file)));
+
   const scriptText = `${await readText(path.join(root, "docs", "ready-to-record-script.md"))}\n${await readText(path.join(root, "site", "ready-to-record-script.md"))}`;
   assertCheck("ready script has scene-by-scene section", scriptText.includes("## Scene-By-Scene Script"));
   assertCheck("ready script has asset checklist", scriptText.includes("## Asset Checklist"));
@@ -116,6 +120,10 @@ async function checkLocal() {
   const orderFiles = await readdir(temp.orderDir);
   const forbidden = orderFiles.filter((file) => sellerOnly.includes(file));
   assertCheck("fulfillment temp order excludes seller-only files", forbidden.length === 0, forbidden.join(", "));
+  const tempManifest = await readJson(path.join(temp.orderDir, "manifest.json"));
+  assertCheck("fulfillment manifest lists primary buyer value", (tempManifest.primaryValue || []).some((item) => item.includes("scene-by-scene script")));
+  const tempEmail = await readText(path.join(temp.orderDir, "delivery-email.md"));
+  assertCheck("fulfillment email mentions scene-by-scene script", tempEmail.includes("scene-by-scene script"));
   await rm(temp.orderDir, { recursive: true, force: true });
 
   const opsReport = await readText(path.join(root, "dist", "ops-report", "ops-report.md"));
