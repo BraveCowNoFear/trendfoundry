@@ -26,6 +26,8 @@ Generated local outputs:
 
 - `dist/qa/latest-qa.md`
 - `dist/qa/latest-qa.json`
+- `dist/qa/latest-online-qa.json` when `--online` is used
+- `dist/qa/latest-ops-qa.json` when `--skip-scheduler` is used
 
 ## Covered Checks
 
@@ -37,7 +39,7 @@ Generated local outputs:
 - sales copy does not promise PDF delivery or attach `prospects.csv`
 - commerce products exist, mention the scene-by-scene script, and exclude seller-only files from buyer fulfillment
 - a temporary fulfillment order excludes seller-only files
-- ops report includes safety and commerce status
+- ops report includes safety, commerce status, and QA gate summary
 - Windows scheduled tasks point to the expected scripts and last result is 0
 - `--skip-scheduler` omits scheduled task checks for in-task self-checks
 - optional online checks verify public page, public sample, ready-to-record script sections, UTF-8 hook text, and OG image dimensions

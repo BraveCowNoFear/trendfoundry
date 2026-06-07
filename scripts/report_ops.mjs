@@ -51,6 +51,7 @@ function publishingSummary(text) {
 
 function markdown(report) {
   const leadCounts = Object.entries(report.leads.stageCounts).map(([stage, count]) => `- ${stage}: ${count}`).join("\n") || "- no leads";
+  const runSteps = report.operations.steps.map((step) => `- ${step.name}: ${step.status}`).join("\n") || "- no recorded operate run";
   const nextActions = report.nextActions.map((item) => `- ${item}`).join("\n");
   return `# TrendFoundry Ops Report
 
@@ -69,6 +70,18 @@ Generated: ${report.generatedAt}
 - Current cards: ${report.product.currentCards}
 - Source errors: ${report.product.errorCount}
 - Top opportunity: ${report.product.topOpportunity}
+
+## QA Gate
+
+- Latest online QA: ${report.qa.online.passed}/${report.qa.online.total} passed
+- Online QA generated: ${report.qa.online.generatedAt}
+- Latest QA run: ${report.qa.latest.passed}/${report.qa.latest.total} passed (${report.qa.latest.mode})
+- Latest QA generated: ${report.qa.latest.generatedAt}
+
+## Last Operations Run
+
+- Generated: ${report.operations.generatedAt}
+${runSteps}
 
 ## Sales Pipeline
 
@@ -97,12 +110,27 @@ ${nextActions}
 const latest = await readJsonIfExists(path.join(root, "data", "latest.json"), {});
 const leadsData = await readJsonIfExists(path.join(root, "data", "leads.json"), { leads: [] });
 const commerceData = await readJsonIfExists(path.join(root, "dist", "commerce", "products.json"), { products: [] });
+const qaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-qa.json"), { checks: [] });
+const onlineQaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-online-qa.json"), qaData);
+const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "latest-run.json"), { steps: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
 const outreachFiles = await listFilesIfExists(path.join(root, "dist", "outreach-drafts"));
 const orderDirs = await listDirsIfExists(path.join(root, "dist", "orders"));
 
 const items = latest.items || [];
 const leads = leadsData.leads || [];
+function qaSummary(data) {
+  const total = data.total ?? data.checks?.length ?? 0;
+  const failed = data.failed ?? (data.checks || []).filter((check) => check.status === "fail").length;
+  const passed = data.passed ?? Math.max(0, total - failed);
+  return {
+    generatedAt: data.generatedAt || "unknown",
+    passed,
+    failed,
+    total,
+    mode: data.online ? "local + online" : data.skipScheduler ? "local / scheduler skipped" : "local"
+  };
+}
 const paidReadyCount = leads.filter((lead) => lead.stage === "paid").length;
 const qualifiedCount = leads.filter((lead) => lead.stage === "qualified").length;
 const report = {
@@ -118,6 +146,15 @@ const report = {
     currentCards: Math.min(12, items.length),
     errorCount: latest.errorCount ?? (latest.errors || []).length ?? 0,
     topOpportunity: items[0]?.title || "none"
+  },
+  qa: {
+    latest: qaSummary(qaData),
+    online: qaSummary(onlineQaData)
+  },
+  operations: {
+    generatedAt: runData.generatedAt || "unknown",
+    mode: runData.mode || "unknown",
+    steps: (runData.steps || []).map((step) => ({ name: step.name, status: step.status }))
   },
   leads: {
     total: leads.length,

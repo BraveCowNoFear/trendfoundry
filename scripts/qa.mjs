@@ -121,6 +121,7 @@ async function checkLocal() {
   const opsReport = await readText(path.join(root, "dist", "ops-report", "ops-report.md"));
   assertCheck("ops report safety says no messages sent", opsReport.includes("No messages were sent."));
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
+  assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 
   if (skipScheduler) {
     pass("scheduled task checks skipped", "--skip-scheduler");
@@ -202,10 +203,27 @@ await checkLocal();
 if (online) await checkOnline();
 
 const failed = checks.filter((check) => check.status === "fail");
-await writeFile(path.join(qaDir, "latest-qa.json"), JSON.stringify({ generatedAt: new Date().toISOString(), online, checks }, null, 2), "utf8");
+const passed = checks.length - failed.length;
+const qaPayload = {
+  generatedAt: new Date().toISOString(),
+  online,
+  skipScheduler,
+  passed,
+  failed: failed.length,
+  total: checks.length,
+  checks
+};
+await writeFile(path.join(qaDir, "latest-qa.json"), JSON.stringify(qaPayload, null, 2), "utf8");
+if (online) {
+  await writeFile(path.join(qaDir, "latest-online-qa.json"), JSON.stringify(qaPayload, null, 2), "utf8");
+} else if (skipScheduler) {
+  await writeFile(path.join(qaDir, "latest-ops-qa.json"), JSON.stringify(qaPayload, null, 2), "utf8");
+} else {
+  await writeFile(path.join(qaDir, "latest-local-qa.json"), JSON.stringify(qaPayload, null, 2), "utf8");
+}
 await writeFile(path.join(qaDir, "latest-qa.md"), markdownReport(), "utf8");
 
-console.log(`QA: ${checks.length - failed.length}/${checks.length} passed`);
+console.log(`QA: ${passed}/${checks.length} passed`);
 console.log(`Report: ${path.join(qaDir, "latest-qa.md")}`);
 
 if (failed.length) {
