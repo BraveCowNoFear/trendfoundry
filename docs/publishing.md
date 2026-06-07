@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27080634271`
+Latest verified Pages run: `27080752909`
 
-Latest verified commit: `159ec31 Add quality risk scoring for creator signals`
+Latest verified commit: `468baa7 Add pricing tiers to public landing page`
 
 Verified public paths:
 
