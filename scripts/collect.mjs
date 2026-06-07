@@ -5,6 +5,12 @@ const root = process.cwd();
 const dataDir = path.join(root, "data");
 const rawDir = path.join(dataDir, "raw");
 const userAgent = "trendfoundry/0.1 (+local autonomous research product)";
+const bilibiliDelayMs = Number(process.env.BILIBILI_DELAY_MS || 1800);
+const bilibiliMaxAttempts = Number(process.env.BILIBILI_MAX_ATTEMPTS || 3);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 async function fetchJson(url) {
   const response = await fetch(url, {
@@ -17,6 +23,30 @@ async function fetchJson(url) {
     throw new Error(`${response.status} ${response.statusText}: ${url}`);
   }
   return response.json();
+}
+
+async function fetchBilibiliJson(url) {
+  let lastError;
+  for (let attempt = 1; attempt <= bilibiliMaxAttempts; attempt += 1) {
+    const response = await fetch(url, {
+      headers: {
+        "accept": "application/json",
+        "accept-language": "zh-CN,zh;q=0.9,en;q=0.7",
+        "referer": "https://www.bilibili.com/",
+        "user-agent": userAgent
+      }
+    });
+    if (response.ok) {
+      return { json: await response.json(), attempts: attempt };
+    }
+    const retryable = response.status === 412 || response.status === 429 || response.status >= 500;
+    lastError = new Error(`${response.status} ${response.statusText} after attempt ${attempt}: ${url}`);
+    if (!retryable || attempt === bilibiliMaxAttempts) {
+      throw lastError;
+    }
+    await sleep(bilibiliDelayMs * attempt + Math.floor(Math.random() * 500));
+  }
+  throw lastError;
 }
 
 function compactText(value, max = 260) {
@@ -269,18 +299,13 @@ async function collectArxiv(queries) {
 
 async function collectBilibili(queries) {
   const items = [];
-  for (const query of queries) {
+  for (const [index, query] of queries.entries()) {
     const url = `https://api.bilibili.com/x/web-interface/search/type?search_type=video&order=pubdate&page=1&keyword=${encodeURIComponent(query)}`;
     try {
-      const response = await fetch(url, {
-        headers: {
-          "accept": "application/json",
-          "referer": "https://www.bilibili.com/",
-          "user-agent": userAgent
-        }
-      });
-      if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-      const json = await response.json();
+      if (index > 0) {
+        await sleep(bilibiliDelayMs);
+      }
+      const { json, attempts } = await fetchBilibiliJson(url);
       const results = json?.data?.result || [];
       items.push(
         ...results.slice(0, 6).map((video) => ({
@@ -293,6 +318,7 @@ async function collectBilibili(queries) {
           points: Number(video.play) || 0,
           comments: Number(video.review) || 0,
           author: video.author,
+          collectionAttempts: attempts,
           createdAt: video.pubdate ? new Date(video.pubdate * 1000).toISOString() : new Date().toISOString(),
           updatedAt: video.pubdate ? new Date(video.pubdate * 1000).toISOString() : new Date().toISOString()
         }))
