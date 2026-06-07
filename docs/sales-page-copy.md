@@ -51,3 +51,7 @@ Until a hosted payment page is connected, use this low-dependency order path:
 Email button URL:
 
 `mailto:rivan_Britain@outlook.com?subject=TrendFoundry%20sample%20pack%20order&body=Hi%2C%20I%20want%20to%20order%20the%20TrendFoundry%20%249%20sample%20pack.%20Please%20send%20the%20latest%20issue%20and%20payment%20instructions.`
+
+GitHub request form URL:
+
+`https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`

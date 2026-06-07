@@ -1,0 +1,56 @@
+name: Order or request a sample pack
+description: Request a TrendFoundry sample pack or ask for a custom weekly brief.
+title: "Sample pack request: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your interest in TrendFoundry. This form is for sample-pack requests and custom brief inquiries.
+
+        Do not include passwords, payment card details, private IDs, or sensitive account information.
+  - type: input
+    id: creator_channel
+    attributes:
+      label: Creator channel or team
+      description: Your channel, team, or public profile URL.
+      placeholder: "https://www.youtube.com/@... or https://space.bilibili.com/..."
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Primary platform
+      options:
+        - Bilibili
+        - YouTube
+        - Both Bilibili and YouTube
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: pack_type
+    attributes:
+      label: What do you want?
+      options:
+        - USD 9 sample issue
+        - USD 19/month weekly brief
+        - USD 49/month custom niche brief
+        - I want to see the free sample first
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Preferred contact
+      description: Email, GitHub handle, or another public contact route.
+      placeholder: "email@example.com"
+    validations:
+      required: true
+  - type: textarea
+    id: niche
+    attributes:
+      label: Niche or topic preference
+      description: Tell us what kind of AI/developer topics you want in the brief.
+      placeholder: "AI agents for office workflows, open-source video tools, coding agents..."
+    validations:
+      required: false

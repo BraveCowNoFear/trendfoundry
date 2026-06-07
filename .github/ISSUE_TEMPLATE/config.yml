@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Email a sample-pack order
+    url: mailto:rivan_Britain@outlook.com?subject=TrendFoundry%20sample%20pack%20order
+    about: Use email if you prefer not to open a public GitHub issue.

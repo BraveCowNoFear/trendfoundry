@@ -279,6 +279,8 @@ Suggested initial price: USD 9 for a single pack, USD 19/month for weekly delive
 
 Manual order CTA: email rivan_Britain@outlook.com with the subject "TrendFoundry sample pack order".
 
+Public request form: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20
+
 ## Operating Rule
 
 Avoid low-quality AI slop. Every idea must include a real source link, a reproducible demo angle, and an explicit limitation section.

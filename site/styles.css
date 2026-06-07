@@ -79,6 +79,11 @@ h1 {
   background: var(--accent);
   color: #fff;
 }
+.action.strong {
+  border-color: #b9c3cc;
+  background: #15171a;
+  color: #fff;
+}
 .topbar aside {
   align-self: end;
   display: grid;

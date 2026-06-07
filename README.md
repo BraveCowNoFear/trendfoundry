@@ -4,6 +4,8 @@ TrendFoundry is a small autonomous creator-intelligence product. It collects pub
 
 Live demo: https://bravecownofear.github.io/trendfoundry/
 
+Request a sample pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20
+
 ## Run
 
 ```bash
@@ -26,6 +28,7 @@ On Windows, `scripts/run_daily.ps1` refreshes the pack and writes logs under `lo
 - `docs/daily-brief.md`: paid-report style brief.
 - `site/index.html`: sales/demo page for the current pack.
 - `docs/design-system.md`: minimal design standards for product and delivery assets.
+- `docs/lead-capture.md`: public intake and triage flow for sample-pack requests.
 
 ## Monetization Plan
 

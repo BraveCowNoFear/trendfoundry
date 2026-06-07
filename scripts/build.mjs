@@ -9,6 +9,7 @@ const contactEmail = "rivan_Britain@outlook.com";
 const orderSubject = encodeURIComponent("TrendFoundry sample pack order");
 const orderBody = encodeURIComponent("Hi, I want to order the TrendFoundry $9 sample pack. Please send the latest issue and payment instructions.");
 const orderHref = `mailto:${contactEmail}?subject=${orderSubject}&body=${orderBody}`;
+const issueOrderHref = "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20";
 await mkdir(siteDir, { recursive: true });
 await mkdir(docsDir, { recursive: true });
 
@@ -112,6 +113,8 @@ Suggested initial price: USD 9 for a single pack, USD 19/month for weekly delive
 
 Manual order CTA: email ${contactEmail} with the subject "TrendFoundry sample pack order".
 
+Public request form: ${issueOrderHref}
+
 ## Operating Rule
 
 Avoid low-quality AI slop. Every idea must include a real source link, a reproducible demo angle, and an explicit limitation section.
@@ -199,7 +202,7 @@ const html = `<!doctype html>
       <div class="hero-actions">
         <a class="action primary" href="./daily-brief.md">Download sample brief</a>
         <a class="action" href="./ready-to-record-script.md">Open script</a>
-        <a class="action" href="${orderHref}">$9 order email</a>
+        <a class="action strong" href="${issueOrderHref}">Request $9 sample</a>
       </div>
     </div>
     <aside>
@@ -219,7 +222,7 @@ const html = `<!doctype html>
       </div>
       <div class="price">
         <span>$19/mo</span>
-        <small><a href="${orderHref}">or $9 sample by email</a></small>
+        <small><a href="${issueOrderHref}">or request a $9 sample</a></small>
       </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
@@ -240,7 +243,8 @@ const html = `<!doctype html>
       <div class="handoff-links">
         <a class="action primary" href="./launch-plan.md">Launch plan</a>
         <a class="action" href="./sales-page-copy.md">Sales copy</a>
-        <a class="action" href="${orderHref}">Manual order</a>
+        <a class="action strong" href="${issueOrderHref}">Request sample</a>
+        <a class="action" href="${orderHref}">Email order</a>
       </div>
     </section>
   </main>
@@ -326,6 +330,11 @@ h1 {
 .action.primary {
   border-color: var(--accent);
   background: var(--accent);
+  color: #fff;
+}
+.action.strong {
+  border-color: #b9c3cc;
+  background: #15171a;
   color: #fff;
 }
 .topbar aside {
