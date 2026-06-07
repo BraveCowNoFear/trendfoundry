@@ -18,6 +18,7 @@
     "ops-report": "node scripts/report_ops.mjs",
     "content-audit": "node scripts/generate_content_audit.mjs",
     "episode-workbench": "node scripts/generate_episode_workbench.mjs",
+    "full-script": "node scripts/generate_full_episode_script.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "visuals": "node scripts/generate_site_visuals.mjs",
