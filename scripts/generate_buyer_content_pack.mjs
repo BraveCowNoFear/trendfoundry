@@ -90,8 +90,8 @@ ${markdownTable(deliverables)}
 ## Delivery Boundary
 
 - Buyer-facing files: ${deliverables.map((item) => item.file).join(", ")}.
-- Seller-only files excluded: prospects.csv, outreach-board.md, data/latest.json, raw source snapshots, local lead pipeline, private order notes, payment credentials, account data.
-- The pack does not promise views, subscribers, revenue, or fully autonomous income.
+- Seller-only files excluded: prospects.csv, outreach-board.md, data/latest.json, raw source snapshots, local lead pipeline, private order notes, sensitive payment data, account data.
+- The pack does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 - The buyer should record the proof asset before polishing title, thumbnail, or CTA.
 
 ## Suggested Delivery Email
@@ -108,7 +108,7 @@ The main proof asset is: ${sentence(meta.proofAsset)}.
 
 Safety note: ${meta.safetyLine}
 
-This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, or automation income.
+This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 Best,
 TrendFoundry
@@ -134,7 +134,7 @@ Main proof asset: ${sentence(meta.proofAsset)}
 
 Safety note: ${meta.safetyLine}
 
-This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, or automation income.
+This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 Best,
 TrendFoundry
@@ -153,7 +153,7 @@ const manifest = {
     "data/leads.json",
     "docs/lead-pipeline.md",
     "docs/lead-replies.md",
-    "payment credentials",
+    "sensitive payment data",
     "account data"
   ],
   safety: {

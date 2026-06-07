@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-07T21:04:53.439Z
+Generated: 2026-06-07T21:12:02.849Z
 
 Status: success
 
@@ -27,7 +27,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Primary episode: NousResearch/hermes-agent
 - Buyer deliverables: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
-- Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, payment credentials, account data
+- Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
 ## Safety Boundary
 

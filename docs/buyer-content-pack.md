@@ -1,6 +1,6 @@
 # TrendFoundry Buyer Content Pack
 
-Generated: 2026-06-07T21:04:53.012Z
+Generated: 2026-06-07T21:12:02.441Z
 
 Dataset: 2026-06-07T20:33:58.416Z
 
@@ -26,8 +26,8 @@ This pack is the buyer-facing content delivery layer for the current TrendFoundr
 ## Delivery Boundary
 
 - Buyer-facing files: full-episode-script.md, episode-workbench.md, content-editorial-audit.md.
-- Seller-only files excluded: prospects.csv, outreach-board.md, data/latest.json, raw source snapshots, local lead pipeline, private order notes, payment credentials, account data.
-- The pack does not promise views, subscribers, revenue, or fully autonomous income.
+- Seller-only files excluded: prospects.csv, outreach-board.md, data/latest.json, raw source snapshots, local lead pipeline, private order notes, sensitive payment data, account data.
+- The pack does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 - The buyer should record the proof asset before polishing title, thumbnail, or CTA.
 
 ## Suggested Delivery Email
@@ -44,7 +44,7 @@ The main proof asset is: Terminal proof / README quickstart, install command, fi
 
 Safety note: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, or automation income.
+This pack is built for proof-first content planning. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 Best,
 TrendFoundry

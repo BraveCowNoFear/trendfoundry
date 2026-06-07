@@ -45,7 +45,7 @@ Primary episode:
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
-Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or fully autonomous income.`;
+Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.`;
 }
 
 const manifest = await readJson("dist/buyer-content-pack/manifest.json");
@@ -92,7 +92,7 @@ const rows = products.map((product) => ({
   order_url: orderPage,
   free_sample_url: samplePack,
   support_email: contactEmail,
-  safety: "No promise of views, subscribers, revenue, platform growth, or autonomous income. Do not request card numbers, passwords, wallet seeds, or private IDs by email."
+  safety: "No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email."
 }));
 
 const markdown = `# TrendFoundry Content Product Listing
@@ -138,8 +138,8 @@ Delivery: ${manifest.buyerDeliverables.join(", ")}
 
 Terms:
 - External payment confirmation required before delivery.
-- Do not send card numbers, private IDs, passwords, wallet seeds, or payment credentials by email.
-- No promise of views, subscribers, revenue, platform growth, or autonomous income.
+- Do not send sensitive payment or account data by email.
+- No promise of views, subscribers, revenue, platform growth, or buyer outcomes.
 - Refund policy: ${rows[0].refund_policy}
 
 ## Short Outreach Copy
@@ -161,8 +161,8 @@ ${manifest.buyerDeliverables.map((file) => `- ${file}`).join("\n")}
 
 Terms:
 - External payment confirmation required before delivery.
-- Do not send card numbers, private IDs, passwords, wallet seeds, or payment credentials by email.
-- No promise of views, subscribers, revenue, platform growth, or autonomous income.
+- Do not send sensitive payment or account data by email.
+- No promise of views, subscribers, revenue, platform growth, or buyer outcomes.
 - Refund policy: ${row.refund_policy}
 
 Support: ${contactEmail}

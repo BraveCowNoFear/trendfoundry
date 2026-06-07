@@ -206,7 +206,7 @@ ${checklist([
 - Deliver this as a proof-first episode, not as a tool endorsement.
 - The buyer can reuse the title, cold open, recording checklist, comparison table, limitation slide, and CTA.
 - If the proof cannot be recorded in one session, downgrade this item to a watchlist note and replace the main episode.
-- Do not promise views, subscribers, revenue, or fully autonomous income.
+- Do not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 ## Shorts / Clip Hooks
 

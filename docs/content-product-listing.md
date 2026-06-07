@@ -1,6 +1,6 @@
 # TrendFoundry Content Product Listing
 
-Generated: 2026-06-07T21:04:53.412Z
+Generated: 2026-06-07T21:12:02.819Z
 
 This is the listing layer for the current buyer content pack. Use it to set up Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Links, Buy Me a Coffee, or manual invoice copy.
 
@@ -23,7 +23,7 @@ This is the listing layer for the current buyer content pack. Use it to set up G
 - Short description: One complete proof-first AI/developer video script plus a five-item episode workbench and editorial audit.
 - Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
-- Safety: No promise of views, subscribers, revenue, platform growth, or autonomous income. Do not request card numbers, passwords, wallet seeds, or private IDs by email.
+- Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
 Long description:
 
@@ -43,7 +43,7 @@ Primary episode:
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
-Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or fully autonomous income.
+Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 ### TrendFoundry Proof-First Weekly Pack
 
@@ -54,7 +54,7 @@ Important: this is a creator planning and production aid. It does not promise vi
 - Short description: A weekly buyer-ready proof-first script pack for AI/developer creators.
 - Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
-- Safety: No promise of views, subscribers, revenue, platform growth, or autonomous income. Do not request card numbers, passwords, wallet seeds, or private IDs by email.
+- Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
 Long description:
 
@@ -74,7 +74,7 @@ Primary episode:
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
-Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or fully autonomous income.
+Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 ### TrendFoundry Custom Proof Pack
 
@@ -85,7 +85,7 @@ Important: this is a creator planning and production aid. It does not promise vi
 - Short description: A custom-niche proof-first script pack tuned to one creator audience or technical lane.
 - Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
-- Safety: No promise of views, subscribers, revenue, platform growth, or autonomous income. Do not request card numbers, passwords, wallet seeds, or private IDs by email.
+- Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
 Long description:
 
@@ -105,7 +105,7 @@ Primary episode:
 
 Use it when you want a proof-first video script and recording checklist without spending hours scanning GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 
-Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or fully autonomous income.
+Important: this is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 
 ## Manual Invoice Template
@@ -119,8 +119,8 @@ Delivery: full-episode-script.md, episode-workbench.md, content-editorial-audit.
 
 Terms:
 - External payment confirmation required before delivery.
-- Do not send card numbers, private IDs, passwords, wallet seeds, or payment credentials by email.
-- No promise of views, subscribers, revenue, platform growth, or autonomous income.
+- Do not send sensitive payment or account data by email.
+- No promise of views, subscribers, revenue, platform growth, or buyer outcomes.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
 
 ## Short Outreach Copy

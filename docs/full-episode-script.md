@@ -1,6 +1,6 @@
 # Full Episode Script: NousResearch/hermes-agent
 
-Generated: 2026-06-07T21:04:52.657Z
+Generated: 2026-06-07T21:12:02.068Z
 
 Dataset: 2026-06-07T20:33:58.416Z
 
@@ -55,7 +55,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 - Deliver this as a proof-first episode, not as a tool endorsement.
 - The buyer can reuse the title, cold open, recording checklist, comparison table, limitation slide, and CTA.
 - If the proof cannot be recorded in one session, downgrade this item to a watchlist note and replace the main episode.
-- Do not promise views, subscribers, revenue, or fully autonomous income.
+- Do not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
 ## Shorts / Clip Hooks
 

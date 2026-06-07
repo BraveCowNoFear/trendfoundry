@@ -9,6 +9,7 @@
     "build": "node scripts/build.mjs",
     "export": "node scripts/export_pack.mjs",
     "fulfill": "node scripts/fulfill_order.mjs",
+    "fulfill-content": "node scripts/fulfill_content_order.mjs",
     "fulfill-ready": "node scripts/fulfill_ready_leads.mjs",
     "fulfill-email-orders": "node scripts/fulfill_email_orders.mjs",
     "payment-reply": "node scripts/draft_payment_reply.mjs",
