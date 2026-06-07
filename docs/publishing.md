@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27080307584`
+Latest verified Pages run: `27080533257`
 
-Latest verified commit: `7284af1 Add no-backend lead capture path`
+Latest verified commit: `3c9dddc Harden Bilibili collection retries`
 
 Verified public paths:
 
