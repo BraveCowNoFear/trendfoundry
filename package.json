@@ -26,6 +26,7 @@
     "custom-proof-pack": "node scripts/generate_custom_proof_pack.mjs",
     "content-sales": "node scripts/generate_content_sales_sequence.mjs",
     "content-prospects": "node scripts/generate_content_prospecting.mjs",
+    "content-crm": "node scripts/generate_content_sales_crm.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
     "social": "node scripts/generate_social_asset.mjs",
     "visuals": "node scripts/generate_site_visuals.mjs",

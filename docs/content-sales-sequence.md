@@ -1,6 +1,6 @@
 # TrendFoundry Content Sales Sequence
 
-Generated: 2026-06-07T21:30:38.228Z
+Generated: 2026-06-07T21:35:03.189Z
 
 This is a content-only sales sequence for the current proof-first script products. It creates reviewable drafts; it does not send messages, collect payment, upload files, or modify accounts.
 

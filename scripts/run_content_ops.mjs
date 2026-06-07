@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-sales", "content-prospects"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-sales", "content-prospects", "content-crm"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -61,6 +61,7 @@ const listing = await readJson("dist/content-listing/products.json", {});
 const customManifest = await readJson("dist/custom-proof-pack/manifest.json", {});
 const salesManifest = await readJson("dist/content-sales-sequence/manifest.json", {});
 const prospectManifest = await readJson("dist/content-prospecting/manifest.json", {});
+const crmManifest = await readJson("dist/content-sales-crm/manifest.json", {});
 const allSucceeded = steps.every((step) => step.status === "success");
 
 const run = {
@@ -89,6 +90,12 @@ const run = {
       channels: prospectManifest.channels || [],
       productFits: prospectManifest.productFits || []
     },
+    salesCrm: {
+      count: crmManifest.count,
+      dueToday: crmManifest.dueToday,
+      dueThisWeek: crmManifest.dueThisWeek,
+      needsReview: crmManifest.needsReview
+    },
     listingSkus: (listing.products || []).map((product) => product.sku),
     sellerOnlyExcluded: buyerManifest.sellerOnlyExcluded || []
   },
@@ -110,7 +117,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, sales drafts, and local prospecting drafts without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, sales drafts, local prospecting drafts, and the local sales CRM without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -127,6 +134,7 @@ ${stepSummary(steps)}
 - Custom pack: ${compact(customManifest.niche, "unknown")} / ${compact(customManifest.platform, "unknown")} (${(customManifest.buyerDeliverables || []).join(", ") || "unknown"})
 - Sales drafts: ${salesManifest.count ?? "unknown"} drafts across ${(salesManifest.channels || []).join(", ") || "unknown"}
 - Prospects: ${prospectManifest.count ?? "unknown"} local drafts across ${(prospectManifest.channels || []).join(", ") || "unknown"}
+- CRM: ${crmManifest.count ?? "unknown"} rows, ${crmManifest.dueToday ?? "unknown"} due today, ${crmManifest.dueThisWeek ?? "unknown"} due this week
 - Listing SKUs: ${((listing.products || []).map((product) => product.sku)).join(", ") || "unknown"}
 - Seller-only exclusions: ${(buyerManifest.sellerOnlyExcluded || []).join(", ") || "unknown"}
 
@@ -143,8 +151,9 @@ ${stepSummary(steps)}
 2. Review \`docs/content-product-listing.md\` before publishing or copying payment-platform fields.
 3. Review \`docs/content-sales-sequence.md\` for publish/send drafts.
 4. Review \`dist/content-prospecting/prospect-board.md\` for one-by-one outreach.
-5. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-6. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+5. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
+6. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+7. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });
