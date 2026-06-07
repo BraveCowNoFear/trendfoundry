@@ -5,7 +5,8 @@ const root = process.cwd();
 const dataFile = path.join(root, "data", "latest.json");
 const distDir = path.join(root, "dist", "outreach-drafts");
 const publicUrl = "https://bravecownofear.github.io/trendfoundry/";
-const sampleUrl = "https://bravecownofear.github.io/trendfoundry/public-sample.md";
+const sampleUrlEn = "https://bravecownofear.github.io/trendfoundry/public-sample.en.md";
+const sampleUrlZh = "https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md";
 const contactEmail = "rivan_Britain@outlook.com";
 
 function csvEscape(value) {
@@ -58,6 +59,7 @@ function draftFor(prospect, index) {
   const angle = clean(item.deliverables?.whyNow, `${topic} is showing up as a fresh creator signal.`);
   const hook = clean(item.deliverables?.hook, "a source-backed hook and demo path");
   const isZh = item.source === "bilibili";
+  const sampleUrl = isZh ? sampleUrlZh : sampleUrlEn;
   const nextFollowup = new Date(Date.now() + 3 * 86400000).toISOString().slice(0, 10);
   const subject = isZh
     ? `TrendFoundry：给 ${creator} 的本周 AI/开发者选题样品`
@@ -76,6 +78,8 @@ function draftFor(prospect, index) {
     opener: isZh ? `看到你最近覆盖「${topic}」。` : `I noticed your recent work around "${topic}".`,
     hook,
     public_sample_url: sampleUrl,
+    english_sample_url: sampleUrlEn,
+    chinese_sample_url: sampleUrlZh,
     product_url: publicUrl,
     status: "drafted_review_before_sending",
     next_followup: nextFollowup,

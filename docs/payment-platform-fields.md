@@ -51,7 +51,11 @@ Buyer delivery files:
 - `ready-to-record-script.md`
 - `opportunities.csv`
 - `public-sample.md`
+- `public-sample.en.md`
+- `public-sample.zh-CN.md`
 - `public-sample.csv`
+- `public-sample.en.csv`
+- `public-sample.zh-CN.csv`
 
 Seller-only files that must not be attached to buyers:
 

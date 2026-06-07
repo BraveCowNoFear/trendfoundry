@@ -182,17 +182,48 @@ function mdLink(item) {
   return `[${item.title}](${item.url})`;
 }
 
-const publicSampleReport = `# TrendFoundry Public Sample
+function englishSampleTitle(item) {
+  return item.deliverables.youtubeTitles?.[0] || item.title;
+}
+
+function zhSampleTitle(item) {
+  return item.deliverables.bilibiliTitles?.[0] || item.title;
+}
+
+function englishSampleWhyNow(item) {
+  return `A current ${item.source} signal makes this a timely candidate for a practical creator workflow test.`;
+}
+
+function englishSampleHook(item) {
+  return `This episode turns ${englishSampleTitle(item)} into a practical workflow test instead of a trend recap.`;
+}
+
+function englishSampleDemo() {
+  return "Run the smallest reproducible test, then compare the workflow before and after the tool.";
+}
+
+function englishSampleLimitation(item) {
+  if (item.source === "github") return "Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.";
+  if (item.source === "bilibili") return "Do not copy the source video; keep the proof link and create your own test, judgment, and limitation section.";
+  if (item.source === "youtube") return "Do not copy the original video; keep the proof link and create your own demo and judgment.";
+  return "Treat public attention as a signal, not proof of quality; verify facts and reproducibility before recording.";
+}
+
+const publicSampleReportEn = `# TrendFoundry Public Sample (English)
 
 Generated: ${data.generatedAt}
 
+Language: English
+
 This free sample shows the format and quality bar. The paid issue expands this into 12 ranked opportunities, one ready-to-record script, CSV tables, and delivery notes.
+
+Chinese version: ${publicSiteUrl}public-sample.zh-CN.md
 
 ## Sample Opportunities
 
 ${publicSample
   .map(
-    (item, index) => `### ${index + 1}. ${item.title}
+    (item, index) => `### ${index + 1}. ${englishSampleTitle(item)}
 
 - Score: ${item.score}
 - Fit: ${item.monetizationFit}
@@ -200,10 +231,10 @@ ${publicSample
 - Quality: ${item.qualityFlags?.length ? `review (${item.qualityFlags.join(", ")})` : "normal"}
 - Link: ${item.url}
 - Creator target: ${item.targetCreator}
-- Why now: ${item.deliverables.whyNow}
-- Hook: ${item.deliverables.hook}
-- Demo: ${item.deliverables.demoSteps[1]}
-- Limitation: ${item.deliverables.limitation}
+- Why now: ${englishSampleWhyNow(item)}
+- Hook: ${englishSampleHook(item)}
+- Demo: ${englishSampleDemo(item)}
+- Limitation: ${englishSampleLimitation(item)}
 `
   )
   .join("\n")}
@@ -219,20 +250,79 @@ Request the current issue: ${issueOrderHref}
 Email order: ${contactEmail}
 `;
 
-const publicSampleCsv = toCsv(
+const publicSampleReportZh = `# TrendFoundry 公开样品（中文）
+
+生成时间：${data.generatedAt}
+
+语言：中文
+
+这份免费样品展示格式和质量标准。付费单期会扩展成 12 条排序机会、1 份可直接录制脚本、CSV 表格和交付说明。
+
+English version: ${publicSiteUrl}public-sample.en.md
+
+## 样品机会
+
+${publicSample
+  .map(
+    (item, index) => `### ${index + 1}. ${zhSampleTitle(item)}
+
+- 评分：${item.score}
+- 匹配度：${fitLabel(item.monetizationFit, "zh")}
+- 来源：${item.source} / ${item.sourceQuery}
+- 质量：${item.qualityFlags?.length ? `需复核（${item.qualityFlags.join("，")}）` : "正常"}
+- 链接：${item.url}
+- 目标创作者：${item.targetCreator}
+- 为什么现在：${zhWhyNow(item)}
+- 钩子：${item.deliverables.hook}
+- 演示：${zhDemo(item)}
+- 限制：${zhLimitation(item)}
+`
+  )
+  .join("\n")}
+
+## 升级
+
+- 单期样品：USD 9，一次性购买。
+- 周更情报：USD 19/月。
+- 垂直定制：USD 49/月。
+
+申请当前期：${issueOrderHref}
+
+邮件下单：${contactEmail}
+`;
+
+const publicSampleCsvEn = toCsv(
   publicSample.map((item, index) => ({
     rank: index + 1,
     score: item.score,
     source: item.source,
     fit: item.monetizationFit,
     quality: item.qualityFlags?.length ? `review: ${item.qualityFlags.join("; ")}` : "normal",
-    title: item.title,
-    hook: item.deliverables.hook,
-    demo: item.deliverables.demoSteps[1],
-    limitation: item.deliverables.limitation,
+    title: englishSampleTitle(item),
+    hook: englishSampleHook(item),
+    why_now: englishSampleWhyNow(item),
+    demo: englishSampleDemo(item),
+    limitation: englishSampleLimitation(item),
     url: item.url
   })),
-  ["rank", "score", "source", "fit", "quality", "title", "hook", "demo", "limitation", "url"]
+  ["rank", "score", "source", "fit", "quality", "title", "hook", "why_now", "demo", "limitation", "url"]
+);
+
+const publicSampleCsvZh = toCsv(
+  publicSample.map((item, index) => ({
+    "排名": index + 1,
+    "评分": item.score,
+    "来源": item.source,
+    "匹配度": fitLabel(item.monetizationFit, "zh"),
+    "质量": item.qualityFlags?.length ? `需复核：${item.qualityFlags.join("；")}` : "正常",
+    "标题": zhSampleTitle(item),
+    "钩子": item.deliverables.hook,
+    "为什么现在": zhWhyNow(item),
+    "演示": zhDemo(item),
+    "限制": zhLimitation(item),
+    "链接": item.url
+  })),
+  ["排名", "评分", "来源", "匹配度", "质量", "标题", "钩子", "为什么现在", "演示", "限制", "链接"]
 );
 
 const report = `# TrendFoundry Daily Creator Intelligence
@@ -585,7 +675,8 @@ function buildTopicPage(topic) {
   <h1>${escapeHtml(topic.title)}</h1>
   <p class="sub">${escapeHtml(topic.description)} Updated from the same source-backed dataset used for the paid weekly brief.</p>
   <div class="hero-actions">
-    <a class="action primary" href="../public-sample.md">View free sample</a>
+    <a class="action primary" href="../public-sample.en.md">English sample</a>
+    <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
     <a class="action" href="../ready-to-record-script.md">Open script</a>
     <a class="action strong" href="${issueOrderHref}">Request current pack</a>
     <a class="action" href="../index.html">Back to dashboard</a>
@@ -722,7 +813,8 @@ ${top
 
 ## Order
 
-- Public sample: ${publicSiteUrl}public-sample.md
+- English sample: ${publicSiteUrl}public-sample.en.md
+- Chinese sample: ${publicSiteUrl}public-sample.zh-CN.md
 - Ready-to-record script: ${publicSiteUrl}ready-to-record-script.md
 - Request current pack: ${issueOrderHref}
 - Email order: ${contactEmail}
@@ -751,7 +843,8 @@ function buildIssuePage() {
   <h1>${escapeHtml(issueTitle)}</h1>
   <p class="sub">A durable public snapshot of 12 source-backed creator opportunities. Use it to inspect proof links, hooks, demo angles, and limitations before requesting the full pack.</p>
   <div class="hero-actions">
-    <a class="action primary" href="../public-sample.md">View free sample</a>
+    <a class="action primary" href="../public-sample.en.md">English sample</a>
+    <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
     <a class="action" href="../ready-to-record-script.md">Open script</a>
     <a class="action" href="./index.html">Issue archive</a>
     <a class="action strong" href="${issueOrderHref}">Request current pack</a>
@@ -873,8 +966,10 @@ const html = `<!doctype html>
       ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
       ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
       <div class="hero-actions">
-        <a class="action primary" href="./public-sample.md">${dual("View free sample", "查看免费样品")}</a>
-        <a class="action" href="./public-sample.csv">${dual("Download CSV sample", "下载 CSV 样品")}</a>
+        <a class="action primary" href="./public-sample.en.md">${dual("English sample", "英文样品")}</a>
+        <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
+        <a class="action primary" href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
+        <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
         <a class="action" href="./ready-to-record-script.md">${dual("Open script", "打开脚本")}</a>
         <a class="action strong" href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
         <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
@@ -914,8 +1009,10 @@ const html = `<!doctype html>
         ${dual("The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.", "公开样品展示格式、评分、来源链接和质量备注，但不暴露完整付费包。", "p")}
       </div>
       <div class="sample-actions">
-        <a class="action primary" href="./public-sample.md">${dual("Open sample", "打开样品")}</a>
-        <a class="action" href="./public-sample.csv">${dual("CSV sample", "CSV 样品")}</a>
+        <a class="action primary" href="./public-sample.en.md">${dual("Open English sample", "打开英文样品")}</a>
+        <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
+        <a class="action primary" href="./public-sample.zh-CN.md">${dual("Open Chinese sample", "打开中文样品")}</a>
+        <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
       </div>
     </section>
     ${socialProof}
@@ -1018,8 +1115,10 @@ const zhHtml = `<!doctype html>
       <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
       <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
       <div class="hero-actions">
-        <a class="action primary" href="../public-sample.md">查看免费样品</a>
-        <a class="action" href="../public-sample.csv">下载 CSV 样品</a>
+        <a class="action primary" href="../public-sample.zh-CN.md">中文样品</a>
+        <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
+        <a class="action primary" href="../public-sample.en.md">English sample</a>
+        <a class="action" href="../public-sample.en.csv">English CSV</a>
         <a class="action" href="../ready-to-record-script.md">打开可录制脚本</a>
         <a class="action strong" href="${issueOrderHref}">在 GitHub 申请</a>
         <a class="action" href="${orderHref}">邮件下单</a>
@@ -1059,8 +1158,10 @@ const zhHtml = `<!doctype html>
         <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
       </div>
       <div class="sample-actions">
-        <a class="action primary" href="../public-sample.md">打开样品</a>
-        <a class="action" href="../public-sample.csv">CSV 样品</a>
+        <a class="action primary" href="../public-sample.zh-CN.md">打开中文样品</a>
+        <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
+        <a class="action primary" href="../public-sample.en.md">Open English sample</a>
+        <a class="action" href="../public-sample.en.csv">English CSV</a>
       </div>
     </section>
     <section class="visual-proof" aria-label="Share preview">
@@ -1085,7 +1186,8 @@ const zhHtml = `<!doctype html>
         <p>每个入口都保留公开来源、钩子、演示角度和限制说明，降低首次购买前的不确定性。</p>
       </div>
       <div class="topic-links">
-        <a class="topic-link" href="../public-sample.md"><span>免费样品</span><small>先检查 3 条当前机会和 CSV 格式。</small></a>
+        <a class="topic-link" href="../public-sample.zh-CN.md"><span>中文样品</span><small>先检查中文 Markdown 和 CSV 格式。</small></a>
+        <a class="topic-link" href="../public-sample.en.md"><span>English sample</span><small>给英文买家检查同一批机会。</small></a>
         <a class="topic-link" href="../issues/latest.html"><span>最新公开期刊</span><small>查看 Top 12 机会的公开快照。</small></a>
         <a class="topic-link" href="../feed.xml"><span>RSS Feed</span><small>订阅每期更新，减少一次性访问流失。</small></a>
         <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
@@ -1861,15 +1963,21 @@ setLanguage(currentLanguage);
 
 await writeFile(path.join(docsDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(docsDir, "ready-to-record-script.md"), script, "utf8");
-await writeFile(path.join(docsDir, "public-sample.md"), publicSampleReport, "utf8");
+await writeFile(path.join(docsDir, "public-sample.md"), publicSampleReportEn, "utf8");
+await writeFile(path.join(docsDir, "public-sample.en.md"), publicSampleReportEn, "utf8");
+await writeFile(path.join(docsDir, "public-sample.zh-CN.md"), publicSampleReportZh, "utf8");
 await writeFile(path.join(siteDir, "index.html"), html, "utf8");
 await writeFile(path.join(zhDir, "index.html"), zhHtml, "utf8");
 await writeFile(path.join(siteDir, "styles.css"), css, "utf8");
 await writeFile(path.join(siteDir, "app.js"), app, "utf8");
 await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
-await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReport, "utf8");
-await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsv, "utf8");
+await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReportEn, "utf8");
+await writeFile(path.join(siteDir, "public-sample.en.md"), publicSampleReportEn, "utf8");
+await writeFile(path.join(siteDir, "public-sample.zh-CN.md"), publicSampleReportZh, "utf8");
+await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsvEn, "utf8");
+await writeFile(path.join(siteDir, "public-sample.en.csv"), publicSampleCsvEn, "utf8");
+await writeFile(path.join(siteDir, "public-sample.zh-CN.csv"), publicSampleCsvZh, "utf8");
 await writeFile(path.join(siteDir, "feed.xml"), rssFeed, "utf8");
 await writeFile(path.join(siteDir, "feed.json"), JSON.stringify(jsonFeed, null, 2), "utf8");
 await writeFile(path.join(docsIssuesDir, issueMarkdownPath), issueMarkdown, "utf8");
@@ -1889,7 +1997,11 @@ const sitemapUrls = [
   "",
   "zh/",
   "public-sample.md",
+  "public-sample.en.md",
+  "public-sample.zh-CN.md",
   "public-sample.csv",
+  "public-sample.en.csv",
+  "public-sample.zh-CN.csv",
   "ready-to-record-script.md",
   "sales-page-copy.md",
   "feed.xml",

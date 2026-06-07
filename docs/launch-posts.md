@@ -1,6 +1,6 @@
 # TrendFoundry Launch Assets
 
-Generated: 2026-06-07T10:09:49.872Z
+Generated: 2026-06-07T10:36:06.815Z
 
 Safety: these are draft assets only. Review before posting or sending. Do not bulk-send identical messages, do not promise views/revenue, and do not ask for payment card details in public replies.
 
@@ -22,7 +22,9 @@ It turns public signals from GitHub, YouTube, Bilibili, HN, and arXiv into:
 - one scene-by-scene ready-to-record script
 - quality-risk notes
 
-Free sample: https://bravecownofear.github.io/trendfoundry/public-sample.md
+Free samples:
+- English: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
+- Chinese: https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 ```
 
 ## linkedin: Product launch
@@ -34,7 +36,9 @@ Most AI newsletters summarize what happened. TrendFoundry tries to answer a more
 
 This week's pack collected 126 public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around NousResearch/hermes-agent.
 
-Free sample: https://bravecownofear.github.io/trendfoundry/public-sample.md
+Free samples:
+- English: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
+- Chinese: https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 Request the paid pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20
 ```
 
@@ -52,7 +56,8 @@ Status: draft_review_before_posting
 4. 1 份 6-8 分钟分镜式成片脚本
 
 本期 source mix：github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
-免费样品：https://bravecownofear.github.io/trendfoundry/public-sample.md
+免费样品：https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
+English sample: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
 ```
 
 ## github_readme_pin: GitHub pinned comment
@@ -66,7 +71,8 @@ Latest top opportunity: NousResearch/hermes-agent
 Hook: 这期不讲概念，直接验证 NousResearch/hermes-agent 是否能进入真实创作工作流。
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-Try the free sample: https://bravecownofear.github.io/trendfoundry/public-sample.md
+Try the English sample: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
+Chinese sample: https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 Open the ready-to-record script: https://bravecownofear.github.io/trendfoundry/ready-to-record-script.md
 ```
 
@@ -81,7 +87,9 @@ Hi,
 
 I am testing TrendFoundry, a weekly AI/developer creator-intelligence pack. It turns public signals into 12 ranked video opportunities, title angles, demo steps, quality-risk notes, and one scene-by-scene ready-to-record script.
 
-The free sample is here: https://bravecownofear.github.io/trendfoundry/public-sample.md
+Free samples:
+- English: https://bravecownofear.github.io/trendfoundry/public-sample.en.md
+- Chinese: https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 
 If this fits your channel, the current sample issue is USD 9. You can request it here:
 https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20

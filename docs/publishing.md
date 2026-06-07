@@ -17,7 +17,11 @@ Verified public paths:
 - `https://bravecownofear.github.io/trendfoundry/daily-brief.md`
 - `https://bravecownofear.github.io/trendfoundry/sales-page-copy.md`
 - `https://bravecownofear.github.io/trendfoundry/public-sample.md`
+- `https://bravecownofear.github.io/trendfoundry/public-sample.en.md`
+- `https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md`
 - `https://bravecownofear.github.io/trendfoundry/public-sample.csv`
+- `https://bravecownofear.github.io/trendfoundry/public-sample.en.csv`
+- `https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.csv`
 - `https://bravecownofear.github.io/trendfoundry/ready-to-record-script.md`
 - `https://bravecownofear.github.io/trendfoundry/sitemap.xml`
 - `https://bravecownofear.github.io/trendfoundry/feed.xml`
@@ -31,7 +35,7 @@ Verified public paths:
 Latest verification:
 
 - Pages workflow `27089829822` completed successfully for commit `8df6662 Simplify source mix legend`.
-- Public page, `zh/`, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
+- Public page, `zh/`, bilingual sample Markdown/CSV files, `ready-to-record-script.md`, `sitemap.xml`, `feed.xml`, `feed.json`, `issues/`, `issues/latest.html`, `issues/2026-06-07.html`, `topics/ai-video-ideas.html`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
 - `npm run qa -- --online` passed 138/138.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.

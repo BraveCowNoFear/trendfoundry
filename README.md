@@ -30,6 +30,7 @@ Then open `http://localhost:4173`.
 
 `npm run export` writes a buyer-ready sample pack under `dist/trendfoundry-sample-pack/`.
 Preview an exported pack with `PORT=4174 SITE_DIR=dist/trendfoundry-sample-pack npm start`.
+Public samples are split by language: `public-sample.en.md/.csv` and `public-sample.zh-CN.md/.csv`.
 
 ## Automation
 

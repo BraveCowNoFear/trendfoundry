@@ -66,7 +66,7 @@ Until a hosted payment page is connected, use this low-dependency order path:
 - Buyer emails: `rivan_Britain@outlook.com`
 - Subject: `TrendFoundry sample pack order`
 - Price: USD 9 for the latest sample pack
-- Delivery: `daily-brief.md`, `ready-to-record-script.md`, `opportunities.csv`, `public-sample.md`, and `public-sample.csv`
+- Delivery: `daily-brief.md`, `ready-to-record-script.md`, `opportunities.csv`, plus English and Chinese sample files (`public-sample.en.md/.csv`, `public-sample.zh-CN.md/.csv`)
 
 Email button URL:
 

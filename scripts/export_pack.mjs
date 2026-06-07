@@ -96,7 +96,11 @@ const buyerDeliverables = [
   "ready-to-record-script.md",
   "opportunities.csv",
   "public-sample.md",
-  "public-sample.csv"
+  "public-sample.en.md",
+  "public-sample.zh-CN.md",
+  "public-sample.csv",
+  "public-sample.en.csv",
+  "public-sample.zh-CN.csv"
 ];
 
 const sellerOnlyFiles = [
@@ -119,7 +123,11 @@ await cp(path.join(siteDir, "index.html"), path.join(packDir, "index.html"));
 await cp(path.join(siteDir, "styles.css"), path.join(packDir, "styles.css"));
 await cp(path.join(siteDir, "app.js"), path.join(packDir, "app.js"));
 await cp(path.join(siteDir, "public-sample.md"), path.join(packDir, "public-sample.md"));
+await cp(path.join(siteDir, "public-sample.en.md"), path.join(packDir, "public-sample.en.md"));
+await cp(path.join(siteDir, "public-sample.zh-CN.md"), path.join(packDir, "public-sample.zh-CN.md"));
 await cp(path.join(siteDir, "public-sample.csv"), path.join(packDir, "public-sample.csv"));
+await cp(path.join(siteDir, "public-sample.en.csv"), path.join(packDir, "public-sample.en.csv"));
+await cp(path.join(siteDir, "public-sample.zh-CN.csv"), path.join(packDir, "public-sample.zh-CN.csv"));
 
 await writeFile(
   path.join(packDir, "opportunities.csv"),
@@ -179,7 +187,11 @@ const manifest = {
     "styles.css",
     "app.js",
     "public-sample.md",
+    "public-sample.en.md",
+    "public-sample.zh-CN.md",
     "public-sample.csv",
+    "public-sample.en.csv",
+    "public-sample.zh-CN.csv",
     "daily-brief.md",
     "ready-to-record-script.md",
     "launch-plan.md",

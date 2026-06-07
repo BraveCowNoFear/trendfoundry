@@ -10,6 +10,9 @@ const online = process.argv.includes("--online");
 const skipScheduler = process.argv.includes("--skip-scheduler");
 const publicBase = "https://bravecownofear.github.io/trendfoundry/";
 const sellerOnly = ["prospects.csv", "outreach-board.md", "latest.json"];
+const homeChineseTitle = "\u7ed9 AI \u548c\u5f00\u53d1\u8005\u89c6\u9891\u9891\u9053\u7684\u521b\u4f5c\u8005\u60c5\u62a5\u5305";
+const zhLandingTitle = "\u7ed9 B \u7ad9\u548c\u4e2d\u6587\u6280\u672f\u9891\u9053\u7684 AI \u521b\u4f5c\u8005\u60c5\u62a5\u5305";
+const emailOrderZh = "\u90ae\u4ef6\u4e0b\u5355";
 const requiredScripts = [
   "daily",
   "operate",
@@ -118,7 +121,7 @@ async function checkLocal() {
   assertCheck("site has email order CTA", siteIndex.includes("Email order"));
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));
   assertCheck("site has language switch", siteIndex.includes('data-language-toggle="en"') && siteIndex.includes('data-language-toggle="zh"'));
-  assertCheck("site has Chinese product copy", siteIndex.includes("给 AI 和开发者视频频道的创作者情报包") && siteIndex.includes("邮件下单"));
+  assertCheck("site has Chinese product copy", siteIndex.includes(homeChineseTitle) && siteIndex.includes(emailOrderZh));
   assertCheck("site card copy is localized", siteIndex.includes("为什么现在") && siteIndex.includes("制作大纲") && siteIndex.includes("B 站角度"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
@@ -128,16 +131,25 @@ async function checkLocal() {
   assertCheck("site has issue archive box", siteIndex.includes('class="archive-box"') && siteIndex.includes("Latest issue") && siteIndex.includes("Issue archive"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
+  assertCheck("site offers separate sample languages", siteIndex.includes("public-sample.en.md") && siteIndex.includes("public-sample.zh-CN.md") && siteIndex.includes("public-sample.en.csv") && siteIndex.includes("public-sample.zh-CN.csv"));
   const appJs = await readText(path.join(root, "site", "app.js"));
   assertCheck("site app persists language choice", appJs.includes("trendfoundry-language") && appJs.includes("setLanguage"));
   assertCheck("site app localizes result count", appJs.includes("个可见机会") && appJs.includes("visible opportunity"));
   assertCheck("site app supports forced Chinese landing page", appJs.includes("data-force-lang") || appJs.includes("forcedLanguage"));
 
   const zhIndex = await readText(path.join(root, "site", "zh", "index.html"));
-  assertCheck("Chinese landing page exists", zhIndex.includes('<html lang="zh-CN">') && zhIndex.includes("给 B 站和中文技术频道的 AI 创作者情报包"));
+  assertCheck("Chinese landing page exists", zhIndex.includes('<html lang="zh-CN">') && zhIndex.includes(zhLandingTitle));
   assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
   assertCheck("Chinese landing page has 12 cards", (zhIndex.match(/<article class="card"/g) || []).length === 12);
-  assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.md"));
+  assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
+
+  const sampleEn = await readText(path.join(root, "site", "public-sample.en.md"));
+  const sampleZh = await readText(path.join(root, "site", "public-sample.zh-CN.md"));
+  const sampleCsvEn = await readText(path.join(root, "site", "public-sample.en.csv"));
+  const sampleCsvZh = await readText(path.join(root, "site", "public-sample.zh-CN.csv"));
+  assertCheck("English public sample exists", sampleEn.includes("Language: English") && sampleEn.includes("Chinese version:"));
+  assertCheck("Chinese public sample exists", sampleZh.includes("语言：中文") && sampleZh.includes("English version:"));
+  assertCheck("public sample CSVs are language-specific", sampleCsvEn.startsWith("rank,score,source") && sampleCsvZh.startsWith("排名,评分,来源"));
 
   for (const slug of seoTopicSlugs) {
     const topicFile = path.join(root, "site", "topics", `${slug}.html`);
@@ -180,6 +192,7 @@ async function checkLocal() {
   const packManifest = await readJson(path.join(root, "dist", "trendfoundry-sample-pack", "manifest.json"));
   assertCheck("sample pack manifest classifies buyer deliverables", sellerOnly.every((file) => !(packManifest.buyerDeliverables || []).includes(file)));
   assertCheck("sample pack manifest classifies seller-only files", sellerOnly.every((file) => (packManifest.sellerOnlyFiles || []).includes(file)));
+  assertCheck("sample pack includes bilingual sample files", ["public-sample.en.md", "public-sample.zh-CN.md", "public-sample.en.csv", "public-sample.zh-CN.csv"].every((file) => (packManifest.buyerDeliverables || []).includes(file)));
 
   const scriptText = `${await readText(path.join(root, "docs", "ready-to-record-script.md"))}\n${await readText(path.join(root, "site", "ready-to-record-script.md"))}`;
   assertCheck("ready script has scene-by-scene section", scriptText.includes("## Scene-By-Scene Script"));
@@ -192,7 +205,7 @@ async function checkLocal() {
 
   const launchPosts = `${await readText(path.join(root, "docs", "launch-posts.md"))}\n${await readText(path.join(root, "dist", "launch-assets", "launch-posts.md"))}`;
   assertCheck("launch assets are draft-only", launchPosts.includes("draft_review_before_posting") && launchPosts.includes("Review before posting or sending"));
-  assertCheck("launch assets include public sample link", launchPosts.includes("https://bravecownofear.github.io/trendfoundry/public-sample.md"));
+  assertCheck("launch assets include bilingual public sample links", launchPosts.includes("https://bravecownofear.github.io/trendfoundry/public-sample.en.md") && launchPosts.includes("https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md"));
   assertCheck("launch assets include no-guarantee warning", launchPosts.includes("do not promise views/revenue") || launchPosts.includes("No promises about views or revenue"));
   assertCheck("launch assets avoid positive view/revenue promises", !/guaranteed (views|revenue)|will get (views|revenue)|grow your (views|revenue)/i.test(launchPosts));
 
@@ -269,12 +282,16 @@ async function checkOnline() {
 
   const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);
   assertCheck("online Chinese landing page HTTP 200", zhIndex.status === 200, String(zhIndex.status));
-  assertCheck("online Chinese landing page has Chinese copy", zhIndex.text.includes("给 B 站和中文技术频道的 AI 创作者情报包") && zhIndex.text.includes("邮件下单"));
+  assertCheck("online Chinese landing page has Chinese copy", zhIndex.text.includes(zhLandingTitle) && zhIndex.text.includes(emailOrderZh));
   assertCheck("online Chinese landing page has 12 cards", (zhIndex.text.match(/<article class="card"/g) || []).length === 12);
 
-  const sample = await fetchText(`${publicBase}public-sample.md?qa=${Date.now()}`);
-  assertCheck("online public sample HTTP 200", sample.status === 200, String(sample.status));
-  assertCheck("online public sample has UTF-8 hook", sample.text.includes("\u8fd9\u671f\u4e0d\u8bb2\u6982\u5ff5"));
+  const sampleEn = await fetchText(`${publicBase}public-sample.en.md?qa=${Date.now()}`);
+  assertCheck("online English public sample HTTP 200", sampleEn.status === 200, String(sampleEn.status));
+  assertCheck("online English public sample has language marker", sampleEn.text.includes("Language: English"));
+
+  const sampleZh = await fetchText(`${publicBase}public-sample.zh-CN.md?qa=${Date.now()}`);
+  assertCheck("online Chinese public sample HTTP 200", sampleZh.status === 200, String(sampleZh.status));
+  assertCheck("online Chinese public sample has UTF-8 marker", sampleZh.text.includes("语言：中文"));
 
   const readyScript = await fetchText(`${publicBase}ready-to-record-script.md?qa=${Date.now()}`);
   assertCheck("online ready script HTTP 200", readyScript.status === 200, String(readyScript.status));

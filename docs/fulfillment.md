@@ -14,7 +14,11 @@ Generated output:
 - `dist/orders/<order-id>/ready-to-record-script.md`
 - `dist/orders/<order-id>/opportunities.csv`
 - `dist/orders/<order-id>/public-sample.md`
+- `dist/orders/<order-id>/public-sample.en.md`
+- `dist/orders/<order-id>/public-sample.zh-CN.md`
 - `dist/orders/<order-id>/public-sample.csv`
+- `dist/orders/<order-id>/public-sample.en.csv`
+- `dist/orders/<order-id>/public-sample.zh-CN.csv`
 - `dist/orders/<order-id>/manifest.json`
 - `dist/orders/<order-id>/delivery-email.md`
 - `dist/orders/<order-id>/fulfillment-checklist.md`

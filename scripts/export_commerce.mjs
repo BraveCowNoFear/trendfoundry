@@ -6,6 +6,8 @@ const commerceDir = path.join(root, "dist", "commerce");
 const contactEmail = "rivan_Britain@outlook.com";
 const productUrl = "https://bravecownofear.github.io/trendfoundry/";
 const sampleUrl = "https://bravecownofear.github.io/trendfoundry/public-sample.md";
+const sampleUrlEn = "https://bravecownofear.github.io/trendfoundry/public-sample.en.md";
+const sampleUrlZh = "https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md";
 const issueFormUrl = "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20";
 
 function csvEscape(value) {
@@ -25,7 +27,11 @@ const deliverables = [
   "ready-to-record-script.md",
   "opportunities.csv",
   "public-sample.md",
-  "public-sample.csv"
+  "public-sample.en.md",
+  "public-sample.zh-CN.md",
+  "public-sample.csv",
+  "public-sample.en.csv",
+  "public-sample.zh-CN.csv"
 ];
 
 const products = [
@@ -89,7 +95,9 @@ ${product.includes.map((item) => `- ${item}`).join("\n")}
 
 Delivery: Markdown brief, scene-by-scene ready-to-record script, opportunities CSV, and public sample files by email or agreed delivery route.
 
-Sample: ${sampleUrl}
+Samples:
+- English: ${sampleUrlEn}
+- Chinese: ${sampleUrlZh}
 
 Important: TrendFoundry is a creator planning aid. It does not promise views, subscribers, revenue, or platform growth.`;
 }
@@ -107,6 +115,8 @@ function platformFields(product) {
     tags: "AI tools, creator economy, YouTube, Bilibili, GitHub, video ideas, creator workflow",
     product_url: productUrl,
     public_sample_url: sampleUrl,
+    english_sample_url: sampleUrlEn,
+    chinese_sample_url: sampleUrlZh,
     request_form_url: issueFormUrl,
     support_email: contactEmail
   };
@@ -130,7 +140,9 @@ Terms:
 - Do not send payment card details by email.
 - Refund policy: if the first paid issue does not include at least three recordable ideas for the buyer's channel, email within 7 days for a refund.
 
-Public sample: ${sampleUrl}
+Public samples:
+- English: ${sampleUrlEn}
+- Chinese: ${sampleUrlZh}
 Support: ${contactEmail}
 `;
 }
@@ -148,7 +160,8 @@ ${rows
 - Price: USD ${row.price_usd}${row.billing === "monthly" ? "/month" : ""}
 - Billing: ${row.billing}
 - Product URL: ${row.product_url}
-- Public sample: ${row.public_sample_url}
+- English sample: ${row.english_sample_url}
+- Chinese sample: ${row.chinese_sample_url}
 
 ### Short Description
 
@@ -180,6 +193,8 @@ await writeFile(
     "tags",
     "product_url",
     "public_sample_url",
+    "english_sample_url",
+    "chinese_sample_url",
     "request_form_url",
     "support_email"
   ]),

@@ -29,6 +29,7 @@ npm start
 然后打开 `http://localhost:4173`。
 
 `npm run export` 会在 `dist/trendfoundry-sample-pack/` 生成可发送给买家的样品包。可用 `PORT=4174 SITE_DIR=dist/trendfoundry-sample-pack npm start` 预览导出的样品包。
+公开样品按语言拆分为 `public-sample.en.md/.csv` 和 `public-sample.zh-CN.md/.csv`。
 
 ## 自动化
 

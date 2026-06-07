@@ -1,12 +1,16 @@
-# TrendFoundry Public Sample
+# TrendFoundry Public Sample (English)
 
 Generated: 2026-06-07T10:09:48.622Z
 
+Language: English
+
 This free sample shows the format and quality bar. The paid issue expands this into 12 ranked opportunities, one ready-to-record script, CSV tables, and delivery notes.
+
+Chinese version: https://bravecownofear.github.io/trendfoundry/public-sample.zh-CN.md
 
 ## Sample Opportunities
 
-### 1. NousResearch/hermes-agent
+### 1. 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
 
 - Score: 187
 - Fit: high
@@ -14,12 +18,12 @@ This free sample shows the format and quality bar. The paid issue expands this i
 - Quality: normal
 - Link: https://github.com/NousResearch/hermes-agent
 - Creator target: tech explainer / developer educator
-- Why now: NousResearch/hermes-agent is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Hook: 这期不讲概念，直接验证 NousResearch/hermes-agent 是否能进入真实创作工作流。
-- Demo: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-- Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
+- Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 
-### 2. infiniflow/ragflow
+### 2. 为什么 infiniflow/ragflow 现在值得创作者关注 (practical test)
 
 - Score: 173
 - Fit: high
@@ -27,12 +31,12 @@ This free sample shows the format and quality bar. The paid issue expands this i
 - Quality: normal
 - Link: https://github.com/infiniflow/ragflow
 - Creator target: tech explainer / developer educator
-- Why now: infiniflow/ragflow is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Hook: 这期不讲概念，直接验证 infiniflow/ragflow 是否能进入真实创作工作流。
-- Demo: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-- Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns 为什么 infiniflow/ragflow 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
+- Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 
-### 3. google-gemini/gemini-cli
+### 3. 为什么 google-gemini/gemini-cli 现在值得创作者关注 (practical test)
 
 - Score: 171
 - Fit: high
@@ -40,10 +44,10 @@ This free sample shows the format and quality bar. The paid issue expands this i
 - Quality: normal
 - Link: https://github.com/google-gemini/gemini-cli
 - Creator target: tech explainer / developer educator
-- Why now: google-gemini/gemini-cli is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Hook: 这期不讲概念，直接验证 google-gemini/gemini-cli 是否能进入真实创作工作流。
-- Demo: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-- Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Why now: A current github signal makes this a timely candidate for a practical creator workflow test.
+- Hook: This episode turns 为什么 google-gemini/gemini-cli 现在值得创作者关注 (practical test) into a practical workflow test instead of a trend recap.
+- Demo: Run the smallest reproducible test, then compare the workflow before and after the tool.
+- Limitation: Do not rely on stars alone; test install friction, maintenance quality, and reproducibility.
 
 
 ## Upgrade

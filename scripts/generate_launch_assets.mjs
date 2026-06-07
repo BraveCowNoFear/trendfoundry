@@ -6,6 +6,8 @@ const outDir = path.join(root, "dist", "launch-assets");
 const docsDir = path.join(root, "docs");
 const publicUrl = "https://bravecownofear.github.io/trendfoundry/";
 const sampleUrl = `${publicUrl}public-sample.md`;
+const sampleUrlEn = `${publicUrl}public-sample.en.md`;
+const sampleUrlZh = `${publicUrl}public-sample.zh-CN.md`;
 const scriptUrl = `${publicUrl}ready-to-record-script.md`;
 const requestUrl = "https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20";
 const contactEmail = "rivan_Britain@outlook.com";
@@ -76,7 +78,9 @@ It turns public signals from GitHub, YouTube, Bilibili, HN, and arXiv into:
 - one scene-by-scene ready-to-record script
 - quality-risk notes
 
-Free sample: ${sampleUrl}`
+Free samples:
+- English: ${sampleUrlEn}
+- Chinese: ${sampleUrlZh}`
   },
   {
     channel: "linkedin",
@@ -86,7 +90,9 @@ Free sample: ${sampleUrl}`
 
 This week's pack collected ${latest.totalItems || 0} public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around ${topTitle}.
 
-Free sample: ${sampleUrl}
+Free samples:
+- English: ${sampleUrlEn}
+- Chinese: ${sampleUrlZh}
 Request the paid pack: ${requestUrl}`
   },
   {
@@ -102,7 +108,8 @@ Request the paid pack: ${requestUrl}`
 4. 1 \u4efd 6-8 \u5206\u949f\u5206\u955c\u5f0f\u6210\u7247\u811a\u672c
 
 \u672c\u671f source mix\uff1a${sourceMixText}
-\u514d\u8d39\u6837\u54c1\uff1a${sampleUrl}`
+\u514d\u8d39\u6837\u54c1\uff1a${sampleUrlZh}
+English sample: ${sampleUrlEn}`
   },
   {
     channel: "github_readme_pin",
@@ -114,7 +121,8 @@ Latest top opportunity: ${topTitle}
 Hook: ${topHook}
 Limitation: ${topLimitation}
 
-Try the free sample: ${sampleUrl}
+Try the English sample: ${sampleUrlEn}
+Chinese sample: ${sampleUrlZh}
 Open the ready-to-record script: ${scriptUrl}`
   },
   {
@@ -127,7 +135,9 @@ Hi,
 
 I am testing TrendFoundry, a weekly AI/developer creator-intelligence pack. It turns public signals into 12 ranked video opportunities, title angles, demo steps, quality-risk notes, and one scene-by-scene ready-to-record script.
 
-The free sample is here: ${sampleUrl}
+Free samples:
+- English: ${sampleUrlEn}
+- Chinese: ${sampleUrlZh}
 
 If this fits your channel, the current sample issue is USD 9. You can request it here:
 ${requestUrl}
