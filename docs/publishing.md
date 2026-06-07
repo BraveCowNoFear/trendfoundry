@@ -19,6 +19,8 @@ Verified public paths:
 - `https://bravecownofear.github.io/trendfoundry/public-sample.csv`
 - `https://bravecownofear.github.io/trendfoundry/ready-to-record-script.md`
 - `https://bravecownofear.github.io/trendfoundry/sitemap.xml`
+- `https://bravecownofear.github.io/trendfoundry/feed.xml`
+- `https://bravecownofear.github.io/trendfoundry/feed.json`
 - `https://bravecownofear.github.io/trendfoundry/topics/ai-video-ideas.html`
 - `https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20`
 
@@ -38,6 +40,15 @@ The repository is intended to be public so the sample product page can be inspec
 The workflow at `.github/workflows/pages.yml` deploys the `site/` directory to GitHub Pages on normal pushes to `main`.
 
 The scheduled operations workflow at `.github/workflows/daily-ops.yml` also deploys `site/` directly after `npm run operate`, because commits created by `GITHUB_TOKEN` do not trigger the separate Pages workflow.
+
+## Feeds
+
+The build output includes:
+
+- `site/feed.xml`: RSS 2.0 feed with the current top 12 opportunities.
+- `site/feed.json`: JSON Feed 1.1 mirror for tools that prefer structured feed ingestion.
+
+Both feeds include proof links, creator hooks, demo angles, limitations, and the current sample-pack request CTA.
 
 ## Pre-Publish Checklist
 

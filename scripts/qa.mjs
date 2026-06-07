@@ -82,6 +82,12 @@ async function checkLocal() {
     assertCheck(`package script: ${script}`, Boolean(pkg.scripts?.[script]), pkg.scripts?.[script] || "missing");
   }
 
+  const readme = await readText(path.join(root, "README.md"));
+  const readmeZh = await readText(path.join(root, "README.zh-CN.md"));
+  assertCheck("README links feeds", readme.includes("/feed.xml") && readme.includes("/feed.json"));
+  assertCheck("Chinese README is readable UTF-8", readmeZh.includes("自动化创作者情报产品") && !/[�鏄丅乊]/.test(readmeZh));
+  assertCheck("Chinese README links feeds", readmeZh.includes("/feed.xml") && readmeZh.includes("/feed.json"));
+
   const dailyOpsWorkflow = await readText(path.join(root, ".github", "workflows", "daily-ops.yml"));
   assertCheck("daily ops workflow has schedule", dailyOpsWorkflow.includes("schedule:") && dailyOpsWorkflow.includes("15 7 * * *"));
   assertCheck("daily ops workflow has manual dispatch", dailyOpsWorkflow.includes("workflow_dispatch:"));
@@ -109,6 +115,8 @@ async function checkLocal() {
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
+  assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
+  assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
 
   for (const slug of seoTopicSlugs) {
@@ -125,6 +133,15 @@ async function checkLocal() {
   const sitemap = await readText(path.join(root, "site", "sitemap.xml"));
   assertCheck("robots points to sitemap", robots.includes(`Sitemap: ${publicBase}sitemap.xml`));
   assertCheck("sitemap includes SEO topics", seoTopicSlugs.every((slug) => sitemap.includes(`${publicBase}topics/${slug}.html`)));
+  assertCheck("sitemap includes feeds", sitemap.includes(`${publicBase}feed.xml`) && sitemap.includes(`${publicBase}feed.json`));
+
+  const rss = await readText(path.join(root, "site", "feed.xml"));
+  const jsonFeed = await readJson(path.join(root, "site", "feed.json"));
+  assertCheck("rss feed has channel", rss.includes("<rss") && rss.includes("<channel>") && rss.includes("TrendFoundry Creator Intelligence"));
+  assertCheck("rss feed has 12 items", (rss.match(/<item>/g) || []).length === 12);
+  assertCheck("rss feed includes order CTA", rss.includes("Order the current pack"));
+  assertCheck("json feed has 12 items", jsonFeed.items?.length === 12, String(jsonFeed.items?.length || 0));
+  assertCheck("json feed has source tags", (jsonFeed.items || []).every((item) => Array.isArray(item.tags) && item.tags.length >= 2));
 
   const og = pngSize(path.join(root, "site", "og-image.png"));
   assertCheck("og image is 1200x630", og?.width === 1200 && og?.height === 630, og ? `${og.width}x${og.height}, ${og.bytes} bytes` : "missing");
@@ -238,10 +255,24 @@ async function checkOnline() {
   const sitemap = await fetchText(`${publicBase}sitemap.xml?qa=${Date.now()}`);
   assertCheck("online sitemap HTTP 200", sitemap.status === 200, String(sitemap.status));
   assertCheck("online sitemap has SEO topics", seoTopicSlugs.every((slug) => sitemap.text.includes(`${publicBase}topics/${slug}.html`)));
+  assertCheck("online sitemap has feeds", sitemap.text.includes(`${publicBase}feed.xml`) && sitemap.text.includes(`${publicBase}feed.json`));
 
   const topic = await fetchText(`${publicBase}topics/ai-video-ideas.html?qa=${Date.now()}`);
   assertCheck("online SEO topic HTTP 200", topic.status === 200, String(topic.status));
   assertCheck("online SEO topic has paid CTA", topic.text.includes("Request current pack") && topic.text.includes("Request sample"));
+
+  const rss = await fetchText(`${publicBase}feed.xml?qa=${Date.now()}`);
+  assertCheck("online RSS feed HTTP 200", rss.status === 200, String(rss.status));
+  assertCheck("online RSS feed has 12 items", (rss.text.match(/<item>/g) || []).length === 12);
+
+  const jsonFeed = await fetchText(`${publicBase}feed.json?qa=${Date.now()}`);
+  assertCheck("online JSON feed HTTP 200", jsonFeed.status === 200, String(jsonFeed.status));
+  try {
+    const parsed = JSON.parse(jsonFeed.text);
+    assertCheck("online JSON feed has 12 items", parsed.items?.length === 12, String(parsed.items?.length || 0));
+  } catch (error) {
+    assertCheck("online JSON feed parses", false, error.message);
+  }
 }
 
 function markdownReport() {

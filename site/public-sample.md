@@ -1,6 +1,6 @@
 # TrendFoundry Public Sample
 
-Generated: 2026-06-07T04:49:55.957Z
+Generated: 2026-06-07T09:30:02.018Z
 
 This free sample shows the format and quality bar. The paid issue expands this into 12 ranked opportunities, one ready-to-record script, CSV tables, and delivery notes.
 
@@ -21,7 +21,7 @@ This free sample shows the format and quality bar. The paid issue expands this i
 
 ### 2. infiniflow/ragflow
 
-- Score: 174
+- Score: 173
 - Fit: high
 - Source: github / ai-agents
 - Quality: normal

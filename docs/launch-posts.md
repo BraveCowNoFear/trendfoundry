@@ -1,12 +1,12 @@
 # TrendFoundry Launch Assets
 
-Generated: 2026-06-07T04:49:57.063Z
+Generated: 2026-06-07T09:30:04.158Z
 
 Safety: these are draft assets only. Review before posting or sending. Do not bulk-send identical messages, do not promise views/revenue, and do not ask for payment card details in public replies.
 
-Source snapshot: 2026-06-07T04:49:55.957Z
+Source snapshot: 2026-06-07T09:30:02.018Z
 Top opportunity: NousResearch/hermes-agent
-Source mix: github 4 / youtube 2 / hn 2 / bilibili 3 / arxiv 1
+Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
 ## x: Launch thread
 
@@ -32,7 +32,7 @@ Status: draft_review_before_posting
 ```text
 Most AI newsletters summarize what happened. TrendFoundry tries to answer a more useful creator question: what should I record next, and what proof do I need before recommending it?
 
-This week's pack collected 124 public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around NousResearch/hermes-agent.
+This week's pack collected 126 public signals and shaped the top 12 into source-backed video opportunities. The top script is a 6-8 minute scene-by-scene plan around NousResearch/hermes-agent.
 
 Free sample: https://bravecownofear.github.io/trendfoundry/public-sample.md
 Request the paid pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20
@@ -51,7 +51,7 @@ Status: draft_review_before_posting
 3. demo 步骤和限制说明
 4. 1 份 6-8 分钟分镜式成片脚本
 
-本期 source mix：github 4 / youtube 2 / hn 2 / bilibili 3 / arxiv 1
+本期 source mix：github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 免费样品：https://bravecownofear.github.io/trendfoundry/public-sample.md
 ```
 

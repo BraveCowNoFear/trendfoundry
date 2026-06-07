@@ -439,6 +439,8 @@ function pageShell({ title, description, body, canonicalPath = "" }) {
   <meta property="og:image" content="${ogImageUrl}">
   <title>${escapeHtml(title)} | TrendFoundry</title>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="../feed.xml">
+  <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="../feed.json">
 </head>
 <body>
 ${body}
@@ -513,6 +515,68 @@ const topicLinks = topicDefinitions
   .map((topic) => `<a class="topic-link" href="./topics/${topic.slug}.html"><span>${escapeHtml(topic.title)}</span><small>${escapeHtml(topic.description)}</small></a>`)
   .join("");
 
+function escapeXml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function feedDescription(item) {
+  return [
+    item.summary || "No summary available.",
+    `Creator hook: ${item.deliverables.hook}`,
+    `Demo angle: ${item.deliverables.demoSteps?.[1] || item.deliverables.whyNow}`,
+    `Limitation: ${item.deliverables.limitation}`,
+    "Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20"
+  ].join("\n\n");
+}
+
+const feedItems = top.slice(0, 12);
+const feedUpdated = new Date(data.generatedAt).toISOString();
+const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TrendFoundry Creator Intelligence</title>
+    <link>${publicSiteUrl}</link>
+    <atom:link href="${publicSiteUrl}feed.xml" rel="self" type="application/rss+xml" />
+    <description>Source-backed AI and developer creator opportunities with hooks, demo angles, and limitations.</description>
+    <language>en</language>
+    <lastBuildDate>${new Date(feedUpdated).toUTCString()}</lastBuildDate>
+${feedItems
+  .map(
+    (item, index) => `    <item>
+      <title>${escapeXml(`#${index + 1} ${item.title}`)}</title>
+      <link>${escapeXml(item.url)}</link>
+      <guid isPermaLink="false">${escapeXml(item.url || item.id)}</guid>
+      <pubDate>${new Date(item.updatedAt || item.createdAt || data.generatedAt).toUTCString()}</pubDate>
+      <description><![CDATA[${feedDescription(item)}]]></description>
+    </item>`
+  )
+  .join("\n")}
+  </channel>
+</rss>
+`;
+
+const jsonFeed = {
+  version: "https://jsonfeed.org/version/1.1",
+  title: "TrendFoundry Creator Intelligence",
+  home_page_url: publicSiteUrl,
+  feed_url: `${publicSiteUrl}feed.json`,
+  description: "Source-backed AI and developer creator opportunities with hooks, demo angles, and limitations.",
+  language: "en",
+  items: feedItems.map((item, index) => ({
+    id: item.url || item.id,
+    url: item.url,
+    title: `#${index + 1} ${item.title}`,
+    content_text: feedDescription(item),
+    date_published: item.updatedAt || item.createdAt || data.generatedAt,
+    tags: [item.source, item.monetizationFit, item.qualityRisk].filter(Boolean)
+  }))
+};
+
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -532,6 +596,8 @@ const html = `<!doctype html>
   <meta name="twitter:image" content="${ogImageUrl}">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="./feed.xml">
+  <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="./feed.json">
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -605,6 +671,17 @@ const html = `<!doctype html>
         <p>These pages refresh with the same daily source data and route qualified readers back to the sample pack.</p>
       </div>
       <div class="topic-links">${topicLinks}</div>
+    </section>
+    <section class="feed-box" aria-label="Subscribe to updates">
+      <div>
+        <p class="section-label">Subscribe</p>
+        <h2>Turn one-time visitors into repeat readers.</h2>
+        <p>The RSS and JSON feeds publish the top 12 current opportunities, each with a proof link, hook, demo angle, and limitation.</p>
+      </div>
+      <div class="feed-actions">
+        <a class="action primary" href="./feed.xml">RSS feed</a>
+        <a class="action" href="./feed.json">JSON feed</a>
+      </div>
     </section>
     <section class="toolbelt" aria-label="Opportunity controls">
       <div class="search-wrap">
@@ -922,7 +999,8 @@ main {
   align-items: start;
 }
 .seo-hub,
-.seo-summary {
+.seo-summary,
+.feed-box {
   display: grid;
   grid-template-columns: minmax(260px, 0.5fr) minmax(0, 1fr);
   gap: 24px;
@@ -932,16 +1010,25 @@ main {
   margin-bottom: 22px;
 }
 .seo-hub h2,
-.seo-summary h2 {
+.seo-summary h2,
+.feed-box h2 {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 1.2;
 }
 .seo-hub p:not(.section-label),
-.seo-summary p {
+.seo-summary p,
+.feed-box p:not(.section-label) {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
+}
+.feed-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  align-self: center;
 }
 .topic-links {
   display: grid;
@@ -1149,6 +1236,7 @@ li { margin: 6px 0; }
   .delivery ul,
   .seo-hub,
   .seo-summary,
+  .feed-box,
   .topic-links,
   .topic-list,
   .toolbelt,
@@ -1158,11 +1246,13 @@ li { margin: 6px 0; }
   }
   .price { text-align: left; }
   .sample-actions { justify-content: flex-start; }
+  .feed-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
   .hero-actions .action,
   .handoff-links .action,
-  .sample-actions .action {
+  .sample-actions .action,
+  .feed-actions .action {
     flex: 1 1 100%;
     width: 100%;
     min-width: 0;
@@ -1215,6 +1305,8 @@ await writeFile(path.join(siteDir, "daily-brief.md"), report, "utf8");
 await writeFile(path.join(siteDir, "ready-to-record-script.md"), script, "utf8");
 await writeFile(path.join(siteDir, "public-sample.md"), publicSampleReport, "utf8");
 await writeFile(path.join(siteDir, "public-sample.csv"), publicSampleCsv, "utf8");
+await writeFile(path.join(siteDir, "feed.xml"), rssFeed, "utf8");
+await writeFile(path.join(siteDir, "feed.json"), JSON.stringify(jsonFeed, null, 2), "utf8");
 for (const topic of topicDefinitions) {
   await writeFile(path.join(topicsDir, `${topic.slug}.html`), buildTopicPage(topic), "utf8");
 }
@@ -1229,6 +1321,8 @@ const sitemapUrls = [
   "public-sample.csv",
   "ready-to-record-script.md",
   "sales-page-copy.md",
+  "feed.xml",
+  "feed.json",
   ...topicDefinitions.map((topic) => `topics/${topic.slug}.html`)
 ];
 await writeFile(

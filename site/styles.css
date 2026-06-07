@@ -288,7 +288,8 @@ main {
   align-items: start;
 }
 .seo-hub,
-.seo-summary {
+.seo-summary,
+.feed-box {
   display: grid;
   grid-template-columns: minmax(260px, 0.5fr) minmax(0, 1fr);
   gap: 24px;
@@ -298,16 +299,25 @@ main {
   margin-bottom: 22px;
 }
 .seo-hub h2,
-.seo-summary h2 {
+.seo-summary h2,
+.feed-box h2 {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 1.2;
 }
 .seo-hub p:not(.section-label),
-.seo-summary p {
+.seo-summary p,
+.feed-box p:not(.section-label) {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
+}
+.feed-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+  align-self: center;
 }
 .topic-links {
   display: grid;
@@ -515,6 +525,7 @@ li { margin: 6px 0; }
   .delivery ul,
   .seo-hub,
   .seo-summary,
+  .feed-box,
   .topic-links,
   .topic-list,
   .toolbelt,
@@ -524,11 +535,13 @@ li { margin: 6px 0; }
   }
   .price { text-align: left; }
   .sample-actions { justify-content: flex-start; }
+  .feed-actions { justify-content: flex-start; }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .result-count { margin: 0; white-space: normal; }
   .hero-actions .action,
   .handoff-links .action,
-  .sample-actions .action {
+  .sample-actions .action,
+  .feed-actions .action {
     flex: 1 1 100%;
     width: 100%;
     min-width: 0;

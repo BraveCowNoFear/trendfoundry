@@ -17,6 +17,8 @@
   <meta name="twitter:image" content="https://bravecownofear.github.io/trendfoundry/og-image.png">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="./feed.xml">
+  <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="./feed.json">
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -39,9 +41,9 @@
     <aside>
       <span><strong>12</strong> opportunities</span>
       <span><strong>11</strong> high-fit</span>
-      <span><strong>1</strong> source errors</span>
-      <span>github 4 / youtube 2 / hn 2 / bilibili 3 / arxiv 1</span>
-      <div class="source-bars" aria-label="Source mix"><span style="--w:33.33%" title="github 4"></span><span style="--w:16.67%" title="youtube 2"></span><span style="--w:16.67%" title="hn 2"></span><span style="--w:25.00%" title="bilibili 3"></span><span style="--w:8.33%" title="arxiv 1"></span></div>
+      <span><strong>0</strong> source errors</span>
+      <span>github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1</span>
+      <div class="source-bars" aria-label="Source mix"><span style="--w:33.33%" title="github 4"></span><span style="--w:16.67%" title="youtube 2"></span><span style="--w:25.00%" title="bilibili 3"></span><span style="--w:16.67%" title="hn 2"></span><span style="--w:8.33%" title="arxiv 1"></span></div>
     </aside>
   </header>
   <main>
@@ -125,12 +127,23 @@
       </div>
       <div class="topic-links"><a class="topic-link" href="./topics/ai-video-ideas.html"><span>AI video ideas for creator channels</span><small>A weekly source-backed list of AI and developer video ideas with hooks, demos, titles, and limitations.</small></a><a class="topic-link" href="./topics/github-ai-projects.html"><span>GitHub AI projects worth turning into videos</span><small>Fresh GitHub signals converted into recordable demos for technical creators.</small></a><a class="topic-link" href="./topics/bilibili-ai-topics.html"><span>Bilibili AI topics for technical explainers</span><small>Chinese creator angles shaped from Bilibili-facing AI and developer signals.</small></a><a class="topic-link" href="./topics/youtube-ai-workflows.html"><span>YouTube AI workflow ideas for weekly videos</span><small>YouTube-ready AI workflow opportunities with proof links and practical demos.</small></a><a class="topic-link" href="./topics/developer-trend-brief.html"><span>Developer trend brief for creator newsletters</span><small>Hacker News, arXiv, GitHub, YouTube, and Bilibili signals turned into a compact creator brief.</small></a></div>
     </section>
+    <section class="feed-box" aria-label="Subscribe to updates">
+      <div>
+        <p class="section-label">Subscribe</p>
+        <h2>Turn one-time visitors into repeat readers.</h2>
+        <p>The RSS and JSON feeds publish the top 12 current opportunities, each with a proof link, hook, demo angle, and limitation.</p>
+      </div>
+      <div class="feed-actions">
+        <a class="action primary" href="./feed.xml">RSS feed</a>
+        <a class="action" href="./feed.json">JSON feed</a>
+      </div>
+    </section>
     <section class="toolbelt" aria-label="Opportunity controls">
       <div class="search-wrap">
         <label for="opportunity-search">Search opportunities</label>
         <input id="opportunity-search" type="search" placeholder="agent, video, workflow, arxiv...">
       </div>
-      <div class="filters" aria-label="Source filters"><button class="filter-button active" type="button" data-source-filter="all">All</button><button class="filter-button" type="button" data-source-filter="github">github</button><button class="filter-button" type="button" data-source-filter="youtube">youtube</button><button class="filter-button" type="button" data-source-filter="hn">hn</button><button class="filter-button" type="button" data-source-filter="bilibili">bilibili</button><button class="filter-button" type="button" data-source-filter="arxiv">arxiv</button></div>
+      <div class="filters" aria-label="Source filters"><button class="filter-button active" type="button" data-source-filter="all">All</button><button class="filter-button" type="button" data-source-filter="github">github</button><button class="filter-button" type="button" data-source-filter="youtube">youtube</button><button class="filter-button" type="button" data-source-filter="bilibili">bilibili</button><button class="filter-button" type="button" data-source-filter="hn">hn</button><button class="filter-button" type="button" data-source-filter="arxiv">arxiv</button></div>
       <p id="result-count" class="result-count">12 visible opportunities</p>
     </section>
     <section class="grid" id="opportunity-grid"><article class="card" data-source="github" data-fit="high" data-search="nousresearch/hermes-agent the agent that grows with you ai-agents tech explainer / developer educator">
@@ -152,7 +165,7 @@
   </details>
 </article>
 <article class="card" data-source="github" data-fit="high" data-search="infiniflow/ragflow ragflow is a leading open-source retrieval-augmented generation (rag) engine that fuses cutting-edge rag with agent capabilities to create a superior context layer for llms ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>Score 174</span><span>high</span></div>
+  <div class="meta"><span>github</span><span>Score 173</span><span>high</span></div>
   <h3>2. <a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer">infiniflow/ragflow</a></h3>
   <p>RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs</p>
   <p class="why"><strong>Why now:</strong> infiniflow/ragflow is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.</p>
@@ -188,7 +201,7 @@
   </details>
 </article>
 <article class="card" data-source="github" data-fit="high" data-search="langchain-ai/langchain the agent engineering platform. ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>Score 169</span><span>high</span></div>
+  <div class="meta"><span>github</span><span>Score 170</span><span>high</span></div>
   <h3>4. <a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noreferrer">langchain-ai/langchain</a></h3>
   <p>The agent engineering platform.</p>
   <p class="why"><strong>Why now:</strong> langchain-ai/langchain is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.</p>
@@ -205,10 +218,10 @@
     <p><strong>Limitation:</strong> Stars and recent activity can overstate production readiness; test install friction and maintenance quality.</p>
   </details>
 </article>
-<article class="card" data-source="youtube" data-fit="high" data-search="the only ai video prompt generator you'll ever need youri van hofwegen / 4 days ago / 34,486 views ai video tools creator workflow ai workflow creator">
-  <div class="meta"><span>youtube</span><span>Score 137</span><span>high</span></div>
+<article class="card" data-source="youtube" data-fit="high" data-search="the only ai video prompt generator you'll ever need youri van hofwegen / 4 days ago / 34,852 views ai video tools creator workflow ai workflow creator">
+  <div class="meta"><span>youtube</span><span>Score 138</span><span>high</span></div>
   <h3>5. <a href="https://www.youtube.com/watch?v=oT-2VO8Jzpk" target="_blank" rel="noreferrer">The Only AI Video Prompt Generator You'll Ever Need</a></h3>
-  <p>Youri van Hofwegen / 4 days ago / 34,486 views</p>
+  <p>Youri van Hofwegen / 4 days ago / 34,852 views</p>
   <p class="why"><strong>Why now:</strong> The Only AI Video Prompt Generator You'll Ever Need is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.</p>
   <div class="idea">
     <strong>Bilibili:</strong> 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注<br>
@@ -223,10 +236,10 @@
     <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
   </details>
 </article>
-<article class="card" data-source="youtube" data-fit="high" data-search="the only 3 tools you need to create any ai video tao prompts / 4 days ago / 33,187 views ai video tools creator workflow ai workflow creator">
+<article class="card" data-source="youtube" data-fit="high" data-search="the only 3 tools you need to create any ai video tao prompts / 4 days ago / 33,475 views ai video tools creator workflow ai workflow creator">
   <div class="meta"><span>youtube</span><span>Score 137</span><span>high</span></div>
   <h3>6. <a href="https://www.youtube.com/watch?v=JQzF5LP4VTs" target="_blank" rel="noreferrer">The ONLY 3 Tools You Need to Create ANY AI Video</a></h3>
-  <p>Tao Prompts / 4 days ago / 33,187 views</p>
+  <p>Tao Prompts / 4 days ago / 33,475 views</p>
   <p class="why"><strong>Why now:</strong> The ONLY 3 Tools You Need to Create ANY AI Video is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.</p>
   <div class="idea">
     <strong>Bilibili:</strong> 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注<br>
@@ -241,27 +254,9 @@
     <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
   </details>
 </article>
-<article class="card" data-source="hn" data-fit="high" data-search="ask hn: what is your (ai) dev tech stack / workflow? ask hn: what is your (ai) dev tech stack / workflow? creator tools ai workflow creator">
-  <div class="meta"><span>hn</span><span>Score 131</span><span>high</span></div>
-  <h3>7. <a href="https://news.ycombinator.com/item?id=48413629" target="_blank" rel="noreferrer">Ask HN: What is your (AI) dev tech stack / workflow?</a></h3>
-  <p>Ask HN: What is your (AI) dev tech stack / workflow?</p>
-  <p class="why"><strong>Why now:</strong> Ask HN: What is your (AI) dev tech stack / workflow? is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.</p>
-  <div class="idea">
-    <strong>Bilibili:</strong> 【实测】为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注<br>
-    <strong>YouTube:</strong> 为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注 (practical test)
-  </div>
-  <details>
-    <summary>Production outline</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>Demo:</strong> Reproduce the smallest useful workflow or summarize the core claim with evidence.</p>
-
-    <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
-    <p><strong>Limitation:</strong> Treat this as a signal, not a guarantee of views, revenue, or technical maturity.</p>
-  </details>
-</article>
 <article class="card" data-source="bilibili" data-fit="high" data-search="【2026最全面秋叶comfyui教程】b站强推！建议所有想学 ai 视频生成comfyui 工作流 的同学，死磕这条视频，花了一周时间整理的comfyui视频生成教程 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的up主开心快乐一整天!!! 视频配套的整 合 包 &amp;工 作 流资料，官注+平论掉落~ b站ai工作流 ai workflow creator">
-  <div class="meta"><span>bilibili</span><span>Score 130</span><span>high</span></div>
-  <h3>8. <a href="http://www.bilibili.com/video/av116703774115351" target="_blank" rel="noreferrer">【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程</a></h3>
+  <div class="meta"><span>bilibili</span><span>Score 133</span><span>high</span></div>
+  <h3>7. <a href="http://www.bilibili.com/video/av116703774115351" target="_blank" rel="noreferrer">【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程</a></h3>
   <p>一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &amp;工 作 流资料，官注+平论掉落~</p>
   <p class="why"><strong>Why now:</strong> 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.</p>
   <div class="idea">
@@ -277,9 +272,45 @@
     <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
   </details>
 </article>
+<article class="card" data-source="hn" data-fit="high" data-search="ask hn: what is your (ai) dev tech stack / workflow? ask hn: what is your (ai) dev tech stack / workflow? creator tools ai workflow creator">
+  <div class="meta"><span>hn</span><span>Score 131</span><span>high</span></div>
+  <h3>8. <a href="https://news.ycombinator.com/item?id=48413629" target="_blank" rel="noreferrer">Ask HN: What is your (AI) dev tech stack / workflow?</a></h3>
+  <p>Ask HN: What is your (AI) dev tech stack / workflow?</p>
+  <p class="why"><strong>Why now:</strong> Ask HN: What is your (AI) dev tech stack / workflow? is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.</p>
+  <div class="idea">
+    <strong>Bilibili:</strong> 【实测】为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注<br>
+    <strong>YouTube:</strong> 为什么 Ask HN: What is your (AI) dev tech stack / workflow? 现在值得创作者关注 (practical test)
+  </div>
+  <details>
+    <summary>Production outline</summary>
+    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
+    <p><strong>Demo:</strong> Reproduce the smallest useful workflow or summarize the core claim with evidence.</p>
+
+    <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about Ask HN: What is your (AI) dev tech stack / workflow?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
+    <p><strong>Limitation:</strong> Treat this as a signal, not a guarantee of views, revenue, or technical maturity.</p>
+  </details>
+</article>
+<article class="card" data-source="bilibili" data-fit="high" data-search="【2026最全面comfyui教程】b站强推！建议所有想学comfyui 工作流 的同学，死磕这条视频，花了一周时间整理的comfyui视频生成教程 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的up主开心快乐一整天!!! 视频配套的整 合 包 &amp;工 作 流资料，官注+平论掉落~ b站ai工作流 ai workflow creator">
+  <div class="meta"><span>bilibili</span><span>Score 129</span><span>high</span></div>
+  <h3>9. <a href="http://www.bilibili.com/video/av116703824447305" target="_blank" rel="noreferrer">【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程</a></h3>
+  <p>一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &amp;工 作 流资料，官注+平论掉落~</p>
+  <p class="why"><strong>Why now:</strong> 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.</p>
+  <div class="idea">
+    <strong>Bilibili:</strong> 【实测】为什么 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注<br>
+    <strong>YouTube:</strong> 为什么 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)
+  </div>
+  <details>
+    <summary>Production outline</summary>
+    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
+    <p><strong>Demo:</strong> Reproduce the smallest useful workflow or summarize the core claim with evidence.</p>
+
+    <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
+    <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
+  </details>
+</article>
 <article class="card" data-source="bilibili" data-fit="high" data-search="【赛博古董】21年前 youtube 被上传的第一个视频 https://youtu.be/jnqxac9ivrw?si=a7kylmhefyx890nb 我在动物园 240p youtube 创作者 ai ai workflow creator">
-  <div class="meta"><span>bilibili</span><span>Score 120</span><span>high</span></div>
-  <h3>9. <a href="http://www.bilibili.com/video/av116706710132732" target="_blank" rel="noreferrer">【赛博古董】21年前 YouTube 被上传的第一个视频</a></h3>
+  <div class="meta"><span>bilibili</span><span>Score 123</span><span>high</span></div>
+  <h3>10. <a href="http://www.bilibili.com/video/av116706710132732" target="_blank" rel="noreferrer">【赛博古董】21年前 YouTube 被上传的第一个视频</a></h3>
   <p>https://youtu.be/jNQXAC9IVRw?si=A7KyLmhEFYX890nb 我在动物园 240p</p>
   <p class="why"><strong>Why now:</strong> 【赛博古董】21年前 YouTube 被上传的第一个视频 is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.</p>
   <div class="idea">
@@ -292,24 +323,6 @@
     <p><strong>Demo:</strong> Reproduce the smallest useful workflow or summarize the core claim with evidence.</p>
 
     <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about 【赛博古董】21年前 YouTube 被上传的第一个视频, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
-    <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
-  </details>
-</article>
-<article class="card" data-source="bilibili" data-fit="high" data-search="[中配]十亿级3d高斯泼溅在浏览器中渲染（开源） - stefan 3d ai 原标题：a billion 3d splats rendering in your browser (and it&amp;#x27;s open source) 作者：stefan 3d ai 原链接：https://www.youtube.com/watch?v=2t-pleenqqa 上传日期：2026-06-06 简介：本视频介绍了一款开创性的开源库，可在网页浏览器内直接渲染十亿个3d高斯点，无需高端显卡或软件安装。演讲者指出，通过借鉴游戏开发中的细节层次和流式传输技术，如今能在笔记本和移动设备上流畅运行大规模3 开源ai项目 ai workflow creator">
-  <div class="meta"><span>bilibili</span><span>Score 119</span><span>high</span></div>
-  <h3>10. <a href="http://www.bilibili.com/video/av116705468618655" target="_blank" rel="noreferrer">[中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI</a></h3>
-  <p>原标题：A Billion 3D Splats Rendering in Your Browser (And It&amp;#x27;s Open Source) 作者：Stefan 3D AI 原链接：https://www.youtube.com/watch?v=2t-PLeenqqA 上传日期：2026-06-06 简介：本视频介绍了一款开创性的开源库，可在网页浏览器内直接渲染十亿个3D高斯点，无需高端显卡或软件安装。演讲者指出，通过借鉴游戏开发中的细节层次和流式传输技术，如今能在笔记本和移动设备上流畅运行大规模3</p>
-  <p class="why"><strong>Why now:</strong> [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI is appearing in a current trend signal for 开源AI项目, which makes it a timely candidate for a practical creator test.</p>
-  <div class="idea">
-    <strong>Bilibili:</strong> 【实测】为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注<br>
-    <strong>YouTube:</strong> 为什么 [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI 现在值得创作者关注 (practical test)
-  </div>
-  <details>
-    <summary>Production outline</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>Demo:</strong> Reproduce the smallest useful workflow or summarize the core claim with evidence.</p>
-
-    <p><strong>Thumbnail:</strong> A clean tech explainer thumbnail about [中配]十亿级3D高斯泼溅在浏览器中渲染（开源） - Stefan 3D AI, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos</p>
     <p><strong>Limitation:</strong> Platform popularity is not proof of quality; validate the workflow before recommending it.</p>
   </details>
 </article>
@@ -332,7 +345,7 @@
   </details>
 </article>
 <article class="card" data-source="arxiv" data-fit="medium" data-search="handoff: humanoid agentic task-space whole-body control via distilled complementary teachers for a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. we instead propose a compact, explicit interface that creator economy generative ai tech explainer / developer educator">
-  <div class="meta"><span>arxiv</span><span>Score 81</span><span>medium</span></div>
+  <div class="meta"><span>arxiv</span><span>Score 80</span><span>medium</span></div>
   <h3>12. <a href="http://arxiv.org/abs/2606.06493v1" target="_blank" rel="noreferrer">HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers</a></h3>
   <p>For a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. Existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. We instead propose a compact, explicit interface that</p>
   <p class="why"><strong>Why now:</strong> HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers is appearing in a current research signal for creator economy generative AI, which makes it a timely candidate for a practical creator test.</p>

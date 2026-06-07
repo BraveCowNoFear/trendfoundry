@@ -60,6 +60,12 @@ function compactText(value, max = 260) {
     .slice(0, max);
 }
 
+function stripCachedFallbackNote(value) {
+  return String(value || "")
+    .replace(/(?:\s*\(cached fallback because fresh collection failed\))+$/g, "")
+    .trim();
+}
+
 function daysAgo(dateString) {
   const then = new Date(dateString).getTime();
   if (!Number.isFinite(then)) return 999;
@@ -517,7 +523,7 @@ function cachedFallbacksFor(errors, fallbackItems) {
       fallbacks.push({
         ...item,
         stale: true,
-        summary: compactText(`${item.summary || ""} (cached fallback because fresh collection failed)`, 300)
+        summary: compactText(`${stripCachedFallbackNote(item.summary)} (cached fallback because fresh collection failed)`, 300)
       });
     }
   }

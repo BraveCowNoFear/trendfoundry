@@ -6,6 +6,11 @@ Live demo: https://bravecownofear.github.io/trendfoundry/
 
 Request a sample pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20
 
+Subscribe:
+
+- RSS: https://bravecownofear.github.io/trendfoundry/feed.xml
+- JSON Feed: https://bravecownofear.github.io/trendfoundry/feed.json
+
 ## Run
 
 ```bash
@@ -34,6 +39,8 @@ On Windows, `scripts/run_daily.ps1` runs the full `npm run operate` pipeline and
 - `docs/daily-brief.md`: paid-report style brief.
 - `docs/ready-to-record-script.md`: one 6-8 minute scene-by-scene script for the top opportunity.
 - `site/index.html`: sales/demo page for the current pack.
+- `site/topics/*.html`: SEO landing pages for creator search traffic.
+- `site/feed.xml` and `site/feed.json`: subscription feeds for the current top 12 opportunities.
 - `docs/design-system.md`: minimal design standards for product and delivery assets.
 - `docs/lead-capture.md`: public intake and triage flow for sample-pack requests.
 - `docs/qa.md`: local and online checks for delivery boundaries, visual assets, script quality, and scheduled operations.
