@@ -93,7 +93,9 @@ ${leadCounts}
 - Outreach drafts: ${report.assets.outreachDraftCount}
 - Launch asset files: ${report.assets.launchAssetCount}
 - Commerce products: ${report.assets.commerceProductCount}
+- Payment reply packets: ${report.assets.paymentReplyCount}
 - Prepared order directories: ${report.assets.orderCount}
+- Latest payment reply packets: ${report.assets.latestPaymentReplies.join(", ") || "none"}
 - Latest order directories: ${report.assets.latestOrders.join(", ") || "none"}
 
 ## Next Actions
@@ -118,6 +120,7 @@ const publishing = publishingSummary(await readTextIfExists(path.join(root, "doc
 const outreachFiles = await listFilesIfExists(path.join(root, "dist", "outreach-drafts"));
 const launchAssetFiles = await listFilesIfExists(path.join(root, "dist", "launch-assets"));
 const orderDirs = await listDirsIfExists(path.join(root, "dist", "orders"));
+const paymentReplyDirs = await listDirsIfExists(path.join(root, "dist", "payment-replies"));
 
 const items = latest.items || [];
 const leads = leadsData.leads || [];
@@ -166,6 +169,8 @@ const report = {
     outreachDraftCount: outreachFiles.filter((file) => file.endsWith(".md") && file !== "outreach-drafts.md").length,
     launchAssetCount: launchAssetFiles.length,
     commerceProductCount: commerceData.products?.length || 0,
+    paymentReplyCount: paymentReplyDirs.length,
+    latestPaymentReplies: paymentReplyDirs.slice(-5),
     orderCount: orderDirs.length,
     latestOrders: orderDirs.slice(-5)
   },
@@ -174,7 +179,8 @@ const report = {
     qualifiedCount ? `Review ${qualifiedCount} qualified lead(s); use npm run fulfill-ready -- --include-qualified only if sample delivery is approved.` : "No qualified leads require approval.",
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
-    commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page."
+    commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
+    "For no-login email orders, run npm run payment-reply before sending payment instructions."
   ]
 };
 

@@ -10,6 +10,7 @@
     "export": "node scripts/export_pack.mjs",
     "fulfill": "node scripts/fulfill_order.mjs",
     "fulfill-ready": "node scripts/fulfill_ready_leads.mjs",
+    "payment-reply": "node scripts/draft_payment_reply.mjs",
     "draft-outreach": "node scripts/draft_outreach.mjs",
     "commerce": "node scripts/export_commerce.mjs",
     "ops-report": "node scripts/report_ops.mjs",

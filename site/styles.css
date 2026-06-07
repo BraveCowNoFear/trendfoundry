@@ -469,6 +469,29 @@ main {
 .order-steps span {
   color: var(--muted);
 }
+.payment-safety {
+  align-items: stretch;
+}
+.safety-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.safety-list li {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 11px 12px;
+  background: #fff;
+}
+.safety-list span {
+  color: var(--muted);
+  line-height: 1.45;
+}
 .order-actions {
   display: flex;
   flex-wrap: wrap;
@@ -708,8 +731,8 @@ li { margin: 6px 0; }
   .order-steps li { grid-template-columns: 1fr; }
   .mail-drafts pre { min-height: 180px; }
   h1 {
-    width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 100%;
+    max-width: 100%;
     font-size: 23px;
     line-height: 1.08;
     white-space: normal;
@@ -717,8 +740,8 @@ li { margin: 6px 0; }
     overflow-wrap: anywhere;
   }
   .sub {
-    width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 100%;
+    max-width: 100%;
     font-size: 16px;
     white-space: normal;
     overflow-wrap: anywhere;

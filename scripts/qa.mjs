@@ -21,6 +21,7 @@ const requiredScripts = [
   "leads",
   "fulfill",
   "fulfill-ready",
+  "payment-reply",
   "draft-outreach",
   "ops-report",
   "launch-assets",
@@ -151,6 +152,7 @@ async function checkLocal() {
   assertCheck("order page has all tiers", ["Sample issue", "Weekly brief", "Custom niche"].every((tier) => orderIndex.includes(tier)));
   assertCheck("order page has email drafts", orderIndex.includes("Open English email") && orderIndex.includes("打开中文邮件") && orderIndex.includes(`mailto:${contactEmail}`));
   assertCheck("order page has safety copy", orderIndex.includes("No card details") && orderIndex.includes("payment credentials"));
+  assertCheck("order page explains payment reply packet", orderIndex.includes("payment reply packet") && orderIndex.includes("manual invoice reference"));
 
   const sampleEn = await readText(path.join(root, "site", "public-sample.en.md"));
   const sampleZh = await readText(path.join(root, "site", "public-sample.zh-CN.md"));
@@ -243,9 +245,36 @@ async function checkLocal() {
   assertCheck("fulfillment email mentions scene-by-scene script", tempEmail.includes("scene-by-scene script"));
   await rm(temp.orderDir, { recursive: true, force: true });
 
+  const paymentReplyId = "qa-payment-reply";
+  const paymentReplyDir = path.join(root, "dist", "payment-replies", paymentReplyId);
+  await rm(paymentReplyDir, { recursive: true, force: true });
+  const paymentReplyResult = spawnSync(process.execPath, [
+    path.join(root, "scripts", "draft_payment_reply.mjs"),
+    "--order-id=qa-payment-reply",
+    "--tier=weekly-brief",
+    "--buyer=QA Buyer",
+    "--contact=qa@example.com",
+    "--channel=https://example.com/qa",
+    "--niche=AI developer tools",
+    "--delivery-route=email"
+  ], {
+    cwd: root,
+    encoding: "utf8"
+  });
+  assertCheck("payment reply script exits", paymentReplyResult.status === 0, paymentReplyResult.stderr || paymentReplyResult.stdout);
+  const paymentReplyText = existsSync(path.join(paymentReplyDir, "payment-reply.md")) ? await readText(path.join(paymentReplyDir, "payment-reply.md")) : "";
+  const paymentInvoiceText = existsSync(path.join(paymentReplyDir, "invoice-draft.md")) ? await readText(path.join(paymentReplyDir, "invoice-draft.md")) : "";
+  const paymentManifest = existsSync(path.join(paymentReplyDir, "manifest.json")) ? await readJson(path.join(paymentReplyDir, "manifest.json")) : {};
+  assertCheck("payment reply includes amount and buyer", paymentReplyText.includes("USD 19 / month") && paymentReplyText.includes("QA Buyer"));
+  assertCheck("payment reply avoids credential collection", paymentReplyText.includes("Please do not send card numbers") && paymentInvoiceText.includes("No payment action was attempted"));
+  assertCheck("payment reply manifest excludes seller-only files", sellerOnly.every((file) => (paymentManifest.excludedSellerOnlyFiles || []).includes(file)));
+  assertCheck("payment reply manifest lists buyer deliverables", ["daily-brief.md", "ready-to-record-script.md", "opportunities.csv"].every((file) => (paymentManifest.buyerDeliverablesAfterPayment || []).includes(file)));
+  await rm(paymentReplyDir, { recursive: true, force: true });
+
   const opsReport = await readText(path.join(root, "dist", "ops-report", "ops-report.md"));
   assertCheck("ops report safety says no messages sent", opsReport.includes("No messages were sent."));
   assertCheck("ops report has commerce SKU count", /Commerce products:\s+3/.test(opsReport));
+  assertCheck("ops report has payment reply count", /Payment reply packets:\s+\d+/.test(opsReport));
   assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 
@@ -299,6 +328,7 @@ async function checkOnline() {
   assertCheck("online order page HTTP 200", orderIndex.status === 200, String(orderIndex.status));
   assertCheck("online order page has email CTAs", orderIndex.text.includes("Order by email") && orderIndex.text.includes("Open English email") && orderIndex.text.includes("打开中文邮件"));
   assertCheck("online order page avoids public payment details", orderIndex.text.includes("No card details") && orderIndex.text.includes("payment credentials"));
+  assertCheck("online order page explains payment reply packet", orderIndex.text.includes("payment reply packet") && orderIndex.text.includes("manual invoice reference"));
 
   const sampleEn = await fetchText(`${publicBase}public-sample.en.md?qa=${Date.now()}`);
   assertCheck("online English public sample HTTP 200", sampleEn.status === 200, String(sampleEn.status));

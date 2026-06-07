@@ -1306,6 +1306,18 @@ const orderHtml = `<!doctype html>
         <li><strong>Receive</strong><span>Get payment instructions and delivery timing.</span></li>
       </ol>
     </section>
+    <section class="offer payment-safety">
+      <div>
+        <p class="section-label">Payment reply</p>
+        <h2>The next email is generated locally for review.</h2>
+        <p>After an order email arrives, TrendFoundry can generate a local payment reply packet with an invoice draft, checklist, delivery boundary, and the exact files to send after payment confirmation.</p>
+      </div>
+      <ul class="safety-list">
+        <li><strong>Private checkout</strong><span>Insert a verified hosted checkout link or manual invoice reference only after review.</span></li>
+        <li><strong>No credential sharing</strong><span>Never ask buyers to email card numbers, private IDs, passwords, wallet seeds, or payment credentials.</span></li>
+        <li><strong>Clean fulfillment</strong><span>Run fulfillment after payment confirmation; buyer packs exclude seller-only source and outreach files.</span></li>
+      </ul>
+    </section>
     <section id="tiers" class="pricing" aria-label="Order tiers">
       <div class="section-head">
         <p class="section-label">Order tiers / 下单档位</p>
@@ -1839,6 +1851,29 @@ main {
 .order-steps span {
   color: var(--muted);
 }
+.payment-safety {
+  align-items: stretch;
+}
+.safety-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.safety-list li {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 11px 12px;
+  background: #fff;
+}
+.safety-list span {
+  color: var(--muted);
+  line-height: 1.45;
+}
 .order-actions {
   display: flex;
   flex-wrap: wrap;
@@ -2078,8 +2113,8 @@ li { margin: 6px 0; }
   .order-steps li { grid-template-columns: 1fr; }
   .mail-drafts pre { min-height: 180px; }
   h1 {
-    width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 100%;
+    max-width: 100%;
     font-size: 23px;
     line-height: 1.08;
     white-space: normal;
@@ -2087,8 +2122,8 @@ li { margin: 6px 0; }
     overflow-wrap: anywhere;
   }
   .sub {
-    width: calc(100vw - 48px);
-    max-width: calc(100vw - 48px);
+    width: 100%;
+    max-width: 100%;
     font-size: 16px;
     white-space: normal;
     overflow-wrap: anywhere;

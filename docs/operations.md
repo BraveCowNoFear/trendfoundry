@@ -48,3 +48,13 @@ If tracked product files change, the workflow commits them to `main` as `github-
 - No GitHub labels are changed.
 - Buyer delivery still excludes `prospects.csv`, `outreach-board.md`, and `latest.json`.
 - The GitHub Actions run only refreshes tracked product files, pushes a commit when there are changes, and deploys the public static site.
+
+## Order Reply Loop
+
+Use this after a buyer sends a no-login order email:
+
+```bash
+npm run payment-reply -- --tier="sample-issue" --buyer="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@channel"
+```
+
+Review `dist/payment-replies/<order-id>/payment-reply.md`, insert a verified hosted checkout link or manual invoice reference, then send manually. The generated packet keeps payment credentials out of email/public issues and reminds the seller to run fulfillment only after payment confirmation.
