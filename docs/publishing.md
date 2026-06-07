@@ -6,9 +6,9 @@ Repository: `BraveCowNoFear/trendfoundry`
 
 Live demo: `https://bravecownofear.github.io/trendfoundry/`
 
-Latest verified Pages run: `27082884010`
+Latest verified Pages run: `27083053568`
 
-Latest verified commit: `b984073 Add manual launch asset pipeline`
+Latest verified commit: `9710a60 Run scheduled TrendFoundry operations`
 
 Verified public paths:
 
@@ -22,10 +22,10 @@ Verified public paths:
 
 Latest verification:
 
-- Pages workflow `27082884010` completed successfully for commit `b98407309344b19f73ad87afb70ed1db9cdc0d1c`.
+- GitHub Actions operations workflow `27083053568` completed successfully and deployed Pages for commit `9710a6013000994bbbb20aff1903596cdd38432a`.
 - Public page, `public-sample.md`, `public-sample.csv`, `ready-to-record-script.md`, and `og-image.png` returned HTTP 200.
 - `og-image.png` is 1200x630, and public HTML includes OG/Twitter image metadata plus the visual preview section.
-- `npm run qa -- --online` passed 62/62.
+- `npm run qa -- --online` passed 68/68.
 - `ready-to-record-script.md` is 4,272 characters and includes scene-by-scene, asset checklist, and fact-safety sections.
 - Browser QA with Edge: desktop 1280px and mobile 390px had no horizontal overflow; the preview image loaded, 12 cards rendered, script CTA and core order CTAs remained visible, and source errors stayed within the QA threshold.
 
@@ -33,7 +33,9 @@ The repository is intended to be public so the sample product page can be inspec
 
 ## GitHub Pages
 
-The workflow at `.github/workflows/pages.yml` deploys the `site/` directory to GitHub Pages on every push to `main`.
+The workflow at `.github/workflows/pages.yml` deploys the `site/` directory to GitHub Pages on normal pushes to `main`.
+
+The scheduled operations workflow at `.github/workflows/daily-ops.yml` also deploys `site/` directly after `npm run operate`, because commits created by `GITHUB_TOKEN` do not trigger the separate Pages workflow.
 
 ## Pre-Publish Checklist
 
