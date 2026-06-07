@@ -21,6 +21,29 @@ Generated output:
 
 `dist/` is ignored by Git. Buyer-specific contact details and delivery drafts should stay local.
 
+## Ready Leads
+
+After syncing GitHub issue leads, prepare local delivery folders for paid leads:
+
+```bash
+npm run leads
+npm run fulfill-ready
+```
+
+To also prepare approved sample deliveries from `qualified` leads:
+
+```bash
+npm run fulfill-ready -- --include-qualified
+```
+
+Generated local outputs:
+
+- `dist/lead-fulfillment/ready-orders.md`
+- `dist/lead-fulfillment/ready-orders.json`
+- `dist/orders/issue-<number>-<requester>/...`
+
+The script only creates local delivery drafts. It does not send messages, upload files, charge buyers, or change GitHub labels.
+
 ## Seller-Only Files
 
 Do not send these files to buyers:

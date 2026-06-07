@@ -30,6 +30,7 @@ All generated files are ignored by Git because they may contain buyer contact de
 3. Validate every new channel or team.
 4. Reply on GitHub or email with the current sample-pack path and payment instructions.
 5. Update GitHub labels so the next sync reflects the latest stage.
+6. When a lead is labeled `paid`, run `npm run fulfill-ready` to create the local delivery folder. Use `-- --include-qualified` only for approved free/sample deliveries.
 
 ## Reply Drafts
 

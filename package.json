@@ -9,6 +9,7 @@
     "build": "node scripts/build.mjs",
     "export": "node scripts/export_pack.mjs",
     "fulfill": "node scripts/fulfill_order.mjs",
+    "fulfill-ready": "node scripts/fulfill_ready_leads.mjs",
     "draft-outreach": "node scripts/draft_outreach.mjs",
     "leads": "node scripts/sync_leads.mjs",
     "start": "node scripts/server.mjs",
