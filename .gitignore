@@ -3,6 +3,7 @@ logs/
 data/raw/
 data/leads.json
 docs/lead-pipeline.md
+docs/lead-replies.md
 dist/
 .DS_Store
 Thumbs.db

@@ -36,8 +36,11 @@ The sync reads public GitHub issues from `BraveCowNoFear/trendfoundry`, parses t
 
 - `data/leads.json`
 - `docs/lead-pipeline.md`
+- `docs/lead-replies.md`
 
-Both files are intentionally ignored by Git because they may contain buyer contact details. Commit `docs/lead-pipeline.example.md` only.
+These files are intentionally ignored by Git because they may contain buyer contact details. Commit `docs/lead-pipeline.example.md` only.
+
+`docs/lead-replies.md` contains GitHub and email reply drafts. Review them before sending; the automation does not post messages or transmit buyer data.
 
 ## Scheduled Sync
 

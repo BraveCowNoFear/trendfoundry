@@ -10,8 +10,9 @@ Generated files:
 
 - `data/leads.json`
 - `docs/lead-pipeline.md`
+- `docs/lead-replies.md`
 
-Both generated files are ignored by Git because they may contain buyer contact details.
+All generated files are ignored by Git because they may contain buyer contact details.
 
 ## Stage Model
 
@@ -29,3 +30,7 @@ Both generated files are ignored by Git because they may contain buyer contact d
 3. Validate every new channel or team.
 4. Reply on GitHub or email with the current sample-pack path and payment instructions.
 5. Update GitHub labels so the next sync reflects the latest stage.
+
+## Reply Drafts
+
+`docs/lead-replies.md` contains GitHub and email reply drafts for each lead. Review before sending; the script never posts replies automatically.
