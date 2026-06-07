@@ -196,6 +196,23 @@ const issueCounts = scored.reduce((acc, row) => {
   for (const issue of row.issues) acc[issue] = (acc[issue] || 0) + 1;
   return acc;
 }, {});
+const nextActions = [
+  issueCounts["generic hook"]
+    ? "Rewrite every generic hook in the top 6 into a measurable viewer pain."
+    : "Keep hooks specific by naming the viewer pain, source proof, and smallest visible test.",
+  issueCounts["generic why-now"]
+    ? "Replace generic why-now notes with source-specific timing: release, update, benchmark, controversy, or adoption signal."
+    : "Preserve source-specific why-now notes with release/update/engagement evidence after every collect run.",
+  issueCounts["demo not concrete enough"]
+    ? "Name the exact install/run/input/output check before recording each episode."
+    : "Turn the best ready episode into a full Bilibili opening and a separate YouTube opening.",
+  "For each paid-pack candidate, name one exact screen recording or terminal capture.",
+  "Keep one limitation sentence in every episode before the CTA.",
+  rewriteQueue.length
+    ? "Use the rewrite queue as the next buyer-facing sample improvement list."
+    : "Use the best content bets as the next ready-to-record queue.",
+  "After content edits, rerun `npm run content-audit` and compare issue counts."
+];
 
 const summaryRows = [
   ["Portfolio items", String(portfolio.length)],
@@ -248,13 +265,7 @@ ${Object.entries(issueCounts).length ? Object.entries(issueCounts).sort((a, b) =
 
 ## Next Content Workbench
 
-1. Rewrite every generic hook in the top 6 into a measurable viewer pain.
-2. Replace generic why-now notes with source-specific timing: release, update, benchmark, controversy, or adoption signal.
-3. For each paid-pack candidate, name one exact screen recording or terminal capture.
-4. Keep one limitation sentence in every episode before the CTA.
-5. Turn the best episode brief into a stronger Bilibili opening and a separate YouTube opening.
-6. Use the rewrite queue as the next buyer-facing sample improvement list.
-7. After content edits, rerun \`npm run content-audit\` and compare generic hook / weak demo counts.
+${nextActions.map((action, index) => `${index + 1}. ${action}`).join("\n")}
 `;
 
 const json = {

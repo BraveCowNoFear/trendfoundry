@@ -126,8 +126,22 @@ function scoreItem(item) {
   return Math.max(0, Math.round(recency + stars + comments + sourceWeight + creatorFit - qualityPenalty + stalePenalty));
 }
 
+function contentTopic(item) {
+  const text = `${item.title || ""} ${item.summary || ""} ${item.sourceQuery || ""}`.toLowerCase();
+  if (/comfyui/.test(text)) return "ComfyUI AI 视频工作流";
+  if (/3 tools|tools you need/.test(text)) return "AI 视频工具栈";
+  if (/prompt/.test(text) && /video/.test(text)) return "AI 视频提示词生成器";
+  if (/dub|voice|tts|40 languages/.test(text)) return "AI 配音/多语种 dubbing 工作流";
+  if (/anti-ai|anti ai/.test(text)) return "AI 反感讨论";
+  if (/rag|retrieval|knowledge/.test(text)) return "RAG 知识库工作流";
+  if (/gemini-cli|terminal|cli/.test(text)) return "终端 AI agent 工作流";
+  if (/langchain|hermes|agent/.test(text)) return "agent engineering workflow";
+  if (/youtube/.test(text) && /download/.test(text)) return "YouTube 下载工作流风险";
+  return shortTitle(item, item.source === "bilibili" || item.source === "youtube" ? 56 : 72);
+}
+
 function ideaAngles(item) {
-  const title = item.title.replace(/[|#]/g, "").trim();
+  const title = contentTopic(item).replace(/[|#]/g, "").trim();
   return [
     `为什么 ${title} 现在值得创作者关注`,
     `${title} 背后的工作流能不能帮你省 10 小时`,
@@ -136,15 +150,154 @@ function ideaAngles(item) {
   ];
 }
 
+function shortTitle(item, max = 72) {
+  return compactText(item.title, max);
+}
+
+function formatCount(value, label) {
+  const number = Number(value || 0);
+  if (!Number.isFinite(number) || number <= 0) return "";
+  if (number >= 1000000) return `${(number / 1000000).toFixed(number >= 10000000 ? 0 : 1)}M ${label}`;
+  if (number >= 1000) return `${(number / 1000).toFixed(number >= 10000 ? 0 : 1)}k ${label}`;
+  return `${number} ${label}`;
+}
+
+function freshnessPhrase(item) {
+  const date = item.updatedAt || item.publishedAt || item.createdAt;
+  if (!date) return "freshness is unknown";
+  const days = Math.round(daysAgo(date));
+  if (days <= 0) return "updated today";
+  if (days === 1) return "updated yesterday";
+  if (days < 14) return `updated ${days} days ago`;
+  if (days < 60) return `updated ${Math.round(days / 7)} weeks ago`;
+  return `updated ${Math.round(days / 30)} months ago`;
+}
+
+function sourceEvidence(item) {
+  if (item.source === "github") {
+    return [
+      freshnessPhrase(item),
+      formatCount(item.stars, "stars"),
+      formatCount(item.comments, "open issues")
+    ].filter(Boolean).join(", ");
+  }
+  if (item.source === "bilibili") {
+    return [
+      freshnessPhrase(item),
+      formatCount(item.points, "plays"),
+      formatCount(item.comments, "reviews"),
+      item.author ? `creator ${item.author}` : ""
+    ].filter(Boolean).join(", ");
+  }
+  if (item.source === "youtube") {
+    return [
+      freshnessPhrase(item),
+      formatCount(item.points, "views"),
+      compactText(item.summary, 90)
+    ].filter(Boolean).join(", ");
+  }
+  if (item.source === "hn") {
+    return [
+      freshnessPhrase(item),
+      formatCount(item.points, "HN points"),
+      formatCount(item.comments, "comments")
+    ].filter(Boolean).join(", ");
+  }
+  if (item.source === "arxiv") {
+    return [
+      freshnessPhrase(item),
+      compactText(item.summary, 110)
+    ].filter(Boolean).join(", ");
+  }
+  return [freshnessPhrase(item), compactText(item.summary, 90)].filter(Boolean).join(", ");
+}
+
+function workflowPain(item) {
+  const text = `${item.title} ${item.summary} ${item.sourceQuery}`.toLowerCase();
+  if (/rag|retrieval|knowledge|context/.test(text)) return "把资料库问答从演示稿变成可验证输出";
+  if (/agent|cli|terminal|gemini|langchain|hermes/.test(text)) return "判断 agent 是真能替你执行任务，还是只适合当噱头";
+  if (/video|comfyui|prompt|tts|voice|dub|short/.test(text)) return "把 AI 视频工作流拆成观众能跟着复现的一屏 demo";
+  if (/anti-ai|debate|discussion|comments/.test(text)) return "把 AI 争议转成创作者能避开的表达和选题雷区";
+  if (/paper|research|arxiv|distilled|control/.test(text)) return "把研究结论翻译成一个小实验，而不是照读摘要";
+  return "判断这个信号是否能节省创作者的选题、录制或交付时间";
+}
+
 function whyNow(item) {
-  const source = item.source === "hn" ? "discussion" : item.source === "arxiv" ? "research" : "trend";
-  return `${item.title} is appearing in a current ${source} signal for ${item.sourceQuery}, which makes it a timely candidate for a practical creator test.`;
+  const title = contentTopic(item);
+  const evidence = sourceEvidence(item);
+  if (item.source === "github") {
+    return `${title} is worth covering now because the repo shows ${evidence}; that is enough evidence to test install friction before creators copy it into an agent workflow.`;
+  }
+  if (item.source === "bilibili") {
+    return `${title} is worth covering now because the Bilibili result shows ${evidence}; use it to test whether the promised workflow survives a smaller reproduction.`;
+  }
+  if (item.source === "youtube") {
+    return `${title} is worth covering now because the YouTube result shows ${evidence}; turn the claim into a before/after creator workflow check.`;
+  }
+  if (item.source === "hn") {
+    return `${title} is worth covering now because the HN thread shows ${evidence}; package the debate into specific creator do/don't guidance.`;
+  }
+  if (item.source === "arxiv") {
+    return `${title} is worth covering now because the paper is ${evidence}; translate one claim into a viewer-safe practical experiment.`;
+  }
+  return `${title} is worth covering now because ${evidence}; use it only if the smallest proof segment can be recorded.`;
+}
+
+function openingHook(item) {
+  const title = contentTopic(item);
+  const pain = workflowPain(item);
+  if (item.source === "github") {
+    return `如果你想讲 ${title}，别先吹 stars：先录一次最小安装和输出，证明它能不能${pain}。`;
+  }
+  if (item.source === "bilibili" || item.source === "youtube") {
+    return `这期不照搬 ${title}，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。`;
+  }
+  if (item.source === "hn") {
+    return `这期拿 ${title} 当争议样本：不站队，直接整理观众反感点和创作者可用表达边界。`;
+  }
+  if (item.source === "arxiv") {
+    return `这期把 ${title} 从论文标题翻译成一次小实验：输入、输出、失败边界全摆出来。`;
+  }
+  return `这期用 ${title} 做一次小验证：它到底能不能${pain}。`;
 }
 
 function demoSteps(item) {
+  const title = shortTitle(item);
+  if (item.source === "github") {
+    return [
+      `Open ${item.url} and capture README promise, latest pushed date, stars, and issue count.`,
+      "Run or inspect the smallest quickstart/example; record the exact command, input, and first output.",
+      "Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.",
+      `Convert the result into one creator workflow: ${workflowPain(item)}.`
+    ];
+  }
+  if (item.source === "bilibili" || item.source === "youtube") {
+    return [
+      `Open the source video and capture title, creator, date, and public engagement for ${title}.`,
+      "Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.",
+      "Build a three-column comparison: source promise, local result, and what a buyer can reuse.",
+      "State the skip condition: which creator should not copy this workflow yet."
+    ];
+  }
+  if (item.source === "hn") {
+    return [
+      `Open the HN discussion and save the thread URL: ${item.url}`,
+      "Cluster the top objections and strongest supporting comments into three viewer-safe claims.",
+      "Turn one claim into a creator script segment with a concrete example and a counterexample.",
+      "End with a do/don't checklist that avoids promising views, revenue, or model capability."
+    ];
+  }
+  if (item.source === "arxiv") {
+    return [
+      `Open the paper and capture title, date, abstract, and one figure/table if available: ${item.url}`,
+      "Choose one claim that can be explained without requiring private data or unreleased code.",
+      "Create a toy input/output demo or annotated diagram that shows the mechanism.",
+      "State the gap between research proof and creator-ready workflow."
+    ];
+  }
   return [
     `Open and verify the source: ${item.url}`,
-    "Reproduce the smallest useful workflow or summarize the core claim with evidence.",
+    "Reproduce the smallest useful workflow with one visible input and one visible output.",
     "Compare the before/after creator workflow: research time, production time, or output quality.",
     "State exactly who should use it and who should skip it."
   ];
@@ -195,7 +348,7 @@ function packageItem(item) {
     deliverables: {
       bilibiliTitles: ideaAngles(item).map((angle) => `【实测】${angle}`),
       youtubeTitles: ideaAngles(item).map((angle) => `${angle} (practical test)`),
-      hook: `这期不追热点，直接复现 ${item.title} 的可用步骤、限制和创作价值。`,
+      hook: openingHook(item),
       whyNow: whyNow(item),
       demoSteps: demoSteps(item),
       outline: [

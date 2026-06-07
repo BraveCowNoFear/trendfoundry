@@ -1,8 +1,8 @@
 # TrendFoundry Editorial Audit
 
-Generated: 2026-06-07T17:00:58.010Z
+Generated: 2026-06-07T20:33:58.777Z
 
-Dataset: 2026-06-07T16:16:38.285Z
+Dataset: 2026-06-07T20:33:58.416Z
 
 This audit is the content-side control surface for TrendFoundry. It ranks the current issue by evidence, recordability, specificity, commercial handoff, and risk so the next work session improves the paid pack instead of only polishing the website.
 
@@ -10,8 +10,8 @@ This audit is the content-side control surface for TrendFoundry. It ranks the cu
 
 - Portfolio items: 12
 - High-fit items: 11
-- Generic hooks: 4
-- Generic why-now notes: 12
+- Generic hooks: 0
+- Generic why-now notes: 0
 - Weak demos: 0
 - Normal quality items: 12
 
@@ -21,94 +21,84 @@ Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
 | Rank | Signal | Source | Content | Editorial issue |
 | --- | --- | --- | --- | --- |
-| 1 | The ONLY 3 Tools You Need to Create ANY AI Video | YouTube | 113/125 | generic why-now |
-| 2 | The Only AI Video Prompt Generator You'll Ever Need | YouTube | 113/125 | generic why-now |
-| 3 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 113/125 | generic why-now |
-| 4 | 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 113/125 | generic why-now |
-| 5 | Ask HN: Why is the HN crowd so anti-AI? | Hacker News | 113/125 | generic why-now |
-| 6 | Show HN: We built a tool to dub any video in the original voice in 40 languages | Hacker News | 113/125 | generic why-now |
+| 1 | infiniflow/ragflow | GitHub | 119/125 | ready |
+| 2 | google-gemini/gemini-cli | GitHub | 119/125 | ready |
+| 3 | The Only AI Video Prompt Generator You'll Ever Need | YouTube | 116/125 | ready |
+| 4 | The ONLY 3 Tools You Need to Create ANY AI Video | YouTube | 116/125 | ready |
+| 5 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 116/125 | ready |
+| 6 | 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 116/125 | ready |
 
 ## Rewrite Queue
 
-| Signal | Issue | Action |
-| --- | --- | --- |
-| NousResearch/hermes-agent | generic hook; generic why-now | Rewrite the first line around one measurable workflow pain. |
-| langchain-ai/langchain | generic hook; generic why-now | Rewrite the first line around one measurable workflow pain. |
-| infiniflow/ragflow | generic hook; generic why-now | Rewrite the first line around one measurable workflow pain. |
-| google-gemini/gemini-cli | generic hook; generic why-now | Rewrite the first line around one measurable workflow pain. |
-| 当我尝试下载 YouTube 时 | generic why-now | Replace trend freshness with a concrete timing reason from the source. |
-| HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers | generic why-now | Replace trend freshness with a concrete timing reason from the source. |
-| The ONLY 3 Tools You Need to Create ANY AI Video | generic why-now | Replace trend freshness with a concrete timing reason from the source. |
-| The Only AI Video Prompt Generator You'll Ever Need | generic why-now | Replace trend freshness with a concrete timing reason from the source. |
+No rewrite queue items.
 
 ## Episode Briefs
 
-### 1. The ONLY 3 Tools You Need to Create ANY AI Video
+### 1. infiniflow/ragflow
 
-- Source: YouTube / score 137 / content score 113
-- Buyer-facing angle: 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注
-- Opening hook: 验证方法是否可复现，避免照搬原视频。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+- Source: GitHub / score 173 / content score 119
+- Buyer-facing angle: 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
+- Opening hook: 如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出。
+- Proof segment: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+- Limitation segment: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
+
+### 2. google-gemini/gemini-cli
+
+- Source: GitHub / score 171 / content score 119
+- Buyer-facing angle: 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
+- Opening hook: 如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
+- Proof segment: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+- Limitation segment: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
+
+### 3. The Only AI Video Prompt Generator You'll Ever Need
+
+- Source: YouTube / score 137 / content score 116
+- Buyer-facing angle: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
+- Opening hook: 这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
-### 2. The Only AI Video Prompt Generator You'll Ever Need
+### 4. The ONLY 3 Tools You Need to Create ANY AI Video
 
-- Source: YouTube / score 137 / content score 113
-- Buyer-facing angle: 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注
-- Opening hook: 验证方法是否可复现，避免照搬原视频。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+- Source: YouTube / score 136 / content score 116
+- Buyer-facing angle: 【实测】为什么 AI 视频工具栈 现在值得创作者关注
+- Opening hook: 这期不照搬 AI 视频工具栈，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
-### 3. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+### 5. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
 
-- Source: Bilibili / score 135 / content score 113
-- Buyer-facing angle: 【实测】为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
-- Opening hook: 验证方法是否可复现，避免照搬原视频。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+- Source: Bilibili / score 135 / content score 116
+- Buyer-facing angle: 【实测】为什么 ComfyUI AI 视频工作流 现在值得创作者关注
+- Opening hook: 这期不照搬 ComfyUI AI 视频工作流，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
-### 4. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+### 6. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
 
-- Source: Bilibili / score 131 / content score 113
-- Buyer-facing angle: 【实测】为什么 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
-- Opening hook: 验证方法是否可复现，避免照搬原视频。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+- Source: Bilibili / score 132 / content score 116
+- Buyer-facing angle: 【实测】为什么 ComfyUI AI 视频工作流 现在值得创作者关注
+- Opening hook: 这期不照搬 ComfyUI AI 视频工作流，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
-- Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
-
-### 5. Ask HN: Why is the HN crowd so anti-AI?
-
-- Source: Hacker News / score 120 / content score 113
-- Buyer-facing angle: 【实测】为什么 Ask HN: Why is the HN crowd so anti-AI? 现在值得创作者关注
-- Opening hook: 验证来源、证据和可讲边界。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-- Limitation segment: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
-- Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
-
-### 6. Show HN: We built a tool to dub any video in the original voice in 40 languages
-
-- Source: Hacker News / score 100 / content score 113
-- Buyer-facing angle: 【实测】为什么 Show HN: We built a tool to dub any video in the original voice in 40 languages 现在值得创作者关注
-- Opening hook: 验证来源、证据和可讲边界。
-- Proof segment: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-- Limitation segment: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
 
 ## Issue Pattern Counts
 
-- generic why-now: 12
-- generic hook: 4
+- No content issues detected.
 
 ## Next Content Workbench
 
-1. Rewrite every generic hook in the top 6 into a measurable viewer pain.
-2. Replace generic why-now notes with source-specific timing: release, update, benchmark, controversy, or adoption signal.
-3. For each paid-pack candidate, name one exact screen recording or terminal capture.
-4. Keep one limitation sentence in every episode before the CTA.
-5. Turn the best episode brief into a stronger Bilibili opening and a separate YouTube opening.
-6. Use the rewrite queue as the next buyer-facing sample improvement list.
-7. After content edits, rerun `npm run content-audit` and compare generic hook / weak demo counts.
+1. Keep hooks specific by naming the viewer pain, source proof, and smallest visible test.
+2. Preserve source-specific why-now notes with release/update/engagement evidence after every collect run.
+3. Turn the best ready episode into a full Bilibili opening and a separate YouTube opening.
+4. For each paid-pack candidate, name one exact screen recording or terminal capture.
+5. Keep one limitation sentence in every episode before the CTA.
+6. Use the best content bets as the next ready-to-record queue.
+7. After content edits, rerun `npm run content-audit` and compare issue counts.
