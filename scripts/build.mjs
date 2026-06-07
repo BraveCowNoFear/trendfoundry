@@ -40,6 +40,12 @@ const bySource = top.reduce((acc, item) => {
   acc[item.source] = (acc[item.source] || 0) + 1;
   return acc;
 }, {});
+const sourceMix = Object.entries(bySource)
+  .map(([source, count]) => `${source} ${count}`)
+  .join(" / ");
+const sourceBars = Object.entries(bySource)
+  .map(([source, count]) => `<span style="--w:${Math.max(8, (count / top.length) * 100).toFixed(2)}%" title="${escapeHtml(source)} ${count}"></span>`)
+  .join("");
 
 function escapeHtml(value) {
   return String(value || "")
@@ -184,9 +190,12 @@ const html = `<!doctype html>
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">TrendFoundry</p>
+      <div class="brandline">
+        <span>TrendFoundry</span>
+        <span>Issue ${new Date(data.generatedAt).toLocaleDateString("en-GB")}</span>
+      </div>
       <h1>Creator intelligence packs for AI and developer video channels</h1>
-      <p class="sub">Fresh public signals from GitHub, Hacker News, and arXiv converted into ranked Bilibili/YouTube ideas with titles, hooks, outlines, and thumbnail prompts.</p>
+      <p class="sub">Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.</p>
       <div class="hero-actions">
         <a class="action primary" href="./daily-brief.md">Download sample brief</a>
         <a class="action" href="./ready-to-record-script.md">Open script</a>
@@ -194,17 +203,19 @@ const html = `<!doctype html>
       </div>
     </div>
     <aside>
-      <span>${top.length} opportunities</span>
-      <span>${high.length} high-fit</span>
-      <span>${data.errorCount || 0} source errors</span>
-      <span>${new Date(data.generatedAt).toLocaleDateString("en-GB")}</span>
+      <span><strong>${top.length}</strong> opportunities</span>
+      <span><strong>${high.length}</strong> high-fit</span>
+      <span><strong>${data.errorCount || 0}</strong> source errors</span>
+      <span>${escapeHtml(sourceMix)}</span>
+      <div class="source-bars" aria-label="Source mix">${sourceBars}</div>
     </aside>
   </header>
   <main>
     <section class="offer">
       <div>
-        <h2>Sell this first</h2>
-        <p>Weekly paid brief for creators who want high-signal technical topics before they become recycled AI demos.</p>
+        <p class="section-label">Current offer</p>
+        <h2>Sell a source-backed weekly brief before building a heavier SaaS.</h2>
+        <p>Start with a manual $9 sample order, prove demand, then convert repeat buyers into the $19/month weekly delivery.</p>
       </div>
       <div class="price">
         <span>$19/mo</span>
@@ -222,6 +233,7 @@ const html = `<!doctype html>
     <section class="grid" id="opportunity-grid">${cards}</section>
     <section class="handoff">
       <div>
+        <p class="section-label">Handoff</p>
         <h2>Next buyer-facing action</h2>
         <p>Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.</p>
       </div>
@@ -237,14 +249,15 @@ const html = `<!doctype html>
 
 const css = `:root {
   color-scheme: light;
-  --ink: #18212f;
-  --muted: #526071;
-  --line: #d8e0ea;
-  --paper: #f7f8fb;
+  --ink: #15171a;
+  --muted: #666d75;
+  --line: #dfe3e8;
+  --paper: #f7f8fa;
   --panel: #ffffff;
-  --accent: #0f766e;
-  --accent-2: #b45309;
-  --accent-soft: #e7f4f2;
+  --accent: #0f6b5f;
+  --accent-2: #8a5a18;
+  --accent-soft: #e8f2f0;
+  --shadow: 0 1px 2px rgba(21, 23, 26, 0.04);
 }
 
 * { box-sizing: border-box; }
@@ -253,35 +266,41 @@ body {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--paper);
   color: var(--ink);
+  text-rendering: optimizeLegibility;
 }
 a { color: inherit; }
 .topbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 220px;
-  gap: 32px;
-  padding: 44px clamp(20px, 5vw, 72px) 28px;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: clamp(28px, 5vw, 72px);
+  padding: 40px clamp(20px, 5vw, 72px) 30px;
   border-bottom: 1px solid var(--line);
   background: #fff;
 }
-.eyebrow {
-  margin: 0 0 12px;
+.brandline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 0 0 18px;
   color: var(--accent);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 h1 {
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0;
-  font-size: clamp(32px, 5vw, 60px);
-  line-height: 1.02;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1;
   letter-spacing: 0;
 }
 .sub {
-  max-width: 820px;
-  margin: 18px 0 0;
+  max-width: 780px;
+  margin: 20px 0 0;
   color: var(--muted);
-  font-size: 18px;
-  line-height: 1.55;
+  font-size: 17px;
+  line-height: 1.6;
 }
 .hero-actions,
 .handoff-links {
@@ -297,11 +316,12 @@ h1 {
   min-height: 38px;
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 8px 13px;
   background: #fff;
   color: var(--ink);
   font-weight: 700;
   text-decoration: none;
+  box-shadow: var(--shadow);
 }
 .action.primary {
   border-color: var(--accent);
@@ -311,17 +331,37 @@ h1 {
 .topbar aside {
   align-self: end;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 .topbar aside span,
 .meta span {
   border: 1px solid var(--line);
-  background: #f9fbfd;
+  background: rgba(255, 255, 255, 0.72);
   border-radius: 6px;
   padding: 8px 10px;
   color: var(--muted);
   font-size: 13px;
 }
+.topbar aside strong {
+  color: var(--ink);
+}
+.source-bars {
+  display: flex;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #f4f6f8;
+}
+.source-bars span {
+  display: block;
+  width: var(--w);
+  background: var(--accent);
+}
+.source-bars span:nth-child(2) { background: #46515c; }
+.source-bars span:nth-child(3) { background: #8a5a18; }
+.source-bars span:nth-child(4) { background: #8b949e; }
+.source-bars span:nth-child(5) { background: #b6bdc5; }
 main {
   padding: 24px clamp(20px, 5vw, 72px) 60px;
 }
@@ -331,16 +371,24 @@ main {
   gap: 24px;
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 0 0 24px;
-  margin-bottom: 24px;
+  padding: 4px 0 24px;
+  margin-bottom: 22px;
 }
-.offer h2 { margin: 0 0 6px; font-size: 24px; }
+.section-label {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.offer h2 { max-width: 780px; margin: 0 0 8px; font-size: 26px; line-height: 1.18; }
 .offer p { margin: 0; color: var(--muted); }
 .price {
   text-align: right;
   color: var(--accent-2);
 }
-.price span { display: block; font-size: 30px; font-weight: 800; }
+.price span { display: block; font-size: 32px; font-weight: 850; }
 .price small { color: var(--muted); }
 .toolbelt {
   display: grid;
@@ -398,7 +446,7 @@ input[type="search"] {
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px;
 }
 .card {
   background: var(--panel);
@@ -406,6 +454,7 @@ input[type="search"] {
   border-radius: 8px;
   padding: 18px;
   min-height: 320px;
+  box-shadow: var(--shadow);
 }
 .card.hidden {
   display: none;
@@ -418,8 +467,8 @@ input[type="search"] {
 }
 .card h3 {
   margin: 0 0 10px;
-  font-size: 18px;
-  line-height: 1.32;
+  font-size: 17px;
+  line-height: 1.34;
 }
 .card p {
   color: var(--muted);
@@ -427,7 +476,8 @@ input[type="search"] {
 }
 .card .why {
   color: var(--ink);
-  background: #f3f7fb;
+  background: #f5f7f9;
+  border: 1px solid #edf0f3;
   border-radius: 6px;
   padding: 10px;
 }

@@ -23,6 +23,7 @@ On Windows, `scripts/run_daily.ps1` refreshes the pack and writes logs under `lo
 - `data/latest.json`: ranked source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv.
 - `docs/daily-brief.md`: paid-report style brief.
 - `site/index.html`: sales/demo page for the current pack.
+- `docs/design-system.md`: minimal design standards for product and delivery assets.
 
 ## Monetization Plan
 
