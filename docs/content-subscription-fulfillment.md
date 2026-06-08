@@ -11,6 +11,7 @@ npm run content-subscription
 npm run record-content-subscription -- --subscriber="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@buyer" --payment-ref="external-confirmation-id"
 npm run content-subscription-crm
 npm run fulfill-content-subscription -- --subscriber="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@buyer" --week="1" --payment-ref="external-confirmation-id"
+npm run complete-content-subscription-delivery -- --order="dist/content-subscriptions/<order-id>"
 ```
 
 ## Output
@@ -32,6 +33,8 @@ Local operator files:
 - `manifest.json`
 - `fulfillment-checklist.md`
 
+After review and sending, `complete-content-subscription-delivery` updates ignored local subscriber status from the order manifest.
+
 ## Safety Boundary
 
 - Does not send messages.
@@ -52,4 +55,5 @@ Local operator files:
 6. Review `weekly-proof-pack.md`.
 7. Review `subscriber-email.md`.
 8. Attach only buyer deliverables unless the buyer requested archived weeks.
-9. Update local status after sending.
+9. Run `npm run complete-content-subscription-delivery -- --order="dist/content-subscriptions/<order-id>"` after sending.
+10. Refresh `npm run content-subscription-crm` to confirm the next delivery date.
