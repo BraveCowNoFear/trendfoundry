@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T07:25:17.560Z
+Generated: 2026-06-08T07:29:01.161Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 32
+- Checked files: 34
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 30
 - Bilibili items with readable Chinese text: 30
@@ -36,6 +36,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/custom-proof-pack.md | public-or-tracked | yes | 0 | none |
 | docs/custom-email-fulfillment.md | public-or-tracked | no | 0 | none |
 | docs/email-subscription-sync.md | public-or-tracked | no | 0 | none |
+| docs/email-order-routing.md | public-or-tracked | no | 0 | none |
 | docs/episode-workbench.md | public-or-tracked | yes | 0 | none |
 | docs/full-episode-script.md | public-or-tracked | yes | 0 | none |
 | dist/content-close-pack/today-close-queue.csv | private-ignored | no | 0 | none |
@@ -47,6 +48,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-subscription-retention/drafts.md | private-ignored | no | 0 | none |
 | dist/email-subscription-sync/synced.csv | private-ignored | no | 0 | none |
 | dist/custom-email-orders/custom-email-orders.md | private-ignored | no | 0 | none |
+| dist/email-order-routing/routes.csv | private-ignored | no | 0 | none |
 | dist/content-sales-crm/pipeline.csv | private-ignored | yes | 0 | none |
 | dist/content-prospecting/prospects.csv | private-ignored | yes | 0 | none |
 
