@@ -85,6 +85,7 @@ function action(row) {
     actor: row.actor || "private",
     offer_sku: row.offer_sku || "",
     campaign_id: row.campaign_id || "",
+    variant_id: row.variant_id || "",
     source_ref: row.source_ref || "",
     next_action: row.next_action,
     review_file: row.review_file || "",
@@ -176,11 +177,31 @@ function fromOutreachReview(rows, passedGateIds) {
     actor: compact(row.creator, "private prospect"),
     offer_sku: row.offer_sku,
     campaign_id: compact(row.campaign_id),
+    variant_id: compact(row.variant_id),
     source_ref: compact(row.proof_url, ""),
     next_action: "review, personalize, and send manually only if safe",
     review_file: reviewPackPath(compact(row.review_id, "")),
     command: `npm run complete-content-outreach-send -- --review-id="${compact(row.review_id, "")}"`,
     safety_note: "send pack is reviewer-ready, not auto-send; record receipt only after manual send"
+  }));
+}
+
+function fromSendBatch(rows) {
+  return rows.map((row, index) => action({
+    action_id: `send-batch-${index + 1}-${compact(row.review_id, "review")}`,
+    priority: 72 - index,
+    lane: "send_batch",
+    status: compact(row.variant_match) === "yes" ? "recommended_variant" : "fallback_variant",
+    title: `Review next send batch candidate: ${compact(row.subject, row.topic)}`,
+    actor: compact(row.creator, "private prospect"),
+    offer_sku: compact(row.offer_sku),
+    campaign_id: compact(row.campaign_id),
+    variant_id: compact(row.variant_id),
+    source_ref: compact(row.review_file),
+    next_action: compact(row.next_action, "review, personalize, and send manually only if safe"),
+    review_file: compact(row.review_file),
+    command: compact(row.command),
+    safety_note: "selected from gate-passed unsent campaigns; send manually only after review and record receipt afterward"
   }));
 }
 
@@ -239,9 +260,9 @@ Private local action brief. Do not publish buyer names, contacts, channels, pros
 
 ## Top Actions
 
-| Priority | Lane | Status | Title | Actor | Campaign | Review File | Command |
-| ---: | --- | --- | --- | --- | --- | --- | --- |
-${top.map((row) => `| ${row.priority} | ${row.lane} | ${row.status} | ${row.title.replace(/\|/g, "/")} | ${row.actor.replace(/\|/g, "/")} | ${row.campaign_id || "-"} | ${row.review_file || "-"} | ${row.command ? `\`${row.command.replace(/\|/g, "/")}\`` : "-"} |`).join("\n") || "| - | - | - | No actions ready. | - | - | - | - |"}
+| Priority | Lane | Status | Title | Actor | Variant | Campaign | Review File | Command |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+${top.map((row) => `| ${row.priority} | ${row.lane} | ${row.status} | ${row.title.replace(/\|/g, "/")} | ${row.actor.replace(/\|/g, "/")} | ${row.variant_id || "-"} | ${row.campaign_id || "-"} | ${row.review_file || "-"} | ${row.command ? `\`${row.command.replace(/\|/g, "/")}\`` : "-"} |`).join("\n") || "| - | - | - | No actions ready. | - | - | - | - | - |"}
 
 ## Full Queue
 
@@ -295,6 +316,7 @@ const customerRows = parseCsv(await readText("dist/content-customer-success/foll
 const retentionRows = parseCsv(await readText("dist/content-subscription-retention/drafts.csv"));
 const outreachRows = parseCsv(await readText("dist/content-outreach-review/review-board.csv"));
 const outreachGateRows = parseCsv(await readText("dist/content-outreach-gate/checks.csv"));
+const sendBatchRows = parseCsv(await readText("dist/content-send-batch/send-batch.csv"));
 const closeRows = parseCsv(await readText("dist/content-close-pack/today-close-queue.csv"));
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
 
@@ -305,6 +327,7 @@ const actions = [
   ...fromDeals(dealRows),
   ...fromCustomerSuccess(customerRows),
   ...fromRetention(retentionRows),
+  ...fromSendBatch(sendBatchRows),
   ...fromOutreachReview(outreachRows, passedGateIds),
   ...fromCloseQueue(closeRows, outreachIds),
   ...fromTestimonials(testimonialManifest)
@@ -323,6 +346,7 @@ const manifest = {
     customerRows: customerRows.length,
     retentionRows: retentionRows.length,
     outreachRows: outreachRows.length,
+    sendBatchRows: sendBatchRows.length,
     outreachGatePassedRows: passedGateIds.size,
     closeRows: closeRows.length,
     testimonialPublishCandidates: testimonialManifest.publishCandidateCount || 0
@@ -350,6 +374,7 @@ await writeFile(path.join(outDir, "actions.csv"), toCsv(actions, [
   "actor",
   "offer_sku",
   "campaign_id",
+  "variant_id",
   "source_ref",
   "next_action",
   "review_file",

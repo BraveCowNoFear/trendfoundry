@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-08T19:01:41.079Z
+Generated: 2026-06-08T19:08:07.655Z
 
 Status: success
 
@@ -8,7 +8,7 @@ Refresh public sources: no
 
 Dataset: 2026-06-08T17:50:16.053Z
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, deal desk, unified fulfillment queue, attribution ledger, experiment plan, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, deal desk, unified fulfillment queue, attribution ledger, experiment plan, next-send batch, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -40,6 +40,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-fulfillment-queue | success | 0 |
 | content-attribution | success | 0 |
 | content-experiments | success | 0 |
+| content-send-batch | success | 0 |
 | content-customer-success | success | 0 |
 | content-testimonials | success | 0 |
 | content-action-brief | success | 0 |
@@ -72,10 +73,11 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Fulfillment queue: 0 rows, 0 waiting manual send, 0 needing delivery fix, 0 concise-ready
 - Attribution: 5 campaigns, 0 sent, 0 replies, top offer trendfoundry-proof-custom
 - Experiments: 4 variants, recommended custom-proof-niche / collect_more_manual_sends
+- Send batch: 3 rows, 2 matching recommended variant
 - Customer success: 0 follow-ups, 0 due now, 0 completion receipts
 - Testimonials: 0 private rows, 0 publish candidates, 0 needing permission/review
-- Action brief: 5 actions, top lane outreach_review, 5 needing manual review
-- Health gate: 98 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Action brief: 8 actions, top lane send_batch, 8 needing manual review
+- Health gate: 102 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -110,9 +112,10 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 20. Review `dist/content-fulfillment-queue/fulfillment-queue.md` before any manual buyer delivery.
 21. Review `dist/content-attribution/attribution-ledger.md` to compare campaign, send, reply, deal, and fulfillment status.
 22. Review `dist/content-experiments/experiment-plan.md` before changing outreach copy or offer mix.
-23. Review `dist/content-customer-success/followup-drafts.md` after any delivered order enters `fulfilled_waiting_feedback`.
-24. Review `dist/content-testimonials/testimonial-bank.md` before reusing any quote in sales copy.
-25. Review `dist/content-action-brief/action-brief.md` for the prioritized private action queue.
-26. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
-27. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-28. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+23. Review `dist/content-send-batch/send-batch.md` for the next three reviewed send candidates.
+24. Review `dist/content-customer-success/followup-drafts.md` after any delivered order enters `fulfilled_waiting_feedback`.
+25. Review `dist/content-testimonials/testimonial-bank.md` before reusing any quote in sales copy.
+26. Review `dist/content-action-brief/action-brief.md` for the prioritized private action queue.
+27. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
+28. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+29. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.

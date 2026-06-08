@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T19:01:40.973Z
+Generated: 2026-06-08T19:08:07.603Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 98
+- Checked files: 102
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 29
 - Bilibili items with readable Chinese text: 29
@@ -21,6 +21,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/generate_content_action_brief.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_attribution.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_experiments.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_send_batch.mjs | tracked-source | no | 0 | none |
 | scripts/generate_full_episode_script.mjs | tracked-source | no | 0 | none |
 | scripts/generate_episode_workbench.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_evidence_pack.mjs | tracked-source | no | 0 | none |
@@ -43,6 +44,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/content-attribution.md | public-or-tracked | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-experiments.md | public-or-tracked | no | 0 | none |
+| docs/content-send-batch.md | public-or-tracked | no | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
 | docs/content-customer-success.md | public-or-tracked | no | 0 | none |
 | docs/content-deal-desk.md | public-or-tracked | no | 0 | none |
@@ -79,6 +81,8 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-attribution/attribution-ledger.md | private-ignored | no | 0 | none |
 | dist/content-experiments/experiments.csv | private-ignored | no | 0 | none |
 | dist/content-experiments/experiment-plan.md | private-ignored | no | 0 | none |
+| dist/content-send-batch/send-batch.csv | private-ignored | no | 0 | none |
+| dist/content-send-batch/send-batch.md | private-ignored | no | 0 | none |
 | dist/full-episode-script/latest.json | private-ignored | yes | 0 | none |
 | dist/episode-workbench/latest.json | private-ignored | yes | 0 | none |
 | dist/content-delivery-gate/checks.csv | private-ignored | no | 0 | none |

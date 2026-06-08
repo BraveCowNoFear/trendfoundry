@@ -1,14 +1,14 @@
 # TrendFoundry Content Action Brief
 
-Generated: 2026-06-08T18:33:55.971Z
+Generated: 2026-06-08T19:08:07.238Z
 
 This public report summarizes the private content-sales action queue. It does not expose buyer names, contacts, prospect rows, channels, private replies, or payment references.
 
 ## Current Counts
 
-- Total private actions: 5
-- Top action lane: outreach_review
-- Needs manual send/review: 5
+- Total private actions: 8
+- Top action lane: send_batch
+- Needs manual send/review: 8
 - Fulfillment-sensitive actions: 0
 - Public-safe action rows exposed here: 0
 
@@ -16,6 +16,7 @@ This public report summarizes the private content-sales action queue. It does no
 
 | Lane | Count |
 | --- | ---: |
+| send_batch | 3 |
 | outreach_review | 5 |
 
 ## Operator Flow
