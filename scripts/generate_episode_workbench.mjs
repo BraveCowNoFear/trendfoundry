@@ -78,18 +78,19 @@ function proofAsset(item) {
 }
 
 function platformOpenings(item) {
-  const angle = primaryAngle(item).replace(/^【实测】/, "");
+  const angle = primaryAngle(item).replace(/[|#]/g, "");
   const english = englishAngle(item).replace(/[|#]/g, "");
   const hook = compact(item.deliverables?.hook);
   const why = compact(item.deliverables?.whyNow);
   const limit = compact(item.deliverables?.limitation);
   return {
     bilibili: [
-      `开场 0-8 秒：${hook}`,
-      `8-18 秒：我不会复述热度，我只看一个证据：${why}`,
-      `18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。`,
-      `35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。`,
-      `55-70 秒：最后我会给你一句结论：${limit}`
+      `0-8s: Open with the proof-first hook: ${hook}`,
+      `8-18s: Say why the signal is worth testing now: ${why}`,
+      "18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.",
+      "35-55s: Show that weak proof becomes a watchlist note, not a recommendation.",
+      `55-70s: Close the opening with the boundary: ${limit}`,
+      `Title card: ${angle}`
     ],
     youtube: [
       `0-7s: ${english} is only worth covering if the smallest proof can be recorded.`,
@@ -127,7 +128,7 @@ function episodeSection(item, index) {
 - Opening hook: ${compact(item.deliverables?.hook)}
 - Why now: ${compact(item.deliverables?.whyNow)}
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
 ${markdownList(openings.bilibili)}
 

@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T08:00:55.090Z
+Generated: 2026-06-08T08:20:47.887Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 42
+- Checked files: 53
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 30
 - Bilibili items with readable Chinese text: 30
@@ -18,10 +18,16 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | File | Scope | Readable Chinese | Mojibake hits | Hit tokens |
 | --- | --- | --- | ---: | --- |
 | data/latest.json | public-or-tracked | yes | 0 | none |
+| scripts/generate_full_episode_script.mjs | tracked-source | no | 0 | none |
+| scripts/generate_episode_workbench.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_evidence_pack.mjs | tracked-source | no | 0 | none |
+| scripts/generate_buyer_content_pack.mjs | tracked-source | no | 0 | none |
+| scripts/run_content_ops.mjs | tracked-source | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
 | docs/content-deal-desk.md | public-or-tracked | no | 0 | none |
 | docs/content-editorial-audit.md | public-or-tracked | yes | 0 | none |
+| docs/content-evidence-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-feedback-loop.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-review.md | public-or-tracked | no | 0 | none |
 | docs/content-ops.md | public-or-tracked | no | 0 | none |
@@ -41,6 +47,11 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/email-order-routing.md | public-or-tracked | no | 0 | none |
 | docs/episode-workbench.md | public-or-tracked | yes | 0 | none |
 | docs/full-episode-script.md | public-or-tracked | yes | 0 | none |
+| dist/full-episode-script/latest.json | private-ignored | yes | 0 | none |
+| dist/episode-workbench/latest.json | private-ignored | yes | 0 | none |
+| dist/content-evidence-pack/content-evidence-pack.md | private-ignored | yes | 0 | none |
+| dist/content-evidence-pack/evidence.csv | private-ignored | yes | 0 | none |
+| dist/content-evidence-pack/claim-checklist.csv | private-ignored | yes | 0 | none |
 | dist/content-close-pack/today-close-queue.csv | private-ignored | no | 0 | none |
 | dist/content-subscription-crm/due-queue.csv | private-ignored | no | 0 | none |
 | dist/content-subscription-crm/due-queue.md | private-ignored | no | 0 | none |

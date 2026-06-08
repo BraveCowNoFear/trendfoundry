@@ -57,7 +57,8 @@ function englishTitle(item) {
 }
 
 function firstReady(items) {
-  return selectPortfolio(items).find((item) => item.qualityRisk === "normal" && item.monetizationFit === "high") || selectPortfolio(items)[0];
+  const portfolio = selectPortfolio(items);
+  return portfolio.find((item) => item.qualityRisk === "normal" && item.monetizationFit === "high") || portfolio[0];
 }
 
 function proofAsset(item) {
@@ -92,6 +93,7 @@ function proofAsset(item) {
 function sceneRows(item) {
   const steps = item.deliverables?.demoSteps || [];
   const proof = proofAsset(item);
+  const proofStep = sentence(steps[1] || steps[0] || proof.capture);
   return [
     {
       time: "0:00-0:20",
@@ -102,31 +104,31 @@ function sceneRows(item) {
     {
       time: "0:20-0:55",
       screen: `${sourceLabel(item)} source page, score/evidence callouts`,
-      narration: `先看证据，不看热闹：${compact(item.deliverables?.whyNow)}`,
+      narration: `Start with evidence, not hype: ${compact(item.deliverables?.whyNow)}`,
       purpose: "Explain why the episode is timely."
     },
     {
       time: "0:55-1:35",
       screen: "Workflow pain map with three boxes",
-      narration: "今天只问一个问题：它到底替代了创作者流程里的哪一步，是选题、资料整理、脚本，还是演示素材？如果替代不了，就不能把它卖成推荐。",
+      narration: "Ask one practical question: which creator workflow step does this actually replace or improve: topic selection, research, scripting, demo capture, or packaging? If it cannot improve one step, treat it as a watchlist signal instead of a recommendation.",
       purpose: "Translate trend into a buyer problem."
     },
     {
       time: "1:35-3:55",
       screen: proof.screen,
-      narration: `主证明段：${sentence(steps[1] || steps[0] || proof.capture)}。录屏时必须留下输入、输出和失败边界，不用剪成万能成功案例。`,
+      narration: `Main proof segment: ${proofStep}. Keep the input, output, setup friction, and failure boundary visible on screen. Do not edit it into a universal success story.`,
       purpose: "Create the core proof segment."
     },
     {
       time: "3:55-4:55",
       screen: "Before/after comparison table",
-      narration: "对比使用前后：它节省了哪一段时间，又新增了哪些检查成本。真正可卖的不是工具名字，而是这张可复制的判断表。",
+      narration: "Compare before and after: what time does it save, what new checks does it add, and what still needs human judgment? The buyer value is not the tool name; it is the repeatable decision table.",
       purpose: "Turn proof into reusable buyer value."
     },
     {
       time: "4:55-5:45",
       screen: "Episode packaging card",
-      narration: `如果把它做成一期内容，标题可以是「${primaryTitle(item)}」。核心承诺不是播放量，而是给观众一个能照着试的小流程。`,
+      narration: `Package the episode around this title: ${primaryTitle(item)}. The promise is not views or revenue; it is a small workflow the audience can try and reject safely.`,
       purpose: "Package the creator angle."
     },
     {
@@ -138,7 +140,7 @@ function sceneRows(item) {
     {
       time: "6:35-7:15",
       screen: "TrendFoundry sample pack CTA",
-      narration: "如果你想每周直接拿到这样的来源、标题、录屏证明、限制和脚本结构，可以索取 TrendFoundry 样品包。你不用追热点，只需要挑一个最适合自己频道的开始录。",
+      narration: "If you want this kind of source, title, proof asset, limitation, and script structure each week, use the TrendFoundry sample pack. You do not need to chase every trend; you need one recordable proof that fits your channel.",
       purpose: "Move viewer to sample request."
     }
   ];
@@ -156,6 +158,8 @@ function checklist(lines) {
 }
 
 const item = firstReady(latest.items || []);
+if (!item) throw new Error("No source items available for full episode script.");
+
 const proof = proofAsset(item);
 const scenes = sceneRows(item);
 const demoSteps = item.deliverables?.demoSteps || [];
@@ -185,7 +189,7 @@ Source: [${item.title}](${item.url})
 ## 70-Second Cold Open
 
 ${scenes.slice(0, 2).map((scene) => `- ${scene.time}: ${scene.narration}`).join("\n")}
-- 0:55-1:10: 我会用一个最小证明来判断它：能不能录出输入、输出和失败边界。
+- 0:55-1:10: I will use one smallest proof to judge it: can we record the input, output, setup friction, and failure boundary?
 
 ## Scene-By-Scene Script
 
@@ -210,16 +214,16 @@ ${checklist([
 
 ## Shorts / Clip Hooks
 
-- 15s: 这个信号最值得测的不是热度，而是它能不能录出一个真实输入和输出。
-- 30s: 我把 ${item.title} 拆成了一个可复现证明：来源、命令/输入、输出、失败边界。
-- 45s: 如果一个 AI 工具不能说明谁该跳过它，它就还不能进入你的付费选题包。
+- 15s: The signal worth testing is not popularity; it is whether we can record one real input and output.
+- 30s: I turn ${item.title} into a reproducible proof: source, command or claim, input, output, and failure boundary.
+- 45s: If an AI tool cannot show who should skip it, it is not ready for a paid topic pack.
 
 ## Publishing Metadata
 
 - Bilibili title: ${primaryTitle(item)}
 - YouTube title: ${englishTitle(item)} (practical proof)
 - Description opener: Proof-first review of ${item.title}: source, smallest reproducible workflow, tradeoff, and limitation.
-- Tags: AI工具, 创作者工作流, GitHub, Bilibili, YouTube, TrendFoundry
+- Tags: AI tools, creator workflow, GitHub, Bilibili, YouTube, TrendFoundry
 `;
 
 const json = {

@@ -84,7 +84,7 @@ Your proof-first content pack is ready. It includes:
 
 ${buyerDeliverables.map((file) => `- ${file}`).join("\n")}
 
-Start with \`full-episode-script.md\` if you want one video to record now. Use \`episode-workbench.md\` if you want alternate ideas, and \`content-editorial-audit.md\` if you want the quality gate behind the choices.
+Start with \`full-episode-script.md\` if you want one video to record now. Use \`episode-workbench.md\` if you want alternate ideas, \`content-evidence-pack.md\` if you want to verify claims before recording, and \`content-editorial-audit.md\` if you want the quality gate behind the choices.
 
 Primary episode: ${compact(sourceManifest.primaryEpisode?.title, "current TrendFoundry proof episode")}
 Proof asset: ${compact(sourceManifest.primaryEpisode?.proofAsset, "proof-first recording asset")}

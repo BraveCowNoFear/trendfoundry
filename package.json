@@ -24,6 +24,7 @@
     "content-audit": "node scripts/generate_content_audit.mjs",
     "episode-workbench": "node scripts/generate_episode_workbench.mjs",
     "full-script": "node scripts/generate_full_episode_script.mjs",
+    "content-evidence": "node scripts/generate_content_evidence_pack.mjs",
     "buyer-pack": "node scripts/generate_buyer_content_pack.mjs",
     "content-ops": "node scripts/run_content_ops.mjs",
     "content-listing": "node scripts/generate_content_listing.mjs",

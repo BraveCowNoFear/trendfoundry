@@ -24,12 +24,13 @@ The command writes to `dist/content-orders/<order-id>/`:
 
 - `full-episode-script.md`
 - `episode-workbench.md`
+- `content-evidence-pack.md`
 - `content-editorial-audit.md`
 - `manifest.json`
 - `delivery-email.md`
 - `fulfillment-checklist.md`
 
-Only the three Markdown content deliverables are buyer deliverables. `manifest.json`, `delivery-email.md`, and `fulfillment-checklist.md` are local operator aids unless manually reviewed and deliberately shared.
+Only the four Markdown content deliverables are buyer deliverables. `manifest.json`, `delivery-email.md`, and `fulfillment-checklist.md` are local operator aids unless manually reviewed and deliberately shared.
 
 ## Seller-Only Boundary
 

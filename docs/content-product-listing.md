@@ -1,6 +1,6 @@
 # TrendFoundry Content Product Listing
 
-Generated: 2026-06-07T22:10:53.521Z
+Generated: 2026-06-08T08:20:43.709Z
 
 This is the listing layer for the current buyer content pack. Use it to set up Gumroad, Ko-fi, Lemon Squeezy, Stripe Payment Links, Buy Me a Coffee, or manual invoice copy.
 
@@ -8,7 +8,7 @@ This is the listing layer for the current buyer content pack. Use it to set up G
 
 - Product: TrendFoundry Proof-First Script Pack
 - Price: USD 9
-- Delivery: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
+- Delivery: Deliver full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Free sample: https://bravecownofear.github.io/trendfoundry/trendfoundry-free-sample-pack.zip
 - Manual order page: https://bravecownofear.github.io/trendfoundry/order/
 
@@ -21,7 +21,7 @@ This is the listing layer for the current buyer content pack. Use it to set up G
 - Billing: one_time
 - Best use: Creators who want one recordable video idea today.
 - Short description: One complete proof-first AI/developer video script plus a five-item episode workbench and editorial audit.
-- Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
+- Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
 - Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
@@ -34,6 +34,7 @@ One complete proof-first AI/developer video script plus a five-item episode work
 What the buyer receives:
 - full-episode-script.md
 - episode-workbench.md
+- content-evidence-pack.md
 - content-editorial-audit.md
 
 Primary episode:
@@ -52,7 +53,7 @@ Important: this is a creator planning and production aid. It does not promise vi
 - Billing: monthly
 - Best use: Creators who need a repeatable weekly video pipeline.
 - Short description: A weekly buyer-ready proof-first script pack for AI/developer creators.
-- Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
+- Fulfillment: Deliver full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md from dist/buyer-content-pack after payment is externally confirmed.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
 - Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
@@ -65,6 +66,7 @@ A weekly buyer-ready proof-first script pack for AI/developer creators.
 What the buyer receives:
 - full-episode-script.md
 - episode-workbench.md
+- content-evidence-pack.md
 - content-editorial-audit.md
 
 Primary episode:
@@ -83,7 +85,7 @@ Important: this is a creator planning and production aid. It does not promise vi
 - Billing: monthly
 - Best use: Teams or creators focused on one narrow niche.
 - Short description: A custom-niche proof-first script pack tuned to one creator audience or technical lane.
-- Fulfillment: Deliver custom-proof-pack.md from dist/custom-proof-pack after payment is externally confirmed. Optional attachments: full-episode-script.md, episode-workbench.md, content-editorial-audit.md.
+- Fulfillment: Deliver custom-proof-pack.md from dist/custom-proof-pack after payment is externally confirmed. Optional attachments: full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md.
 - Refund policy: If the first delivered pack does not include one recordable proof-first script and at least three alternate episode candidates, email within 7 days for a refund.
 - Safety: No promise of views, subscribers, revenue, platform growth, or buyer outcomes. Do not request sensitive payment or account data by email.
 
@@ -113,7 +115,7 @@ Contact:
 Channel:
 Product: TrendFoundry Proof-First Script Pack
 Price: USD 9
-Delivery: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
+Delivery: full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md
 
 Custom pack delivery: custom-proof-pack.md from dist/custom-proof-pack after external payment confirmation.
 

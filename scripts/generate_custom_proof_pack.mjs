@@ -176,7 +176,7 @@ ${selected.slice(1).map((item, index) => episodeBlock(item, index + 1, niche, pl
 ## Delivery Notes
 
 - Buyer deliverable: custom-proof-pack.md.
-- Optional attachments after review: full-episode-script.md, episode-workbench.md, content-editorial-audit.md.
+- Optional attachments after review: full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md.
 - External payment confirmation is required before delivery.
 - This is a planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 `;
@@ -220,7 +220,7 @@ const manifest = {
     limitation: compact(primary.deliverables?.limitation)
   },
   buyerDeliverables: ["custom-proof-pack.md"],
-  optionalAttachments: ["full-episode-script.md", "episode-workbench.md", "content-editorial-audit.md"],
+  optionalAttachments: ["full-episode-script.md", "episode-workbench.md", "content-evidence-pack.md", "content-editorial-audit.md"],
   selectedEpisodes: selected.map((item, index) => ({
     rank: index + 1,
     title: item.title,

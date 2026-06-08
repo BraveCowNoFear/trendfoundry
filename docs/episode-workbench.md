@@ -1,8 +1,8 @@
 # TrendFoundry Episode Workbench
 
-Generated: 2026-06-07T22:10:51.922Z
+Generated: 2026-06-08T08:20:41.857Z
 
-Dataset: 2026-06-07T20:33:58.416Z
+Dataset: 2026-06-08T07:15:29.423Z
 
 This is the content-side production queue. It turns ready signals into platform-specific openings, recording proof, and buyer handoff notes without touching the frontend build.
 
@@ -17,13 +17,14 @@ This is the content-side production queue. It turns ready signals into platform-
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
 - Why now: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
-- 开场 0-8 秒：如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
-- 8-18 秒：我不会复述热度，我只看一个证据：agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- 18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。
-- 35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。
-- 55-70 秒：最后我会给你一句结论：Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- 0-8s: Open with the proof-first hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
+- 8-18s: Say why the signal is worth testing now: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
+- 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
+- 55-70s: Close the opening with the boundary: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Title card: 【实测】为什么 agent engineering workflow 现在值得创作者关注
 
 ### YouTube Opening
 
@@ -51,23 +52,24 @@ This is the content-side production queue. It turns ready signals into platform-
 
 - Source: GitHub
 - URL: https://github.com/infiniflow/ragflow
-- Score: 173
+- Score: 175
 - Buyer-facing angle: 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
 - Opening hook: 如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出。
-- Why now: RAG 知识库工作流 is worth covering now because the repo shows updated 2 days ago, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why now: RAG 知识库工作流 is worth covering now because the repo shows updated today, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
-- 开场 0-8 秒：如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出。
-- 8-18 秒：我不会复述热度，我只看一个证据：RAG 知识库工作流 is worth covering now because the repo shows updated 2 days ago, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- 18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。
-- 35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。
-- 55-70 秒：最后我会给你一句结论：Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- 0-8s: Open with the proof-first hook: 如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出。
+- 8-18s: Say why the signal is worth testing now: RAG 知识库工作流 is worth covering now because the repo shows updated today, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
+- 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
+- 55-70s: Close the opening with the boundary: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Title card: 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
 
 ### YouTube Opening
 
 - 0-7s: infiniflow/ragflow is only worth covering if the smallest proof can be recorded.
-- 7-18s: The signal is specific: RAG 知识库工作流 is worth covering now because the repo shows updated 2 days ago, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 7-18s: The signal is specific: RAG 知识库工作流 is worth covering now because the repo shows updated today, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - 18-32s: I will test the promise, show the smallest reproducible output, and mark the adoption blockers.
 - 32-48s: No view promises, no hype recap; this is a buyer-ready workflow check.
 - 48-60s: The boundary is simple: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -90,23 +92,24 @@ This is the content-side production queue. It turns ready signals into platform-
 
 - Source: GitHub
 - URL: https://github.com/google-gemini/gemini-cli
-- Score: 171
+- Score: 172
 - Buyer-facing angle: 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
 - Opening hook: 如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
-- Why now: 终端 AI agent 工作流 is worth covering now because the repo shows updated 2 days ago, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why now: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
-- 开场 0-8 秒：如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
-- 8-18 秒：我不会复述热度，我只看一个证据：终端 AI agent 工作流 is worth covering now because the repo shows updated 2 days ago, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- 18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。
-- 35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。
-- 55-70 秒：最后我会给你一句结论：Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- 0-8s: Open with the proof-first hook: 如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
+- 8-18s: Say why the signal is worth testing now: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
+- 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
+- 55-70s: Close the opening with the boundary: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Title card: 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
 
 ### YouTube Opening
 
 - 0-7s: google-gemini/gemini-cli is only worth covering if the smallest proof can be recorded.
-- 7-18s: The signal is specific: 终端 AI agent 工作流 is worth covering now because the repo shows updated 2 days ago, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 7-18s: The signal is specific: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - 18-32s: I will test the promise, show the smallest reproducible output, and mark the adoption blockers.
 - 32-48s: No view promises, no hype recap; this is a buyer-ready workflow check.
 - 48-60s: The boundary is simple: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -134,13 +137,14 @@ This is the content-side production queue. It turns ready signals into platform-
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
 - Why now: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 550 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
-- 开场 0-8 秒：如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
-- 8-18 秒：我不会复述热度，我只看一个证据：agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 550 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- 18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。
-- 35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。
-- 55-70 秒：最后我会给你一句结论：Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- 0-8s: Open with the proof-first hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
+- 8-18s: Say why the signal is worth testing now: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 550 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
+- 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
+- 55-70s: Close the opening with the boundary: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+- Title card: 【实测】为什么 agent engineering workflow 现在值得创作者关注
 
 ### YouTube Opening
 
@@ -164,41 +168,42 @@ This is the content-side production queue. It turns ready signals into platform-
 - Minimum demo path: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 - Safety line to keep: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-## 5. The Only AI Video Prompt Generator You'll Ever Need
+## 5. 当我尝试下载 YouTube 时
 
-- Source: YouTube
-- URL: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Score: 137
-- Buyer-facing angle: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
-- Opening hook: 这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
-- Why now: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 5 days ago, 36k views, Youri van Hofwegen / 5 days ago / 35,673 views; turn the claim into a before/after creator workflow check.
+- Source: Bilibili
+- URL: http://www.bilibili.com/video/av116707230223184
+- Score: 142
+- Buyer-facing angle: 【实测】为什么 当我尝试下载 YouTube 时 现在值得创作者关注
+- Opening hook: 这期不照搬 当我尝试下载 YouTube 时，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Why now: 当我尝试下载 YouTube 时 is worth covering now because the Bilibili result shows updated yesterday, 3.9k plays, 19 reviews, creator 你的米老鼠大爹; use it to test whether the promised workflow survives a smaller reproduction.
 
-### Bilibili Opening
+### Bilibili Opening Plan
 
-- 开场 0-8 秒：这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
-- 8-18 秒：我不会复述热度，我只看一个证据：AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 5 days ago, 36k views, Youri van Hofwegen / 5 days ago / 35,673 views; turn the claim into a before/after creator workflow check.
-- 18-35 秒：这期交付三个东西：最小复现、失败边界、谁值得继续用。
-- 35-55 秒：如果它不能在一个小输入里跑出可解释结果，就只把它当选题信号，不当推荐。
-- 55-70 秒：最后我会给你一句结论：Platform popularity is not proof of quality; validate the workflow before recommending it.
+- 0-8s: Open with the proof-first hook: 这期不照搬 当我尝试下载 YouTube 时，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- 8-18s: Say why the signal is worth testing now: 当我尝试下载 YouTube 时 is worth covering now because the Bilibili result shows updated yesterday, 3.9k plays, 19 reviews, creator 你的米老鼠大爹; use it to test whether the promised workflow survives a smaller reproduction.
+- 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
+- 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
+- 55-70s: Close the opening with the boundary: Platform popularity is not proof of quality; validate the workflow before recommending it.
+- Title card: 【实测】为什么 当我尝试下载 YouTube 时 现在值得创作者关注
 
 ### YouTube Opening
 
-- 0-7s: The Only AI Video Prompt Generator You'll Ever Need is only worth covering if the smallest proof can be recorded.
-- 7-18s: The signal is specific: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 5 days ago, 36k views, Youri van Hofwegen / 5 days ago / 35,673 views; turn the claim into a before/after creator workflow check.
+- 0-7s: 当我尝试下载 YouTube 时 is only worth covering if the smallest proof can be recorded.
+- 7-18s: The signal is specific: 当我尝试下载 YouTube 时 is worth covering now because the Bilibili result shows updated yesterday, 3.9k plays, 19 reviews, creator 你的米老鼠大爹; use it to test whether the promised workflow survives a smaller reproduction.
 - 18-32s: I will test the promise, show the smallest reproducible output, and mark the adoption blockers.
 - 32-48s: No view promises, no hype recap; this is a buyer-ready workflow check.
 - 48-60s: The boundary is simple: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 ### Recording Proof
 
-- Open the source video and capture title, creator, date, and public engagement for The Only AI Video Prompt Generator You'll Ever Need.
+- Open the source video and capture title, creator, date, and public engagement for 当我尝试下载 YouTube 时.
 - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
 - State the skip condition: which creator should not copy this workflow yet.
 
 ### Buyer Handoff
 
-- Use this as a YouTube proof episode for AI workflow creator.
+- Use this as a Bilibili proof episode for AI workflow creator.
 - Primary asset to record: browser capture: source claim, tiny reproduction input, before/after comparison table, and skip-condition slide.
 - Minimum demo path: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Safety line to keep: Platform popularity is not proof of quality; validate the workflow before recommending it.

@@ -1,8 +1,8 @@
 # TrendFoundry Custom Proof Pack
 
-Generated: 2026-06-07T22:10:53.190Z
+Generated: 2026-06-08T08:20:43.361Z
 
-Dataset: 2026-06-07T20:33:58.416Z
+Dataset: 2026-06-08T07:15:29.423Z
 
 Buyer: custom buyer
 
@@ -27,8 +27,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 | Rank | Episode | Source | Fit score | Proof asset |
 | --- | --- | --- | --- | --- |
 | 1 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 234 | Record the repository README, install or quickstart command, first output, and one blocker note. |
-| 2 | 为什么 RAG 知识库工作流 现在值得创作者关注 (practical test) | GitHub | 220 | Record the repository README, install or quickstart command, first output, and one blocker note. |
-| 3 | 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test) | GitHub | 218 | Record the repository README, install or quickstart command, first output, and one blocker note. |
+| 2 | 为什么 RAG 知识库工作流 现在值得创作者关注 (practical test) | GitHub | 222 | Record the repository README, install or quickstart command, first output, and one blocker note. |
+| 3 | 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test) | GitHub | 219 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 | 4 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 217 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 | 5 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 211 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 | 6 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 207 | Record the repository README, install or quickstart command, first output, and one blocker note. |
@@ -66,8 +66,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 
 - Source: GitHub
 - URL: https://github.com/infiniflow/ragflow
-- Fit score: 220
-- Why this fits: RAG 知识库工作流 is worth covering now because the repo shows updated 2 days ago, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Fit score: 222
+- Why this fits: RAG 知识库工作流 is worth covering now because the repo shows updated today, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -90,8 +90,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 
 - Source: GitHub
 - URL: https://github.com/google-gemini/gemini-cli
-- Fit score: 218
-- Why this fits: 终端 AI agent 工作流 is worth covering now because the repo shows updated 2 days ago, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Fit score: 219
+- Why this fits: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -139,7 +139,7 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 - Source: GitHub
 - URL: https://github.com/browser-use/browser-use
 - Fit score: 211
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated yesterday, 98k stars, 271 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated 2 days ago, 98k stars, 274 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -163,7 +163,7 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 - Source: GitHub
 - URL: https://github.com/affaan-m/ECC
 - Fit score: 207
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 210k stars, 37 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated yesterday, 210k stars, 39 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -193,6 +193,6 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 ## Delivery Notes
 
 - Buyer deliverable: custom-proof-pack.md.
-- Optional attachments after review: full-episode-script.md, episode-workbench.md, content-editorial-audit.md.
+- Optional attachments after review: full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md.
 - External payment confirmation is required before delivery.
 - This is a planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
