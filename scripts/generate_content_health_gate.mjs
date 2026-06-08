@@ -79,7 +79,8 @@ const sourceFiles = [
   "scripts/generate_episode_workbench.mjs",
   "scripts/generate_content_evidence_pack.mjs",
   "scripts/generate_buyer_content_pack.mjs",
-  "scripts/run_content_ops.mjs"
+  "scripts/run_content_ops.mjs",
+  "scripts/update_content_sale_status.mjs"
 ];
 
 function compact(value, fallback = "") {

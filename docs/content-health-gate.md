@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T08:20:47.887Z
+Generated: 2026-06-08T08:29:41.571Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 53
+- Checked files: 54
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 30
 - Bilibili items with readable Chinese text: 30
@@ -23,6 +23,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/generate_content_evidence_pack.mjs | tracked-source | no | 0 | none |
 | scripts/generate_buyer_content_pack.mjs | tracked-source | no | 0 | none |
 | scripts/run_content_ops.mjs | tracked-source | no | 0 | none |
+| scripts/update_content_sale_status.mjs | tracked-source | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
 | docs/content-deal-desk.md | public-or-tracked | no | 0 | none |

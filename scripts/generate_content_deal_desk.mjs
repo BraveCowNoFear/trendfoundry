@@ -316,6 +316,7 @@ This step turns private replies and CRM deal stages into reviewer-ready replies,
 4. Send a reply manually only after checking the source, offer, and safety checklist.
 5. Record external payment confirmation before running any fulfillment command.
 6. After fulfillment, update the ignored CRM override/status files.
+7. Use \`npm run record-content-sale\` to upsert ignored CRM status instead of editing CSV by hand.
 
 ## Safety Boundary
 

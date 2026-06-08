@@ -1,6 +1,6 @@
 # TrendFoundry Content Deal Desk
 
-Generated: 2026-06-08T08:00:54.678Z
+Generated: 2026-06-08T08:29:26.907Z
 
 This step turns private replies and CRM deal stages into reviewer-ready replies, invoice drafts, and fulfillment commands. Detailed buyer/prospect rows stay in ignored `dist/content-deal-desk/`.
 
@@ -18,6 +18,7 @@ This step turns private replies and CRM deal stages into reviewer-ready replies,
 4. Send a reply manually only after checking the source, offer, and safety checklist.
 5. Record external payment confirmation before running any fulfillment command.
 6. After fulfillment, update the ignored CRM override/status files.
+7. Use `npm run record-content-sale` to upsert ignored CRM status instead of editing CSV by hand.
 
 ## Safety Boundary
 
