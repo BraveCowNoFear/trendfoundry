@@ -88,7 +88,8 @@ const sourceFiles = [
   "scripts/generate_buyer_content_pack.mjs",
   "scripts/run_content_ops.mjs",
   "scripts/update_content_sale_status.mjs",
-  "scripts/complete_content_order_delivery.mjs"
+  "scripts/complete_content_order_delivery.mjs",
+  "scripts/complete_custom_proof_delivery.mjs"
 ];
 
 function compact(value, fallback = "") {

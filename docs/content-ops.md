@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-08T13:11:38.118Z
+Generated: 2026-06-08T13:19:55.407Z
 
 Status: success
 
@@ -59,7 +59,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Outreach review: 5 send packs, 0 skipped for text cleanup
 - Deal desk: 0 active deals, 4 objection playbook rows
 - Customer success: 0 follow-ups, 0 due now, 0 completion receipts
-- Health gate: 62 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Health gate: 63 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 

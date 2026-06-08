@@ -72,6 +72,7 @@ ${skippedRows.length ? skippedRows.join("\n") : "| - | - | - | No skipped orders
 
 - Verify payment externally before sending any delivery email.
 - Attach only buyer deliverables from the custom order directory.
+- After manual delivery, run \`npm run complete-custom-proof-delivery -- --order="dist/custom-email-orders/<order-id>" --source="custom-email" --creator="<buyer>" --next-due="YYYY-MM-DD"\`.
 - Do not attach prospects, outreach notes, raw snapshots, account data, or sensitive payment data.
 - Do not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 `;
