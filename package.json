@@ -30,6 +30,7 @@
     "content-crm": "node scripts/generate_content_sales_crm.mjs",
     "content-subscription": "node scripts/generate_content_subscription_plan.mjs",
     "content-subscription-crm": "node scripts/generate_content_subscription_crm.mjs",
+    "content-subscription-due": "node scripts/fulfill_due_content_subscriptions.mjs",
     "record-content-subscription": "node scripts/update_content_subscription_status.mjs",
     "complete-content-subscription-delivery": "node scripts/complete_content_subscription_delivery.mjs",
     "content-revenue": "node scripts/generate_content_revenue_model.mjs",
