@@ -35,6 +35,7 @@ const publicDocs = [
   "docs/content-reply-intake.md",
   "docs/content-testimonials.md",
   "docs/content-outreach-review.md",
+  "docs/content-outreach-gate.md",
   "docs/content-outreach-sends.md",
   "docs/content-ops.md",
   "docs/content-product-listing.md",
@@ -73,6 +74,7 @@ const privateFiles = [
   "dist/content-subscription-retention/drafts.md",
   "dist/content-outreach-review/review-board.csv",
   "dist/content-outreach-review/review-board.md",
+  "dist/content-outreach-gate/checks.csv",
   "dist/content-deal-desk/deal-desk.csv",
   "dist/content-deal-desk/deal-desk.md",
   "dist/content-deal-desk/response-drafts.md",
@@ -112,7 +114,8 @@ const sourceFiles = [
   "scripts/update_content_sale_status.mjs",
   "scripts/complete_content_order_delivery.mjs",
   "scripts/complete_custom_proof_delivery.mjs",
-  "scripts/generate_content_fulfillment_queue.mjs"
+  "scripts/generate_content_fulfillment_queue.mjs",
+  "scripts/generate_content_outreach_gate.mjs"
 ];
 
 function compact(value, fallback = "") {

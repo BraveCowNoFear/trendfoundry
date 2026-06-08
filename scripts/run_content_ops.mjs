@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-gate", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -73,6 +73,7 @@ const revenueManifest = await readJson("dist/content-revenue-model/manifest.json
 const feedbackManifest = await readJson("dist/content-feedback-loop/manifest.json", {});
 const closeManifest = await readJson("dist/content-close-pack/manifest.json", {});
 const outreachReviewManifest = await readJson("dist/content-outreach-review/manifest.json", {});
+const outreachGateManifest = await readJson("dist/content-outreach-gate/manifest.json", {});
 const outreachSendsManifest = await readJson("dist/content-outreach-sends/manifest.json", {});
 const dealDeskManifest = await readJson("dist/content-deal-desk/manifest.json", {});
 const fulfillmentQueueManifest = await readJson("dist/content-fulfillment-queue/manifest.json", {});
@@ -174,6 +175,12 @@ const run = {
       offerSkus: outreachReviewManifest.offerSkus || [],
       followUpDates: outreachReviewManifest.followUpDates || []
     },
+    outreachGate: {
+      checkCount: outreachGateManifest.checkCount,
+      passedCount: outreachGateManifest.passedCount,
+      failedCount: outreachGateManifest.failedCount,
+      averageDraftWords: outreachGateManifest.averageDraftWords
+    },
     outreachSends: {
       sendReceiptCount: outreachSendsManifest.sendReceiptCount,
       sentToday: outreachSendsManifest.sentTodayCount,
@@ -243,7 +250,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach send receipts, deal desk, unified fulfillment queue, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, deal desk, unified fulfillment queue, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -272,6 +279,7 @@ ${stepSummary(steps)}
 - Feedback loop: ${feedbackManifest.learningCount ?? "unknown"} learnings, ${feedbackManifest.questionCount ?? "unknown"} questions, ${feedbackManifest.privateReplyRows ?? "unknown"} private replies
 - Close pack: ${closeManifest.selectedCount ?? "unknown"} selected, ${closeManifest.cleanTextCount ?? "unknown"} clean, ${closeManifest.needsCleanupCount ?? "unknown"} needing cleanup
 - Outreach review: ${outreachReviewManifest.reviewPackCount ?? "unknown"} send packs, ${outreachReviewManifest.skippedNeedsCleanupCount ?? "unknown"} skipped for text cleanup
+- Outreach gate: ${outreachGateManifest.passedCount ?? "unknown"} passed, ${outreachGateManifest.failedCount ?? "unknown"} failed, ${outreachGateManifest.averageDraftWords ?? "unknown"} average draft words
 - Outreach sends: ${outreachSendsManifest.sendReceiptCount ?? "unknown"} receipts, ${outreachSendsManifest.sentTodayCount ?? "unknown"} sent today, ${outreachSendsManifest.waitingReplyCount ?? "unknown"} waiting reply
 - Deal desk: ${dealDeskManifest.activeDealCount ?? "unknown"} active deals, ${dealDeskManifest.playbookCount ?? "unknown"} objection playbook rows
 - Fulfillment queue: ${fulfillmentQueueManifest.queueCount ?? "unknown"} rows, ${fulfillmentQueueManifest.preparedWaitingManualSendCount ?? "unknown"} waiting manual send, ${fulfillmentQueueManifest.needsDeliveryFixCount ?? "unknown"} needing delivery fix, ${fulfillmentQueueManifest.conciseReadyCount ?? "unknown"} concise-ready
@@ -307,15 +315,16 @@ ${stepSummary(steps)}
 14. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
 15. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
 16. Review \`dist/content-outreach-review/review-board.md\` and one send pack at a time under \`dist/content-outreach-review/send-packs/\`.
-17. After a send pack is manually sent, run \`npm run complete-content-outreach-send -- --review-id="..."\`.
-18. Review \`dist/content-deal-desk/deal-desk.md\` when a reply, invoice request, or payment confirmation arrives.
-19. Review \`dist/content-fulfillment-queue/fulfillment-queue.md\` before any manual buyer delivery.
-20. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
-21. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
-22. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
-23. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-24. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-25. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+17. Review \`docs/content-outreach-gate.md\`; only send packs with passed gate rows may enter action brief.
+18. After a send pack is manually sent, run \`npm run complete-content-outreach-send -- --review-id="..."\`.
+19. Review \`dist/content-deal-desk/deal-desk.md\` when a reply, invoice request, or payment confirmation arrives.
+20. Review \`dist/content-fulfillment-queue/fulfillment-queue.md\` before any manual buyer delivery.
+21. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
+22. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
+23. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
+24. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+25. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+26. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

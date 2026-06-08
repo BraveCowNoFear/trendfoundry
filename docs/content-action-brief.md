@@ -1,6 +1,6 @@
 # TrendFoundry Content Action Brief
 
-Generated: 2026-06-08T18:20:16.591Z
+Generated: 2026-06-08T18:33:55.971Z
 
 This public report summarizes the private content-sales action queue. It does not expose buyer names, contacts, prospect rows, channels, private replies, or payment references.
 
@@ -22,7 +22,7 @@ This public report summarizes the private content-sales action queue. It does no
 
 1. Review ignored `dist/content-action-brief/action-brief.md`.
 2. Work from the highest priority row downward.
-3. For outreach rows, review the send pack before sending and record the send receipt afterward.
+3. For outreach rows, only use send packs that passed `content-outreach-gate`; review before sending and record the send receipt afterward.
 4. For fulfillment rows, verify external payment and attach only concise-ready buyer deliverables.
 
 ## Safety Boundary

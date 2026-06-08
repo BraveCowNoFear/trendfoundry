@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T18:20:16.895Z
+Generated: 2026-06-08T18:33:56.260Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 86
+- Checked files: 89
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 29
 - Bilibili items with readable Chinese text: 29
@@ -35,6 +35,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/complete_content_order_delivery.mjs | tracked-source | no | 0 | none |
 | scripts/complete_custom_proof_delivery.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_fulfillment_queue.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_outreach_gate.mjs | tracked-source | no | 0 | none |
 | docs/content-action-brief.md | public-or-tracked | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
@@ -48,6 +49,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/content-reply-intake.md | public-or-tracked | no | 0 | none |
 | docs/content-testimonials.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-review.md | public-or-tracked | no | 0 | none |
+| docs/content-outreach-gate.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-sends.md | public-or-tracked | no | 0 | none |
 | docs/content-ops.md | public-or-tracked | no | 0 | none |
 | docs/content-product-listing.md | public-or-tracked | no | 0 | none |
@@ -83,6 +85,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-subscription-retention/drafts.md | private-ignored | no | 0 | none |
 | dist/content-outreach-review/review-board.csv | private-ignored | no | 0 | none |
 | dist/content-outreach-review/review-board.md | private-ignored | no | 0 | none |
+| dist/content-outreach-gate/checks.csv | private-ignored | no | 0 | none |
 | dist/content-deal-desk/deal-desk.csv | private-ignored | no | 0 | none |
 | dist/content-deal-desk/deal-desk.md | private-ignored | no | 0 | none |
 | dist/content-deal-desk/response-drafts.md | private-ignored | no | 0 | none |

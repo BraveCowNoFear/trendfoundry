@@ -10,6 +10,26 @@ function compact(value, fallback = "") {
   return String(value || fallback).replace(/\s+/g, " ").trim() || fallback;
 }
 
+function cleanDisplayText(value) {
+  const replacements = [
+    [String.fromCodePoint(0x9225, 0x6a9a), "'s"],
+    [`${String.fromCodePoint(0x9225, 0x6a9d)}e`, "'ve"],
+    [`${String.fromCodePoint(0x9225, 0x6a99)}e`, "'re"],
+    [`${String.fromCodePoint(0x9225, 0x6a92)}l`, "'ll"],
+    [String.fromCodePoint(0x9225, 0x6a87), "'d"],
+    [String.fromCodePoint(0x9225, 0x6a9b), "'t"],
+    [String.fromCodePoint(0x9225), "'"],
+    [String.fromCodePoint(0x00e2, 0x20ac, 0x2122), "'"],
+    [String.fromCodePoint(0x00e2, 0x20ac, 0x0153), "\""],
+    [String.fromCodePoint(0x00e2, 0x20ac, 0x009d), "\""],
+    [String.fromCodePoint(0x00e2, 0x20ac, 0x201c), "-"],
+    [String.fromCodePoint(0x00e2, 0x20ac, 0x201d), "-"]
+  ];
+  let text = compact(value);
+  for (const [from, to] of replacements) text = text.split(from).join(to);
+  return text.replace(/\s+/g, " ").trim();
+}
+
 function csvEscape(value) {
   const text = String(value ?? "");
   return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
@@ -94,20 +114,20 @@ function sourceNoun(source) {
 }
 
 function subjectLine(row, product) {
-  const topic = compact(row.topic, "your next proof-first episode");
+  const topic = cleanDisplayText(row.topic) || "your next proof-first episode";
   if (row.offer_sku === "trendfoundry-proof-custom") return `Proof pack idea for ${topic}`;
   if (row.offer_sku === "trendfoundry-proof-weekly") return `A weekly proof-first episode queue for ${topic}`;
   return `One proof-first script idea for ${topic}`;
 }
 
 function makePack(row, product, index) {
-  const creator = compact(row.creator, "creator");
-  const topic = compact(row.topic, "AI/developer creator workflow");
+  const creator = cleanDisplayText(row.creator) || "creator";
+  const topic = cleanDisplayText(row.topic) || "AI/developer creator workflow";
   const source = compact(row.source, "public source");
   const proofUrl = compact(row.proof_url, product.product_url || "https://bravecownofear.github.io/trendfoundry/");
   const freeSampleUrl = compact(product.free_sample_url, "https://bravecownofear.github.io/trendfoundry/trendfoundry-free-sample-pack.zip");
   const orderUrl = compact(product.order_url, "https://bravecownofear.github.io/trendfoundry/order/");
-  const question = compact(row.feedback_question, "Which proof asset would you actually record this week?");
+  const question = cleanDisplayText(row.feedback_question) || "Which proof asset would you actually record this week?";
   const subject = subjectLine(row, product);
   const followUpDate = addDaysIso(index < 3 ? 3 : 5);
   const body = [

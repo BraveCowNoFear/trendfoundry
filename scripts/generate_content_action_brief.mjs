@@ -165,8 +165,8 @@ function fromRetention(rows) {
   }));
 }
 
-function fromOutreachReview(rows) {
-  return rows.map((row, index) => action({
+function fromOutreachReview(rows, passedGateIds) {
+  return rows.filter((row) => passedGateIds.has(compact(row.review_id))).map((row, index) => action({
     action_id: compact(row.review_id, `outreach-${index + 1}`),
     priority: 62 - index,
     lane: "outreach_review",
@@ -272,7 +272,7 @@ ${Object.entries(manifest.laneCounts).map(([lane, count]) => `| ${lane} | ${coun
 
 1. Review ignored \`dist/content-action-brief/action-brief.md\`.
 2. Work from the highest priority row downward.
-3. For outreach rows, review the send pack before sending and record the send receipt afterward.
+3. For outreach rows, only use send packs that passed \`content-outreach-gate\`; review before sending and record the send receipt afterward.
 4. For fulfillment rows, verify external payment and attach only concise-ready buyer deliverables.
 
 ## Safety Boundary
@@ -292,16 +292,18 @@ const dealRows = parseCsv(await readText("dist/content-deal-desk/deal-desk.csv")
 const customerRows = parseCsv(await readText("dist/content-customer-success/followups.csv"));
 const retentionRows = parseCsv(await readText("dist/content-subscription-retention/drafts.csv"));
 const outreachRows = parseCsv(await readText("dist/content-outreach-review/review-board.csv"));
+const outreachGateRows = parseCsv(await readText("dist/content-outreach-gate/checks.csv"));
 const closeRows = parseCsv(await readText("dist/content-close-pack/today-close-queue.csv"));
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
 
 const outreachIds = new Set(outreachRows.map((row) => compact(row.review_id)));
+const passedGateIds = new Set(outreachGateRows.filter((row) => row.status === "passed").map((row) => compact(row.review_id)));
 const actions = [
   ...fromFulfillment(fulfillmentRows),
   ...fromDeals(dealRows),
   ...fromCustomerSuccess(customerRows),
   ...fromRetention(retentionRows),
-  ...fromOutreachReview(outreachRows),
+  ...fromOutreachReview(outreachRows, passedGateIds),
   ...fromCloseQueue(closeRows, outreachIds),
   ...fromTestimonials(testimonialManifest)
 ].sort((left, right) => Number(right.priority) - Number(left.priority) || left.action_id.localeCompare(right.action_id));
@@ -319,6 +321,7 @@ const manifest = {
     customerRows: customerRows.length,
     retentionRows: retentionRows.length,
     outreachRows: outreachRows.length,
+    outreachGatePassedRows: passedGateIds.size,
     closeRows: closeRows.length,
     testimonialPublishCandidates: testimonialManifest.publishCandidateCount || 0
   },
