@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -60,6 +60,7 @@ const audit = await readJson("dist/content-audit/latest.json", {});
 const listing = await readJson("dist/content-listing/products.json", {});
 const customManifest = await readJson("dist/custom-proof-pack/manifest.json", {});
 const subscriptionManifest = await readJson("dist/content-subscription-plan/manifest.json", {});
+const subscriptionCrmManifest = await readJson("dist/content-subscription-crm/manifest.json", {});
 const salesManifest = await readJson("dist/content-sales-sequence/manifest.json", {});
 const prospectManifest = await readJson("dist/content-prospecting/manifest.json", {});
 const crmManifest = await readJson("dist/content-sales-crm/manifest.json", {});
@@ -93,6 +94,12 @@ const run = {
     subscriptionPlan: {
       weeks: subscriptionManifest.weeks,
       deliveryDates: subscriptionManifest.deliveryDates || []
+    },
+    subscriptionCrm: {
+      count: subscriptionCrmManifest.subscriberCount,
+      dueToday: subscriptionCrmManifest.dueCount,
+      paymentReview: subscriptionCrmManifest.blockedCount,
+      renewalSoon: subscriptionCrmManifest.renewalCount
     },
     prospecting: {
       count: prospectManifest.count,
@@ -167,6 +174,7 @@ ${stepSummary(steps)}
 - Buyer deliverables: ${(buyerManifest.buyerDeliverables || []).join(", ") || "unknown"}
 - Custom pack: ${compact(customManifest.niche, "unknown")} / ${compact(customManifest.platform, "unknown")} (${(customManifest.buyerDeliverables || []).join(", ") || "unknown"})
 - Subscription plan: ${subscriptionManifest.weeks ?? "unknown"} weeks (${(subscriptionManifest.deliveryDates || []).join(", ") || "unknown"})
+- Subscription CRM: ${subscriptionCrmManifest.subscriberCount ?? "unknown"} subscribers, ${subscriptionCrmManifest.dueCount ?? "unknown"} ready today, ${subscriptionCrmManifest.blockedCount ?? "unknown"} needing payment review, ${subscriptionCrmManifest.renewalCount ?? "unknown"} renewal checks
 - Sales drafts: ${salesManifest.count ?? "unknown"} drafts across ${(salesManifest.channels || []).join(", ") || "unknown"}
 - Prospects: ${prospectManifest.count ?? "unknown"} local drafts across ${(prospectManifest.channels || []).join(", ") || "unknown"}
 - CRM: ${crmManifest.count ?? "unknown"} rows, ${crmManifest.dueToday ?? "unknown"} due today, ${crmManifest.dueThisWeek ?? "unknown"} due this week
@@ -189,15 +197,16 @@ ${stepSummary(steps)}
 1. Review \`docs/buyer-content-pack.md\`.
 2. Review \`docs/content-product-listing.md\` before publishing or copying payment-platform fields.
 3. Review \`docs/content-subscription-plan.md\` for the weekly subscription promise.
-4. Review \`docs/content-sales-sequence.md\` for publish/send drafts.
-5. Review \`dist/content-prospecting/prospect-board.md\` for one-by-one outreach.
-6. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
-7. Review \`docs/content-revenue-model.md\` for weekly sales targets.
-8. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
-9. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
-10. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-11. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-12. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+4. Review \`docs/content-subscription-crm.md\` and private \`dist/content-subscription-crm/due-queue.md\` for due subscribers.
+5. Review \`docs/content-sales-sequence.md\` for publish/send drafts.
+6. Review \`dist/content-prospecting/prospect-board.md\` for one-by-one outreach.
+7. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
+8. Review \`docs/content-revenue-model.md\` for weekly sales targets.
+9. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
+10. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
+11. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+12. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+13. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

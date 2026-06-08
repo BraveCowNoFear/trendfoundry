@@ -32,6 +32,7 @@ const publicDocs = [
   "docs/content-revenue-model.md",
   "docs/content-sales-crm.md",
   "docs/content-sales-sequence.md",
+  "docs/content-subscription-crm.md",
   "docs/content-subscription-fulfillment.md",
   "docs/content-subscription-plan.md",
   "docs/custom-proof-pack.md",
@@ -41,6 +42,8 @@ const publicDocs = [
 
 const privateFiles = [
   "dist/content-close-pack/today-close-queue.csv",
+  "dist/content-subscription-crm/due-queue.csv",
+  "dist/content-subscription-crm/due-queue.md",
   "dist/content-sales-crm/pipeline.csv",
   "dist/content-prospecting/prospects.csv"
 ];
