@@ -226,7 +226,7 @@ async function checkLocal() {
 
   const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
   assertCheck("order page exists", orderIndex.includes('<link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/order/">') && orderIndex.includes("Order TrendFoundry"));
-  assertCheck("order page has all tiers", ["Sample issue", "Weekly brief", "Custom niche"].every((tier) => orderIndex.includes(tier)));
+  assertCheck("order page has all tiers", ["Sample issue", "Weekly pipeline", "Custom niche desk"].every((tier) => orderIndex.includes(tier)));
   assertCheck("order page has email drafts", orderIndex.includes("Open English email") && orderIndex.includes("打开中文邮件") && orderIndex.includes(`mailto:${contactEmail}`));
   assertCheck("order page has copyable drafts", (orderIndex.match(/data-copy-order=/g) || []).length >= 5 && orderIndex.includes("navigator.clipboard") && orderIndex.includes("copy-fallback") && orderIndex.includes("Copy English draft") && orderIndex.includes("复制中文草稿"));
   assertCheck("order page links downloadable sample pack", orderIndex.includes("../trendfoundry-free-sample-pack.zip") && orderIndex.includes("Download sample pack"));

@@ -274,7 +274,7 @@ const fitPersonas = [
     copyZh: "适合深技术团队：需要技术新鲜度、限制说明和站得住的叙事。",
     kitEn: "Source rank / novelty score / caveat map / narrative claim",
     kitZh: "来源排序 / 新鲜度评分 / 限制地图 / 叙事主张",
-    cadenceEn: "Custom niche pack",
+    cadenceEn: "Custom niche desk",
     cadenceZh: "垂直定制包",
     progress: 81,
     strengthEn: "High confidence",
@@ -464,42 +464,42 @@ const pricingTiers = [
     name: "Sample issue",
     nameZh: "单期样品",
     price: "$9",
-    cadence: "one-off",
+    cadence: "one-time",
     cadenceZh: "一次性",
-    bestFor: "Test whether the brief fits your channel before subscribing.",
-    bestForZh: "先测试这份情报包是否适合你的频道，再决定是否订阅。",
-    includes: ["12 ranked opportunities", "1 ready-to-record script", "CSV opportunity table", "Quality-risk notes"],
-    includesZh: ["12 个排序后的选题机会", "1 份可直接录制的脚本", "CSV 机会表", "质量风险备注"],
+    bestFor: "A proof-backed pack for testing one channel before you subscribe.",
+    bestForZh: "先买一份带证据的选题包，测试是否适合你的频道。",
+    includes: ["12 ranked ideas", "1 ready-to-record script", "CSV signal table", "Risk notes"],
+    includesZh: ["12 个排序选题", "1 份可直接录制的脚本", "CSV 信号表", "风险备注"],
     action: "Request sample",
     actionZh: "申请样品",
     href: issueOrderHref,
     featured: false
   },
   {
-    name: "Weekly brief",
+    name: "Weekly pipeline",
     nameZh: "周更情报",
     price: "$19",
-    cadence: "per month",
+    cadence: "monthly",
     cadenceZh: "每月",
-    bestFor: "Creators who need a dependable weekly topic pipeline.",
-    bestForZh: "适合需要稳定周更选题管线的创作者。",
-    includes: ["Weekly 12-item issue", "Fresh source mix", "Bilibili + YouTube title angles", "Recording outline per item"],
-    includesZh: ["每周 12 条机会", "新鲜来源组合", "B 站 + YouTube 标题角度", "每条都有录制大纲"],
+    bestFor: "The default subscription for a steady recording queue every week.",
+    bestForZh: "默认订阅档：每周补充一批可录制选题。",
+    includes: ["Weekly 12-idea issue", "Fresh source mix", "Bilibili + YouTube angles", "Outline for each idea"],
+    includesZh: ["每周 12 个选题", "新鲜来源组合", "B 站 + YouTube 角度", "每个选题配大纲"],
     action: "Start weekly",
     actionZh: "开始周更",
     href: orderHref,
     featured: true
   },
   {
-    name: "Custom niche",
+    name: "Custom niche desk",
     nameZh: "垂直定制",
     price: "$49",
-    cadence: "per month",
+    cadence: "monthly",
     cadenceZh: "每月",
-    bestFor: "Teams focused on one narrow audience or technical vertical.",
-    bestForZh: "适合聚焦单一受众或技术垂类的小团队。",
-    includes: ["Custom source queries", "Niche-specific ranking", "Stricter quality filtering", "Lead/outreach angle notes"],
-    includesZh: ["定制来源查询", "垂类专属排序", "更严格质量过滤", "线索/外联角度备注"],
+    bestFor: "A focused desk for one audience, niche, or technical vertical.",
+    bestForZh: "围绕一个受众、垂类或技术方向建立专属情报桌。",
+    includes: ["Custom source queries", "Niche-specific ranking", "Stricter quality filters", "Lead/outreach angles"],
+    includesZh: ["定制来源查询", "垂类专属排序", "更严格质量过滤", "线索/外联角度"],
     action: "Ask for custom",
     actionZh: "咨询定制",
     href: issueOrderHref,
@@ -528,31 +528,31 @@ function tierOrderHref(tier, lang = "en") {
 function tierDecisionMeta(tier) {
   if (tier.name === "Sample issue") {
     return {
-      packEn: "Current issue, CSV, risk notes, and one recording script.",
-      packZh: "当前期刊、CSV、风险备注和一份录制脚本。",
-      deliveryEn: "One manual delivery after request confirmation.",
-      deliveryZh: "确认请求后一次性交付。",
-      routeEn: "Use this to test channel fit before subscribing.",
-      routeZh: "用于先测试是否适合你的频道，再决定是否订阅。"
+      packEn: "One brief, CSV signal table, risk notes, and a recording script.",
+      packZh: "一份情报简报、CSV 信号表、风险备注和录制脚本。",
+      deliveryEn: "Delivered once after the request is reviewed.",
+      deliveryZh: "请求审核后一次性交付。",
+      routeEn: "Best for proving whether TrendFoundry fits your channel.",
+      routeZh: "适合先验证 TrendFoundry 是否适合你的频道。"
     };
   }
-  if (tier.name === "Custom niche") {
+  if (tier.name === "Custom niche desk") {
     return {
-      packEn: "Custom sources, niche scoring, stricter filters, and outreach angles.",
-      packZh: "定制来源、垂类评分、更严格过滤和外联角度。",
-      deliveryEn: "Monthly custom pack shaped around one narrow audience.",
-      deliveryZh: "每月围绕一个窄受众交付定制包。",
-      routeEn: "Best when one vertical matters more than broad discovery.",
-      routeZh: "适合一个垂类比泛发现更重要的场景。"
+      packEn: "Custom source queries, niche scoring, strict filters, and lead angles.",
+      packZh: "定制来源查询、垂类评分、严格过滤和线索角度。",
+      deliveryEn: "A monthly desk shaped around one narrow audience.",
+      deliveryZh: "每月围绕一个窄受众交付专属情报桌。",
+      routeEn: "Best when focus matters more than broad discovery.",
+      routeZh: "适合垂类聚焦比泛发现更重要的场景。"
     };
   }
   return {
-    packEn: "Weekly 12-item brief with source mix, title angles, and outlines.",
-    packZh: "每周 12 条情报，包含来源组合、标题角度和录制大纲。",
-    deliveryEn: "Fresh weekly issue inside a monthly subscription cadence.",
+    packEn: "A weekly 12-idea issue with sources, angles, and outlines.",
+    packZh: "每周 12 个选题，包含来源、角度和录制大纲。",
+    deliveryEn: "A new issue every week inside one monthly subscription.",
     deliveryZh: "按月订阅，每周收到新一期。",
-    routeEn: "The default choice for a dependable publishing queue.",
-    routeZh: "适合稳定维护发布队列的默认选择。"
+    routeEn: "Best for keeping a reliable recording queue alive.",
+    routeZh: "适合持续维护稳定录制队列。"
   };
 }
 
@@ -609,23 +609,23 @@ const defaultPricingTier = pricingTiers.find((tier) => tier.featured) || pricing
 const defaultTierDecision = tierDecisionMeta(defaultPricingTier);
 const pricingChooser = `<div class="pricing-chooser" aria-live="polite">
     <div>
-      ${dual("Selected plan", "已选档位", "p", ' class="pricing-chooser-label"')}
+      ${dual("Selected offer", "已选产品", "p", ' class="pricing-chooser-label"')}
       <h3 id="selected-tier-name" data-i18n-en="${escapeHtml(defaultPricingTier.name)}" data-i18n-zh="${escapeHtml(defaultPricingTier.nameZh)}">${escapeHtml(defaultPricingTier.name)}</h3>
       <p id="selected-tier-copy" data-i18n-en="${escapeHtml(defaultPricingTier.bestFor)}" data-i18n-zh="${escapeHtml(defaultPricingTier.bestForZh)}">${escapeHtml(defaultPricingTier.bestFor)}</p>
-      <div class="pricing-configurator" aria-label="Selected plan configuration">
+      <div class="pricing-configurator" aria-label="Selected offer details">
         <div>
           <span>01</span>
-          <strong data-i18n-en="Pack" data-i18n-zh="交付包">Pack</strong>
+          <strong data-i18n-en="Files included" data-i18n-zh="包含文件">Files included</strong>
           <small id="selected-tier-pack" data-i18n-en="${escapeHtml(defaultTierDecision.packEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.packZh)}">${escapeHtml(defaultTierDecision.packEn)}</small>
         </div>
         <div>
           <span>02</span>
-          <strong data-i18n-en="Delivery" data-i18n-zh="交付节奏">Delivery</strong>
+          <strong data-i18n-en="Delivery" data-i18n-zh="交付方式">Delivery</strong>
           <small id="selected-tier-delivery" data-i18n-en="${escapeHtml(defaultTierDecision.deliveryEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.deliveryZh)}">${escapeHtml(defaultTierDecision.deliveryEn)}</small>
         </div>
         <div>
           <span>03</span>
-          <strong data-i18n-en="Route" data-i18n-zh="购买路径">Route</strong>
+          <strong data-i18n-en="Why buy" data-i18n-zh="为什么买">Why buy</strong>
           <small id="selected-tier-route" data-i18n-en="${escapeHtml(defaultTierDecision.routeEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.routeZh)}">${escapeHtml(defaultTierDecision.routeEn)}</small>
         </div>
       </div>
@@ -934,7 +934,7 @@ const planningCalculator = `<section class="planning-calculator" id="planning-ca
         <div class="calculator-result" aria-live="polite">
           <span id="saved-hours">9h</span>
           <p id="saved-hours-copy">${dual("estimated planning time reclaimed each month", "预计每月释放的规划时间")}</p>
-          <em id="tier-suggestion">${dual("Suggested: Weekly brief", "建议：周更情报")}</em>
+          <em id="tier-suggestion">${dual("Suggested: Weekly pipeline", "建议：周更情报")}</em>
         </div>
       </div>
     </section>`;
@@ -1204,7 +1204,7 @@ ${publicSample
 ## Upgrade
 
 - Sample issue: USD 9 one-off.
-- Weekly brief: USD 19/month.
+- Weekly pipeline: USD 19/month.
 - Custom niche: USD 49/month.
 
 Request the current issue: ${issueOrderHref}
@@ -1723,7 +1723,7 @@ function buildTopicPage(topic) {
   const body = `<header class="topic-hero">
   <div class="brandline">${brandLogo()}<span>SEO brief</span></div>
   <h1>${escapeHtml(topic.title)}</h1>
-  <p class="sub">${escapeHtml(topic.description)} Updated from the same source-backed dataset used for the paid weekly brief.</p>
+  <p class="sub">${escapeHtml(topic.description)} Updated from the same source-backed dataset used for the paid weekly pipeline.</p>
   <div class="hero-actions">
     <a class="action primary" href="../public-sample.en.md">English sample</a>
     <a class="action" href="../public-sample.zh-CN.md">中文样品</a>
@@ -2401,7 +2401,7 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Source-backed AI and developer video opportunities shaped into titles, hooks, demos, limitations, and buyer-ready weekly briefs.">
+  <meta name="description" content="Source-backed AI and developer video opportunities shaped into titles, hooks, demos, limitations, and buyer-ready weekly pipelines.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${publicSiteUrl}">
   <meta property="og:title" content="TrendFoundry Creator Intelligence">
@@ -2411,7 +2411,7 @@ const html = `<!doctype html>
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="TrendFoundry Creator Intelligence">
-  <meta name="twitter:description" content="AI and developer trend signals shaped into creator-ready weekly briefs.">
+  <meta name="twitter:description" content="AI and developer trend signals shaped into creator-ready weekly pipelines.">
   <meta name="twitter:image" content="${ogImageUrl}">
   <title>TrendFoundry Creator Intelligence</title>
   <link rel="stylesheet" href="./styles.css">
@@ -2460,7 +2460,7 @@ const html = `<!doctype html>
   <main>
     <section class="offer">
       <div>
-        ${dual("Weekly brief", "周更情报", "p", ' class="section-label"')}
+        ${dual("Weekly pipeline", "周更情报", "p", ' class="section-label"')}
         ${dual("Fresh AI and developer video opportunities, ready to turn into scripts.", "每周拿到可核验、可录制的 AI/开发者视频选题。", "h2")}
         ${dual("Each issue gives you 12 ranked ideas with source links, Bilibili and YouTube title angles, outlines, risk notes, CSV, and one ready-to-record script.", "每期包含 12 条排序后的机会、来源链接、B 站和 YouTube 标题角度、录制大纲、风险备注、CSV，以及 1 份可直接录制的脚本。", "p")}
       </div>
@@ -2534,17 +2534,16 @@ const html = `<!doctype html>
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
-          ${dual("Pricing Studio", "定价工作台", "p", ' class="section-label"')}
-          ${dual("Pick the publishing cadence.", "选择你的发布节奏。", "h2")}
-          ${dual("Treat pricing like choosing a device configuration: pick the cadence, confirm the delivery route, then send the order draft.", "把定价当成选择产品配置：先定节奏，再确认交付路径，最后发送下单草稿。", "p")}
+          ${dual("Offer", "购买选题包", "p", ' class="section-label"')}
+          ${dual("Buy a ready-to-record idea pack.", "买一份能直接开录的选题包。", "h2")}
+          ${dual("TrendFoundry turns public source signals into creator-ready topic packs. Choose by delivery depth: one sample, a weekly pipeline, or a custom niche desk.", "TrendFoundry 把公开来源信号整理成创作者可直接使用的选题包。按交付深度选择：单期样品、周更管线，或垂直定制。", "p")}
         </div>
-        <div class="pricing-steps" aria-hidden="true">
-          <span class="active">1</span><small>${dual("Choose plan", "选择方案")}</small>
-          <span>2</span><small>${dual("Confirm", "确认")}</small>
-          <span>3</span><small>${dual("Complete", "完成")}</small>
+        <div class="pricing-proof-points" aria-label="Offer division rules">
+          ${dual("Delivery depth", "交付深度", "span")}
+          ${dual("Files included", "包含文件", "span")}
+          ${dual("Manual review", "人工审核", "span")}
         </div>
       </div>
-      ${pricingRail}
       <div class="pricing-workbench">
         <div class="tier-grid">${pricingCards}</div>
         ${pricingChooser}
@@ -2716,17 +2715,16 @@ const zhHtml = `<!doctype html>
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
-          <p class="section-label">定价工作台</p>
-          <h2>选择你的发布节奏。</h2>
-          <p>把定价当成选择产品配置：先定节奏，再确认交付路径，最后发送下单草稿。</p>
+          <p class="section-label">购买选题包</p>
+          <h2>买一份能直接开录的选题包。</h2>
+          <p>TrendFoundry 把公开来源信号整理成创作者可直接使用的选题包。按交付深度选择：单期样品、周更管线，或垂直定制。</p>
         </div>
-        <div class="pricing-steps" aria-hidden="true">
-          <span class="active">1</span><small>选择方案</small>
-          <span>2</span><small>确认</small>
-          <span>3</span><small>完成</small>
+        <div class="pricing-proof-points" aria-label="产品划分规则">
+          <span>交付深度</span>
+          <span>包含文件</span>
+          <span>人工审核</span>
         </div>
       </div>
-      ${pricingRail}
       <div class="pricing-workbench">
         <div class="tier-grid">${pricingCards}</div>
         ${pricingChooser}
@@ -2765,7 +2763,7 @@ const orderHtml = `<!doctype html>
   <meta property="og:type" content="website">
   <meta property="og:url" content="${publicSiteUrl}order/">
   <meta property="og:title" content="Order TrendFoundry without login">
-  <meta property="og:description" content="Choose a sample issue, weekly brief, or custom niche pack and send a prepared order email.">
+  <meta property="og:description" content="Choose a sample issue, weekly pipeline, or custom niche desk and send a prepared order email.">
   <meta property="og:image" content="${ogImageUrl}">
   <title>Order TrendFoundry</title>
   <link rel="canonical" href="${publicSiteUrl}order/">
@@ -2826,9 +2824,9 @@ const orderHtml = `<!doctype html>
       <div class="mail-drafts">
         <article>
           <h3>English draft</h3>
-          <pre>Subject: TrendFoundry order: Weekly brief
+          <pre>Subject: TrendFoundry order: Weekly pipeline
 
-Hi, I want to order TrendFoundry Weekly brief ($19 per month).
+Hi, I want to order TrendFoundry Weekly pipeline ($19 monthly).
 
 My channel:
 Main platform:
@@ -5292,41 +5290,28 @@ main {
   align-items: start;
 }
 .pricing-studio .section-head h2 {
-  max-width: 880px;
-  font-size: clamp(40px, 6vw, 76px);
-  line-height: 0.98;
+  max-width: 760px;
+  font-size: clamp(38px, 5.2vw, 64px);
+  line-height: 1;
   letter-spacing: 0;
 }
-.pricing-steps {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 8px 12px;
-  align-items: center;
-  min-width: 300px;
+.pricing-proof-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: 330px;
   padding-top: 8px;
 }
-.pricing-steps > span {
-  display: grid;
-  place-items: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(17, 17, 20, 0.14);
-  border-radius: 50%;
-  background: #fff;
-  color: var(--muted);
-  font-weight: 850;
-}
-.pricing-steps > span.active {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
-}
-.pricing-steps small {
-  grid-row: 2;
+.pricing-proof-points span {
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.82);
   color: var(--muted);
   font-size: 12px;
   font-weight: 760;
-  text-align: center;
+  white-space: nowrap;
 }
 .pricing-rail {
   position: relative;
@@ -5412,8 +5397,8 @@ main {
 }
 .pricing-workbench {
   display: grid;
-  grid-template-columns: minmax(320px, 0.46fr) minmax(0, 0.54fr);
-  gap: clamp(18px, 4vw, 54px);
+  grid-template-columns: 1fr;
+  gap: clamp(16px, 3vw, 28px);
   align-items: start;
 }
 .tier-grid {
@@ -5422,7 +5407,7 @@ main {
   gap: 12px;
 }
 .pricing-studio .tier-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .tier {
   display: grid;
@@ -5442,35 +5427,26 @@ main {
   box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
 }
 .pricing-studio .tier {
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  min-height: 134px;
-  gap: 12px 18px;
-  padding: 20px;
+  grid-template-columns: 1fr;
+  align-items: start;
+  min-height: 318px;
+  gap: 14px;
+  padding: 22px;
 }
 .pricing-studio .tier > div:first-child {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 3px 14px;
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  align-items: start;
 }
 .pricing-studio .tier > div:first-child > * {
-  grid-column: 2;
+  grid-column: auto;
 }
 .pricing-studio .tier > div:first-child::before {
-  content: "";
-  grid-row: 1 / span 4;
-  width: 58px;
-  height: 58px;
-  border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 50% 34%, rgba(0,113,227,0.15), transparent 32%),
-    linear-gradient(180deg, #fff, #f4f6f9);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 12px 28px rgba(17, 17, 20, 0.06);
+  content: none;
 }
 .pricing-studio .tier:hover {
-  transform: translateX(3px);
+  transform: translateY(-3px);
 }
 .tier.featured {
   border-color: rgba(0, 113, 227, 0.38);
@@ -5505,16 +5481,14 @@ main {
   font-weight: 850;
 }
 .pricing-studio .tier-price {
-  grid-row: 1 / span 2;
-  grid-column: 2;
-  margin: 0;
-  text-align: right;
-  font-size: 36px;
+  grid-row: auto;
+  grid-column: auto;
+  margin: 4px 0 2px;
+  text-align: left;
+  font-size: 42px;
 }
 .pricing-studio .tier-price::after {
-  content: " →";
-  color: var(--accent);
-  font-size: 22px;
+  content: "";
 }
 .tier p:not(.tier-kicker):not(.tier-price) {
   margin: 0;
@@ -5529,10 +5503,10 @@ main {
 .pricing-studio .tier ul {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 5px 14px;
+  grid-template-columns: 1fr;
+  gap: 7px;
   padding-left: 18px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .tier-actions {
   display: grid;
@@ -5571,10 +5545,10 @@ main {
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 .pricing-studio .pricing-chooser {
-  position: sticky;
-  top: 92px;
-  grid-template-columns: 1fr;
-  min-height: 520px;
+  position: relative;
+  top: auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 0;
   margin-top: 0;
   border-color: rgba(17, 17, 20, 0.14);
   border-radius: 8px;
@@ -5637,10 +5611,10 @@ main {
   margin-top: 16px;
 }
 .pricing-studio .pricing-configurator {
-  grid-template-columns: 1fr;
-  gap: 0;
-  margin-top: 26px;
-  border-top: 1px solid rgba(17, 17, 20, 0.14);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+  border-top: 0;
 }
 .pricing-configurator > div {
   display: grid;
@@ -5654,13 +5628,12 @@ main {
   background: rgba(255,255,255,0.68);
 }
 .pricing-studio .pricing-configurator > div {
-  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-columns: 30px minmax(0, 1fr);
   min-height: 0;
-  border: 0;
-  border-bottom: 1px solid rgba(17, 17, 20, 0.1);
-  border-radius: 0;
-  padding: 16px 0;
-  background: transparent;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255,255,255,0.7);
 }
 .pricing-configurator span {
   grid-row: span 2;
@@ -5692,7 +5665,8 @@ main {
   justify-items: end;
 }
 .pricing-studio .pricing-chooser-action {
-  align-self: end;
+  align-self: stretch;
+  align-content: end;
   justify-items: stretch;
   margin-top: 10px;
 }
@@ -8456,9 +8430,8 @@ input[type="email"] {
   .pricing-studio .section-head h2 {
     font-size: clamp(34px, 11vw, 52px);
   }
-  .pricing-steps {
-    min-width: 0;
-    width: 100%;
+  .pricing-proof-points {
+    max-width: none;
     justify-content: start;
   }
   .pricing-rail {
@@ -8485,6 +8458,7 @@ input[type="email"] {
   .pricing-studio .pricing-chooser {
     position: relative;
     top: auto;
+    grid-template-columns: 1fr;
     min-height: 0;
     border-radius: 8px;
   }
@@ -8492,6 +8466,7 @@ input[type="email"] {
     display: grid;
     grid-auto-flow: row;
     grid-auto-columns: auto;
+    grid-template-columns: 1fr;
     overflow: visible;
     padding: 0;
   }
@@ -9103,7 +9078,7 @@ function updatePlanningCalculator() {
   }
   if (tierSuggestion) {
     let suggestion = currentLanguage === "zh" ? "建议：单期样品" : "Suggested: Sample issue";
-    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly brief";
+    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly pipeline";
     if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
     tierSuggestion.textContent = suggestion;
   }

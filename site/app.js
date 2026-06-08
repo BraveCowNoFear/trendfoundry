@@ -88,7 +88,7 @@ function updatePlanningCalculator() {
   }
   if (tierSuggestion) {
     let suggestion = currentLanguage === "zh" ? "建议：单期样品" : "Suggested: Sample issue";
-    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly brief";
+    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly pipeline";
     if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
     tierSuggestion.textContent = suggestion;
   }
