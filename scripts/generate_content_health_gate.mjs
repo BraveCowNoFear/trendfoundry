@@ -25,6 +25,7 @@ const publicDocs = [
   "docs/buyer-content-pack.md",
   "docs/content-close-pack.md",
   "docs/content-deal-desk.md",
+  "docs/content-delivery-gate.md",
   "docs/content-editorial-audit.md",
   "docs/content-evidence-pack.md",
   "docs/content-feedback-loop.md",
@@ -51,6 +52,7 @@ const publicDocs = [
 const privateFiles = [
   "dist/full-episode-script/latest.json",
   "dist/episode-workbench/latest.json",
+  "dist/content-delivery-gate/checks.csv",
   "dist/content-evidence-pack/content-evidence-pack.md",
   "dist/content-evidence-pack/evidence.csv",
   "dist/content-evidence-pack/claim-checklist.csv",
@@ -78,6 +80,7 @@ const sourceFiles = [
   "scripts/generate_full_episode_script.mjs",
   "scripts/generate_episode_workbench.mjs",
   "scripts/generate_content_evidence_pack.mjs",
+  "scripts/generate_content_delivery_gate.mjs",
   "scripts/generate_buyer_content_pack.mjs",
   "scripts/run_content_ops.mjs",
   "scripts/update_content_sale_status.mjs"

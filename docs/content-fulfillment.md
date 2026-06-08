@@ -7,7 +7,7 @@ This is the local fulfillment lane for the buyer content pack. It prepares an or
 Refresh the buyer content pack first:
 
 ```bash
-npm run buyer-pack
+npm run content-ops
 ```
 
 Prepare a buyer-only order folder:
@@ -19,6 +19,8 @@ npm run fulfill-content -- --buyer="Buyer Name" --contact="buyer@example.com" --
 `--payment-ref` should be a local reference to an externally confirmed payment, not sensitive payment or account data. If omitted, the generated manifest marks payment as not externally confirmed.
 
 If `dist/content-orders/<order-id>/manifest.json` already exists, the command reports `already_prepared` and exits without overwriting buyer deliverables.
+
+Before sending a paid delivery, review `docs/content-delivery-gate.md`. The gate must show 0 failed checks for the buyer content pack.
 
 ## Generated Files
 

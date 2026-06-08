@@ -26,6 +26,7 @@
     "full-script": "node scripts/generate_full_episode_script.mjs",
     "content-evidence": "node scripts/generate_content_evidence_pack.mjs",
     "buyer-pack": "node scripts/generate_buyer_content_pack.mjs",
+    "content-delivery-gate": "node scripts/generate_content_delivery_gate.mjs",
     "content-ops": "node scripts/run_content_ops.mjs",
     "content-listing": "node scripts/generate_content_listing.mjs",
     "custom-proof-pack": "node scripts/generate_custom_proof_pack.mjs",

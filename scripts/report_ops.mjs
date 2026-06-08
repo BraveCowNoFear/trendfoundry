@@ -90,6 +90,7 @@ ${runSteps}
 - Primary episode: ${report.content.primaryEpisode}
 - Buyer deliverables: ${report.content.buyerDeliverables.join(", ") || "unknown"}
 - Evidence pack: ${report.content.evidenceItems} items, ${report.content.evidenceClaims} claims (${report.content.evidenceDeliverable})
+- Delivery gate: ${report.content.deliveryGatePassed} passed, ${report.content.deliveryGateFailed} failed
 - Prospects: ${report.content.prospects}
 - CRM due today: ${report.content.crmDueToday}
 - Close queue: ${report.content.closeSelected}
@@ -191,6 +192,8 @@ const report = {
     evidenceItems: contentOpsData.contentState?.evidencePack?.evidenceItemCount ?? "unknown",
     evidenceClaims: contentOpsData.contentState?.evidencePack?.claimCount ?? "unknown",
     evidenceDeliverable: contentOpsData.contentState?.evidencePack?.buyerDeliverable ?? "unknown",
+    deliveryGatePassed: contentOpsData.contentState?.deliveryGate?.passedCount ?? "unknown",
+    deliveryGateFailed: contentOpsData.contentState?.deliveryGate?.failedCount ?? "unknown",
     prospects: contentOpsData.contentState?.prospecting?.count ?? "unknown",
     crmDueToday: contentOpsData.contentState?.salesCrm?.dueToday ?? "unknown",
     closeSelected: contentOpsData.contentState?.closePack?.selectedCount ?? "unknown",
