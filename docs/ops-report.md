@@ -36,7 +36,7 @@ The report reads local state only. It does not send messages, charge buyers, upl
 - current source snapshot and item count
 - latest online QA pass count plus the most recent QA run
 - most recent `npm run operate` step statuses
-- content sales lane status: content ops steps, primary episode, buyer deliverables, prospects, CRM due today, close queue, outreach review packs, deal desk active deals, objection playbook rows, and content health gate counts
+- content sales lane status: content ops steps, primary episode, buyer deliverables, evidence items/claims, prospects, CRM due today, close queue, outreach review packs, deal desk active deals, objection playbook rows, and content health gate counts
 - lead stage counts
 - local outreach draft count
 - launch asset count
