@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-08T13:19:55.407Z
+Generated: 2026-06-08T17:38:42.454Z
 
 Status: success
 
@@ -8,7 +8,7 @@ Refresh public sources: no
 
 Dataset: 2026-06-08T07:15:29.423Z
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, deal desk, customer-success follow-ups, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, deal desk, customer-success follow-ups, testimonial bank, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -35,6 +35,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-outreach-review | success | 0 |
 | content-deal-desk | success | 0 |
 | content-customer-success | success | 0 |
+| content-testimonials | success | 0 |
 | content-health | success | 0 |
 
 ## Current Content State
@@ -59,7 +60,8 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Outreach review: 5 send packs, 0 skipped for text cleanup
 - Deal desk: 0 active deals, 4 objection playbook rows
 - Customer success: 0 follow-ups, 0 due now, 0 completion receipts
-- Health gate: 63 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Testimonials: 0 private rows, 0 publish candidates, 0 needing permission/review
+- Health gate: 69 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -89,6 +91,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 15. Review `dist/content-outreach-review/review-board.md` and one send pack at a time under `dist/content-outreach-review/send-packs/`.
 16. Review `dist/content-deal-desk/deal-desk.md` when a reply, invoice request, or payment confirmation arrives.
 17. Review `dist/content-customer-success/followup-drafts.md` after any delivered order enters `fulfilled_waiting_feedback`.
-18. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
-19. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-20. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+18. Review `dist/content-testimonials/testimonial-bank.md` before reusing any quote in sales copy.
+19. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
+20. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+21. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.

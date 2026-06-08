@@ -99,6 +99,8 @@ ${runSteps}
 - Deal desk playbook rows: ${report.content.playbookRows}
 - Customer success follow-ups: ${report.content.customerFollowups}
 - Customer success due now: ${report.content.customerDueNow}
+- Testimonial private rows: ${report.content.testimonialRows}
+- Testimonial publish candidates: ${report.content.testimonialCandidates}
 - Health gate: ${report.content.healthFiles} files, ${report.content.healthMojibake} mojibake, ${report.content.healthLeaks} public leaks
 
 ## Sales Pipeline
@@ -139,6 +141,7 @@ const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "lates
 const contentOpsData = await readJsonIfExists(path.join(root, "dist", "content-ops", "latest-run.json"), { contentState: {}, steps: [] });
 const dealDeskData = await readJsonIfExists(path.join(root, "dist", "content-deal-desk", "manifest.json"), {});
 const customerSuccessData = await readJsonIfExists(path.join(root, "dist", "content-customer-success", "manifest.json"), {});
+const testimonialData = await readJsonIfExists(path.join(root, "dist", "content-testimonials", "manifest.json"), {});
 const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "content-outreach-review", "manifest.json"), {});
 const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
 const emailFulfillmentData = await readJsonIfExists(path.join(root, "dist", "email-fulfillment", "email-orders.json"), { prepared: [] });
@@ -205,6 +208,8 @@ const report = {
     playbookRows: dealDeskData.playbookCount ?? contentOpsData.contentState?.dealDesk?.playbookCount ?? "unknown",
     customerFollowups: customerSuccessData.followupCount ?? contentOpsData.contentState?.customerSuccess?.followupCount ?? "unknown",
     customerDueNow: customerSuccessData.dueNowCount ?? contentOpsData.contentState?.customerSuccess?.dueNow ?? "unknown",
+    testimonialRows: testimonialData.testimonialRows ?? contentOpsData.contentState?.testimonials?.testimonialRows ?? "unknown",
+    testimonialCandidates: testimonialData.publishCandidateCount ?? contentOpsData.contentState?.testimonials?.publishCandidateCount ?? "unknown",
     healthFiles: contentOpsData.contentState?.healthGate?.checkedFileCount ?? "unknown",
     healthMojibake: contentOpsData.contentState?.healthGate?.filesWithMojibakeMarkers ?? "unknown",
     healthLeaks: contentOpsData.contentState?.healthGate?.publicCloseDocProspectLeaks ?? "unknown"
@@ -230,7 +235,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
-    contentOpsData.status === "success" ? "Review dist/content-outreach-review/review-board.md, dist/content-deal-desk/deal-desk.md, and dist/content-customer-success/followup-drafts.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, outreach review, deal desk, and customer follow-ups.",
+    contentOpsData.status === "success" ? "Review dist/content-outreach-review/review-board.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, outreach review, deal desk, customer follow-ups, and testimonial bank.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."

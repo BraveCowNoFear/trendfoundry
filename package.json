@@ -47,6 +47,8 @@
     "content-outreach-review": "node scripts/generate_content_outreach_review.mjs",
     "content-deal-desk": "node scripts/generate_content_deal_desk.mjs",
     "content-customer-success": "node scripts/generate_content_customer_success.mjs",
+    "content-testimonials": "node scripts/generate_content_testimonials.mjs",
+    "record-content-testimonial": "node scripts/update_content_testimonial_status.mjs",
     "record-content-sale": "node scripts/update_content_sale_status.mjs",
     "content-health": "node scripts/generate_content_health_gate.mjs",
     "launch-assets": "node scripts/generate_launch_assets.mjs",
