@@ -237,7 +237,7 @@ async function checkLocal() {
   const authConfigText = await readText(path.join(root, "site", "auth", "auth.config.json"));
   const authConfig = JSON.parse(authConfigText);
   const authScript = await readText(path.join(root, "site", "auth.js"));
-  assertCheck("auth page exists", authIndex.includes("Sign in with the account you already use.") && authIndex.includes("Google") && authIndex.includes("WeChat") && authIndex.includes("Alipay"));
+  assertCheck("auth page exists", authIndex.includes("Access the signal room.") && authIndex.includes("auth-provider-rail") && authIndex.includes("signal-board.png") && authIndex.includes("Google") && authIndex.includes("WeChat") && authIndex.includes("Alipay"));
   assertCheck("auth page keeps static safety copy", authIndex.includes("Secrets stay off the static site") && authIndex.includes("static site cannot complete OAuth token exchange"));
   assertCheck("auth config has empty broker defaults", authConfig.brokerBaseUrl === "" && authConfig.emailSignInEndpoint === "");
   assertCheck("auth config has providers disabled by default", Object.values(authConfig.providers || {}).every((provider) => provider.clientId === "" && provider.enabled === false));

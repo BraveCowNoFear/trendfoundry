@@ -7,6 +7,12 @@ const accountProvider = document.querySelector("#account-provider");
 const accountAvatar = document.querySelector("#account-avatar");
 const signOutButton = document.querySelector("#sign-out-button");
 const emailForm = document.querySelector("#email-login-form");
+const authHeroVisual = document.querySelector(".auth-hero-visual");
+const authVisualKicker = document.querySelector("#auth-visual-kicker");
+const authVisualTitle = document.querySelector("#auth-visual-title");
+const authVisualCopy = document.querySelector("#auth-visual-copy");
+const authAvatarNodes = [...document.querySelectorAll("[data-auth-avatar]")];
+const authChoiceNodes = [...document.querySelectorAll("[data-auth-choice]")];
 const providers = window.TRENDFOUNDRY_AUTH_PROVIDERS || [];
 const sessionKey = "trendfoundry.auth.session";
 let authConfig = { providers: {} };
@@ -23,6 +29,36 @@ function providerConfig(providerId) {
 function providerReady(providerId) {
   const config = providerConfig(providerId);
   return Boolean(authConfig.brokerBaseUrl || (config.enabled && config.clientId && (config.authorizationEndpoint || config.authUrl)));
+}
+
+function setAuthVisual(providerId) {
+  const provider = providers.find((item) => item.id === providerId);
+  const isEmail = providerId === "email";
+  const ready = isEmail ? Boolean(authConfig.emailSignInEndpoint) : provider ? providerReady(provider.id) : false;
+  const label = isEmail ? "Email magic link" : provider ? provider.label : "Secure access";
+  const region = isEmail ? "Direct inbox" : provider ? provider.region : "Account access";
+  const description = isEmail
+    ? "Email creates a low-friction fallback for buyers who do not want a social identity."
+    : provider
+      ? provider.description
+      : "Choose a provider to preview the access path before you leave the page.";
+  if (authHeroVisual) authHeroVisual.dataset.ready = ready ? "true" : "false";
+  if (authVisualKicker) authVisualKicker.textContent = (ready ? "Ready path" : "Setup path") + " / " + region;
+  if (authVisualTitle) authVisualTitle.textContent = label;
+  if (authVisualCopy) {
+    authVisualCopy.textContent = ready
+      ? description + " The button can hand off through the configured gateway."
+      : description + " Add the gateway or client settings before production login.";
+  }
+  for (const button of providerGrid.querySelectorAll("[data-provider]")) {
+    button.classList.toggle("visual-active", button.dataset.provider === providerId);
+  }
+  for (const avatar of authAvatarNodes) {
+    avatar.classList.toggle("visual-active", avatar.dataset.authAvatar === providerId);
+  }
+  for (const choice of authChoiceNodes) {
+    choice.classList.toggle("visual-active", choice.dataset.authChoice === providerId);
+  }
 }
 
 function authReturnUrl() {
@@ -104,6 +140,8 @@ function renderProviders() {
     button.dataset.ready = ready ? "true" : "false";
     button.title = ready ? "Start login" : "Set brokerBaseUrl or provider clientId in auth.config.json";
   }
+  const firstReady = providers.find((provider) => providerReady(provider.id));
+  setAuthVisual(firstReady ? firstReady.id : providers[0]?.id || "email");
 }
 
 function handleCallback() {
@@ -112,17 +150,20 @@ function handleCallback() {
     const provider = params.get("provider") || "provider";
     const message = params.get("message") || "auth_error";
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice(provider + " login could not start: " + message.replace(/_/g, " ") + ".", "warning");
     return true;
   }
   if (params.get("tf_auth") === "ok") {
+    const provider = params.get("provider") || "broker";
     saveSession({
-      provider: params.get("provider") || "broker",
+      provider,
       name: params.get("name") || params.get("email") || "TrendFoundry member",
       email: params.get("email") || "",
       mode: "active"
     });
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice("Signed in through the configured auth gateway.", "success");
     return true;
   }
@@ -132,6 +173,7 @@ function handleCallback() {
     const provider = state.split(".")[0] || "provider";
     saveSession({ provider, name: "Pending OAuth exchange", mode: "pending" });
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice(expected && state !== expected ? "State mismatch. Do not trust this callback until the backend validates it." : "Code received. A backend must exchange it for a secure session.", expected && state !== expected ? "danger" : "warning");
     return true;
   }
@@ -157,8 +199,8 @@ async function loadConfig() {
       // The static page can still render even when the broker is temporarily unavailable.
     }
   }
-  const callbackHandled = handleCallback();
   renderProviders();
+  const callbackHandled = handleCallback();
   renderSession();
   if (callbackHandled) {
     return;
@@ -174,19 +216,51 @@ async function loadConfig() {
 providerGrid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-provider]");
   if (!button) return;
-  const provider = providers.find((item) => item.id === button.dataset.provider);
+  startAuthChoice(button.dataset.provider);
+});
+
+function startAuthChoice(providerId) {
+  if (providerId === "email") {
+    emailForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    const emailInput = emailForm.querySelector("input[type='email']");
+    if (emailInput) emailInput.focus({ preventScroll: true });
+    setAuthVisual("email");
+    window.setTimeout(() => setAuthVisual("email"), 120);
+    return;
+  }
+  const provider = providers.find((item) => item.id === providerId);
   if (!provider) return;
+  setAuthVisual(provider.id);
   const url = buildAuthUrl(provider);
   if (!url) {
     setNotice(provider.label + " needs brokerBaseUrl or an enabled clientId in auth.config.json.", "warning");
     return;
   }
   window.location.href = url;
+}
+
+providerGrid.addEventListener("pointerover", (event) => {
+  const button = event.target.closest("[data-provider]");
+  if (button) setAuthVisual(button.dataset.provider);
 });
+
+providerGrid.addEventListener("focusin", (event) => {
+  const button = event.target.closest("[data-provider]");
+  if (button) setAuthVisual(button.dataset.provider);
+});
+
+for (const choice of authChoiceNodes) {
+  choice.addEventListener("click", () => startAuthChoice(choice.dataset.authChoice));
+  choice.addEventListener("pointerover", () => setAuthVisual(choice.dataset.authChoice));
+  choice.addEventListener("focusin", () => setAuthVisual(choice.dataset.authChoice));
+}
+
+emailForm.addEventListener("focusin", () => setAuthVisual("email"));
 
 emailForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = new FormData(emailForm).get("email");
+  setAuthVisual("email");
   if (!authConfig.emailSignInEndpoint) {
     saveSession({ provider: "email", name: String(email), email: String(email), mode: "pending" });
     renderSession();
@@ -212,5 +286,9 @@ signOutButton.addEventListener("click", () => {
   renderSession();
   setNotice("Signed out on this device.", "neutral");
 });
+
+window.trendfoundryAuthPreview = {
+  setProvider: setAuthVisual
+};
 
 loadConfig();

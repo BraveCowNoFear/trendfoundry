@@ -45,7 +45,8 @@ const providerAvatarMeta = {
   alipay: ["支", "#1677ff", "#ffffff"],
   dingtalk: ["钉", "#2f88ff", "#ffffff"],
   feishu: ["飞", "#00b96b", "#4c6fff"],
-  line: ["L", "#06c755", "#ffffff"]
+  line: ["L", "#06c755", "#ffffff"],
+  email: ["@", "#111114", "#f5f5f7"]
 };
 
 function brandLogo() {
@@ -68,6 +69,33 @@ const authProviderCards = authProviders
   .join("");
 const authProviderOrbit = authProviders
   .map((provider, index) => `<span class="auth-orbit-avatar" data-auth-avatar="${escapeHtml(provider.id)}" style="--orbit-index:${index}">${providerAvatar(provider, "provider-avatar-small")}</span>`)
+  .join("");
+const emailAccessProvider = {
+  id: "email",
+  label: "Email",
+  description: "Magic-link fallback",
+  region: "Direct inbox"
+};
+const authPrimaryChoices = [
+  authProviders.find((provider) => provider.id === "google"),
+  authProviders.find((provider) => provider.id === "apple"),
+  emailAccessProvider
+].filter(Boolean);
+const authQuickLogins = authPrimaryChoices
+  .map(
+    (provider, index) => `<button class="auth-quick-login${index === 0 ? " primary" : ""}" type="button" data-auth-choice="${escapeHtml(provider.id)}">
+  ${providerAvatar(provider)}
+  <span>${provider.id === "email" ? "Email access" : `Continue with ${escapeHtml(provider.label)}`}</span>
+</button>`
+  )
+  .join("");
+const authProviderRail = [...authProviders, emailAccessProvider]
+  .map(
+    (provider) => `<button class="auth-rail-avatar" type="button" data-auth-choice="${escapeHtml(provider.id)}" data-auth-avatar="${escapeHtml(provider.id)}">
+  ${providerAvatar(provider)}
+  <span>${escapeHtml(provider.label)}</span>
+</button>`
+  )
   .join("");
 
 const authProviderConfig = Object.fromEntries(
@@ -2879,24 +2907,35 @@ const authHtml = `<!doctype html>
   <header class="topic-hero auth-hero">
     <div class="auth-hero-copy">
       <div class="brandline">${brandLogo()}<span>Account access</span></div>
-      <h1>Sign in with the account you already use.</h1>
-      <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
+      <h1>Access the signal room.</h1>
+      <p class="sub">Log in to keep ranked opportunities, source proof, and delivery notes attached to the account your team already uses.</p>
+      <div class="auth-quick-logins" aria-label="Primary sign-in choices">${authQuickLogins}</div>
       <div class="hero-actions">
-        <a class="action primary" href="#providers">Choose provider</a>
         <a class="action" href="../order/">Order page</a>
         <a class="action" href="../zh/">Chinese entry</a>
         <a class="action strong" href="../">Dashboard</a>
       </div>
     </div>
     <figure class="auth-hero-visual">
-      <img src="../signal-board.png" alt="TrendFoundry signal board preview with ranked creator opportunities" width="1200" height="760">
-      <div class="auth-provider-orbit" aria-hidden="true">${authProviderOrbit}</div>
+      <div class="auth-image-stack">
+        <img class="auth-main-shot" src="../signal-board.png" alt="TrendFoundry signal board preview with ranked creator opportunities" width="1200" height="760">
+        <div class="auth-preview-card auth-preview-sample">
+          <img src="../signal-board.png" alt="TrendFoundry ranked signal cards preview" width="1200" height="760">
+          <span>Signal Board</span>
+        </div>
+        <div class="auth-preview-card auth-preview-proof">
+          <img src="../og-image.png" alt="TrendFoundry proof ledger graphic" width="1200" height="630">
+          <span>Proof Ledger</span>
+        </div>
+        <div class="auth-provider-orbit" aria-hidden="true">${authProviderOrbit}</div>
+      </div>
       <figcaption>
         <span id="auth-visual-kicker">Secure access</span>
         <strong id="auth-visual-title">Ranked opportunities stay attached to source proof.</strong>
         <small id="auth-visual-copy">Choose a provider to preview the access path before you leave the page.</small>
       </figcaption>
     </figure>
+    <div class="auth-provider-rail" aria-label="Supported login platforms">${authProviderRail}</div>
   </header>
   <main>
     <section class="auth-status-panel" aria-label="Account status">
@@ -2963,6 +3002,7 @@ const authVisualKicker = document.querySelector("#auth-visual-kicker");
 const authVisualTitle = document.querySelector("#auth-visual-title");
 const authVisualCopy = document.querySelector("#auth-visual-copy");
 const authAvatarNodes = [...document.querySelectorAll("[data-auth-avatar]")];
+const authChoiceNodes = [...document.querySelectorAll("[data-auth-choice]")];
 const providers = window.TRENDFOUNDRY_AUTH_PROVIDERS || [];
 const sessionKey = "trendfoundry.auth.session";
 let authConfig = { providers: {} };
@@ -3005,6 +3045,9 @@ function setAuthVisual(providerId) {
   }
   for (const avatar of authAvatarNodes) {
     avatar.classList.toggle("visual-active", avatar.dataset.authAvatar === providerId);
+  }
+  for (const choice of authChoiceNodes) {
+    choice.classList.toggle("visual-active", choice.dataset.authChoice === providerId);
   }
 }
 
@@ -3163,7 +3206,19 @@ async function loadConfig() {
 providerGrid.addEventListener("click", (event) => {
   const button = event.target.closest("[data-provider]");
   if (!button) return;
-  const provider = providers.find((item) => item.id === button.dataset.provider);
+  startAuthChoice(button.dataset.provider);
+});
+
+function startAuthChoice(providerId) {
+  if (providerId === "email") {
+    emailForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    const emailInput = emailForm.querySelector("input[type='email']");
+    if (emailInput) emailInput.focus({ preventScroll: true });
+    setAuthVisual("email");
+    window.setTimeout(() => setAuthVisual("email"), 120);
+    return;
+  }
+  const provider = providers.find((item) => item.id === providerId);
   if (!provider) return;
   setAuthVisual(provider.id);
   const url = buildAuthUrl(provider);
@@ -3172,7 +3227,7 @@ providerGrid.addEventListener("click", (event) => {
     return;
   }
   window.location.href = url;
-});
+}
 
 providerGrid.addEventListener("pointerover", (event) => {
   const button = event.target.closest("[data-provider]");
@@ -3183,6 +3238,12 @@ providerGrid.addEventListener("focusin", (event) => {
   const button = event.target.closest("[data-provider]");
   if (button) setAuthVisual(button.dataset.provider);
 });
+
+for (const choice of authChoiceNodes) {
+  choice.addEventListener("click", () => startAuthChoice(choice.dataset.authChoice));
+  choice.addEventListener("pointerover", () => setAuthVisual(choice.dataset.authChoice));
+  choice.addEventListener("focusin", () => setAuthVisual(choice.dataset.authChoice));
+}
 
 emailForm.addEventListener("focusin", () => setAuthVisual("email"));
 
@@ -7037,61 +7098,183 @@ li { margin: 6px 0; }
   gap: 10px;
 }
 .auth-hero .sub {
-  max-width: 880px;
+  max-width: 620px;
+  color: #495263;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.45;
 }
 .auth-hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.58fr) minmax(320px, 0.42fr);
-  gap: clamp(24px, 5vw, 64px);
+  grid-template-columns: minmax(300px, 0.42fr) minmax(420px, 0.58fr);
+  gap: clamp(30px, 6vw, 82px);
   align-items: center;
-  min-height: min(660px, 92svh);
+  min-height: min(780px, 94svh);
   overflow: hidden;
-  background:
-    radial-gradient(circle at 82% 18%, rgba(0, 113, 227, 0.14), transparent 32%),
-    #fff;
+  background: linear-gradient(180deg, #fff 0%, #f8f9fb 100%);
 }
 .auth-hero-copy {
   min-width: 0;
 }
+.auth-hero-copy h1 {
+  max-width: 720px;
+  margin-bottom: 18px;
+  font-size: clamp(54px, 8vw, 104px);
+  line-height: 0.93;
+  letter-spacing: 0;
+}
+.auth-quick-logins {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 470px);
+  margin: 30px 0 22px;
+}
+.auth-quick-login {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 62px;
+  border: 1px solid rgba(17, 17, 20, 0.14);
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.88);
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 780;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(17, 17, 20, 0.05);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease, color 180ms ease;
+}
+.auth-quick-login.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 18px 42px rgba(0, 113, 227, 0.24);
+}
+.auth-quick-login:hover,
+.auth-quick-login:focus-visible,
+.auth-quick-login.visual-active {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.42);
+  box-shadow: 0 18px 40px rgba(17, 17, 20, 0.1);
+}
+.auth-quick-login.primary:hover,
+.auth-quick-login.primary:focus-visible,
+.auth-quick-login.primary.visual-active {
+  background: #0578ea;
+  color: #fff;
+  box-shadow: 0 22px 48px rgba(0, 113, 227, 0.3);
+}
+.auth-quick-login .provider-avatar {
+  width: 42px;
+  height: 42px;
+}
 .auth-hero-visual {
   position: relative;
   display: grid;
-  gap: 14px;
+  gap: 0;
   min-width: 0;
   margin: 0;
-  justify-self: end;
+  justify-self: stretch;
 }
-.auth-hero-visual::before {
+.auth-image-stack {
+  position: relative;
+  min-height: clamp(480px, 52vw, 660px);
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.98), rgba(241,245,250,0.84)),
+    linear-gradient(90deg, rgba(0,113,227,0.08), transparent 58%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 34px 88px rgba(17, 17, 20, 0.12);
+  overflow: hidden;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.auth-image-stack::after {
   content: "";
   position: absolute;
-  inset: 8% -8% auto auto;
-  width: 70%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: rgba(0, 113, 227, 0.12);
-  filter: blur(28px);
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0 34%, rgba(255,255,255,0.62) 42%, transparent 54%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.28) 0 1px, transparent 1px 34px);
+  opacity: 0.44;
   pointer-events: none;
 }
-.auth-hero-visual img {
+.auth-hero-visual[data-ready="true"] .auth-image-stack,
+.auth-hero-visual[data-ready="false"] .auth-image-stack {
+  transform: translateY(-3px);
+}
+.auth-main-shot,
+.auth-preview-card img,
+.auth-setup-copy img {
+  image-rendering: auto;
+}
+.auth-main-shot {
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 560px);
+  width: min(84%, 720px);
   height: auto;
+  margin: 58px 4% 0 auto;
   border: 1px solid rgba(17, 17, 20, 0.1);
-  border-radius: 20px;
-  background: #f7f8fa;
+  border-radius: 8px;
+  background: #fff;
   box-shadow: 0 28px 76px rgba(17, 17, 20, 0.16);
+  transform: rotate(-2deg);
+}
+.auth-preview-card {
+  position: absolute;
+  z-index: 3;
+  display: grid;
+  gap: 9px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 20px 54px rgba(17, 17, 20, 0.14);
+  backdrop-filter: blur(18px);
+  transition: transform 180ms ease;
+}
+.auth-preview-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #fff;
+}
+.auth-preview-card span {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 820;
+}
+.auth-preview-sample {
+  left: clamp(10px, 4vw, 42px);
+  bottom: clamp(82px, 14vw, 138px);
+  width: min(46%, 360px);
+}
+.auth-preview-proof {
+  right: clamp(8px, 4vw, 34px);
+  bottom: clamp(24px, 5vw, 52px);
+  width: min(42%, 330px);
+}
+.auth-hero-visual:hover .auth-preview-sample {
+  transform: translateY(-5px) rotate(-1deg);
+}
+.auth-hero-visual:hover .auth-preview-proof {
+  transform: translateY(-3px) rotate(1deg);
 }
 .auth-hero-visual figcaption {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  z-index: 4;
+  right: clamp(16px, 4vw, 44px);
+  top: clamp(18px, 4vw, 44px);
   display: grid;
   gap: 3px;
-  width: min(78%, 390px);
-  margin: -62px 22px 0 auto;
+  width: min(46%, 390px);
+  margin: 0;
   border: 1px solid rgba(255,255,255,0.54);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 14px;
   background: rgba(255,255,255,0.78);
   box-shadow: var(--shadow);
@@ -7121,13 +7304,13 @@ li { margin: 6px 0; }
 }
 .auth-provider-orbit {
   position: absolute;
-  z-index: 2;
-  inset: 12px 12px auto auto;
+  z-index: 4;
+  inset: auto auto 22px 24px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 6px;
-  width: min(78%, 390px);
+  width: min(44%, 330px);
   pointer-events: none;
 }
 .auth-orbit-avatar {
@@ -7149,6 +7332,47 @@ li { margin: 6px 0; }
   border-color: rgba(0, 113, 227, 0.42);
   box-shadow: 0 14px 30px rgba(0, 113, 227, 0.16);
   transform: translateY(-5px) scale(1.08);
+}
+.auth-provider-rail {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
+  gap: 8px;
+  align-items: stretch;
+  width: min(100%, 1180px);
+  margin: clamp(12px, 3vw, 28px) auto 0;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 20px 58px rgba(17, 17, 20, 0.08);
+  backdrop-filter: blur(16px);
+}
+.auth-rail-avatar {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 92px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 6px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.auth-rail-avatar:hover,
+.auth-rail-avatar:focus-visible,
+.auth-rail-avatar.visual-active {
+  border-color: rgba(0, 113, 227, 0.16);
+  background: rgba(0, 113, 227, 0.06);
+  transform: translateY(-2px);
+}
+.auth-rail-avatar .provider-avatar {
+  width: 46px;
+  height: 46px;
 }
 @keyframes authChipFloat {
   0%, 100% { transform: translateY(0); }
@@ -7223,8 +7447,9 @@ li { margin: 6px 0; }
   gap: 10px;
 }
 .provider-button {
+  position: relative;
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr) auto;
+  grid-template-columns: 42px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
   min-height: 82px;
@@ -7295,11 +7520,26 @@ li { margin: 6px 0; }
   line-height: 1.35;
 }
 .provider-button em {
+  position: static;
+  grid-column: 2;
+  justify-self: start;
+  margin-top: -2px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: rgba(17, 17, 20, 0.03);
   color: var(--muted);
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
   text-transform: uppercase;
+}
+.provider-button strong,
+.provider-button small,
+.auth-quick-login span,
+.auth-rail-avatar span {
+  overflow-wrap: normal;
+  word-break: normal;
 }
 .email-login {
   display: grid;
@@ -7969,19 +8209,50 @@ input[type="email"] {
     gap: 18px;
     min-height: 0;
   }
+  .auth-hero-copy h1 {
+    font-size: clamp(48px, 14vw, 72px);
+  }
+  .auth-quick-logins {
+    width: 100%;
+    margin: 22px 0 16px;
+  }
+  .auth-quick-login {
+    min-height: 58px;
+    font-size: 16px;
+  }
   .auth-hero-visual {
     justify-self: stretch;
   }
-  .auth-hero-visual img {
+  .auth-image-stack {
+    min-height: 390px;
+  }
+  .auth-main-shot {
     width: 100%;
-    max-height: 260px;
+    max-height: 250px;
+    margin: 58px 0 0;
     object-fit: cover;
     object-position: left top;
-    border-radius: 16px;
+    border-radius: 8px;
+    transform: none;
+  }
+  .auth-preview-card {
+    padding: 8px;
+  }
+  .auth-preview-sample {
+    left: 10px;
+    bottom: 70px;
+    width: min(54%, 230px);
+  }
+  .auth-preview-proof {
+    right: 10px;
+    bottom: 18px;
+    width: min(48%, 210px);
   }
   .auth-hero-visual figcaption {
-    width: calc(100% - 24px);
-    margin: -44px 12px 0;
+    right: 12px;
+    left: 12px;
+    top: 12px;
+    width: auto;
     padding: 12px;
   }
   .auth-hero-visual figcaption strong {
@@ -7991,13 +8262,27 @@ input[type="email"] {
     font-size: 12px;
   }
   .auth-provider-orbit {
-    inset: 10px 10px auto auto;
-    width: min(70%, 250px);
+    display: none;
+  }
+  .auth-provider-rail {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(74px, 82px);
+    justify-content: start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding: 10px;
     gap: 5px;
   }
-  .auth-orbit-avatar {
-    width: 28px;
-    height: 28px;
+  .auth-rail-avatar {
+    min-height: 82px;
+    scroll-snap-align: start;
+    font-size: 12px;
+  }
+  .auth-rail-avatar .provider-avatar {
+    width: 40px;
+    height: 40px;
   }
   .provider-avatar-small {
     width: 22px;

@@ -13,19 +13,95 @@
   <link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/auth/">
   <link rel="stylesheet" href="../styles.css">
   <script>window.TRENDFOUNDRY_AUTH_PROVIDERS = [{"id":"google","region":"Global","label":"Google","description":"Gmail and Google Workspace accounts.","scope":"openid email profile","authUrl":"https://accounts.google.com/o/oauth2/v2/auth"},{"id":"apple","region":"Global","label":"Apple","description":"Apple ID and private relay email.","scope":"name email","authUrl":"https://appleid.apple.com/auth/authorize"},{"id":"microsoft","region":"Global","label":"Microsoft","description":"Outlook, Microsoft 365, and Azure AD.","scope":"openid email profile User.Read","authUrl":"https://login.microsoftonline.com/common/oauth2/v2.0/authorize"},{"id":"github","region":"Global","label":"GitHub","description":"Developer accounts and public issue buyers.","scope":"read:user user:email","authUrl":"https://github.com/login/oauth/authorize"},{"id":"facebook","region":"Global","label":"Facebook","description":"Meta social login.","scope":"email public_profile","authUrl":"https://www.facebook.com/v19.0/dialog/oauth"},{"id":"x","region":"Global","label":"X","description":"Creator and social audience accounts.","scope":"users.read tweet.read offline.access","authUrl":"https://twitter.com/i/oauth2/authorize"},{"id":"linkedin","region":"Global","label":"LinkedIn","description":"Professional creator accounts.","scope":"openid profile email","authUrl":"https://www.linkedin.com/oauth/v2/authorization"},{"id":"wechat","region":"China","label":"WeChat","description":"WeChat Open Platform QR login.","scope":"snsapi_login","authUrl":"https://open.weixin.qq.com/connect/qrconnect"},{"id":"qq","region":"China","label":"QQ","description":"Tencent QQ Connect accounts.","scope":"get_user_info","authUrl":"https://graph.qq.com/oauth2.0/authorize"},{"id":"weibo","region":"China","label":"Weibo","description":"Sina Weibo OAuth login.","scope":"email","authUrl":"https://api.weibo.com/oauth2/authorize"},{"id":"alipay","region":"China","label":"Alipay","description":"Alipay Open Platform authorization.","scope":"auth_user","authUrl":"https://openauth.alipay.com/oauth2/publicAppAuthorize.htm"},{"id":"dingtalk","region":"China","label":"DingTalk","description":"Alibaba DingTalk organization accounts.","scope":"openid corpid","authUrl":"https://login.dingtalk.com/oauth2/auth"},{"id":"feishu","region":"China","label":"Feishu","description":"Feishu and Lark workplace accounts.","scope":"contact:user.base:readonly","authUrl":"https://accounts.feishu.cn/open-apis/authen/v1/authorize"},{"id":"line","region":"Asia","label":"LINE","description":"LINE accounts for Japan and Southeast Asia.","scope":"openid profile email","authUrl":"https://access.line.me/oauth2/v2.1/authorize"}];</script>
-  <script src="../auth.js" defer></script>
+  <script src="../auth.js?v=2026-06-08T07%3A15%3A29.423Z" defer></script>
 </head>
 <body data-page="auth">
   <header class="topic-hero auth-hero">
-    <div class="brandline"><span>TrendFoundry</span><span>Account access</span></div>
-    <h1>Sign in with the account you already use.</h1>
-    <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
-    <div class="hero-actions">
-      <a class="action primary" href="#providers">Choose provider</a>
-      <a class="action" href="../order/">Order page</a>
-      <a class="action" href="../zh/">Chinese entry</a>
-      <a class="action strong" href="../">Dashboard</a>
+    <div class="auth-hero-copy">
+      <div class="brandline"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-word">TrendFoundry</span></span><span>Account access</span></div>
+      <h1>Access the signal room.</h1>
+      <p class="sub">Log in to keep ranked opportunities, source proof, and delivery notes attached to the account your team already uses.</p>
+      <div class="auth-quick-logins" aria-label="Primary sign-in choices"><button class="auth-quick-login primary" type="button" data-auth-choice="google">
+  <span class="provider-avatar " style="--provider-a:#4285f4;--provider-b:#34a853" aria-hidden="true"><span>G</span></span>
+  <span>Continue with Google</span>
+</button><button class="auth-quick-login" type="button" data-auth-choice="apple">
+  <span class="provider-avatar " style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>A</span></span>
+  <span>Continue with Apple</span>
+</button><button class="auth-quick-login" type="button" data-auth-choice="email">
+  <span class="provider-avatar " style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>@</span></span>
+  <span>Email access</span>
+</button></div>
+      <div class="hero-actions">
+        <a class="action" href="../order/">Order page</a>
+        <a class="action" href="../zh/">Chinese entry</a>
+        <a class="action strong" href="../">Dashboard</a>
+      </div>
     </div>
+    <figure class="auth-hero-visual">
+      <div class="auth-image-stack">
+        <img class="auth-main-shot" src="../signal-board.png" alt="TrendFoundry signal board preview with ranked creator opportunities" width="1200" height="760">
+        <div class="auth-preview-card auth-preview-sample">
+          <img src="../signal-board.png" alt="TrendFoundry ranked signal cards preview" width="1200" height="760">
+          <span>Signal Board</span>
+        </div>
+        <div class="auth-preview-card auth-preview-proof">
+          <img src="../og-image.png" alt="TrendFoundry proof ledger graphic" width="1200" height="630">
+          <span>Proof Ledger</span>
+        </div>
+        <div class="auth-provider-orbit" aria-hidden="true"><span class="auth-orbit-avatar" data-auth-avatar="google" style="--orbit-index:0"><span class="provider-avatar provider-avatar-small" style="--provider-a:#4285f4;--provider-b:#34a853" aria-hidden="true"><span>G</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="apple" style="--orbit-index:1"><span class="provider-avatar provider-avatar-small" style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>A</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="microsoft" style="--orbit-index:2"><span class="provider-avatar provider-avatar-small" style="--provider-a:#7fba00;--provider-b:#00a4ef" aria-hidden="true"><span>M</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="github" style="--orbit-index:3"><span class="provider-avatar provider-avatar-small" style="--provider-a:#24292f;--provider-b:#ffffff" aria-hidden="true"><span>GH</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="facebook" style="--orbit-index:4"><span class="provider-avatar provider-avatar-small" style="--provider-a:#1877f2;--provider-b:#ffffff" aria-hidden="true"><span>f</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="x" style="--orbit-index:5"><span class="provider-avatar provider-avatar-small" style="--provider-a:#050505;--provider-b:#ffffff" aria-hidden="true"><span>X</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="linkedin" style="--orbit-index:6"><span class="provider-avatar provider-avatar-small" style="--provider-a:#0a66c2;--provider-b:#ffffff" aria-hidden="true"><span>in</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="wechat" style="--orbit-index:7"><span class="provider-avatar provider-avatar-small" style="--provider-a:#07c160;--provider-b:#ffffff" aria-hidden="true"><span>微</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="qq" style="--orbit-index:8"><span class="provider-avatar provider-avatar-small" style="--provider-a:#12b7f5;--provider-b:#ffffff" aria-hidden="true"><span>Q</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="weibo" style="--orbit-index:9"><span class="provider-avatar provider-avatar-small" style="--provider-a:#e6162d;--provider-b:#ffd54a" aria-hidden="true"><span>微</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="alipay" style="--orbit-index:10"><span class="provider-avatar provider-avatar-small" style="--provider-a:#1677ff;--provider-b:#ffffff" aria-hidden="true"><span>支</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="dingtalk" style="--orbit-index:11"><span class="provider-avatar provider-avatar-small" style="--provider-a:#2f88ff;--provider-b:#ffffff" aria-hidden="true"><span>钉</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="feishu" style="--orbit-index:12"><span class="provider-avatar provider-avatar-small" style="--provider-a:#00b96b;--provider-b:#4c6fff" aria-hidden="true"><span>飞</span></span></span><span class="auth-orbit-avatar" data-auth-avatar="line" style="--orbit-index:13"><span class="provider-avatar provider-avatar-small" style="--provider-a:#06c755;--provider-b:#ffffff" aria-hidden="true"><span>L</span></span></span></div>
+      </div>
+      <figcaption>
+        <span id="auth-visual-kicker">Secure access</span>
+        <strong id="auth-visual-title">Ranked opportunities stay attached to source proof.</strong>
+        <small id="auth-visual-copy">Choose a provider to preview the access path before you leave the page.</small>
+      </figcaption>
+    </figure>
+    <div class="auth-provider-rail" aria-label="Supported login platforms"><button class="auth-rail-avatar" type="button" data-auth-choice="google" data-auth-avatar="google">
+  <span class="provider-avatar " style="--provider-a:#4285f4;--provider-b:#34a853" aria-hidden="true"><span>G</span></span>
+  <span>Google</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="apple" data-auth-avatar="apple">
+  <span class="provider-avatar " style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>A</span></span>
+  <span>Apple</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="microsoft" data-auth-avatar="microsoft">
+  <span class="provider-avatar " style="--provider-a:#7fba00;--provider-b:#00a4ef" aria-hidden="true"><span>M</span></span>
+  <span>Microsoft</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="github" data-auth-avatar="github">
+  <span class="provider-avatar " style="--provider-a:#24292f;--provider-b:#ffffff" aria-hidden="true"><span>GH</span></span>
+  <span>GitHub</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="facebook" data-auth-avatar="facebook">
+  <span class="provider-avatar " style="--provider-a:#1877f2;--provider-b:#ffffff" aria-hidden="true"><span>f</span></span>
+  <span>Facebook</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="x" data-auth-avatar="x">
+  <span class="provider-avatar " style="--provider-a:#050505;--provider-b:#ffffff" aria-hidden="true"><span>X</span></span>
+  <span>X</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="linkedin" data-auth-avatar="linkedin">
+  <span class="provider-avatar " style="--provider-a:#0a66c2;--provider-b:#ffffff" aria-hidden="true"><span>in</span></span>
+  <span>LinkedIn</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="wechat" data-auth-avatar="wechat">
+  <span class="provider-avatar " style="--provider-a:#07c160;--provider-b:#ffffff" aria-hidden="true"><span>微</span></span>
+  <span>WeChat</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="qq" data-auth-avatar="qq">
+  <span class="provider-avatar " style="--provider-a:#12b7f5;--provider-b:#ffffff" aria-hidden="true"><span>Q</span></span>
+  <span>QQ</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="weibo" data-auth-avatar="weibo">
+  <span class="provider-avatar " style="--provider-a:#e6162d;--provider-b:#ffd54a" aria-hidden="true"><span>微</span></span>
+  <span>Weibo</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="alipay" data-auth-avatar="alipay">
+  <span class="provider-avatar " style="--provider-a:#1677ff;--provider-b:#ffffff" aria-hidden="true"><span>支</span></span>
+  <span>Alipay</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="dingtalk" data-auth-avatar="dingtalk">
+  <span class="provider-avatar " style="--provider-a:#2f88ff;--provider-b:#ffffff" aria-hidden="true"><span>钉</span></span>
+  <span>DingTalk</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="feishu" data-auth-avatar="feishu">
+  <span class="provider-avatar " style="--provider-a:#00b96b;--provider-b:#4c6fff" aria-hidden="true"><span>飞</span></span>
+  <span>Feishu</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="line" data-auth-avatar="line">
+  <span class="provider-avatar " style="--provider-a:#06c755;--provider-b:#ffffff" aria-hidden="true"><span>L</span></span>
+  <span>LINE</span>
+</button><button class="auth-rail-avatar" type="button" data-auth-choice="email" data-auth-avatar="email">
+  <span class="provider-avatar " style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>@</span></span>
+  <span>Email</span>
+</button></div>
   </header>
   <main>
     <section class="auth-status-panel" aria-label="Account status">
@@ -51,59 +127,59 @@
           <p>Provider buttons use the same redirect contract. Enable them in <code>auth.config.json</code> or route every provider through a broker.</p>
         </div>
         <div class="provider-grid"><button class="provider-button" type="button" data-provider="google">
-  <span class="provider-mark">G</span>
+  <span class="provider-avatar " style="--provider-a:#4285f4;--provider-b:#34a853" aria-hidden="true"><span>G</span></span>
   <span><strong>Google</strong><small>Gmail and Google Workspace accounts.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="apple">
-  <span class="provider-mark">A</span>
+  <span class="provider-avatar " style="--provider-a:#111114;--provider-b:#f5f5f7" aria-hidden="true"><span>A</span></span>
   <span><strong>Apple</strong><small>Apple ID and private relay email.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="microsoft">
-  <span class="provider-mark">M</span>
+  <span class="provider-avatar " style="--provider-a:#7fba00;--provider-b:#00a4ef" aria-hidden="true"><span>M</span></span>
   <span><strong>Microsoft</strong><small>Outlook, Microsoft 365, and Azure AD.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="github">
-  <span class="provider-mark">G</span>
+  <span class="provider-avatar " style="--provider-a:#24292f;--provider-b:#ffffff" aria-hidden="true"><span>GH</span></span>
   <span><strong>GitHub</strong><small>Developer accounts and public issue buyers.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="facebook">
-  <span class="provider-mark">F</span>
+  <span class="provider-avatar " style="--provider-a:#1877f2;--provider-b:#ffffff" aria-hidden="true"><span>f</span></span>
   <span><strong>Facebook</strong><small>Meta social login.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="x">
-  <span class="provider-mark">X</span>
+  <span class="provider-avatar " style="--provider-a:#050505;--provider-b:#ffffff" aria-hidden="true"><span>X</span></span>
   <span><strong>X</strong><small>Creator and social audience accounts.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="linkedin">
-  <span class="provider-mark">L</span>
+  <span class="provider-avatar " style="--provider-a:#0a66c2;--provider-b:#ffffff" aria-hidden="true"><span>in</span></span>
   <span><strong>LinkedIn</strong><small>Professional creator accounts.</small></span>
   <em>Global</em>
 </button><button class="provider-button" type="button" data-provider="wechat">
-  <span class="provider-mark">W</span>
+  <span class="provider-avatar " style="--provider-a:#07c160;--provider-b:#ffffff" aria-hidden="true"><span>微</span></span>
   <span><strong>WeChat</strong><small>WeChat Open Platform QR login.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="qq">
-  <span class="provider-mark">Q</span>
+  <span class="provider-avatar " style="--provider-a:#12b7f5;--provider-b:#ffffff" aria-hidden="true"><span>Q</span></span>
   <span><strong>QQ</strong><small>Tencent QQ Connect accounts.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="weibo">
-  <span class="provider-mark">W</span>
+  <span class="provider-avatar " style="--provider-a:#e6162d;--provider-b:#ffd54a" aria-hidden="true"><span>微</span></span>
   <span><strong>Weibo</strong><small>Sina Weibo OAuth login.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="alipay">
-  <span class="provider-mark">A</span>
+  <span class="provider-avatar " style="--provider-a:#1677ff;--provider-b:#ffffff" aria-hidden="true"><span>支</span></span>
   <span><strong>Alipay</strong><small>Alipay Open Platform authorization.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="dingtalk">
-  <span class="provider-mark">D</span>
+  <span class="provider-avatar " style="--provider-a:#2f88ff;--provider-b:#ffffff" aria-hidden="true"><span>钉</span></span>
   <span><strong>DingTalk</strong><small>Alibaba DingTalk organization accounts.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="feishu">
-  <span class="provider-mark">F</span>
+  <span class="provider-avatar " style="--provider-a:#00b96b;--provider-b:#4c6fff" aria-hidden="true"><span>飞</span></span>
   <span><strong>Feishu</strong><small>Feishu and Lark workplace accounts.</small></span>
   <em>China</em>
 </button><button class="provider-button" type="button" data-provider="line">
-  <span class="provider-mark">L</span>
+  <span class="provider-avatar " style="--provider-a:#06c755;--provider-b:#ffffff" aria-hidden="true"><span>L</span></span>
   <span><strong>LINE</strong><small>LINE accounts for Japan and Southeast Asia.</small></span>
   <em>Asia</em>
 </button></div>
@@ -125,7 +201,10 @@
         <p class="section-label">Production setup</p>
         <h2>Secrets stay off the static site.</h2>
       </div>
-      <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+      <div class="auth-setup-copy">
+        <img src="../og-image.png" alt="TrendFoundry public proof graphic used for secure account context" width="1200" height="630">
+        <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+      </div>
     </section>
   </main>
 </body>
