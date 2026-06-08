@@ -24,6 +24,7 @@ const mojibakeTokens = [
 const publicDocs = [
   "docs/buyer-content-pack.md",
   "docs/content-close-pack.md",
+  "docs/content-deal-desk.md",
   "docs/content-editorial-audit.md",
   "docs/content-feedback-loop.md",
   "docs/content-outreach-review.md",
@@ -56,6 +57,10 @@ const privateFiles = [
   "dist/content-subscription-retention/drafts.md",
   "dist/content-outreach-review/review-board.csv",
   "dist/content-outreach-review/review-board.md",
+  "dist/content-deal-desk/deal-desk.csv",
+  "dist/content-deal-desk/deal-desk.md",
+  "dist/content-deal-desk/response-drafts.md",
+  "dist/content-deal-desk/invoice-drafts.md",
   "dist/email-subscription-sync/synced.csv",
   "dist/custom-email-orders/custom-email-orders.md",
   "dist/email-order-routing/routes.csv",
