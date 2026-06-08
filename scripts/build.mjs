@@ -631,57 +631,124 @@ const zhDeliveryPreviewRisk = deliveryPreviewItem ? zhLimitation(deliveryPreview
 const deliveryPreviewTabs = [
   {
     id: "brief",
+    number: "01",
     label: "Brief",
     labelZh: "Brief",
+    caption: "Ranked card",
+    captionZh: "排序机会卡",
     title: "The ranked opportunity card",
     titleZh: "已排序机会卡",
+    metric: "Score " + deliveryPreviewScore,
+    metricZh: "评分 " + deliveryPreviewScore,
+    status: "Brief selected",
+    statusZh: "已选择 Brief",
     body: `#1 ${deliveryPreviewTitle}\nSource: ${deliveryPreviewSource}\nScore: ${deliveryPreviewScore}\nWhy now: source-backed signal with a concrete recording angle.\nRisk: ${deliveryPreviewRisk}`,
     bodyZh: `#1 ${zhDeliveryPreviewTitle}\n来源：${deliveryPreviewSource}\n评分：${deliveryPreviewScore}\n为什么现在：有来源支撑，并且已经成型为可录制角度。\n风险：${zhDeliveryPreviewRisk}`
   },
   {
     id: "csv",
+    number: "02",
     label: "CSV",
     labelZh: "CSV",
+    caption: "Sortable table",
+    captionZh: "可排序表",
     title: "The sortable buyer table",
     titleZh: "可排序买家表格",
+    metric: "12 rows",
+    metricZh: "12 行",
+    status: "CSV table selected",
+    statusZh: "已选择 CSV 表格",
     body: `rank,source,score,title,risk\n1,${deliveryPreviewSource},${deliveryPreviewScore},"${deliveryPreviewTitle}","${deliveryPreviewRisk}"`,
     bodyZh: `rank,source,score,title,risk\n1,${deliveryPreviewSource},${deliveryPreviewScore},"${zhDeliveryPreviewTitle}","${zhDeliveryPreviewRisk}"`
   },
   {
     id: "script",
+    number: "03",
     label: "Script",
     labelZh: "脚本",
+    caption: "Recording pass",
+    captionZh: "录制初稿",
     title: "The first recording pass",
     titleZh: "第一版录制脚本",
+    metric: "4 beats",
+    metricZh: "4 段",
+    status: "Script selected",
+    statusZh: "已选择脚本",
     body: `Hook: turn the source signal into a viewer question.\nDemo path: show the project, workflow, or claim in sequence.\nLimitation: name what is unverified before recommending it.\nClose: ask whether this deserves a deeper episode.`,
     bodyZh: `钩子：把来源信号改写成观众问题。\n演示路径：按顺序展示项目、工作流或主张。\n限制：在推荐前说明仍未核验的部分。\n结尾：判断它是否值得做成更深一集。`
   },
   {
-    id: "issue",
-    label: "Issue",
-    labelZh: "期刊",
+    id: "proof",
+    number: "04",
+    label: "Proof",
+    labelZh: "证明",
+    caption: "Source trail",
+    captionZh: "来源链",
     title: "The public proof trail",
     titleZh: "公开证明链",
+    metric: "86% trust",
+    metricZh: "86% 可信度",
+    status: "Proof trail selected",
+    statusZh: "已选择证明链",
     body: `Archive: latest issue page\nProof: original public URL remains attached\nPack: Markdown + CSV + script + delivery notes\nNext step: buyer can order without rebuilding the research queue.`,
     bodyZh: `归档：最新公开期刊页\n证明：原始公开 URL 保持附带\n交付：Markdown + CSV + 脚本 + 交付说明\n下一步：买家不必重建研究队列就能下单。`
   }
 ];
+function deliveryLineItems(tab, lang = "en") {
+  const body = lang === "zh" ? tab.bodyZh : tab.body;
+  return body
+    .split("\n")
+    .map((line) => `<li><span></span><p>${escapeHtml(line)}</p></li>`)
+    .join("");
+}
 const deliveryPreviewButtons = deliveryPreviewTabs
-  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" aria-pressed="${index === 0 ? "true" : "false"}">${dual(tab.label, tab.labelZh)}</button>`)
+  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" data-deliverable-status-en="${escapeHtml(tab.status)}" data-deliverable-status-zh="${escapeHtml(tab.statusZh)}" aria-pressed="${index === 0 ? "true" : "false"}">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            ${dual(tab.label, tab.labelZh, "strong")}
+            ${dual(tab.caption, tab.captionZh, "small")}
+          </span>
+        </button>`)
   .join("");
 const zhDeliveryPreviewButtons = deliveryPreviewTabs
-  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" aria-pressed="${index === 0 ? "true" : "false"}">${escapeHtml(tab.labelZh)}</button>`)
+  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" data-deliverable-status-en="${escapeHtml(tab.status)}" data-deliverable-status-zh="${escapeHtml(tab.statusZh)}" aria-pressed="${index === 0 ? "true" : "false"}">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            <strong>${escapeHtml(tab.labelZh)}</strong>
+            <small>${escapeHtml(tab.captionZh)}</small>
+          </span>
+        </button>`)
   .join("");
 const deliveryPreviewPanels = deliveryPreviewTabs
-  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}">
+  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}" data-deliverable-index="${index}" style="--stack-x: ${index * 34}px; --stack-y: ${index * 15}px; --stack-rotate: ${index * -1.2}deg; --stack-scale: ${Math.max(0.88, 1 - index * 0.035)}; --stack-order: ${deliveryPreviewTabs.length - index};">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="${escapeHtml(tab.id)}"></span>
+            <span>${dual(tab.label, tab.labelZh)}</span>
+            <em>${escapeHtml(tab.number)}</em>
+          </div>
           ${dual(tab.title, tab.titleZh, "h3")}
-          <pre>${escapeHtml(tab.body)}</pre>
+          ${dual(tab.caption, tab.captionZh, "p", ' class="deliverable-sheet-caption"')}
+          <ul class="deliverable-lines">${deliveryLineItems(tab)}</ul>
+          <div class="deliverable-proof-strip">
+            ${dual("Ready after checkout", "付款后即可交付", "span")}
+            <strong>${dual(tab.metric, tab.metricZh)}</strong>
+          </div>
         </article>`)
   .join("");
 const zhDeliveryPreviewPanels = deliveryPreviewTabs
-  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}">
+  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}" data-deliverable-index="${index}" style="--stack-x: ${index * 34}px; --stack-y: ${index * 15}px; --stack-rotate: ${index * -1.2}deg; --stack-scale: ${Math.max(0.88, 1 - index * 0.035)}; --stack-order: ${deliveryPreviewTabs.length - index};">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="${escapeHtml(tab.id)}"></span>
+            <span>${escapeHtml(tab.labelZh)}</span>
+            <em>${escapeHtml(tab.number)}</em>
+          </div>
           <h3>${escapeHtml(tab.titleZh)}</h3>
-          <pre>${escapeHtml(tab.bodyZh)}</pre>
+          <p class="deliverable-sheet-caption">${escapeHtml(tab.captionZh)}</p>
+          <ul class="deliverable-lines">${deliveryLineItems(tab, "zh")}</ul>
+          <div class="deliverable-proof-strip">
+            <span>付款后即可交付</span>
+            <strong>${escapeHtml(tab.metricZh)}</strong>
+          </div>
         </article>`)
   .join("");
 const socialProof = `<section class="visual-proof" aria-label="Product preview">
@@ -2244,9 +2311,14 @@ const html = `<!doctype html>
         ${dual("Open the pack before you buy it.", "购买前，先看清交付包。", "h2")}
         ${dual("A creator does not need another digest. They need a small set of files that can move from source check to recording queue without rebuilding the research.", "创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。", "p")}
       </div>
-      <div class="deliverable-viewer">
+      <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
         <div class="deliverable-tabs" aria-label="Delivery file preview">${deliveryPreviewButtons}</div>
         <div class="deliverable-screen">${deliveryPreviewPanels}</div>
+        <div class="delivery-stack-footer">
+          <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
+          <p data-deliverable-status>${dual("Brief selected", "已选择 Brief")}</p>
+          ${dual("Click a tab or use arrow keys to explore each deliverable.", "点击标签或使用方向键查看每份交付文件。", "small")}
+        </div>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
@@ -2423,9 +2495,14 @@ const zhHtml = `<!doctype html>
         <h2>购买前，先看清交付包。</h2>
         <p>创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。</p>
       </div>
-      <div class="deliverable-viewer">
+      <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
         <div class="deliverable-tabs" aria-label="Delivery file preview">${zhDeliveryPreviewButtons}</div>
         <div class="deliverable-screen">${zhDeliveryPreviewPanels}</div>
+        <div class="delivery-stack-footer">
+          <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
+          <p data-deliverable-status>已选择 Brief</p>
+          <small>点击标签或使用方向键查看每份交付文件。</small>
+        </div>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
@@ -5120,97 +5197,282 @@ main {
 }
 .deliverable-viewer {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   min-width: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 18px;
-  padding: 14px;
+  border-radius: 22px;
+  padding: clamp(12px, 2vw, 18px);
   background:
     linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,249,252,0.86)),
     radial-gradient(circle at 82% 16%, rgba(0, 113, 227, 0.12), transparent 32%);
   box-shadow: var(--shadow);
+  outline: none;
+}
+.deliverable-viewer:focus-visible {
+  box-shadow: var(--shadow), 0 0 0 4px rgba(0, 113, 227, 0.14);
 }
 .deliverable-tabs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
-  border: 1px solid var(--line);
+  gap: 4px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
   border-radius: 999px;
   padding: 4px;
-  background: #fff;
+  background: rgba(255,255,255,0.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .deliverable-tab {
-  min-height: 34px;
+  min-width: 0;
+  min-height: 48px;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
   font: inherit;
-  font-size: 12px;
-  font-weight: 850;
   cursor: pointer;
-  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 10px;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.deliverable-tab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(17, 17, 20, 0.2);
+  flex: 0 0 auto;
+}
+.deliverable-tab-copy {
+  display: grid;
+  min-width: 0;
+  text-align: left;
+}
+.deliverable-tab strong {
+  overflow: hidden;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.deliverable-tab small {
+  overflow: hidden;
+  margin-top: 2px;
+  color: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.1;
+  opacity: 0.62;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .deliverable-tab:hover,
 .deliverable-tab.active {
-  background: var(--ink);
-  color: #fff;
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.08);
+}
+.deliverable-tab.active .deliverable-tab-dot {
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12);
 }
 .deliverable-tab:hover {
   transform: translateY(-1px);
 }
 .deliverable-screen {
   position: relative;
-  min-height: 306px;
+  min-height: 430px;
   overflow: hidden;
-  border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 14px;
-  background: #111114;
-  color: #fff;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  border: 1px solid rgba(17, 17, 20, 0.06);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(255,255,255,0.94), transparent 34%),
+    linear-gradient(145deg, #f5f5f7, #eef2f8 58%, #f8f9fb);
+  color: var(--ink);
+  perspective: 1200px;
 }
 .deliverable-screen::before {
   content: "";
-  display: block;
+  position: absolute;
+  inset: auto 9% 18px 9%;
   height: 28px;
-  background:
-    radial-gradient(circle at 18px 50%, #ff5f57 0 4px, transparent 5px),
-    radial-gradient(circle at 36px 50%, #ffbd2e 0 4px, transparent 5px),
-    radial-gradient(circle at 54px 50%, #28c840 0 4px, transparent 5px),
-    linear-gradient(180deg, #272b31, #171a1f);
+  border-radius: 999px;
+  background: rgba(17, 17, 20, 0.08);
+  filter: blur(18px);
 }
 .deliverable-panel {
   position: absolute;
-  inset: 28px 0 0;
+  inset: clamp(16px, 3vw, 28px) clamp(18px, 4vw, 60px);
   display: grid;
   align-content: start;
-  gap: 12px;
-  padding: 18px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 220ms ease, transform 220ms ease;
+  gap: 14px;
+  min-width: 0;
+  padding: clamp(18px, 2.8vw, 28px);
+  border: 1px solid rgba(17, 17, 20, 0.09);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 26px 58px rgba(19, 25, 38, 0.16);
+  opacity: 0.54;
+  pointer-events: none;
+  transform:
+    translateX(var(--stack-x, 0px))
+    translateY(var(--stack-y, 0px))
+    rotate(var(--stack-rotate, 0deg))
+    scale(var(--stack-scale, 1));
+  transform-origin: center bottom;
+  transition: opacity 260ms ease, transform 260ms ease, box-shadow 260ms ease;
+  z-index: var(--stack-order, 1);
 }
 .deliverable-panel.active {
   opacity: 1;
-  transform: translateY(0);
+  pointer-events: auto;
+  background: #fff;
+  transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+  box-shadow: 0 32px 72px rgba(19, 25, 38, 0.2);
+}
+.deliverable-panel:not(.active) .deliverable-lines,
+.deliverable-panel:not(.active) .deliverable-proof-strip,
+.deliverable-panel:not(.active) .deliverable-sheet-caption {
+  opacity: 0.18;
+}
+.deliverable-panel:not(.active) h3 {
+  opacity: 0.16;
+}
+.deliverable-sheet-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 850;
+}
+.deliverable-sheet-top > span:not(.deliverable-sheet-mark) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.deliverable-sheet-top em {
+  margin-left: auto;
+  color: rgba(17, 17, 20, 0.28);
+  font-style: normal;
+  letter-spacing: 0;
+}
+.deliverable-sheet-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--blue);
+  box-shadow: inset 0 -6px 10px rgba(0,0,0,0.14);
+}
+.deliverable-sheet-mark[data-kind="csv"],
+.deliverable-panel[data-deliverable-panel="csv"] .deliverable-lines li span {
+  background: #34c759;
+}
+.deliverable-sheet-mark[data-kind="script"],
+.deliverable-panel[data-deliverable-panel="script"] .deliverable-lines li span {
+  background: #ff7a3d;
+}
+.deliverable-sheet-mark[data-kind="proof"],
+.deliverable-panel[data-deliverable-panel="proof"] .deliverable-lines li span {
+  background: #35c28b;
 }
 .deliverable-panel h3 {
   margin: 0;
-  color: #fff;
-  font-size: clamp(20px, 2.2vw, 28px);
+  max-width: 460px;
+  color: var(--ink);
+  font-size: clamp(24px, 3vw, 34px);
   line-height: 1.1;
 }
-.deliverable-panel pre {
-  overflow: auto;
-  max-height: 210px;
+.deliverable-sheet-caption {
   margin: 0;
-  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+.deliverable-lines {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.deliverable-lines li {
+  display: grid;
+  grid-template-columns: 9px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  min-width: 0;
+}
+.deliverable-lines li span {
+  width: 9px;
+  height: 9px;
+  margin-top: 7px;
+  border-radius: 99px;
+  background: var(--blue);
+}
+.deliverable-lines p {
+  overflow-wrap: anywhere;
+  margin: 0;
+  color: #545963;
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+.deliverable-proof-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  margin-top: 4px;
   border-radius: 10px;
-  padding: 14px;
-  background: rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.8);
-  font: 13px/1.55 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
-  white-space: pre-wrap;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, rgba(0, 113, 227, 0.1), rgba(52, 199, 89, 0.08));
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+.deliverable-proof-strip strong {
+  flex: 0 0 auto;
+  color: var(--blue);
+  font-size: 14px;
+}
+.delivery-stack-footer {
+  display: grid;
+  grid-template-columns: minmax(80px, 150px) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 0 4px;
+  color: var(--muted);
+}
+.delivery-stack-meter {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(17, 17, 20, 0.08);
+}
+.delivery-stack-meter span {
+  display: block;
+  width: var(--delivery-progress, 25%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+  transition: width 260ms ease;
+}
+.delivery-stack-footer p,
+.delivery-stack-footer small {
+  margin: 0;
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 750;
+}
+.delivery-stack-footer small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .proof-ledger {
   display: grid;
@@ -5572,7 +5834,7 @@ main {
   color: var(--muted);
   line-height: 1.5;
 }
-.delivery ul {
+.delivery > ul {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -5581,7 +5843,7 @@ main {
   padding: 0;
   list-style: none;
 }
-.delivery li {
+.delivery > ul > li {
   display: grid;
   gap: 4px;
   margin: 0;
@@ -5592,7 +5854,7 @@ main {
   background: #fff;
   box-shadow: 0 1px 1px rgba(17, 17, 20, 0.04);
 }
-.delivery li span {
+.delivery > ul > li span {
   color: var(--muted);
   line-height: 1.45;
 }
@@ -6371,7 +6633,7 @@ input[type="email"] {
   .section-head,
   .tier-grid,
   .delivery,
-  .delivery ul,
+  .delivery > ul,
   .proof-ledger,
   .seo-hub,
   .seo-summary,
@@ -6725,32 +6987,61 @@ input[type="email"] {
     gap: 4px;
   }
   .deliverable-tab {
-    min-height: 32px;
-    font-size: 11px;
+    min-height: 40px;
+    gap: 5px;
+    padding: 6px;
   }
-  .deliverable-screen {
-    min-height: 260px;
-  }
-  .deliverable-panel {
-    padding: 14px;
-  }
-  .deliverable-panel pre {
-    max-height: 170px;
+  .deliverable-tab strong {
     font-size: 12px;
   }
-  .delivery-lab ul {
+  .deliverable-tab small {
+    display: none;
+  }
+  .deliverable-screen {
+    min-height: 344px;
+    border-radius: 14px;
+  }
+  .deliverable-panel {
+    inset: 12px;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+  .deliverable-panel h3 {
+    font-size: 22px;
+  }
+  .deliverable-lines {
+    gap: 7px;
+  }
+  .deliverable-lines p {
+    font-size: 12px;
+  }
+  .deliverable-proof-strip {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+  .delivery-stack-footer {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .delivery-stack-footer small {
+    white-space: normal;
+  }
+  .delivery-lab > ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
-  .delivery-lab li {
+  .delivery-lab > ul > li {
     min-height: 100px;
     padding: 10px;
   }
-  .delivery-lab li strong {
+  .delivery-lab > ul > li strong {
     font-size: 13px;
     line-height: 1.25;
   }
-  .delivery-lab li span {
+  .delivery-lab > ul > li span {
     font-size: 12px;
     line-height: 1.35;
   }
@@ -7044,6 +7335,8 @@ const savedHoursCopy = document.querySelector("#saved-hours-copy");
 const tierSuggestion = document.querySelector("#tier-suggestion");
 const deliverableButtons = [...document.querySelectorAll("[data-deliverable-tab]")];
 const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+const deliverableViewer = document.querySelector(".deliverable-viewer");
+const deliverableStatus = document.querySelector("[data-deliverable-status]");
 const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
 const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
@@ -7219,6 +7512,8 @@ function setLanguage(language) {
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
   updateOpportunityFocus(activeOpportunityCard);
+  const activeDeliverable = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
+  if (activeDeliverable) activateDeliverableTab(activeDeliverable.dataset.deliverableTab);
 }
 
 function applyFilters() {
@@ -7336,18 +7631,59 @@ for (const button of contrastButtons) {
   });
 }
 
-function activateDeliverableTab(id) {
-  for (const button of deliverableButtons) {
+function activateDeliverableTab(id, scrollToButton = false) {
+  const activeIndex = Math.max(0, deliverableButtons.findIndex((button) => button.dataset.deliverableTab === id));
+  const total = Math.max(1, deliverableButtons.length);
+  const compactStack = window.innerWidth < 640;
+  const xStep = compactStack ? 18 : 34;
+  const yStep = compactStack ? 9 : 15;
+  if (deliverableViewer) {
+    deliverableViewer.dataset.activeDeliverable = id;
+    deliverableViewer.style.setProperty("--delivery-progress", Math.round(((activeIndex + 1) / total) * 100) + "%");
+  }
+  for (const [index, button] of deliverableButtons.entries()) {
     const active = button.dataset.deliverableTab === id;
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active) {
+      if (deliverableStatus) {
+        const suffix = currentLanguage === "zh" ? "Zh" : "En";
+        deliverableStatus.textContent = button.dataset["deliverableStatus" + suffix] || button.textContent.trim();
+      }
+      if (scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    }
   }
   for (const panel of deliverablePanels) {
+    const panelIndex = Number(panel.dataset.deliverableIndex || 0);
+    let offset = panelIndex - activeIndex;
+    if (offset < 0) offset += total;
     panel.classList.toggle("active", panel.dataset.deliverablePanel === id);
+    panel.style.setProperty("--stack-x", offset * xStep + "px");
+    panel.style.setProperty("--stack-y", offset * yStep + "px");
+    panel.style.setProperty("--stack-rotate", offset * -1.2 + "deg");
+    panel.style.setProperty("--stack-scale", String(Math.max(0.88, 1 - offset * 0.035)));
+    panel.style.setProperty("--stack-order", String(total - offset));
   }
 }
 for (const button of deliverableButtons) {
-  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab));
+  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab, true));
+}
+if (deliverableViewer && deliverableButtons.length) {
+  deliverableViewer.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const currentIndex = Math.max(0, deliverableButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + deliverableButtons.length) % deliverableButtons.length;
+    const nextButton = deliverableButtons[nextIndex];
+    activateDeliverableTab(nextButton.dataset.deliverableTab, true);
+    nextButton.focus({ preventScroll: true });
+  });
+  window.addEventListener("resize", () => {
+    const activeButton = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
+    activateDeliverableTab(activeButton.dataset.deliverableTab);
+  });
+  activateDeliverableTab((deliverableButtons[0] || {}).dataset?.deliverableTab || "brief");
 }
 
 function activateProofTab(id) {

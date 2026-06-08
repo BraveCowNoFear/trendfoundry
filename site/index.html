@@ -841,32 +841,90 @@
         <h2 data-i18n-en="Open the pack before you buy it." data-i18n-zh="购买前，先看清交付包。">Open the pack before you buy it.</h2>
         <p data-i18n-en="A creator does not need another digest. They need a small set of files that can move from source check to recording queue without rebuilding the research." data-i18n-zh="创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。">A creator does not need another digest. They need a small set of files that can move from source check to recording queue without rebuilding the research.</p>
       </div>
-      <div class="deliverable-viewer">
-        <div class="deliverable-tabs" aria-label="Delivery file preview"><button class="deliverable-tab active" type="button" data-deliverable-tab="brief" aria-pressed="true"><span data-i18n-en="Brief" data-i18n-zh="Brief">Brief</span></button><button class="deliverable-tab" type="button" data-deliverable-tab="csv" aria-pressed="false"><span data-i18n-en="CSV" data-i18n-zh="CSV">CSV</span></button><button class="deliverable-tab" type="button" data-deliverable-tab="script" aria-pressed="false"><span data-i18n-en="Script" data-i18n-zh="脚本">Script</span></button><button class="deliverable-tab" type="button" data-deliverable-tab="issue" aria-pressed="false"><span data-i18n-en="Issue" data-i18n-zh="期刊">Issue</span></button></div>
-        <div class="deliverable-screen"><article class="deliverable-panel active" data-deliverable-panel="brief">
+      <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
+        <div class="deliverable-tabs" aria-label="Delivery file preview"><button class="deliverable-tab active" type="button" data-deliverable-tab="brief" data-deliverable-status-en="Brief selected" data-deliverable-status-zh="已选择 Brief" aria-pressed="true">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            <strong data-i18n-en="Brief" data-i18n-zh="Brief">Brief</strong>
+            <small data-i18n-en="Ranked card" data-i18n-zh="排序机会卡">Ranked card</small>
+          </span>
+        </button><button class="deliverable-tab" type="button" data-deliverable-tab="csv" data-deliverable-status-en="CSV table selected" data-deliverable-status-zh="已选择 CSV 表格" aria-pressed="false">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            <strong data-i18n-en="CSV" data-i18n-zh="CSV">CSV</strong>
+            <small data-i18n-en="Sortable table" data-i18n-zh="可排序表">Sortable table</small>
+          </span>
+        </button><button class="deliverable-tab" type="button" data-deliverable-tab="script" data-deliverable-status-en="Script selected" data-deliverable-status-zh="已选择脚本" aria-pressed="false">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            <strong data-i18n-en="Script" data-i18n-zh="脚本">Script</strong>
+            <small data-i18n-en="Recording pass" data-i18n-zh="录制初稿">Recording pass</small>
+          </span>
+        </button><button class="deliverable-tab" type="button" data-deliverable-tab="proof" data-deliverable-status-en="Proof trail selected" data-deliverable-status-zh="已选择证明链" aria-pressed="false">
+          <span class="deliverable-tab-dot"></span>
+          <span class="deliverable-tab-copy">
+            <strong data-i18n-en="Proof" data-i18n-zh="证明">Proof</strong>
+            <small data-i18n-en="Source trail" data-i18n-zh="来源链">Source trail</small>
+          </span>
+        </button></div>
+        <div class="deliverable-screen"><article class="deliverable-panel active" data-deliverable-panel="brief" data-deliverable-index="0" style="--stack-x: 0px; --stack-y: 0px; --stack-rotate: 0deg; --stack-scale: 1; --stack-order: 4;">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="brief"></span>
+            <span><span data-i18n-en="Brief" data-i18n-zh="Brief">Brief</span></span>
+            <em>01</em>
+          </div>
           <h3 data-i18n-en="The ranked opportunity card" data-i18n-zh="已排序机会卡">The ranked opportunity card</h3>
-          <pre>#1 NousResearch/hermes-agent
-Source: GitHub
-Score: 187
-Why now: source-backed signal with a concrete recording angle.
-Risk: normal</pre>
-        </article><article class="deliverable-panel" data-deliverable-panel="csv">
+          <p class="deliverable-sheet-caption" data-i18n-en="Ranked card" data-i18n-zh="排序机会卡">Ranked card</p>
+          <ul class="deliverable-lines"><li><span></span><p>#1 NousResearch/hermes-agent</p></li><li><span></span><p>Source: GitHub</p></li><li><span></span><p>Score: 187</p></li><li><span></span><p>Why now: source-backed signal with a concrete recording angle.</p></li><li><span></span><p>Risk: normal</p></li></ul>
+          <div class="deliverable-proof-strip">
+            <span data-i18n-en="Ready after checkout" data-i18n-zh="付款后即可交付">Ready after checkout</span>
+            <strong><span data-i18n-en="Score 187" data-i18n-zh="评分 187">Score 187</span></strong>
+          </div>
+        </article><article class="deliverable-panel" data-deliverable-panel="csv" data-deliverable-index="1" style="--stack-x: 34px; --stack-y: 15px; --stack-rotate: -1.2deg; --stack-scale: 0.965; --stack-order: 3;">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="csv"></span>
+            <span><span data-i18n-en="CSV" data-i18n-zh="CSV">CSV</span></span>
+            <em>02</em>
+          </div>
           <h3 data-i18n-en="The sortable buyer table" data-i18n-zh="可排序买家表格">The sortable buyer table</h3>
-          <pre>rank,source,score,title,risk
-1,GitHub,187,&quot;NousResearch/hermes-agent&quot;,&quot;normal&quot;</pre>
-        </article><article class="deliverable-panel" data-deliverable-panel="script">
+          <p class="deliverable-sheet-caption" data-i18n-en="Sortable table" data-i18n-zh="可排序表">Sortable table</p>
+          <ul class="deliverable-lines"><li><span></span><p>rank,source,score,title,risk</p></li><li><span></span><p>1,GitHub,187,&quot;NousResearch/hermes-agent&quot;,&quot;normal&quot;</p></li></ul>
+          <div class="deliverable-proof-strip">
+            <span data-i18n-en="Ready after checkout" data-i18n-zh="付款后即可交付">Ready after checkout</span>
+            <strong><span data-i18n-en="12 rows" data-i18n-zh="12 行">12 rows</span></strong>
+          </div>
+        </article><article class="deliverable-panel" data-deliverable-panel="script" data-deliverable-index="2" style="--stack-x: 68px; --stack-y: 30px; --stack-rotate: -2.4deg; --stack-scale: 0.9299999999999999; --stack-order: 2;">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="script"></span>
+            <span><span data-i18n-en="Script" data-i18n-zh="脚本">Script</span></span>
+            <em>03</em>
+          </div>
           <h3 data-i18n-en="The first recording pass" data-i18n-zh="第一版录制脚本">The first recording pass</h3>
-          <pre>Hook: turn the source signal into a viewer question.
-Demo path: show the project, workflow, or claim in sequence.
-Limitation: name what is unverified before recommending it.
-Close: ask whether this deserves a deeper episode.</pre>
-        </article><article class="deliverable-panel" data-deliverable-panel="issue">
+          <p class="deliverable-sheet-caption" data-i18n-en="Recording pass" data-i18n-zh="录制初稿">Recording pass</p>
+          <ul class="deliverable-lines"><li><span></span><p>Hook: turn the source signal into a viewer question.</p></li><li><span></span><p>Demo path: show the project, workflow, or claim in sequence.</p></li><li><span></span><p>Limitation: name what is unverified before recommending it.</p></li><li><span></span><p>Close: ask whether this deserves a deeper episode.</p></li></ul>
+          <div class="deliverable-proof-strip">
+            <span data-i18n-en="Ready after checkout" data-i18n-zh="付款后即可交付">Ready after checkout</span>
+            <strong><span data-i18n-en="4 beats" data-i18n-zh="4 段">4 beats</span></strong>
+          </div>
+        </article><article class="deliverable-panel" data-deliverable-panel="proof" data-deliverable-index="3" style="--stack-x: 102px; --stack-y: 45px; --stack-rotate: -3.5999999999999996deg; --stack-scale: 0.895; --stack-order: 1;">
+          <div class="deliverable-sheet-top">
+            <span class="deliverable-sheet-mark" data-kind="proof"></span>
+            <span><span data-i18n-en="Proof" data-i18n-zh="证明">Proof</span></span>
+            <em>04</em>
+          </div>
           <h3 data-i18n-en="The public proof trail" data-i18n-zh="公开证明链">The public proof trail</h3>
-          <pre>Archive: latest issue page
-Proof: original public URL remains attached
-Pack: Markdown + CSV + script + delivery notes
-Next step: buyer can order without rebuilding the research queue.</pre>
+          <p class="deliverable-sheet-caption" data-i18n-en="Source trail" data-i18n-zh="来源链">Source trail</p>
+          <ul class="deliverable-lines"><li><span></span><p>Archive: latest issue page</p></li><li><span></span><p>Proof: original public URL remains attached</p></li><li><span></span><p>Pack: Markdown + CSV + script + delivery notes</p></li><li><span></span><p>Next step: buyer can order without rebuilding the research queue.</p></li></ul>
+          <div class="deliverable-proof-strip">
+            <span data-i18n-en="Ready after checkout" data-i18n-zh="付款后即可交付">Ready after checkout</span>
+            <strong><span data-i18n-en="86% trust" data-i18n-zh="86% 可信度">86% trust</span></strong>
+          </div>
         </article></div>
+        <div class="delivery-stack-footer">
+          <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
+          <p data-deliverable-status><span data-i18n-en="Brief selected" data-i18n-zh="已选择 Brief">Brief selected</span></p>
+          <small data-i18n-en="Click a tab or use arrow keys to explore each deliverable." data-i18n-zh="点击标签或使用方向键查看每份交付文件。">Click a tab or use arrow keys to explore each deliverable.</small>
+        </div>
       </div>
       <ul><li><strong><span data-i18n-en="Proof links" data-i18n-zh="来源链接">Proof links</span></strong><span data-i18n-en="Every idea keeps the original public source attached." data-i18n-zh="每个选题都保留原始公开来源，方便买家核验。">Every idea keeps the original public source attached.</span></li><li><strong><span data-i18n-en="Recordable angle" data-i18n-zh="可录制角度">Recordable angle</span></strong><span data-i18n-en="Titles, hook, outline, demo step, and limitation are generated together." data-i18n-zh="标题、钩子、大纲、演示步骤和限制说明一起生成。">Titles, hook, outline, demo step, and limitation are generated together.</span></li><li><strong><span data-i18n-en="Quality control" data-i18n-zh="质量控制">Quality control</span></strong><span data-i18n-en="Hype, rights-risk, and too-broad signals are flagged before they reach the display pack." data-i18n-zh="炒作、版权风险和过宽泛信号会在进入展示包前被标记。">Hype, rights-risk, and too-broad signals are flagged before they reach the display pack.</span></li><li><strong><span data-i18n-en="Simple ordering" data-i18n-zh="轻量下单">Simple ordering</span></strong><span data-i18n-en="Request the current issue through GitHub or email and get the delivery details directly." data-i18n-zh="通过 GitHub 或邮件申请当前期次，并直接收到交付说明。">Request the current issue through GitHub or email and get the delivery details directly.</span></li></ul>
     </section>

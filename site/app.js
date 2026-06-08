@@ -14,6 +14,8 @@ const savedHoursCopy = document.querySelector("#saved-hours-copy");
 const tierSuggestion = document.querySelector("#tier-suggestion");
 const deliverableButtons = [...document.querySelectorAll("[data-deliverable-tab]")];
 const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+const deliverableViewer = document.querySelector(".deliverable-viewer");
+const deliverableStatus = document.querySelector("[data-deliverable-status]");
 const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
 const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
@@ -189,6 +191,8 @@ function setLanguage(language) {
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
   updateOpportunityFocus(activeOpportunityCard);
+  const activeDeliverable = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
+  if (activeDeliverable) activateDeliverableTab(activeDeliverable.dataset.deliverableTab);
 }
 
 function applyFilters() {
@@ -306,18 +310,59 @@ for (const button of contrastButtons) {
   });
 }
 
-function activateDeliverableTab(id) {
-  for (const button of deliverableButtons) {
+function activateDeliverableTab(id, scrollToButton = false) {
+  const activeIndex = Math.max(0, deliverableButtons.findIndex((button) => button.dataset.deliverableTab === id));
+  const total = Math.max(1, deliverableButtons.length);
+  const compactStack = window.innerWidth < 640;
+  const xStep = compactStack ? 18 : 34;
+  const yStep = compactStack ? 9 : 15;
+  if (deliverableViewer) {
+    deliverableViewer.dataset.activeDeliverable = id;
+    deliverableViewer.style.setProperty("--delivery-progress", Math.round(((activeIndex + 1) / total) * 100) + "%");
+  }
+  for (const [index, button] of deliverableButtons.entries()) {
     const active = button.dataset.deliverableTab === id;
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active) {
+      if (deliverableStatus) {
+        const suffix = currentLanguage === "zh" ? "Zh" : "En";
+        deliverableStatus.textContent = button.dataset["deliverableStatus" + suffix] || button.textContent.trim();
+      }
+      if (scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    }
   }
   for (const panel of deliverablePanels) {
+    const panelIndex = Number(panel.dataset.deliverableIndex || 0);
+    let offset = panelIndex - activeIndex;
+    if (offset < 0) offset += total;
     panel.classList.toggle("active", panel.dataset.deliverablePanel === id);
+    panel.style.setProperty("--stack-x", offset * xStep + "px");
+    panel.style.setProperty("--stack-y", offset * yStep + "px");
+    panel.style.setProperty("--stack-rotate", offset * -1.2 + "deg");
+    panel.style.setProperty("--stack-scale", String(Math.max(0.88, 1 - offset * 0.035)));
+    panel.style.setProperty("--stack-order", String(total - offset));
   }
 }
 for (const button of deliverableButtons) {
-  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab));
+  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab, true));
+}
+if (deliverableViewer && deliverableButtons.length) {
+  deliverableViewer.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const currentIndex = Math.max(0, deliverableButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + deliverableButtons.length) % deliverableButtons.length;
+    const nextButton = deliverableButtons[nextIndex];
+    activateDeliverableTab(nextButton.dataset.deliverableTab, true);
+    nextButton.focus({ preventScroll: true });
+  });
+  window.addEventListener("resize", () => {
+    const activeButton = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
+    activateDeliverableTab(activeButton.dataset.deliverableTab);
+  });
+  activateDeliverableTab((deliverableButtons[0] || {}).dataset?.deliverableTab || "brief");
 }
 
 function activateProofTab(id) {
