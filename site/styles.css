@@ -2201,9 +2201,9 @@ main {
 .pricing-studio .tier {
   grid-template-columns: 1fr;
   align-items: start;
-  min-height: 318px;
-  gap: 14px;
-  padding: 22px;
+  min-height: 276px;
+  gap: 12px;
+  padding: 20px;
 }
 .pricing-studio .tier > div:first-child {
   display: grid;
@@ -2257,7 +2257,7 @@ main {
   grid-column: auto;
   margin: 4px 0 2px;
   text-align: left;
-  font-size: 42px;
+  font-size: 40px;
 }
 .pricing-studio .tier-price::after {
   content: "";
@@ -2266,6 +2266,16 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
+}
+.tier-commitment {
+  display: block;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+  line-height: 1;
 }
 .tier ul {
   margin: 0;
@@ -2276,9 +2286,9 @@ main {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 7px;
+  gap: 6px;
   padding-left: 18px;
-  font-size: 14px;
+  font-size: 13px;
 }
 .tier-actions {
   display: grid;
@@ -2322,24 +2332,15 @@ main {
   grid-template-columns: minmax(0, 1fr) auto;
   min-height: 0;
   margin-top: 0;
-  border-color: rgba(17, 17, 20, 0.14);
+  border-color: rgba(17, 17, 20, 0.1);
   border-radius: 8px;
-  padding: clamp(20px, 3vw, 34px);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,248,252,0.9)),
-    radial-gradient(circle at 92% 8%, rgba(0,113,227,0.16), transparent 30%);
-  box-shadow: 0 32px 86px rgba(17, 17, 20, 0.13);
+  padding: clamp(18px, 2.5vw, 28px);
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 18px 48px rgba(17, 17, 20, 0.08);
   overflow: hidden;
 }
 .pricing-studio .pricing-chooser::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(120deg, transparent 0 38%, rgba(255,255,255,0.66) 48%, transparent 58%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 32px);
-  opacity: 0.38;
+  display: none;
 }
 .pricing-studio .pricing-chooser > * {
   position: relative;
@@ -2367,7 +2368,7 @@ main {
   line-height: 1.12;
 }
 .pricing-studio .pricing-chooser h3 {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(28px, 3.4vw, 42px);
   letter-spacing: 0;
 }
 .pricing-chooser p:not(.pricing-chooser-label) {
@@ -2375,6 +2376,16 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
+}
+.selected-tier-commitment {
+  width: fit-content;
+  margin-top: 10px !important;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #111114;
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 820;
 }
 .pricing-configurator {
   display: grid;
@@ -2400,12 +2411,12 @@ main {
   background: rgba(255,255,255,0.68);
 }
 .pricing-studio .pricing-configurator > div {
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 10px minmax(0, 1fr);
   min-height: 0;
-  border: 1px solid rgba(17, 17, 20, 0.08);
+  border: 1px solid rgba(17, 17, 20, 0.07);
   border-radius: 8px;
-  padding: 14px;
-  background: rgba(255,255,255,0.7);
+  padding: 12px;
+  background: rgba(247,248,250,0.64);
 }
 .pricing-configurator span {
   grid-row: span 2;
@@ -2414,14 +2425,12 @@ main {
   font-weight: 900;
 }
 .pricing-studio .pricing-configurator span {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 6px;
+  height: 100%;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
-  font-size: 12px;
+  color: transparent;
+  font-size: 0;
 }
 .pricing-configurator strong {
   color: var(--ink);

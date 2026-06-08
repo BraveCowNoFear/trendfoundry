@@ -46,12 +46,14 @@ const selectedTierName = document.querySelector("#selected-tier-name");
 const selectedTierCopy = document.querySelector("#selected-tier-copy");
 const selectedTierPrice = document.querySelector("#selected-tier-price");
 const selectedTierCadence = document.querySelector("#selected-tier-cadence");
+const selectedTierCommitment = document.querySelector("#selected-tier-commitment");
 const selectedTierCta = document.querySelector("#selected-tier-cta");
 const selectedTierPack = document.querySelector("#selected-tier-pack");
 const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
 const pricingStudioNode = document.querySelector(".pricing-studio");
+const tierDirectActions = [...document.querySelectorAll("[data-tier-direct]")];
 const localNavNode = document.querySelector(".local-nav");
 const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
 const galleryPositionNode = document.querySelector("#gallery-position");
@@ -115,6 +117,7 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (selectedTierCopy) selectedTierCopy.textContent = card.dataset["tierBest" + suffix] || "";
   if (selectedTierPrice) selectedTierPrice.textContent = card.dataset.tierPrice || "";
   if (selectedTierCadence) selectedTierCadence.textContent = card.dataset["tierCadence" + suffix] || "";
+  if (selectedTierCommitment) selectedTierCommitment.textContent = card.dataset["tierCommitment" + suffix] || "";
   if (selectedTierPack) selectedTierPack.textContent = card.dataset["tierPack" + suffix] || "";
   if (selectedTierDelivery) selectedTierDelivery.textContent = card.dataset["tierDelivery" + suffix] || "";
   if (selectedTierRoute) selectedTierRoute.textContent = card.dataset["tierRoute" + suffix] || "";
@@ -131,6 +134,9 @@ function updateSelectedTier(card, scrollToCard = false) {
     pricingChooserNode.classList.remove("is-updating");
     window.requestAnimationFrame(() => pricingChooserNode.classList.add("is-updating"));
     window.setTimeout(() => pricingChooserNode.classList.remove("is-updating"), 260);
+  }
+  for (const action of tierDirectActions) {
+    action.setAttribute("href", action.dataset["tierHref" + suffix] || action.getAttribute("href") || "#");
   }
   if (scrollToCard && card.scrollIntoView) {
     card.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });

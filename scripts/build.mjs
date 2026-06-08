@@ -519,6 +519,8 @@ const pricingTiers = [
     price: "$9",
     cadence: "one-time",
     cadenceZh: "一次性",
+    commitment: "Test once",
+    commitmentZh: "先试一次",
     bestFor: "A proof-backed pack for testing one channel before you subscribe.",
     bestForZh: "先买一份带证据的选题包，测试是否适合你的频道。",
     includes: ["12 ranked ideas", "1 ready-to-record script", "CSV signal table", "Risk notes"],
@@ -534,6 +536,8 @@ const pricingTiers = [
     price: "$19",
     cadence: "monthly",
     cadenceZh: "每月",
+    commitment: "Keep queue alive",
+    commitmentZh: "保持选题队列",
     bestFor: "The default subscription for a steady recording queue every week.",
     bestForZh: "默认订阅档：每周补充一批可录制选题。",
     includes: ["Weekly 12-idea issue", "Fresh source mix", "Bilibili + YouTube angles", "Outline for each idea"],
@@ -549,6 +553,8 @@ const pricingTiers = [
     price: "$49",
     cadence: "monthly",
     cadenceZh: "每月",
+    commitment: "Own a niche",
+    commitmentZh: "占住一个垂类",
     bestFor: "A focused desk for one audience, niche, or technical vertical.",
     bestForZh: "围绕一个受众、垂类或技术方向建立专属情报桌。",
     includes: ["Custom source queries", "Niche-specific ranking", "Stricter quality filters", "Lead/outreach angles"],
@@ -628,17 +634,18 @@ const pricingCards = pricingTiers
   .map(
     (tier, index) => {
       const decision = tierDecisionMeta(tier);
-      return `<article class="tier${tier.featured ? " featured selected" : ""}" data-tier-card="${escapeHtml(tierSlug(tier))}" data-tier-index="${index}" data-tier-name-en="${escapeHtml(tier.name)}" data-tier-name-zh="${escapeHtml(tier.nameZh)}" data-tier-price="${escapeHtml(tier.price)}" data-tier-cadence-en="${escapeHtml(tier.cadence)}" data-tier-cadence-zh="${escapeHtml(tier.cadenceZh)}" data-tier-best-en="${escapeHtml(tier.bestFor)}" data-tier-best-zh="${escapeHtml(tier.bestForZh)}" data-tier-action-en="${escapeHtml(tier.action)}" data-tier-action-zh="${escapeHtml(tier.actionZh)}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}" data-tier-pack-en="${escapeHtml(decision.packEn)}" data-tier-pack-zh="${escapeHtml(decision.packZh)}" data-tier-delivery-en="${escapeHtml(decision.deliveryEn)}" data-tier-delivery-zh="${escapeHtml(decision.deliveryZh)}" data-tier-route-en="${escapeHtml(decision.routeEn)}" data-tier-route-zh="${escapeHtml(decision.routeZh)}">
+      return `<article class="tier${tier.featured ? " featured selected" : ""}" data-tier-card="${escapeHtml(tierSlug(tier))}" data-tier-index="${index}" data-tier-name-en="${escapeHtml(tier.name)}" data-tier-name-zh="${escapeHtml(tier.nameZh)}" data-tier-price="${escapeHtml(tier.price)}" data-tier-cadence-en="${escapeHtml(tier.cadence)}" data-tier-cadence-zh="${escapeHtml(tier.cadenceZh)}" data-tier-commitment-en="${escapeHtml(tier.commitment)}" data-tier-commitment-zh="${escapeHtml(tier.commitmentZh)}" data-tier-best-en="${escapeHtml(tier.bestFor)}" data-tier-best-zh="${escapeHtml(tier.bestForZh)}" data-tier-action-en="${escapeHtml(tier.action)}" data-tier-action-zh="${escapeHtml(tier.actionZh)}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}" data-tier-pack-en="${escapeHtml(decision.packEn)}" data-tier-pack-zh="${escapeHtml(decision.packZh)}" data-tier-delivery-en="${escapeHtml(decision.deliveryEn)}" data-tier-delivery-zh="${escapeHtml(decision.deliveryZh)}" data-tier-route-en="${escapeHtml(decision.routeEn)}" data-tier-route-zh="${escapeHtml(decision.routeZh)}">
   <div>
     ${dual(tier.cadence, tier.cadenceZh, "p", ' class="tier-kicker"')}
     ${dual(tier.name, tier.nameZh, "h3")}
     <p class="tier-price">${escapeHtml(tier.price)}</p>
+    ${dual(tier.commitment, tier.commitmentZh, "strong", ' class="tier-commitment"')}
     ${dual(tier.bestFor, tier.bestForZh, "p")}
   </div>
-  <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
+  <ul>${tier.includes.slice(0, 3).map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
   <div class="tier-actions">
     <button class="action tier-select-action${tier.featured ? " primary" : ""}" type="button" data-tier-select="${escapeHtml(tierSlug(tier))}" aria-pressed="${tier.featured ? "true" : "false"}">${dual("Select tier", "选择此档")}</button>
-    <a class="action" href="${tier.href}">${dual(tier.action, tier.actionZh)}</a>
+    <a class="action tier-direct-action" href="${escapeHtml(tierOrderHref(tier))}" data-tier-direct="${escapeHtml(tierSlug(tier))}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}">${dual(tier.action, tier.actionZh)}</a>
   </div>
 </article>`;
     }
@@ -662,23 +669,24 @@ const defaultPricingTier = pricingTiers.find((tier) => tier.featured) || pricing
 const defaultTierDecision = tierDecisionMeta(defaultPricingTier);
 const pricingChooser = `<div class="pricing-chooser" aria-live="polite">
     <div>
-      ${dual("Selected offer", "已选产品", "p", ' class="pricing-chooser-label"')}
+      ${dual("Order summary", "订单摘要", "p", ' class="pricing-chooser-label"')}
       <h3 id="selected-tier-name" data-i18n-en="${escapeHtml(defaultPricingTier.name)}" data-i18n-zh="${escapeHtml(defaultPricingTier.nameZh)}">${escapeHtml(defaultPricingTier.name)}</h3>
       <p id="selected-tier-copy" data-i18n-en="${escapeHtml(defaultPricingTier.bestFor)}" data-i18n-zh="${escapeHtml(defaultPricingTier.bestForZh)}">${escapeHtml(defaultPricingTier.bestFor)}</p>
+      <p class="selected-tier-commitment" id="selected-tier-commitment" data-i18n-en="${escapeHtml(defaultPricingTier.commitment)}" data-i18n-zh="${escapeHtml(defaultPricingTier.commitmentZh)}">${escapeHtml(defaultPricingTier.commitment)}</p>
       <div class="pricing-configurator" aria-label="Selected offer details">
         <div>
-          <span>01</span>
-          <strong data-i18n-en="Files included" data-i18n-zh="包含文件">Files included</strong>
+          <span></span>
+          <strong data-i18n-en="Files" data-i18n-zh="文件">Files</strong>
           <small id="selected-tier-pack" data-i18n-en="${escapeHtml(defaultTierDecision.packEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.packZh)}">${escapeHtml(defaultTierDecision.packEn)}</small>
         </div>
         <div>
-          <span>02</span>
+          <span></span>
           <strong data-i18n-en="Delivery" data-i18n-zh="交付方式">Delivery</strong>
           <small id="selected-tier-delivery" data-i18n-en="${escapeHtml(defaultTierDecision.deliveryEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.deliveryZh)}">${escapeHtml(defaultTierDecision.deliveryEn)}</small>
         </div>
         <div>
-          <span>03</span>
-          <strong data-i18n-en="Why buy" data-i18n-zh="为什么买">Why buy</strong>
+          <span></span>
+          <strong data-i18n-en="Best for" data-i18n-zh="适合">Best for</strong>
           <small id="selected-tier-route" data-i18n-en="${escapeHtml(defaultTierDecision.routeEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.routeZh)}">${escapeHtml(defaultTierDecision.routeEn)}</small>
         </div>
       </div>
@@ -2589,13 +2597,13 @@ const html = `<!doctype html>
       <div class="section-head">
         <div>
           ${dual("Offer", "购买选题包", "p", ' class="section-label"')}
-          ${dual("Buy a ready-to-record idea pack.", "买一份能直接开录的选题包。", "h2")}
-          ${dual("TrendFoundry turns public source signals into creator-ready topic packs. Choose by delivery depth: one sample, a weekly pipeline, or a custom niche desk.", "TrendFoundry 把公开来源信号整理成创作者可直接使用的选题包。按交付深度选择：单期样品、周更管线，或垂直定制。", "p")}
+          ${dual("Choose by commitment.", "按投入程度选择。", "h2")}
+          ${dual("Start with one pack, keep a weekly queue, or ask for a narrow desk. Every tier uses the same proof-first format; only depth and cadence change.", "先买一份测试，持续更新选周更，需要窄垂类就定制。每档都沿用同一套证据优先格式，只改变深度和节奏。", "p")}
         </div>
         <div class="pricing-proof-points" aria-label="Offer division rules">
-          ${dual("Delivery depth", "交付深度", "span")}
-          ${dual("Files included", "包含文件", "span")}
-          ${dual("Manual review", "人工审核", "span")}
+          ${dual("Test once", "先试一次", "span")}
+          ${dual("Keep queue alive", "保持队列", "span")}
+          ${dual("Own a niche", "占住垂类", "span")}
         </div>
       </div>
       <div class="pricing-workbench">
@@ -2772,13 +2780,13 @@ const zhHtml = `<!doctype html>
       <div class="section-head">
         <div>
           <p class="section-label">购买选题包</p>
-          <h2>买一份能直接开录的选题包。</h2>
-          <p>TrendFoundry 把公开来源信号整理成创作者可直接使用的选题包。按交付深度选择：单期样品、周更管线，或垂直定制。</p>
+          <h2>按投入程度选择。</h2>
+          <p>先买一份测试，持续更新选周更，需要窄垂类就定制。每档都沿用同一套证据优先格式，只改变深度和节奏。</p>
         </div>
         <div class="pricing-proof-points" aria-label="产品划分规则">
-          <span>交付深度</span>
-          <span>包含文件</span>
-          <span>人工审核</span>
+          <span>先试一次</span>
+          <span>保持队列</span>
+          <span>占住垂类</span>
         </div>
       </div>
       <div class="pricing-workbench">
@@ -5587,9 +5595,9 @@ main {
 .pricing-studio .tier {
   grid-template-columns: 1fr;
   align-items: start;
-  min-height: 318px;
-  gap: 14px;
-  padding: 22px;
+  min-height: 276px;
+  gap: 12px;
+  padding: 20px;
 }
 .pricing-studio .tier > div:first-child {
   display: grid;
@@ -5643,7 +5651,7 @@ main {
   grid-column: auto;
   margin: 4px 0 2px;
   text-align: left;
-  font-size: 42px;
+  font-size: 40px;
 }
 .pricing-studio .tier-price::after {
   content: "";
@@ -5652,6 +5660,16 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
+}
+.tier-commitment {
+  display: block;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 13px;
+  line-height: 1;
 }
 .tier ul {
   margin: 0;
@@ -5662,9 +5680,9 @@ main {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 7px;
+  gap: 6px;
   padding-left: 18px;
-  font-size: 14px;
+  font-size: 13px;
 }
 .tier-actions {
   display: grid;
@@ -5708,24 +5726,15 @@ main {
   grid-template-columns: minmax(0, 1fr) auto;
   min-height: 0;
   margin-top: 0;
-  border-color: rgba(17, 17, 20, 0.14);
+  border-color: rgba(17, 17, 20, 0.1);
   border-radius: 8px;
-  padding: clamp(20px, 3vw, 34px);
-  background:
-    linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,248,252,0.9)),
-    radial-gradient(circle at 92% 8%, rgba(0,113,227,0.16), transparent 30%);
-  box-shadow: 0 32px 86px rgba(17, 17, 20, 0.13);
+  padding: clamp(18px, 2.5vw, 28px);
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 18px 48px rgba(17, 17, 20, 0.08);
   overflow: hidden;
 }
 .pricing-studio .pricing-chooser::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(120deg, transparent 0 38%, rgba(255,255,255,0.66) 48%, transparent 58%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 32px);
-  opacity: 0.38;
+  display: none;
 }
 .pricing-studio .pricing-chooser > * {
   position: relative;
@@ -5753,7 +5762,7 @@ main {
   line-height: 1.12;
 }
 .pricing-studio .pricing-chooser h3 {
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(28px, 3.4vw, 42px);
   letter-spacing: 0;
 }
 .pricing-chooser p:not(.pricing-chooser-label) {
@@ -5761,6 +5770,16 @@ main {
   margin: 0;
   color: var(--muted);
   line-height: 1.45;
+}
+.selected-tier-commitment {
+  width: fit-content;
+  margin-top: 10px !important;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #111114;
+  color: #fff !important;
+  font-size: 13px;
+  font-weight: 820;
 }
 .pricing-configurator {
   display: grid;
@@ -5786,12 +5805,12 @@ main {
   background: rgba(255,255,255,0.68);
 }
 .pricing-studio .pricing-configurator > div {
-  grid-template-columns: 30px minmax(0, 1fr);
+  grid-template-columns: 10px minmax(0, 1fr);
   min-height: 0;
-  border: 1px solid rgba(17, 17, 20, 0.08);
+  border: 1px solid rgba(17, 17, 20, 0.07);
   border-radius: 8px;
-  padding: 14px;
-  background: rgba(255,255,255,0.7);
+  padding: 12px;
+  background: rgba(247,248,250,0.64);
 }
 .pricing-configurator span {
   grid-row: span 2;
@@ -5800,14 +5819,12 @@ main {
   font-weight: 900;
 }
 .pricing-studio .pricing-configurator span {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
+  width: 6px;
+  height: 100%;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
-  font-size: 12px;
+  color: transparent;
+  font-size: 0;
 }
 .pricing-configurator strong {
   color: var(--ink);
@@ -9232,12 +9249,14 @@ const selectedTierName = document.querySelector("#selected-tier-name");
 const selectedTierCopy = document.querySelector("#selected-tier-copy");
 const selectedTierPrice = document.querySelector("#selected-tier-price");
 const selectedTierCadence = document.querySelector("#selected-tier-cadence");
+const selectedTierCommitment = document.querySelector("#selected-tier-commitment");
 const selectedTierCta = document.querySelector("#selected-tier-cta");
 const selectedTierPack = document.querySelector("#selected-tier-pack");
 const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
 const pricingStudioNode = document.querySelector(".pricing-studio");
+const tierDirectActions = [...document.querySelectorAll("[data-tier-direct]")];
 const localNavNode = document.querySelector(".local-nav");
 const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
 const galleryPositionNode = document.querySelector("#gallery-position");
@@ -9301,6 +9320,7 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (selectedTierCopy) selectedTierCopy.textContent = card.dataset["tierBest" + suffix] || "";
   if (selectedTierPrice) selectedTierPrice.textContent = card.dataset.tierPrice || "";
   if (selectedTierCadence) selectedTierCadence.textContent = card.dataset["tierCadence" + suffix] || "";
+  if (selectedTierCommitment) selectedTierCommitment.textContent = card.dataset["tierCommitment" + suffix] || "";
   if (selectedTierPack) selectedTierPack.textContent = card.dataset["tierPack" + suffix] || "";
   if (selectedTierDelivery) selectedTierDelivery.textContent = card.dataset["tierDelivery" + suffix] || "";
   if (selectedTierRoute) selectedTierRoute.textContent = card.dataset["tierRoute" + suffix] || "";
@@ -9317,6 +9337,9 @@ function updateSelectedTier(card, scrollToCard = false) {
     pricingChooserNode.classList.remove("is-updating");
     window.requestAnimationFrame(() => pricingChooserNode.classList.add("is-updating"));
     window.setTimeout(() => pricingChooserNode.classList.remove("is-updating"), 260);
+  }
+  for (const action of tierDirectActions) {
+    action.setAttribute("href", action.dataset["tierHref" + suffix] || action.getAttribute("href") || "#");
   }
   if (scrollToCard && card.scrollIntoView) {
     card.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
