@@ -202,9 +202,9 @@ async function checkLocal() {
   assertCheck("site has animated workflow preview", siteIndex.includes("signal-demo.svg") && siteIndex.includes('class="motion-proof"') && siteIndex.includes('class="motion-preview"'));
   assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
-  assertCheck("site has SEO hub", siteIndex.includes('class="seo-hub"') && siteIndex.includes("Search pages"));
-  assertCheck("site has feed subscribe box", siteIndex.includes('class="feed-box"') && siteIndex.includes("RSS feed") && siteIndex.includes("JSON feed"));
-  assertCheck("site has issue archive box", siteIndex.includes('class="archive-box"') && siteIndex.includes("Latest issue") && siteIndex.includes("Issue archive"));
+  assertCheck("site has trust dock search entry", siteIndex.includes('class="trust-dock"') && siteIndex.includes("Search Pages") && siteIndex.includes("./topics/"));
+  assertCheck("site has trust dock feed entry", siteIndex.includes('data-trust-dock="feed"') && siteIndex.includes("Open RSS feed") && siteIndex.includes("./feed.json"));
+  assertCheck("site has trust dock archive entry", siteIndex.includes('data-trust-dock="archive"') && siteIndex.includes("Open latest issue") && siteIndex.includes("issues/latest.html"));
   assertCheck("site links no-login order page", siteIndex.includes("./order/") && siteIndex.includes("Order without login"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);

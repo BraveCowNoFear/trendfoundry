@@ -1749,6 +1749,170 @@ const issueDate = feedUpdated.slice(0, 10);
 const issueTitle = `TrendFoundry Issue ${issueDate}`;
 const issuePath = `issues/${issueDate}.html`;
 const issueMarkdownPath = `${issueDate}.md`;
+const trustFeedRows = top.slice(0, 5);
+const proofLinkRate = top.length ? Math.round((top.filter((item) => item.url).length / top.length) * 100) : 0;
+const trustDockFeedRows = trustFeedRows
+  .map((item, index) => `<li><span></span><strong>${dual(englishSampleTitle(item), zhSampleTitle(item))}</strong><em>${index === 0 ? "new" : `${(index + 1) * 2}h`}</em></li>`)
+  .join("");
+const zhTrustDockFeedRows = trustFeedRows
+  .map((item, index) => `<li><span></span><strong>${escapeHtml(zhSampleTitle(item))}</strong><em>${index === 0 ? "new" : `${(index + 1) * 2}h`}</em></li>`)
+  .join("");
+const trustDockSearchLinks = topicDefinitions.slice(0, 4)
+  .map((topic) => `<a href="./topics/${topic.slug}.html"><strong>${dual(topic.title, topic.titleZh)}</strong>${dual(topic.description, topic.descriptionZh, "span")}</a>`)
+  .join("");
+const zhTrustDockSearchLinks = topicDefinitions.slice(0, 4)
+  .map((topic) => `<a href="../topics/${topic.slug}.html"><strong>${escapeHtml(topic.titleZh)}</strong><span>${escapeHtml(topic.descriptionZh)}</span></a>`)
+  .join("");
+const trustDockItems = [
+  {
+    id: "search",
+    icon: "⌕",
+    label: "Search Pages",
+    labelZh: "搜索页",
+    title: "Evergreen pages keep discovery open.",
+    titleZh: "长期入口让发现持续开放。",
+    body: "Platform and workflow pages refresh from the same source data, then route qualified readers back to the sample pack.",
+    bodyZh: "平台和工作流页面使用同一份来源数据刷新，再把合格读者引回样品包。",
+    metric: `${topicDefinitions.length} pages`,
+    metricZh: `${topicDefinitions.length} 个入口`,
+    href: "./topics/bilibili-ai-topics.html",
+    hrefZh: "../topics/bilibili-ai-topics.html",
+    action: "Open search page",
+    actionZh: "打开搜索页",
+    panel: `<div class="trust-link-grid">${trustDockSearchLinks}</div>`
+  },
+  {
+    id: "feed",
+    icon: "▤",
+    label: "Live Feed",
+    labelZh: "实时 Feed",
+    title: "The current issue stays inspectable.",
+    titleZh: "当前期次始终可检查。",
+    body: "RSS and JSON publish the top opportunities with proof links, hooks, demo angles, and limitation notes.",
+    bodyZh: "RSS 和 JSON 发布 Top 机会，并保留来源链接、钩子、演示角度和限制说明。",
+    metric: `${top.length} current signals`,
+    metricZh: `${top.length} 条当前信号`,
+    href: "./feed.xml",
+    hrefZh: "../feed.xml",
+    action: "Open RSS feed",
+    actionZh: "打开 RSS Feed",
+    panel: `<div class="trust-live-list"><div><span></span><strong>${dual(`${top.length} current signals`, `${top.length} 条当前信号`)}</strong><a href="./feed.json">JSON</a></div><ol>${trustDockFeedRows}</ol></div>`
+  },
+  {
+    id: "archive",
+    icon: "□",
+    label: "Archive",
+    labelZh: "归档",
+    title: "Every issue freezes into proof.",
+    titleZh: "每一期都冻结成证明。",
+    body: `The latest public issue is dated ${issueDate}, so buyers can compare the track record before paying.`,
+    bodyZh: `最新公开期刊日期为 ${issueDate}，买家付款前可以比较历史记录。`,
+    metric: issueDate,
+    metricZh: issueDate,
+    href: `./${issuePath}`,
+    hrefZh: `../${issuePath}`,
+    action: "Open latest issue",
+    actionZh: "打开最新一期",
+    panel: `<div class="trust-issue-card"><div><strong>#${escapeHtml(issueDate)}</strong><span>${dual("Weekly Trend Brief", "周更趋势简报")}</span><em>${dual(`${top.length} ranked signals`, `${top.length} 条排序信号`)}</em></div><ul><li>${dual("Proof links attached", "来源链接已附带")}</li><li>${dual("Source list included", "来源列表已包含")}</li><li>${dual("Evidence verified", "证据已核验")}</li></ul></div>`
+  },
+  {
+    id: "sample",
+    icon: "中",
+    label: "中文样品",
+    labelZh: "中文样品",
+    title: "Chinese buyers can inspect the same quality bar.",
+    titleZh: "中文买家可以检查同一套质量标准。",
+    body: "The Chinese sample keeps titles, hooks, source links, CSV fields, and delivery structure visible before an order.",
+    bodyZh: "中文样品在下单前展示标题、钩子、来源链接、CSV 字段和交付结构。",
+    metric: "Bilingual pack",
+    metricZh: "双语样品包",
+    href: "./public-sample.zh-CN.md",
+    hrefZh: "../public-sample.zh-CN.md",
+    action: "Open Chinese sample",
+    actionZh: "打开中文样品",
+    panel: `<div class="trust-sample-card"><strong>${dual("Chinese sample", "中文样品")}</strong><span>Markdown + CSV</span><p>${dual("Titles, hooks, proof links, and risk notes remain visible before purchase.", "标题、钩子、来源链接和风险备注在购买前保持可见。")}</p><a href="./public-sample.zh-CN.csv">${dual("Open CSV", "打开 CSV")}</a></div>`
+  }
+];
+const trustDockButtons = trustDockItems
+  .map((item, index) => `<button class="trust-dock-tab${index === 1 ? " active" : ""}" type="button" data-trust-dock="${escapeHtml(item.id)}" aria-pressed="${index === 1 ? "true" : "false"}"><span>${escapeHtml(item.icon)}</span><strong>${dual(item.label, item.labelZh)}</strong></button>`)
+  .join("");
+const zhTrustDockButtons = trustDockItems
+  .map((item, index) => `<button class="trust-dock-tab${index === 1 ? " active" : ""}" type="button" data-trust-dock="${escapeHtml(item.id)}" aria-pressed="${index === 1 ? "true" : "false"}"><span>${escapeHtml(item.icon)}</span><strong>${escapeHtml(item.labelZh)}</strong></button>`)
+  .join("");
+const trustDockPanels = trustDockItems
+  .map((item, index) => `<article class="trust-dock-panel${index === 1 ? " active" : ""}" data-trust-dock-panel="${escapeHtml(item.id)}">
+        <div class="trust-panel-copy">
+          ${dual(item.title, item.titleZh, "h3")}
+          ${dual(item.body, item.bodyZh, "p")}
+          <a class="trust-panel-link" href="${escapeHtml(item.href)}">${dual(item.action, item.actionZh)}<span>→</span></a>
+        </div>
+        ${item.panel}
+      </article>`)
+  .join("");
+const zhTrustDockPanels = trustDockItems
+  .map((item, index) => {
+    const panel = item.id === "search"
+      ? `<div class="trust-link-grid">${zhTrustDockSearchLinks}</div>`
+      : item.id === "feed"
+        ? `<div class="trust-live-list"><div><span></span><strong>${top.length} 条当前信号</strong><a href="../feed.json">JSON</a></div><ol>${zhTrustDockFeedRows}</ol></div>`
+        : item.id === "archive"
+          ? `<div class="trust-issue-card"><div><strong>#${escapeHtml(issueDate)}</strong><span>Weekly Trend Brief</span><em>${top.length} 条排序信号</em></div><ul><li>来源链接已附带</li><li>来源列表已包含</li><li>证据已核验</li></ul></div>`
+          : `<div class="trust-sample-card"><strong>中文样品</strong><span>Markdown + CSV</span><p>标题、钩子、来源链接和风险备注在购买前保持可见。</p><a href="../public-sample.zh-CN.csv">打开 CSV</a></div>`;
+    return `<article class="trust-dock-panel${index === 1 ? " active" : ""}" data-trust-dock-panel="${escapeHtml(item.id)}">
+        <div class="trust-panel-copy">
+          <h3>${escapeHtml(item.titleZh)}</h3>
+          <p>${escapeHtml(item.bodyZh)}</p>
+          <a class="trust-panel-link" href="${escapeHtml(item.hrefZh)}">${escapeHtml(item.actionZh)}<span>→</span></a>
+        </div>
+        ${panel}
+      </article>`;
+  })
+  .join("");
+const trustDockMetrics = [
+  [`${top.length}`, "current signals", "当前信号"],
+  [issueDate, "latest issue", "最新期次"],
+  [`${proofLinkRate}%`, "proof links attached", "来源链接附带"]
+];
+const trustDockMetricItems = trustDockMetrics
+  .map(([value, label, labelZh]) => `<span><strong>${escapeHtml(value)}</strong>${dual(label, labelZh)}</span>`)
+  .join("");
+const zhTrustDockMetricItems = trustDockMetrics
+  .map(([value, , labelZh]) => `<span><strong>${escapeHtml(value)}</strong>${escapeHtml(labelZh)}</span>`)
+  .join("");
+const trustDock = `<section class="trust-dock" id="trust-dock" aria-label="Trust dock">
+      <div class="trust-dock-copy">
+        ${dual("Trust Dock", "信任入口", "p", ' class="section-label"')}
+        ${dual("Keep checking before you buy.", "购买前，可以一直检查。", "h2")}
+        ${dual("Open data, weekly cadence, and public proof make the product easy to verify without forcing a decision on the first visit.", "开放数据、周更节奏和公开证明，让买家不必第一次访问就做决定，也能持续验证产品质量。", "p")}
+        <ul class="trust-dock-bullets">
+          <li><span></span>${dual("Public and verifiable", "公开且可验证")}</li>
+          <li><span></span>${dual("Updated every week", "每周更新")}</li>
+          <li><span></span>${dual("Proof you can click", "来源可点击")}</li>
+        </ul>
+      </div>
+      <div class="trust-dock-surface" data-active-trust-dock="feed" tabindex="0">
+        <div class="trust-dock-tabs" aria-label="Trust entry points">${trustDockButtons}<span class="trust-dock-indicator" aria-hidden="true"></span></div>
+        <div class="trust-dock-stage">${trustDockPanels}</div>
+        <div class="trust-dock-metrics">${trustDockMetricItems}</div>
+      </div>
+    </section>`;
+const zhTrustDock = `<section class="trust-dock" id="trust-dock" aria-label="Trust dock">
+      <div class="trust-dock-copy">
+        <p class="section-label">信任入口</p>
+        <h2>购买前，可以一直检查。</h2>
+        <p>开放数据、周更节奏和公开证明，让买家不必第一次访问就做决定，也能持续验证产品质量。</p>
+        <ul class="trust-dock-bullets">
+          <li><span></span>公开且可验证</li>
+          <li><span></span>每周更新</li>
+          <li><span></span>来源可点击</li>
+        </ul>
+      </div>
+      <div class="trust-dock-surface" data-active-trust-dock="feed" tabindex="0">
+        <div class="trust-dock-tabs" aria-label="Trust entry points">${zhTrustDockButtons}<span class="trust-dock-indicator" aria-hidden="true"></span></div>
+        <div class="trust-dock-stage">${zhTrustDockPanels}</div>
+        <div class="trust-dock-metrics">${zhTrustDockMetricItems}</div>
+      </div>
+    </section>`;
 const proofLedgerItems = [
   {
     id: "sample",
@@ -2323,36 +2487,7 @@ const html = `<!doctype html>
       <ul>${deliveryChecklist}</ul>
     </section>
     ${proofLedger}
-    <section class="seo-hub" aria-label="Search landing pages">
-      <div>
-        ${dual("Search pages", "搜索页", "p", ' class="section-label"')}
-        ${dual("Evergreen entry points for creators searching by platform or workflow.", "面向按平台或工作流搜索的创作者，提供长期入口。", "h2")}
-        ${dual("These pages refresh with the same daily source data and route qualified readers back to the sample pack.", "这些页面使用同一份每日来源数据刷新，并把合格读者引回样品包。", "p")}
-      </div>
-      <div class="topic-links">${topicLinks}</div>
-    </section>
-    <section class="feed-box" aria-label="Subscribe to updates">
-      <div>
-        ${dual("Subscribe", "订阅", "p", ' class="section-label"')}
-        ${dual("Turn one-time visitors into repeat readers.", "把一次性访问者变成持续读者。", "h2")}
-        ${dual("The RSS and JSON feeds publish the top 12 current opportunities, each with a proof link, hook, demo angle, and limitation.", "RSS 和 JSON Feed 发布当前 Top 12 机会，每条都包含来源链接、钩子、演示角度和限制说明。", "p")}
-      </div>
-      <div class="feed-actions">
-        <a class="action primary" href="./feed.xml">${dual("RSS feed", "RSS Feed")}</a>
-        <a class="action" href="./feed.json">${dual("JSON feed", "JSON Feed")}</a>
-      </div>
-    </section>
-    <section class="archive-box" aria-label="Public issue archive">
-      <div>
-        ${dual("Archive", "归档", "p", ' class="section-label"')}
-        ${dual("Durable public issues build trust before purchase.", "持久公开期刊能在购买前建立信任。", "h2")}
-        ${dual("Each issue freezes the top 12 opportunities, proof links, hooks, demo angles, and limitations for buyers who want to inspect the track record.", "每一期都会冻结 Top 12 机会、来源链接、钩子、演示角度和限制说明，方便买家检查历史记录。", "p")}
-      </div>
-      <div class="feed-actions">
-        <a class="action primary" href="./issues/latest.html">${dual("Latest issue", "最新一期")}</a>
-        <a class="action" href="./issues/index.html">${dual("Issue archive", "期刊归档")}</a>
-      </div>
-    </section>
+    ${trustDock}
     ${closingHandoff}
   </main>
 </body>
@@ -2507,20 +2642,7 @@ const zhHtml = `<!doctype html>
       <ul>${deliveryChecklist}</ul>
     </section>
     ${zhProofLedger}
-    <section class="seo-hub" aria-label="Chinese discovery links">
-      <div>
-        <p class="section-label">复访入口</p>
-        <h2>中文买家可以从样品、Feed、公开归档继续检查质量。</h2>
-        <p>每个入口都保留公开来源、钩子、演示角度和限制说明，降低首次购买前的不确定性。</p>
-      </div>
-      <div class="topic-links">
-        <a class="topic-link" href="../public-sample.zh-CN.md"><span>中文样品</span><small>先检查中文 Markdown 和 CSV 格式。</small></a>
-        <a class="topic-link" href="../public-sample.en.md"><span>English sample</span><small>给英文买家检查同一批机会。</small></a>
-        <a class="topic-link" href="../issues/latest.html"><span>最新公开期刊</span><small>查看 Top 12 机会的公开快照。</small></a>
-        <a class="topic-link" href="../feed.xml"><span>RSS Feed</span><small>订阅每期更新，减少一次性访问流失。</small></a>
-        <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
-      </div>
-    </section>
+    ${zhTrustDock}
     ${zhClosingHandoff}
   </main>
 </body>
@@ -3796,6 +3918,8 @@ h1 {
   .deliverable-tab,
   .proof-tab,
   .proof-panel,
+  .trust-dock-tab,
+  .trust-dock-panel,
   .final-action-button,
   .final-action-panel,
   .opportunity-focus,
@@ -5597,6 +5721,371 @@ main {
 .proof-panel .action {
   width: fit-content;
 }
+.trust-dock {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+  gap: clamp(22px, 5vw, 68px);
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(34px, 6vw, 72px);
+  margin-top: 38px;
+}
+.trust-dock-copy {
+  min-width: 0;
+}
+.trust-dock-copy h2 {
+  max-width: 560px;
+  margin: 0 0 12px;
+  font-size: clamp(38px, 5.4vw, 74px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.trust-dock-copy p:not(.section-label) {
+  max-width: 480px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.trust-dock-bullets {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.trust-dock-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 820;
+}
+.trust-dock-bullets li > span:first-child {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(52,199,89,0.18), rgba(255,255,255,0.9)),
+    radial-gradient(circle at 50% 50%, rgba(52,199,89,0.28) 0 3px, transparent 4px);
+  border: 1px solid rgba(52,199,89,0.18);
+}
+.trust-dock-bullets li > span:not(:first-child) {
+  min-width: 0;
+}
+.trust-dock-surface {
+  position: relative;
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,248,250,0.92)),
+    radial-gradient(circle at 74% 18%, rgba(0,113,227,0.1), transparent 34%);
+  box-shadow: 0 28px 72px rgba(19, 25, 38, 0.12);
+  outline: none;
+}
+.trust-dock-surface:focus-visible {
+  box-shadow: 0 28px 72px rgba(19, 25, 38, 0.12), 0 0 0 4px rgba(0,113,227,0.14);
+}
+.trust-dock-tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-width: 0;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.08);
+  background: rgba(255,255,255,0.72);
+}
+.trust-dock-tab {
+  display: grid;
+  gap: 7px;
+  justify-items: center;
+  min-width: 0;
+  min-height: 112px;
+  border: 0;
+  border-right: 1px solid rgba(17, 17, 20, 0.08);
+  padding: 22px 12px 18px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+.trust-dock-tab:last-of-type {
+  border-right: 0;
+}
+.trust-dock-tab:hover {
+  color: var(--ink);
+  background: rgba(255,255,255,0.68);
+}
+.trust-dock-tab.active {
+  color: var(--blue);
+}
+.trust-dock-tab span {
+  font-size: 28px;
+  line-height: 1;
+}
+.trust-dock-tab strong {
+  max-width: 100%;
+  font-size: 13px;
+  font-weight: 780;
+  line-height: 1.2;
+  text-align: center;
+}
+.trust-dock-indicator {
+  position: absolute;
+  left: 25%;
+  bottom: 0;
+  width: 25%;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--blue);
+  transform: translateX(var(--trust-indicator-x, 0%));
+  transition: transform 240ms ease;
+}
+.trust-dock-stage {
+  display: grid;
+  min-height: 330px;
+  padding: clamp(18px, 3vw, 28px);
+}
+.trust-dock-panel {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.42fr) minmax(0, 0.58fr);
+  gap: 22px;
+  align-items: stretch;
+  min-width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+.trust-dock-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.trust-panel-copy {
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  min-width: 0;
+}
+.trust-panel-copy h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.06;
+}
+.trust-panel-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.trust-panel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 4px;
+  color: var(--blue);
+  font-weight: 820;
+  text-decoration: none;
+}
+.trust-panel-link span {
+  transition: transform 160ms ease;
+}
+.trust-panel-link:hover span {
+  transform: translateX(3px);
+}
+.trust-link-grid,
+.trust-live-list,
+.trust-issue-card,
+.trust-sample-card {
+  min-width: 0;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 14px 38px rgba(17, 17, 20, 0.07);
+}
+.trust-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: rgba(17, 17, 20, 0.08);
+}
+.trust-link-grid a {
+  display: grid;
+  gap: 6px;
+  min-height: 112px;
+  padding: 16px;
+  background: #fff;
+  color: var(--ink);
+  text-decoration: none;
+}
+.trust-link-grid strong,
+.trust-sample-card strong,
+.trust-live-list strong,
+.trust-issue-card strong {
+  color: var(--ink);
+  font-weight: 840;
+}
+.trust-link-grid span,
+.trust-sample-card span,
+.trust-issue-card span,
+.trust-issue-card em {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.trust-live-list {
+  display: grid;
+  align-content: start;
+  overflow: hidden;
+}
+.trust-live-list > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  border-bottom: 1px solid var(--line);
+  padding: 16px;
+}
+.trust-live-list > div span {
+  width: 9px;
+  height: 9px;
+  border-radius: 99px;
+  background: #34c759;
+}
+.trust-live-list > div a {
+  margin-left: auto;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.trust-live-list ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trust-live-list li {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.06);
+  padding: 0 16px;
+}
+.trust-live-list li:last-child {
+  border-bottom: 0;
+}
+.trust-live-list li span {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--blue);
+}
+.trust-live-list li strong {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.trust-live-list li em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+.trust-issue-card,
+.trust-sample-card {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  padding: 22px;
+}
+.trust-issue-card > div,
+.trust-sample-card {
+  min-width: 0;
+}
+.trust-issue-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 24px;
+}
+.trust-issue-card span,
+.trust-issue-card em,
+.trust-sample-card span {
+  display: block;
+}
+.trust-issue-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.trust-issue-card li {
+  color: var(--muted);
+  font-size: 13px;
+}
+.trust-issue-card li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 99px;
+  background: #34c759;
+}
+.trust-sample-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.trust-sample-card a {
+  color: var(--blue);
+  font-weight: 820;
+  text-decoration: none;
+}
+.trust-dock-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(17, 17, 20, 0.08);
+  padding: 14px clamp(18px, 3vw, 28px);
+  background: rgba(255,255,255,0.72);
+}
+.trust-dock-metrics span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  border-right: 1px solid rgba(17, 17, 20, 0.1);
+  padding: 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.trust-dock-metrics span:first-child {
+  padding-left: 0;
+}
+.trust-dock-metrics span:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+.trust-dock-metrics strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .seo-hub,
 .seo-summary,
 .feed-box,
@@ -6635,6 +7124,7 @@ input[type="email"] {
   .delivery,
   .delivery > ul,
   .proof-ledger,
+  .trust-dock,
   .seo-hub,
   .seo-summary,
   .feed-box,
@@ -7086,6 +7576,88 @@ input[type="email"] {
   .proof-panel h3 {
     font-size: clamp(24px, 7vw, 32px);
   }
+  .trust-dock {
+    gap: 18px;
+    padding-top: 34px;
+    margin-top: 28px;
+  }
+  .trust-dock-copy h2 {
+    font-size: clamp(32px, 9vw, 46px);
+  }
+  .trust-dock-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .trust-dock-bullets {
+    gap: 9px;
+    margin-top: 18px;
+  }
+  .trust-dock-surface {
+    border-radius: 16px;
+  }
+  .trust-dock-tabs {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(118px, 38vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .trust-dock-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .trust-dock-tab {
+    min-height: 84px;
+    padding: 16px 10px 14px;
+    scroll-snap-align: start;
+  }
+  .trust-dock-tab span {
+    font-size: 23px;
+  }
+  .trust-dock-tab strong {
+    font-size: 12px;
+  }
+  .trust-dock-indicator {
+    display: none;
+  }
+  .trust-dock-stage {
+    min-height: 420px;
+    padding: 14px;
+  }
+  .trust-dock-panel {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .trust-panel-copy {
+    align-content: start;
+  }
+  .trust-panel-copy h3 {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+  .trust-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .trust-link-grid a {
+    min-height: 86px;
+  }
+  .trust-live-list li {
+    min-height: 42px;
+  }
+  .trust-live-list li strong {
+    white-space: normal;
+  }
+  .trust-dock-metrics {
+    padding: 12px 14px;
+  }
+  .trust-dock-metrics span {
+    padding: 0 8px;
+    font-size: 11px;
+  }
+  .trust-dock-metrics strong {
+    overflow: visible;
+    font-size: 16px;
+    white-space: normal;
+  }
   .auth-hero {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -7339,6 +7911,9 @@ const deliverableViewer = document.querySelector(".deliverable-viewer");
 const deliverableStatus = document.querySelector("[data-deliverable-status]");
 const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
 const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
+const trustDockButtons = [...document.querySelectorAll("[data-trust-dock]")];
+const trustDockPanels = [...document.querySelectorAll("[data-trust-dock-panel]")];
+const trustDockSurface = document.querySelector(".trust-dock-surface");
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
 const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
 const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
@@ -7514,6 +8089,8 @@ function setLanguage(language) {
   updateOpportunityFocus(activeOpportunityCard);
   const activeDeliverable = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
   if (activeDeliverable) activateDeliverableTab(activeDeliverable.dataset.deliverableTab);
+  const activeTrustDock = trustDockButtons.find((button) => button.classList.contains("active")) || trustDockButtons[0];
+  if (activeTrustDock) activateTrustDock(activeTrustDock.dataset.trustDock);
 }
 
 function applyFilters() {
@@ -7698,6 +8275,39 @@ function activateProofTab(id) {
 }
 for (const button of proofButtons) {
   button.addEventListener("click", () => activateProofTab(button.dataset.proofTab));
+}
+
+function activateTrustDock(id, scrollToButton = false) {
+  const activeIndex = Math.max(0, trustDockButtons.findIndex((button) => button.dataset.trustDock === id));
+  if (trustDockSurface) {
+    trustDockSurface.dataset.activeTrustDock = id;
+    trustDockSurface.style.setProperty("--trust-indicator-x", (activeIndex - 1) * 100 + "%");
+  }
+  for (const button of trustDockButtons) {
+    const active = button.dataset.trustDock === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of trustDockPanels) {
+    panel.classList.toggle("active", panel.dataset.trustDockPanel === id);
+  }
+}
+for (const button of trustDockButtons) {
+  button.addEventListener("click", () => activateTrustDock(button.dataset.trustDock, true));
+}
+if (trustDockSurface && trustDockButtons.length) {
+  trustDockSurface.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const currentIndex = Math.max(0, trustDockButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + trustDockButtons.length) % trustDockButtons.length;
+    const nextButton = trustDockButtons[nextIndex];
+    activateTrustDock(nextButton.dataset.trustDock, true);
+    nextButton.focus({ preventScroll: true });
+  });
+  activateTrustDock((trustDockButtons.find((button) => button.classList.contains("active")) || trustDockButtons[0]).dataset.trustDock);
 }
 
 function activateFinalAction(id) {

@@ -18,6 +18,9 @@ const deliverableViewer = document.querySelector(".deliverable-viewer");
 const deliverableStatus = document.querySelector("[data-deliverable-status]");
 const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
 const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
+const trustDockButtons = [...document.querySelectorAll("[data-trust-dock]")];
+const trustDockPanels = [...document.querySelectorAll("[data-trust-dock-panel]")];
+const trustDockSurface = document.querySelector(".trust-dock-surface");
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
 const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
 const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
@@ -193,6 +196,8 @@ function setLanguage(language) {
   updateOpportunityFocus(activeOpportunityCard);
   const activeDeliverable = deliverableButtons.find((button) => button.classList.contains("active")) || deliverableButtons[0];
   if (activeDeliverable) activateDeliverableTab(activeDeliverable.dataset.deliverableTab);
+  const activeTrustDock = trustDockButtons.find((button) => button.classList.contains("active")) || trustDockButtons[0];
+  if (activeTrustDock) activateTrustDock(activeTrustDock.dataset.trustDock);
 }
 
 function applyFilters() {
@@ -377,6 +382,39 @@ function activateProofTab(id) {
 }
 for (const button of proofButtons) {
   button.addEventListener("click", () => activateProofTab(button.dataset.proofTab));
+}
+
+function activateTrustDock(id, scrollToButton = false) {
+  const activeIndex = Math.max(0, trustDockButtons.findIndex((button) => button.dataset.trustDock === id));
+  if (trustDockSurface) {
+    trustDockSurface.dataset.activeTrustDock = id;
+    trustDockSurface.style.setProperty("--trust-indicator-x", (activeIndex - 1) * 100 + "%");
+  }
+  for (const button of trustDockButtons) {
+    const active = button.dataset.trustDock === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of trustDockPanels) {
+    panel.classList.toggle("active", panel.dataset.trustDockPanel === id);
+  }
+}
+for (const button of trustDockButtons) {
+  button.addEventListener("click", () => activateTrustDock(button.dataset.trustDock, true));
+}
+if (trustDockSurface && trustDockButtons.length) {
+  trustDockSurface.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const currentIndex = Math.max(0, trustDockButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + trustDockButtons.length) % trustDockButtons.length;
+    const nextButton = trustDockButtons[nextIndex];
+    activateTrustDock(nextButton.dataset.trustDock, true);
+    nextButton.focus({ preventScroll: true });
+  });
+  activateTrustDock((trustDockButtons.find((button) => button.classList.contains("active")) || trustDockButtons[0]).dataset.trustDock);
 }
 
 function activateFinalAction(id) {

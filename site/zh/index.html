@@ -908,18 +908,49 @@
       </article></div>
     </div>
   </section>
-    <section class="seo-hub" aria-label="Chinese discovery links">
-      <div>
-        <p class="section-label">复访入口</p>
-        <h2>中文买家可以从样品、Feed、公开归档继续检查质量。</h2>
-        <p>每个入口都保留公开来源、钩子、演示角度和限制说明，降低首次购买前的不确定性。</p>
+    <section class="trust-dock" id="trust-dock" aria-label="Trust dock">
+      <div class="trust-dock-copy">
+        <p class="section-label">信任入口</p>
+        <h2>购买前，可以一直检查。</h2>
+        <p>开放数据、周更节奏和公开证明，让买家不必第一次访问就做决定，也能持续验证产品质量。</p>
+        <ul class="trust-dock-bullets">
+          <li><span></span>公开且可验证</li>
+          <li><span></span>每周更新</li>
+          <li><span></span>来源可点击</li>
+        </ul>
       </div>
-      <div class="topic-links">
-        <a class="topic-link" href="../public-sample.zh-CN.md"><span>中文样品</span><small>先检查中文 Markdown 和 CSV 格式。</small></a>
-        <a class="topic-link" href="../public-sample.en.md"><span>English sample</span><small>给英文买家检查同一批机会。</small></a>
-        <a class="topic-link" href="../issues/latest.html"><span>最新公开期刊</span><small>查看 Top 12 机会的公开快照。</small></a>
-        <a class="topic-link" href="../feed.xml"><span>RSS Feed</span><small>订阅每期更新，减少一次性访问流失。</small></a>
-        <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
+      <div class="trust-dock-surface" data-active-trust-dock="feed" tabindex="0">
+        <div class="trust-dock-tabs" aria-label="Trust entry points"><button class="trust-dock-tab" type="button" data-trust-dock="search" aria-pressed="false"><span>⌕</span><strong>搜索页</strong></button><button class="trust-dock-tab active" type="button" data-trust-dock="feed" aria-pressed="true"><span>▤</span><strong>实时 Feed</strong></button><button class="trust-dock-tab" type="button" data-trust-dock="archive" aria-pressed="false"><span>□</span><strong>归档</strong></button><button class="trust-dock-tab" type="button" data-trust-dock="sample" aria-pressed="false"><span>中</span><strong>中文样品</strong></button><span class="trust-dock-indicator" aria-hidden="true"></span></div>
+        <div class="trust-dock-stage"><article class="trust-dock-panel" data-trust-dock-panel="search">
+        <div class="trust-panel-copy">
+          <h3>长期入口让发现持续开放。</h3>
+          <p>平台和工作流页面使用同一份来源数据刷新，再把合格读者引回样品包。</p>
+          <a class="trust-panel-link" href="../topics/bilibili-ai-topics.html">打开搜索页<span>→</span></a>
+        </div>
+        <div class="trust-link-grid"><a href="../topics/ai-video-ideas.html"><strong>面向创作者频道的 AI 视频选题</strong><span>每周更新、有来源支撑的 AI 和开发者视频选题列表，包含钩子、演示、标题和限制说明。</span></a><a href="../topics/github-ai-projects.html"><strong>值得做成视频的 GitHub AI 项目</strong><span>把新鲜 GitHub 信号转成技术创作者可以录制的演示选题。</span></a><a href="../topics/bilibili-ai-topics.html"><strong>适合技术讲解的 B 站 AI 选题</strong><span>从面向 B 站的 AI 和开发者信号里整理中文创作者角度。</span></a><a href="../topics/youtube-ai-workflows.html"><strong>适合周更视频的 YouTube AI 工作流选题</strong><span>面向 YouTube 的 AI 工作流机会，包含证明链接和可操作演示。</span></a></div>
+      </article><article class="trust-dock-panel active" data-trust-dock-panel="feed">
+        <div class="trust-panel-copy">
+          <h3>当前期次始终可检查。</h3>
+          <p>RSS 和 JSON 发布 Top 机会，并保留来源链接、钩子、演示角度和限制说明。</p>
+          <a class="trust-panel-link" href="../feed.xml">打开 RSS Feed<span>→</span></a>
+        </div>
+        <div class="trust-live-list"><div><span></span><strong>12 条当前信号</strong><a href="../feed.json">JSON</a></div><ol><li><span></span><strong>【实测】为什么 agent engineering workflow 现在值得创作者关注</strong><em>new</em></li><li><span></span><strong>【实测】为什么 RAG 知识库工作流 现在值得创作者关注</strong><em>4h</em></li><li><span></span><strong>【实测】为什么 终端 AI agent 工作流 现在值得创作者关注</strong><em>6h</em></li><li><span></span><strong>【实测】为什么 agent engineering workflow 现在值得创作者关注</strong><em>8h</em></li><li><span></span><strong>【实测】为什么 当我尝试下载 YouTube 时 现在值得创作者关注</strong><em>10h</em></li></ol></div>
+      </article><article class="trust-dock-panel" data-trust-dock-panel="archive">
+        <div class="trust-panel-copy">
+          <h3>每一期都冻结成证明。</h3>
+          <p>最新公开期刊日期为 2026-06-08，买家付款前可以比较历史记录。</p>
+          <a class="trust-panel-link" href="../issues/2026-06-08.html">打开最新一期<span>→</span></a>
+        </div>
+        <div class="trust-issue-card"><div><strong>#2026-06-08</strong><span>Weekly Trend Brief</span><em>12 条排序信号</em></div><ul><li>来源链接已附带</li><li>来源列表已包含</li><li>证据已核验</li></ul></div>
+      </article><article class="trust-dock-panel" data-trust-dock-panel="sample">
+        <div class="trust-panel-copy">
+          <h3>中文买家可以检查同一套质量标准。</h3>
+          <p>中文样品在下单前展示标题、钩子、来源链接、CSV 字段和交付结构。</p>
+          <a class="trust-panel-link" href="../public-sample.zh-CN.md">打开中文样品<span>→</span></a>
+        </div>
+        <div class="trust-sample-card"><strong>中文样品</strong><span>Markdown + CSV</span><p>标题、钩子、来源链接和风险备注在购买前保持可见。</p><a href="../public-sample.zh-CN.csv">打开 CSV</a></div>
+      </article></div>
+        <div class="trust-dock-metrics"><span><strong>12</strong>当前信号</span><span><strong>2026-06-08</strong>最新期次</span><span><strong>100%</strong>来源链接附带</span></div>
       </div>
     </section>
     <section class="handoff closing-handoff" id="final-action" aria-label="Final action">
