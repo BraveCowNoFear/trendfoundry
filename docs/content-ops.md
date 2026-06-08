@@ -1,14 +1,14 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-08T07:06:47.083Z
+Generated: 2026-06-08T07:52:20.117Z
 
 Status: success
 
 Refresh public sources: no
 
-Dataset: 2026-06-07T20:33:58.416Z
+Dataset: 2026-06-08T07:15:29.423Z
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -30,12 +30,13 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-revenue | success | 0 |
 | content-feedback | success | 0 |
 | content-close | success | 0 |
+| content-outreach-review | success | 0 |
 | content-health | success | 0 |
 
 ## Current Content State
 
-- Total source items: 126
-- Source errors: 2
+- Total source items: 127
+- Source errors: 1
 - Primary episode: NousResearch/hermes-agent
 - Buyer deliverables: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
 - Custom pack: AI video creators / YouTube and Bilibili (custom-proof-pack.md)
@@ -49,7 +50,8 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Revenue model: base new MRR USD 70, base month-one cash USD 92.5
 - Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Close pack: 5 selected, 5 clean, 0 needing cleanup
-- Health gate: 28 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Outreach review: 5 send packs, 0 skipped for text cleanup
+- Health gate: 37 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -74,6 +76,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 10. Review `docs/content-revenue-model.md` for weekly sales targets.
 11. Review `docs/content-feedback-loop.md` before editing product copy or sales objections.
 12. Review `dist/content-close-pack/today-close-queue.md` for the five-row daily close queue.
-13. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
-14. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-15. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+13. Review `dist/content-outreach-review/review-board.md` and one send pack at a time under `dist/content-outreach-review/send-packs/`.
+14. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
+15. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+16. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.

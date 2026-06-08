@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "buyer-pack", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -69,6 +69,7 @@ const crmManifest = await readJson("dist/content-sales-crm/manifest.json", {});
 const revenueManifest = await readJson("dist/content-revenue-model/manifest.json", {});
 const feedbackManifest = await readJson("dist/content-feedback-loop/manifest.json", {});
 const closeManifest = await readJson("dist/content-close-pack/manifest.json", {});
+const outreachReviewManifest = await readJson("dist/content-outreach-review/manifest.json", {});
 const healthManifest = await readJson("dist/content-health-gate/manifest.json", {});
 const allSucceeded = steps.every((step) => step.status === "success");
 
@@ -143,6 +144,12 @@ const run = {
       needsCleanupCount: closeManifest.needsCleanupCount,
       offerSkus: closeManifest.offerSkus || []
     },
+    outreachReview: {
+      reviewPackCount: outreachReviewManifest.reviewPackCount,
+      skippedNeedsCleanupCount: outreachReviewManifest.skippedNeedsCleanupCount,
+      offerSkus: outreachReviewManifest.offerSkus || [],
+      followUpDates: outreachReviewManifest.followUpDates || []
+    },
     healthGate: {
       checkedFileCount: healthManifest.checkedFileCount,
       filesWithMojibakeMarkers: healthManifest.filesWithMojibakeMarkers,
@@ -170,7 +177,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, buyer content pack, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -195,6 +202,7 @@ ${stepSummary(steps)}
 - Revenue model: base new MRR USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.new_mrr_usd) ?? "unknown"}, base month-one cash USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.month_one_cash_usd) ?? "unknown"}
 - Feedback loop: ${feedbackManifest.learningCount ?? "unknown"} learnings, ${feedbackManifest.questionCount ?? "unknown"} questions, ${feedbackManifest.privateReplyRows ?? "unknown"} private replies
 - Close pack: ${closeManifest.selectedCount ?? "unknown"} selected, ${closeManifest.cleanTextCount ?? "unknown"} clean, ${closeManifest.needsCleanupCount ?? "unknown"} needing cleanup
+- Outreach review: ${outreachReviewManifest.reviewPackCount ?? "unknown"} send packs, ${outreachReviewManifest.skippedNeedsCleanupCount ?? "unknown"} skipped for text cleanup
 - Health gate: ${healthManifest.checkedFileCount ?? "unknown"} files checked, ${healthManifest.filesWithMojibakeMarkers ?? "unknown"} with mojibake markers, ${healthManifest.publicCloseDocProspectLeaks ?? "unknown"} public prospect leaks
 - Listing SKUs: ${((listing.products || []).map((product) => product.sku)).join(", ") || "unknown"}
 - Seller-only exclusions: ${(buyerManifest.sellerOnlyExcluded || []).join(", ") || "unknown"}
@@ -220,9 +228,10 @@ ${stepSummary(steps)}
 10. Review \`docs/content-revenue-model.md\` for weekly sales targets.
 11. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
 12. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
-13. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-14. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-15. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+13. Review \`dist/content-outreach-review/review-board.md\` and one send pack at a time under \`dist/content-outreach-review/send-packs/\`.
+14. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+15. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+16. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });
