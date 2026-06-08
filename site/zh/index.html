@@ -423,52 +423,48 @@
         </li></ol>
       </div>
     </section>
-    <section class="opportunity-finder" id="opportunities" aria-labelledby="opportunity-finder-title">
-      <div class="finder-head">
-        <div>
-          <p class="section-label">机会筛选器</p>
-          <h2 id="opportunity-finder-title">先选来源，再在里面搜索。</h2>
-          <p>这里像商品分类墙一样工作：先按录制意图选入口，再展开具体机会。</p>
-        </div>
-        <p id="result-count" class="result-count" data-count="12">12 个可见机会</p>
-      </div>
-      <div class="finder-controls">
-        <div class="source-picker">
-          <div class="control-label"><span>1</span><strong>选择来源入口</strong></div>
-          <div class="filters" aria-label="Source filters"><button class="filter-button active" type="button" data-source-filter="all" aria-pressed="true">
-    <span class="filter-title" data-i18n-en="All signals" data-i18n-zh="全部信号">全部信号</span>
-    <span class="filter-note" data-i18n-en="Start here for the full weekly mix." data-i18n-zh="先看完整周更组合。">先看完整周更组合。</span>
-    <span class="filter-count" data-i18n-en="12 items" data-i18n-zh="12 条">12 条</span>
-  </button><button class="filter-button" type="button" data-source-filter="github" aria-pressed="false">
-    <span class="filter-title" data-i18n-en="GitHub" data-i18n-zh="GitHub">GitHub</span>
-    <span class="filter-note" data-i18n-en="Repos and tools ready for demos." data-i18n-zh="适合做实测演示的项目。">适合做实测演示的项目。</span>
-    <span class="filter-count" data-i18n-en="4 items" data-i18n-zh="4 条">4 条</span>
-  </button><button class="filter-button" type="button" data-source-filter="youtube" aria-pressed="false">
-    <span class="filter-title" data-i18n-en="YouTube" data-i18n-zh="YouTube">YouTube</span>
-    <span class="filter-note" data-i18n-en="Formats and angles already watched." data-i18n-zh="已验证的视频角度。">已验证的视频角度。</span>
-    <span class="filter-count" data-i18n-en="2 items" data-i18n-zh="2 条">2 条</span>
-  </button><button class="filter-button" type="button" data-source-filter="bilibili" aria-pressed="false">
-    <span class="filter-title" data-i18n-en="Bilibili" data-i18n-zh="B 站">B 站</span>
-    <span class="filter-note" data-i18n-en="Chinese creator demand signals." data-i18n-zh="中文创作者需求信号。">中文创作者需求信号。</span>
-    <span class="filter-count" data-i18n-en="3 items" data-i18n-zh="3 条">3 条</span>
-  </button><button class="filter-button" type="button" data-source-filter="hn" aria-pressed="false">
-    <span class="filter-title" data-i18n-en="Hacker News" data-i18n-zh="Hacker News">Hacker News</span>
-    <span class="filter-note" data-i18n-en="Technical debate and early objections." data-i18n-zh="技术讨论和早期异议。">技术讨论和早期异议。</span>
-    <span class="filter-count" data-i18n-en="2 items" data-i18n-zh="2 条">2 条</span>
-  </button><button class="filter-button" type="button" data-source-filter="arxiv" aria-pressed="false">
-    <span class="filter-title" data-i18n-en="arXiv" data-i18n-zh="arXiv">arXiv</span>
-    <span class="filter-note" data-i18n-en="Research signals before the demos spread." data-i18n-zh="演示扩散前的研究信号。">演示扩散前的研究信号。</span>
-    <span class="filter-count" data-i18n-en="1 item" data-i18n-zh="1 条">1 条</span>
-  </button></div>
-        </div>
-        <div class="search-wrap">
-          <div class="control-label"><span>2</span><label for="opportunity-search">在结果里搜索</label></div>
-          <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
+    <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
+      <div class="signal-shelf-copy">
+        <p class="section-label">样品信号</p>
+        <h2 id="signal-shelf-title">先看 3 条，再决定买哪一档。</h2>
+        <p>TrendFoundry 把公开 AI/开发者趋势整理成可录制选题、来源证据、CSV 和脚本。产品只按投入程度分三档：单期、周更、定制。</p>
+        <div class="product-rule-strip" aria-label="产品划分规则">
+          <span>单期 = 先试一包</span>
+          <span>周更 = 保持队列</span>
+          <span>定制 = 占住垂类</span>
         </div>
       </div>
-      <div class="opportunity-focus" id="opportunity-focus" aria-live="polite">
+      <div class="signal-shelf-board">
+        <div class="sample-signal-list" aria-label="样品信号列表"><article class="sample-signal-card card is-focused" tabindex="0" data-source="github" data-fit="high" data-rank="1" data-focus-title-en="NousResearch/hermes-agent" data-focus-title-zh="【实测】为什么 agent engineering workflow 现在值得创作者关注" data-focus-summary-en="The agent that grows with you" data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="187" data-focus-source="GitHub" data-focus-url="https://github.com/NousResearch/hermes-agent" data-search="nousresearch/hermes-agent the agent that grows with you ai-agents tech explainer / developer educator">
+  <span class="sample-signal-rank">01</span>
+  <div>
+    <p class="sample-signal-meta"><span>GitHub</span><span>评分 187</span><span>高匹配</span></p>
+    <h3>【实测】为什么 agent engineering workflow 现在值得创作者关注</h3>
+    <p>验证安装、输出和适用边界。</p>
+  </div>
+  <a class="sample-signal-link" href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer" aria-label="打开来源">↗</a>
+</article>
+<article class="sample-signal-card card" tabindex="0" data-source="github" data-fit="high" data-rank="2" data-focus-title-en="infiniflow/ragflow" data-focus-title-zh="【实测】为什么 RAG 知识库工作流 现在值得创作者关注" data-focus-summary-en="RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs" data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="175" data-focus-source="GitHub" data-focus-url="https://github.com/infiniflow/ragflow" data-search="infiniflow/ragflow ragflow is a leading open-source retrieval-augmented generation (rag) engine that fuses cutting-edge rag with agent capabilities to create a superior context layer for llms ai-agents tech explainer / developer educator">
+  <span class="sample-signal-rank">02</span>
+  <div>
+    <p class="sample-signal-meta"><span>GitHub</span><span>评分 175</span><span>高匹配</span></p>
+    <h3>【实测】为什么 RAG 知识库工作流 现在值得创作者关注</h3>
+    <p>验证安装、输出和适用边界。</p>
+  </div>
+  <a class="sample-signal-link" href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer" aria-label="打开来源">↗</a>
+</article>
+<article class="sample-signal-card card" tabindex="0" data-source="github" data-fit="high" data-rank="3" data-focus-title-en="google-gemini/gemini-cli" data-focus-title-zh="【实测】为什么 终端 AI agent 工作流 现在值得创作者关注" data-focus-summary-en="An open-source AI agent that brings the power of Gemini directly into your terminal." data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="172" data-focus-source="GitHub" data-focus-url="https://github.com/google-gemini/gemini-cli" data-search="google-gemini/gemini-cli an open-source ai agent that brings the power of gemini directly into your terminal. ai-agents tech explainer / developer educator">
+  <span class="sample-signal-rank">03</span>
+  <div>
+    <p class="sample-signal-meta"><span>GitHub</span><span>评分 172</span><span>高匹配</span></p>
+    <h3>【实测】为什么 终端 AI agent 工作流 现在值得创作者关注</h3>
+    <p>验证安装、输出和适用边界。</p>
+  </div>
+  <a class="sample-signal-link" href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noreferrer" aria-label="打开来源">↗</a>
+</article></div>
+        <div class="opportunity-focus" id="opportunity-focus" aria-live="polite">
     <div>
-      <p class="section-label" id="opportunity-focus-label" data-i18n-en="Active opportunity" data-i18n-zh="当前焦点">当前焦点</p>
+      <p class="section-label" id="opportunity-focus-label" data-i18n-en="Sample preview" data-i18n-zh="样品预览">样品预览</p>
       <h3 id="opportunity-focus-title">【实测】为什么 agent engineering workflow 现在值得创作者关注</h3>
       <p id="opportunity-focus-summary">验证安装、输出和适用边界。</p>
     </div>
@@ -481,190 +477,10 @@
       <a class="action primary" id="opportunity-focus-link" href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">打开来源</a>
     </div>
   </div>
-    </section>
-    <section class="grid opportunity-gallery" id="opportunity-grid" aria-label="Opportunity Gallery" style="--gallery-progress: 8%;">
-      <div class="gallery-header">
-        <div>
-          <p class="section-label">机会画廊</p>
-          <h2>12 条信号，收束成一条录制队列。</h2>
-          <p>先用上方筛选，再像浏览产品画廊一样推进当前录制队列。</p>
-        </div>
-        <div class="gallery-count"><span id="gallery-position">已选择 1 / 12</span><strong id="gallery-active-score">评分 187</strong></div>
       </div>
-      <article class="card" tabindex="0" data-source="github" data-fit="high" data-rank="1" data-gallery-index="0" data-focus-title-en="NousResearch/hermes-agent" data-focus-title-zh="【实测】为什么 agent engineering workflow 现在值得创作者关注" data-focus-summary-en="The agent that grows with you" data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="187" data-focus-source="GitHub" data-focus-url="https://github.com/NousResearch/hermes-agent" data-search="nousresearch/hermes-agent 验证安装、输出和适用边界。 【实测】为什么 agent engineering workflow 现在值得创作者关注 ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>评分 187</span><span>高匹配</span></div>
-  <h3><a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">NousResearch/hermes-agent</a></h3>
-  <p>创作切入：验证安装、输出和适用边界。</p>
-  <p class="why"><strong>为什么现在：</strong>NousResearch/hermes-agent 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 agent engineering workflow 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 NousResearch/hermes-agent、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="github" data-fit="high" data-rank="2" data-gallery-index="1" data-focus-title-en="infiniflow/ragflow" data-focus-title-zh="【实测】为什么 RAG 知识库工作流 现在值得创作者关注" data-focus-summary-en="RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs" data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="175" data-focus-source="GitHub" data-focus-url="https://github.com/infiniflow/ragflow" data-search="infiniflow/ragflow 验证安装、输出和适用边界。 【实测】为什么 rag 知识库工作流 现在值得创作者关注 ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>评分 175</span><span>高匹配</span></div>
-  <h3><a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer">infiniflow/ragflow</a></h3>
-  <p>创作切入：验证安装、输出和适用边界。</p>
-  <p class="why"><strong>为什么现在：</strong>infiniflow/ragflow 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 RAG 知识库工作流 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 infiniflow/ragflow、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="github" data-fit="high" data-rank="3" data-gallery-index="2" data-focus-title-en="google-gemini/gemini-cli" data-focus-title-zh="【实测】为什么 终端 AI agent 工作流 现在值得创作者关注" data-focus-summary-en="An open-source AI agent that brings the power of Gemini directly into your terminal." data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="172" data-focus-source="GitHub" data-focus-url="https://github.com/google-gemini/gemini-cli" data-search="google-gemini/gemini-cli 验证安装、输出和适用边界。 【实测】为什么 终端 ai agent 工作流 现在值得创作者关注 ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>评分 172</span><span>高匹配</span></div>
-  <h3><a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noreferrer">google-gemini/gemini-cli</a></h3>
-  <p>创作切入：验证安装、输出和适用边界。</p>
-  <p class="why"><strong>为什么现在：</strong>google-gemini/gemini-cli 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 终端 AI agent 工作流 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 google-gemini/gemini-cli、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="github" data-fit="high" data-rank="4" data-gallery-index="3" data-focus-title-en="langchain-ai/langchain" data-focus-title-zh="【实测】为什么 agent engineering workflow 现在值得创作者关注" data-focus-summary-en="The agent engineering platform." data-focus-summary-zh="验证安装、输出和适用边界。" data-focus-score="170" data-focus-source="GitHub" data-focus-url="https://github.com/langchain-ai/langchain" data-search="langchain-ai/langchain 验证安装、输出和适用边界。 【实测】为什么 agent engineering workflow 现在值得创作者关注 ai-agents tech explainer / developer educator">
-  <div class="meta"><span>github</span><span>评分 170</span><span>高匹配</span></div>
-  <h3><a href="https://github.com/langchain-ai/langchain" target="_blank" rel="noreferrer">langchain-ai/langchain</a></h3>
-  <p>创作切入：验证安装、输出和适用边界。</p>
-  <p class="why"><strong>为什么现在：</strong>langchain-ai/langchain 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 agent engineering workflow 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 langchain-ai/langchain、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="youtube" data-fit="high" data-rank="5" data-gallery-index="4" data-focus-title-en="The ONLY 3 Tools You Need to Create ANY AI Video" data-focus-title-zh="【实测】为什么 AI 视频工具栈 现在值得创作者关注" data-focus-summary-en="Tao Prompts / 5 days ago / 35,739 views" data-focus-summary-zh="验证方法是否可复现，避免照搬原视频。" data-focus-score="137" data-focus-source="YouTube" data-focus-url="https://www.youtube.com/watch?v=JQzF5LP4VTs" data-search="the only 3 tools you need to create any ai video 验证方法是否可复现，避免照搬原视频。 【实测】为什么 ai 视频工具栈 现在值得创作者关注 ai video tools creator workflow ai workflow creator">
-  <div class="meta"><span>youtube</span><span>评分 137</span><span>高匹配</span></div>
-  <h3><a href="https://www.youtube.com/watch?v=JQzF5LP4VTs" target="_blank" rel="noreferrer">The ONLY 3 Tools You Need to Create ANY AI Video</a></h3>
-  <p>创作切入：验证方法是否可复现，避免照搬原视频。</p>
-  <p class="why"><strong>为什么现在：</strong>The ONLY 3 Tools You Need to Create ANY AI Video 正出现在 youtube / AI video tools creator workflow 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 AI 视频工具栈 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 The ONLY 3 Tools You Need to Create ANY AI Video、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要复制原视频；要保留来源，并重新做自己的演示、判断和限制说明。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="youtube" data-fit="high" data-rank="6" data-gallery-index="5" data-focus-title-en="Best AI Video Prompt Generator 2026 (FREE)" data-focus-title-zh="【实测】为什么 AI 视频提示词生成器 现在值得创作者关注" data-focus-summary-en="Youri van Hofwegen / 6 days ago / 36,993 views" data-focus-summary-zh="验证方法是否可复现，避免照搬原视频。" data-focus-score="136" data-focus-source="YouTube" data-focus-url="https://www.youtube.com/watch?v=oT-2VO8Jzpk" data-search="best ai video prompt generator 2026 (free) 验证方法是否可复现，避免照搬原视频。 【实测】为什么 ai 视频提示词生成器 现在值得创作者关注 ai video tools creator workflow ai workflow creator">
-  <div class="meta"><span>youtube</span><span>评分 136</span><span>高匹配</span></div>
-  <h3><a href="https://www.youtube.com/watch?v=oT-2VO8Jzpk" target="_blank" rel="noreferrer">Best AI Video Prompt Generator 2026 (FREE)</a></h3>
-  <p>创作切入：验证方法是否可复现，避免照搬原视频。</p>
-  <p class="why"><strong>为什么现在：</strong>Best AI Video Prompt Generator 2026 (FREE) 正出现在 youtube / AI video tools creator workflow 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 AI 视频提示词生成器 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 Best AI Video Prompt Generator 2026 (FREE)、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要复制原视频；要保留来源，并重新做自己的演示、判断和限制说明。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="bilibili" data-fit="high" data-rank="7" data-gallery-index="6" data-focus-title-en="Bilibili creator workflow signal" data-focus-title-zh="【实测】为什么 B站强推！这几位老师简直就是教 AI 漫剧的神！！！ 现在值得创作者关注" data-focus-summary-en="热爱学习的芙莉莲 / 野生技能协会" data-focus-summary-zh="验证方法是否可复现，避免照搬原视频。" data-focus-score="135" data-focus-source="Bilibili" data-focus-url="http://www.bilibili.com/video/av116713756562539" data-search="b站强推！这几位老师简直就是教 ai 漫剧的神！！！ 验证方法是否可复现，避免照搬原视频。 【实测】为什么 b站强推！这几位老师简直就是教 ai 漫剧的神！！！ 现在值得创作者关注 b站ai工作流 ai workflow creator">
-  <div class="meta"><span>bilibili</span><span>评分 135</span><span>高匹配</span></div>
-  <h3><a href="http://www.bilibili.com/video/av116713756562539" target="_blank" rel="noreferrer">B站强推！这几位老师简直就是教 AI 漫剧的神！！！</a></h3>
-  <p>创作切入：验证方法是否可复现，避免照搬原视频。</p>
-  <p class="why"><strong>为什么现在：</strong>B站强推！这几位老师简直就是教 AI 漫剧的神！！！ 正出现在 bilibili / B站AI工作流 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 B站强推！这几位老师简直就是教 AI 漫剧的神！！！ 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 B站强推！这几位老师简直就是教 AI 漫剧的神！！！、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看热度；要检查素材版权、观点边界和是否能做出原创实测。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="bilibili" data-fit="high" data-rank="8" data-gallery-index="7" data-focus-title-en="Bilibili creator workflow signal" data-focus-title-zh="【实测】为什么 【赛博古董】21年前 YouTube 被上传的第一个视频 现在值得创作者关注" data-focus-summary-en="https://youtu.be/jNQXAC9IVRw?si=A7KyLmhEFYX890nb 我在动物园 240p" data-focus-summary-zh="验证方法是否可复现，避免照搬原视频。" data-focus-score="125" data-focus-source="Bilibili" data-focus-url="http://www.bilibili.com/video/av116706710132732" data-search="【赛博古董】21年前 youtube 被上传的第一个视频 验证方法是否可复现，避免照搬原视频。 【实测】为什么 【赛博古董】21年前 youtube 被上传的第一个视频 现在值得创作者关注 youtube 创作者 ai ai workflow creator">
-  <div class="meta"><span>bilibili</span><span>评分 125</span><span>高匹配</span></div>
-  <h3><a href="http://www.bilibili.com/video/av116706710132732" target="_blank" rel="noreferrer">【赛博古董】21年前 YouTube 被上传的第一个视频</a></h3>
-  <p>创作切入：验证方法是否可复现，避免照搬原视频。</p>
-  <p class="why"><strong>为什么现在：</strong>【赛博古董】21年前 YouTube 被上传的第一个视频 正出现在 bilibili / YouTube 创作者 AI 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 【赛博古董】21年前 YouTube 被上传的第一个视频 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 【赛博古董】21年前 YouTube 被上传的第一个视频、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看热度；要检查素材版权、观点边界和是否能做出原创实测。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="bilibili" data-fit="high" data-rank="9" data-gallery-index="8" data-focus-title-en="Bilibili creator workflow signal" data-focus-title-zh="【实测】为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注" data-focus-summary-en="这期看 Open-LLM-VTuber，一个开源 AI 虚拟人框架。它把语音识别、LLM、TTS、Live2D 角色前端串成一条互动链路，让 AI 不只停在聊天框里，而是可以听你说话、生成回复、开口回答，还能用角色形象演出来。 项目地址： https://github.com/Open-LLM-VTuber/Open-LLM-VTuber" data-focus-summary-zh="验证方法是否可复现，避免照搬原视频。" data-focus-score="124" data-focus-source="Bilibili" data-focus-url="http://www.bilibili.com/video/av116712766704983" data-search="10k 星的 ai 虚拟人框架：把聊天框变成能说话的 live2d 角色 验证方法是否可复现，避免照搬原视频。 【实测】为什么 ai 配音/多语种 dubbing 工作流 现在值得创作者关注 开源ai项目 tech explainer / developer educator">
-  <div class="meta"><span>bilibili</span><span>评分 124</span><span>高匹配</span></div>
-  <h3><a href="http://www.bilibili.com/video/av116712766704983" target="_blank" rel="noreferrer">10K 星的 AI 虚拟人框架：把聊天框变成能说话的 Live2D 角色</a></h3>
-  <p>创作切入：验证方法是否可复现，避免照搬原视频。</p>
-  <p class="why"><strong>为什么现在：</strong>10K 星的 AI 虚拟人框架：把聊天框变成能说话的 Live2D 角色 正出现在 bilibili / 开源AI项目 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 10K 星的 AI 虚拟人框架：把聊天框变成能说话的 Live2D 角色、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>不要只看热度；要检查素材版权、观点边界和是否能做出原创实测。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="hn" data-fit="high" data-rank="10" data-gallery-index="9" data-focus-title-en="Show HN: Lathe – Use LLMs to learn a new domain, not skip past it" data-focus-title-zh="【实测】为什么 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it 现在值得创作者关注" data-focus-summary-en="Show HN: Lathe – Use LLMs to learn a new domain, not skip past it" data-focus-summary-zh="验证来源、证据和可讲边界。" data-focus-score="109" data-focus-source="Hacker News" data-focus-url="https://github.com/devenjarvis/lathe" data-search="show hn: lathe – use llms to learn a new domain, not skip past it 验证来源、证据和可讲边界。 【实测】为什么 show hn: lathe – use llms to learn a new domain, not skip past it 现在值得创作者关注 github trending ai workflow creator">
-  <div class="meta"><span>hn</span><span>评分 109</span><span>高匹配</span></div>
-  <h3><a href="https://github.com/devenjarvis/lathe" target="_blank" rel="noreferrer">Show HN: Lathe – Use LLMs to learn a new domain, not skip past it</a></h3>
-  <p>创作切入：验证来源、证据和可讲边界。</p>
-  <p class="why"><strong>为什么现在：</strong>Show HN: Lathe – Use LLMs to learn a new domain, not skip past it 正出现在 hn / GitHub trending 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>公开热度不等于生产可用；录制前需要核验来源、复现路径和事实边界。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="hn" data-fit="high" data-rank="11" data-gallery-index="10" data-focus-title-en="Show HN: We built a tool to dub any video in the original voice in 40 languages" data-focus-title-zh="【实测】为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注" data-focus-summary-en="Show HN: We built a tool to dub any video in the original voice in 40 languages" data-focus-summary-zh="验证来源、证据和可讲边界。" data-focus-score="102" data-focus-source="Hacker News" data-focus-url="https://vaani.media" data-search="show hn: we built a tool to dub any video in the original voice in 40 languages 验证来源、证据和可讲边界。 【实测】为什么 ai 配音/多语种 dubbing 工作流 现在值得创作者关注 creator tools ai workflow creator">
-  <div class="meta"><span>hn</span><span>评分 102</span><span>高匹配</span></div>
-  <h3><a href="https://vaani.media" target="_blank" rel="noreferrer">Show HN: We built a tool to dub any video in the original voice in 40 languages</a></h3>
-  <p>创作切入：验证来源、证据和可讲边界。</p>
-  <p class="why"><strong>为什么现在：</strong>Show HN: We built a tool to dub any video in the original voice in 40 languages 正出现在 hn / creator tools 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 Show HN: We built a tool to dub any video in the original voice in 40 languages、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>公开热度不等于生产可用；录制前需要核验来源、复现路径和事实边界。</p>
-  </details>
-</article>
-<article class="card" tabindex="0" data-source="arxiv" data-fit="medium" data-rank="12" data-gallery-index="11" data-focus-title-en="Counterintuitive problems in discrete probability" data-focus-title-zh="【实测】为什么 Counterintuitive problems in discrete probability 现在值得创作者关注" data-focus-summary-en="This manuscript contains a collection of counterintuitive problems in discrete probability, together with detailed solutions. The dataset was constructed as part of a broader research project investigating the capabilities of the latest-generation Large Language Models (LLMs) in solving discrete probability problems, in order to assess whether LLMs tend to m" data-focus-summary-zh="验证来源、证据和可讲边界。" data-focus-score="80" data-focus-source="arXiv" data-focus-url="http://arxiv.org/abs/2606.07516v1" data-search="counterintuitive problems in discrete probability 验证来源、证据和可讲边界。 【实测】为什么 counterintuitive problems in discrete probability 现在值得创作者关注 creator economy generative ai ai workflow creator">
-  <div class="meta"><span>arxiv</span><span>评分 80</span><span>中匹配</span></div>
-  <h3><a href="http://arxiv.org/abs/2606.07516v1" target="_blank" rel="noreferrer">Counterintuitive problems in discrete probability</a></h3>
-  <p>创作切入：验证来源、证据和可讲边界。</p>
-  <p class="why"><strong>为什么现在：</strong>Counterintuitive problems in discrete probability 正出现在 arxiv / creator economy generative AI 的趋势信号里，适合做一次可复现的创作者工作流测试。</p>
-  <div class="idea"><strong>B 站角度：</strong>【实测】为什么 Counterintuitive problems in discrete probability 现在值得创作者关注</div>
-  <details>
-    <summary>制作大纲</summary>
-    <ol><li>30 秒问题开场: 观众为什么现在会关心它</li><li>3 分钟最小可复现实测: 安装、输入、输出</li><li>2 分钟对比: 它替代了哪一步，不能替代哪一步</li><li>1 分钟变现角度: 内容、模板、咨询或工具包</li><li>结尾: 给观众一个可复制的小任务</li></ol>
-    <p><strong>演示：</strong>用公开证据验证核心主张，并说明适合谁、不适合谁。</p>
-    <p><strong>封面：</strong>一张干净的技术讲解封面，突出 Counterintuitive problems in discrete probability、趋势信号和中文标题区域，避免假 logo。</p>
-    <p><strong>限制：</strong>公开热度不等于生产可用；录制前需要核验来源、复现路径和事实边界。</p>
-  </details>
-</article>
-      <div class="gallery-footer">
-        <div class="gallery-meter" aria-hidden="true"><span></span></div>
-        <div class="gallery-controls" aria-label="Opportunity gallery controls">
-          <button class="gallery-step" type="button" data-gallery-step="prev" aria-label="上一条机会">‹</button>
-          <button class="gallery-step" type="button" data-gallery-step="next" aria-label="下一条机会">›</button>
-        </div>
+      <div class="signal-shelf-actions">
+        <a class="action primary" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
+        <a class="action strong" href="../issues/latest.html">打开完整 12 条</a>
       </div>
     </section>
     <section class="contrast-lab" aria-label="Before and after TrendFoundry">

@@ -264,7 +264,7 @@ function setLanguage(language) {
     button.classList.toggle("active", button.dataset.languageToggle === currentLanguage);
   }
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
-  resultCount.textContent = countLabel(visible);
+  if (resultCount) resultCount.textContent = countLabel(visible);
   updatePlanningCalculator();
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
@@ -276,7 +276,7 @@ function setLanguage(language) {
 }
 
 function applyFilters() {
-  const query = (search.value || "").trim().toLowerCase();
+  const query = (search?.value || "").trim().toLowerCase();
   let visible = 0;
   for (const card of cards) {
     const sourceMatch = activeSource === "all" || card.dataset.source === activeSource;
@@ -291,10 +291,12 @@ function applyFilters() {
   } else {
     updateGalleryState(activeOpportunityCard);
   }
-  resultCount.textContent = countLabel(visible);
-  resultCount.classList.remove("bump");
-  window.requestAnimationFrame(() => resultCount.classList.add("bump"));
-  window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+  if (resultCount) {
+    resultCount.textContent = countLabel(visible);
+    resultCount.classList.remove("bump");
+    window.requestAnimationFrame(() => resultCount.classList.add("bump"));
+    window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+  }
 }
 
 for (const card of cards) {
@@ -365,7 +367,7 @@ for (const button of fitPersonaButtons) {
   button.addEventListener("focusin", () => activateFitPersona(button));
 }
 
-search.addEventListener("input", applyFilters);
+if (search) search.addEventListener("input", applyFilters);
 if (videoCountInput) videoCountInput.addEventListener("input", updatePlanningCalculator);
 if (researchHoursInput) researchHoursInput.addEventListener("input", updatePlanningCalculator);
 setLanguage(currentLanguage);

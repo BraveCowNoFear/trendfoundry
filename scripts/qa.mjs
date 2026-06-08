@@ -197,7 +197,7 @@ async function checkLocal() {
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));
   assertCheck("site has language switch", siteIndex.includes('data-language-toggle="en"') && siteIndex.includes('data-language-toggle="zh"'));
   assertCheck("site has Chinese product copy", siteIndex.includes(homeChineseTitle) && siteIndex.includes(emailOrderZh));
-  assertCheck("site card copy is localized", siteIndex.includes("为什么现在") && siteIndex.includes("制作大纲") && siteIndex.includes("B 站角度"));
+  assertCheck("site sample signal shelf is localized", siteIndex.includes('class="signal-shelf"') && siteIndex.includes("先看 3 条，再决定买哪一档。") && siteIndex.includes("单期 = 先试一包"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
   assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
@@ -209,7 +209,8 @@ async function checkLocal() {
   assertCheck("site checkout close links custom brief", siteIndex.includes("Custom niche desk") && siteIndex.includes("TrendFoundry%20order%3A%20Custom%20niche%20desk"));
   assertCheck("site links no-login order page", siteIndex.includes("./order/") && siteIndex.includes("Order without login"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
-  assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
+  assertCheck("site renders 3 sample signal cards", (siteIndex.match(/<article class="sample-signal-card card/g) || []).length === 3);
+  assertCheck("site links full 12-signal issue from shelf", siteIndex.includes("Open all 12 signals") && siteIndex.includes("./issues/latest.html"));
   assertCheck("site offers separate sample languages", siteIndex.includes("public-sample.en.md") && siteIndex.includes("public-sample.zh-CN.md") && siteIndex.includes("public-sample.en.csv") && siteIndex.includes("public-sample.zh-CN.csv"));
   const appJs = await readText(path.join(root, "site", "app.js"));
   assertCheck("site app persists language choice", appJs.includes("trendfoundry-language") && appJs.includes("setLanguage"));
@@ -219,7 +220,8 @@ async function checkLocal() {
   const zhIndex = await readText(path.join(root, "site", "zh", "index.html"));
   assertCheck("Chinese landing page exists", zhIndex.includes('<html lang="zh-CN">') && zhIndex.includes(zhLandingTitle));
   assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
-  assertCheck("Chinese landing page has 12 cards", (zhIndex.match(/<article class="card"/g) || []).length === 12);
+  assertCheck("Chinese landing page has 3 sample signal cards", (zhIndex.match(/<article class="sample-signal-card card/g) || []).length === 3);
+  assertCheck("Chinese landing page explains product rules", zhIndex.includes("产品只按投入程度分三档") && zhIndex.includes("单期 = 先试一包") && zhIndex.includes("打开完整 12 条"));
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
   assertCheck("Chinese landing page has product signal board", zhIndex.includes("../signal-board.png") && zhIndex.includes('class="product-visual"'));

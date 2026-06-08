@@ -3842,6 +3842,156 @@ input[type="search"]:focus {
   font-size: 12px;
   font-weight: 850;
 }
+.signal-shelf {
+  display: grid;
+  gap: 22px;
+  scroll-margin-top: 118px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(34px, 6vw, 74px) 0;
+}
+.signal-shelf-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 960px;
+}
+.signal-shelf-copy h2 {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(34px, 5.6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.signal-shelf-copy > p:not(.section-label) {
+  margin: 0;
+  max-width: 780px;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.42;
+}
+.product-rule-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.product-rule-strip span {
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.05);
+}
+.signal-shelf-board {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: 14px;
+  align-items: stretch;
+}
+.sample-signal-list {
+  display: grid;
+  gap: 10px;
+}
+.sample-signal-card.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 34px;
+  gap: 12px;
+  align-items: start;
+  min-height: 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.86);
+  cursor: pointer;
+}
+.sample-signal-card.card:hover,
+.sample-signal-card.card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.28);
+  box-shadow: 0 18px 44px rgba(17, 17, 20, 0.09);
+  outline: 0;
+}
+.sample-signal-card.card.is-focused {
+  border-color: rgba(0, 113, 227, 0.62);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 251, 255, 0.9)),
+    radial-gradient(circle at 94% 10%, rgba(0, 113, 227, 0.09), transparent 30%);
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.18), 0 20px 48px rgba(0, 113, 227, 0.09);
+}
+.sample-signal-rank {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f5f7f9;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+.sample-signal-card.is-focused .sample-signal-rank {
+  background: var(--blue);
+  color: #fff;
+}
+.sample-signal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 7px;
+}
+.sample-signal-meta span {
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 999px;
+  padding: 4px 7px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+}
+.sample-signal-card h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.22;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.sample-signal-card p:not(.sample-signal-meta) {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.sample-signal-link {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 900;
+}
+.signal-shelf .opportunity-focus {
+  align-self: stretch;
+  margin-top: 0;
+  min-height: 100%;
+}
+.signal-shelf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4984,6 +5134,28 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .signal-shelf-board {
+    grid-template-columns: 1fr;
+  }
+  .signal-shelf-copy h2 {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+  .sample-signal-card.card {
+    grid-template-columns: 38px minmax(0, 1fr) 32px;
+    gap: 10px;
+    padding: 12px;
+  }
+  .signal-shelf .opportunity-focus {
+    min-height: 0;
+  }
+  .signal-shelf-actions .action {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
   .opportunity-gallery {
     grid-template-columns: 1fr;
     gap: 12px;

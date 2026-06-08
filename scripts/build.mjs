@@ -1665,14 +1665,14 @@ const focusItem = top[0] || null;
 
 function opportunityFocusPanel(lang = "en") {
   const isZh = lang === "zh";
-  const title = focusItem ? (isZh ? zhSampleTitle(focusItem) : englishSampleTitle(focusItem)) : (isZh ? "机会预览" : "Opportunity preview");
-  const summary = focusItem ? (isZh ? zhHook(focusItem) : focusItem.summary || englishSampleHook(focusItem)) : (isZh ? "筛选后会在这里显示最匹配的机会。" : "The best matching opportunity will appear here after filtering.");
+  const title = focusItem ? (isZh ? zhSampleTitle(focusItem) : englishSampleTitle(focusItem)) : (isZh ? "样品预览" : "Sample preview");
+  const summary = focusItem ? (isZh ? zhHook(focusItem) : focusItem.summary || englishSampleHook(focusItem)) : (isZh ? "点选左侧样品后，这里显示来源、评分和录制切入点。" : "Select a sample signal to see its source, score, and recording angle.");
   const source = focusItem ? sourceLabel(focusItem) : "";
   const score = focusItem ? String(focusItem.score) : "";
   const href = focusItem ? focusItem.url : "#";
   return `<div class="opportunity-focus" id="opportunity-focus" aria-live="polite">
     <div>
-      <p class="section-label" id="opportunity-focus-label" data-i18n-en="Active opportunity" data-i18n-zh="当前焦点">${isZh ? "当前焦点" : "Active opportunity"}</p>
+      <p class="section-label" id="opportunity-focus-label" data-i18n-en="Sample preview" data-i18n-zh="样品预览">${isZh ? "样品预览" : "Sample preview"}</p>
       <h3 id="opportunity-focus-title">${escapeHtml(title)}</h3>
       <p id="opportunity-focus-summary">${escapeHtml(summary)}</p>
     </div>
@@ -1689,6 +1689,32 @@ function opportunityFocusPanel(lang = "en") {
 
 const opportunityFocus = opportunityFocusPanel("en");
 const zhOpportunityFocus = opportunityFocusPanel("zh");
+
+const sampleSignalItems = top.slice(0, 3);
+
+function sampleSignalRows(lang = "en") {
+  const isZh = lang === "zh";
+  return sampleSignalItems
+    .map((item, index) => {
+      const title = isZh ? zhSampleTitle(item) : englishSampleTitle(item);
+      const summary = isZh ? zhHook(item) : item.summary || englishSampleHook(item);
+      const fit = fitLabel(item.monetizationFit, isZh ? "zh" : "en");
+      const source = sourceLabel(item);
+      return `<article class="sample-signal-card card${index === 0 ? " is-focused" : ""}" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(source)}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+  <span class="sample-signal-rank">0${index + 1}</span>
+  <div>
+    <p class="sample-signal-meta"><span>${escapeHtml(source)}</span><span>${isZh ? "评分 " : "Score "}${escapeHtml(String(item.score))}</span><span>${escapeHtml(fit)}</span></p>
+    <h3>${escapeHtml(title)}</h3>
+    <p>${escapeHtml(summary)}</p>
+  </div>
+  <a class="sample-signal-link" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer" aria-label="${isZh ? "打开来源" : "Open proof source"}">↗</a>
+</article>`;
+    })
+    .join("\n");
+}
+
+const sampleSignalCards = sampleSignalRows("en");
+const zhSampleSignalCards = sampleSignalRows("zh");
 
 const topicDefinitions = [
   {
@@ -2643,43 +2669,24 @@ const html = `<!doctype html>
     ${motionProof}
     ${signalRunway}
     ${decisionFlow}
-    <section class="opportunity-finder" id="opportunities" aria-labelledby="opportunity-finder-title">
-      <div class="finder-head">
-        <div>
-          ${dual("Opportunity finder", "机会筛选器", "p", ' class="section-label"')}
-          ${dual("Pick a source lane, then search inside it.", "先选来源，再在里面搜索。", "h2", ' id="opportunity-finder-title"')}
-          ${dual("The controls work like a product category wall: choose the lane that matches your recording intent before opening the cards.", "这里像商品分类墙一样工作：先按录制意图选入口，再展开具体机会。", "p")}
-        </div>
-        <p id="result-count" class="result-count" data-count="${top.length}">${top.length} visible opportunities</p>
-      </div>
-      <div class="finder-controls">
-        <div class="source-picker">
-          <div class="control-label"><span>1</span>${dual("Pick a source lane", "选择来源入口", "strong")}</div>
-          <div class="filters" aria-label="Source filters">${sourceButtons}</div>
-        </div>
-        <div class="search-wrap">
-          <div class="control-label"><span>2</span><label for="opportunity-search">${dual("Search within results", "在结果里搜索")}</label></div>
-          <input id="opportunity-search" type="search" ${langAttr("agent, video, workflow, arxiv...", "智能体、视频、工作流、arxiv...")}>
+    <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
+      <div class="signal-shelf-copy">
+        ${dual("Sample signals", "样品信号", "p", ' class="section-label"')}
+        ${dual("See three signals, then choose the right tier.", "先看 3 条，再决定买哪一档。", "h2", ' id="signal-shelf-title"')}
+        ${dual("TrendFoundry turns public AI and developer trends into recordable topics, proof links, CSV, and script handoff. Products only differ by commitment: one issue, weekly queue, or custom niche desk.", "TrendFoundry 把公开 AI/开发者趋势整理成可录制选题、来源证据、CSV 和脚本。产品只按投入程度分三档：单期、周更、定制。", "p")}
+        <div class="product-rule-strip" aria-label="Product division rules">
+          ${dual("Single issue = test one pack", "单期 = 先试一包", "span")}
+          ${dual("Weekly = keep a queue alive", "周更 = 保持队列", "span")}
+          ${dual("Custom = own a niche", "定制 = 占住垂类", "span")}
         </div>
       </div>
-      ${opportunityFocus}
-    </section>
-    <section class="grid opportunity-gallery" id="opportunity-grid" aria-label="Opportunity Gallery" style="--gallery-progress: ${Math.round(100 / Math.max(1, top.length))}%;">
-      <div class="gallery-header">
-        <div>
-          ${dual("Opportunity Gallery", "机会画廊", "p", ' class="section-label"')}
-          ${dual("Twelve signals. One focused recording queue.", "12 条信号，收束成一条录制队列。", "h2")}
-          ${dual("Use the filters above, then move through the selected queue like a product gallery.", "先用上方筛选，再像浏览产品画廊一样推进当前录制队列。", "p")}
-        </div>
-        <div class="gallery-count"><span id="gallery-position">${dual(`1 of ${top.length} selected`, `已选择 1 / ${top.length}`)}</span><strong id="gallery-active-score">Score ${escapeHtml(String(top[0]?.score || ""))}</strong></div>
+      <div class="signal-shelf-board">
+        <div class="sample-signal-list" aria-label="Sample signal list">${sampleSignalCards}</div>
+        ${opportunityFocus}
       </div>
-      ${cards}
-      <div class="gallery-footer">
-        <div class="gallery-meter" aria-hidden="true"><span></span></div>
-        <div class="gallery-controls" aria-label="Opportunity gallery controls">
-          <button class="gallery-step" type="button" data-gallery-step="prev" aria-label="Previous opportunity">‹</button>
-          <button class="gallery-step" type="button" data-gallery-step="next" aria-label="Next opportunity">›</button>
-        </div>
+      <div class="signal-shelf-actions">
+        <a class="action primary" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
+        <a class="action strong" href="./issues/latest.html">${dual("Open all 12 signals", "打开完整 12 条")}</a>
       </div>
     </section>
     ${contrastSection}
@@ -2824,43 +2831,24 @@ const zhHtml = `<!doctype html>
     ${zhMotionProof}
     ${zhSignalRunway}
     ${zhDecisionFlow}
-    <section class="opportunity-finder" id="opportunities" aria-labelledby="opportunity-finder-title">
-      <div class="finder-head">
-        <div>
-          <p class="section-label">机会筛选器</p>
-          <h2 id="opportunity-finder-title">先选来源，再在里面搜索。</h2>
-          <p>这里像商品分类墙一样工作：先按录制意图选入口，再展开具体机会。</p>
-        </div>
-        <p id="result-count" class="result-count" data-count="${top.length}">${top.length} 个可见机会</p>
-      </div>
-      <div class="finder-controls">
-        <div class="source-picker">
-          <div class="control-label"><span>1</span><strong>选择来源入口</strong></div>
-          <div class="filters" aria-label="Source filters">${zhSourceButtons}</div>
-        </div>
-        <div class="search-wrap">
-          <div class="control-label"><span>2</span><label for="opportunity-search">在结果里搜索</label></div>
-          <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
+    <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
+      <div class="signal-shelf-copy">
+        <p class="section-label">样品信号</p>
+        <h2 id="signal-shelf-title">先看 3 条，再决定买哪一档。</h2>
+        <p>TrendFoundry 把公开 AI/开发者趋势整理成可录制选题、来源证据、CSV 和脚本。产品只按投入程度分三档：单期、周更、定制。</p>
+        <div class="product-rule-strip" aria-label="产品划分规则">
+          <span>单期 = 先试一包</span>
+          <span>周更 = 保持队列</span>
+          <span>定制 = 占住垂类</span>
         </div>
       </div>
-      ${zhOpportunityFocus}
-    </section>
-    <section class="grid opportunity-gallery" id="opportunity-grid" aria-label="Opportunity Gallery" style="--gallery-progress: ${Math.round(100 / Math.max(1, top.length))}%;">
-      <div class="gallery-header">
-        <div>
-          <p class="section-label">机会画廊</p>
-          <h2>12 条信号，收束成一条录制队列。</h2>
-          <p>先用上方筛选，再像浏览产品画廊一样推进当前录制队列。</p>
-        </div>
-        <div class="gallery-count"><span id="gallery-position">已选择 1 / ${top.length}</span><strong id="gallery-active-score">评分 ${escapeHtml(String(top[0]?.score || ""))}</strong></div>
+      <div class="signal-shelf-board">
+        <div class="sample-signal-list" aria-label="样品信号列表">${zhSampleSignalCards}</div>
+        ${zhOpportunityFocus}
       </div>
-      ${zhCards}
-      <div class="gallery-footer">
-        <div class="gallery-meter" aria-hidden="true"><span></span></div>
-        <div class="gallery-controls" aria-label="Opportunity gallery controls">
-          <button class="gallery-step" type="button" data-gallery-step="prev" aria-label="上一条机会">‹</button>
-          <button class="gallery-step" type="button" data-gallery-step="next" aria-label="下一条机会">›</button>
-        </div>
+      <div class="signal-shelf-actions">
+        <a class="action primary" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
+        <a class="action strong" href="../issues/latest.html">打开完整 12 条</a>
       </div>
     </section>
     ${zhContrastSection}
@@ -7323,6 +7311,156 @@ input[type="search"]:focus {
   font-size: 12px;
   font-weight: 850;
 }
+.signal-shelf {
+  display: grid;
+  gap: 22px;
+  scroll-margin-top: 118px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(34px, 6vw, 74px) 0;
+}
+.signal-shelf-copy {
+  display: grid;
+  gap: 14px;
+  max-width: 960px;
+}
+.signal-shelf-copy h2 {
+  margin: 0;
+  max-width: 900px;
+  font-size: clamp(34px, 5.6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.signal-shelf-copy > p:not(.section-label) {
+  margin: 0;
+  max-width: 780px;
+  color: var(--muted);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.42;
+}
+.product-rule-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.product-rule-strip span {
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 850;
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.05);
+}
+.signal-shelf-board {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: 14px;
+  align-items: stretch;
+}
+.sample-signal-list {
+  display: grid;
+  gap: 10px;
+}
+.sample-signal-card.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 34px;
+  gap: 12px;
+  align-items: start;
+  min-height: 0;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.86);
+  cursor: pointer;
+}
+.sample-signal-card.card:hover,
+.sample-signal-card.card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.28);
+  box-shadow: 0 18px 44px rgba(17, 17, 20, 0.09);
+  outline: 0;
+}
+.sample-signal-card.card.is-focused {
+  border-color: rgba(0, 113, 227, 0.62);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 251, 255, 0.9)),
+    radial-gradient(circle at 94% 10%, rgba(0, 113, 227, 0.09), transparent 30%);
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.18), 0 20px 48px rgba(0, 113, 227, 0.09);
+}
+.sample-signal-rank {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #f5f7f9;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+.sample-signal-card.is-focused .sample-signal-rank {
+  background: var(--blue);
+  color: #fff;
+}
+.sample-signal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 7px;
+}
+.sample-signal-meta span {
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 999px;
+  padding: 4px 7px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+}
+.sample-signal-card h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.22;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.sample-signal-card p:not(.sample-signal-meta) {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.sample-signal-link {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 900;
+}
+.signal-shelf .opportunity-focus {
+  align-self: stretch;
+  margin-top: 0;
+  min-height: 100%;
+}
+.signal-shelf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -8465,6 +8603,28 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .signal-shelf-board {
+    grid-template-columns: 1fr;
+  }
+  .signal-shelf-copy h2 {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+  .sample-signal-card.card {
+    grid-template-columns: 38px minmax(0, 1fr) 32px;
+    gap: 10px;
+    padding: 12px;
+  }
+  .signal-shelf .opportunity-focus {
+    min-height: 0;
+  }
+  .signal-shelf-actions .action {
+    flex: 1 1 100%;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
   .opportunity-gallery {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -9728,7 +9888,7 @@ function setLanguage(language) {
     button.classList.toggle("active", button.dataset.languageToggle === currentLanguage);
   }
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
-  resultCount.textContent = countLabel(visible);
+  if (resultCount) resultCount.textContent = countLabel(visible);
   updatePlanningCalculator();
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
@@ -9740,7 +9900,7 @@ function setLanguage(language) {
 }
 
 function applyFilters() {
-  const query = (search.value || "").trim().toLowerCase();
+  const query = (search?.value || "").trim().toLowerCase();
   let visible = 0;
   for (const card of cards) {
     const sourceMatch = activeSource === "all" || card.dataset.source === activeSource;
@@ -9755,10 +9915,12 @@ function applyFilters() {
   } else {
     updateGalleryState(activeOpportunityCard);
   }
-  resultCount.textContent = countLabel(visible);
-  resultCount.classList.remove("bump");
-  window.requestAnimationFrame(() => resultCount.classList.add("bump"));
-  window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+  if (resultCount) {
+    resultCount.textContent = countLabel(visible);
+    resultCount.classList.remove("bump");
+    window.requestAnimationFrame(() => resultCount.classList.add("bump"));
+    window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+  }
 }
 
 for (const card of cards) {
@@ -9829,7 +9991,7 @@ for (const button of fitPersonaButtons) {
   button.addEventListener("focusin", () => activateFitPersona(button));
 }
 
-search.addEventListener("input", applyFilters);
+if (search) search.addEventListener("input", applyFilters);
 if (videoCountInput) videoCountInput.addEventListener("input", updatePlanningCalculator);
 if (researchHoursInput) researchHoursInput.addEventListener("input", updatePlanningCalculator);
 setLanguage(currentLanguage);
