@@ -24,6 +24,9 @@ The report reads local state only. It does not send messages, charge buyers, upl
 - `dist/commerce/products.json`
 - `dist/qa/latest-qa.json`
 - `dist/ops-run/latest-run.json`
+- `dist/content-ops/latest-run.json`
+- `dist/content-outreach-review/manifest.json`
+- `dist/content-deal-desk/manifest.json`
 - `dist/orders/`
 - `docs/publishing.md`
 
@@ -33,6 +36,7 @@ The report reads local state only. It does not send messages, charge buyers, upl
 - current source snapshot and item count
 - latest online QA pass count plus the most recent QA run
 - most recent `npm run operate` step statuses
+- content sales lane status: content ops steps, primary episode, buyer deliverables, prospects, CRM due today, close queue, outreach review packs, deal desk active deals, objection playbook rows, and content health gate counts
 - lead stage counts
 - local outreach draft count
 - launch asset count

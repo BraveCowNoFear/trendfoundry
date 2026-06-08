@@ -53,6 +53,8 @@ try {
   }
   steps.push(runStep("daily", ["daily"]));
   await persistRun();
+  steps.push(runStep("content-ops", ["content-ops"]));
+  await persistRun();
   steps.push(runStep("commerce", ["commerce"]));
   await persistRun();
   steps.push(runStep("leads", ["leads"]));

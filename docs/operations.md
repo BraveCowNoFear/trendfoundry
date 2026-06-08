@@ -11,9 +11,17 @@ npm run operate
 This runs:
 
 - `npm run daily`
+- `npm run content-ops`
 - `npm run commerce`
 - `npm run leads`
 - `npm run intake-email-orders`
+- `npm run audit-email-order-routing`
+- `npm run sync-email-subscriptions`
+- `npm run content-subscription`
+- `npm run content-subscription-crm`
+- `npm run content-subscription-due`
+- `npm run content-subscription-retention`
+- `npm run fulfill-custom-email-orders`
 - `npm run fulfill-email-orders`
 - `npm run fulfill-ready`
 - `npm run launch-assets`
@@ -48,6 +56,7 @@ If tracked product files change, the workflow commits them to `main` as `github-
 - No payment action is attempted.
 - No files are uploaded.
 - No GitHub labels are changed.
+- Content operations refresh buyer packs, prospect review packs, deal desk drafts, and health gates locally only.
 - Buyer delivery still excludes `prospects.csv`, `outreach-board.md`, and `latest.json`.
 - The GitHub Actions run only refreshes tracked product files, pushes a commit when there are changes, and deploys the public static site.
 
