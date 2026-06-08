@@ -995,48 +995,57 @@
         <div class="trust-dock-metrics"><span><strong>12</strong>当前信号</span><span><strong>2026-06-08</strong>最新期次</span><span><strong>100%</strong>来源链接附带</span></div>
       </div>
     </section>
-    <section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+    <section class="handoff closing-handoff" id="final-action" aria-label="Final action" style="--final-progress:33%;">
       <div class="closing-copy">
-        <p class="section-label">最终动作</p>
-        <h2>把下一期排进录制队列。</h2>
-        <p>页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。</p>
+        <p class="section-label">最终动作工作台</p>
+        <h2>选择下一步动作。</h2>
+        <p>你已经看过信号和证明。现在选择检查、下单，或复用这套运营闭环。</p>
         <div class="closing-badges" aria-label="Conversion path">
-          <span>证明优先</span>
-          <span>人工优先</span>
-          <span>可复用</span>
+          <span>建立在已验证来源上</span>
+          <span>默认安全</span>
+          <span>可以直接行动</span>
         </div>
+        <p class="closing-key-hint">可用方向键切换最终路径。</p>
       </div>
-      <div class="closing-console">
+      <div class="closing-console" tabindex="0">
         <div class="closing-console-top">
-          <span>TrendFoundry</span>
+          <span><i></i>TrendFoundry</span>
           <strong>买家交接</strong>
+          <em>已验证</em>
         </div>
-        <div class="final-action-switcher" aria-label="Choose final action"><button class="final-action-button active" type="button" data-final-action="inspect" aria-pressed="true"><span>检查</span><strong>先看证明</strong></button><button class="final-action-button" type="button" data-final-action="order" aria-pressed="false"><span>下单</span><strong>人工结算</strong></button><button class="final-action-button" type="button" data-final-action="operate" aria-pressed="false"><span>运营</span><strong>发布闭环</strong></button></div>
+        <div class="final-action-switcher" aria-label="Choose final action"><button class="final-action-button active" type="button" data-final-action="inspect" data-final-index="0" aria-pressed="true"><em>01</em><span>检查</span><strong>先看证明</strong></button><button class="final-action-button" type="button" data-final-action="order" data-final-index="1" aria-pressed="false"><em>02</em><span>下单</span><strong>人工结算</strong></button><button class="final-action-button" type="button" data-final-action="operate" data-final-index="2" aria-pressed="false"><em>03</em><span>运营</span><strong>发布闭环</strong></button></div>
         <div class="final-action-panels"><article class="final-action-panel active" data-final-panel="inspect">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker">最新期刊 + 样品包 + 公开 Feed</p>
         <h3>先把证明路径打开。</h3>
         <p>面对谨慎买家，先让对方检查已冻结的期刊和样品包。每个承诺都有可见来源路径，销售才更稳。</p>
+        <div class="final-progress-row"><span>01 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="../issues/latest.html">打开最新期刊</a>
           <a class="action" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
         </div>
       </article><article class="final-action-panel" data-final-panel="order">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker">$9 样品、$19 周更、$49 定制</p>
         <h3>把下一期排进交付队列。</h3>
         <p>下单路径保持高信任和人工优先：选择交付包，发送准备好的请求，再私下确认付款和交付细节。</p>
+        <div class="final-progress-row"><span>02 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="../order/">打开下单页</a>
           <a class="action" href="https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&amp;title=Sample%20pack%20request%3A%20">申请样品</a>
         </div>
       </article><article class="final-action-panel" data-final-panel="operate">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker">报价、文案、外联、复用</p>
         <h3>把页面变成销售系统。</h3>
         <p>用发布计划和销售文案把访客从证明路径导向周更订阅，再让归档持续累积信任。</p>
+        <div class="final-progress-row"><span>03 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="../launch-plan.md">打开发布计划</a>
           <a class="action" href="../sales-page-copy.md">查看销售文案</a>
         </div>
       </article></div>
+        <div class="final-action-chips" aria-label="Handoff assurances"><span>来源证明</span><span>人工结算</span><span>发布闭环</span></div>
       </div>
     </section>
   </main>

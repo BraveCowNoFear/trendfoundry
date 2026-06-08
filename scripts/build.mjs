@@ -2128,16 +2128,18 @@ const finalActionItems = [
   }
 ];
 const finalActionButtons = finalActionItems
-  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${dual(item.label, item.labelZh)}</span><strong>${dual(item.metric, item.metricZh)}</strong></button>`)
+  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" data-final-index="${index}" aria-pressed="${index === 0 ? "true" : "false"}"><em>0${index + 1}</em><span>${dual(item.label, item.labelZh)}</span><strong>${dual(item.metric, item.metricZh)}</strong></button>`)
   .join("");
 const zhFinalActionButtons = finalActionItems
-  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${escapeHtml(item.labelZh)}</span><strong>${escapeHtml(item.metricZh)}</strong></button>`)
+  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" data-final-index="${index}" aria-pressed="${index === 0 ? "true" : "false"}"><em>0${index + 1}</em><span>${escapeHtml(item.labelZh)}</span><strong>${escapeHtml(item.metricZh)}</strong></button>`)
   .join("");
 const finalActionPanels = finalActionItems
   .map((item, index) => `<article class="final-action-panel${index === 0 ? " active" : ""}" data-final-panel="${escapeHtml(item.id)}">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         ${dual(item.status, item.statusZh, "p", ' class="final-panel-kicker"')}
         ${dual(item.title, item.titleZh, "h3")}
         ${dual(item.body, item.bodyZh, "p")}
+        <div class="final-progress-row"><span>0${index + 1} / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="${escapeHtml(item.href)}">${dual(item.action, item.actionZh)}</a>
           <a class="action" href="${escapeHtml(item.secondaryHref)}">${dual(item.secondaryAction, item.secondaryActionZh)}</a>
@@ -2146,53 +2148,63 @@ const finalActionPanels = finalActionItems
   .join("");
 const zhFinalActionPanels = finalActionItems
   .map((item, index) => `<article class="final-action-panel${index === 0 ? " active" : ""}" data-final-panel="${escapeHtml(item.id)}">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker">${escapeHtml(item.statusZh)}</p>
         <h3>${escapeHtml(item.titleZh)}</h3>
         <p>${escapeHtml(item.bodyZh)}</p>
+        <div class="final-progress-row"><span>0${index + 1} / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="${escapeHtml(item.hrefZh)}">${escapeHtml(item.actionZh)}</a>
           <a class="action" href="${escapeHtml(item.secondaryHrefZh)}">${escapeHtml(item.secondaryActionZh)}</a>
         </div>
       </article>`)
   .join("");
-const closingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+const finalActionChips = `<div class="final-action-chips" aria-label="Handoff assurances"><span>${dual("Source proof", "来源证明")}</span><span>${dual("Manual checkout", "人工结算")}</span><span>${dual("Launch loop", "发布闭环")}</span></div>`;
+const zhFinalActionChips = `<div class="final-action-chips" aria-label="Handoff assurances"><span>来源证明</span><span>人工结算</span><span>发布闭环</span></div>`;
+const closingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action" style="--final-progress:33%;">
       <div class="closing-copy">
-        ${dual("Final action", "最终动作", "p", ' class="section-label"')}
-        ${dual("Leave with the next issue queued.", "把下一期排进录制队列。", "h2")}
-        ${dual("The page now ends where a buyer actually decides: inspect the proof, request the pack, or reuse the operating plan.", "页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。", "p")}
+        ${dual("Final Action Studio", "最终动作工作台", "p", ' class="section-label"')}
+        ${dual("Choose the next move.", "选择下一步动作。", "h2")}
+        ${dual("You have seen the signal and the proof. Now choose whether to inspect, order, or operate the loop.", "你已经看过信号和证明。现在选择检查、下单，或复用这套运营闭环。", "p")}
         <div class="closing-badges" aria-label="Conversion path">
-          <span>${dual("Proof-led", "证明优先")}</span>
-          <span>${dual("Manual-first", "人工优先")}</span>
-          <span>${dual("Repeatable", "可复用")}</span>
+          <span>${dual("Built on verified sources", "建立在已验证来源上")}</span>
+          <span>${dual("Secure by design", "默认安全")}</span>
+          <span>${dual("Ready to act", "可以直接行动")}</span>
         </div>
+        <p class="closing-key-hint">${dual("Use arrow keys to switch the final route.", "可用方向键切换最终路径。")}</p>
       </div>
-      <div class="closing-console">
+      <div class="closing-console" tabindex="0">
         <div class="closing-console-top">
-          <span>${dual("TrendFoundry", "TrendFoundry")}</span>
+          <span><i></i>${dual("TrendFoundry", "TrendFoundry")}</span>
           <strong>${dual("Buyer handoff", "买家交接")}</strong>
+          <em>${dual("Verified", "已验证")}</em>
         </div>
         <div class="final-action-switcher" aria-label="Choose final action">${finalActionButtons}</div>
         <div class="final-action-panels">${finalActionPanels}</div>
+        ${finalActionChips}
       </div>
     </section>`;
-const zhClosingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+const zhClosingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action" style="--final-progress:33%;">
       <div class="closing-copy">
-        <p class="section-label">最终动作</p>
-        <h2>把下一期排进录制队列。</h2>
-        <p>页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。</p>
+        <p class="section-label">最终动作工作台</p>
+        <h2>选择下一步动作。</h2>
+        <p>你已经看过信号和证明。现在选择检查、下单，或复用这套运营闭环。</p>
         <div class="closing-badges" aria-label="Conversion path">
-          <span>证明优先</span>
-          <span>人工优先</span>
-          <span>可复用</span>
+          <span>建立在已验证来源上</span>
+          <span>默认安全</span>
+          <span>可以直接行动</span>
         </div>
+        <p class="closing-key-hint">可用方向键切换最终路径。</p>
       </div>
-      <div class="closing-console">
+      <div class="closing-console" tabindex="0">
         <div class="closing-console-top">
-          <span>TrendFoundry</span>
+          <span><i></i>TrendFoundry</span>
           <strong>买家交接</strong>
+          <em>已验证</em>
         </div>
         <div class="final-action-switcher" aria-label="Choose final action">${zhFinalActionButtons}</div>
         <div class="final-action-panels">${zhFinalActionPanels}</div>
+        ${zhFinalActionChips}
       </div>
     </section>`;
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
@@ -7249,7 +7261,8 @@ li { margin: 6px 0; }
   gap: clamp(22px, 5vw, 68px);
   align-items: center;
   margin-top: 38px;
-  padding-top: 42px;
+  padding-top: clamp(42px, 7vw, 88px);
+  border-top: 1px solid var(--line);
 }
 .closing-copy h2 {
   max-width: 640px;
@@ -7265,43 +7278,64 @@ li { margin: 6px 0; }
   line-height: 1.5;
 }
 .closing-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
 }
-.closing-badges span {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 7px 10px;
-  background: rgba(255,255,255,0.72);
+.closing-badges > span {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 800;
+}
+.closing-badges > span::before {
+  content: "";
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(0,113,227,0.2);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,113,227,0.22), transparent 34%),
+    #fff;
+  box-shadow: 0 8px 20px rgba(17,17,20,0.06);
+}
+.closing-key-hint {
+  margin-top: 28px !important;
+  color: var(--muted);
+  font-size: 13px !important;
+  font-weight: 720;
 }
 .closing-console {
   position: relative;
   display: grid;
-  gap: 12px;
+  gap: 16px;
   min-width: 0;
   overflow: hidden;
-  border-radius: 22px;
-  padding: clamp(14px, 2.2vw, 24px);
+  border: 1px solid rgba(17, 17, 20, 0.12);
+  border-radius: 8px;
+  padding: clamp(18px, 3vw, 34px);
   background:
-    radial-gradient(circle at 78% 10%, rgba(0, 113, 227, 0.34), transparent 32%),
-    linear-gradient(145deg, #1d1e23, #08090b 62%, #121319);
-  color: #fff;
-  box-shadow: 0 34px 88px rgba(17, 17, 20, 0.24);
+    linear-gradient(135deg, rgba(255,255,255,0.98), rgba(245,248,252,0.9)),
+    radial-gradient(circle at 88% 8%, rgba(0, 113, 227, 0.13), transparent 28%);
+  color: var(--ink);
+  box-shadow: 0 32px 86px rgba(17, 17, 20, 0.11);
 }
 .closing-console::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: linear-gradient(180deg, rgba(0,0,0,0.82), transparent 86%);
+    linear-gradient(120deg, transparent 0 36%, rgba(255,255,255,0.72) 48%, transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.22) 0 1px, transparent 1px 34px);
+  opacity: 0.45;
   pointer-events: none;
 }
 .closing-console-top,
@@ -7311,45 +7345,93 @@ li { margin: 6px 0; }
   z-index: 1;
 }
 .closing-console-top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
   gap: 12px;
-  color: rgba(255,255,255,0.62);
+  color: var(--muted);
   font-size: 12px;
   font-weight: 800;
   text-transform: uppercase;
 }
+.closing-console-top > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.closing-console-top i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(0,113,227,0.08);
+}
 .closing-console-top strong {
-  color: #8bc4ff;
+  color: var(--ink);
+}
+.closing-console-top em {
+  border: 1px solid rgba(15, 123, 99, 0.18);
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgba(15, 123, 99, 0.07);
+  color: var(--success);
+  font-style: normal;
 }
 .final-action-switcher {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 0;
+  border: 1px solid rgba(17,17,20,0.14);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.7);
 }
 .final-action-button {
   display: grid;
-  gap: 4px;
-  min-height: 74px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  padding: 11px 12px;
-  background: rgba(255,255,255,0.07);
-  color: #fff;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 10px;
+  align-items: center;
+  min-height: 78px;
+  border: 0;
+  border-right: 1px solid rgba(17,17,20,0.1);
+  border-radius: 0;
+  padding: 14px 16px;
+  background: transparent;
+  color: var(--ink);
   text-align: left;
   cursor: pointer;
   transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
+.final-action-button:last-child {
+  border-right: 0;
+}
 .final-action-button:hover {
-  border-color: rgba(255,255,255,0.26);
-  transform: translateY(-1px);
+  background: rgba(0,113,227,0.04);
 }
 .final-action-button.active {
-  border-color: rgba(255,255,255,0.72);
-  background: #fff;
+  box-shadow: inset 0 0 0 2px var(--accent);
+  background: rgba(0,113,227,0.05);
   color: var(--ink);
 }
-.final-action-button span {
+.final-action-button em {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(17,17,20,0.14);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 850;
+}
+.final-action-button.active em {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.final-action-button > span {
   font-size: 14px;
   font-weight: 850;
 }
@@ -7361,17 +7443,22 @@ li { margin: 6px 0; }
 }
 .final-action-panels {
   display: grid;
+  border: 1px solid rgba(17,17,20,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.7);
+  overflow: hidden;
 }
 .final-action-panel {
   grid-area: 1 / 1;
   display: grid;
   align-content: end;
-  gap: 12px;
-  min-height: 284px;
-  border: 1px solid rgba(255,255,255,0.11);
-  border-radius: 14px;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.42fr);
+  gap: 12px 26px;
+  min-height: 330px;
+  border: 0;
+  border-radius: 0;
   padding: clamp(18px, 3vw, 28px);
-  background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.06));
+  background: transparent;
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
@@ -7383,30 +7470,92 @@ li { margin: 6px 0; }
   transform: translateY(0);
 }
 .final-panel-kicker {
+  grid-column: 1;
   margin: 0;
-  color: #8bc4ff;
+  color: var(--accent);
   font-size: 12px;
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .final-action-panel h3 {
+  grid-column: 1;
   max-width: 560px;
   margin: 0;
-  color: #fff;
+  color: var(--ink);
   font-size: clamp(28px, 4vw, 48px);
   line-height: 1.02;
 }
 .final-action-panel p:not(.final-panel-kicker) {
+  grid-column: 1;
   max-width: 620px;
   margin: 0;
-  color: rgba(255,255,255,0.72);
+  color: var(--muted);
   line-height: 1.5;
 }
+.final-panel-visual {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  align-self: center;
+}
+.final-panel-visual span {
+  display: block;
+  min-height: 118px;
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,247,250,0.86)),
+    linear-gradient(135deg, rgba(0,113,227,0.08), transparent 50%);
+  box-shadow: 0 12px 26px rgba(17,17,20,0.06);
+}
+.final-panel-visual span:nth-child(2) {
+  transform: translateY(10px);
+}
+.final-panel-visual span:nth-child(3) {
+  transform: translateY(20px);
+}
+.final-progress-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 800;
+}
+.final-progress-row strong {
+  display: block;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0 var(--final-progress, 33%), rgba(17,17,20,0.12) var(--final-progress, 33%) 100%);
+}
 .final-panel-actions {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+.final-action-chips {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.final-action-chips > span {
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.72);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 760;
+}
+.final-action-chips > span:first-child {
+  color: var(--success);
 }
 .auth-hero .sub {
   max-width: 620px;
@@ -8670,8 +8819,15 @@ input[type="email"] {
     font-size: 16px;
   }
   .closing-console {
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 12px;
+  }
+  .closing-console-top {
+    grid-template-columns: 1fr auto;
+  }
+  .closing-console-top em {
+    grid-column: 1 / -1;
+    width: fit-content;
   }
   .final-action-switcher {
     grid-auto-flow: column;
@@ -8692,11 +8848,23 @@ input[type="email"] {
     scroll-snap-align: start;
   }
   .final-action-panel {
+    grid-template-columns: 1fr;
     min-height: 318px;
     padding: 16px;
   }
+  .final-panel-visual {
+    grid-column: 1;
+    grid-row: auto;
+    order: -1;
+  }
+  .final-panel-visual span {
+    min-height: 76px;
+  }
   .final-action-panel h3 {
     font-size: clamp(25px, 7vw, 34px);
+  }
+  .final-action-chips {
+    grid-template-columns: 1fr;
   }
   .final-panel-actions .action {
     flex: 1 1 100%;
@@ -8870,6 +9038,7 @@ const trustDockPanels = [...document.querySelectorAll("[data-trust-dock-panel]")
 const trustDockSurface = document.querySelector(".trust-dock-surface");
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
 const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
+const finalActionNode = document.querySelector(".closing-console");
 const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
 const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotlight-panel]")];
 const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
@@ -9355,6 +9524,7 @@ if (trustDockSurface && trustDockButtons.length) {
 }
 
 function activateFinalAction(id) {
+  const activeButton = finalActionButtons.find((button) => button.dataset.finalAction === id);
   for (const button of finalActionButtons) {
     const active = button.dataset.finalAction === id;
     button.classList.toggle("active", active);
@@ -9364,9 +9534,24 @@ function activateFinalAction(id) {
   for (const panel of finalActionPanels) {
     panel.classList.toggle("active", panel.dataset.finalPanel === id);
   }
+  if (finalActionNode && activeButton) {
+    const index = Number(activeButton.dataset.finalIndex || 0);
+    const progress = Math.round(((index + 1) / Math.max(1, finalActionButtons.length)) * 100);
+    finalActionNode.style.setProperty("--final-progress", progress + "%");
+  }
 }
 for (const button of finalActionButtons) {
   button.addEventListener("click", () => activateFinalAction(button.dataset.finalAction));
+}
+if (finalActionNode) {
+  finalActionNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const currentIndex = Math.max(0, finalActionButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + finalActionButtons.length) % finalActionButtons.length;
+    event.preventDefault();
+    activateFinalAction(finalActionButtons[nextIndex].dataset.finalAction);
+  });
 }
 
 function activateSampleSpotlight(index, scrollToButton = true) {

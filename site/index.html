@@ -1046,48 +1046,57 @@
         <div class="trust-dock-metrics"><span><strong>12</strong><span data-i18n-en="current signals" data-i18n-zh="当前信号">current signals</span></span><span><strong>2026-06-08</strong><span data-i18n-en="latest issue" data-i18n-zh="最新期次">latest issue</span></span><span><strong>100%</strong><span data-i18n-en="proof links attached" data-i18n-zh="来源链接附带">proof links attached</span></span></div>
       </div>
     </section>
-    <section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+    <section class="handoff closing-handoff" id="final-action" aria-label="Final action" style="--final-progress:33%;">
       <div class="closing-copy">
-        <p class="section-label" data-i18n-en="Final action" data-i18n-zh="最终动作">Final action</p>
-        <h2 data-i18n-en="Leave with the next issue queued." data-i18n-zh="把下一期排进录制队列。">Leave with the next issue queued.</h2>
-        <p data-i18n-en="The page now ends where a buyer actually decides: inspect the proof, request the pack, or reuse the operating plan." data-i18n-zh="页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。">The page now ends where a buyer actually decides: inspect the proof, request the pack, or reuse the operating plan.</p>
+        <p class="section-label" data-i18n-en="Final Action Studio" data-i18n-zh="最终动作工作台">Final Action Studio</p>
+        <h2 data-i18n-en="Choose the next move." data-i18n-zh="选择下一步动作。">Choose the next move.</h2>
+        <p data-i18n-en="You have seen the signal and the proof. Now choose whether to inspect, order, or operate the loop." data-i18n-zh="你已经看过信号和证明。现在选择检查、下单，或复用这套运营闭环。">You have seen the signal and the proof. Now choose whether to inspect, order, or operate the loop.</p>
         <div class="closing-badges" aria-label="Conversion path">
-          <span><span data-i18n-en="Proof-led" data-i18n-zh="证明优先">Proof-led</span></span>
-          <span><span data-i18n-en="Manual-first" data-i18n-zh="人工优先">Manual-first</span></span>
-          <span><span data-i18n-en="Repeatable" data-i18n-zh="可复用">Repeatable</span></span>
+          <span><span data-i18n-en="Built on verified sources" data-i18n-zh="建立在已验证来源上">Built on verified sources</span></span>
+          <span><span data-i18n-en="Secure by design" data-i18n-zh="默认安全">Secure by design</span></span>
+          <span><span data-i18n-en="Ready to act" data-i18n-zh="可以直接行动">Ready to act</span></span>
         </div>
+        <p class="closing-key-hint"><span data-i18n-en="Use arrow keys to switch the final route." data-i18n-zh="可用方向键切换最终路径。">Use arrow keys to switch the final route.</span></p>
       </div>
-      <div class="closing-console">
+      <div class="closing-console" tabindex="0">
         <div class="closing-console-top">
-          <span><span data-i18n-en="TrendFoundry" data-i18n-zh="TrendFoundry">TrendFoundry</span></span>
+          <span><i></i><span data-i18n-en="TrendFoundry" data-i18n-zh="TrendFoundry">TrendFoundry</span></span>
           <strong><span data-i18n-en="Buyer handoff" data-i18n-zh="买家交接">Buyer handoff</span></strong>
+          <em><span data-i18n-en="Verified" data-i18n-zh="已验证">Verified</span></em>
         </div>
-        <div class="final-action-switcher" aria-label="Choose final action"><button class="final-action-button active" type="button" data-final-action="inspect" aria-pressed="true"><span><span data-i18n-en="Inspect" data-i18n-zh="检查">Inspect</span></span><strong><span data-i18n-en="Proof first" data-i18n-zh="先看证明">Proof first</span></strong></button><button class="final-action-button" type="button" data-final-action="order" aria-pressed="false"><span><span data-i18n-en="Order" data-i18n-zh="下单">Order</span></span><strong><span data-i18n-en="Manual checkout" data-i18n-zh="人工结算">Manual checkout</span></strong></button><button class="final-action-button" type="button" data-final-action="operate" aria-pressed="false"><span><span data-i18n-en="Operate" data-i18n-zh="运营">Operate</span></span><strong><span data-i18n-en="Launch loop" data-i18n-zh="发布闭环">Launch loop</span></strong></button></div>
+        <div class="final-action-switcher" aria-label="Choose final action"><button class="final-action-button active" type="button" data-final-action="inspect" data-final-index="0" aria-pressed="true"><em>01</em><span><span data-i18n-en="Inspect" data-i18n-zh="检查">Inspect</span></span><strong><span data-i18n-en="Proof first" data-i18n-zh="先看证明">Proof first</span></strong></button><button class="final-action-button" type="button" data-final-action="order" data-final-index="1" aria-pressed="false"><em>02</em><span><span data-i18n-en="Order" data-i18n-zh="下单">Order</span></span><strong><span data-i18n-en="Manual checkout" data-i18n-zh="人工结算">Manual checkout</span></strong></button><button class="final-action-button" type="button" data-final-action="operate" data-final-index="2" aria-pressed="false"><em>03</em><span><span data-i18n-en="Operate" data-i18n-zh="运营">Operate</span></span><strong><span data-i18n-en="Launch loop" data-i18n-zh="发布闭环">Launch loop</span></strong></button></div>
         <div class="final-action-panels"><article class="final-action-panel active" data-final-panel="inspect">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker" data-i18n-en="Latest issue + sample pack + public feed" data-i18n-zh="最新期刊 + 样品包 + 公开 Feed">Latest issue + sample pack + public feed</p>
         <h3 data-i18n-en="Leave with the proof trail open." data-i18n-zh="先把证明路径打开。">Leave with the proof trail open.</h3>
         <p data-i18n-en="For cautious buyers, start with the frozen issue and sample pack. The product sells better when every claim has a visible source trail." data-i18n-zh="面对谨慎买家，先让对方检查已冻结的期刊和样品包。每个承诺都有可见来源路径，销售才更稳。">For cautious buyers, start with the frozen issue and sample pack. The product sells better when every claim has a visible source trail.</p>
+        <div class="final-progress-row"><span>01 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="./issues/latest.html"><span data-i18n-en="Open latest issue" data-i18n-zh="打开最新期刊">Open latest issue</span></a>
           <a class="action" href="./trendfoundry-free-sample-pack.zip"><span data-i18n-en="Download sample" data-i18n-zh="下载样品包">Download sample</span></a>
         </div>
       </article><article class="final-action-panel" data-final-panel="order">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker" data-i18n-en="$9 sample, $19 weekly, $49 custom" data-i18n-zh="$9 样品、$19 周更、$49 定制">$9 sample, $19 weekly, $49 custom</p>
         <h3 data-i18n-en="Move the next issue into the queue." data-i18n-zh="把下一期排进交付队列。">Move the next issue into the queue.</h3>
         <p data-i18n-en="The order route stays high-trust and manual: choose the pack, send a prepared request, then confirm payment and delivery details privately." data-i18n-zh="下单路径保持高信任和人工优先：选择交付包，发送准备好的请求，再私下确认付款和交付细节。">The order route stays high-trust and manual: choose the pack, send a prepared request, then confirm payment and delivery details privately.</p>
+        <div class="final-progress-row"><span>02 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="./order/"><span data-i18n-en="Open order page" data-i18n-zh="打开下单页">Open order page</span></a>
           <a class="action" href="https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&amp;title=Sample%20pack%20request%3A%20"><span data-i18n-en="Request sample" data-i18n-zh="申请样品">Request sample</span></a>
         </div>
       </article><article class="final-action-panel" data-final-panel="operate">
+        <div class="final-panel-visual" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="final-panel-kicker" data-i18n-en="Offer, copy, outreach, repeat" data-i18n-zh="报价、文案、外联、复用">Offer, copy, outreach, repeat</p>
         <h3 data-i18n-en="Turn the page into a selling system." data-i18n-zh="把页面变成销售系统。">Turn the page into a selling system.</h3>
         <p data-i18n-en="Use the launch plan and sales copy to route visitors from proof into a weekly subscription, then reuse the archive as compounding trust." data-i18n-zh="用发布计划和销售文案把访客从证明路径导向周更订阅，再让归档持续累积信任。">Use the launch plan and sales copy to route visitors from proof into a weekly subscription, then reuse the archive as compounding trust.</p>
+        <div class="final-progress-row"><span>03 / 03</span><strong></strong></div>
         <div class="final-panel-actions">
           <a class="action primary" href="./launch-plan.md"><span data-i18n-en="Open launch plan" data-i18n-zh="打开发布计划">Open launch plan</span></a>
           <a class="action" href="./sales-page-copy.md"><span data-i18n-en="View sales copy" data-i18n-zh="查看销售文案">View sales copy</span></a>
         </div>
       </article></div>
+        <div class="final-action-chips" aria-label="Handoff assurances"><span><span data-i18n-en="Source proof" data-i18n-zh="来源证明">Source proof</span></span><span><span data-i18n-en="Manual checkout" data-i18n-zh="人工结算">Manual checkout</span></span><span><span data-i18n-en="Launch loop" data-i18n-zh="发布闭环">Launch loop</span></span></div>
       </div>
     </section>
   </main>

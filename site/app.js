@@ -23,6 +23,7 @@ const trustDockPanels = [...document.querySelectorAll("[data-trust-dock-panel]")
 const trustDockSurface = document.querySelector(".trust-dock-surface");
 const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
 const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
+const finalActionNode = document.querySelector(".closing-console");
 const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
 const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotlight-panel]")];
 const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
@@ -508,6 +509,7 @@ if (trustDockSurface && trustDockButtons.length) {
 }
 
 function activateFinalAction(id) {
+  const activeButton = finalActionButtons.find((button) => button.dataset.finalAction === id);
   for (const button of finalActionButtons) {
     const active = button.dataset.finalAction === id;
     button.classList.toggle("active", active);
@@ -517,9 +519,24 @@ function activateFinalAction(id) {
   for (const panel of finalActionPanels) {
     panel.classList.toggle("active", panel.dataset.finalPanel === id);
   }
+  if (finalActionNode && activeButton) {
+    const index = Number(activeButton.dataset.finalIndex || 0);
+    const progress = Math.round(((index + 1) / Math.max(1, finalActionButtons.length)) * 100);
+    finalActionNode.style.setProperty("--final-progress", progress + "%");
+  }
 }
 for (const button of finalActionButtons) {
   button.addEventListener("click", () => activateFinalAction(button.dataset.finalAction));
+}
+if (finalActionNode) {
+  finalActionNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const currentIndex = Math.max(0, finalActionButtons.findIndex((button) => button.classList.contains("active")));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + finalActionButtons.length) % finalActionButtons.length;
+    event.preventDefault();
+    activateFinalAction(finalActionButtons[nextIndex].dataset.finalAction);
+  });
 }
 
 function activateSampleSpotlight(index, scrollToButton = true) {
