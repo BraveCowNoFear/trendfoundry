@@ -16,6 +16,12 @@ Prepare a buyer-only order folder:
 npm run fulfill-content -- --buyer="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@channel" --product="trendfoundry-proof-script-pack" --payment-ref="external-confirmation-id" --order-id="buyer-content-order"
 ```
 
+After the manually reviewed delivery has been sent, record the completion in the ignored content sales CRM:
+
+```bash
+npm run complete-content-order-delivery -- --order="dist/content-orders/buyer-content-order" --source="youtube" --creator="Buyer Name" --next-due="2026-06-15"
+```
+
 `--payment-ref` should be a local reference to an externally confirmed payment, not sensitive payment or account data. If omitted, the generated manifest marks payment as not externally confirmed.
 
 If `dist/content-orders/<order-id>/manifest.json` already exists, the command reports `already_prepared` and exits without overwriting buyer deliverables.
@@ -57,3 +63,4 @@ Never attach or publish these files from this lane:
 - No uploads.
 - No promises of views, subscribers, revenue, platform growth, or buyer outcomes.
 - External payment confirmation is checked outside this repository before delivery.
+- Delivery completion writes ignored local CRM state only; it does not send messages, collect payment, or upload files.

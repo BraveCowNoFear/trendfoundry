@@ -157,7 +157,7 @@ function fulfillmentCommand({ row, product }) {
     const niche = compact(row.topic, "AI video creators").replace(/"/g, "'");
     return `npm run custom-proof-pack -- --niche="${niche}" --platform="${compact(row.source, "YouTube")}" --buyer="${buyer}" --channel="${channel}"`;
   }
-  return `npm run buyer-pack\nnpm run fulfill-content -- --buyer="${buyer}" --contact="<buyer-contact-after-review>" --channel="${channel}" --product="${product.sku || "trendfoundry-proof-script-pack"}" --payment-ref="<external-confirmation-id>" --order-id="${orderId}"`;
+  return `npm run buyer-pack\nnpm run fulfill-content -- --buyer="${buyer}" --contact="<buyer-contact-after-review>" --channel="${channel}" --product="${product.sku || "trendfoundry-proof-script-pack"}" --payment-ref="<external-confirmation-id>" --order-id="${orderId}"\n# After manual delivery is sent:\nnpm run complete-content-order-delivery -- --order="dist/content-orders/${orderId}" --source="${compact(row.source, "manual")}" --creator="${buyer}" --next-due="<YYYY-MM-DD>"`;
 }
 
 function mergeDeals({ pipeline, replies, products }) {
