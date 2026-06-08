@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-08T07:00:53.200Z
+Generated: 2026-06-08T07:06:47.083Z
 
 Status: success
 
@@ -23,6 +23,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-subscription | success | 0 |
 | content-subscription-crm | success | 0 |
 | content-subscription-due | success | 0 |
+| content-subscription-retention | success | 0 |
 | content-sales | success | 0 |
 | content-prospects | success | 0 |
 | content-crm | success | 0 |
@@ -41,13 +42,14 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Subscription plan: 4 weeks (2026-06-17, 2026-06-24, 2026-07-01, 2026-07-08)
 - Subscription CRM: 0 subscribers, 0 ready today, 0 needing payment review, 0 renewal checks
 - Subscription due fulfillment: 0 ready, 0 prepared, 0 failed
+- Subscription retention: 0 drafts, 0 payment review, 0 renewal
 - Sales drafts: 6 drafts across warm_email, bilibili_dynamic, youtube_community, linkedin_or_x, followup_email, objection_reply
 - Prospects: 20 local drafts across YouTube, Bilibili
 - CRM: 20 rows, 5 due today, 20 due this week
 - Revenue model: base new MRR USD 70, base month-one cash USD 92.5
 - Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Close pack: 5 selected, 5 clean, 0 needing cleanup
-- Health gate: 25 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Health gate: 28 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -65,12 +67,13 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 3. Review `docs/content-subscription-plan.md` for the weekly subscription promise.
 4. Review `docs/content-subscription-crm.md` and private `dist/content-subscription-crm/due-queue.md` for due subscribers.
 5. Review `docs/content-subscription-due.md` and private `dist/content-subscription-due/prepared.csv` for prepared weekly deliveries.
-6. Review `docs/content-sales-sequence.md` for publish/send drafts.
-7. Review `dist/content-prospecting/prospect-board.md` for one-by-one outreach.
-8. Review `dist/content-sales-crm/pipeline.md` for today's follow-up queue.
-9. Review `docs/content-revenue-model.md` for weekly sales targets.
-10. Review `docs/content-feedback-loop.md` before editing product copy or sales objections.
-11. Review `dist/content-close-pack/today-close-queue.md` for the five-row daily close queue.
-12. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
-13. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-14. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+6. Review `docs/content-subscription-retention.md` and private `dist/content-subscription-retention/drafts.md` for renewal/payment-review drafts.
+7. Review `docs/content-sales-sequence.md` for publish/send drafts.
+8. Review `dist/content-prospecting/prospect-board.md` for one-by-one outreach.
+9. Review `dist/content-sales-crm/pipeline.md` for today's follow-up queue.
+10. Review `docs/content-revenue-model.md` for weekly sales targets.
+11. Review `docs/content-feedback-loop.md` before editing product copy or sales objections.
+12. Review `dist/content-close-pack/today-close-queue.md` for the five-row daily close queue.
+13. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
+14. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+15. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.

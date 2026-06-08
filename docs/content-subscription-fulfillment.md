@@ -11,6 +11,7 @@ npm run content-subscription
 npm run record-content-subscription -- --subscriber="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@buyer" --payment-ref="external-confirmation-id"
 npm run content-subscription-crm
 npm run content-subscription-due
+npm run content-subscription-retention
 npm run fulfill-content-subscription -- --subscriber="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@buyer" --week="1" --payment-ref="external-confirmation-id"
 npm run complete-content-subscription-delivery -- --order="dist/content-subscriptions/<order-id>"
 ```
@@ -52,10 +53,11 @@ After review and sending, `complete-content-subscription-delivery` updates ignor
 2. Record the subscriber in ignored local status with `npm run record-content-subscription`.
 3. Refresh `npm run content-subscription-crm`.
 4. Run `npm run content-subscription-due` to prepare all due buyer-only weekly packs.
-5. Pick the correct week from `docs/content-subscription-plan.md` if running a manual one-off delivery.
-6. Run the single fulfillment command with buyer details and payment reference only when bypassing the batch queue.
-7. Review `weekly-proof-pack.md`.
-8. Review `subscriber-email.md`.
-9. Attach only buyer deliverables unless the buyer requested archived weeks.
-10. Run `npm run complete-content-subscription-delivery -- --order="dist/content-subscriptions/<order-id>"` after sending.
-11. Refresh `npm run content-subscription-crm` to confirm the next delivery date.
+5. Run `npm run content-subscription-retention` to prepare renewal/payment-review drafts for non-deliverable rows.
+6. Pick the correct week from `docs/content-subscription-plan.md` if running a manual one-off delivery.
+7. Run the single fulfillment command with buyer details and payment reference only when bypassing the batch queue.
+8. Review `weekly-proof-pack.md`.
+9. Review `subscriber-email.md`.
+10. Attach only buyer deliverables unless the buyer requested archived weeks.
+11. Run `npm run complete-content-subscription-delivery -- --order="dist/content-subscriptions/<order-id>"` after sending.
+12. Refresh `npm run content-subscription-crm` to confirm the next delivery date.
