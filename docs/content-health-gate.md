@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T08:44:43.946Z
+Generated: 2026-06-08T13:11:38.055Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 58
+- Checked files: 62
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 30
 - Bilibili items with readable Chinese text: 30
@@ -22,12 +22,14 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/generate_episode_workbench.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_evidence_pack.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_delivery_gate.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_customer_success.mjs | tracked-source | no | 0 | none |
 | scripts/generate_buyer_content_pack.mjs | tracked-source | no | 0 | none |
 | scripts/run_content_ops.mjs | tracked-source | no | 0 | none |
 | scripts/update_content_sale_status.mjs | tracked-source | no | 0 | none |
 | scripts/complete_content_order_delivery.mjs | tracked-source | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
+| docs/content-customer-success.md | public-or-tracked | no | 0 | none |
 | docs/content-deal-desk.md | public-or-tracked | no | 0 | none |
 | docs/content-delivery-gate.md | public-or-tracked | no | 0 | none |
 | docs/content-editorial-audit.md | public-or-tracked | yes | 0 | none |
@@ -70,6 +72,8 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-deal-desk/deal-desk.md | private-ignored | no | 0 | none |
 | dist/content-deal-desk/response-drafts.md | private-ignored | no | 0 | none |
 | dist/content-deal-desk/invoice-drafts.md | private-ignored | no | 0 | none |
+| dist/content-customer-success/followups.csv | private-ignored | no | 0 | none |
+| dist/content-customer-success/followup-drafts.md | private-ignored | no | 0 | none |
 | dist/email-subscription-sync/synced.csv | private-ignored | no | 0 | none |
 | dist/custom-email-orders/custom-email-orders.md | private-ignored | no | 0 | none |
 | dist/email-order-routing/routes.csv | private-ignored | no | 0 | none |
