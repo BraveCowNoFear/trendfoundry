@@ -101,6 +101,10 @@ ${runSteps}
 - Outreach waiting reply: ${report.content.outreachWaitingReply}
 - Deal desk active deals: ${report.content.activeDeals}
 - Deal desk playbook rows: ${report.content.playbookRows}
+- Fulfillment queue rows: ${report.content.fulfillmentQueueRows}
+- Fulfillment waiting manual send: ${report.content.fulfillmentWaitingManualSend}
+- Fulfillment needs delivery fix: ${report.content.fulfillmentNeedsFix}
+- Fulfillment concise-ready: ${report.content.fulfillmentConciseReady}
 - Customer success follow-ups: ${report.content.customerFollowups}
 - Customer success due now: ${report.content.customerDueNow}
 - Testimonial private rows: ${report.content.testimonialRows}
@@ -145,6 +149,7 @@ const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "lates
 const contentOpsData = await readJsonIfExists(path.join(root, "dist", "content-ops", "latest-run.json"), { contentState: {}, steps: [] });
 const replyIntakeData = await readJsonIfExists(path.join(root, "dist", "content-reply-intake", "manifest.json"), {});
 const dealDeskData = await readJsonIfExists(path.join(root, "dist", "content-deal-desk", "manifest.json"), {});
+const fulfillmentQueueData = await readJsonIfExists(path.join(root, "dist", "content-fulfillment-queue", "manifest.json"), {});
 const customerSuccessData = await readJsonIfExists(path.join(root, "dist", "content-customer-success", "manifest.json"), {});
 const testimonialData = await readJsonIfExists(path.join(root, "dist", "content-testimonials", "manifest.json"), {});
 const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "content-outreach-review", "manifest.json"), {});
@@ -216,6 +221,10 @@ const report = {
     outreachWaitingReply: outreachSendsData.waitingReplyCount ?? contentOpsData.contentState?.outreachSends?.waitingReply ?? "unknown",
     activeDeals: dealDeskData.activeDealCount ?? contentOpsData.contentState?.dealDesk?.activeDealCount ?? "unknown",
     playbookRows: dealDeskData.playbookCount ?? contentOpsData.contentState?.dealDesk?.playbookCount ?? "unknown",
+    fulfillmentQueueRows: fulfillmentQueueData.queueCount ?? contentOpsData.contentState?.fulfillmentQueue?.queueCount ?? "unknown",
+    fulfillmentWaitingManualSend: fulfillmentQueueData.preparedWaitingManualSendCount ?? contentOpsData.contentState?.fulfillmentQueue?.preparedWaitingManualSend ?? "unknown",
+    fulfillmentNeedsFix: fulfillmentQueueData.needsDeliveryFixCount ?? contentOpsData.contentState?.fulfillmentQueue?.needsDeliveryFix ?? "unknown",
+    fulfillmentConciseReady: fulfillmentQueueData.conciseReadyCount ?? contentOpsData.contentState?.fulfillmentQueue?.conciseReady ?? "unknown",
     customerFollowups: customerSuccessData.followupCount ?? contentOpsData.contentState?.customerSuccess?.followupCount ?? "unknown",
     customerDueNow: customerSuccessData.dueNowCount ?? contentOpsData.contentState?.customerSuccess?.dueNow ?? "unknown",
     testimonialRows: testimonialData.testimonialRows ?? contentOpsData.contentState?.testimonials?.testimonialRows ?? "unknown",
@@ -245,7 +254,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
-    contentOpsData.status === "success" ? "Review dist/content-reply-intake/parsed-replies.md, dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, customer follow-ups, and testimonial bank.",
+    contentOpsData.status === "success" ? "Review dist/content-reply-intake/parsed-replies.md, dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-fulfillment-queue/fulfillment-queue.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, fulfillment queue, customer follow-ups, and testimonial bank.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."

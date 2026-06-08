@@ -30,6 +30,7 @@ const publicDocs = [
   "docs/content-editorial-audit.md",
   "docs/content-evidence-pack.md",
   "docs/content-feedback-loop.md",
+  "docs/content-fulfillment-queue.md",
   "docs/content-reply-intake.md",
   "docs/content-testimonials.md",
   "docs/content-outreach-review.md",
@@ -73,6 +74,8 @@ const privateFiles = [
   "dist/content-deal-desk/deal-desk.md",
   "dist/content-deal-desk/response-drafts.md",
   "dist/content-deal-desk/invoice-drafts.md",
+  "dist/content-fulfillment-queue/fulfillment-queue.csv",
+  "dist/content-fulfillment-queue/fulfillment-queue.md",
   "dist/content-customer-success/followups.csv",
   "dist/content-customer-success/followup-drafts.md",
   "dist/content-testimonials/testimonials.csv",
@@ -104,7 +107,8 @@ const sourceFiles = [
   "scripts/run_content_ops.mjs",
   "scripts/update_content_sale_status.mjs",
   "scripts/complete_content_order_delivery.mjs",
-  "scripts/complete_custom_proof_delivery.mjs"
+  "scripts/complete_custom_proof_delivery.mjs",
+  "scripts/generate_content_fulfillment_queue.mjs"
 ];
 
 function compact(value, fallback = "") {
