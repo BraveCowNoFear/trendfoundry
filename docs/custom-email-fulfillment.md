@@ -1,14 +1,14 @@
 # Custom Email Order Fulfillment
 
-Generated: 2026-06-08T07:24:30.176Z
+Generated: 2026-06-08T07:41:16.464Z
 
 This prepares buyer-only custom proof pack directories for paid email orders with `tier=custom-niche`. It does not send messages, collect payment, upload files, or build the frontend.
 
 ## Prepared Custom Orders
 
-| Order ID | Buyer | Contact | Niche | Platform | Order Dir |
-| --- | --- | --- | --- | --- | --- |
-| - | - | - | - | - | No paid custom email orders. |
+| Order ID | Status | Buyer | Contact | Niche | Platform | Order Dir |
+| --- | --- | --- | --- | --- | --- | --- |
+| - | - | - | - | - | - | No paid custom email orders. |
 
 ## Skipped Orders
 

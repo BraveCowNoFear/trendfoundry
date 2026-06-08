@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { prepareOrder } from "./lib/fulfillment.mjs";
 
@@ -21,7 +22,7 @@ function safeLine(value, fallback = "not-provided") {
 
 function markdownReport(prepared, skipped, generatedAt) {
   const readyRows = prepared.map(
-    (row) => `| ${row.orderId} | ${row.orderType} | ${row.buyerName} | ${row.buyerContact} | ${row.channel} | ${row.orderDir} |`
+    (row) => `| ${row.orderId} | ${row.status} | ${row.orderType} | ${row.buyerName} | ${row.buyerContact} | ${row.channel} | ${row.orderDir} |`
   );
   const skippedRows = skipped.map((order) => `| ${order.orderId || "-"} | ${order.stage || "unknown"} | ${safeLine(order.buyerName)} | ${safeLine(order.buyerContact)} | ${safeLine(order.skipReason, "not_paid_needs_fulfillment")} |`);
   return `# Email Order Fulfillment Report
@@ -37,9 +38,9 @@ Custom email orders are handled by \`fulfill-custom-email-orders\`.
 
 ## Prepared Orders
 
-| Order ID | Type | Buyer | Contact | Channel | Order Dir |
-|---|---|---|---|---|---|
-${readyRows.length ? readyRows.join("\n") : "| - | - | - | - | - | No paid email orders. |"}
+| Order ID | Status | Type | Buyer | Contact | Channel | Order Dir |
+|---|---|---|---|---|---|---|
+${readyRows.length ? readyRows.join("\n") : "| - | - | - | - | - | - | No paid email orders. |"}
 
 ## Skipped Orders
 
@@ -59,16 +60,12 @@ const intakeFile = resolvePath(argValue("intake-file", "dist/email-order-intake/
 const reportDir = resolvePath(argValue("out-dir", "dist/email-fulfillment"));
 const intake = JSON.parse(await readFile(intakeFile, "utf8"));
 const orders = intake.orders || [];
-const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment" && !["weekly-brief", "custom-niche"].includes(order.tier));
+const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment");
 const skipped = orders
-  .filter((order) => order.stage !== "paid_needs_fulfillment" || ["weekly-brief", "custom-niche"].includes(order.tier))
+  .filter((order) => order.stage !== "paid_needs_fulfillment")
   .map((order) => ({
     ...order,
-    skipReason: order.tier === "weekly-brief" && order.stage === "paid_needs_fulfillment"
-      ? "weekly_subscription_handled_by_content_subscription_due"
-      : order.tier === "custom-niche" && order.stage === "paid_needs_fulfillment"
-        ? "custom_order_handled_by_fulfill_custom_email_orders"
-      : "not_paid_needs_fulfillment"
+    skipReason: "not_paid_needs_fulfillment"
   }));
 const prepared = [];
 
@@ -78,6 +75,22 @@ for (const order of ready) {
   const channel = safeLine(order.channel, "not-provided");
   const orderType = safeLine(order.tier, "sample-issue");
   const orderId = safeLine(order.orderId, `${new Date().toISOString().slice(0, 10)}-${orderType}`);
+  const existingOrderDir = path.join(root, "dist", "orders", orderId);
+  if (existsSync(path.join(existingOrderDir, "manifest.json"))) {
+    prepared.push({
+      orderId,
+      sourceFile: order.sourceFile,
+      stage: order.stage,
+      buyerName,
+      buyerContact,
+      channel,
+      orderType,
+      orderDir: existingOrderDir,
+      files: [],
+      status: "already_prepared"
+    });
+    continue;
+  }
   const result = await prepareOrder({ root, buyerName, buyerContact, channel, orderType, orderId });
   prepared.push({
     orderId,
@@ -88,7 +101,8 @@ for (const order of ready) {
     channel,
     orderType,
     orderDir: result.orderDir,
-    files: result.files
+    files: result.files,
+    status: "prepared"
   });
 }
 
@@ -98,6 +112,8 @@ const payload = {
   generatedAt,
   intakeFile,
   prepared,
+  preparedCount: prepared.filter((row) => row.status === "prepared").length,
+  alreadyPreparedCount: prepared.filter((row) => row.status === "already_prepared").length,
   skipped,
   skippedCount: skipped.length,
   safety: [
@@ -111,6 +127,7 @@ const payload = {
 await writeFile(path.join(reportDir, "email-orders.json"), JSON.stringify(payload, null, 2), "utf8");
 await writeFile(path.join(reportDir, "email-orders.md"), markdownReport(prepared, skipped, generatedAt), "utf8");
 
-console.log(`Prepared ${prepared.length} paid email order(s).`);
+console.log(`Prepared ${payload.preparedCount} paid email order(s).`);
+console.log(`Already prepared paid email order(s): ${payload.alreadyPreparedCount}.`);
 console.log(`Skipped ${skipped.length} non-paid email order(s).`);
 console.log(`Report: ${path.join(reportDir, "email-orders.md")}`);

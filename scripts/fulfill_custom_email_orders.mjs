@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 
@@ -47,7 +48,7 @@ function runCustomPack(order) {
 }
 
 function markdownReport({ generatedAt, prepared, skipped }) {
-  const preparedRows = prepared.map((row) => `| ${row.orderId} | ${row.buyerName} | ${row.buyerContact} | ${row.niche} | ${row.platform} | ${row.orderDir} |`);
+  const preparedRows = prepared.map((row) => `| ${row.orderId} | ${row.status} | ${row.buyerName} | ${row.buyerContact} | ${row.niche} | ${row.platform} | ${row.orderDir} |`);
   const skippedRows = skipped.map((row) => `| ${row.orderId || "-"} | ${row.stage || "unknown"} | ${row.tier || "unknown"} | ${safeLine(row.skipReason, "not_custom_paid_order")} |`);
   return `# Custom Email Order Fulfillment
 
@@ -57,9 +58,9 @@ This prepares buyer-only custom proof pack directories for paid email orders wit
 
 ## Prepared Custom Orders
 
-| Order ID | Buyer | Contact | Niche | Platform | Order Dir |
-| --- | --- | --- | --- | --- | --- |
-${preparedRows.length ? preparedRows.join("\n") : "| - | - | - | - | - | No paid custom email orders. |"}
+| Order ID | Status | Buyer | Contact | Niche | Platform | Order Dir |
+| --- | --- | --- | --- | --- | --- | --- |
+${preparedRows.length ? preparedRows.join("\n") : "| - | - | - | - | - | - | No paid custom email orders. |"}
 
 ## Skipped Orders
 
@@ -91,12 +92,30 @@ const prepared = [];
 await mkdir(outDir, { recursive: true });
 
 for (const order of ready) {
-  const { result, orderId } = runCustomPack(order);
+  const orderId = safeLine(order.orderId, `custom-${Date.now()}`);
+  const orderDir = path.join(outDir, orderId);
+  if (existsSync(path.join(orderDir, "manifest.json"))) {
+    prepared.push({
+      orderId,
+      sourceFile: order.sourceFile,
+      stage: order.stage,
+      tier: order.tier,
+      buyerName: safeLine(order.buyerName, "custom buyer"),
+      buyerContact: safeLine(order.buyerContact, "not-provided"),
+      channel: safeLine(order.channel, "not-provided"),
+      niche: safeLine(order.niche, "not-provided"),
+      platform: platformFor(order),
+      orderDir,
+      files: [],
+      status: "already_prepared"
+    });
+    continue;
+  }
+  const { result } = runCustomPack(order);
   if (result.status !== 0) {
     throw new Error(`custom proof pack failed for ${orderId}: ${result.stderr || result.stdout}`);
   }
   const sourceDir = path.join(root, "dist", "custom-proof-pack");
-  const orderDir = path.join(outDir, orderId);
   await mkdir(orderDir, { recursive: true });
   const files = ["custom-proof-pack.md", "delivery-email.md", "manifest.json"];
   for (const file of files) {
@@ -128,7 +147,8 @@ Order directory: ${orderDir}
     niche: safeLine(order.niche, "not-provided"),
     platform: platformFor(order),
     orderDir,
-    files: [...files, "fulfillment-checklist.md"]
+    files: [...files, "fulfillment-checklist.md"],
+    status: "prepared"
   });
 }
 
@@ -138,6 +158,8 @@ const payload = {
   intakeFile,
   prepared,
   preparedCount: prepared.length,
+  newlyPreparedCount: prepared.filter((row) => row.status === "prepared").length,
+  alreadyPreparedCount: prepared.filter((row) => row.status === "already_prepared").length,
   skipped,
   skippedCount: skipped.length,
   safety: {
@@ -173,6 +195,7 @@ await writeFile(path.join(docsDir, "custom-email-fulfillment.md"), markdownRepor
   }))
 }), "utf8");
 
-console.log(`Prepared ${prepared.length} paid custom email order(s).`);
+console.log(`Prepared ${payload.newlyPreparedCount} paid custom email order(s).`);
+console.log(`Already prepared paid custom email order(s): ${payload.alreadyPreparedCount}.`);
 console.log(`Skipped ${skipped.length} non-custom email order(s).`);
 console.log(`Report: ${path.join(docsDir, "custom-email-fulfillment.md")}`);

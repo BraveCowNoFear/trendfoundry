@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 
@@ -63,6 +64,20 @@ async function readTextMaybe(file) {
 
 function runFulfillment(row) {
   const orderId = `${compact(row.delivery_date, new Date().toISOString().slice(0, 10))}-${compact(row.subscriber_id, "subscriber")}-week-${compact(row.week, "1")}`;
+  const orderDir = path.join(root, "dist", "content-subscriptions", orderId);
+  if (existsSync(path.join(orderDir, "manifest.json"))) {
+    return {
+      subscriber_id: compact(row.subscriber_id),
+      order_id: orderId,
+      week: compact(row.week),
+      delivery_date: compact(row.delivery_date),
+      status: "already_prepared",
+      exit_code: 0,
+      order_dir: orderDir,
+      stdout: "",
+      stderr: ""
+    };
+  }
   const args = [
     path.join(root, "scripts", "fulfill_content_subscription.mjs"),
     `--subscriber=${compact(row.name, row.subscriber_id)}`,
@@ -84,13 +99,13 @@ function runFulfillment(row) {
     delivery_date: compact(row.delivery_date),
     status: result.status === 0 ? "prepared" : "failed",
     exit_code: result.status,
-    order_dir: path.join(root, "dist", "content-subscriptions", orderId),
+    order_dir: orderDir,
     stdout: result.stdout || "",
     stderr: result.stderr || ""
   };
 }
 
-function publicDoc({ generatedAt, queueCount, readyCount, preparedCount, failedCount }) {
+function publicDoc({ generatedAt, queueCount, readyCount, preparedCount, alreadyPreparedCount, failedCount }) {
   return `# TrendFoundry Content Subscription Due Fulfillment
 
 Generated: ${generatedAt}
@@ -102,6 +117,7 @@ This content-only batch step prepares weekly subscription delivery directories f
 - Queue rows reviewed: ${queueCount}
 - Ready rows: ${readyCount}
 - Prepared deliveries: ${preparedCount}
+- Already prepared deliveries: ${alreadyPreparedCount}
 - Failed deliveries: ${failedCount}
 
 ## Operator Flow
@@ -129,13 +145,15 @@ const generatedAt = new Date().toISOString();
 const queueRows = parseCsv(await readTextMaybe(queueFile));
 const readyRows = queueRows.filter((row) => compact(row.action) === "prepare_delivery");
 const preparedRows = readyRows.map(runFulfillment);
-const failedRows = preparedRows.filter((row) => row.status !== "prepared");
+const failedRows = preparedRows.filter((row) => row.status === "failed");
+const alreadyPreparedRows = preparedRows.filter((row) => row.status === "already_prepared");
 const manifest = {
   generatedAt,
   queueFile: path.relative(root, queueFile).replace(/\\/g, "/"),
   queueCount: queueRows.length,
   readyCount: readyRows.length,
   preparedCount: preparedRows.filter((row) => row.status === "prepared").length,
+  alreadyPreparedCount: alreadyPreparedRows.length,
   failedCount: failedRows.length,
   buyerDeliverables: ["weekly-proof-pack.md", "subscriber-email.md"],
   safety: {
@@ -164,13 +182,15 @@ await writeFile(path.join(docsDir, "content-subscription-due.md"), publicDoc({
   queueCount: queueRows.length,
   readyCount: readyRows.length,
   preparedCount: manifest.preparedCount,
+  alreadyPreparedCount: manifest.alreadyPreparedCount,
   failedCount: manifest.failedCount
 }), "utf8");
 
-if (failedRows.length) {
+if (manifest.failedCount) {
   console.error(`Due subscription fulfillment failed for ${failedRows.length} row(s).`);
   process.exit(1);
 }
 
 console.log(`Wrote ${path.join(docsDir, "content-subscription-due.md")}`);
 console.log(`Prepared subscription deliveries: ${manifest.preparedCount}`);
+console.log(`Already prepared subscription deliveries: ${manifest.alreadyPreparedCount}`);
