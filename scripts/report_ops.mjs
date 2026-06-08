@@ -101,6 +101,7 @@ ${runSteps}
 - Outreach gate failed: ${report.content.outreachGateFailed}
 - Outreach send receipts: ${report.content.outreachSendReceipts}
 - Outreach waiting reply: ${report.content.outreachWaitingReply}
+- Outreach follow-ups due: ${report.content.outreachFollowupsDue}
 - Attribution campaigns: ${report.content.attributionCampaigns}
 - Attribution replies: ${report.content.attributionReplies}
 - Attribution deals: ${report.content.attributionDeals}
@@ -169,6 +170,7 @@ const actionBriefData = await readJsonIfExists(path.join(root, "dist", "content-
 const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "content-outreach-review", "manifest.json"), {});
 const outreachGateData = await readJsonIfExists(path.join(root, "dist", "content-outreach-gate", "manifest.json"), {});
 const outreachSendsData = await readJsonIfExists(path.join(root, "dist", "content-outreach-sends", "manifest.json"), {});
+const outreachFollowupsData = await readJsonIfExists(path.join(root, "dist", "content-outreach-followups", "manifest.json"), {});
 const attributionData = await readJsonIfExists(path.join(root, "dist", "content-attribution", "manifest.json"), {});
 const experimentsData = await readJsonIfExists(path.join(root, "dist", "content-experiments", "manifest.json"), {});
 const sendBatchData = await readJsonIfExists(path.join(root, "dist", "content-send-batch", "manifest.json"), {});
@@ -239,6 +241,7 @@ const report = {
     outreachGateFailed: outreachGateData.failedCount ?? contentOpsData.contentState?.outreachGate?.failedCount ?? "unknown",
     outreachSendReceipts: outreachSendsData.sendReceiptCount ?? contentOpsData.contentState?.outreachSends?.sendReceiptCount ?? "unknown",
     outreachWaitingReply: outreachSendsData.waitingReplyCount ?? contentOpsData.contentState?.outreachSends?.waitingReply ?? "unknown",
+    outreachFollowupsDue: outreachFollowupsData.followupCount ?? contentOpsData.contentState?.outreachFollowups?.followups ?? "unknown",
     attributionCampaigns: attributionData.campaignCount ?? contentOpsData.contentState?.attribution?.campaigns ?? "unknown",
     attributionReplies: attributionData.repliesAttributedCount ?? contentOpsData.contentState?.attribution?.repliesAttributed ?? "unknown",
     attributionDeals: attributionData.dealsAttributedCount ?? contentOpsData.contentState?.attribution?.dealsAttributed ?? "unknown",

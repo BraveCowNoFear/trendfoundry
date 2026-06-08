@@ -205,6 +205,25 @@ function fromSendBatch(rows) {
   }));
 }
 
+function fromOutreachFollowups(rows) {
+  return rows.map((row, index) => action({
+    action_id: compact(row.followup_id, `followup-${index + 1}`),
+    priority: 80 - index,
+    lane: "outreach_followup",
+    status: "due_followup",
+    title: `Send reviewed follow-up: ${compact(row.subject, row.topic)}`,
+    actor: compact(row.creator, "private prospect"),
+    offer_sku: compact(row.offer_sku),
+    campaign_id: compact(row.campaign_id),
+    variant_id: compact(row.variant_id),
+    source_ref: compact(row.review_file),
+    next_action: "review follow-up draft, send manually if safe, then run the listed record-content-sale command",
+    review_file: "dist/content-outreach-followups/followups.md",
+    command: compact(row.command),
+    safety_note: "follow-up is due and unreplied; manual review required before sending"
+  }));
+}
+
 function fromCloseQueue(rows, existingOutreachIds) {
   return rows
     .filter((row) => !existingOutreachIds.has(`outreach-${String(row.close_rank).padStart(2, "0")}-${compact(row.creator).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`))
@@ -317,6 +336,7 @@ const retentionRows = parseCsv(await readText("dist/content-subscription-retenti
 const outreachRows = parseCsv(await readText("dist/content-outreach-review/review-board.csv"));
 const outreachGateRows = parseCsv(await readText("dist/content-outreach-gate/checks.csv"));
 const sendBatchRows = parseCsv(await readText("dist/content-send-batch/send-batch.csv"));
+const outreachFollowupRows = parseCsv(await readText("dist/content-outreach-followups/followups.csv"));
 const closeRows = parseCsv(await readText("dist/content-close-pack/today-close-queue.csv"));
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
 
@@ -327,6 +347,7 @@ const actions = [
   ...fromDeals(dealRows),
   ...fromCustomerSuccess(customerRows),
   ...fromRetention(retentionRows),
+  ...fromOutreachFollowups(outreachFollowupRows),
   ...fromSendBatch(sendBatchRows),
   ...fromOutreachReview(outreachRows, passedGateIds),
   ...fromCloseQueue(closeRows, outreachIds),
@@ -345,6 +366,7 @@ const manifest = {
     dealRows: dealRows.length,
     customerRows: customerRows.length,
     retentionRows: retentionRows.length,
+    outreachFollowupRows: outreachFollowupRows.length,
     outreachRows: outreachRows.length,
     sendBatchRows: sendBatchRows.length,
     outreachGatePassedRows: passedGateIds.size,

@@ -49,6 +49,7 @@
     "content-outreach-review": "node scripts/generate_content_outreach_review.mjs",
     "content-outreach-gate": "node scripts/generate_content_outreach_gate.mjs",
     "content-outreach-sends": "node scripts/generate_content_outreach_send_log.mjs",
+    "content-outreach-followups": "node scripts/generate_content_outreach_followups.mjs",
     "content-attribution": "node scripts/generate_content_attribution.mjs",
     "content-experiments": "node scripts/generate_content_experiments.mjs",
     "content-send-batch": "node scripts/generate_content_send_batch.mjs",
