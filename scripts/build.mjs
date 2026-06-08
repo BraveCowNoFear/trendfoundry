@@ -31,14 +31,43 @@ await mkdir(docsIssuesDir, { recursive: true });
 
 const authProviders = AUTH_PROVIDERS.map(publicProvider);
 
+const providerAvatarMeta = {
+  google: ["G", "#4285f4", "#34a853"],
+  apple: ["A", "#111114", "#f5f5f7"],
+  microsoft: ["M", "#7fba00", "#00a4ef"],
+  github: ["GH", "#24292f", "#ffffff"],
+  facebook: ["f", "#1877f2", "#ffffff"],
+  x: ["X", "#050505", "#ffffff"],
+  linkedin: ["in", "#0a66c2", "#ffffff"],
+  wechat: ["微", "#07c160", "#ffffff"],
+  qq: ["Q", "#12b7f5", "#ffffff"],
+  weibo: ["微", "#e6162d", "#ffd54a"],
+  alipay: ["支", "#1677ff", "#ffffff"],
+  dingtalk: ["钉", "#2f88ff", "#ffffff"],
+  feishu: ["飞", "#00b96b", "#4c6fff"],
+  line: ["L", "#06c755", "#ffffff"]
+};
+
+function brandLogo() {
+  return `<span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-word">TrendFoundry</span></span>`;
+}
+
+function providerAvatar(provider, extraClass = "") {
+  const [glyph, colorA, colorB] = providerAvatarMeta[provider.id] || [provider.label.slice(0, 2), "#111114", "#f5f5f7"];
+  return `<span class="provider-avatar ${extraClass}" style="--provider-a:${escapeHtml(colorA)};--provider-b:${escapeHtml(colorB)}" aria-hidden="true"><span>${escapeHtml(glyph)}</span></span>`;
+}
+
 const authProviderCards = authProviders
   .map(
     (provider) => `<button class="provider-button" type="button" data-provider="${provider.id}">
-  <span class="provider-mark">${escapeHtml(provider.label.slice(0, 1))}</span>
+  ${providerAvatar(provider)}
   <span><strong>${escapeHtml(provider.label)}</strong><small>${escapeHtml(provider.description)}</small></span>
   <em>${escapeHtml(provider.region)}</em>
 </button>`
   )
+  .join("");
+const authProviderOrbit = authProviders
+  .map((provider, index) => `<span class="auth-orbit-avatar" data-auth-avatar="${escapeHtml(provider.id)}" style="--orbit-index:${index}">${providerAvatar(provider, "provider-avatar-small")}</span>`)
   .join("");
 
 const authProviderConfig = Object.fromEntries(
@@ -124,17 +153,20 @@ const sourceMixZh = Object.entries(bySource)
   .map(([source, count]) => `${source} ${count} 个`)
   .join(" / ");
 const sourceLegend = Object.entries(bySource)
-  .map(([source, count]) => `<span>${escapeHtml(source)} <strong>${count}</strong></span>`)
+  .map(([source, count]) => `<button type="button" data-source-lens="${escapeHtml(source)}" aria-pressed="false"><span>${escapeHtml(sourceLabel({ source }))}</span><strong>${count}</strong></button>`)
   .join("");
 const sourceMixPanel = `<div class="source-mix-panel">
         ${dual("Source mix", "来源组合", "p", ' class="source-mix-label"')}
-        <div class="source-legend" aria-label="Source mix">${sourceLegend}</div>
+        <div class="source-legend" aria-label="Source mix">
+          <button class="active" type="button" data-source-lens="all" aria-pressed="true"><span>${dual("All", "全部")}</span><strong>${top.length}</strong></button>
+          ${sourceLegend}
+        </div>
       </div>`;
 const publicSample = top.slice(0, 3);
 const boardItems = top.slice(0, 5);
 const boardRows = boardItems
   .map(
-    (item, index) => `<li>
+    (item, index) => `<li data-board-source="${escapeHtml(item.source)}">
       <span>#${index + 1}</span>
       <strong>${escapeHtml(sourceLabel(item))}</strong>
       <em>${escapeHtml(String(item.score))}</em>
@@ -152,14 +184,252 @@ const productVisual = `<div class="product-visual" aria-label="TrendFoundry sign
           <div class="signal-ticker" aria-hidden="true">${boardTicker}</div>
         </div>
         <ul class="board-summary">${boardRows}</ul>
+        ${sourceMixPanel}
       </div>`;
+const fitPersonaItems = {
+  youtube: top.find((item) => item.source === "youtube") || top[0] || null,
+  bilibili: top.find((item) => item.source === "bilibili") || top[1] || top[0] || null,
+  deeptech: top.find((item) => item.source === "github" || item.source === "arxiv") || top[2] || top[0] || null
+};
+const fitPersonas = [
+  {
+    id: "youtube",
+    eyebrowEn: "Pack 01",
+    eyebrowZh: "包 01",
+    labelEn: "Buyer Content Pack",
+    labelZh: "买家内容包",
+    titleEn: "Educate and convert buyers with proof-first content.",
+    titleZh: "用证据优先的内容教育并转化买家。",
+    copyEn: "The same market signal becomes a buyer-facing topic, proof card, hook, and script seed.",
+    copyZh: "同一条市场信号会变成面向买家的选题、证据卡、钩子和脚本种子。",
+    kitEn: "Proof card / buyer hook / title angles / script seed",
+    kitZh: "证据卡 / 买家钩子 / 标题角度 / 脚本种子",
+    cadenceEn: "7-day content sprint",
+    cadenceZh: "7 天内容冲刺",
+    progress: 72,
+    strengthEn: "Very strong",
+    strengthZh: "很强",
+    velocityEn: "Accelerating",
+    velocityZh: "正在加速",
+    item: fitPersonaItems.youtube
+  },
+  {
+    id: "bilibili",
+    eyebrowEn: "Pack 02",
+    eyebrowZh: "包 02",
+    labelEn: "Outreach Pack",
+    labelZh: "外联回复包",
+    titleEn: "Turn the signal into a sharper outreach angle.",
+    titleZh: "把信号变成更锐利的外联角度。",
+    copyEn: "For teams that need a timely reason to contact creators, operators, or niche buyers.",
+    copyZh: "适合需要及时联系创作者、运营者或垂直买家的团队。",
+    kitEn: "Audience pain / reply angle / proof snippet / CTA note",
+    kitZh: "受众痛点 / 回复角度 / 证据片段 / CTA 备注",
+    cadenceEn: "48-hour reply window",
+    cadenceZh: "48 小时回复窗口",
+    progress: 64,
+    strengthEn: "Focused",
+    strengthZh: "聚焦",
+    velocityEn: "Fresh window",
+    velocityZh: "新鲜窗口",
+    item: fitPersonaItems.bilibili
+  },
+  {
+    id: "deeptech",
+    eyebrowEn: "Pack 03",
+    eyebrowZh: "包 03",
+    labelEn: "Thought Leadership Pack",
+    labelZh: "观点领导力包",
+    titleEn: "Shape the proof into an original perspective.",
+    titleZh: "把证据塑造成一个原创观点。",
+    copyEn: "Best for deep-tech teams that want technical novelty, caveats, and a defensible narrative.",
+    copyZh: "适合深技术团队：需要技术新鲜度、限制说明和站得住的叙事。",
+    kitEn: "Source rank / novelty score / caveat map / narrative claim",
+    kitZh: "来源排序 / 新鲜度评分 / 限制地图 / 叙事主张",
+    cadenceEn: "Custom niche pack",
+    cadenceZh: "垂直定制包",
+    progress: 81,
+    strengthEn: "High confidence",
+    strengthZh: "高置信度",
+    velocityEn: "Technical lift",
+    velocityZh: "技术抬升",
+    item: fitPersonaItems.deeptech
+  }
+];
+const defaultFitPersona = fitPersonas[0];
+const fitSources = [
+  ["News", "新闻", "news"],
+  ["Bilibili", "B 站", "bilibili"],
+  ["YouTube", "YouTube", "youtube"],
+  ["Hacker News", "Hacker News", "hn"],
+  ["GitHub", "GitHub", "github"],
+  ["arXiv", "arXiv", "arxiv"]
+];
+const fitSourceRows = fitSources
+  .map(([labelEn, labelZh, source], index) => `<li data-fit-source-row="${escapeHtml(source)}" style="--row-index:${index}">
+      <span>${escapeHtml(labelEn.slice(0, 2).toUpperCase())}</span>
+      <strong data-i18n-en="${escapeHtml(labelEn)}" data-i18n-zh="${escapeHtml(labelZh)}">${escapeHtml(labelEn)}</strong>
+      <em aria-hidden="true"></em>
+    </li>`)
+  .join("");
+const fitPipelineStages = [
+  ["Detect", "发现"],
+  ["Validate", "验证"],
+  ["Curate", "策划"],
+  ["Package", "打包"]
+];
+const fitPipelineColumns = fitPipelineStages
+  .map(([labelEn, labelZh], index) => `<div class="fit-pipeline-column" style="--stage-index:${index}">
+      <p data-i18n-en="${escapeHtml(labelEn)}" data-i18n-zh="${escapeHtml(labelZh)}">${escapeHtml(labelEn)}</p>
+      <span></span>
+      <span></span>
+    </div>`)
+  .join("");
+const fitPersonaButtons = fitPersonas
+  .map((persona, index) => `<button class="fit-persona${index === 0 ? " active" : ""}" type="button" data-fit-persona="${escapeHtml(persona.id)}" aria-pressed="${index === 0 ? "true" : "false"}"
+    data-fit-pack-en="${escapeHtml(persona.labelEn)}" data-fit-pack-zh="${escapeHtml(persona.labelZh)}"
+    data-fit-title-en="${escapeHtml(persona.titleEn)}" data-fit-title-zh="${escapeHtml(persona.titleZh)}"
+    data-fit-copy-en="${escapeHtml(persona.copyEn)}" data-fit-copy-zh="${escapeHtml(persona.copyZh)}"
+    data-fit-kit-en="${escapeHtml(persona.kitEn)}" data-fit-kit-zh="${escapeHtml(persona.kitZh)}"
+    data-fit-cadence-en="${escapeHtml(persona.cadenceEn)}" data-fit-cadence-zh="${escapeHtml(persona.cadenceZh)}"
+    data-fit-strength-en="${escapeHtml(persona.strengthEn)}" data-fit-strength-zh="${escapeHtml(persona.strengthZh)}"
+    data-fit-velocity-en="${escapeHtml(persona.velocityEn)}" data-fit-velocity-zh="${escapeHtml(persona.velocityZh)}"
+    data-fit-progress="${escapeHtml(persona.progress)}"
+    data-fit-source="${escapeHtml(sourceLabel(persona.item || {}))}" data-fit-score="${escapeHtml(persona.item?.score || "-")}"
+    data-fit-signal-en="${escapeHtml(persona.item ? fitSignalTitle(persona.item) : "Ranked creator opportunity")}"
+    data-fit-signal-zh="${escapeHtml(persona.item ? (persona.item.deliverables?.bilibiliTitles?.[0] || persona.item.title) : "已排序创作者机会")}"
+    data-fit-url="${escapeHtml(persona.item?.url || "./issues/latest.html")}">
+      <span data-i18n-en="${escapeHtml(persona.eyebrowEn)}" data-i18n-zh="${escapeHtml(persona.eyebrowZh)}">${escapeHtml(persona.eyebrowEn)}</span>
+      <strong data-i18n-en="${escapeHtml(persona.labelEn)}" data-i18n-zh="${escapeHtml(persona.labelZh)}">${escapeHtml(persona.labelEn)}</strong>
+    </button>`)
+  .join("");
+const fitStudio = `<section class="fit-studio" id="fit-studio" aria-label="Creator fit studio">
+      <div class="fit-copy">
+        ${dual("Signal Studio", "信号工作室", "p", ' class="section-label"')}
+        ${dual("One signal. Many product packs.", "一条信号，多种产品包。", "h2")}
+        ${dual("Choose how you sell. TrendFoundry reframes the same public proof into buyer content, outreach, or thought leadership without making the buyer rebuild the research.", "选择你的销售方式。TrendFoundry 会把同一条公开证据重组为买家内容、外联回复或观点领导力，而不是让买家重新做研究。", "p")}
+        <div class="fit-personas" aria-label="Product pack modes">${fitPersonaButtons}</div>
+      </div>
+      <div class="fit-device" data-fit-device="${escapeHtml(defaultFitPersona.id)}" style="--fit-progress:${escapeHtml(defaultFitPersona.progress)}%">
+        <div class="fit-device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="fit-device-screen">
+          <div class="fit-console-head">
+            <div>
+              <p class="fit-device-label" data-i18n-en="Signal Studio" data-i18n-zh="信号工作室">Signal Studio</p>
+              <strong><span data-i18n-en="Reframing to" data-i18n-zh="正在重组为">Reframing to</span> <b id="fit-title" data-i18n-en="${escapeHtml(defaultFitPersona.labelEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.labelZh)}">${escapeHtml(defaultFitPersona.labelEn)}</b></strong>
+            </div>
+            <span class="fit-live"><i></i><span data-i18n-en="Live" data-i18n-zh="实时">Live</span></span>
+          </div>
+          <div class="fit-progress" aria-hidden="true"><span></span><em id="fit-progress-label">${escapeHtml(defaultFitPersona.progress)}%</em></div>
+          <div class="fit-workbench">
+            <ul class="fit-source-list" aria-label="Source lanes">${fitSourceRows}</ul>
+            <div class="fit-pipeline" aria-label="Signal pipeline">${fitPipelineColumns}</div>
+            <a class="fit-signal-card" id="fit-signal-link" href="${escapeHtml(defaultFitPersona.item?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">
+              <span id="fit-source">${escapeHtml(sourceLabel(defaultFitPersona.item || {}))}</span>
+              <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}" data-i18n-zh="${escapeHtml(defaultFitPersona.item ? (defaultFitPersona.item.deliverables?.bilibiliTitles?.[0] || defaultFitPersona.item.title) : "已排序创作者机会")}">${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}</strong>
+              <em id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.strengthEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.strengthZh)}">${escapeHtml(defaultFitPersona.strengthEn)}</em>
+              <small aria-hidden="true"></small>
+            </a>
+          </div>
+          <div class="fit-telemetry" aria-label="Signal studio summary">
+            <span><strong data-i18n-en="Pack kit" data-i18n-zh="交付组件">Pack kit</strong><small id="fit-kit" data-i18n-en="${escapeHtml(defaultFitPersona.kitEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.kitZh)}">${escapeHtml(defaultFitPersona.kitEn)}</small></span>
+            <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="${escapeHtml(defaultFitPersona.cadenceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.cadenceZh)}">${escapeHtml(defaultFitPersona.cadenceEn)}</small></span>
+            <span><strong data-i18n-en="Market velocity" data-i18n-zh="市场速度">Market velocity</strong><small id="fit-velocity" data-i18n-en="${escapeHtml(defaultFitPersona.velocityEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.velocityZh)}">${escapeHtml(defaultFitPersona.velocityEn)}</small></span>
+          </div>
+        </div>
+      </div>
+    </section>`;
 const zhProductVisual = `<div class="product-visual" aria-label="TrendFoundry signal board preview">
         <div class="product-screen">
           <img src="../signal-board.png" alt="TrendFoundry 按来源和评分整理的当前创作者机会看板" width="1200" height="760">
           <div class="signal-ticker" aria-hidden="true">${boardTicker}</div>
         </div>
         <ul class="board-summary">${boardRows}</ul>
+        ${sourceMixPanel}
       </div>`;
+const runwayItem = top[0] || boardItems[0];
+const runwayStages = [
+  ["01", "Proof", "证据", "Keep the original public source attached to the opportunity.", "把原始公开来源一直附在机会旁边。"],
+  ["02", "Score", "评分", "Compress novelty, creator fit, recordability, and risk into one decision signal.", "把新鲜度、创作者匹配、可录制性和风险压缩成一个决策信号。"],
+  ["03", "Shape", "成型", "Turn the signal into title angles, hook, demo path, and limitation note.", "把信号变成标题角度、钩子、演示路径和限制说明。"],
+  ["04", "Ship", "交付", "Package Markdown, CSV, script, and issue page so the buyer can record.", "打包 Markdown、CSV、脚本和期刊页，让买家可以开录。"]
+];
+const runwayStageButtons = runwayStages
+  .map(([number, label, labelZh, text, textZh], index) => `<button class="runway-stage${index === 0 ? " active" : ""}" type="button" data-runway-stage="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
+          <span>${number}</span>
+          <strong>${dual(label, labelZh)}</strong>
+          ${dual(text, textZh, "em")}
+        </button>`)
+  .join("");
+const zhRunwayStageButtons = runwayStages
+  .map(([number, , labelZh, , textZh], index) => `<button class="runway-stage${index === 0 ? " active" : ""}" type="button" data-runway-stage="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
+          <span>${number}</span>
+          <strong>${escapeHtml(labelZh)}</strong>
+          <em>${escapeHtml(textZh)}</em>
+        </button>`)
+  .join("");
+const runwayStagePanels = runwayStages
+  .map(([number, label, labelZh, text, textZh], index) => `<article class="runway-panel${index === 0 ? " active" : ""}" data-runway-panel="${index}">
+          <p>${number} / ${dual(label, labelZh)}</p>
+          ${dual(text, textZh, "h3")}
+        </article>`)
+  .join("");
+const zhRunwayStagePanels = runwayStages
+  .map(([number, , labelZh, , textZh], index) => `<article class="runway-panel${index === 0 ? " active" : ""}" data-runway-panel="${index}">
+          <p>${number} / ${escapeHtml(labelZh)}</p>
+          <h3>${escapeHtml(textZh)}</h3>
+        </article>`)
+  .join("");
+const runwayTitle = runwayItem ? englishSampleTitle(runwayItem) : "Ranked creator opportunity";
+const zhRunwayTitle = runwayItem ? (runwayItem.deliverables?.bilibiliTitles?.[0] || runwayItem.title) : "已排序创作者机会";
+const runwaySource = runwayItem ? sourceLabel(runwayItem) : "Public source";
+const runwayScore = runwayItem ? String(runwayItem.score) : "0";
+const signalRunway = `<section class="signal-runway" id="signal-runway" aria-label="Evidence runway">
+      <div class="runway-copy">
+        ${dual("Evidence runway", "证据跑道", "p", ' class="section-label"')}
+        ${dual("One public signal becomes a recording decision.", "一条公开信号，变成一次录制决策。", "h2")}
+        ${dual("The Apple-like moment here is restraint: fewer moving parts, but every step keeps the buyer confident that the opportunity can be traced, judged, shaped, and shipped.", "这里的苹果感来自克制：动作更少，但每一步都让买家确信机会可以追溯、判断、成型并交付。", "p")}
+      </div>
+      <div class="runway-console" style="--runway-progress:25%">
+        <div class="runway-topline">
+          <span>${escapeHtml(runwaySource)}</span>
+          <strong>${dual("Score", "评分")} ${escapeHtml(runwayScore)}</strong>
+        </div>
+        <div class="runway-product">
+          <div class="runway-card">
+            ${dual("Current candidate", "当前候选", "p")}
+            <h3>${escapeHtml(runwayTitle)}</h3>
+            <a href="${escapeHtml(runwayItem?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">${dual("Open proof source", "打开来源")}</a>
+          </div>
+          <div class="runway-line" aria-hidden="true"><span></span></div>
+          <div class="runway-panels">${runwayStagePanels}</div>
+        </div>
+        <div class="runway-stages" aria-label="Evidence stages">${runwayStageButtons}</div>
+      </div>
+    </section>`;
+const zhSignalRunway = `<section class="signal-runway" id="signal-runway" aria-label="Evidence runway">
+      <div class="runway-copy">
+        <p class="section-label">证据跑道</p>
+        <h2>一条公开信号，变成一次录制决策。</h2>
+        <p>这里的苹果感来自克制：动作更少，但每一步都让买家确信机会可以追溯、判断、成型并交付。</p>
+      </div>
+      <div class="runway-console" style="--runway-progress:25%">
+        <div class="runway-topline">
+          <span>${escapeHtml(runwaySource)}</span>
+          <strong>评分 ${escapeHtml(runwayScore)}</strong>
+        </div>
+        <div class="runway-product">
+          <div class="runway-card">
+            <p>当前候选</p>
+            <h3>${escapeHtml(zhRunwayTitle)}</h3>
+            <a href="${escapeHtml(runwayItem?.url || "../issues/latest.html")}" target="_blank" rel="noreferrer">打开来源</a>
+          </div>
+          <div class="runway-line" aria-hidden="true"><span></span></div>
+          <div class="runway-panels">${zhRunwayStagePanels}</div>
+        </div>
+        <div class="runway-stages" aria-label="Evidence stages">${zhRunwayStageButtons}</div>
+      </div>
+    </section>`;
 
 const pricingTiers = [
   {
@@ -217,10 +487,45 @@ function langAttr(en, zh, name = "placeholder") {
   return `data-i18n-${name}-en="${escapeHtml(en)}" data-i18n-${name}-zh="${escapeHtml(zh)}" ${name}="${escapeHtml(en)}"`;
 }
 
+function tierSlug(tier) {
+  return tier.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 function tierOrderHref(tier, lang = "en") {
   const subject = encodeURIComponent(`TrendFoundry order: ${tier.name}`);
   const body = orderDraftBody(tier, lang);
   return `mailto:${contactEmail}?subject=${subject}&body=${encodeURIComponent(body)}`;
+}
+
+function tierDecisionMeta(tier) {
+  if (tier.name === "Sample issue") {
+    return {
+      packEn: "Current issue, CSV, risk notes, and one recording script.",
+      packZh: "当前期刊、CSV、风险备注和一份录制脚本。",
+      deliveryEn: "One manual delivery after request confirmation.",
+      deliveryZh: "确认请求后一次性交付。",
+      routeEn: "Use this to test channel fit before subscribing.",
+      routeZh: "用于先测试是否适合你的频道，再决定是否订阅。"
+    };
+  }
+  if (tier.name === "Custom niche") {
+    return {
+      packEn: "Custom sources, niche scoring, stricter filters, and outreach angles.",
+      packZh: "定制来源、垂类评分、更严格过滤和外联角度。",
+      deliveryEn: "Monthly custom pack shaped around one narrow audience.",
+      deliveryZh: "每月围绕一个窄受众交付定制包。",
+      routeEn: "Best when one vertical matters more than broad discovery.",
+      routeZh: "适合一个垂类比泛发现更重要的场景。"
+    };
+  }
+  return {
+    packEn: "Weekly 12-item brief with source mix, title angles, and outlines.",
+    packZh: "每周 12 条情报，包含来源组合、标题角度和录制大纲。",
+    deliveryEn: "Fresh weekly issue inside a monthly subscription cadence.",
+    deliveryZh: "按月订阅，每周收到新一期。",
+    routeEn: "The default choice for a dependable publishing queue.",
+    routeZh: "适合稳定维护发布队列的默认选择。"
+  };
 }
 
 function orderDraftBody(tier, lang = "en") {
@@ -240,7 +545,9 @@ function copyOrderButton(tier, lang = "en", label = "Copy draft", labelZh = "复
 
 const pricingCards = pricingTiers
   .map(
-    (tier) => `<article class="tier${tier.featured ? " featured" : ""}">
+    (tier) => {
+      const decision = tierDecisionMeta(tier);
+      return `<article class="tier${tier.featured ? " featured selected" : ""}" data-tier-card="${escapeHtml(tierSlug(tier))}" data-tier-name-en="${escapeHtml(tier.name)}" data-tier-name-zh="${escapeHtml(tier.nameZh)}" data-tier-price="${escapeHtml(tier.price)}" data-tier-cadence-en="${escapeHtml(tier.cadence)}" data-tier-cadence-zh="${escapeHtml(tier.cadenceZh)}" data-tier-best-en="${escapeHtml(tier.bestFor)}" data-tier-best-zh="${escapeHtml(tier.bestForZh)}" data-tier-action-en="${escapeHtml(tier.action)}" data-tier-action-zh="${escapeHtml(tier.actionZh)}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}" data-tier-pack-en="${escapeHtml(decision.packEn)}" data-tier-pack-zh="${escapeHtml(decision.packZh)}" data-tier-delivery-en="${escapeHtml(decision.deliveryEn)}" data-tier-delivery-zh="${escapeHtml(decision.deliveryZh)}" data-tier-route-en="${escapeHtml(decision.routeEn)}" data-tier-route-zh="${escapeHtml(decision.routeZh)}">
   <div>
     ${dual(tier.cadence, tier.cadenceZh, "p", ' class="tier-kicker"')}
     ${dual(tier.name, tier.nameZh, "h3")}
@@ -248,10 +555,44 @@ const pricingCards = pricingTiers
     ${dual(tier.bestFor, tier.bestForZh, "p")}
   </div>
   <ul>${tier.includes.map((item, index) => `<li>${dual(item, tier.includesZh[index])}</li>`).join("")}</ul>
-  <a class="action${tier.featured ? " primary" : ""}" href="${tier.href}">${dual(tier.action, tier.actionZh)}</a>
-</article>`
+  <div class="tier-actions">
+    <button class="action tier-select-action${tier.featured ? " primary" : ""}" type="button" data-tier-select="${escapeHtml(tierSlug(tier))}" aria-pressed="${tier.featured ? "true" : "false"}">${dual("Select tier", "选择此档")}</button>
+    <a class="action" href="${tier.href}">${dual(tier.action, tier.actionZh)}</a>
+  </div>
+</article>`;
+    }
   )
   .join("");
+const defaultPricingTier = pricingTiers.find((tier) => tier.featured) || pricingTiers[0];
+const defaultTierDecision = tierDecisionMeta(defaultPricingTier);
+const pricingChooser = `<div class="pricing-chooser" aria-live="polite">
+    <div>
+      ${dual("Selected plan", "已选档位", "p", ' class="pricing-chooser-label"')}
+      <h3 id="selected-tier-name" data-i18n-en="${escapeHtml(defaultPricingTier.name)}" data-i18n-zh="${escapeHtml(defaultPricingTier.nameZh)}">${escapeHtml(defaultPricingTier.name)}</h3>
+      <p id="selected-tier-copy" data-i18n-en="${escapeHtml(defaultPricingTier.bestFor)}" data-i18n-zh="${escapeHtml(defaultPricingTier.bestForZh)}">${escapeHtml(defaultPricingTier.bestFor)}</p>
+      <div class="pricing-configurator" aria-label="Selected plan configuration">
+        <div>
+          <span>01</span>
+          <strong data-i18n-en="Pack" data-i18n-zh="交付包">Pack</strong>
+          <small id="selected-tier-pack" data-i18n-en="${escapeHtml(defaultTierDecision.packEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.packZh)}">${escapeHtml(defaultTierDecision.packEn)}</small>
+        </div>
+        <div>
+          <span>02</span>
+          <strong data-i18n-en="Delivery" data-i18n-zh="交付节奏">Delivery</strong>
+          <small id="selected-tier-delivery" data-i18n-en="${escapeHtml(defaultTierDecision.deliveryEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.deliveryZh)}">${escapeHtml(defaultTierDecision.deliveryEn)}</small>
+        </div>
+        <div>
+          <span>03</span>
+          <strong data-i18n-en="Route" data-i18n-zh="购买路径">Route</strong>
+          <small id="selected-tier-route" data-i18n-en="${escapeHtml(defaultTierDecision.routeEn)}" data-i18n-zh="${escapeHtml(defaultTierDecision.routeZh)}">${escapeHtml(defaultTierDecision.routeEn)}</small>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-chooser-action">
+      <strong><span id="selected-tier-price">${escapeHtml(defaultPricingTier.price)}</span> <small id="selected-tier-cadence" data-i18n-en="${escapeHtml(defaultPricingTier.cadence)}" data-i18n-zh="${escapeHtml(defaultPricingTier.cadenceZh)}">${escapeHtml(defaultPricingTier.cadence)}</small></strong>
+      <a class="action primary" id="selected-tier-cta" href="${escapeHtml(tierOrderHref(defaultPricingTier))}" data-i18n-en="${escapeHtml(defaultPricingTier.action)}" data-i18n-zh="${escapeHtml(defaultPricingTier.actionZh)}">${escapeHtml(defaultPricingTier.action)}</a>
+    </div>
+  </div>`;
 
 const orderTierCards = pricingTiers
   .map(
@@ -279,6 +620,69 @@ const deliveryItems = [
 ];
 const deliveryChecklist = deliveryItems
   .map(([label, labelZh, text, textZh]) => `<li><strong>${dual(label, labelZh)}</strong>${dual(text, textZh, "span")}</li>`)
+  .join("");
+const deliveryPreviewItem = top[0] || publicSample[0];
+const deliveryPreviewTitle = deliveryPreviewItem ? englishSampleTitle(deliveryPreviewItem) : "Ranked creator opportunity";
+const zhDeliveryPreviewTitle = deliveryPreviewItem ? (deliveryPreviewItem.deliverables?.bilibiliTitles?.[0] || deliveryPreviewItem.title) : "已排序创作者机会";
+const deliveryPreviewSource = deliveryPreviewItem ? sourceLabel(deliveryPreviewItem) : "Public source";
+const deliveryPreviewScore = deliveryPreviewItem ? String(deliveryPreviewItem.score) : "0";
+const deliveryPreviewRisk = deliveryPreviewItem?.qualityRisk || "Rights and implementation limits need a quick source check before recording.";
+const zhDeliveryPreviewRisk = deliveryPreviewItem ? zhLimitation(deliveryPreviewItem) : "录制前需要快速核验来源、版权和实现限制。";
+const deliveryPreviewTabs = [
+  {
+    id: "brief",
+    label: "Brief",
+    labelZh: "Brief",
+    title: "The ranked opportunity card",
+    titleZh: "已排序机会卡",
+    body: `#1 ${deliveryPreviewTitle}\nSource: ${deliveryPreviewSource}\nScore: ${deliveryPreviewScore}\nWhy now: source-backed signal with a concrete recording angle.\nRisk: ${deliveryPreviewRisk}`,
+    bodyZh: `#1 ${zhDeliveryPreviewTitle}\n来源：${deliveryPreviewSource}\n评分：${deliveryPreviewScore}\n为什么现在：有来源支撑，并且已经成型为可录制角度。\n风险：${zhDeliveryPreviewRisk}`
+  },
+  {
+    id: "csv",
+    label: "CSV",
+    labelZh: "CSV",
+    title: "The sortable buyer table",
+    titleZh: "可排序买家表格",
+    body: `rank,source,score,title,risk\n1,${deliveryPreviewSource},${deliveryPreviewScore},"${deliveryPreviewTitle}","${deliveryPreviewRisk}"`,
+    bodyZh: `rank,source,score,title,risk\n1,${deliveryPreviewSource},${deliveryPreviewScore},"${zhDeliveryPreviewTitle}","${zhDeliveryPreviewRisk}"`
+  },
+  {
+    id: "script",
+    label: "Script",
+    labelZh: "脚本",
+    title: "The first recording pass",
+    titleZh: "第一版录制脚本",
+    body: `Hook: turn the source signal into a viewer question.\nDemo path: show the project, workflow, or claim in sequence.\nLimitation: name what is unverified before recommending it.\nClose: ask whether this deserves a deeper episode.`,
+    bodyZh: `钩子：把来源信号改写成观众问题。\n演示路径：按顺序展示项目、工作流或主张。\n限制：在推荐前说明仍未核验的部分。\n结尾：判断它是否值得做成更深一集。`
+  },
+  {
+    id: "issue",
+    label: "Issue",
+    labelZh: "期刊",
+    title: "The public proof trail",
+    titleZh: "公开证明链",
+    body: `Archive: latest issue page\nProof: original public URL remains attached\nPack: Markdown + CSV + script + delivery notes\nNext step: buyer can order without rebuilding the research queue.`,
+    bodyZh: `归档：最新公开期刊页\n证明：原始公开 URL 保持附带\n交付：Markdown + CSV + 脚本 + 交付说明\n下一步：买家不必重建研究队列就能下单。`
+  }
+];
+const deliveryPreviewButtons = deliveryPreviewTabs
+  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" aria-pressed="${index === 0 ? "true" : "false"}">${dual(tab.label, tab.labelZh)}</button>`)
+  .join("");
+const zhDeliveryPreviewButtons = deliveryPreviewTabs
+  .map((tab, index) => `<button class="deliverable-tab${index === 0 ? " active" : ""}" type="button" data-deliverable-tab="${escapeHtml(tab.id)}" aria-pressed="${index === 0 ? "true" : "false"}">${escapeHtml(tab.labelZh)}</button>`)
+  .join("");
+const deliveryPreviewPanels = deliveryPreviewTabs
+  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}">
+          ${dual(tab.title, tab.titleZh, "h3")}
+          <pre>${escapeHtml(tab.body)}</pre>
+        </article>`)
+  .join("");
+const zhDeliveryPreviewPanels = deliveryPreviewTabs
+  .map((tab, index) => `<article class="deliverable-panel${index === 0 ? " active" : ""}" data-deliverable-panel="${escapeHtml(tab.id)}">
+          <h3>${escapeHtml(tab.titleZh)}</h3>
+          <pre>${escapeHtml(tab.bodyZh)}</pre>
+        </article>`)
   .join("");
 const socialProof = `<section class="visual-proof" aria-label="Product preview">
       <div>
@@ -354,6 +758,227 @@ const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-l
         <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
       </div>
     </section>`;
+const beforeAfterRows = [
+  ["Topic search", "找选题", "A creator opens five feeds and still has to decide what is recordable.", "创作者打开五个信息源，最后仍要自己判断什么能录。", "The pack arrives as ranked candidates with proof links and risk notes.", "交付时已经是排序候选、来源链接和风险备注。"],
+  ["Script planning", "写脚本", "The first hour disappears into title angles, hooks, and demo structure.", "第一个小时常被标题角度、开场钩子和演示结构吃掉。", "Each idea already carries title angles, hook, demo path, and limitation.", "每个机会已经带标题角度、钩子、演示路径和限制说明。"],
+  ["Publishing rhythm", "更新节奏", "Good topics arrive randomly, so the recording queue keeps resetting.", "好选题随机出现，录制队列反复重置。", "A weekly issue turns public signals into a steady recording queue.", "每周期刊把公开信号变成稳定录制队列。"]
+];
+const beforeAfterTable = beforeAfterRows
+  .map(([label, labelZh, before, beforeZh, after, afterZh]) => `<div class="contrast-row">
+          <strong>${dual(label, labelZh)}</strong>
+          ${dual(before, beforeZh, "span", ' class="before-copy"')}
+          ${dual(after, afterZh, "span", ' class="after-copy"')}
+        </div>`)
+  .join("");
+const zhBeforeAfterTable = beforeAfterRows
+  .map(([, labelZh, , beforeZh, , afterZh]) => `<div class="contrast-row">
+          <strong>${escapeHtml(labelZh)}</strong>
+          <span class="before-copy">${escapeHtml(beforeZh)}</span>
+          <span class="after-copy">${escapeHtml(afterZh)}</span>
+        </div>`)
+  .join("");
+const contrastSection = `<section class="contrast-lab" aria-label="Before and after TrendFoundry">
+      <div class="contrast-copy">
+        ${dual("Before / after", "前后对比", "p", ' class="section-label"')}
+        ${dual("From scavenging trends to choosing what to record.", "从追热点，变成选择下一条该录什么。", "h2")}
+        ${dual("The business promise is not more information. It is less decision fatigue before a creator turns on the camera.", "商业承诺不是更多信息，而是在创作者开录前减少决策疲劳。", "p")}
+      </div>
+      <div class="contrast-panel" data-contrast-mode="after">
+        <div class="contrast-toggle" aria-label="Compare workflow">
+          <button class="contrast-option" type="button" data-contrast-set="before">${dual("Without it", "不用它")}</button>
+          <button class="contrast-option active" type="button" data-contrast-set="after">${dual("With TrendFoundry", "使用 TrendFoundry")}</button>
+        </div>
+        <div class="contrast-table">${beforeAfterTable}</div>
+      </div>
+    </section>`;
+const zhContrastSection = `<section class="contrast-lab" aria-label="Before and after TrendFoundry">
+      <div class="contrast-copy">
+        <p class="section-label">前后对比</p>
+        <h2>从追热点，变成选择下一条该录什么。</h2>
+        <p>商业承诺不是更多信息，而是在创作者开录前减少决策疲劳。</p>
+      </div>
+      <div class="contrast-panel" data-contrast-mode="after">
+        <div class="contrast-toggle" aria-label="Compare workflow">
+          <button class="contrast-option" type="button" data-contrast-set="before">不用它</button>
+          <button class="contrast-option active" type="button" data-contrast-set="after">使用 TrendFoundry</button>
+        </div>
+        <div class="contrast-table">${zhBeforeAfterTable}</div>
+      </div>
+    </section>`;
+const planningCalculator = `<section class="planning-calculator" id="planning-calculator" aria-label="Creator planning time estimator">
+      <div class="calculator-copy">
+        ${dual("Planning estimator", "规划估算器", "p", ' class="section-label"')}
+        ${dual("Estimate the time you get back before recording.", "估算开录前能省回多少时间。", "h2")}
+        ${dual("TrendFoundry is most valuable when your bottleneck is deciding what deserves a recording slot, not pressing record.", "当瓶颈不是按下录制键，而是判断什么值得录时，TrendFoundry 的价值最大。", "p")}
+      </div>
+      <div class="calculator-panel">
+        <label class="range-control">
+          <span>${dual("Videos per week", "每周视频数")}</span>
+          <strong><output id="video-count-output">2</output></strong>
+          <input id="video-count" type="range" min="1" max="5" step="1" value="2">
+        </label>
+        <label class="range-control">
+          <span>${dual("Research hours per video", "每条找选题小时")}</span>
+          <strong><output id="research-hours-output">2</output>h</strong>
+          <input id="research-hours" type="range" min="1" max="6" step="1" value="2">
+        </label>
+        <div class="calculator-result" aria-live="polite">
+          <span id="saved-hours">9h</span>
+          <p id="saved-hours-copy">${dual("estimated planning time reclaimed each month", "预计每月释放的规划时间")}</p>
+          <em id="tier-suggestion">${dual("Suggested: Weekly brief", "建议：周更情报")}</em>
+        </div>
+      </div>
+    </section>`;
+const zhPlanningCalculator = `<section class="planning-calculator" id="planning-calculator" aria-label="Creator planning time estimator">
+      <div class="calculator-copy">
+        <p class="section-label">规划估算器</p>
+        <h2>估算开录前能省回多少时间。</h2>
+        <p>当瓶颈不是按下录制键，而是判断什么值得录时，TrendFoundry 的价值最大。</p>
+      </div>
+      <div class="calculator-panel">
+        <label class="range-control">
+          <span>每周视频数</span>
+          <strong><output id="video-count-output">2</output></strong>
+          <input id="video-count" type="range" min="1" max="5" step="1" value="2">
+        </label>
+        <label class="range-control">
+          <span>每条找选题小时</span>
+          <strong><output id="research-hours-output">2</output>h</strong>
+          <input id="research-hours" type="range" min="1" max="6" step="1" value="2">
+        </label>
+        <div class="calculator-result" aria-live="polite">
+          <span id="saved-hours">9h</span>
+          <p id="saved-hours-copy">预计每月释放的规划时间</p>
+          <em id="tier-suggestion">建议：周更情报</em>
+        </div>
+      </div>
+    </section>`;
+const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
+    <a class="local-brand" href="#top">${brandLogo()}</a>
+    <div class="local-links">
+      <a href="#fit-studio" data-local-link="fit-studio">${dual("Fit", "适配")}</a>
+      <a href="#sample" data-local-link="sample">${dual("Sample", "样品")}</a>
+      <a href="#decision-flow" data-local-link="decision-flow">${dual("System", "系统")}</a>
+      <a href="#opportunities" data-local-link="opportunities">${dual("Signals", "信号")}</a>
+      <a href="#planning-calculator" data-local-link="planning-calculator">${dual("Estimate", "估算")}</a>
+      <a href="#pricing" data-local-link="pricing">${dual("Pricing", "定价")}</a>
+    </div>
+    <a class="local-cta" href="./order/">${dual("Order", "下单")}</a>
+    <span class="local-progress" aria-hidden="true"></span>
+  </nav>`;
+const zhLocalNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
+    <a class="local-brand" href="#top">${brandLogo()}</a>
+    <div class="local-links">
+      <a href="#fit-studio" data-local-link="fit-studio">适配</a>
+      <a href="#sample" data-local-link="sample">样品</a>
+      <a href="#decision-flow" data-local-link="decision-flow">系统</a>
+      <a href="#opportunities" data-local-link="opportunities">信号</a>
+      <a href="#planning-calculator" data-local-link="planning-calculator">估算</a>
+      <a href="#pricing" data-local-link="pricing">定价</a>
+    </div>
+    <a class="local-cta" href="../order/">下单</a>
+    <span class="local-progress" aria-hidden="true"></span>
+  </nav>`;
+const sampleDrawerCards = publicSample
+  .map((item, index) => `<article class="sample-drawer-card">
+      <div class="sample-drawer-meta"><span>#${index + 1}</span><span>${escapeHtml(sourceLabel(item))}</span><span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span></div>
+      <h3>${escapeHtml(englishSampleTitle(item))}</h3>
+      ${dual(item.summary || "Recordable creator opportunity with proof links and practical demo framing.", zhHook(item), "p")}
+      <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${dual("Open proof source", "打开来源")}</a>
+    </article>`)
+  .join("");
+const zhSampleDrawerCards = publicSample
+  .map((item, index) => `<article class="sample-drawer-card">
+      <div class="sample-drawer-meta"><span>#${index + 1}</span><span>${escapeHtml(sourceLabel(item))}</span><span>评分 ${escapeHtml(String(item.score))}</span></div>
+      <h3>${escapeHtml(item.deliverables?.bilibiliTitles?.[0] || item.title)}</h3>
+      <p>${escapeHtml(zhHook(item))}</p>
+      <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">打开来源</a>
+    </article>`)
+  .join("");
+const sampleSpotlightButtons = publicSample
+  .map((item, index) => `<button class="sample-spotlight-tab${index === 0 ? " active" : ""}" type="button" data-sample-spotlight="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
+      <span>#${index + 1}</span>
+      <strong>${escapeHtml(sourceLabel(item))}</strong>
+      <em>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</em>
+    </button>`)
+  .join("");
+const zhSampleSpotlightButtons = publicSample
+  .map((item, index) => `<button class="sample-spotlight-tab${index === 0 ? " active" : ""}" type="button" data-sample-spotlight="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
+      <span>#${index + 1}</span>
+      <strong>${escapeHtml(sourceLabel(item))}</strong>
+      <em>评分 ${escapeHtml(String(item.score))}</em>
+    </button>`)
+  .join("");
+const sampleSpotlightPanels = publicSample
+  .map((item, index) => `<article class="sample-spotlight-panel${index === 0 ? " active" : ""}" data-sample-spotlight-panel="${index}">
+      <div class="sample-spotlight-meta">
+        <span>${escapeHtml(sourceLabel(item))}</span>
+        <span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span>
+      </div>
+      <h3>${escapeHtml(englishSampleTitle(item))}</h3>
+      ${dual(englishSampleHook(item), zhHook(item), "p")}
+      <div class="sample-spotlight-proof">
+        <strong>${dual("Proof note", "证据备注")}</strong>
+        ${dual(englishSampleLimitation(item), zhLimitation(item), "span")}
+      </div>
+      <a class="action primary" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${dual("Open proof source", "打开来源")}</a>
+    </article>`)
+  .join("");
+const zhSampleSpotlightPanels = publicSample
+  .map((item, index) => `<article class="sample-spotlight-panel${index === 0 ? " active" : ""}" data-sample-spotlight-panel="${index}">
+      <div class="sample-spotlight-meta">
+        <span>${escapeHtml(sourceLabel(item))}</span>
+        <span>评分 ${escapeHtml(String(item.score))}</span>
+      </div>
+      <h3>${escapeHtml(zhSampleTitle(item))}</h3>
+      <p>${escapeHtml(zhHook(item))}</p>
+      <div class="sample-spotlight-proof">
+        <strong>证据备注</strong>
+        <span>${escapeHtml(zhLimitation(item))}</span>
+      </div>
+      <a class="action primary" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">打开来源</a>
+    </article>`)
+  .join("");
+const sampleSpotlight = `<div class="sample-spotlight" aria-label="Sample opportunity spotlight">
+      <div class="sample-spotlight-tabs">${sampleSpotlightButtons}</div>
+      <div class="sample-spotlight-stage">${sampleSpotlightPanels}</div>
+    </div>`;
+const zhSampleSpotlight = `<div class="sample-spotlight" aria-label="Sample opportunity spotlight">
+      <div class="sample-spotlight-tabs">${zhSampleSpotlightButtons}</div>
+      <div class="sample-spotlight-stage">${zhSampleSpotlightPanels}</div>
+    </div>`;
+const sampleDrawer = `<div class="sample-drawer" id="sample-drawer" aria-hidden="true">
+    <div class="sample-drawer-backdrop" data-sample-close></div>
+    <section class="sample-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="sample-drawer-title">
+      <button class="drawer-close" type="button" data-sample-close aria-label="Close sample preview">×</button>
+      <div class="drawer-head">
+        ${dual("Live sample", "实时样品", "p", ' class="section-label"')}
+        ${dual("Three current opportunities, still inside the page.", "不离开页面，先看 3 个当前机会。", "h2", ' id="sample-drawer-title"')}
+        ${dual("This is a compact preview of the same source-backed issue. Download the pack for Markdown, CSV, and the full script handoff.", "这是同一份有来源期刊的紧凑预览。下载样品包可获得 Markdown、CSV 和完整脚本交付。", "p")}
+      </div>
+      <div class="sample-drawer-grid">${sampleDrawerCards}</div>
+      <div class="drawer-actions">
+        <a class="action primary" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
+        <a class="action strong" href="./order/">${dual("Order current issue", "下单当前期")}</a>
+      </div>
+    </section>
+  </div>`;
+const zhSampleDrawer = `<div class="sample-drawer" id="sample-drawer" aria-hidden="true">
+    <div class="sample-drawer-backdrop" data-sample-close></div>
+    <section class="sample-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="sample-drawer-title">
+      <button class="drawer-close" type="button" data-sample-close aria-label="关闭样品预览">×</button>
+      <div class="drawer-head">
+        <p class="section-label">实时样品</p>
+        <h2 id="sample-drawer-title">不离开页面，先看 3 个当前机会。</h2>
+        <p>这是同一份有来源期刊的紧凑预览。下载样品包可获得 Markdown、CSV 和完整脚本交付。</p>
+      </div>
+      <div class="sample-drawer-grid">${zhSampleDrawerCards}</div>
+      <div class="drawer-actions">
+        <a class="action primary" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
+        <a class="action strong" href="../order/">下单当前期</a>
+      </div>
+    </section>
+  </div>`;
 
 function csvEscape(value) {
   const text = String(value ?? "");
@@ -397,6 +1022,15 @@ function sourceLabel(item) {
 function englishSampleTitle(item) {
   const candidates = [item.deliverables.youtubeTitles?.[0], item.title].filter(Boolean);
   return candidates.find((value) => !hasCjk(value)) || `${sourceLabel(item)} creator workflow signal`;
+}
+
+function fitSignalTitle(item) {
+  if (item.source === "github" && String(item.title || "").includes("/")) {
+    const repo = String(item.title).split("/").pop().replace(/[-_]+/g, " ").trim();
+    return repo ? repo.replace(/\b\w/g, (letter) => letter.toUpperCase()) : englishSampleTitle(item);
+  }
+  const title = englishSampleTitle(item);
+  return title.length > 42 ? `${sourceLabel(item)} creator workflow signal` : title;
 }
 
 function zhSampleTitle(item) {
@@ -750,7 +1384,7 @@ function englishVideoAngle(item) {
 
 const cards = top
   .map(
-    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span><span>${dual(fitLabel(item.monetizationFit), fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? `<span>${dual("cached", "缓存")}</span>` : ""}${item.qualityFlags?.length ? `<span>${dual("review", "需复核")}</span>` : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   ${dual(item.summary || "No summary available.", `创作切入：${zhHook(item)}`, "p")}
@@ -840,7 +1474,7 @@ const zhSourceButtons = ["all", ...Object.keys(bySource)]
 
 const zhCards = top
   .map(
-    (item, index) => `<article class="card" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-search="${escapeHtml(`${item.title} ${zhHook(item)} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${zhHook(item)} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>评分 ${item.score}</span><span>${escapeHtml(fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? "<span>缓存</span>" : ""}${item.qualityFlags?.length ? "<span>需复核</span>" : ""}</div>
   <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>创作切入：${escapeHtml(zhHook(item))}</p>
@@ -856,6 +1490,35 @@ const zhCards = top
 </article>`
   )
   .join("\n");
+
+const focusItem = top[0] || null;
+
+function opportunityFocusPanel(lang = "en") {
+  const isZh = lang === "zh";
+  const title = focusItem ? (isZh ? zhSampleTitle(focusItem) : englishSampleTitle(focusItem)) : (isZh ? "机会预览" : "Opportunity preview");
+  const summary = focusItem ? (isZh ? zhHook(focusItem) : focusItem.summary || englishSampleHook(focusItem)) : (isZh ? "筛选后会在这里显示最匹配的机会。" : "The best matching opportunity will appear here after filtering.");
+  const source = focusItem ? sourceLabel(focusItem) : "";
+  const score = focusItem ? String(focusItem.score) : "";
+  const href = focusItem ? focusItem.url : "#";
+  return `<div class="opportunity-focus" id="opportunity-focus" aria-live="polite">
+    <div>
+      <p class="section-label" id="opportunity-focus-label" data-i18n-en="Active opportunity" data-i18n-zh="当前焦点">${isZh ? "当前焦点" : "Active opportunity"}</p>
+      <h3 id="opportunity-focus-title">${escapeHtml(title)}</h3>
+      <p id="opportunity-focus-summary">${escapeHtml(summary)}</p>
+    </div>
+    <div class="opportunity-focus-card">
+      <div class="opportunity-focus-meta">
+        <span id="opportunity-focus-rank">#1</span>
+        <span id="opportunity-focus-source">${escapeHtml(source)}</span>
+        <span id="opportunity-focus-score">${isZh ? "评分 " : "Score "}${escapeHtml(score)}</span>
+      </div>
+      <a class="action primary" id="opportunity-focus-link" href="${escapeHtml(href)}" target="_blank" rel="noreferrer">${isZh ? "打开来源" : "Open proof source"}</a>
+    </div>
+  </div>`;
+}
+
+const opportunityFocus = opportunityFocusPanel("en");
+const zhOpportunityFocus = opportunityFocusPanel("zh");
 
 const topicDefinitions = [
   {
@@ -949,7 +1612,7 @@ function buildTopicPage(topic) {
   const fallback = top.filter((item) => !seen.has(item.url || item.id));
   const featured = [...items, ...fallback].slice(0, 8);
   const body = `<header class="topic-hero">
-  <div class="brandline"><span>TrendFoundry</span><span>SEO brief</span></div>
+  <div class="brandline">${brandLogo()}<span>SEO brief</span></div>
   <h1>${escapeHtml(topic.title)}</h1>
   <p class="sub">${escapeHtml(topic.description)} Updated from the same source-backed dataset used for the paid weekly brief.</p>
   <div class="hero-actions">
@@ -1019,6 +1682,246 @@ const issueDate = feedUpdated.slice(0, 10);
 const issueTitle = `TrendFoundry Issue ${issueDate}`;
 const issuePath = `issues/${issueDate}.html`;
 const issueMarkdownPath = `${issueDate}.md`;
+const proofLedgerItems = [
+  {
+    id: "sample",
+    label: "Sample",
+    labelZh: "样品",
+    title: "Inspect the product shape before ordering.",
+    titleZh: "下单前先检查产品形态。",
+    body: "The free pack exposes the same brief structure: ranked opportunities, proof links, CSV, and a ready-to-record script sample.",
+    bodyZh: "免费样品公开同一套 brief 结构：排序机会、来源链接、CSV 和可录制脚本样例。",
+    metric: `${publicSample.length} current ideas`,
+    metricZh: `${publicSample.length} 个当前机会`,
+    href: "./trendfoundry-free-sample-pack.zip",
+    hrefZh: "../trendfoundry-free-sample-pack.zip",
+    action: "Download sample",
+    actionZh: "下载样品"
+  },
+  {
+    id: "feed",
+    label: "Feed",
+    labelZh: "Feed",
+    title: "Watch the pipeline refresh without asking.",
+    titleZh: "不用询问，也能看到管线更新。",
+    body: "RSS and JSON publish the current top opportunities with hook, demo angle, limitation, and source trail.",
+    bodyZh: "RSS 和 JSON 发布当前 Top 机会，并保留钩子、演示角度、限制说明和来源链。",
+    metric: `${feedItems.length} live feed items`,
+    metricZh: `${feedItems.length} 条 Feed 项目`,
+    href: "./feed.xml",
+    hrefZh: "../feed.xml",
+    action: "Open RSS",
+    actionZh: "打开 RSS"
+  },
+  {
+    id: "archive",
+    label: "Archive",
+    labelZh: "归档",
+    title: "Freeze every issue as a track record.",
+    titleZh: "每一期都冻结成历史记录。",
+    body: `The latest public issue is dated ${issueDate}, so buyers can inspect what was known at the time instead of trusting a moving sales page.`,
+    bodyZh: `最新公开期刊日期为 ${issueDate}，买家可以检查当时的记录，而不是只相信会变化的销售页。`,
+    metric: issueDate,
+    metricZh: issueDate,
+    href: `./${issuePath}`,
+    hrefZh: `../${issuePath}`,
+    action: "Latest issue",
+    actionZh: "最新一期"
+  },
+  {
+    id: "order",
+    label: "Order",
+    labelZh: "下单",
+    title: "Move from proof to a buyer-ready pack.",
+    titleZh: "从证明资产进入买家交付包。",
+    body: "The order page keeps checkout manual first: pick a tier, send a prepared email, then receive payment and delivery details privately.",
+    bodyZh: "下单页先保持人工结账：选择档位，发送准备好的邮件，再私下收到付款和交付说明。",
+    metric: "$9 / $19 / $49",
+    metricZh: "$9 / $19 / $49",
+    href: "./order/",
+    hrefZh: "../order/",
+    action: "Open order page",
+    actionZh: "打开下单页"
+  }
+];
+const proofLedgerButtons = proofLedgerItems
+  .map((item, index) => `<button class="proof-tab${index === 0 ? " active" : ""}" type="button" data-proof-tab="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${dual(item.label, item.labelZh)}</span><strong>${dual(item.metric, item.metricZh)}</strong></button>`)
+  .join("");
+const zhProofLedgerButtons = proofLedgerItems
+  .map((item, index) => `<button class="proof-tab${index === 0 ? " active" : ""}" type="button" data-proof-tab="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${escapeHtml(item.labelZh)}</span><strong>${escapeHtml(item.metricZh)}</strong></button>`)
+  .join("");
+const proofLedgerPanels = proofLedgerItems
+  .map((item, index) => `<article class="proof-panel${index === 0 ? " active" : ""}" data-proof-panel="${escapeHtml(item.id)}">
+        ${dual(item.label, item.labelZh, "p", ' class="proof-panel-kicker"')}
+        ${dual(item.title, item.titleZh, "h3")}
+        ${dual(item.body, item.bodyZh, "p")}
+        <a class="action primary" href="${escapeHtml(item.href)}">${dual(item.action, item.actionZh)}</a>
+      </article>`)
+  .join("");
+const zhProofLedgerPanels = proofLedgerItems
+  .map((item, index) => `<article class="proof-panel${index === 0 ? " active" : ""}" data-proof-panel="${escapeHtml(item.id)}">
+        <p class="proof-panel-kicker">${escapeHtml(item.labelZh)}</p>
+        <h3>${escapeHtml(item.titleZh)}</h3>
+        <p>${escapeHtml(item.bodyZh)}</p>
+        <a class="action primary" href="${escapeHtml(item.hrefZh)}">${escapeHtml(item.actionZh)}</a>
+      </article>`)
+  .join("");
+const proofLedger = `<section class="proof-ledger" id="proof-ledger" aria-label="Proof ledger">
+    <div class="proof-copy">
+      ${dual("Proof ledger", "证明账本", "p", ' class="section-label"')}
+      ${dual("Trust is a system, not a claim.", "信任不是一句话，而是一套系统。", "h2")}
+      ${dual("TrendFoundry keeps a visible trail from sample to feed to archive to order, so a buyer can inspect the operating rhythm before paying.", "TrendFoundry 把样品、Feed、归档和下单路径连成可见轨迹，让买家在付款前先检查运营节奏。", "p")}
+    </div>
+    <div class="proof-console">
+      <div class="proof-tabs" aria-label="Proof channels">${proofLedgerButtons}</div>
+      <div class="proof-panels">${proofLedgerPanels}</div>
+    </div>
+  </section>`;
+const zhProofLedger = `<section class="proof-ledger" id="proof-ledger" aria-label="Proof ledger">
+    <div class="proof-copy">
+      <p class="section-label">证明账本</p>
+      <h2>信任不是一句话，而是一套系统。</h2>
+      <p>TrendFoundry 把样品、Feed、归档和下单路径连成可见轨迹，让买家在付款前先检查运营节奏。</p>
+    </div>
+    <div class="proof-console">
+      <div class="proof-tabs" aria-label="Proof channels">${zhProofLedgerButtons}</div>
+      <div class="proof-panels">${zhProofLedgerPanels}</div>
+    </div>
+  </section>`;
+
+const finalActionItems = [
+  {
+    id: "inspect",
+    label: "Inspect",
+    labelZh: "检查",
+    metric: "Proof first",
+    metricZh: "先看证明",
+    status: "Latest issue + sample pack + public feed",
+    statusZh: "最新期刊 + 样品包 + 公开 Feed",
+    title: "Leave with the proof trail open.",
+    titleZh: "先把证明路径打开。",
+    body: "For cautious buyers, start with the frozen issue and sample pack. The product sells better when every claim has a visible source trail.",
+    bodyZh: "面对谨慎买家，先让对方检查已冻结的期刊和样品包。每个承诺都有可见来源路径，销售才更稳。",
+    href: "./issues/latest.html",
+    hrefZh: "../issues/latest.html",
+    action: "Open latest issue",
+    actionZh: "打开最新期刊",
+    secondaryHref: "./trendfoundry-free-sample-pack.zip",
+    secondaryHrefZh: "../trendfoundry-free-sample-pack.zip",
+    secondaryAction: "Download sample",
+    secondaryActionZh: "下载样品包"
+  },
+  {
+    id: "order",
+    label: "Order",
+    labelZh: "下单",
+    metric: "Manual checkout",
+    metricZh: "人工结算",
+    status: "$9 sample, $19 weekly, $49 custom",
+    statusZh: "$9 样品、$19 周更、$49 定制",
+    title: "Move the next issue into the queue.",
+    titleZh: "把下一期排进交付队列。",
+    body: "The order route stays high-trust and manual: choose the pack, send a prepared request, then confirm payment and delivery details privately.",
+    bodyZh: "下单路径保持高信任和人工优先：选择交付包，发送准备好的请求，再私下确认付款和交付细节。",
+    href: "./order/",
+    hrefZh: "../order/",
+    action: "Open order page",
+    actionZh: "打开下单页",
+    secondaryHref: issueOrderHref,
+    secondaryHrefZh: issueOrderHref,
+    secondaryAction: "Request sample",
+    secondaryActionZh: "申请样品"
+  },
+  {
+    id: "operate",
+    label: "Operate",
+    labelZh: "运营",
+    metric: "Launch loop",
+    metricZh: "发布闭环",
+    status: "Offer, copy, outreach, repeat",
+    statusZh: "报价、文案、外联、复用",
+    title: "Turn the page into a selling system.",
+    titleZh: "把页面变成销售系统。",
+    body: "Use the launch plan and sales copy to route visitors from proof into a weekly subscription, then reuse the archive as compounding trust.",
+    bodyZh: "用发布计划和销售文案把访客从证明路径导向周更订阅，再让归档持续累积信任。",
+    href: "./launch-plan.md",
+    hrefZh: "../launch-plan.md",
+    action: "Open launch plan",
+    actionZh: "打开发布计划",
+    secondaryHref: "./sales-page-copy.md",
+    secondaryHrefZh: "../sales-page-copy.md",
+    secondaryAction: "View sales copy",
+    secondaryActionZh: "查看销售文案"
+  }
+];
+const finalActionButtons = finalActionItems
+  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${dual(item.label, item.labelZh)}</span><strong>${dual(item.metric, item.metricZh)}</strong></button>`)
+  .join("");
+const zhFinalActionButtons = finalActionItems
+  .map((item, index) => `<button class="final-action-button${index === 0 ? " active" : ""}" type="button" data-final-action="${escapeHtml(item.id)}" aria-pressed="${index === 0 ? "true" : "false"}"><span>${escapeHtml(item.labelZh)}</span><strong>${escapeHtml(item.metricZh)}</strong></button>`)
+  .join("");
+const finalActionPanels = finalActionItems
+  .map((item, index) => `<article class="final-action-panel${index === 0 ? " active" : ""}" data-final-panel="${escapeHtml(item.id)}">
+        ${dual(item.status, item.statusZh, "p", ' class="final-panel-kicker"')}
+        ${dual(item.title, item.titleZh, "h3")}
+        ${dual(item.body, item.bodyZh, "p")}
+        <div class="final-panel-actions">
+          <a class="action primary" href="${escapeHtml(item.href)}">${dual(item.action, item.actionZh)}</a>
+          <a class="action" href="${escapeHtml(item.secondaryHref)}">${dual(item.secondaryAction, item.secondaryActionZh)}</a>
+        </div>
+      </article>`)
+  .join("");
+const zhFinalActionPanels = finalActionItems
+  .map((item, index) => `<article class="final-action-panel${index === 0 ? " active" : ""}" data-final-panel="${escapeHtml(item.id)}">
+        <p class="final-panel-kicker">${escapeHtml(item.statusZh)}</p>
+        <h3>${escapeHtml(item.titleZh)}</h3>
+        <p>${escapeHtml(item.bodyZh)}</p>
+        <div class="final-panel-actions">
+          <a class="action primary" href="${escapeHtml(item.hrefZh)}">${escapeHtml(item.actionZh)}</a>
+          <a class="action" href="${escapeHtml(item.secondaryHrefZh)}">${escapeHtml(item.secondaryActionZh)}</a>
+        </div>
+      </article>`)
+  .join("");
+const closingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+      <div class="closing-copy">
+        ${dual("Final action", "最终动作", "p", ' class="section-label"')}
+        ${dual("Leave with the next issue queued.", "把下一期排进录制队列。", "h2")}
+        ${dual("The page now ends where a buyer actually decides: inspect the proof, request the pack, or reuse the operating plan.", "页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。", "p")}
+        <div class="closing-badges" aria-label="Conversion path">
+          <span>${dual("Proof-led", "证明优先")}</span>
+          <span>${dual("Manual-first", "人工优先")}</span>
+          <span>${dual("Repeatable", "可复用")}</span>
+        </div>
+      </div>
+      <div class="closing-console">
+        <div class="closing-console-top">
+          <span>${dual("TrendFoundry", "TrendFoundry")}</span>
+          <strong>${dual("Buyer handoff", "买家交接")}</strong>
+        </div>
+        <div class="final-action-switcher" aria-label="Choose final action">${finalActionButtons}</div>
+        <div class="final-action-panels">${finalActionPanels}</div>
+      </div>
+    </section>`;
+const zhClosingHandoff = `<section class="handoff closing-handoff" id="final-action" aria-label="Final action">
+      <div class="closing-copy">
+        <p class="section-label">最终动作</p>
+        <h2>把下一期排进录制队列。</h2>
+        <p>页面现在收束在买家真正做决定的位置：检查证明、申请交付包，或复用运营计划。</p>
+        <div class="closing-badges" aria-label="Conversion path">
+          <span>证明优先</span>
+          <span>人工优先</span>
+          <span>可复用</span>
+        </div>
+      </div>
+      <div class="closing-console">
+        <div class="closing-console-top">
+          <span>TrendFoundry</span>
+          <strong>买家交接</strong>
+        </div>
+        <div class="final-action-switcher" aria-label="Choose final action">${zhFinalActionButtons}</div>
+        <div class="final-action-panels">${zhFinalActionPanels}</div>
+      </div>
+    </section>`;
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -1118,7 +2021,7 @@ function issueCards(items) {
 
 function buildIssuePage() {
   const body = `<header class="topic-hero">
-  <div class="brandline"><span>TrendFoundry</span><span>Public issue</span></div>
+  <div class="brandline">${brandLogo()}<span>Public issue</span></div>
   <h1>${escapeHtml(issueTitle)}</h1>
   <p class="sub">A durable public snapshot of 12 source-backed creator opportunities. Use it to inspect proof links, hooks, demo angles, and limitations before requesting the full pack.</p>
   <div class="hero-actions">
@@ -1180,7 +2083,7 @@ function buildIssueArchivePage(slugs) {
     .map((slug) => `<a class="topic-link" href="./${slug}.html"><span>TrendFoundry Issue ${escapeHtml(slug)}</span><small>Public snapshot with 12 source-backed opportunities, hooks, demo angles, and limitations.</small></a>`)
     .join("");
   const body = `<header class="topic-hero">
-  <div class="brandline"><span>TrendFoundry</span><span>Issue archive</span></div>
+  <div class="brandline">${brandLogo()}<span>Issue archive</span></div>
   <h1>Public issue archive</h1>
   <p class="sub">Durable snapshots make the product inspectable, indexable, and easier to trust before a buyer requests the current pack.</p>
   <div class="hero-actions">
@@ -1229,14 +2132,14 @@ const html = `<!doctype html>
   <link rel="stylesheet" href="./styles.css">
   <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="./feed.xml">
   <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="./feed.json">
-  <script src="./app.js" defer></script>
+  <script src="./app.js?v=${encodeURIComponent(feedUpdated)}" defer></script>
 </head>
-<body data-lang="en" data-default-lang="en">
+<body id="top" data-lang="en" data-default-lang="en">
   <header class="topbar">
     <div>
       <div class="brandrow">
         <div class="brandline">
-          <span>TrendFoundry</span>
+          ${brandLogo()}
           <span>${dual(`Issue ${new Date(data.generatedAt).toLocaleDateString("en-GB")}`, `期次 ${new Date(data.generatedAt).toLocaleDateString("zh-CN")}`)}</span>
         </div>
         <div class="language-switch" aria-label="Language">
@@ -1247,9 +2150,9 @@ const html = `<!doctype html>
       ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
       ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
       <div class="hero-metrics" aria-label="Product proof points">
-        <span><strong>12</strong>${dual("ranked opportunities", "条排序机会")}</span>
-        <span><strong>5</strong>${dual("source lanes", "个来源入口")}</span>
-        <span><strong>1</strong>${dual("recordable script", "份可录制脚本")}</span>
+        <span><strong data-hero-count="12">12</strong>${dual("ranked opportunities", "条排序机会")}</span>
+        <span><strong data-hero-count="5">5</strong>${dual("source lanes", "个来源入口")}</span>
+        <span><strong data-hero-count="1">1</strong>${dual("recordable script", "份可录制脚本")}</span>
       </div>
       <div class="hero-actions">
         <a class="action primary" href="./public-sample.en.md">${dual("View free sample", "查看免费样品")}</a>
@@ -1263,9 +2166,12 @@ const html = `<!doctype html>
         <a href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
         <a href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
+      <a class="scroll-cue" href="#sample" aria-label="Scroll to sample">${dual("Scroll", "下滑")}<span aria-hidden="true"></span></a>
     </div>
     <aside>${productVisual}</aside>
   </header>
+  ${localNav}
+  ${sampleDrawer}
   <main>
     <section class="offer">
       <div>
@@ -1278,24 +2184,28 @@ const html = `<!doctype html>
         <small><a href="${issueOrderHref}">${dual("GitHub request", "GitHub 申请")}</a> / <a href="${orderHref}">${dual("email order", "邮件下单")}</a></small>
       </div>
     </section>
-    <section class="sample-preview" aria-label="Free public sample">
+    ${fitStudio}
+    <section class="sample-preview" id="sample" aria-label="Free public sample">
       <div>
         ${dual("Free sample", "免费样品", "p", ' class="section-label"')}
         ${dual("Inspect three current opportunities before ordering.", "下单前先检查 3 个当前机会。", "h2")}
         ${dual("The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.", "公开样品展示格式、评分、来源链接和质量备注，但不暴露完整付费包。", "p")}
       </div>
       <div class="sample-actions">
+        <button class="action primary" type="button" data-sample-open>${dual("Preview in page", "页面内预览")}</button>
         <a class="action strong" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
-        <a class="action primary" href="./public-sample.en.md">${dual("Open English sample", "打开英文样品")}</a>
+        <a class="action" href="./public-sample.en.md">${dual("Open English sample", "打开英文样品")}</a>
         <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
         <a class="action primary" href="./public-sample.zh-CN.md">${dual("Open Chinese sample", "打开中文样品")}</a>
         <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
       </div>
+      ${sampleSpotlight}
     </section>
     ${socialProof}
     ${motionProof}
+    ${signalRunway}
     ${decisionFlow}
-    <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
+    <section class="opportunity-finder" id="opportunities" aria-labelledby="opportunity-finder-title">
       <div class="finder-head">
         <div>
           ${dual("Opportunity finder", "机会筛选器", "p", ' class="section-label"')}
@@ -1314,23 +2224,33 @@ const html = `<!doctype html>
           <input id="opportunity-search" type="search" ${langAttr("agent, video, workflow, arxiv...", "智能体、视频、工作流、arxiv...")}>
         </div>
       </div>
+      ${opportunityFocus}
     </section>
     <section class="grid" id="opportunity-grid">${cards}</section>
-    <section class="pricing" aria-label="Pricing tiers">
+    ${contrastSection}
+    ${planningCalculator}
+    <section class="pricing" id="pricing" aria-label="Pricing tiers">
       <div class="section-head">
         ${dual("Pricing", "定价", "p", ' class="section-label"')}
         ${dual("Choose the depth that matches your publishing cadence.", "按你的更新节奏选择交付深度。", "h2")}
         ${dual("Every tier is built around the same promise: fewer weak topics, faster planning, and a clearer recording queue.", "每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。", "p")}
       </div>
       <div class="tier-grid">${pricingCards}</div>
+      ${pricingChooser}
     </section>
-    <section class="delivery" aria-label="What the buyer receives">
-      <div>
+    <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
+      <div class="delivery-copy">
         ${dual("What arrives", "交付内容", "p", ' class="section-label"')}
-        ${dual("A compact intelligence pack, not another AI news digest.", "这是紧凑的创作者情报包，不是又一份 AI 新闻摘要。", "h2")}
+        ${dual("Open the pack before you buy it.", "购买前，先看清交付包。", "h2")}
+        ${dual("A creator does not need another digest. They need a small set of files that can move from source check to recording queue without rebuilding the research.", "创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。", "p")}
+      </div>
+      <div class="deliverable-viewer">
+        <div class="deliverable-tabs" aria-label="Delivery file preview">${deliveryPreviewButtons}</div>
+        <div class="deliverable-screen">${deliveryPreviewPanels}</div>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
+    ${proofLedger}
     <section class="seo-hub" aria-label="Search landing pages">
       <div>
         ${dual("Search pages", "搜索页", "p", ' class="section-label"')}
@@ -1361,20 +2281,7 @@ const html = `<!doctype html>
         <a class="action" href="./issues/index.html">${dual("Issue archive", "期刊归档")}</a>
       </div>
     </section>
-    <section class="handoff">
-      <div>
-        ${dual("Handoff", "交接", "p", ' class="section-label"')}
-        ${dual("Next buyer-facing action", "下一步面向买家的动作", "h2")}
-        ${dual("Use the sample brief and ready-to-record script as the free proof asset, then sell weekly delivery from the launch plan.", "把样品 brief 和可录制脚本作为免费证明资产，再按发布计划销售周更交付。", "p")}
-      </div>
-      <div class="handoff-links">
-        <a class="action primary" href="./launch-plan.md">${dual("Launch plan", "发布计划")}</a>
-        <a class="action" href="./sales-page-copy.md">${dual("Sales copy", "销售文案")}</a>
-        <a class="action primary" href="./order/">${dual("Order page", "下单页")}</a>
-        <a class="action strong" href="${issueOrderHref}">${dual("Request sample", "申请样品")}</a>
-        <a class="action" href="${orderHref}">${dual("Email order", "邮件下单")}</a>
-      </div>
-    </section>
+    ${closingHandoff}
   </main>
 </body>
 </html>`;
@@ -1397,14 +2304,14 @@ const zhHtml = `<!doctype html>
   <link rel="stylesheet" href="../styles.css">
   <link rel="alternate" type="application/rss+xml" title="TrendFoundry RSS" href="../feed.xml">
   <link rel="alternate" type="application/feed+json" title="TrendFoundry JSON Feed" href="../feed.json">
-  <script src="../app.js" defer></script>
+  <script src="../app.js?v=${encodeURIComponent(feedUpdated)}" defer></script>
 </head>
-<body data-lang="zh" data-default-lang="zh" data-force-lang="zh">
+<body id="top" data-lang="zh" data-default-lang="zh" data-force-lang="zh">
   <header class="topbar">
     <div>
       <div class="brandrow">
         <div class="brandline">
-          <span>TrendFoundry</span>
+          ${brandLogo()}
           <span>中文入口 · 期次 ${new Date(data.generatedAt).toLocaleDateString("zh-CN")}</span>
         </div>
         <div class="language-switch" aria-label="Language">
@@ -1415,9 +2322,9 @@ const zhHtml = `<!doctype html>
       <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
       <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
       <div class="hero-metrics" aria-label="Product proof points">
-        <span><strong>12</strong>条排序机会</span>
-        <span><strong>5</strong>个来源入口</span>
-        <span><strong>1</strong>份可录制脚本</span>
+        <span><strong data-hero-count="12">12</strong>条排序机会</span>
+        <span><strong data-hero-count="5">5</strong>个来源入口</span>
+        <span><strong data-hero-count="1">1</strong>份可录制脚本</span>
       </div>
       <div class="hero-actions">
         <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
@@ -1431,9 +2338,12 @@ const zhHtml = `<!doctype html>
         <a href="${issueOrderHref}">在 GitHub 申请</a>
         <a href="${orderHref}">邮件下单</a>
       </div>
+      <a class="scroll-cue" href="#sample" aria-label="Scroll to sample">下滑<span aria-hidden="true"></span></a>
     </div>
     <aside>${zhProductVisual}</aside>
   </header>
+  ${zhLocalNav}
+  ${zhSampleDrawer}
   <main>
     <section class="offer">
       <div>
@@ -1446,19 +2356,22 @@ const zhHtml = `<!doctype html>
         <small><a href="${issueOrderHref}">GitHub 申请</a> / <a href="${orderHref}">邮件下单</a></small>
       </div>
     </section>
-    <section class="sample-preview" aria-label="Free public sample">
+    ${fitStudio}
+    <section class="sample-preview" id="sample" aria-label="Free public sample">
       <div>
         <p class="section-label">免费样品</p>
         <h2>下单前先看 3 个当前机会。</h2>
         <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
       </div>
       <div class="sample-actions">
+        <button class="action primary" type="button" data-sample-open>页面内预览</button>
         <a class="action strong" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
-        <a class="action primary" href="../public-sample.zh-CN.md">打开中文样品</a>
+        <a class="action" href="../public-sample.zh-CN.md">打开中文样品</a>
         <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
         <a class="action primary" href="../public-sample.en.md">Open English sample</a>
         <a class="action" href="../public-sample.en.csv">English CSV</a>
       </div>
+      ${zhSampleSpotlight}
     </section>
     <section class="visual-proof" aria-label="Product preview">
       <div>
@@ -1469,8 +2382,9 @@ const zhHtml = `<!doctype html>
       <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
     </section>
     ${zhMotionProof}
+    ${zhSignalRunway}
     ${zhDecisionFlow}
-    <section class="opportunity-finder" aria-labelledby="opportunity-finder-title">
+    <section class="opportunity-finder" id="opportunities" aria-labelledby="opportunity-finder-title">
       <div class="finder-head">
         <div>
           <p class="section-label">机会筛选器</p>
@@ -1489,23 +2403,33 @@ const zhHtml = `<!doctype html>
           <input id="opportunity-search" type="search" placeholder="智能体、视频、工作流、arxiv...">
         </div>
       </div>
+      ${zhOpportunityFocus}
     </section>
     <section class="grid" id="opportunity-grid">${zhCards}</section>
-    <section class="pricing" aria-label="Pricing tiers">
+    ${zhContrastSection}
+    ${zhPlanningCalculator}
+    <section class="pricing" id="pricing" aria-label="Pricing tiers">
       <div class="section-head">
         <p class="section-label">定价</p>
         <h2>按你的更新节奏选择交付深度。</h2>
         <p>每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。</p>
       </div>
       <div class="tier-grid">${pricingCards}</div>
+      ${pricingChooser}
     </section>
-    <section class="delivery" aria-label="What the buyer receives">
-      <div>
+    <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
+      <div class="delivery-copy">
         <p class="section-label">交付内容</p>
-        <h2>这是创作者情报包，不是 AI 新闻摘要。</h2>
+        <h2>购买前，先看清交付包。</h2>
+        <p>创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。</p>
+      </div>
+      <div class="deliverable-viewer">
+        <div class="deliverable-tabs" aria-label="Delivery file preview">${zhDeliveryPreviewButtons}</div>
+        <div class="deliverable-screen">${zhDeliveryPreviewPanels}</div>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
+    ${zhProofLedger}
     <section class="seo-hub" aria-label="Chinese discovery links">
       <div>
         <p class="section-label">复访入口</p>
@@ -1520,19 +2444,7 @@ const zhHtml = `<!doctype html>
         <a class="topic-link" href="../topics/bilibili-ai-topics.html"><span>B 站 AI 选题页</span><small>面向中文技术讲解的长期搜索入口。</small></a>
       </div>
     </section>
-    <section class="handoff">
-      <div>
-        <p class="section-label">下一步</p>
-        <h2>把这页作为中文外联和 B 站动态的主链接。</h2>
-        <p>先给对方免费样品和公开归档，再引导申请当前完整包或邮件下单。</p>
-      </div>
-      <div class="handoff-links">
-        <a class="action primary" href="${issueOrderHref}">申请样品</a>
-        <a class="action" href="../sales-page-copy.md">销售文案</a>
-        <a class="action primary" href="../order/">下单页</a>
-        <a class="action strong" href="${orderHref}">邮件下单</a>
-      </div>
-    </section>
+    ${zhClosingHandoff}
   </main>
 </body>
 </html>`;
@@ -1554,7 +2466,7 @@ const orderHtml = `<!doctype html>
 </head>
 <body data-lang="en">
   <header class="topic-hero order-hero">
-    <div class="brandline"><span>TrendFoundry</span><span>No-login order</span></div>
+    <div class="brandline">${brandLogo()}<span>No-login order</span></div>
     <h1>Order a creator-intelligence pack without creating another account.</h1>
     <p class="sub">Pick a tier, send the prepared email, and receive payment instructions plus the next delivery step. The GitHub form remains available for buyers who prefer public issue tracking.</p>
     <div class="hero-actions">
@@ -1728,19 +2640,30 @@ const authHtml = `<!doctype html>
   <link rel="canonical" href="${publicSiteUrl}auth/">
   <link rel="stylesheet" href="../styles.css">
   <script>window.TRENDFOUNDRY_AUTH_PROVIDERS = ${JSON.stringify(authProviders)};</script>
-  <script src="../auth.js" defer></script>
+  <script src="../auth.js?v=${encodeURIComponent(feedUpdated)}" defer></script>
 </head>
 <body data-page="auth">
   <header class="topic-hero auth-hero">
-    <div class="brandline"><span>TrendFoundry</span><span>Account access</span></div>
-    <h1>Sign in with the account you already use.</h1>
-    <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
-    <div class="hero-actions">
-      <a class="action primary" href="#providers">Choose provider</a>
-      <a class="action" href="../order/">Order page</a>
-      <a class="action" href="../zh/">Chinese entry</a>
-      <a class="action strong" href="../">Dashboard</a>
+    <div class="auth-hero-copy">
+      <div class="brandline">${brandLogo()}<span>Account access</span></div>
+      <h1>Sign in with the account you already use.</h1>
+      <p class="sub">Global and China identity providers are wired through a config-driven OAuth gateway, so buyers can use Google, Apple, Microsoft, GitHub, WeChat, QQ, Alipay, DingTalk, Feishu, and other common accounts.</p>
+      <div class="hero-actions">
+        <a class="action primary" href="#providers">Choose provider</a>
+        <a class="action" href="../order/">Order page</a>
+        <a class="action" href="../zh/">Chinese entry</a>
+        <a class="action strong" href="../">Dashboard</a>
+      </div>
     </div>
+    <figure class="auth-hero-visual">
+      <img src="../signal-board.png" alt="TrendFoundry signal board preview with ranked creator opportunities" width="1200" height="760">
+      <div class="auth-provider-orbit" aria-hidden="true">${authProviderOrbit}</div>
+      <figcaption>
+        <span id="auth-visual-kicker">Secure access</span>
+        <strong id="auth-visual-title">Ranked opportunities stay attached to source proof.</strong>
+        <small id="auth-visual-copy">Choose a provider to preview the access path before you leave the page.</small>
+      </figcaption>
+    </figure>
   </header>
   <main>
     <section class="auth-status-panel" aria-label="Account status">
@@ -1784,7 +2707,10 @@ const authHtml = `<!doctype html>
         <p class="section-label">Production setup</p>
         <h2>Secrets stay off the static site.</h2>
       </div>
-      <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+      <div class="auth-setup-copy">
+        <img src="../og-image.png" alt="TrendFoundry public proof graphic used for secure account context" width="1200" height="630">
+        <p>The static site cannot complete OAuth token exchange. GitHub Pages can start OAuth flows, but token exchange and secure sessions must live in a backend or hosted auth service. The generated <a href="./auth.config.json"><code>auth.config.json</code></a> is public-client configuration only; provider secrets belong in the broker.</p>
+      </div>
     </section>
   </main>
 </body>
@@ -1799,6 +2725,11 @@ const accountProvider = document.querySelector("#account-provider");
 const accountAvatar = document.querySelector("#account-avatar");
 const signOutButton = document.querySelector("#sign-out-button");
 const emailForm = document.querySelector("#email-login-form");
+const authHeroVisual = document.querySelector(".auth-hero-visual");
+const authVisualKicker = document.querySelector("#auth-visual-kicker");
+const authVisualTitle = document.querySelector("#auth-visual-title");
+const authVisualCopy = document.querySelector("#auth-visual-copy");
+const authAvatarNodes = [...document.querySelectorAll("[data-auth-avatar]")];
 const providers = window.TRENDFOUNDRY_AUTH_PROVIDERS || [];
 const sessionKey = "trendfoundry.auth.session";
 let authConfig = { providers: {} };
@@ -1815,6 +2746,33 @@ function providerConfig(providerId) {
 function providerReady(providerId) {
   const config = providerConfig(providerId);
   return Boolean(authConfig.brokerBaseUrl || (config.enabled && config.clientId && (config.authorizationEndpoint || config.authUrl)));
+}
+
+function setAuthVisual(providerId) {
+  const provider = providers.find((item) => item.id === providerId);
+  const isEmail = providerId === "email";
+  const ready = isEmail ? Boolean(authConfig.emailSignInEndpoint) : provider ? providerReady(provider.id) : false;
+  const label = isEmail ? "Email magic link" : provider ? provider.label : "Secure access";
+  const region = isEmail ? "Direct inbox" : provider ? provider.region : "Account access";
+  const description = isEmail
+    ? "Email creates a low-friction fallback for buyers who do not want a social identity."
+    : provider
+      ? provider.description
+      : "Choose a provider to preview the access path before you leave the page.";
+  if (authHeroVisual) authHeroVisual.dataset.ready = ready ? "true" : "false";
+  if (authVisualKicker) authVisualKicker.textContent = (ready ? "Ready path" : "Setup path") + " / " + region;
+  if (authVisualTitle) authVisualTitle.textContent = label;
+  if (authVisualCopy) {
+    authVisualCopy.textContent = ready
+      ? description + " The button can hand off through the configured gateway."
+      : description + " Add the gateway or client settings before production login.";
+  }
+  for (const button of providerGrid.querySelectorAll("[data-provider]")) {
+    button.classList.toggle("visual-active", button.dataset.provider === providerId);
+  }
+  for (const avatar of authAvatarNodes) {
+    avatar.classList.toggle("visual-active", avatar.dataset.authAvatar === providerId);
+  }
 }
 
 function authReturnUrl() {
@@ -1896,6 +2854,8 @@ function renderProviders() {
     button.dataset.ready = ready ? "true" : "false";
     button.title = ready ? "Start login" : "Set brokerBaseUrl or provider clientId in auth.config.json";
   }
+  const firstReady = providers.find((provider) => providerReady(provider.id));
+  setAuthVisual(firstReady ? firstReady.id : providers[0]?.id || "email");
 }
 
 function handleCallback() {
@@ -1904,17 +2864,20 @@ function handleCallback() {
     const provider = params.get("provider") || "provider";
     const message = params.get("message") || "auth_error";
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice(provider + " login could not start: " + message.replace(/_/g, " ") + ".", "warning");
     return true;
   }
   if (params.get("tf_auth") === "ok") {
+    const provider = params.get("provider") || "broker";
     saveSession({
-      provider: params.get("provider") || "broker",
+      provider,
       name: params.get("name") || params.get("email") || "TrendFoundry member",
       email: params.get("email") || "",
       mode: "active"
     });
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice("Signed in through the configured auth gateway.", "success");
     return true;
   }
@@ -1924,6 +2887,7 @@ function handleCallback() {
     const provider = state.split(".")[0] || "provider";
     saveSession({ provider, name: "Pending OAuth exchange", mode: "pending" });
     window.history.replaceState({}, "", window.location.pathname);
+    setAuthVisual(provider);
     setNotice(expected && state !== expected ? "State mismatch. Do not trust this callback until the backend validates it." : "Code received. A backend must exchange it for a secure session.", expected && state !== expected ? "danger" : "warning");
     return true;
   }
@@ -1949,8 +2913,8 @@ async function loadConfig() {
       // The static page can still render even when the broker is temporarily unavailable.
     }
   }
-  const callbackHandled = handleCallback();
   renderProviders();
+  const callbackHandled = handleCallback();
   renderSession();
   if (callbackHandled) {
     return;
@@ -1968,6 +2932,7 @@ providerGrid.addEventListener("click", (event) => {
   if (!button) return;
   const provider = providers.find((item) => item.id === button.dataset.provider);
   if (!provider) return;
+  setAuthVisual(provider.id);
   const url = buildAuthUrl(provider);
   if (!url) {
     setNotice(provider.label + " needs brokerBaseUrl or an enabled clientId in auth.config.json.", "warning");
@@ -1976,9 +2941,22 @@ providerGrid.addEventListener("click", (event) => {
   window.location.href = url;
 });
 
+providerGrid.addEventListener("pointerover", (event) => {
+  const button = event.target.closest("[data-provider]");
+  if (button) setAuthVisual(button.dataset.provider);
+});
+
+providerGrid.addEventListener("focusin", (event) => {
+  const button = event.target.closest("[data-provider]");
+  if (button) setAuthVisual(button.dataset.provider);
+});
+
+emailForm.addEventListener("focusin", () => setAuthVisual("email"));
+
 emailForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = new FormData(emailForm).get("email");
+  setAuthVisual("email");
   if (!authConfig.emailSignInEndpoint) {
     saveSession({ provider: "email", name: String(email), email: String(email), mode: "pending" });
     renderSession();
@@ -2004,6 +2982,10 @@ signOutButton.addEventListener("click", () => {
   renderSession();
   setNotice("Signed out on this device.", "neutral");
 });
+
+window.trendfoundryAuthPreview = {
+  setProvider: setAuthVisual
+};
 
 loadConfig();
 `;
@@ -2032,6 +3014,10 @@ body {
   color: var(--ink);
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 78px;
 }
 a { color: inherit; }
 h1,
@@ -2067,9 +3053,239 @@ small {
   background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.86));
   pointer-events: none;
 }
+.local-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: minmax(120px, auto) minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 54px;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.08);
+  padding: 8px clamp(20px, 5vw, 72px);
+  background: rgba(251, 251, 253, 0.78);
+  backdrop-filter: saturate(180%) blur(22px);
+  --scroll-progress: 0%;
+}
+.local-progress {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.local-progress::before {
+  content: "";
+  display: block;
+  width: var(--scroll-progress);
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0071e3, #8bc4ff);
+  box-shadow: 0 0 18px rgba(0, 113, 227, 0.32);
+  transition: width 120ms linear;
+}
+.local-brand,
+.local-links a,
+.local-cta {
+  text-decoration: none;
+  white-space: nowrap;
+}
+.local-brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 850;
+}
+.local-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+.local-links a {
+  position: relative;
+  padding: 8px 0;
+  transition: color 160ms ease;
+}
+.local-links a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--accent);
+  opacity: 0;
+  transform: scaleX(0.36);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.local-links a.active,
+.local-links a:hover {
+  color: var(--ink);
+}
+.local-links a.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.local-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 850;
+  box-shadow: 0 8px 18px rgba(0, 113, 227, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.local-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 113, 227, 0.24);
+}
+.sample-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 54px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.sample-drawer[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sample-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 245, 247, 0.72);
+  backdrop-filter: blur(24px) saturate(150%);
+}
+.sample-drawer-panel {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  width: min(1040px, 100%);
+  max-height: min(820px, calc(100svh - 34px));
+  overflow: auto;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 22px;
+  padding: clamp(18px, 3vw, 34px);
+  background:
+    radial-gradient(circle at 84% 10%, rgba(0, 113, 227, 0.12), transparent 28%),
+    rgba(255, 255, 255, 0.9);
+  box-shadow: 0 34px 100px rgba(17, 17, 20, 0.24);
+  transform: translateY(18px) scale(0.98);
+  transition: transform 220ms ease;
+}
+.sample-drawer[aria-hidden="false"] .sample-drawer-panel {
+  transform: translateY(0) scale(1);
+}
+.drawer-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.drawer-head {
+  max-width: 760px;
+  padding-right: 44px;
+}
+.drawer-head h2 {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1;
+}
+.drawer-head p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.sample-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.sample-drawer-card {
+  display: grid;
+  gap: 12px;
+  min-height: 280px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(17, 17, 20, 0.06);
+}
+.sample-drawer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.sample-drawer-meta span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+.sample-drawer-card h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.25;
+}
+.sample-drawer-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.sample-drawer-card a {
+  align-self: end;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+.drawer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+body.drawer-open {
+  overflow: hidden;
+}
 .brandline {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px 16px;
   margin: 0;
   color: var(--accent);
@@ -2077,6 +3293,52 @@ small {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+.brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.brand-mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(17, 17, 20, 0.18);
+  border-radius: 7px;
+  background: linear-gradient(180deg, #ffffff, #f3f5f7);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 6px 16px rgba(17, 17, 20, 0.08);
+}
+.brand-mark::before,
+.brand-mark::after,
+.brand-mark span {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: var(--ink);
+}
+.brand-mark::before {
+  width: 3px;
+  height: 12px;
+  transform: translateX(-4px);
+}
+.brand-mark span {
+  width: 3px;
+  height: 16px;
+}
+.brand-mark::after {
+  width: 3px;
+  height: 8px;
+  transform: translateX(4px);
+}
+.brand-word {
+  color: var(--ink);
+  font-weight: 850;
 }
 .brandrow {
   display: flex;
@@ -2159,6 +3421,11 @@ h1 {
   color: var(--ink);
   font-size: 28px;
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: transform 180ms ease;
+}
+.hero-metrics.is-counting > span > strong {
+  transform: translateY(-1px);
 }
 .hero-actions,
 .handoff-links {
@@ -2183,6 +3450,44 @@ h1 {
 .utility-links a:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.scroll-cue span {
+  position: relative;
+  display: inline-flex;
+  width: 18px;
+  height: 28px;
+  border: 1px solid rgba(17, 17, 20, 0.18);
+  border-radius: 999px;
+}
+.scroll-cue span::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  animation: scrollCue 1.8s ease-in-out infinite;
+}
+@keyframes scrollCue {
+  0%, 100% { opacity: 0.28; transform: translate(-50%, 0); }
+  50% { opacity: 1; transform: translate(-50%, 9px); }
 }
 .action {
   display: inline-flex;
@@ -2242,29 +3547,53 @@ h1 {
   display: grid;
   gap: 7px;
   border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 9px 10px;
-  background: rgba(255, 255, 255, 0.72);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.82);
   color: var(--muted);
+  box-shadow: 0 10px 28px rgba(17, 17, 20, 0.06);
+  backdrop-filter: blur(18px);
 }
 .source-mix-label {
   margin: 0;
-  color: var(--ink);
-  font-size: 12px;
+  color: var(--accent);
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 .source-legend {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
 }
-.source-legend span {
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
+.source-legend button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 999px;
+  padding: 5px 8px;
+  background: rgba(255,255,255,0.72);
   color: var(--muted);
   font-size: 12px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+.source-legend button:hover,
+.source-legend button:focus-visible,
+.source-legend button.active {
+  transform: translateY(-1px);
+  border-color: rgba(0, 113, 227, 0.28);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.source-legend button strong {
+  color: currentColor;
+  font-size: 11px;
 }
 .product-visual {
   display: grid;
@@ -2348,6 +3677,15 @@ h1 {
   font-size: 12px;
   box-shadow: 0 8px 22px rgba(17, 17, 20, 0.05);
   backdrop-filter: blur(16px);
+  transition: transform 180ms ease, opacity 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.board-summary li.is-source-focused {
+  transform: translateY(-3px);
+  border-color: rgba(0, 113, 227, 0.32);
+  box-shadow: 0 14px 28px rgba(0, 113, 227, 0.11);
+}
+.board-summary li.is-source-dimmed {
+  opacity: 0.42;
 }
 .board-summary strong {
   color: var(--ink);
@@ -2372,7 +3710,32 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .signal-ticker span,
   .product-visual,
+  .source-legend button,
   .flow-orbit,
+  .runway-line span,
+  .runway-panel,
+  .runway-stage,
+  .deliverable-panel,
+  .deliverable-tab,
+  .proof-tab,
+  .proof-panel,
+  .final-action-button,
+  .final-action-panel,
+  .opportunity-focus,
+  .card,
+  .auth-orbit-avatar,
+  .provider-avatar,
+  .auth-hero-visual figcaption,
+  .provider-button,
+  .fit-persona,
+  .fit-device,
+  .fit-signal-card,
+  .fit-source-list li,
+  .fit-progress span::before,
+  .sample-spotlight-tab,
+  .sample-spotlight-panel,
+  .local-progress::before,
+  .scroll-cue span::after,
   .reveal-item {
     animation: none;
     transition: none;
@@ -2406,29 +3769,569 @@ main {
 }
 .price > span { display: block; font-size: clamp(34px, 4.4vw, 56px); font-weight: 850; color: var(--ink); }
 .price small { color: var(--muted); }
+.fit-studio {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(22px, 5vw, 68px);
+  align-items: center;
+  padding-top: 18px;
+}
+.fit-studio > *,
+.fit-copy,
+.fit-personas,
+.fit-device,
+.fit-device-screen {
+  min-width: 0;
+}
+.fit-copy h2 {
+  max-width: 560px;
+  margin: 0 0 10px;
+  font-size: clamp(34px, 4.7vw, 64px);
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+.fit-copy p:not(.section-label) {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.fit-personas {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+}
+.fit-persona {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 18px;
+  gap: 12px;
+  align-items: center;
+  min-height: 86px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.74);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.fit-persona::before {
+  content: "";
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 62% 34%, rgba(0, 113, 227, 0.28), transparent 26%),
+    linear-gradient(145deg, #fff, #f1f3f7);
+  box-shadow: inset 0 0 0 1px rgba(17,17,20,0.04);
+}
+.fit-persona::after {
+  content: "";
+  width: 7px;
+  height: 12px;
+  border-right: 2px solid rgba(17,17,20,0.34);
+  border-bottom: 2px solid rgba(17,17,20,0.34);
+  transform: rotate(-45deg);
+  justify-self: end;
+}
+.fit-persona:hover,
+.fit-persona:focus-visible,
+.fit-persona.active {
+  transform: translateY(-1px);
+  border-color: rgba(0, 113, 227, 0.34);
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(17, 17, 20, 0.08);
+}
+.fit-persona span {
+  grid-column: 2;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.fit-persona strong {
+  grid-column: 2;
+  font-size: 15px;
+  line-height: 1.2;
+}
+.fit-device {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.94), rgba(247,248,250,0.82)),
+    #fff;
+  box-shadow: 0 36px 90px rgba(17, 17, 20, 0.12);
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+.fit-device.is-switching {
+  transform: translateY(-4px);
+  border-color: rgba(0, 113, 227, 0.28);
+  box-shadow: 0 40px 96px rgba(0, 113, 227, 0.14);
+}
+.fit-device::before {
+  content: "";
+  position: absolute;
+  inset: -35% -18% auto auto;
+  width: 48%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.16), transparent 62%);
+  filter: blur(2px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+.fit-device[data-fit-device="bilibili"]::before {
+  background: radial-gradient(circle, rgba(255, 98, 0, 0.14), transparent 62%);
+}
+.fit-device[data-fit-device="deeptech"]::before {
+  background: radial-gradient(circle, rgba(22, 163, 127, 0.14), transparent 62%);
+}
+.fit-device-bar {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  height: 32px;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.06);
+  background: rgba(255,255,255,0.62);
+}
+.fit-device-bar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #d5d8de;
+}
+.fit-device-screen {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  min-height: 520px;
+  padding: clamp(18px, 3vw, 30px);
+}
+.fit-device-label {
+  margin: 0;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.fit-console-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 2px;
+}
+.fit-console-head strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+}
+.fit-console-head b {
+  color: var(--accent);
+  font-weight: 850;
+}
+.fit-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 780;
+  white-space: nowrap;
+}
+.fit-live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #19c37d;
+  box-shadow: 0 0 0 4px rgba(25,195,125,0.1);
+}
+.fit-progress {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+.fit-progress span {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(17,17,20,0.08);
+  overflow: hidden;
+}
+.fit-progress span::before {
+  content: "";
+  display: block;
+  width: var(--fit-progress, 72%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 280ms ease;
+}
+.fit-progress em {
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+}
+.fit-workbench {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(138px, 0.24fr) minmax(0, 1fr) minmax(160px, 0.28fr);
+  gap: 14px;
+  min-height: 300px;
+  border-top: 1px solid rgba(17,17,20,0.06);
+  border-bottom: 1px solid rgba(17,17,20,0.06);
+  padding: 16px 0;
+}
+.fit-source-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fit-source-list li {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 36px;
+  gap: 8px;
+  align-items: center;
+  min-height: 35px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  background: rgba(255,255,255,0.74);
+  animation: signalPulse 4.8s ease-in-out infinite;
+  animation-delay: calc(var(--row-index) * 180ms);
+}
+.fit-source-list li span {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #f2f4f7;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 850;
+}
+.fit-source-list li strong {
+  min-width: 0;
+  color: var(--ink);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fit-source-list li em {
+  height: 12px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 92% 50%, #19c37d 0 2px, transparent 3px),
+    linear-gradient(90deg, transparent 0 12%, var(--accent) 12% 20%, transparent 20% 32%, rgba(0,113,227,0.38) 32% 54%, transparent 54%);
+  opacity: 0.72;
+}
+.fit-pipeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  overflow: hidden;
+}
+.fit-pipeline::before,
+.fit-pipeline::after {
+  content: "";
+  position: absolute;
+  right: 9%;
+  left: 4%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,113,227,0.08), rgba(0,113,227,0.72), rgba(25,195,125,0.48));
+  transform-origin: left center;
+  pointer-events: none;
+}
+.fit-pipeline::before {
+  top: 42%;
+  transform: rotate(16deg);
+}
+.fit-pipeline::after {
+  top: 58%;
+  transform: rotate(-10deg);
+}
+.fit-pipeline-column {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 14px;
+  border-left: 1px dashed rgba(17,17,20,0.1);
+  padding-left: 10px;
+}
+.fit-pipeline-column p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.fit-pipeline-column span {
+  display: block;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 84% 20%, #19c37d 0 3px, transparent 4px),
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,248,250,0.78));
+  box-shadow: 0 10px 28px rgba(17,17,20,0.06);
+}
+.fit-pipeline-column span::before,
+.fit-pipeline-column span::after {
+  content: "";
+  display: block;
+  height: 5px;
+  margin: 13px 12px 0;
+  border-radius: 999px;
+  background: rgba(17,17,20,0.1);
+}
+.fit-pipeline-column span::after {
+  width: 42%;
+  margin-top: 8px;
+  background: rgba(0,113,227,0.16);
+}
+.fit-signal-card {
+  align-self: center;
+  display: grid;
+  gap: 10px;
+  min-height: 176px;
+  border: 1px solid rgba(0, 113, 227, 0.34);
+  border-radius: 12px;
+  padding: 16px;
+  background: rgba(255,255,255,0.86);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 14px 36px rgba(17, 17, 20, 0.06);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.fit-signal-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 113, 227, 0.36);
+  box-shadow: 0 18px 42px rgba(0, 113, 227, 0.1);
+}
+.fit-signal-card span,
+.fit-signal-card em {
+  color: var(--accent);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.fit-signal-card strong {
+  max-width: 720px;
+  color: var(--ink);
+  font-size: clamp(17px, 1.65vw, 23px);
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+.fit-signal-card small {
+  display: block;
+  align-self: end;
+  height: 36px;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(0,113,227,0.12) 0 9%, transparent 9% 13%, rgba(25,195,125,0.22) 13% 22%, transparent 22% 29%, rgba(0,113,227,0.28) 29% 38%, transparent 38% 48%, rgba(0,113,227,0.12) 48% 60%, transparent 60% 68%, rgba(25,195,125,0.3) 68% 84%, transparent 84%);
+}
+.fit-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.fit-telemetry span {
+  display: grid;
+  gap: 5px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: rgba(255,255,255,0.74);
+}
+.fit-telemetry strong {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.fit-telemetry small {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 760;
+  overflow-wrap: anywhere;
+}
 .pricing,
 .sample-preview,
+.fit-studio,
 .visual-proof,
 .motion-proof,
-.delivery {
+.signal-runway,
+.delivery,
+.proof-ledger {
   border-bottom: 1px solid var(--line);
   padding: 2px 0 34px;
   margin-bottom: 34px;
 }
 .reveal-item {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 620ms ease, transform 620ms ease;
+  opacity: 0;
+  transform: translateY(24px) scale(0.992);
+  transition:
+    opacity 720ms ease,
+    transform 720ms cubic-bezier(0.2, 0.72, 0.16, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal-item.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 .sample-preview {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
   align-items: center;
+}
+.sample-spotlight {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 0.66fr);
+  gap: 12px;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 12px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(0, 113, 227, 0.12), transparent 34%),
+    rgba(255,255,255,0.72);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(20px);
+}
+.sample-spotlight-tabs {
+  display: grid;
+  gap: 8px;
+}
+.sample-spotlight-tab {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: center;
+  min-height: 72px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.sample-spotlight-tab:hover,
+.sample-spotlight-tab.active {
+  border-color: rgba(0, 113, 227, 0.34);
+  background: var(--accent-soft);
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.07);
+  transform: translateY(-1px);
+}
+.sample-spotlight-tab span {
+  grid-row: span 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #111114;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 850;
+}
+.sample-spotlight-tab strong {
+  font-size: 14px;
+}
+.sample-spotlight-tab em {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+.sample-spotlight-stage {
+  display: grid;
+  min-height: 300px;
+}
+.sample-spotlight-panel {
+  grid-area: 1 / 1;
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 28px);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(247,248,250,0.92)),
+    #fff;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.992);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+.sample-spotlight-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.sample-spotlight-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sample-spotlight-meta span,
+.sample-spotlight-proof {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+.sample-spotlight-panel h3 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(25px, 3.2vw, 44px);
+  line-height: 1.04;
+}
+.sample-spotlight-panel p {
+  max-width: 680px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.sample-spotlight-proof {
+  display: grid;
+  gap: 3px;
+  max-width: 680px;
+  border-radius: 10px;
+  line-height: 1.35;
+}
+.sample-spotlight-proof strong {
+  color: var(--ink);
+}
+.sample-spotlight-panel .action {
+  width: fit-content;
 }
 .visual-proof {
   display: grid;
@@ -2443,13 +4346,15 @@ main {
   align-items: center;
 }
 .visual-proof h2,
-.motion-proof h2 {
+.motion-proof h2,
+.runway-copy h2 {
   margin: 0 0 8px;
   font-size: 24px;
   line-height: 1.2;
 }
 .visual-proof p:not(.section-label),
-.motion-proof p:not(.section-label) {
+.motion-proof p:not(.section-label),
+.runway-copy p:not(.section-label) {
   margin: 0;
   color: var(--muted);
   line-height: 1.5;
@@ -2474,6 +4379,211 @@ main {
   border-radius: var(--radius);
   background: #f7f8fa;
   box-shadow: var(--shadow);
+}
+.signal-runway {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  padding-top: 8px;
+}
+.runway-copy h2 {
+  max-width: 520px;
+  font-size: clamp(32px, 4vw, 58px);
+  line-height: 0.98;
+}
+.runway-copy p:not(.section-label) {
+  max-width: 560px;
+  font-size: 17px;
+}
+.runway-console {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: clamp(16px, 2.4vw, 28px);
+  background:
+    radial-gradient(circle at 78% 16%, rgba(0, 113, 227, 0.24), transparent 30%),
+    linear-gradient(145deg, #18191d, #08090b 62%, #111114);
+  color: #fff;
+  box-shadow: 0 34px 88px rgba(17, 17, 20, 0.28);
+}
+.runway-console::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.86), transparent 82%);
+  pointer-events: none;
+}
+.runway-topline,
+.runway-product,
+.runway-stages {
+  position: relative;
+  z-index: 1;
+}
+.runway-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+.runway-topline strong {
+  color: #fff;
+}
+.runway-product {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) 64px minmax(220px, 0.7fr);
+  gap: 16px;
+  align-items: stretch;
+  min-height: 244px;
+}
+.runway-card,
+.runway-panels {
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+}
+.runway-card {
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  padding: 20px;
+}
+.runway-card p {
+  margin: 0;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.runway-card h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 2.8vw, 36px);
+  line-height: 1.03;
+}
+.runway-card a {
+  width: fit-content;
+  color: #8bc4ff;
+  font-size: 13px;
+  font-weight: 850;
+  text-decoration: none;
+}
+.runway-line {
+  position: relative;
+  align-self: center;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.18);
+}
+.runway-line span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--runway-progress);
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7dd3fc, #0071e3);
+  box-shadow: 0 0 24px rgba(0, 113, 227, 0.42);
+  transition: width 320ms ease;
+}
+.runway-line::before,
+.runway-line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%);
+  box-shadow: 0 0 0 8px rgba(255,255,255,0.08);
+}
+.runway-line::before { left: 0; }
+.runway-line::after { right: 0; }
+.runway-panels {
+  position: relative;
+  overflow: hidden;
+  min-height: 244px;
+}
+.runway-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+.runway-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.runway-panel p {
+  margin: 0;
+  color: rgba(255,255,255,0.58);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.runway-panel h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.1;
+}
+.runway-stages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.runway-stage {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 8px;
+  min-height: 104px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+.runway-stage:hover,
+.runway-stage.active {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.55);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.runway-stage span {
+  grid-row: span 2;
+  color: #8bc4ff;
+  font-size: 12px;
+  font-weight: 900;
+}
+.runway-stage strong {
+  align-self: end;
+  font-size: 13px;
+}
+.runway-stage em {
+  grid-column: 2;
+  color: rgba(255,255,255,0.58);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.35;
 }
 .decision-flow {
   display: grid;
@@ -2607,6 +4717,195 @@ main {
   font-style: normal;
   line-height: 1.4;
 }
+.contrast-lab {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0 42px;
+  margin: 4px 0 34px;
+}
+.contrast-copy h2 {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1;
+}
+.contrast-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.contrast-panel {
+  display: grid;
+  gap: 14px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(249,250,252,0.78));
+  box-shadow: var(--shadow);
+}
+.contrast-toggle {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  background: #fff;
+}
+.contrast-option {
+  min-height: 38px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+.contrast-option.active {
+  background: var(--ink);
+  color: #fff;
+}
+.contrast-option:hover {
+  transform: translateY(-1px);
+}
+.contrast-table {
+  display: grid;
+  gap: 8px;
+}
+.contrast-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 0.25fr) minmax(0, 0.375fr) minmax(0, 0.375fr);
+  gap: 10px;
+  align-items: stretch;
+}
+.contrast-row strong,
+.contrast-row span {
+  display: flex;
+  align-items: center;
+  min-height: 84px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+  background: #fff;
+  line-height: 1.35;
+}
+.contrast-row strong {
+  color: var(--ink);
+  font-size: 14px;
+}
+.contrast-row span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.contrast-panel[data-contrast-mode="before"] .before-copy,
+.contrast-panel[data-contrast-mode="after"] .after-copy {
+  border-color: rgba(0, 113, 227, 0.36);
+  background: var(--accent-soft);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.2);
+}
+.contrast-panel[data-contrast-mode="before"] .after-copy,
+.contrast-panel[data-contrast-mode="after"] .before-copy {
+  opacity: 0.58;
+}
+.planning-calculator {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding: 8px 0 42px;
+  margin: 4px 0 34px;
+}
+.calculator-copy h2 {
+  margin: 0 0 10px;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1;
+}
+.calculator-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.calculator-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.56fr) minmax(220px, 0.44fr);
+  gap: 14px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,252,0.78)),
+    radial-gradient(circle at 86% 16%, rgba(0, 113, 227, 0.12), transparent 30%);
+  box-shadow: var(--shadow);
+}
+.range-control {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: #fff;
+}
+.range-control + .range-control {
+  grid-column: 1;
+}
+.range-control span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+.range-control strong {
+  color: var(--ink);
+  font-size: 36px;
+  line-height: 1;
+}
+.range-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.calculator-result {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  min-height: 240px;
+  border-radius: 14px;
+  padding: 20px;
+  background: #111114;
+  color: #fff;
+}
+.calculator-result span {
+  font-size: clamp(54px, 7vw, 92px);
+  font-weight: 850;
+  line-height: 0.9;
+}
+.calculator-result p {
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.4;
+}
+.calculator-result em {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 850;
+}
 .sample-preview h2 {
   margin: 0 0 8px;
   font-size: 24px;
@@ -2667,6 +4966,10 @@ main {
   border-color: rgba(0, 113, 227, 0.38);
   background: linear-gradient(180deg, #ffffff, #f5faff);
 }
+.tier.selected {
+  border-color: rgba(0, 113, 227, 0.58);
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.36), 0 22px 50px rgba(0, 113, 227, 0.12);
+}
 .tier-kicker {
   margin: 0 0 8px;
   color: var(--accent);
@@ -2696,11 +4999,341 @@ main {
   padding-left: 18px;
   color: var(--muted);
 }
+.tier-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.tier-actions .action {
+  width: 100%;
+}
+.tier-select-action {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+.tier-select-action:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.22);
+  outline-offset: 2px;
+}
+.pricing-chooser {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.96), rgba(247,250,252,0.88)),
+    radial-gradient(circle at 82% 12%, rgba(0, 113, 227, 0.12), transparent 28%);
+  box-shadow: var(--shadow);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.pricing-chooser.is-updating {
+  border-color: rgba(0, 113, 227, 0.34);
+  box-shadow: 0 18px 42px rgba(0, 113, 227, 0.11);
+}
+.pricing-chooser-label {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pricing-chooser h3 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.12;
+}
+.pricing-chooser p:not(.pricing-chooser-label) {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pricing-configurator {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+.pricing-configurator > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 8px;
+  align-content: start;
+  min-height: 94px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255,255,255,0.68);
+}
+.pricing-configurator span {
+  grid-row: span 2;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+.pricing-configurator strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+.pricing-configurator small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+.pricing-chooser-action {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+.pricing-chooser-action strong {
+  color: var(--ink);
+  font-size: 26px;
+  line-height: 1;
+}
+.pricing-chooser-action small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 750;
+}
 .delivery {
   display: grid;
   grid-template-columns: minmax(260px, 0.55fr) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
+}
+.delivery-lab {
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(20px, 4vw, 48px);
+}
+.delivery-copy {
+  min-width: 0;
+}
+.delivery-copy p:not(.section-label) {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.deliverable-viewer {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: 14px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,249,252,0.86)),
+    radial-gradient(circle at 82% 16%, rgba(0, 113, 227, 0.12), transparent 32%);
+  box-shadow: var(--shadow);
+}
+.deliverable-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px;
+  background: #fff;
+}
+.deliverable-tab {
+  min-height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.deliverable-tab:hover,
+.deliverable-tab.active {
+  background: var(--ink);
+  color: #fff;
+}
+.deliverable-tab:hover {
+  transform: translateY(-1px);
+}
+.deliverable-screen {
+  position: relative;
+  min-height: 306px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 14px;
+  background: #111114;
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.deliverable-screen::before {
+  content: "";
+  display: block;
+  height: 28px;
+  background:
+    radial-gradient(circle at 18px 50%, #ff5f57 0 4px, transparent 5px),
+    radial-gradient(circle at 36px 50%, #ffbd2e 0 4px, transparent 5px),
+    radial-gradient(circle at 54px 50%, #28c840 0 4px, transparent 5px),
+    linear-gradient(180deg, #272b31, #171a1f);
+}
+.deliverable-panel {
+  position: absolute;
+  inset: 28px 0 0;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+.deliverable-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.deliverable-panel h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.1;
+}
+.deliverable-panel pre {
+  overflow: auto;
+  max-height: 210px;
+  margin: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 14px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.8);
+  font: 13px/1.55 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  white-space: pre-wrap;
+}
+.proof-ledger {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(22px, 4vw, 52px);
+  align-items: center;
+}
+.proof-copy h2 {
+  max-width: 560px;
+  margin: 0 0 10px;
+  font-size: clamp(32px, 4vw, 58px);
+  line-height: 0.98;
+}
+.proof-copy p:not(.section-label) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.proof-console {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.42fr) minmax(0, 0.58fr);
+  gap: 12px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 18px;
+  padding: 14px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.96), rgba(247,250,252,0.86)),
+    radial-gradient(circle at 84% 12%, rgba(0, 113, 227, 0.12), transparent 30%);
+  box-shadow: var(--shadow);
+}
+.proof-tabs {
+  display: grid;
+  gap: 8px;
+}
+.proof-tab {
+  display: grid;
+  gap: 5px;
+  min-height: 82px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  background: #fff;
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+.proof-tab:hover,
+.proof-tab.active {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.42);
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.18);
+}
+.proof-tab span {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 850;
+}
+.proof-tab strong {
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.25;
+}
+.proof-panels {
+  position: relative;
+  overflow: hidden;
+  min-height: 352px;
+  border-radius: 14px;
+  background: #111114;
+  color: #fff;
+}
+.proof-panels::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 16%, rgba(0, 113, 227, 0.25), transparent 34%),
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: auto, 42px 42px, 42px 42px;
+  pointer-events: none;
+}
+.proof-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  padding: 22px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+.proof-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.proof-panel-kicker {
+  margin: 0;
+  color: #8bc4ff;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.proof-panel h3 {
+  max-width: 520px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.02;
+}
+.proof-panel p:not(.proof-panel-kicker) {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.5;
+}
+.proof-panel .action {
+  width: fit-content;
 }
 .seo-hub,
 .seo-summary,
@@ -2940,9 +5573,10 @@ main {
   line-height: 1.5;
 }
 .delivery ul {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2951,8 +5585,12 @@ main {
   display: grid;
   gap: 4px;
   margin: 0;
-  padding: 0 0 10px;
-  border-bottom: 1px solid var(--line);
+  min-height: 104px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(17, 17, 20, 0.04);
 }
 .delivery li span {
   color: var(--muted);
@@ -3103,6 +5741,55 @@ input[type="search"]:focus {
   transform: scale(1.03);
   background: var(--accent-soft);
 }
+.opportunity-focus {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: var(--radius);
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 251, 250, 0.84)),
+    radial-gradient(circle at 16% 14%, rgba(15, 107, 95, 0.11), transparent 32%);
+  box-shadow: 0 22px 54px rgba(17, 17, 20, 0.1);
+  backdrop-filter: blur(18px);
+}
+.opportunity-focus h3 {
+  margin: 4px 0 8px;
+  max-width: 760px;
+  font-size: clamp(22px, 3vw, 36px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.opportunity-focus p {
+  max-width: 740px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.opportunity-focus-card {
+  display: grid;
+  gap: 14px;
+  justify-items: end;
+  min-width: min(320px, 100%);
+}
+.opportunity-focus-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.opportunity-focus-meta span {
+  border: 1px solid #dbe2e8;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 850;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -3121,6 +5808,15 @@ input[type="search"]:focus {
   transform: translateY(-3px);
   border-color: #b8c8d9;
   box-shadow: 0 20px 46px rgba(17, 17, 20, 0.11);
+}
+.card:focus-visible {
+  outline: 3px solid rgba(15, 107, 95, 0.18);
+  outline-offset: 3px;
+}
+.card.is-focused {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px rgba(15, 107, 95, 0.5), 0 24px 54px rgba(17, 17, 20, 0.13);
 }
 .card.hidden {
   display: none;
@@ -3172,8 +5868,287 @@ li { margin: 6px 0; }
   margin: 0;
   color: var(--muted);
 }
+.closing-handoff {
+  grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(22px, 5vw, 68px);
+  align-items: center;
+  margin-top: 38px;
+  padding-top: 42px;
+}
+.closing-copy h2 {
+  max-width: 640px;
+  margin: 0 0 12px;
+  font-size: clamp(36px, 5.2vw, 72px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.closing-copy p:not(.section-label) {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.closing-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.closing-badges span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+}
+.closing-console {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: clamp(14px, 2.2vw, 24px);
+  background:
+    radial-gradient(circle at 78% 10%, rgba(0, 113, 227, 0.34), transparent 32%),
+    linear-gradient(145deg, #1d1e23, #08090b 62%, #121319);
+  color: #fff;
+  box-shadow: 0 34px 88px rgba(17, 17, 20, 0.24);
+}
+.closing-console::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.82), transparent 86%);
+  pointer-events: none;
+}
+.closing-console-top,
+.final-action-switcher,
+.final-action-panels {
+  position: relative;
+  z-index: 1;
+}
+.closing-console-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255,255,255,0.62);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.closing-console-top strong {
+  color: #8bc4ff;
+}
+.final-action-switcher {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.final-action-button {
+  display: grid;
+  gap: 4px;
+  min-height: 74px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: 11px 12px;
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.final-action-button:hover {
+  border-color: rgba(255,255,255,0.26);
+  transform: translateY(-1px);
+}
+.final-action-button.active {
+  border-color: rgba(255,255,255,0.72);
+  background: #fff;
+  color: var(--ink);
+}
+.final-action-button span {
+  font-size: 14px;
+  font-weight: 850;
+}
+.final-action-button strong {
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.25;
+  opacity: 0.72;
+}
+.final-action-panels {
+  display: grid;
+}
+.final-action-panel {
+  grid-area: 1 / 1;
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  min-height: 284px;
+  border: 1px solid rgba(255,255,255,0.11);
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 28px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.11), rgba(255,255,255,0.06));
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 220ms ease, transform 220ms ease, visibility 220ms ease;
+}
+.final-action-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.final-panel-kicker {
+  margin: 0;
+  color: #8bc4ff;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.final-action-panel h3 {
+  max-width: 560px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.02;
+}
+.final-action-panel p:not(.final-panel-kicker) {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.5;
+}
+.final-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .auth-hero .sub {
   max-width: 880px;
+}
+.auth-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.58fr) minmax(320px, 0.42fr);
+  gap: clamp(24px, 5vw, 64px);
+  align-items: center;
+  min-height: min(660px, 92svh);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 18%, rgba(0, 113, 227, 0.14), transparent 32%),
+    #fff;
+}
+.auth-hero-copy {
+  min-width: 0;
+}
+.auth-hero-visual {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  margin: 0;
+  justify-self: end;
+}
+.auth-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 8% -8% auto auto;
+  width: 70%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(0, 113, 227, 0.12);
+  filter: blur(28px);
+  pointer-events: none;
+}
+.auth-hero-visual img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(100%, 560px);
+  height: auto;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 20px;
+  background: #f7f8fa;
+  box-shadow: 0 28px 76px rgba(17, 17, 20, 0.16);
+}
+.auth-hero-visual figcaption {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 3px;
+  width: min(78%, 390px);
+  margin: -62px 22px 0 auto;
+  border: 1px solid rgba(255,255,255,0.54);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255,255,255,0.78);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+.auth-hero-visual[data-ready="true"] figcaption {
+  border-color: rgba(15, 123, 99, 0.32);
+}
+.auth-hero-visual[data-ready="false"] figcaption {
+  border-color: rgba(0, 113, 227, 0.22);
+}
+.auth-hero-visual figcaption span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.auth-hero-visual figcaption strong {
+  font-size: 16px;
+  line-height: 1.25;
+}
+.auth-hero-visual figcaption small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+.auth-provider-orbit {
+  position: absolute;
+  z-index: 2;
+  inset: 12px 12px auto auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  width: min(78%, 390px);
+  pointer-events: none;
+}
+.auth-orbit-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.54);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.74);
+  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.09);
+  animation: authChipFloat 4.8s ease-in-out infinite;
+  animation-delay: calc(var(--orbit-index) * -0.42s);
+  backdrop-filter: blur(14px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.auth-orbit-avatar.visual-active {
+  border-color: rgba(0, 113, 227, 0.42);
+  box-shadow: 0 14px 30px rgba(0, 113, 227, 0.16);
+  transform: translateY(-5px) scale(1.08);
+}
+@keyframes authChipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 .auth-status-panel,
 .auth-shell,
@@ -3257,21 +6232,54 @@ li { margin: 6px 0; }
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.provider-button:hover,
+.provider-button:focus-visible,
+.provider-button.visual-active {
+  border-color: rgba(0, 113, 227, 0.35);
+  background: #fbfdff;
+  box-shadow: 0 10px 26px rgba(17, 17, 20, 0.07);
+  transform: translateY(-1px);
 }
 .provider-button.configured {
   border-color: #94aaa5;
   background: #fbfdfc;
 }
-.provider-mark {
+.provider-button.configured.visual-active {
+  border-color: rgba(15, 123, 99, 0.45);
+}
+.provider-avatar {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
-  border-radius: 7px;
-  background: #f1f4f6;
-  color: var(--accent);
+  border: 1px solid rgba(17, 17, 20, 0.06);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255,255,255,0.56), transparent 27%),
+    linear-gradient(135deg, var(--provider-a), var(--provider-b));
+  color: #fff;
+  font-size: 13px;
   font-weight: 850;
+  letter-spacing: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 8px 18px rgba(17, 17, 20, 0.09);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.provider-avatar span {
+  line-height: 1;
+}
+.provider-avatar-small {
+  width: 28px;
+  height: 28px;
+  font-size: 10px;
+}
+.provider-button:hover .provider-avatar,
+.provider-button:focus-visible .provider-avatar,
+.provider-button.visual-active .provider-avatar {
+  transform: scale(1.05);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.32), 0 12px 22px rgba(17, 17, 20, 0.14);
 }
 .provider-button strong,
 .provider-button small {
@@ -3331,17 +6339,40 @@ input[type="email"] {
   background: #fff0f0;
   color: #8b2727;
 }
+.auth-setup-copy {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+.auth-setup-copy img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
 @media (max-width: 960px) {
   .topbar,
   .offer,
+  .fit-studio,
   .sample-preview,
   .visual-proof,
   .motion-proof,
+  .signal-runway,
   .decision-flow,
+  .contrast-lab,
+  .planning-calculator,
   .section-head,
   .tier-grid,
   .delivery,
   .delivery ul,
+  .proof-ledger,
   .seo-hub,
   .seo-summary,
   .feed-box,
@@ -3359,15 +6390,197 @@ input[type="email"] {
   .issue-list,
   .finder-head,
   .finder-controls,
+  .opportunity-focus,
   .handoff,
   .grid {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .fit-studio {
+    gap: 18px;
+  }
+  .fit-copy h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .fit-personas {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(154px, 48vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fit-personas::-webkit-scrollbar {
+    display: none;
+  }
+  .fit-persona {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    min-height: 86px;
+    scroll-snap-align: start;
+  }
+  .fit-device {
+    border-radius: 16px;
+  }
+  .fit-device-screen {
+    min-height: 0;
+    padding: 16px;
+  }
+  .fit-console-head {
+    align-items: start;
+  }
+  .fit-workbench {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 12px;
+  }
+  .fit-source-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fit-source-list li {
+    grid-template-columns: 22px minmax(0, 1fr);
+  }
+  .fit-source-list li em {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+  .fit-pipeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .fit-pipeline::before,
+  .fit-pipeline::after {
+    display: none;
+  }
+  .fit-signal-card {
+    min-height: 0;
+  }
+  .fit-telemetry {
+    grid-template-columns: 1fr;
+  }
   .sample-actions { justify-content: flex-start; }
+  .sample-spotlight {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+    padding: 10px;
+  }
+  .sample-spotlight-tabs {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(138px, 44vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sample-spotlight-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .sample-spotlight-tab {
+    min-height: 66px;
+    padding: 9px;
+    scroll-snap-align: start;
+  }
+  .sample-spotlight-tab span {
+    width: 30px;
+    height: 30px;
+  }
+  .sample-spotlight-stage {
+    min-height: 360px;
+  }
+  .sample-spotlight-panel {
+    padding: 16px;
+  }
+  .sample-spotlight-panel h3 {
+    font-size: clamp(23px, 7vw, 31px);
+  }
+  .sample-spotlight-panel .action {
+    width: 100%;
+  }
   .feed-actions { justify-content: flex-start; }
+  .opportunity-focus {
+    gap: 14px;
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .opportunity-focus h3 {
+    font-size: clamp(24px, 8vw, 32px);
+  }
+  .opportunity-focus-card {
+    justify-items: stretch;
+    min-width: 0;
+  }
+  .opportunity-focus-meta {
+    justify-content: flex-start;
+  }
+  .opportunity-focus .action {
+    width: 100%;
+  }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .motion-preview { max-width: 100%; }
+  .signal-runway {
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+  .runway-copy h2 {
+    font-size: clamp(30px, 8vw, 38px);
+  }
+  .runway-copy p:not(.section-label) {
+    font-size: 15px;
+  }
+  .runway-console {
+    border-radius: 18px;
+    padding: 14px;
+  }
+  .runway-product {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .runway-line {
+    width: 4px;
+    height: 34px;
+    justify-self: center;
+  }
+  .runway-line span {
+    width: 100%;
+    height: var(--runway-progress);
+    background: linear-gradient(180deg, #7dd3fc, #0071e3);
+    transition: height 320ms ease;
+  }
+  .runway-line::before,
+  .runway-line::after {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .runway-line::before { top: 0; }
+  .runway-line::after { top: 100%; right: auto; }
+  .runway-card,
+  .runway-panels {
+    min-height: 160px;
+    border-radius: 14px;
+  }
+  .runway-stages {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .runway-stage {
+    grid-template-columns: 1fr;
+    min-height: 56px;
+    padding: 9px 7px;
+    text-align: center;
+  }
+  .runway-stage span {
+    grid-row: auto;
+  }
+  .runway-stage strong {
+    align-self: center;
+    font-size: 12px;
+  }
+  .runway-stage em {
+    display: none;
+  }
   .decision-flow {
     gap: 18px;
     padding-bottom: 30px;
@@ -3398,11 +6611,335 @@ input[type="email"] {
     width: 38px;
     height: 38px;
   }
+  .contrast-lab {
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+  .contrast-copy h2 {
+    font-size: clamp(30px, 9vw, 44px);
+  }
+  .contrast-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .contrast-panel {
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .contrast-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .contrast-row strong {
+    min-height: 0;
+    padding: 8px 10px;
+  }
+  .contrast-row span {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 10px;
+    font-size: 12px;
+  }
+  .contrast-panel[data-contrast-mode="before"] .after-copy,
+  .contrast-panel[data-contrast-mode="after"] .before-copy {
+    display: none;
+  }
+  .planning-calculator {
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+  .calculator-copy h2 {
+    font-size: clamp(30px, 9vw, 44px);
+  }
+  .calculator-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .calculator-panel {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .range-control + .range-control,
+  .calculator-result {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .calculator-result {
+    min-height: 190px;
+  }
+  .tier-actions {
+    grid-template-columns: 1fr;
+  }
+  .tier-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(286px, 86vw);
+    gap: 10px;
+    overflow-x: auto;
+    padding: 2px 0 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tier-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .tier {
+    min-height: 388px;
+    scroll-snap-align: start;
+  }
+  .pricing-chooser {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .pricing-chooser h3 {
+    font-size: 22px;
+  }
+  .pricing-configurator {
+    grid-template-columns: 1fr;
+  }
+  .pricing-configurator > div {
+    min-height: 0;
+  }
+  .pricing-chooser-action {
+    justify-items: stretch;
+  }
+  .pricing-chooser-action strong {
+    font-size: 24px;
+  }
+  .delivery-lab {
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+  .delivery-copy {
+    position: static;
+  }
+  .delivery-copy p:not(.section-label) {
+    font-size: 15px;
+  }
+  .deliverable-viewer {
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .deliverable-tabs {
+    gap: 4px;
+  }
+  .deliverable-tab {
+    min-height: 32px;
+    font-size: 11px;
+  }
+  .deliverable-screen {
+    min-height: 260px;
+  }
+  .deliverable-panel {
+    padding: 14px;
+  }
+  .deliverable-panel pre {
+    max-height: 170px;
+    font-size: 12px;
+  }
+  .delivery-lab ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .delivery-lab li {
+    min-height: 100px;
+    padding: 10px;
+  }
+  .delivery-lab li strong {
+    font-size: 13px;
+    line-height: 1.25;
+  }
+  .delivery-lab li span {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+  .proof-ledger {
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+  .proof-copy h2 {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+  .proof-copy p:not(.section-label) {
+    font-size: 15px;
+  }
+  .proof-console {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .proof-tabs {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(132px, 42vw);
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .proof-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .proof-tab {
+    min-height: 66px;
+    padding: 10px;
+    scroll-snap-align: start;
+  }
+  .proof-panels {
+    min-height: 254px;
+  }
+  .proof-panel {
+    padding: 16px;
+  }
+  .proof-panel h3 {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+  .auth-hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    min-height: 0;
+  }
+  .auth-hero-visual {
+    justify-self: stretch;
+  }
+  .auth-hero-visual img {
+    width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    object-position: left top;
+    border-radius: 16px;
+  }
+  .auth-hero-visual figcaption {
+    width: calc(100% - 24px);
+    margin: -44px 12px 0;
+    padding: 12px;
+  }
+  .auth-hero-visual figcaption strong {
+    font-size: 14px;
+  }
+  .auth-hero-visual figcaption small {
+    font-size: 12px;
+  }
+  .auth-provider-orbit {
+    inset: 10px 10px auto auto;
+    width: min(70%, 250px);
+    gap: 5px;
+  }
+  .auth-orbit-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  .provider-avatar-small {
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
+  }
+  .auth-setup-copy {
+    grid-template-columns: 1fr;
+  }
+  .auth-setup-copy img {
+    max-height: 180px;
+    object-fit: cover;
+  }
+  .closing-handoff {
+    gap: 18px;
+    padding-top: 30px;
+  }
+  .closing-copy h2 {
+    font-size: clamp(32px, 9vw, 46px);
+  }
+  .closing-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .closing-console {
+    border-radius: 16px;
+    padding: 12px;
+  }
+  .final-action-switcher {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(138px, 45vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .final-action-switcher::-webkit-scrollbar {
+    display: none;
+  }
+  .final-action-button {
+    min-height: 68px;
+    padding: 10px;
+    scroll-snap-align: start;
+  }
+  .final-action-panel {
+    min-height: 318px;
+    padding: 16px;
+  }
+  .final-action-panel h3 {
+    font-size: clamp(25px, 7vw, 34px);
+  }
+  .final-panel-actions .action {
+    flex: 1 1 100%;
+    width: 100%;
+    text-align: center;
+  }
   .result-count { justify-self: stretch; margin: 0; white-space: normal; text-align: center; }
   .brandrow { align-items: flex-start; }
   .topbar {
     gap: 18px;
     padding: 24px clamp(20px, 5vw, 72px) 18px;
+  }
+  .local-nav {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px;
+    min-height: 50px;
+    padding: 7px 20px;
+  }
+  .local-brand {
+    font-size: 13px;
+  }
+  .local-links {
+    justify-content: flex-start;
+    gap: 14px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .local-links::-webkit-scrollbar {
+    display: none;
+  }
+  .local-cta {
+    min-height: 28px;
+    padding: 4px 10px;
+  }
+  .sample-drawer {
+    align-items: end;
+    padding: 10px;
+  }
+  .sample-drawer-panel {
+    width: 100%;
+    max-height: calc(100svh - 20px);
+    border-radius: 18px;
+    padding: 18px;
+  }
+  .drawer-head {
+    padding-right: 38px;
+  }
+  .drawer-head h2 {
+    font-size: clamp(28px, 9vw, 42px);
+  }
+  .sample-drawer-grid {
+    grid-template-columns: 1fr;
+  }
+  .sample-drawer-card {
+    min-height: 0;
+  }
+  .drawer-actions .action {
+    flex: 1 1 100%;
+    width: 100%;
   }
   .topbar > * {
     min-width: 0;
@@ -3440,6 +6977,10 @@ input[type="email"] {
   .hero-metrics strong {
     font-size: 24px;
   }
+  .scroll-cue {
+    margin-top: 16px;
+    align-self: flex-start;
+  }
   body[data-lang="zh"] h1 {
     word-break: break-all;
   }
@@ -3466,7 +7007,7 @@ input[type="email"] {
     min-width: 0;
     max-width: 100%;
   }
-  .source-legend span {
+  .source-legend button {
     flex: 1 1 calc(50% - 5px);
   }
   .hero-actions .action,
@@ -3494,14 +7035,168 @@ const resultCount = document.querySelector("#result-count");
 const languageButtons = [...document.querySelectorAll("[data-language-toggle]")];
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
+const videoCountInput = document.querySelector("#video-count");
+const researchHoursInput = document.querySelector("#research-hours");
+const videoCountOutput = document.querySelector("#video-count-output");
+const researchHoursOutput = document.querySelector("#research-hours-output");
+const savedHoursOutput = document.querySelector("#saved-hours");
+const savedHoursCopy = document.querySelector("#saved-hours-copy");
+const tierSuggestion = document.querySelector("#tier-suggestion");
+const deliverableButtons = [...document.querySelectorAll("[data-deliverable-tab]")];
+const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
+const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
+const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
+const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
+const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
+const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotlight-panel]")];
+const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
+const fitDeviceNode = document.querySelector(".fit-device");
+const fitTitleNode = document.querySelector("#fit-title");
+const fitKitNode = document.querySelector("#fit-kit");
+const fitCadenceNode = document.querySelector("#fit-cadence");
+const fitSourceNode = document.querySelector("#fit-source");
+const fitSignalNode = document.querySelector("#fit-signal");
+const fitStrengthNode = document.querySelector("#fit-strength");
+const fitVelocityNode = document.querySelector("#fit-velocity");
+const fitProgressLabel = document.querySelector("#fit-progress-label");
+const fitSignalLink = document.querySelector("#fit-signal-link");
+const tierCards = [...document.querySelectorAll("[data-tier-card]")];
+const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
+const selectedTierName = document.querySelector("#selected-tier-name");
+const selectedTierCopy = document.querySelector("#selected-tier-copy");
+const selectedTierPrice = document.querySelector("#selected-tier-price");
+const selectedTierCadence = document.querySelector("#selected-tier-cadence");
+const selectedTierCta = document.querySelector("#selected-tier-cta");
+const selectedTierPack = document.querySelector("#selected-tier-pack");
+const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
+const selectedTierRoute = document.querySelector("#selected-tier-route");
+const pricingChooserNode = document.querySelector(".pricing-chooser");
+const localNavNode = document.querySelector(".local-nav");
+const opportunityFocusTitle = document.querySelector("#opportunity-focus-title");
+const opportunityFocusSummary = document.querySelector("#opportunity-focus-summary");
+const opportunityFocusRank = document.querySelector("#opportunity-focus-rank");
+const opportunityFocusSource = document.querySelector("#opportunity-focus-source");
+const opportunityFocusScore = document.querySelector("#opportunity-focus-score");
+const opportunityFocusLink = document.querySelector("#opportunity-focus-link");
+let selectedTierCard = tierCards.find((card) => card.classList.contains("selected")) || tierCards[0] || null;
+let activeFitPersonaButton = fitPersonaButtons.find((button) => button.classList.contains("active")) || fitPersonaButtons[0] || null;
+let activeOpportunityCard = cards[0] || null;
 let activeSource = "all";
 const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
 const forcedLanguage = document.body.dataset.forceLang;
 let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 function countLabel(count) {
   if (currentLanguage === "zh") return "正在显示 " + count + " 条机会";
   return count === 1 ? "Showing 1 opportunity" : "Showing " + count + " opportunities";
+}
+
+function updatePlanningCalculator() {
+  if (!videoCountInput || !researchHoursInput || !savedHoursOutput) return;
+  const videos = Number(videoCountInput.value || 2);
+  const hours = Number(researchHoursInput.value || 2);
+  const monthlySaved = Math.max(1, Math.round(videos * hours * 4.3 * 0.55));
+  if (videoCountOutput) videoCountOutput.textContent = String(videos);
+  if (researchHoursOutput) researchHoursOutput.textContent = String(hours);
+  savedHoursOutput.textContent = monthlySaved + "h";
+  if (savedHoursCopy) {
+    savedHoursCopy.textContent = currentLanguage === "zh" ? "预计每月释放的规划时间" : "estimated planning time reclaimed each month";
+  }
+  if (tierSuggestion) {
+    let suggestion = currentLanguage === "zh" ? "建议：单期样品" : "Suggested: Sample issue";
+    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly brief";
+    if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
+    tierSuggestion.textContent = suggestion;
+  }
+}
+
+function updateSelectedTier(card, scrollToCard = false) {
+  if (!card) return;
+  selectedTierCard = card;
+  for (const tierCard of tierCards) tierCard.classList.toggle("selected", tierCard === card);
+  for (const button of tierSelectButtons) {
+    const active = button.dataset.tierSelect === card.dataset.tierCard;
+    button.classList.toggle("primary", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (selectedTierName) selectedTierName.textContent = card.dataset["tierName" + suffix] || "";
+  if (selectedTierCopy) selectedTierCopy.textContent = card.dataset["tierBest" + suffix] || "";
+  if (selectedTierPrice) selectedTierPrice.textContent = card.dataset.tierPrice || "";
+  if (selectedTierCadence) selectedTierCadence.textContent = card.dataset["tierCadence" + suffix] || "";
+  if (selectedTierPack) selectedTierPack.textContent = card.dataset["tierPack" + suffix] || "";
+  if (selectedTierDelivery) selectedTierDelivery.textContent = card.dataset["tierDelivery" + suffix] || "";
+  if (selectedTierRoute) selectedTierRoute.textContent = card.dataset["tierRoute" + suffix] || "";
+  if (selectedTierCta) {
+    selectedTierCta.textContent = card.dataset["tierAction" + suffix] || selectedTierCta.textContent;
+    selectedTierCta.setAttribute("href", card.dataset["tierHref" + suffix] || selectedTierCta.getAttribute("href") || "#");
+  }
+  if (pricingChooserNode) {
+    pricingChooserNode.classList.remove("is-updating");
+    window.requestAnimationFrame(() => pricingChooserNode.classList.add("is-updating"));
+    window.setTimeout(() => pricingChooserNode.classList.remove("is-updating"), 260);
+  }
+  if (scrollToCard && card.scrollIntoView) {
+    card.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+}
+
+function activateFitPersona(button, scrollToButton = false) {
+  if (!button) return;
+  activeFitPersonaButton = button;
+  for (const item of fitPersonaButtons) {
+    const active = item === button;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && item.scrollIntoView) item.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (fitDeviceNode) {
+    fitDeviceNode.dataset.fitDevice = button.dataset.fitPersona || "";
+    fitDeviceNode.style.setProperty("--fit-progress", (button.dataset.fitProgress || "72") + "%");
+    fitDeviceNode.classList.remove("is-switching");
+    window.requestAnimationFrame(() => fitDeviceNode.classList.add("is-switching"));
+    window.setTimeout(() => fitDeviceNode.classList.remove("is-switching"), 300);
+  }
+  if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
+  if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
+  if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
+  if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";
+  if (fitSignalNode) fitSignalNode.textContent = button.dataset["fitSignal" + suffix] || "";
+  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitStrength" + suffix] || "";
+  if (fitVelocityNode) fitVelocityNode.textContent = button.dataset["fitVelocity" + suffix] || "";
+  if (fitProgressLabel) fitProgressLabel.textContent = (button.dataset.fitProgress || "72") + "%";
+  if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");
+}
+
+function updateOpportunityFocus(card) {
+  if (!opportunityFocusTitle) return;
+  activeOpportunityCard = card || null;
+  for (const item of cards) item.classList.toggle("is-focused", item === activeOpportunityCard);
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (!activeOpportunityCard) {
+    opportunityFocusTitle.textContent = currentLanguage === "zh" ? "没有匹配机会" : "No matching opportunity";
+    opportunityFocusSummary.textContent = currentLanguage === "zh" ? "换一个来源或缩短搜索词，焦点机会会立刻回到这里。" : "Switch lanes or shorten the search query and the focused opportunity will return here.";
+    if (opportunityFocusRank) opportunityFocusRank.textContent = "#0";
+    if (opportunityFocusSource) opportunityFocusSource.textContent = currentLanguage === "zh" ? "空结果" : "Empty";
+    if (opportunityFocusScore) opportunityFocusScore.textContent = currentLanguage === "zh" ? "评分 -" : "Score -";
+    if (opportunityFocusLink) {
+      opportunityFocusLink.setAttribute("href", "#opportunities");
+      opportunityFocusLink.textContent = currentLanguage === "zh" ? "调整筛选" : "Adjust filters";
+    }
+    return;
+  }
+  opportunityFocusTitle.textContent = activeOpportunityCard.dataset["focusTitle" + suffix] || "";
+  opportunityFocusSummary.textContent = activeOpportunityCard.dataset["focusSummary" + suffix] || "";
+  if (opportunityFocusRank) opportunityFocusRank.textContent = "#" + (activeOpportunityCard.dataset.rank || "");
+  if (opportunityFocusSource) opportunityFocusSource.textContent = activeOpportunityCard.dataset.focusSource || "";
+  if (opportunityFocusScore) opportunityFocusScore.textContent = (currentLanguage === "zh" ? "评分 " : "Score ") + (activeOpportunityCard.dataset.focusScore || "");
+  if (opportunityFocusLink) {
+    opportunityFocusLink.setAttribute("href", activeOpportunityCard.dataset.focusUrl || "#");
+    opportunityFocusLink.textContent = currentLanguage === "zh" ? "打开来源" : "Open proof source";
+  }
 }
 
 function setLanguage(language) {
@@ -3520,6 +7215,10 @@ function setLanguage(language) {
   }
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
   resultCount.textContent = countLabel(visible);
+  updatePlanningCalculator();
+  updateSelectedTier(selectedTierCard);
+  activateFitPersona(activeFitPersonaButton);
+  updateOpportunityFocus(activeOpportunityCard);
 }
 
 function applyFilters() {
@@ -3532,10 +7231,23 @@ function applyFilters() {
     card.classList.toggle("hidden", !show);
     if (show) visible += 1;
   }
+  const firstVisible = cards.find((card) => !card.classList.contains("hidden"));
+  if (!activeOpportunityCard || activeOpportunityCard.classList.contains("hidden")) {
+    updateOpportunityFocus(firstVisible || null);
+  }
   resultCount.textContent = countLabel(visible);
   resultCount.classList.remove("bump");
   window.requestAnimationFrame(() => resultCount.classList.add("bump"));
   window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+}
+
+for (const card of cards) {
+  card.addEventListener("pointerenter", () => updateOpportunityFocus(card));
+  card.addEventListener("focusin", () => updateOpportunityFocus(card));
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a, summary, details")) return;
+    updateOpportunityFocus(card);
+  });
 }
 
 for (const button of buttons) {
@@ -3554,10 +7266,31 @@ for (const button of languageButtons) {
   button.addEventListener("click", () => setLanguage(button.dataset.languageToggle));
 }
 
+for (const button of tierSelectButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierSelect);
+    updateSelectedTier(card, true);
+  });
+}
+
+for (const button of fitPersonaButtons) {
+  button.addEventListener("click", () => activateFitPersona(button, true));
+  if (finePointer) button.addEventListener("pointerenter", () => activateFitPersona(button));
+  button.addEventListener("focusin", () => activateFitPersona(button));
+}
+
 search.addEventListener("input", applyFilters);
+if (videoCountInput) videoCountInput.addEventListener("input", updatePlanningCalculator);
+if (researchHoursInput) researchHoursInput.addEventListener("input", updatePlanningCalculator);
 setLanguage(currentLanguage);
+if (selectedTierCard && window.location.hash === "#pricing") {
+  window.requestAnimationFrame(() => updateSelectedTier(selectedTierCard, true));
+}
 const revealTargets = [...document.querySelectorAll("main > section, .topbar > div, .topbar aside")];
-for (const target of revealTargets) target.classList.add("reveal-item");
+for (const [index, target] of revealTargets.entries()) {
+  target.classList.add("reveal-item");
+  target.style.setProperty("--reveal-delay", Math.min(index % 5, 4) * 42 + "ms");
+}
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -3590,9 +7323,217 @@ if ("IntersectionObserver" in window && flowSteps.length) {
   for (const step of flowSteps) flowObserver.observe(step);
 }
 
+const contrastButtons = [...document.querySelectorAll("[data-contrast-set]")];
+for (const button of contrastButtons) {
+  button.addEventListener("click", () => {
+    const panel = button.closest(".contrast-panel");
+    if (!panel) return;
+    const mode = button.dataset.contrastSet === "before" ? "before" : "after";
+    panel.dataset.contrastMode = mode;
+    for (const other of panel.querySelectorAll("[data-contrast-set]")) {
+      other.classList.toggle("active", other === button);
+    }
+  });
+}
+
+function activateDeliverableTab(id) {
+  for (const button of deliverableButtons) {
+    const active = button.dataset.deliverableTab === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const panel of deliverablePanels) {
+    panel.classList.toggle("active", panel.dataset.deliverablePanel === id);
+  }
+}
+for (const button of deliverableButtons) {
+  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab));
+}
+
+function activateProofTab(id) {
+  for (const button of proofButtons) {
+    const active = button.dataset.proofTab === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const panel of proofPanels) {
+    panel.classList.toggle("active", panel.dataset.proofPanel === id);
+  }
+}
+for (const button of proofButtons) {
+  button.addEventListener("click", () => activateProofTab(button.dataset.proofTab));
+}
+
+function activateFinalAction(id) {
+  for (const button of finalActionButtons) {
+    const active = button.dataset.finalAction === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of finalActionPanels) {
+    panel.classList.toggle("active", panel.dataset.finalPanel === id);
+  }
+}
+for (const button of finalActionButtons) {
+  button.addEventListener("click", () => activateFinalAction(button.dataset.finalAction));
+}
+
+function activateSampleSpotlight(index, scrollToButton = true) {
+  for (const button of sampleSpotlightButtons) {
+    const active = button.dataset.sampleSpotlight === String(index);
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of sampleSpotlightPanels) {
+    panel.classList.toggle("active", panel.dataset.sampleSpotlightPanel === String(index));
+  }
+}
+for (const button of sampleSpotlightButtons) {
+  button.addEventListener("click", () => activateSampleSpotlight(button.dataset.sampleSpotlight));
+}
+
+const localLinks = [...document.querySelectorAll("[data-local-link]")];
+const localSections = localLinks
+  .map((link) => ({ link, section: document.getElementById(link.dataset.localLink) }))
+  .filter((item) => item.section);
+function setActiveLocalLink(id) {
+  for (const item of localSections) {
+    item.link.classList.toggle("active", item.section.id === id);
+  }
+}
+if ("IntersectionObserver" in window && localSections.length) {
+  const localObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (visible[0]) setActiveLocalLink(visible[0].target.id);
+  }, { rootMargin: "-20% 0px -58% 0px", threshold: [0.02, 0.2, 0.45] });
+  for (const item of localSections) localObserver.observe(item.section);
+  setActiveLocalLink(localSections[0].section.id);
+}
+
+function updateLocalProgress() {
+  if (!localNavNode) return;
+  const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+  localNavNode.style.setProperty("--scroll-progress", (progress * 100).toFixed(2) + "%");
+}
+updateLocalProgress();
+window.addEventListener("scroll", updateLocalProgress, { passive: true });
+window.addEventListener("resize", updateLocalProgress);
+
+const sampleDrawerNode = document.querySelector("#sample-drawer");
+const sampleOpenButtons = [...document.querySelectorAll("[data-sample-open]")];
+const sampleCloseButtons = [...document.querySelectorAll("[data-sample-close]")];
+function setSampleDrawer(open) {
+  if (!sampleDrawerNode) return;
+  sampleDrawerNode.setAttribute("aria-hidden", open ? "false" : "true");
+  document.body.classList.toggle("drawer-open", open);
+  if (open) {
+    const closeButton = sampleDrawerNode.querySelector(".drawer-close");
+    if (closeButton) closeButton.focus();
+  }
+}
+for (const button of sampleOpenButtons) {
+  button.addEventListener("click", () => setSampleDrawer(true));
+}
+for (const button of sampleCloseButtons) {
+  button.addEventListener("click", () => setSampleDrawer(false));
+}
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setSampleDrawer(false);
+});
+
 const hero = document.querySelector(".topbar");
 const productVisualNode = document.querySelector(".product-visual");
 const motionSafe = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const heroMetricValues = [...document.querySelectorAll("[data-hero-count]")];
+const sourceLensButtons = [...document.querySelectorAll("[data-source-lens]")];
+const sourceLensWrap = document.querySelector(".source-legend");
+const boardSummaryItems = [...document.querySelectorAll("[data-board-source]")];
+const runwayNode = document.querySelector(".signal-runway");
+const runwayConsole = document.querySelector(".runway-console");
+const runwayButtons = [...document.querySelectorAll("[data-runway-stage]")];
+const runwayPanels = [...document.querySelectorAll("[data-runway-panel]")];
+let runwayAutoTimer = 0;
+let runwayUserPaused = false;
+
+let selectedSourceLens = "all";
+function renderSourceLens(source) {
+  const activeSource = source || "all";
+  const hasMatch = activeSource === "all" || boardSummaryItems.some((item) => item.dataset.boardSource === activeSource);
+  for (const button of sourceLensButtons) {
+    const active = button.dataset.sourceLens === activeSource;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const item of boardSummaryItems) {
+    const focused = hasMatch && activeSource !== "all" && item.dataset.boardSource === activeSource;
+    item.classList.toggle("is-source-focused", focused);
+    item.classList.toggle("is-source-dimmed", hasMatch && activeSource !== "all" && !focused);
+  }
+  if (productVisualNode) {
+    productVisualNode.dataset.sourceFocus = hasMatch ? activeSource : "all";
+  }
+}
+
+for (const button of sourceLensButtons) {
+  button.addEventListener("pointerenter", () => renderSourceLens(button.dataset.sourceLens));
+  button.addEventListener("focusin", () => renderSourceLens(button.dataset.sourceLens));
+  button.addEventListener("click", () => {
+    selectedSourceLens = button.dataset.sourceLens || "all";
+    renderSourceLens(selectedSourceLens);
+  });
+}
+if (sourceLensWrap) {
+  sourceLensWrap.addEventListener("pointerleave", () => renderSourceLens(selectedSourceLens));
+}
+renderSourceLens(selectedSourceLens);
+
+function activateRunwayStage(index) {
+  if (!runwayButtons.length || !runwayConsole) return;
+  const activeIndex = Math.max(0, Math.min(index, runwayButtons.length - 1));
+  for (const button of runwayButtons) {
+    const isActive = Number(button.dataset.runwayStage) === activeIndex;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  }
+  for (const panel of runwayPanels) {
+    panel.classList.toggle("active", Number(panel.dataset.runwayPanel) === activeIndex);
+  }
+  runwayConsole.style.setProperty("--runway-progress", ((activeIndex + 1) / runwayButtons.length * 100).toFixed(0) + "%");
+}
+for (const button of runwayButtons) {
+  button.addEventListener("click", () => {
+    runwayUserPaused = true;
+    if (runwayAutoTimer) window.clearInterval(runwayAutoTimer);
+    activateRunwayStage(Number(button.dataset.runwayStage));
+  });
+}
+if (runwayNode && runwayButtons.length && motionSafe) {
+  const startRunway = () => {
+    if (runwayAutoTimer || runwayUserPaused) return;
+    runwayAutoTimer = window.setInterval(() => {
+      const current = runwayButtons.findIndex((button) => button.classList.contains("active"));
+      activateRunwayStage((current + 1) % runwayButtons.length);
+    }, 2600);
+  };
+  const stopRunway = () => {
+    if (runwayAutoTimer) window.clearInterval(runwayAutoTimer);
+    runwayAutoTimer = 0;
+  };
+  if ("IntersectionObserver" in window) {
+    const runwayObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) startRunway();
+      else stopRunway();
+    }, { threshold: 0.34 });
+    runwayObserver.observe(runwayNode);
+  } else {
+    startRunway();
+  }
+}
 if (hero && productVisualNode && motionSafe) {
   hero.addEventListener("pointermove", (event) => {
     const rect = hero.getBoundingClientRect();
@@ -3603,6 +7544,44 @@ if (hero && productVisualNode && motionSafe) {
   hero.addEventListener("pointerleave", () => {
     productVisualNode.style.transform = "";
   });
+}
+
+function animateHeroMetrics() {
+  if (!motionSafe || !heroMetricValues.length) return;
+  const metricWrap = document.querySelector(".hero-metrics");
+  metricWrap?.classList.add("is-counting");
+  const duration = 920;
+  const start = performance.now();
+  for (const node of heroMetricValues) node.textContent = "0";
+  function step(now) {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    for (const node of heroMetricValues) {
+      const target = Number(node.dataset.heroCount || node.textContent || 0);
+      node.textContent = String(Math.round(target * eased));
+    }
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      for (const node of heroMetricValues) node.textContent = String(Number(node.dataset.heroCount || node.textContent || 0));
+      metricWrap?.classList.remove("is-counting");
+    }
+  }
+  window.requestAnimationFrame(step);
+}
+
+if (heroMetricValues.length && motionSafe) {
+  if ("IntersectionObserver" in window) {
+    const metricObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        animateHeroMetrics();
+        metricObserver.disconnect();
+      }
+    }, { threshold: 0.48 });
+    metricObserver.observe(heroMetricValues[0].closest(".hero-metrics"));
+  } else {
+    animateHeroMetrics();
+  }
 }
 `;
 

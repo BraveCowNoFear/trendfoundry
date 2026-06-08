@@ -5,14 +5,168 @@ const resultCount = document.querySelector("#result-count");
 const languageButtons = [...document.querySelectorAll("[data-language-toggle]")];
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
+const videoCountInput = document.querySelector("#video-count");
+const researchHoursInput = document.querySelector("#research-hours");
+const videoCountOutput = document.querySelector("#video-count-output");
+const researchHoursOutput = document.querySelector("#research-hours-output");
+const savedHoursOutput = document.querySelector("#saved-hours");
+const savedHoursCopy = document.querySelector("#saved-hours-copy");
+const tierSuggestion = document.querySelector("#tier-suggestion");
+const deliverableButtons = [...document.querySelectorAll("[data-deliverable-tab]")];
+const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+const proofButtons = [...document.querySelectorAll("[data-proof-tab]")];
+const proofPanels = [...document.querySelectorAll("[data-proof-panel]")];
+const finalActionButtons = [...document.querySelectorAll("[data-final-action]")];
+const finalActionPanels = [...document.querySelectorAll("[data-final-panel]")];
+const sampleSpotlightButtons = [...document.querySelectorAll("[data-sample-spotlight]")];
+const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotlight-panel]")];
+const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
+const fitDeviceNode = document.querySelector(".fit-device");
+const fitTitleNode = document.querySelector("#fit-title");
+const fitKitNode = document.querySelector("#fit-kit");
+const fitCadenceNode = document.querySelector("#fit-cadence");
+const fitSourceNode = document.querySelector("#fit-source");
+const fitSignalNode = document.querySelector("#fit-signal");
+const fitStrengthNode = document.querySelector("#fit-strength");
+const fitVelocityNode = document.querySelector("#fit-velocity");
+const fitProgressLabel = document.querySelector("#fit-progress-label");
+const fitSignalLink = document.querySelector("#fit-signal-link");
+const tierCards = [...document.querySelectorAll("[data-tier-card]")];
+const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
+const selectedTierName = document.querySelector("#selected-tier-name");
+const selectedTierCopy = document.querySelector("#selected-tier-copy");
+const selectedTierPrice = document.querySelector("#selected-tier-price");
+const selectedTierCadence = document.querySelector("#selected-tier-cadence");
+const selectedTierCta = document.querySelector("#selected-tier-cta");
+const selectedTierPack = document.querySelector("#selected-tier-pack");
+const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
+const selectedTierRoute = document.querySelector("#selected-tier-route");
+const pricingChooserNode = document.querySelector(".pricing-chooser");
+const localNavNode = document.querySelector(".local-nav");
+const opportunityFocusTitle = document.querySelector("#opportunity-focus-title");
+const opportunityFocusSummary = document.querySelector("#opportunity-focus-summary");
+const opportunityFocusRank = document.querySelector("#opportunity-focus-rank");
+const opportunityFocusSource = document.querySelector("#opportunity-focus-source");
+const opportunityFocusScore = document.querySelector("#opportunity-focus-score");
+const opportunityFocusLink = document.querySelector("#opportunity-focus-link");
+let selectedTierCard = tierCards.find((card) => card.classList.contains("selected")) || tierCards[0] || null;
+let activeFitPersonaButton = fitPersonaButtons.find((button) => button.classList.contains("active")) || fitPersonaButtons[0] || null;
+let activeOpportunityCard = cards[0] || null;
 let activeSource = "all";
 const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
 const forcedLanguage = document.body.dataset.forceLang;
 let currentLanguage = forcedLanguage || (requestedLanguage === "en" || requestedLanguage === "zh" ? requestedLanguage : localStorage.getItem("trendfoundry-language")) || document.body.dataset.defaultLang || "en";
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 function countLabel(count) {
   if (currentLanguage === "zh") return "正在显示 " + count + " 条机会";
   return count === 1 ? "Showing 1 opportunity" : "Showing " + count + " opportunities";
+}
+
+function updatePlanningCalculator() {
+  if (!videoCountInput || !researchHoursInput || !savedHoursOutput) return;
+  const videos = Number(videoCountInput.value || 2);
+  const hours = Number(researchHoursInput.value || 2);
+  const monthlySaved = Math.max(1, Math.round(videos * hours * 4.3 * 0.55));
+  if (videoCountOutput) videoCountOutput.textContent = String(videos);
+  if (researchHoursOutput) researchHoursOutput.textContent = String(hours);
+  savedHoursOutput.textContent = monthlySaved + "h";
+  if (savedHoursCopy) {
+    savedHoursCopy.textContent = currentLanguage === "zh" ? "预计每月释放的规划时间" : "estimated planning time reclaimed each month";
+  }
+  if (tierSuggestion) {
+    let suggestion = currentLanguage === "zh" ? "建议：单期样品" : "Suggested: Sample issue";
+    if (videos >= 2 || monthlySaved >= 8) suggestion = currentLanguage === "zh" ? "建议：周更情报" : "Suggested: Weekly brief";
+    if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
+    tierSuggestion.textContent = suggestion;
+  }
+}
+
+function updateSelectedTier(card, scrollToCard = false) {
+  if (!card) return;
+  selectedTierCard = card;
+  for (const tierCard of tierCards) tierCard.classList.toggle("selected", tierCard === card);
+  for (const button of tierSelectButtons) {
+    const active = button.dataset.tierSelect === card.dataset.tierCard;
+    button.classList.toggle("primary", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (selectedTierName) selectedTierName.textContent = card.dataset["tierName" + suffix] || "";
+  if (selectedTierCopy) selectedTierCopy.textContent = card.dataset["tierBest" + suffix] || "";
+  if (selectedTierPrice) selectedTierPrice.textContent = card.dataset.tierPrice || "";
+  if (selectedTierCadence) selectedTierCadence.textContent = card.dataset["tierCadence" + suffix] || "";
+  if (selectedTierPack) selectedTierPack.textContent = card.dataset["tierPack" + suffix] || "";
+  if (selectedTierDelivery) selectedTierDelivery.textContent = card.dataset["tierDelivery" + suffix] || "";
+  if (selectedTierRoute) selectedTierRoute.textContent = card.dataset["tierRoute" + suffix] || "";
+  if (selectedTierCta) {
+    selectedTierCta.textContent = card.dataset["tierAction" + suffix] || selectedTierCta.textContent;
+    selectedTierCta.setAttribute("href", card.dataset["tierHref" + suffix] || selectedTierCta.getAttribute("href") || "#");
+  }
+  if (pricingChooserNode) {
+    pricingChooserNode.classList.remove("is-updating");
+    window.requestAnimationFrame(() => pricingChooserNode.classList.add("is-updating"));
+    window.setTimeout(() => pricingChooserNode.classList.remove("is-updating"), 260);
+  }
+  if (scrollToCard && card.scrollIntoView) {
+    card.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+}
+
+function activateFitPersona(button, scrollToButton = false) {
+  if (!button) return;
+  activeFitPersonaButton = button;
+  for (const item of fitPersonaButtons) {
+    const active = item === button;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && item.scrollIntoView) item.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (fitDeviceNode) {
+    fitDeviceNode.dataset.fitDevice = button.dataset.fitPersona || "";
+    fitDeviceNode.style.setProperty("--fit-progress", (button.dataset.fitProgress || "72") + "%");
+    fitDeviceNode.classList.remove("is-switching");
+    window.requestAnimationFrame(() => fitDeviceNode.classList.add("is-switching"));
+    window.setTimeout(() => fitDeviceNode.classList.remove("is-switching"), 300);
+  }
+  if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
+  if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
+  if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
+  if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";
+  if (fitSignalNode) fitSignalNode.textContent = button.dataset["fitSignal" + suffix] || "";
+  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitStrength" + suffix] || "";
+  if (fitVelocityNode) fitVelocityNode.textContent = button.dataset["fitVelocity" + suffix] || "";
+  if (fitProgressLabel) fitProgressLabel.textContent = (button.dataset.fitProgress || "72") + "%";
+  if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");
+}
+
+function updateOpportunityFocus(card) {
+  if (!opportunityFocusTitle) return;
+  activeOpportunityCard = card || null;
+  for (const item of cards) item.classList.toggle("is-focused", item === activeOpportunityCard);
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (!activeOpportunityCard) {
+    opportunityFocusTitle.textContent = currentLanguage === "zh" ? "没有匹配机会" : "No matching opportunity";
+    opportunityFocusSummary.textContent = currentLanguage === "zh" ? "换一个来源或缩短搜索词，焦点机会会立刻回到这里。" : "Switch lanes or shorten the search query and the focused opportunity will return here.";
+    if (opportunityFocusRank) opportunityFocusRank.textContent = "#0";
+    if (opportunityFocusSource) opportunityFocusSource.textContent = currentLanguage === "zh" ? "空结果" : "Empty";
+    if (opportunityFocusScore) opportunityFocusScore.textContent = currentLanguage === "zh" ? "评分 -" : "Score -";
+    if (opportunityFocusLink) {
+      opportunityFocusLink.setAttribute("href", "#opportunities");
+      opportunityFocusLink.textContent = currentLanguage === "zh" ? "调整筛选" : "Adjust filters";
+    }
+    return;
+  }
+  opportunityFocusTitle.textContent = activeOpportunityCard.dataset["focusTitle" + suffix] || "";
+  opportunityFocusSummary.textContent = activeOpportunityCard.dataset["focusSummary" + suffix] || "";
+  if (opportunityFocusRank) opportunityFocusRank.textContent = "#" + (activeOpportunityCard.dataset.rank || "");
+  if (opportunityFocusSource) opportunityFocusSource.textContent = activeOpportunityCard.dataset.focusSource || "";
+  if (opportunityFocusScore) opportunityFocusScore.textContent = (currentLanguage === "zh" ? "评分 " : "Score ") + (activeOpportunityCard.dataset.focusScore || "");
+  if (opportunityFocusLink) {
+    opportunityFocusLink.setAttribute("href", activeOpportunityCard.dataset.focusUrl || "#");
+    opportunityFocusLink.textContent = currentLanguage === "zh" ? "打开来源" : "Open proof source";
+  }
 }
 
 function setLanguage(language) {
@@ -31,6 +185,10 @@ function setLanguage(language) {
   }
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
   resultCount.textContent = countLabel(visible);
+  updatePlanningCalculator();
+  updateSelectedTier(selectedTierCard);
+  activateFitPersona(activeFitPersonaButton);
+  updateOpportunityFocus(activeOpportunityCard);
 }
 
 function applyFilters() {
@@ -43,10 +201,23 @@ function applyFilters() {
     card.classList.toggle("hidden", !show);
     if (show) visible += 1;
   }
+  const firstVisible = cards.find((card) => !card.classList.contains("hidden"));
+  if (!activeOpportunityCard || activeOpportunityCard.classList.contains("hidden")) {
+    updateOpportunityFocus(firstVisible || null);
+  }
   resultCount.textContent = countLabel(visible);
   resultCount.classList.remove("bump");
   window.requestAnimationFrame(() => resultCount.classList.add("bump"));
   window.setTimeout(() => resultCount.classList.remove("bump"), 220);
+}
+
+for (const card of cards) {
+  card.addEventListener("pointerenter", () => updateOpportunityFocus(card));
+  card.addEventListener("focusin", () => updateOpportunityFocus(card));
+  card.addEventListener("click", (event) => {
+    if (event.target.closest("a, summary, details")) return;
+    updateOpportunityFocus(card);
+  });
 }
 
 for (const button of buttons) {
@@ -65,10 +236,31 @@ for (const button of languageButtons) {
   button.addEventListener("click", () => setLanguage(button.dataset.languageToggle));
 }
 
+for (const button of tierSelectButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierSelect);
+    updateSelectedTier(card, true);
+  });
+}
+
+for (const button of fitPersonaButtons) {
+  button.addEventListener("click", () => activateFitPersona(button, true));
+  if (finePointer) button.addEventListener("pointerenter", () => activateFitPersona(button));
+  button.addEventListener("focusin", () => activateFitPersona(button));
+}
+
 search.addEventListener("input", applyFilters);
+if (videoCountInput) videoCountInput.addEventListener("input", updatePlanningCalculator);
+if (researchHoursInput) researchHoursInput.addEventListener("input", updatePlanningCalculator);
 setLanguage(currentLanguage);
+if (selectedTierCard && window.location.hash === "#pricing") {
+  window.requestAnimationFrame(() => updateSelectedTier(selectedTierCard, true));
+}
 const revealTargets = [...document.querySelectorAll("main > section, .topbar > div, .topbar aside")];
-for (const target of revealTargets) target.classList.add("reveal-item");
+for (const [index, target] of revealTargets.entries()) {
+  target.classList.add("reveal-item");
+  target.style.setProperty("--reveal-delay", Math.min(index % 5, 4) * 42 + "ms");
+}
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -101,9 +293,217 @@ if ("IntersectionObserver" in window && flowSteps.length) {
   for (const step of flowSteps) flowObserver.observe(step);
 }
 
+const contrastButtons = [...document.querySelectorAll("[data-contrast-set]")];
+for (const button of contrastButtons) {
+  button.addEventListener("click", () => {
+    const panel = button.closest(".contrast-panel");
+    if (!panel) return;
+    const mode = button.dataset.contrastSet === "before" ? "before" : "after";
+    panel.dataset.contrastMode = mode;
+    for (const other of panel.querySelectorAll("[data-contrast-set]")) {
+      other.classList.toggle("active", other === button);
+    }
+  });
+}
+
+function activateDeliverableTab(id) {
+  for (const button of deliverableButtons) {
+    const active = button.dataset.deliverableTab === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const panel of deliverablePanels) {
+    panel.classList.toggle("active", panel.dataset.deliverablePanel === id);
+  }
+}
+for (const button of deliverableButtons) {
+  button.addEventListener("click", () => activateDeliverableTab(button.dataset.deliverableTab));
+}
+
+function activateProofTab(id) {
+  for (const button of proofButtons) {
+    const active = button.dataset.proofTab === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const panel of proofPanels) {
+    panel.classList.toggle("active", panel.dataset.proofPanel === id);
+  }
+}
+for (const button of proofButtons) {
+  button.addEventListener("click", () => activateProofTab(button.dataset.proofTab));
+}
+
+function activateFinalAction(id) {
+  for (const button of finalActionButtons) {
+    const active = button.dataset.finalAction === id;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of finalActionPanels) {
+    panel.classList.toggle("active", panel.dataset.finalPanel === id);
+  }
+}
+for (const button of finalActionButtons) {
+  button.addEventListener("click", () => activateFinalAction(button.dataset.finalAction));
+}
+
+function activateSampleSpotlight(index, scrollToButton = true) {
+  for (const button of sampleSpotlightButtons) {
+    const active = button.dataset.sampleSpotlight === String(index);
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+    if (active && scrollToButton && button.scrollIntoView) button.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+  }
+  for (const panel of sampleSpotlightPanels) {
+    panel.classList.toggle("active", panel.dataset.sampleSpotlightPanel === String(index));
+  }
+}
+for (const button of sampleSpotlightButtons) {
+  button.addEventListener("click", () => activateSampleSpotlight(button.dataset.sampleSpotlight));
+}
+
+const localLinks = [...document.querySelectorAll("[data-local-link]")];
+const localSections = localLinks
+  .map((link) => ({ link, section: document.getElementById(link.dataset.localLink) }))
+  .filter((item) => item.section);
+function setActiveLocalLink(id) {
+  for (const item of localSections) {
+    item.link.classList.toggle("active", item.section.id === id);
+  }
+}
+if ("IntersectionObserver" in window && localSections.length) {
+  const localObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (visible[0]) setActiveLocalLink(visible[0].target.id);
+  }, { rootMargin: "-20% 0px -58% 0px", threshold: [0.02, 0.2, 0.45] });
+  for (const item of localSections) localObserver.observe(item.section);
+  setActiveLocalLink(localSections[0].section.id);
+}
+
+function updateLocalProgress() {
+  if (!localNavNode) return;
+  const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+  localNavNode.style.setProperty("--scroll-progress", (progress * 100).toFixed(2) + "%");
+}
+updateLocalProgress();
+window.addEventListener("scroll", updateLocalProgress, { passive: true });
+window.addEventListener("resize", updateLocalProgress);
+
+const sampleDrawerNode = document.querySelector("#sample-drawer");
+const sampleOpenButtons = [...document.querySelectorAll("[data-sample-open]")];
+const sampleCloseButtons = [...document.querySelectorAll("[data-sample-close]")];
+function setSampleDrawer(open) {
+  if (!sampleDrawerNode) return;
+  sampleDrawerNode.setAttribute("aria-hidden", open ? "false" : "true");
+  document.body.classList.toggle("drawer-open", open);
+  if (open) {
+    const closeButton = sampleDrawerNode.querySelector(".drawer-close");
+    if (closeButton) closeButton.focus();
+  }
+}
+for (const button of sampleOpenButtons) {
+  button.addEventListener("click", () => setSampleDrawer(true));
+}
+for (const button of sampleCloseButtons) {
+  button.addEventListener("click", () => setSampleDrawer(false));
+}
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setSampleDrawer(false);
+});
+
 const hero = document.querySelector(".topbar");
 const productVisualNode = document.querySelector(".product-visual");
 const motionSafe = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const heroMetricValues = [...document.querySelectorAll("[data-hero-count]")];
+const sourceLensButtons = [...document.querySelectorAll("[data-source-lens]")];
+const sourceLensWrap = document.querySelector(".source-legend");
+const boardSummaryItems = [...document.querySelectorAll("[data-board-source]")];
+const runwayNode = document.querySelector(".signal-runway");
+const runwayConsole = document.querySelector(".runway-console");
+const runwayButtons = [...document.querySelectorAll("[data-runway-stage]")];
+const runwayPanels = [...document.querySelectorAll("[data-runway-panel]")];
+let runwayAutoTimer = 0;
+let runwayUserPaused = false;
+
+let selectedSourceLens = "all";
+function renderSourceLens(source) {
+  const activeSource = source || "all";
+  const hasMatch = activeSource === "all" || boardSummaryItems.some((item) => item.dataset.boardSource === activeSource);
+  for (const button of sourceLensButtons) {
+    const active = button.dataset.sourceLens === activeSource;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  }
+  for (const item of boardSummaryItems) {
+    const focused = hasMatch && activeSource !== "all" && item.dataset.boardSource === activeSource;
+    item.classList.toggle("is-source-focused", focused);
+    item.classList.toggle("is-source-dimmed", hasMatch && activeSource !== "all" && !focused);
+  }
+  if (productVisualNode) {
+    productVisualNode.dataset.sourceFocus = hasMatch ? activeSource : "all";
+  }
+}
+
+for (const button of sourceLensButtons) {
+  button.addEventListener("pointerenter", () => renderSourceLens(button.dataset.sourceLens));
+  button.addEventListener("focusin", () => renderSourceLens(button.dataset.sourceLens));
+  button.addEventListener("click", () => {
+    selectedSourceLens = button.dataset.sourceLens || "all";
+    renderSourceLens(selectedSourceLens);
+  });
+}
+if (sourceLensWrap) {
+  sourceLensWrap.addEventListener("pointerleave", () => renderSourceLens(selectedSourceLens));
+}
+renderSourceLens(selectedSourceLens);
+
+function activateRunwayStage(index) {
+  if (!runwayButtons.length || !runwayConsole) return;
+  const activeIndex = Math.max(0, Math.min(index, runwayButtons.length - 1));
+  for (const button of runwayButtons) {
+    const isActive = Number(button.dataset.runwayStage) === activeIndex;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  }
+  for (const panel of runwayPanels) {
+    panel.classList.toggle("active", Number(panel.dataset.runwayPanel) === activeIndex);
+  }
+  runwayConsole.style.setProperty("--runway-progress", ((activeIndex + 1) / runwayButtons.length * 100).toFixed(0) + "%");
+}
+for (const button of runwayButtons) {
+  button.addEventListener("click", () => {
+    runwayUserPaused = true;
+    if (runwayAutoTimer) window.clearInterval(runwayAutoTimer);
+    activateRunwayStage(Number(button.dataset.runwayStage));
+  });
+}
+if (runwayNode && runwayButtons.length && motionSafe) {
+  const startRunway = () => {
+    if (runwayAutoTimer || runwayUserPaused) return;
+    runwayAutoTimer = window.setInterval(() => {
+      const current = runwayButtons.findIndex((button) => button.classList.contains("active"));
+      activateRunwayStage((current + 1) % runwayButtons.length);
+    }, 2600);
+  };
+  const stopRunway = () => {
+    if (runwayAutoTimer) window.clearInterval(runwayAutoTimer);
+    runwayAutoTimer = 0;
+  };
+  if ("IntersectionObserver" in window) {
+    const runwayObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) startRunway();
+      else stopRunway();
+    }, { threshold: 0.34 });
+    runwayObserver.observe(runwayNode);
+  } else {
+    startRunway();
+  }
+}
 if (hero && productVisualNode && motionSafe) {
   hero.addEventListener("pointermove", (event) => {
     const rect = hero.getBoundingClientRect();
@@ -114,4 +514,42 @@ if (hero && productVisualNode && motionSafe) {
   hero.addEventListener("pointerleave", () => {
     productVisualNode.style.transform = "";
   });
+}
+
+function animateHeroMetrics() {
+  if (!motionSafe || !heroMetricValues.length) return;
+  const metricWrap = document.querySelector(".hero-metrics");
+  metricWrap?.classList.add("is-counting");
+  const duration = 920;
+  const start = performance.now();
+  for (const node of heroMetricValues) node.textContent = "0";
+  function step(now) {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    for (const node of heroMetricValues) {
+      const target = Number(node.dataset.heroCount || node.textContent || 0);
+      node.textContent = String(Math.round(target * eased));
+    }
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      for (const node of heroMetricValues) node.textContent = String(Number(node.dataset.heroCount || node.textContent || 0));
+      metricWrap?.classList.remove("is-counting");
+    }
+  }
+  window.requestAnimationFrame(step);
+}
+
+if (heroMetricValues.length && motionSafe) {
+  if ("IntersectionObserver" in window) {
+    const metricObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        animateHeroMetrics();
+        metricObserver.disconnect();
+      }
+    }, { threshold: 0.48 });
+    metricObserver.observe(heroMetricValues[0].closest(".hero-metrics"));
+  } else {
+    animateHeroMetrics();
+  }
 }
