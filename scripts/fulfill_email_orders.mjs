@@ -33,6 +33,7 @@ Only local buyer delivery directories were created. No messages were sent, no fi
 Eligible stage: \`paid_needs_fulfillment\`
 
 Weekly email orders are handled by the subscription workflow: \`sync-email-subscriptions\` -> \`content-subscription-crm\` -> \`content-subscription-due\`.
+Custom email orders are handled by \`fulfill-custom-email-orders\`.
 
 ## Prepared Orders
 
@@ -58,13 +59,15 @@ const intakeFile = resolvePath(argValue("intake-file", "dist/email-order-intake/
 const reportDir = resolvePath(argValue("out-dir", "dist/email-fulfillment"));
 const intake = JSON.parse(await readFile(intakeFile, "utf8"));
 const orders = intake.orders || [];
-const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment" && order.tier !== "weekly-brief");
+const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment" && !["weekly-brief", "custom-niche"].includes(order.tier));
 const skipped = orders
-  .filter((order) => order.stage !== "paid_needs_fulfillment" || order.tier === "weekly-brief")
+  .filter((order) => order.stage !== "paid_needs_fulfillment" || ["weekly-brief", "custom-niche"].includes(order.tier))
   .map((order) => ({
     ...order,
     skipReason: order.tier === "weekly-brief" && order.stage === "paid_needs_fulfillment"
       ? "weekly_subscription_handled_by_content_subscription_due"
+      : order.tier === "custom-niche" && order.stage === "paid_needs_fulfillment"
+        ? "custom_order_handled_by_fulfill_custom_email_orders"
       : "not_paid_needs_fulfillment"
   }));
 const prepared = [];

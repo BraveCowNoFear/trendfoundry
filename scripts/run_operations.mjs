@@ -69,6 +69,8 @@ try {
   await persistRun();
   steps.push(runStep("content-subscription-retention", ["content-subscription-retention"]));
   await persistRun();
+  steps.push(runStep("fulfill-custom-email-orders", ["fulfill-custom-email-orders"]));
+  await persistRun();
   steps.push(runStep("fulfill-email-orders", ["fulfill-email-orders"]));
   await persistRun();
   steps.push(runStep("fulfill-ready", ["fulfill-ready"]));
