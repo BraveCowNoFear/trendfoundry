@@ -95,6 +95,8 @@ ${runSteps}
 - CRM due today: ${report.content.crmDueToday}
 - Close queue: ${report.content.closeSelected}
 - Outreach review packs: ${report.content.outreachReviewPacks}
+- Outreach send receipts: ${report.content.outreachSendReceipts}
+- Outreach waiting reply: ${report.content.outreachWaitingReply}
 - Deal desk active deals: ${report.content.activeDeals}
 - Deal desk playbook rows: ${report.content.playbookRows}
 - Customer success follow-ups: ${report.content.customerFollowups}
@@ -143,6 +145,7 @@ const dealDeskData = await readJsonIfExists(path.join(root, "dist", "content-dea
 const customerSuccessData = await readJsonIfExists(path.join(root, "dist", "content-customer-success", "manifest.json"), {});
 const testimonialData = await readJsonIfExists(path.join(root, "dist", "content-testimonials", "manifest.json"), {});
 const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "content-outreach-review", "manifest.json"), {});
+const outreachSendsData = await readJsonIfExists(path.join(root, "dist", "content-outreach-sends", "manifest.json"), {});
 const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
 const emailFulfillmentData = await readJsonIfExists(path.join(root, "dist", "email-fulfillment", "email-orders.json"), { prepared: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
@@ -204,6 +207,8 @@ const report = {
     crmDueToday: contentOpsData.contentState?.salesCrm?.dueToday ?? "unknown",
     closeSelected: contentOpsData.contentState?.closePack?.selectedCount ?? "unknown",
     outreachReviewPacks: outreachReviewData.reviewPackCount ?? contentOpsData.contentState?.outreachReview?.reviewPackCount ?? "unknown",
+    outreachSendReceipts: outreachSendsData.sendReceiptCount ?? contentOpsData.contentState?.outreachSends?.sendReceiptCount ?? "unknown",
+    outreachWaitingReply: outreachSendsData.waitingReplyCount ?? contentOpsData.contentState?.outreachSends?.waitingReply ?? "unknown",
     activeDeals: dealDeskData.activeDealCount ?? contentOpsData.contentState?.dealDesk?.activeDealCount ?? "unknown",
     playbookRows: dealDeskData.playbookCount ?? contentOpsData.contentState?.dealDesk?.playbookCount ?? "unknown",
     customerFollowups: customerSuccessData.followupCount ?? contentOpsData.contentState?.customerSuccess?.followupCount ?? "unknown",
@@ -235,7 +240,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
-    contentOpsData.status === "success" ? "Review dist/content-outreach-review/review-board.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, outreach review, deal desk, customer follow-ups, and testimonial bank.",
+    contentOpsData.status === "success" ? "Review dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, outreach review, send receipts, deal desk, customer follow-ups, and testimonial bank.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."
