@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { argValue, contactEmail, slug } from "./lib/fulfillment.mjs";
 
@@ -26,8 +27,18 @@ const sourceManifest = await readJson(path.join(sourceDir, "manifest.json"));
 const buyerDeliverables = sourceManifest.buyerDeliverables || [
   "full-episode-script.md",
   "episode-workbench.md",
+  "content-evidence-pack.md",
   "content-editorial-audit.md"
 ];
+
+const manifestPath = path.join(orderDir, "manifest.json");
+if (existsSync(manifestPath)) {
+  const existingManifest = await readJson(manifestPath);
+  console.log(`Content fulfillment order already prepared: ${orderDir}`);
+  console.log(`Status: already_prepared`);
+  console.log(`Files: ${(existingManifest.buyerDeliverables || buyerDeliverables).join(", ")}, manifest.json, delivery-email.md, fulfillment-checklist.md`);
+  process.exit(0);
+}
 
 await mkdir(orderDir, { recursive: true });
 

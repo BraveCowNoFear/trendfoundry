@@ -18,6 +18,8 @@ npm run fulfill-content -- --buyer="Buyer Name" --contact="buyer@example.com" --
 
 `--payment-ref` should be a local reference to an externally confirmed payment, not sensitive payment or account data. If omitted, the generated manifest marks payment as not externally confirmed.
 
+If `dist/content-orders/<order-id>/manifest.json` already exists, the command reports `already_prepared` and exits without overwriting buyer deliverables.
+
 ## Generated Files
 
 The command writes to `dist/content-orders/<order-id>/`:
