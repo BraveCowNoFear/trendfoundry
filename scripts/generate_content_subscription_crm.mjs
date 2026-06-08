@@ -211,7 +211,7 @@ The file is ignored by Git. Use \`dist/content-subscription-crm/subscribers.temp
 ## Operator Flow
 
 1. Run \`npm run content-subscription\` to refresh the four-week content calendar.
-2. Update the ignored subscriber file after external subscription/payment confirmation.
+2. After external subscription/payment confirmation, run \`npm run record-content-subscription -- --subscriber="Buyer Name" --contact="buyer@example.com" --channel="https://youtube.com/@buyer" --payment-ref="external-confirmation-id"\`.
 3. Run \`npm run content-subscription-crm\`.
 4. Review \`dist/content-subscription-crm/due-queue.md\`.
 5. Run only the fulfillment commands marked \`prepare_delivery\`.
