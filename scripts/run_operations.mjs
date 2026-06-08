@@ -61,6 +61,14 @@ try {
   await persistRun();
   steps.push(runStep("sync-email-subscriptions", ["sync-email-subscriptions"]));
   await persistRun();
+  steps.push(runStep("content-subscription", ["content-subscription"]));
+  await persistRun();
+  steps.push(runStep("content-subscription-crm", ["content-subscription-crm"]));
+  await persistRun();
+  steps.push(runStep("content-subscription-due", ["content-subscription-due"]));
+  await persistRun();
+  steps.push(runStep("content-subscription-retention", ["content-subscription-retention"]));
+  await persistRun();
   steps.push(runStep("fulfill-email-orders", ["fulfill-email-orders"]));
   await persistRun();
   steps.push(runStep("fulfill-ready", ["fulfill-ready"]));

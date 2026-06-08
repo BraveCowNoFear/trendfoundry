@@ -1,6 +1,6 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T07:13:14.311Z
+Generated: 2026-06-08T07:16:21.658Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
@@ -50,9 +50,9 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 
 ## Bilibili Sample
 
-- 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 (AI图生视频工作流)
-- 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 (PR教程-)
 - 当我尝试下载 YouTube 时 (你的米老鼠大爹)
+- 【宏观投资】就业数据造假？美联储加息恐慌！ AI 泡沫要破？SpaceX IPO内幕 + 黄金比特币暴跌，本周市场全解读 (YouTube全球洞见)
+- 第24周 GitHub 周榜，19个项目杀入榜单，有个工具把 AI 输入砍掉九成 (GitHub星探)
 
 ## Safety Boundary
 

@@ -97,12 +97,6 @@ function addMonthsIso(value, months) {
   return isoDate(date);
 }
 
-async function firstPlanDeliveryDate(fallbackDate) {
-  const calendarText = await readTextMaybe(path.join(root, "dist", "content-subscription-plan", "calendar.csv"));
-  const rows = parseCsv(calendarText);
-  return compact(rows[0]?.delivery_date, fallbackDate);
-}
-
 function isPaidWeeklyOrder(order) {
   return order.stage === "paid_needs_fulfillment" && order.tier === "weekly-brief";
 }
@@ -180,7 +174,7 @@ const intakeFile = path.isAbsolute(argValue("intake-file", "")) ? argValue("inta
 const intake = await readJsonMaybe(intakeFile, { orders: [] });
 const orders = intake.orders || [];
 const paidWeeklyOrders = orders.filter(isPaidWeeklyOrder);
-const firstDeliveryDate = await firstPlanDeliveryDate(todayIso);
+const firstDeliveryDate = compact(argValue("first-delivery-date", todayIso));
 const incomingRows = paidWeeklyOrders.map((order) => subscriberFromOrder(order, todayIso, firstDeliveryDate));
 const existingRows = parseCsv(await readTextMaybe(subscribersFile));
 const mergedRows = mergeSubscribers(existingRows, incomingRows);
