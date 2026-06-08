@@ -51,6 +51,11 @@ const meta = extractFullScriptMeta(fullScript);
 
 const deliverables = [
   {
+    file: "START-HERE.md",
+    value: "A one-page buyer quickstart with TL;DR, recording order, next action, and what to ignore until needed.",
+    use: "The buyer wants the shortest path to action."
+  },
+  {
     file: "full-episode-script.md",
     value: "A complete 6-8 minute proof-first episode script with scenes, narration, recording checklist, shorts hooks, and publishing metadata.",
     use: "The buyer wants one script they can record immediately."
@@ -72,13 +77,38 @@ const deliverables = [
   }
 ];
 
+const startHere = `# START HERE
+
+## TL;DR
+
+Record one proof-first episode from \`full-episode-script.md\`. Use the other files only when you need options, source checks, or quality rationale.
+
+## Next Action
+
+1. Open \`full-episode-script.md\`.
+2. Record the proof asset first: ${sentence(meta.proofAsset)}.
+3. Keep this safety line in the first minute: ${meta.safetyLine}
+4. Check \`content-evidence-pack.md\` only before recording claims on camera.
+5. Use \`episode-workbench.md\` only if you want a different episode from the queue.
+
+## What To Ignore At First
+
+- Do not start with the audit unless you are reviewing quality.
+- Do not read every source before choosing the first recording path.
+- Do not optimize title, thumbnail, or CTA until the proof asset is visible.
+
+## Boundary
+
+This is a creator planning aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
+`;
+
 const buyerIndex = `# TrendFoundry Buyer Content Pack
 
 Generated: ${new Date().toISOString()}
 
 Dataset: ${latest.generatedAt}
 
-This pack is the buyer-facing content delivery layer for the current TrendFoundry issue. It packages one complete proof-first script, a five-item episode queue, a source-backed evidence pack, and the editorial quality gate into a reviewable delivery bundle.
+This pack is the buyer-facing content delivery layer for the current TrendFoundry issue. Start with \`START-HERE.md\`; the remaining files are reference attachments.
 
 ## Primary Episode
 
@@ -109,7 +139,7 @@ Hi,
 
 Here is the current TrendFoundry buyer content pack.
 
-Start with \`full-episode-script.md\` if you want one video to record now. Use \`episode-workbench.md\` if you want to choose from the broader queue. Use \`content-evidence-pack.md\` to verify sources, claims, proof assets, and limitations before recording. Use \`content-editorial-audit.md\` to see the quality gate behind the choices.
+Start with \`START-HERE.md\`. It gives the TL;DR and the recording order. Use \`full-episode-script.md\` if you want one video to record now. Use the other files only as references.
 
 The main proof asset is: ${sentence(meta.proofAsset)}.
 
@@ -122,7 +152,7 @@ TrendFoundry
 
 ## Operator Checklist
 
-1. Attach or copy the four buyer-facing files.
+1. Attach or copy the five buyer-facing files, with START-HERE.md first.
 2. Do not attach seller-only files or raw source snapshots.
 3. Ask the buyer to re-check visible source metadata on recording day.
 4. If the buyer wants a custom niche, regenerate the queue from updated sources before writing a custom script.
@@ -176,8 +206,10 @@ await mkdir(docsDir, { recursive: true });
 await mkdir(distDir, { recursive: true });
 await writeFile(path.join(docsDir, "buyer-content-pack.md"), buyerIndex, "utf8");
 await writeFile(path.join(distDir, "README.md"), buyerIndex, "utf8");
+await writeFile(path.join(distDir, "START-HERE.md"), startHere, "utf8");
 await writeFile(path.join(distDir, "delivery-email.md"), deliveryEmail, "utf8");
 await writeFile(path.join(distDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");
+await writeFile(path.join(distDir, "START-HERE.md"), startHere, "utf8");
 await writeFile(path.join(distDir, "full-episode-script.md"), fullScript, "utf8");
 await writeFile(path.join(distDir, "episode-workbench.md"), workbench, "utf8");
 await writeFile(path.join(distDir, "content-evidence-pack.md"), evidencePack, "utf8");

@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-sends", "content-deal-desk", "content-customer-success", "content-testimonials", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-sends", "content-deal-desk", "content-customer-success", "content-testimonials", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -67,6 +67,7 @@ const subscriptionDueManifest = await readJson("dist/content-subscription-due/ma
 const subscriptionRetentionManifest = await readJson("dist/content-subscription-retention/manifest.json", {});
 const salesManifest = await readJson("dist/content-sales-sequence/manifest.json", {});
 const prospectManifest = await readJson("dist/content-prospecting/manifest.json", {});
+const replyIntakeManifest = await readJson("dist/content-reply-intake/manifest.json", {});
 const crmManifest = await readJson("dist/content-sales-crm/manifest.json", {});
 const revenueManifest = await readJson("dist/content-revenue-model/manifest.json", {});
 const feedbackManifest = await readJson("dist/content-feedback-loop/manifest.json", {});
@@ -134,6 +135,11 @@ const run = {
       count: prospectManifest.count,
       channels: prospectManifest.channels || [],
       productFits: prospectManifest.productFits || []
+    },
+    replyIntake: {
+      parsedCount: replyIntakeManifest.parsedCount,
+      skippedCount: replyIntakeManifest.skippedCount,
+      stageCounts: replyIntakeManifest.stageCounts || {}
     },
     salesCrm: {
       count: crmManifest.count,
@@ -218,7 +224,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach send receipts, deal desk, customer-success follow-ups, testimonial bank, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach send receipts, deal desk, customer-success follow-ups, testimonial bank, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -241,6 +247,7 @@ ${stepSummary(steps)}
 - Subscription retention: ${subscriptionRetentionManifest.draftCount ?? "unknown"} drafts, ${subscriptionRetentionManifest.paymentReviewCount ?? "unknown"} payment review, ${subscriptionRetentionManifest.renewalCount ?? "unknown"} renewal
 - Sales drafts: ${salesManifest.count ?? "unknown"} drafts across ${(salesManifest.channels || []).join(", ") || "unknown"}
 - Prospects: ${prospectManifest.count ?? "unknown"} local drafts across ${(prospectManifest.channels || []).join(", ") || "unknown"}
+- Reply intake: ${replyIntakeManifest.parsedCount ?? "unknown"} parsed, ${replyIntakeManifest.skippedCount ?? "unknown"} skipped
 - CRM: ${crmManifest.count ?? "unknown"} rows, ${crmManifest.dueToday ?? "unknown"} due today, ${crmManifest.dueThisWeek ?? "unknown"} due this week
 - Revenue model: base new MRR USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.new_mrr_usd) ?? "unknown"}, base month-one cash USD ${((revenueManifest.scenarios || []).find((scenario) => scenario.scenario === "base")?.month_one_cash_usd) ?? "unknown"}
 - Feedback loop: ${feedbackManifest.learningCount ?? "unknown"} learnings, ${feedbackManifest.questionCount ?? "unknown"} questions, ${feedbackManifest.privateReplyRows ?? "unknown"} private replies
@@ -273,18 +280,19 @@ ${stepSummary(steps)}
 8. Review \`docs/content-subscription-retention.md\` and private \`dist/content-subscription-retention/drafts.md\` for renewal/payment-review drafts.
 9. Review \`docs/content-sales-sequence.md\` for publish/send drafts.
 10. Review \`dist/content-prospecting/prospect-board.md\` for one-by-one outreach.
-11. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
-12. Review \`docs/content-revenue-model.md\` for weekly sales targets.
-13. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
-14. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
-15. Review \`dist/content-outreach-review/review-board.md\` and one send pack at a time under \`dist/content-outreach-review/send-packs/\`.
-16. After a send pack is manually sent, run \`npm run complete-content-outreach-send -- --review-id="..."\`.
-17. Review \`dist/content-deal-desk/deal-desk.md\` when a reply, invoice request, or payment confirmation arrives.
-18. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
-19. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
-20. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-21. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-22. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+11. Drop copied replies into \`data/content-sales-crm/reply-inbox/\`, then review \`dist/content-reply-intake/parsed-replies.md\`.
+12. Review \`dist/content-sales-crm/pipeline.md\` for today's follow-up queue.
+13. Review \`docs/content-revenue-model.md\` for weekly sales targets.
+14. Review \`docs/content-feedback-loop.md\` before editing product copy or sales objections.
+15. Review \`dist/content-close-pack/today-close-queue.md\` for the five-row daily close queue.
+16. Review \`dist/content-outreach-review/review-board.md\` and one send pack at a time under \`dist/content-outreach-review/send-packs/\`.
+17. After a send pack is manually sent, run \`npm run complete-content-outreach-send -- --review-id="..."\`.
+18. Review \`dist/content-deal-desk/deal-desk.md\` when a reply, invoice request, or payment confirmation arrives.
+19. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
+20. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
+21. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+22. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+23. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

@@ -35,6 +35,7 @@
     "custom-proof-pack": "node scripts/generate_custom_proof_pack.mjs",
     "content-sales": "node scripts/generate_content_sales_sequence.mjs",
     "content-prospects": "node scripts/generate_content_prospecting.mjs",
+    "content-reply-intake": "node scripts/intake_content_replies.mjs",
     "content-crm": "node scripts/generate_content_sales_crm.mjs",
     "content-subscription": "node scripts/generate_content_subscription_plan.mjs",
     "content-subscription-crm": "node scripts/generate_content_subscription_crm.mjs",

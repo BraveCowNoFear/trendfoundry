@@ -1,15 +1,15 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T17:43:54.261Z
+Generated: 2026-06-08T17:55:47.092Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 74
+- Checked files: 78
 - Files with mojibake markers: 0
-- Bilibili items in latest dataset: 30
-- Bilibili items with readable Chinese text: 30
+- Bilibili items in latest dataset: 29
+- Bilibili items with readable Chinese text: 29
 - Close pack selected rows: 5
 - Public close doc prospect leaks: 0
 
@@ -27,6 +27,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/update_content_testimonial_status.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_outreach_send_log.mjs | tracked-source | no | 0 | none |
 | scripts/complete_content_outreach_send.mjs | tracked-source | no | 0 | none |
+| scripts/intake_content_replies.mjs | tracked-source | no | 0 | none |
 | scripts/generate_buyer_content_pack.mjs | tracked-source | no | 0 | none |
 | scripts/run_content_ops.mjs | tracked-source | no | 0 | none |
 | scripts/update_content_sale_status.mjs | tracked-source | no | 0 | none |
@@ -40,6 +41,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/content-editorial-audit.md | public-or-tracked | yes | 0 | none |
 | docs/content-evidence-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-feedback-loop.md | public-or-tracked | no | 0 | none |
+| docs/content-reply-intake.md | public-or-tracked | no | 0 | none |
 | docs/content-testimonials.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-review.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-sends.md | public-or-tracked | no | 0 | none |
@@ -86,6 +88,8 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-testimonials/publish-candidates.md | private-ignored | no | 0 | none |
 | dist/content-outreach-sends/send-log.csv | private-ignored | no | 0 | none |
 | dist/content-outreach-sends/send-log.md | private-ignored | no | 0 | none |
+| dist/content-reply-intake/parsed-replies.csv | private-ignored | no | 0 | none |
+| dist/content-reply-intake/parsed-replies.md | private-ignored | no | 0 | none |
 | dist/email-subscription-sync/synced.csv | private-ignored | no | 0 | none |
 | dist/custom-email-orders/custom-email-orders.md | private-ignored | no | 0 | none |
 | dist/email-order-routing/routes.csv | private-ignored | no | 0 | none |
@@ -94,9 +98,9 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 
 ## Bilibili Sample
 
-- 当我尝试下载 YouTube 时 (你的米老鼠大爹)
-- 【宏观投资】就业数据造假？美联储加息恐慌！ AI 泡沫要破？SpaceX IPO内幕 + 黄金比特币暴跌，本周市场全解读 (YouTube全球洞见)
-- 第24周 GitHub 周榜，19个项目杀入榜单，有个工具把 AI 输入砍掉九成 (GitHub星探)
+- B站强推！这几位老师简直就是教 AI 漫剧的神！！！ (热爱学习的芙莉莲)
+- 【赛博古董】21年前 YouTube 被上传的第一个视频 (依然杏压抑)
+- 10K 星的 AI 虚拟人框架：把聊天框变成能说话的 Live2D 角色 (AIlazy俊)
 
 ## Safety Boundary
 

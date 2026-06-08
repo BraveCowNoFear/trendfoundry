@@ -92,6 +92,8 @@ ${runSteps}
 - Evidence pack: ${report.content.evidenceItems} items, ${report.content.evidenceClaims} claims (${report.content.evidenceDeliverable})
 - Delivery gate: ${report.content.deliveryGatePassed} passed, ${report.content.deliveryGateFailed} failed
 - Prospects: ${report.content.prospects}
+- Reply intake parsed: ${report.content.replyIntakeParsed}
+- Reply intake skipped: ${report.content.replyIntakeSkipped}
 - CRM due today: ${report.content.crmDueToday}
 - Close queue: ${report.content.closeSelected}
 - Outreach review packs: ${report.content.outreachReviewPacks}
@@ -141,6 +143,7 @@ const qaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-qa.j
 const onlineQaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-online-qa.json"), qaData);
 const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "latest-run.json"), { steps: [] });
 const contentOpsData = await readJsonIfExists(path.join(root, "dist", "content-ops", "latest-run.json"), { contentState: {}, steps: [] });
+const replyIntakeData = await readJsonIfExists(path.join(root, "dist", "content-reply-intake", "manifest.json"), {});
 const dealDeskData = await readJsonIfExists(path.join(root, "dist", "content-deal-desk", "manifest.json"), {});
 const customerSuccessData = await readJsonIfExists(path.join(root, "dist", "content-customer-success", "manifest.json"), {});
 const testimonialData = await readJsonIfExists(path.join(root, "dist", "content-testimonials", "manifest.json"), {});
@@ -204,6 +207,8 @@ const report = {
     deliveryGatePassed: contentOpsData.contentState?.deliveryGate?.passedCount ?? "unknown",
     deliveryGateFailed: contentOpsData.contentState?.deliveryGate?.failedCount ?? "unknown",
     prospects: contentOpsData.contentState?.prospecting?.count ?? "unknown",
+    replyIntakeParsed: replyIntakeData.parsedCount ?? contentOpsData.contentState?.replyIntake?.parsedCount ?? "unknown",
+    replyIntakeSkipped: replyIntakeData.skippedCount ?? contentOpsData.contentState?.replyIntake?.skippedCount ?? "unknown",
     crmDueToday: contentOpsData.contentState?.salesCrm?.dueToday ?? "unknown",
     closeSelected: contentOpsData.contentState?.closePack?.selectedCount ?? "unknown",
     outreachReviewPacks: outreachReviewData.reviewPackCount ?? contentOpsData.contentState?.outreachReview?.reviewPackCount ?? "unknown",
@@ -240,7 +245,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
-    contentOpsData.status === "success" ? "Review dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, outreach review, send receipts, deal desk, customer follow-ups, and testimonial bank.",
+    contentOpsData.status === "success" ? "Review dist/content-reply-intake/parsed-replies.md, dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, customer follow-ups, and testimonial bank.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."

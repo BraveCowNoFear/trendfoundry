@@ -5,6 +5,7 @@ import { argValue } from "./lib/fulfillment.mjs";
 
 const root = process.cwd();
 const expectedDeliverables = [
+  "START-HERE.md",
   "full-episode-script.md",
   "episode-workbench.md",
   "content-evidence-pack.md",

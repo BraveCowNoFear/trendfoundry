@@ -6,6 +6,7 @@ const docsDir = path.join(root, "docs");
 const outDir = path.join(root, "dist", "content-delivery-gate");
 const packDir = path.join(root, "dist", "buyer-content-pack");
 const expectedDeliverables = [
+  "START-HERE.md",
   "full-episode-script.md",
   "episode-workbench.md",
   "content-evidence-pack.md",
@@ -94,6 +95,10 @@ function sensitiveRequestHits(text) {
   return patterns.flatMap((pattern) => [...text.matchAll(pattern)].map((match) => compact(match[0]).slice(0, 160)));
 }
 
+function wordCount(text) {
+  return compact(text).split(/\s+/).filter(Boolean).length;
+}
+
 function row(status, check, file, detail) {
   return { status, check, file, detail };
 }
@@ -105,6 +110,8 @@ const buyerDeliverables = manifest.buyerDeliverables || [];
 const checks = [];
 
 checks.push(row(buyerDeliverables.length === expectedDeliverables.length ? "pass" : "fail", "deliverable_count", "manifest.json", `expected=${expectedDeliverables.length}; actual=${buyerDeliverables.length}`));
+checks.push(row(buyerDeliverables.length <= 5 ? "pass" : "fail", "concise_deliverable_count", "manifest.json", `max=5; actual=${buyerDeliverables.length}`));
+checks.push(row(buyerDeliverables[0] === "START-HERE.md" ? "pass" : "fail", "start_here_first", "manifest.json", `first=${buyerDeliverables[0] || "missing"}`));
 for (const file of expectedDeliverables) {
   checks.push(row(buyerDeliverables.includes(file) ? "pass" : "fail", "expected_deliverable_manifest", "manifest.json", file));
 }
@@ -113,6 +120,14 @@ for (const file of buyerDeliverables) {
   const filePath = path.join(packDir, file);
   const text = await readTextMaybe(filePath);
   checks.push(row(text ? "pass" : "fail", "deliverable_file_exists", file, text ? `${Buffer.byteLength(text, "utf8")} bytes` : "missing or empty"));
+  const words = wordCount(text);
+  if (file === "START-HERE.md") {
+    checks.push(row(words > 0 && words <= 220 ? "pass" : "fail", "start_here_short", file, `words=${words}; max=220`));
+    checks.push(row(/TL;DR/i.test(text) ? "pass" : "fail", "start_here_has_tldr", file, "requires TL;DR"));
+    checks.push(row(/Next Action/i.test(text) ? "pass" : "fail", "start_here_has_next_action", file, "requires Next Action"));
+  } else {
+    checks.push(row(words <= 2600 ? "pass" : "fail", "reference_file_length", file, `words=${words}; max=2600`));
+  }
 
   const mojibake = tokenHits(text);
   checks.push(row(mojibake.length ? "fail" : "pass", "no_mojibake_markers", file, mojibake.join("; ") || "clean"));
@@ -159,7 +174,7 @@ const markdown = `# TrendFoundry Content Delivery Gate
 
 Generated: ${generatedAt}
 
-This gate checks the buyer content pack before paid delivery. It verifies the four buyer-facing files, seller-only boundaries, sensitive-data wording, outcome guarantees, and mojibake markers. It does not send messages, collect payment, upload files, or build the frontend.
+This gate checks the buyer content pack before paid delivery. It verifies START-HERE plus the four reference files, seller-only boundaries, sensitive-data wording, outcome guarantees, concise first-read guidance, and mojibake markers. It does not send messages, collect payment, upload files, or build the frontend.
 
 ## Summary
 
@@ -184,6 +199,7 @@ ${checks.map((check) => `| ${check.status} | ${check.check} | ${check.file} | ${
 - Blocks seller-only file references in buyer deliverables.
 - Blocks sensitive payment/account data requests in buyer deliverables.
 - Blocks view, subscriber, revenue, growth, sales, or customer outcome guarantees.
+- Requires a short START-HERE.md with TL;DR and next action so buyer delivery stays easy to understand.
 `;
 
 await mkdir(docsDir, { recursive: true });

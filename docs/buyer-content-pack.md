@@ -1,10 +1,10 @@
 # TrendFoundry Buyer Content Pack
 
-Generated: 2026-06-08T08:20:43.019Z
+Generated: 2026-06-08T17:55:40.251Z
 
-Dataset: 2026-06-08T07:15:29.423Z
+Dataset: 2026-06-08T17:50:16.053Z
 
-This pack is the buyer-facing content delivery layer for the current TrendFoundry issue. It packages one complete proof-first script, a five-item episode queue, a source-backed evidence pack, and the editorial quality gate into a reviewable delivery bundle.
+This pack is the buyer-facing content delivery layer for the current TrendFoundry issue. Start with `START-HERE.md`; the remaining files are reference attachments.
 
 ## Primary Episode
 
@@ -19,6 +19,7 @@ This pack is the buyer-facing content delivery layer for the current TrendFoundr
 
 | File | Buyer value | Use first when |
 | --- | --- | --- |
+| START-HERE.md | A one-page buyer quickstart with TL;DR, recording order, next action, and what to ignore until needed. | The buyer wants the shortest path to action. |
 | full-episode-script.md | A complete 6-8 minute proof-first episode script with scenes, narration, recording checklist, shorts hooks, and publishing metadata. | The buyer wants one script they can record immediately. |
 | episode-workbench.md | Five ready episode candidates with Bilibili opening plan, YouTube opening, recording proof, and buyer handoff notes. | The buyer wants to choose between several video ideas. |
 | content-evidence-pack.md | A source-backed fact-check checklist with public URLs, claim types, proof assets, verification steps, and limitation lines. | The buyer wants to verify claims before recording or delegating production. |
@@ -26,7 +27,7 @@ This pack is the buyer-facing content delivery layer for the current TrendFoundr
 
 ## Delivery Boundary
 
-- Buyer-facing files: full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md.
+- Buyer-facing files: START-HERE.md, full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md.
 - Seller-only files excluded: prospects.csv, outreach-board.md, data/latest.json, raw source snapshots, local lead pipeline, private order notes, sensitive payment data, account data.
 - The pack does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 - The buyer should record the proof asset before polishing title, thumbnail, or CTA.
@@ -40,7 +41,7 @@ Hi,
 
 Here is the current TrendFoundry buyer content pack.
 
-Start with `full-episode-script.md` if you want one video to record now. Use `episode-workbench.md` if you want to choose from the broader queue. Use `content-evidence-pack.md` to verify sources, claims, proof assets, and limitations before recording. Use `content-editorial-audit.md` to see the quality gate behind the choices.
+Start with `START-HERE.md`. It gives the TL;DR and the recording order. Use `full-episode-script.md` if you want one video to record now. Use the other files only as references.
 
 The main proof asset is: Terminal proof / README quickstart, install command, first output, and one blocker note.
 
@@ -53,7 +54,7 @@ TrendFoundry
 
 ## Operator Checklist
 
-1. Attach or copy the four buyer-facing files.
+1. Attach or copy the five buyer-facing files, with START-HERE.md first.
 2. Do not attach seller-only files or raw source snapshots.
 3. Ask the buyer to re-check visible source metadata on recording day.
 4. If the buyer wants a custom niche, regenerate the queue from updated sources before writing a custom script.

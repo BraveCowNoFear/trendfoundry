@@ -25,6 +25,7 @@ const ordersDir = path.join(root, "dist", "content-orders");
 const orderDir = path.join(ordersDir, orderId);
 const sourceManifest = await readJson(path.join(sourceDir, "manifest.json"));
 const buyerDeliverables = sourceManifest.buyerDeliverables || [
+  "START-HERE.md",
   "full-episode-script.md",
   "episode-workbench.md",
   "content-evidence-pack.md",
@@ -95,7 +96,7 @@ Your proof-first content pack is ready. It includes:
 
 ${buyerDeliverables.map((file) => `- ${file}`).join("\n")}
 
-Start with \`full-episode-script.md\` if you want one video to record now. Use \`episode-workbench.md\` if you want alternate ideas, \`content-evidence-pack.md\` if you want to verify claims before recording, and \`content-editorial-audit.md\` if you want the quality gate behind the choices.
+Start with \`START-HERE.md\`. It gives the TL;DR, the recording order, and what to ignore until needed. Then use \`full-episode-script.md\` if you want one video to record now. Treat the other files as references.
 
 Primary episode: ${compact(sourceManifest.primaryEpisode?.title, "current TrendFoundry proof episode")}
 Proof asset: ${compact(sourceManifest.primaryEpisode?.proofAsset, "proof-first recording asset")}
