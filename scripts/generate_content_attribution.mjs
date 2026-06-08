@@ -72,6 +72,15 @@ function firstByKey(rows) {
   return map;
 }
 
+function mapBy(rows, field) {
+  const map = new Map();
+  for (const row of rows) {
+    const value = compact(row[field]);
+    if (value && !map.has(value)) map.set(value, row);
+  }
+  return map;
+}
+
 function countBy(rows, field) {
   return rows.reduce((acc, row) => {
     const value = compact(row[field], "unknown");
@@ -94,12 +103,13 @@ function fulfillmentForCampaign(row, fulfillmentRows) {
   }) || {};
 }
 
-function rowFromCampaign({ reviewRow, gateByReview, sendByReview, repliesByKey, dealsByKey, fulfillmentRows }) {
+function rowFromCampaign({ reviewRow, gateByReview, sendByReview, repliesByCampaign, repliesByReview, repliesByKey, dealsByKey, fulfillmentRows }) {
   const campaignId = compact(reviewRow.campaign_id, `tf-${compact(reviewRow.review_id, "unknown")}`);
+  const reviewId = compact(reviewRow.review_id);
   const key = keyFor(reviewRow);
-  const gate = gateByReview.get(compact(reviewRow.review_id)) || {};
-  const send = sendByReview.get(compact(reviewRow.review_id)) || {};
-  const reply = repliesByKey.get(key) || {};
+  const gate = gateByReview.get(reviewId) || {};
+  const send = sendByReview.get(reviewId) || {};
+  const reply = repliesByCampaign.get(campaignId) || repliesByReview.get(reviewId) || repliesByKey.get(key) || {};
   const deal = dealsByKey.get(key) || {};
   const fulfillment = fulfillmentForCampaign(reviewRow, fulfillmentRows);
   const sentStatus = send.review_id ? "manual_sent" : "not_sent";
@@ -113,7 +123,7 @@ function rowFromCampaign({ reviewRow, gateByReview, sendByReview, repliesByKey, 
       : dealStatus || replyStatus || sentStatus;
   return {
     campaign_id: campaignId,
-    review_id: compact(reviewRow.review_id),
+    review_id: reviewId,
     source: compact(reviewRow.source),
     creator: compact(reviewRow.creator),
     offer_sku: compact(reviewRow.offer_sku),
@@ -128,7 +138,7 @@ function rowFromCampaign({ reviewRow, gateByReview, sendByReview, repliesByKey, 
     action_status: actionStatus,
     tracked_free_sample_url: compact(reviewRow.tracked_free_sample_url),
     tracked_order_url: compact(reviewRow.tracked_order_url),
-    attribution_basis: send.review_id ? "review_id" : reply.stage || deal.stage ? "source_creator" : "campaign_generated"
+    attribution_basis: reply.campaign_id ? "reply_campaign_id" : reply.review_id ? "reply_review_id" : send.review_id ? "send_review_id" : reply.stage || deal.stage ? "source_creator" : "campaign_generated"
   };
 }
 
@@ -196,11 +206,15 @@ const fulfillmentRows = await readCsvMaybe("dist/content-fulfillment-queue/fulfi
 const gateByReview = new Map(gateRows.map((row) => [compact(row.review_id), row]));
 const sendByReview = new Map(sendRows.map((row) => [compact(row.review_id), row]));
 const repliesByKey = firstByKey(replyRows);
+const repliesByCampaign = mapBy(replyRows, "campaign_id");
+const repliesByReview = mapBy(replyRows, "review_id");
 const dealsByKey = firstByKey(dealRows);
 const rows = reviewRows.map((reviewRow) => rowFromCampaign({
   reviewRow,
   gateByReview,
   sendByReview,
+  repliesByCampaign,
+  repliesByReview,
   repliesByKey,
   dealsByKey,
   fulfillmentRows

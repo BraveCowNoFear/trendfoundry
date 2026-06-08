@@ -81,8 +81,35 @@ async function listInboxFiles() {
 }
 
 function headerValue(text, name) {
-  const pattern = new RegExp(`^${name}:\\s*(.+)$`, "im");
-  return compact(text.match(pattern)?.[1] || "");
+  const wanted = name.toLowerCase();
+  for (const line of text.split(/\r?\n/)) {
+    const cleaned = line.replace(/^\uFEFF/, "").trim();
+    const separator = cleaned.indexOf(":");
+    if (separator < 0) continue;
+    if (cleaned.slice(0, separator).trim().toLowerCase() === wanted) {
+      return compact(cleaned.slice(separator + 1));
+    }
+  }
+  const knownHeaders = [
+    "Source",
+    "Creator",
+    "Buyer",
+    "From",
+    "Campaign",
+    "Campaign-ID",
+    "Campaign ID",
+    "Review-ID",
+    "Review ID",
+    "Stage",
+    "Summary",
+    "Objection",
+    "Next-Due",
+    "Notes"
+  ];
+  const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\\ /g, "[ -]");
+  const boundary = knownHeaders.map(escapeRegex).join("|");
+  const pattern = new RegExp(`(?:^|\\s)${escapeRegex(name)}:\\s*([\\s\\S]*?)(?=\\s(?:${boundary}):|$)`, "i");
+  return compact(text.replace(/^\uFEFF/, "").match(pattern)?.[1] || "");
 }
 
 function addDays(date, days) {
@@ -143,13 +170,15 @@ function safeId(file) {
 }
 
 function keyFor(row) {
+  const campaign = compact(row.campaign_id);
+  if (campaign) return `campaign:${campaign.toLowerCase()}`;
   return `${compact(row.source).toLowerCase()}:${compact(row.creator).toLowerCase()}`;
 }
 
-function upsert(rows, nextRow, columns) {
-  const key = keyFor(nextRow);
+function upsert(rows, nextRow, columns, keyFn = keyFor) {
+  const key = keyFn(nextRow);
   const normalized = rows.map((row) => Object.fromEntries(columns.map((column) => [column, compact(row[column])])));
-  const index = normalized.findIndex((row) => keyFor(row) === key);
+  const index = normalized.findIndex((row) => keyFn(row) === key);
   if (index >= 0) {
     normalized[index] = { ...normalized[index], ...nextRow };
     return normalized;
@@ -179,6 +208,8 @@ Use a local \`.txt\` or \`.md\` file:
 \`\`\`text
 Source: youtube
 Creator: Creator Name
+Campaign: tf-outreach-01-example
+Review-ID: outreach-01-example
 Stage: replied_needs_response
 Summary: Short safe summary of the reply
 Objection: price_sensitive
@@ -206,9 +237,9 @@ Private local parsed reply log. Do not publish.
 
 ## Parsed Replies
 
-| File | Source | Creator | Stage | Objection | Summary |
-| --- | --- | --- | --- | --- | --- |
-${parsed.map((row) => `| ${row.file} | ${row.source} | ${row.creator.replace(/\|/g, "/")} | ${row.stage} | ${row.objection} | ${row.summary.replace(/\|/g, "/")} |`).join("\n") || "| - | - | - | - | - | No inbox replies parsed. |"}
+| File | Campaign | Review | Source | Creator | Stage | Objection | Summary |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+${parsed.map((row) => `| ${row.file} | ${row.campaign_id || "-"} | ${row.review_id || "-"} | ${row.source} | ${row.creator.replace(/\|/g, "/")} | ${row.stage} | ${row.objection} | ${row.summary.replace(/\|/g, "/")} |`).join("\n") || "| - | - | - | - | - | - | - | No inbox replies parsed. |"}
 
 ## Skipped
 
@@ -238,6 +269,8 @@ for (const file of files) {
   parsed.push({
     reply_id: safeId(file),
     file: path.relative(root, file).replace(/\\/g, "/"),
+    campaign_id: headerValue(text, "Campaign") || headerValue(text, "Campaign-ID") || headerValue(text, "Campaign ID"),
+    review_id: headerValue(text, "Review-ID") || headerValue(text, "Review ID"),
     source,
     creator,
     summary,
@@ -249,7 +282,7 @@ for (const file of files) {
 }
 
 if (parsed.length) {
-  const replyColumns = ["source", "creator", "summary", "objection", "stage", "notes"];
+  const replyColumns = ["source", "creator", "campaign_id", "review_id", "summary", "objection", "stage", "notes"];
   const overrideColumns = ["source", "creator", "stage", "next_due", "notes"];
   let replies = await readCsvMaybe(repliesFile);
   let overrides = await readCsvMaybe(overridesFile);
@@ -257,6 +290,8 @@ if (parsed.length) {
     replies = upsert(replies, {
       source: row.source,
       creator: row.creator,
+      campaign_id: row.campaign_id,
+      review_id: row.review_id,
       summary: row.summary,
       objection: row.objection,
       stage: row.stage,
@@ -293,7 +328,7 @@ const manifest = {
 };
 
 await writeFile(path.join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");
-await writeFile(path.join(outDir, "parsed-replies.csv"), toCsv(parsed, ["reply_id", "file", "source", "creator", "summary", "objection", "stage", "next_due", "notes"]), "utf8");
+await writeFile(path.join(outDir, "parsed-replies.csv"), toCsv(parsed, ["reply_id", "file", "campaign_id", "review_id", "source", "creator", "summary", "objection", "stage", "next_due", "notes"]), "utf8");
 await writeFile(path.join(outDir, "parsed-replies.md"), privateMarkdown(parsed, skipped), "utf8");
 await writeFile(path.join(docsDir, "content-reply-intake.md"), publicDoc({ parsed, skipped }), "utf8");
 

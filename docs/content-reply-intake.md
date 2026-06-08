@@ -1,6 +1,6 @@
 # TrendFoundry Content Reply Intake
 
-Generated: 2026-06-08T17:55:43.916Z
+Generated: 2026-06-08T18:54:04.032Z
 
 This step parses copied creator/buyer replies from ignored `data/content-sales-crm/reply-inbox/` and updates ignored local CRM reply/status files. Private reply text stays in ignored data/dist folders.
 
@@ -18,6 +18,8 @@ Use a local `.txt` or `.md` file:
 ```text
 Source: youtube
 Creator: Creator Name
+Campaign: tf-outreach-01-example
+Review-ID: outreach-01-example
 Stage: replied_needs_response
 Summary: Short safe summary of the reply
 Objection: price_sensitive

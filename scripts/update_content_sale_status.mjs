@@ -72,13 +72,15 @@ async function readCsvMaybe(file) {
 }
 
 function keyFor(row) {
+  const campaign = compact(row.campaign_id);
+  if (campaign) return `campaign:${campaign.toLowerCase()}`;
   return `${compact(row.source).toLowerCase()}:${compact(row.creator).toLowerCase()}`;
 }
 
-function upsert(rows, nextRow, columns) {
-  const key = keyFor(nextRow);
+function upsert(rows, nextRow, columns, keyFn = keyFor) {
+  const key = keyFn(nextRow);
   const normalized = rows.map((row) => Object.fromEntries(columns.map((column) => [column, compact(row[column])])));
-  const index = normalized.findIndex((row) => keyFor(row) === key);
+  const index = normalized.findIndex((row) => keyFn(row) === key);
   if (index >= 0) {
     normalized[index] = { ...normalized[index], ...nextRow };
     return { rows: normalized, action: "updated" };
@@ -93,6 +95,8 @@ const nextDue = compact(argValue("next-due", ""));
 const notes = compact(argValue("notes", ""));
 const summary = compact(argValue("summary", ""));
 const objection = compact(argValue("objection", ""));
+const campaignId = compact(argValue("campaign-id", ""));
+const reviewId = compact(argValue("review-id", ""));
 const replyStage = compact(argValue("reply-stage", stage));
 const replyNotes = compact(argValue("reply-notes", ""));
 
@@ -114,7 +118,7 @@ if (replyStage && !allowedStages.has(replyStage)) {
 await mkdir(privateDir, { recursive: true });
 
 const overrideColumns = ["source", "creator", "stage", "next_due", "notes"];
-const replyColumns = ["source", "creator", "summary", "objection", "stage", "notes"];
+const replyColumns = ["source", "creator", "campaign_id", "review_id", "summary", "objection", "stage", "notes"];
 const overrideRow = {
   source,
   creator,
@@ -132,6 +136,8 @@ if (summary || objection || replyNotes) {
   const replyRow = {
     source,
     creator,
+    campaign_id: campaignId,
+    review_id: reviewId,
     summary,
     objection,
     stage: replyStage,
@@ -148,6 +154,8 @@ const manifest = {
   source,
   creator,
   stage,
+  campaign_id: campaignId,
+  review_id: reviewId,
   next_due: nextDue,
   overrideAction: overrideResult.action,
   overrideCount: overrideResult.rows.length,
