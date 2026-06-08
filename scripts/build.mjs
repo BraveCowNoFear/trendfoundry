@@ -573,9 +573,9 @@ function copyOrderButton(tier, lang = "en", label = "Copy draft", labelZh = "复
 
 const pricingCards = pricingTiers
   .map(
-    (tier) => {
+    (tier, index) => {
       const decision = tierDecisionMeta(tier);
-      return `<article class="tier${tier.featured ? " featured selected" : ""}" data-tier-card="${escapeHtml(tierSlug(tier))}" data-tier-name-en="${escapeHtml(tier.name)}" data-tier-name-zh="${escapeHtml(tier.nameZh)}" data-tier-price="${escapeHtml(tier.price)}" data-tier-cadence-en="${escapeHtml(tier.cadence)}" data-tier-cadence-zh="${escapeHtml(tier.cadenceZh)}" data-tier-best-en="${escapeHtml(tier.bestFor)}" data-tier-best-zh="${escapeHtml(tier.bestForZh)}" data-tier-action-en="${escapeHtml(tier.action)}" data-tier-action-zh="${escapeHtml(tier.actionZh)}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}" data-tier-pack-en="${escapeHtml(decision.packEn)}" data-tier-pack-zh="${escapeHtml(decision.packZh)}" data-tier-delivery-en="${escapeHtml(decision.deliveryEn)}" data-tier-delivery-zh="${escapeHtml(decision.deliveryZh)}" data-tier-route-en="${escapeHtml(decision.routeEn)}" data-tier-route-zh="${escapeHtml(decision.routeZh)}">
+      return `<article class="tier${tier.featured ? " featured selected" : ""}" data-tier-card="${escapeHtml(tierSlug(tier))}" data-tier-index="${index}" data-tier-name-en="${escapeHtml(tier.name)}" data-tier-name-zh="${escapeHtml(tier.nameZh)}" data-tier-price="${escapeHtml(tier.price)}" data-tier-cadence-en="${escapeHtml(tier.cadence)}" data-tier-cadence-zh="${escapeHtml(tier.cadenceZh)}" data-tier-best-en="${escapeHtml(tier.bestFor)}" data-tier-best-zh="${escapeHtml(tier.bestForZh)}" data-tier-action-en="${escapeHtml(tier.action)}" data-tier-action-zh="${escapeHtml(tier.actionZh)}" data-tier-href-en="${escapeHtml(tierOrderHref(tier, "en"))}" data-tier-href-zh="${escapeHtml(tierOrderHref(tier, "zh"))}" data-tier-pack-en="${escapeHtml(decision.packEn)}" data-tier-pack-zh="${escapeHtml(decision.packZh)}" data-tier-delivery-en="${escapeHtml(decision.deliveryEn)}" data-tier-delivery-zh="${escapeHtml(decision.deliveryZh)}" data-tier-route-en="${escapeHtml(decision.routeEn)}" data-tier-route-zh="${escapeHtml(decision.routeZh)}">
   <div>
     ${dual(tier.cadence, tier.cadenceZh, "p", ' class="tier-kicker"')}
     ${dual(tier.name, tier.nameZh, "h3")}
@@ -591,6 +591,20 @@ const pricingCards = pricingTiers
     }
   )
   .join("");
+const pricingRail = `<div class="pricing-rail" role="tablist" aria-label="Pricing plan selector">
+  ${pricingTiers
+    .map(
+      (tier, index) => {
+        const featuredBadge = tier.featured ? `\n    ${dual("Best default", "默认推荐", "em")}` : "";
+        return `<button class="pricing-rail-option${tier.featured ? " active" : ""}" type="button" role="tab" aria-selected="${tier.featured ? "true" : "false"}" data-tier-jump="${escapeHtml(tierSlug(tier))}">
+    <span>${index + 1}</span>
+    <strong>${dual(tier.name, tier.nameZh)}</strong>
+    <small>${escapeHtml(tier.price)} ${dual(tier.cadence, tier.cadenceZh)}</small>${featuredBadge}
+  </button>`;
+      }
+    )
+    .join("")}
+</div>`;
 const defaultPricingTier = pricingTiers.find((tier) => tier.featured) || pricingTiers[0];
 const defaultTierDecision = tierDecisionMeta(defaultPricingTier);
 const pricingChooser = `<div class="pricing-chooser" aria-live="polite">
@@ -2505,14 +2519,24 @@ const html = `<!doctype html>
     </section>
     ${contrastSection}
     ${planningCalculator}
-    <section class="pricing" id="pricing" aria-label="Pricing tiers">
+    <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
-        ${dual("Pricing", "定价", "p", ' class="section-label"')}
-        ${dual("Choose the depth that matches your publishing cadence.", "按你的更新节奏选择交付深度。", "h2")}
-        ${dual("Every tier is built around the same promise: fewer weak topics, faster planning, and a clearer recording queue.", "每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。", "p")}
+        <div>
+          ${dual("Pricing Studio", "定价工作台", "p", ' class="section-label"')}
+          ${dual("Pick the publishing cadence.", "选择你的发布节奏。", "h2")}
+          ${dual("Treat pricing like choosing a device configuration: pick the cadence, confirm the delivery route, then send the order draft.", "把定价当成选择产品配置：先定节奏，再确认交付路径，最后发送下单草稿。", "p")}
+        </div>
+        <div class="pricing-steps" aria-hidden="true">
+          <span class="active">1</span><small>${dual("Choose plan", "选择方案")}</small>
+          <span>2</span><small>${dual("Confirm", "确认")}</small>
+          <span>3</span><small>${dual("Complete", "完成")}</small>
+        </div>
       </div>
-      <div class="tier-grid">${pricingCards}</div>
-      ${pricingChooser}
+      ${pricingRail}
+      <div class="pricing-workbench">
+        <div class="tier-grid">${pricingCards}</div>
+        ${pricingChooser}
+      </div>
     </section>
     <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
       <div class="delivery-copy">
@@ -2677,14 +2701,24 @@ const zhHtml = `<!doctype html>
     </section>
     ${zhContrastSection}
     ${zhPlanningCalculator}
-    <section class="pricing" id="pricing" aria-label="Pricing tiers">
+    <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
-        <p class="section-label">定价</p>
-        <h2>按你的更新节奏选择交付深度。</h2>
-        <p>每一档都围绕同一个价值：少踩弱选题、更快规划、录制队列更清楚。</p>
+        <div>
+          <p class="section-label">定价工作台</p>
+          <h2>选择你的发布节奏。</h2>
+          <p>把定价当成选择产品配置：先定节奏，再确认交付路径，最后发送下单草稿。</p>
+        </div>
+        <div class="pricing-steps" aria-hidden="true">
+          <span class="active">1</span><small>选择方案</small>
+          <span>2</span><small>确认</small>
+          <span>3</span><small>完成</small>
+        </div>
       </div>
-      <div class="tier-grid">${pricingCards}</div>
-      ${pricingChooser}
+      ${pricingRail}
+      <div class="pricing-workbench">
+        <div class="tier-grid">${pricingCards}</div>
+        ${pricingChooser}
+      </div>
     </section>
     <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
       <div class="delivery-copy">
@@ -5236,10 +5270,147 @@ main {
   color: var(--muted);
   line-height: 1.5;
 }
+.pricing-studio {
+  gap: 20px;
+  padding-top: clamp(28px, 5vw, 58px);
+  border-top: 1px solid var(--line);
+}
+.pricing-studio .section-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+.pricing-studio .section-head h2 {
+  max-width: 880px;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.pricing-steps {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 8px 12px;
+  align-items: center;
+  min-width: 300px;
+  padding-top: 8px;
+}
+.pricing-steps > span {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(17, 17, 20, 0.14);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--muted);
+  font-weight: 850;
+}
+.pricing-steps > span.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+.pricing-steps small {
+  grid-row: 2;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  text-align: center;
+}
+.pricing-rail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid rgba(17, 17, 20, 0.16);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 16px 44px rgba(17, 17, 20, 0.06);
+  overflow: hidden;
+}
+.pricing-rail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0 var(--pricing-progress, 66%), rgba(17,17,20,0.12) var(--pricing-progress, 66%) 100%);
+}
+.pricing-rail-option {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 14px;
+  align-items: center;
+  min-height: 86px;
+  border: 0;
+  border-right: 1px solid rgba(17, 17, 20, 0.1);
+  padding: 16px 18px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 180ms ease, box-shadow 180ms ease;
+}
+.pricing-rail-option:last-child {
+  border-right: 0;
+}
+.pricing-rail-option > span {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(17, 17, 20, 0.18);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+.pricing-rail-option strong {
+  font-size: 19px;
+  line-height: 1.1;
+}
+.pricing-rail-option small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.pricing-rail-option em {
+  grid-column: 2;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 820;
+}
+.pricing-rail-option:hover,
+.pricing-rail-option:focus-visible,
+.pricing-rail-option.active {
+  background: rgba(0, 113, 227, 0.05);
+}
+.pricing-rail-option.active {
+  box-shadow: inset 0 0 0 2px rgba(0, 113, 227, 0.84);
+}
+.pricing-rail-option.active > span {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.pricing-workbench {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.46fr) minmax(0, 0.54fr);
+  gap: clamp(18px, 4vw, 54px);
+  align-items: start;
+}
 .tier-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+}
+.pricing-studio .tier-grid {
+  grid-template-columns: 1fr;
 }
 .tier {
   display: grid;
@@ -5258,6 +5429,37 @@ main {
   border-color: #b8c8d9;
   box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
 }
+.pricing-studio .tier {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 134px;
+  gap: 12px 18px;
+  padding: 20px;
+}
+.pricing-studio .tier > div:first-child {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 3px 14px;
+  align-items: center;
+}
+.pricing-studio .tier > div:first-child > * {
+  grid-column: 2;
+}
+.pricing-studio .tier > div:first-child::before {
+  content: "";
+  grid-row: 1 / span 4;
+  width: 58px;
+  height: 58px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(0,113,227,0.15), transparent 32%),
+    linear-gradient(180deg, #fff, #f4f6f9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 12px 28px rgba(17, 17, 20, 0.06);
+}
+.pricing-studio .tier:hover {
+  transform: translateX(3px);
+}
 .tier.featured {
   border-color: rgba(0, 113, 227, 0.38);
   background: linear-gradient(180deg, #ffffff, #f5faff);
@@ -5265,6 +5467,11 @@ main {
 .tier.selected {
   border-color: rgba(0, 113, 227, 0.58);
   box-shadow: inset 0 0 0 1px rgba(0, 113, 227, 0.36), 0 22px 50px rgba(0, 113, 227, 0.12);
+}
+.pricing-studio .tier.selected {
+  background:
+    linear-gradient(180deg, #fff, #f7fbff),
+    radial-gradient(circle at 8% 12%, rgba(0,113,227,0.08), transparent 28%);
 }
 .tier-kicker {
   margin: 0 0 8px;
@@ -5285,6 +5492,18 @@ main {
   line-height: 1;
   font-weight: 850;
 }
+.pricing-studio .tier-price {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  margin: 0;
+  text-align: right;
+  font-size: 36px;
+}
+.pricing-studio .tier-price::after {
+  content: " →";
+  color: var(--accent);
+  font-size: 22px;
+}
 .tier p:not(.tier-kicker):not(.tier-price) {
   margin: 0;
   color: var(--muted);
@@ -5295,6 +5514,14 @@ main {
   padding-left: 18px;
   color: var(--muted);
 }
+.pricing-studio .tier ul {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px 14px;
+  padding-left: 18px;
+  font-size: 13px;
+}
 .tier-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -5302,6 +5529,10 @@ main {
 }
 .tier-actions .action {
   width: 100%;
+}
+.pricing-studio .tier-actions {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .tier-select-action {
   border: 0;
@@ -5327,9 +5558,42 @@ main {
   box-shadow: var(--shadow);
   transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
+.pricing-studio .pricing-chooser {
+  position: sticky;
+  top: 92px;
+  grid-template-columns: 1fr;
+  min-height: 520px;
+  margin-top: 0;
+  border-color: rgba(17, 17, 20, 0.14);
+  border-radius: 8px;
+  padding: clamp(20px, 3vw, 34px);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.96), rgba(245,248,252,0.9)),
+    radial-gradient(circle at 92% 8%, rgba(0,113,227,0.16), transparent 30%);
+  box-shadow: 0 32px 86px rgba(17, 17, 20, 0.13);
+  overflow: hidden;
+}
+.pricing-studio .pricing-chooser::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 38%, rgba(255,255,255,0.66) 48%, transparent 58%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 32px);
+  opacity: 0.38;
+}
+.pricing-studio .pricing-chooser > * {
+  position: relative;
+  z-index: 1;
+}
 .pricing-chooser.is-updating {
   border-color: rgba(0, 113, 227, 0.34);
   box-shadow: 0 18px 42px rgba(0, 113, 227, 0.11);
+}
+.pricing-studio .pricing-chooser.is-updating {
+  transform: translateY(-2px);
+  box-shadow: 0 36px 92px rgba(0, 113, 227, 0.13);
 }
 .pricing-chooser-label {
   margin: 0 0 6px;
@@ -5344,6 +5608,10 @@ main {
   font-size: 24px;
   line-height: 1.12;
 }
+.pricing-studio .pricing-chooser h3 {
+  font-size: clamp(32px, 4vw, 48px);
+  letter-spacing: 0;
+}
 .pricing-chooser p:not(.pricing-chooser-label) {
   max-width: 620px;
   margin: 0;
@@ -5356,6 +5624,12 @@ main {
   gap: 8px;
   margin-top: 16px;
 }
+.pricing-studio .pricing-configurator {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 26px;
+  border-top: 1px solid rgba(17, 17, 20, 0.14);
+}
 .pricing-configurator > div {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -5367,11 +5641,30 @@ main {
   padding: 10px;
   background: rgba(255,255,255,0.68);
 }
+.pricing-studio .pricing-configurator > div {
+  grid-template-columns: 34px minmax(0, 1fr);
+  min-height: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 0;
+  padding: 16px 0;
+  background: transparent;
+}
 .pricing-configurator span {
   grid-row: span 2;
   color: var(--accent);
   font-size: 11px;
   font-weight: 900;
+}
+.pricing-studio .pricing-configurator span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
 }
 .pricing-configurator strong {
   color: var(--ink);
@@ -5386,10 +5679,23 @@ main {
   gap: 10px;
   justify-items: end;
 }
+.pricing-studio .pricing-chooser-action {
+  align-self: end;
+  justify-items: stretch;
+  margin-top: 10px;
+}
 .pricing-chooser-action strong {
   color: var(--ink);
   font-size: 26px;
   line-height: 1;
+}
+.pricing-studio .pricing-chooser-action strong {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--accent);
+  font-size: clamp(42px, 6vw, 64px);
 }
 .pricing-chooser-action small {
   color: var(--muted);
@@ -5611,6 +5917,11 @@ main {
   color: var(--muted);
   font-size: 14px;
   font-weight: 750;
+}
+.pricing-studio .pricing-chooser-action .action {
+  justify-content: center;
+  min-height: 54px;
+  border-radius: 8px;
 }
 .deliverable-lines {
   display: grid;
@@ -7990,8 +8301,60 @@ input[type="email"] {
     border-radius: 14px;
     padding: 14px;
   }
+  .pricing-studio .section-head {
+    grid-template-columns: 1fr;
+  }
+  .pricing-studio .section-head h2 {
+    font-size: clamp(34px, 11vw, 52px);
+  }
+  .pricing-steps {
+    min-width: 0;
+    width: 100%;
+    justify-content: start;
+  }
+  .pricing-rail {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(230px, 78vw);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pricing-rail::-webkit-scrollbar {
+    display: none;
+  }
+  .pricing-rail-option {
+    scroll-snap-align: start;
+  }
+  .pricing-workbench {
+    grid-template-columns: 1fr;
+  }
   .pricing-chooser h3 {
     font-size: 22px;
+  }
+  .pricing-studio .pricing-chooser {
+    position: relative;
+    top: auto;
+    min-height: 0;
+    border-radius: 8px;
+  }
+  .pricing-studio .tier-grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    overflow: visible;
+    padding: 0;
+  }
+  .pricing-studio .tier {
+    min-height: 0;
+    scroll-snap-align: none;
+  }
+  .pricing-studio .tier ul {
+    grid-template-columns: 1fr;
+  }
+  .pricing-studio .tier-price {
+    font-size: 30px;
   }
   .pricing-configurator {
     grid-template-columns: 1fr;
@@ -8522,6 +8885,7 @@ const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
+const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
 const selectedTierName = document.querySelector("#selected-tier-name");
 const selectedTierCopy = document.querySelector("#selected-tier-copy");
 const selectedTierPrice = document.querySelector("#selected-tier-price");
@@ -8531,6 +8895,7 @@ const selectedTierPack = document.querySelector("#selected-tier-pack");
 const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
+const pricingStudioNode = document.querySelector(".pricing-studio");
 const localNavNode = document.querySelector(".local-nav");
 const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
 const galleryPositionNode = document.querySelector("#gallery-position");
@@ -8579,6 +8944,11 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (!card) return;
   selectedTierCard = card;
   for (const tierCard of tierCards) tierCard.classList.toggle("selected", tierCard === card);
+  for (const railButton of tierRailButtons) {
+    const active = railButton.dataset.tierJump === card.dataset.tierCard;
+    railButton.classList.toggle("active", active);
+    railButton.setAttribute("aria-selected", active ? "true" : "false");
+  }
   for (const button of tierSelectButtons) {
     const active = button.dataset.tierSelect === card.dataset.tierCard;
     button.classList.toggle("primary", active);
@@ -8595,6 +8965,11 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (selectedTierCta) {
     selectedTierCta.textContent = card.dataset["tierAction" + suffix] || selectedTierCta.textContent;
     selectedTierCta.setAttribute("href", card.dataset["tierHref" + suffix] || selectedTierCta.getAttribute("href") || "#");
+  }
+  if (pricingStudioNode) {
+    const index = Number(card.dataset.tierIndex || 0);
+    const progress = Math.round(((index + 1) / Math.max(1, tierCards.length)) * 100);
+    pricingStudioNode.style.setProperty("--pricing-progress", progress + "%");
   }
   if (pricingChooserNode) {
     pricingChooserNode.classList.remove("is-updating");
@@ -8791,6 +9166,26 @@ for (const button of tierSelectButtons) {
   button.addEventListener("click", () => {
     const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierSelect);
     updateSelectedTier(card, true);
+  });
+}
+for (const button of tierRailButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card, true);
+  });
+  if (finePointer) button.addEventListener("pointerenter", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card);
+  });
+}
+if (pricingStudioNode) {
+  pricingStudioNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const currentIndex = Math.max(0, tierCards.indexOf(selectedTierCard));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + tierCards.length) % tierCards.length;
+    event.preventDefault();
+    updateSelectedTier(tierCards[nextIndex], true);
   });
 }
 

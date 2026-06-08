@@ -38,6 +38,7 @@ const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
+const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
 const selectedTierName = document.querySelector("#selected-tier-name");
 const selectedTierCopy = document.querySelector("#selected-tier-copy");
 const selectedTierPrice = document.querySelector("#selected-tier-price");
@@ -47,6 +48,7 @@ const selectedTierPack = document.querySelector("#selected-tier-pack");
 const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
+const pricingStudioNode = document.querySelector(".pricing-studio");
 const localNavNode = document.querySelector(".local-nav");
 const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
 const galleryPositionNode = document.querySelector("#gallery-position");
@@ -95,6 +97,11 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (!card) return;
   selectedTierCard = card;
   for (const tierCard of tierCards) tierCard.classList.toggle("selected", tierCard === card);
+  for (const railButton of tierRailButtons) {
+    const active = railButton.dataset.tierJump === card.dataset.tierCard;
+    railButton.classList.toggle("active", active);
+    railButton.setAttribute("aria-selected", active ? "true" : "false");
+  }
   for (const button of tierSelectButtons) {
     const active = button.dataset.tierSelect === card.dataset.tierCard;
     button.classList.toggle("primary", active);
@@ -111,6 +118,11 @@ function updateSelectedTier(card, scrollToCard = false) {
   if (selectedTierCta) {
     selectedTierCta.textContent = card.dataset["tierAction" + suffix] || selectedTierCta.textContent;
     selectedTierCta.setAttribute("href", card.dataset["tierHref" + suffix] || selectedTierCta.getAttribute("href") || "#");
+  }
+  if (pricingStudioNode) {
+    const index = Number(card.dataset.tierIndex || 0);
+    const progress = Math.round(((index + 1) / Math.max(1, tierCards.length)) * 100);
+    pricingStudioNode.style.setProperty("--pricing-progress", progress + "%");
   }
   if (pricingChooserNode) {
     pricingChooserNode.classList.remove("is-updating");
@@ -307,6 +319,26 @@ for (const button of tierSelectButtons) {
   button.addEventListener("click", () => {
     const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierSelect);
     updateSelectedTier(card, true);
+  });
+}
+for (const button of tierRailButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card, true);
+  });
+  if (finePointer) button.addEventListener("pointerenter", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card);
+  });
+}
+if (pricingStudioNode) {
+  pricingStudioNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    const currentIndex = Math.max(0, tierCards.indexOf(selectedTierCard));
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const nextIndex = (currentIndex + delta + tierCards.length) % tierCards.length;
+    event.preventDefault();
+    updateSelectedTier(tierCards[nextIndex], true);
   });
 }
 
