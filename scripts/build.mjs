@@ -2458,15 +2458,16 @@ const html = `<!doctype html>
   ${localNav}
   ${sampleDrawer}
   <main>
-    <section class="offer">
+    <section class="offer product-path" aria-label="How TrendFoundry turns signals into packs">
       <div>
-        ${dual("Weekly pipeline", "周更情报", "p", ' class="section-label"')}
-        ${dual("Fresh AI and developer video opportunities, ready to turn into scripts.", "每周拿到可核验、可录制的 AI/开发者视频选题。", "h2")}
-        ${dual("Each issue gives you 12 ranked ideas with source links, Bilibili and YouTube title angles, outlines, risk notes, CSV, and one ready-to-record script.", "每期包含 12 条排序后的机会、来源链接、B 站和 YouTube 标题角度、录制大纲、风险备注、CSV，以及 1 份可直接录制的脚本。", "p")}
+        ${dual("How it works", "交付路径", "p", ' class="section-label"')}
+        ${dual("Public signals go in. A recordable pack comes out.", "输入公开信号，输出可录制选题包。", "h2")}
+        ${dual("TrendFoundry is not another feed. It filters noisy public sources into a small set of ideas that already carry proof, angle, risk, and a first script pass.", "TrendFoundry 不是另一个信息流。它把嘈杂公开来源筛成少量选题，每个选题都带来源证据、创作角度、风险备注和第一版脚本。", "p")}
       </div>
-      <div class="price">
-        <span>$19/mo</span>
-        <small><a href="${issueOrderHref}">${dual("GitHub request", "GitHub 申请")}</a> / <a href="${orderHref}">${dual("email order", "邮件下单")}</a></small>
+      <div class="path-steps" aria-label="Delivery path">
+        <span><strong>${dual("Signal", "信号")}</strong>${dual("GitHub, YouTube, Bilibili, HN, arXiv", "GitHub、YouTube、Bilibili、HN、arXiv")}</span>
+        <span><strong>${dual("Filter", "筛选")}</strong>${dual("Score fit, proof, novelty, and risk", "按匹配度、证据、新鲜度和风险评分")}</span>
+        <span><strong>${dual("Pack", "打包")}</strong>${dual("Brief, CSV, risk notes, recording script", "简报、CSV、风险备注、录制脚本")}</span>
       </div>
     </section>
     ${fitStudio}
@@ -2633,15 +2634,16 @@ const zhHtml = `<!doctype html>
   ${zhLocalNav}
   ${zhSampleDrawer}
   <main>
-    <section class="offer">
+    <section class="offer product-path" aria-label="How TrendFoundry turns signals into packs">
       <div>
-        <p class="section-label">周更情报</p>
-        <h2>每周拿到可核验、可录制的 AI/开发者视频选题。</h2>
-        <p>每期包含 12 条排序后的机会、来源链接、B 站和 YouTube 标题角度、录制大纲、风险备注、CSV，以及 1 份可直接录制的脚本。</p>
+        <p class="section-label">交付路径</p>
+        <h2>输入公开信号，输出可录制选题包。</h2>
+        <p>TrendFoundry 不是另一个信息流。它把嘈杂公开来源筛成少量选题，每个选题都带来源证据、创作角度、风险备注和第一版脚本。</p>
       </div>
-      <div class="price">
-        <span>$19/mo</span>
-        <small><a href="${issueOrderHref}">GitHub 申请</a> / <a href="${orderHref}">邮件下单</a></small>
+      <div class="path-steps" aria-label="交付路径">
+        <span><strong>信号</strong>GitHub、YouTube、Bilibili、HN、arXiv</span>
+        <span><strong>筛选</strong>按匹配度、证据、新鲜度和风险评分</span>
+        <span><strong>打包</strong>简报、CSV、风险备注、录制脚本</span>
       </div>
     </section>
     ${fitStudio}
@@ -4115,6 +4117,43 @@ main {
 }
 .offer h2 { max-width: 780px; margin: 0 0 8px; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.08; }
 .offer p { margin: 0; color: var(--muted); }
+.product-path {
+  grid-template-columns: minmax(0, 0.88fr) minmax(360px, 0.72fr);
+  align-items: stretch;
+  padding-bottom: 42px;
+}
+.product-path h2 {
+  max-width: 760px;
+}
+.product-path p:not(.section-label) {
+  max-width: 720px;
+  line-height: 1.5;
+}
+.path-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  min-width: 0;
+}
+.path-steps span {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 56px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.72);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+  box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
+}
+.path-steps strong {
+  color: var(--ink);
+  font-size: 14px;
+}
 .price {
   text-align: right;
   color: var(--accent-2);
@@ -8920,6 +8959,15 @@ input[type="email"] {
   .language-switch { width: 100%; }
   .language-option { flex: 1 1 0; }
   .order-steps li { grid-template-columns: 1fr; }
+  .product-path {
+    grid-template-columns: 1fr;
+    padding-bottom: 32px;
+  }
+  .path-steps span {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    min-height: 0;
+  }
   .mail-drafts pre { min-height: 180px; }
   h1 {
     width: 100%;
