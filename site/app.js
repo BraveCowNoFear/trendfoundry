@@ -37,6 +37,8 @@ const fitStrengthNode = document.querySelector("#fit-strength");
 const fitVelocityNode = document.querySelector("#fit-velocity");
 const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
+const fitPreviewCopyNode = document.querySelector("#fit-preview-copy");
+const fitMatrixColumns = [...document.querySelectorAll("[data-matrix-column]")];
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
 const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
@@ -152,12 +154,16 @@ function activateFitPersona(button, scrollToButton = false) {
     window.requestAnimationFrame(() => fitDeviceNode.classList.add("is-switching"));
     window.setTimeout(() => fitDeviceNode.classList.remove("is-switching"), 300);
   }
+  for (const column of fitMatrixColumns) {
+    column.classList.toggle("active", column.dataset.matrixColumn === (button.dataset.fitPersona || ""));
+  }
   if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
   if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
   if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
   if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";
   if (fitSignalNode) fitSignalNode.textContent = button.dataset["fitSignal" + suffix] || "";
-  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitStrength" + suffix] || "";
+  if (fitPreviewCopyNode) fitPreviewCopyNode.textContent = button.dataset["fitCopy" + suffix] || "";
+  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitRule" + suffix] || "";
   if (fitVelocityNode) fitVelocityNode.textContent = button.dataset["fitVelocity" + suffix] || "";
   if (fitProgressLabel) fitProgressLabel.textContent = (button.dataset.fitProgress || "72") + "%";
   if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");

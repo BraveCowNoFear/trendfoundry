@@ -226,6 +226,10 @@ const fitPersonas = [
     eyebrowZh: "包 01",
     labelEn: "Buyer Content Pack",
     labelZh: "买家内容包",
+    shortEn: "Content",
+    shortZh: "内容",
+    ruleEn: "For publishing",
+    ruleZh: "用于发布",
     titleEn: "Educate and convert buyers with proof-first content.",
     titleZh: "用证据优先的内容教育并转化买家。",
     copyEn: "The same market signal becomes a buyer-facing topic, proof card, hook, and script seed.",
@@ -247,6 +251,10 @@ const fitPersonas = [
     eyebrowZh: "包 02",
     labelEn: "Outreach Pack",
     labelZh: "外联回复包",
+    shortEn: "Outreach",
+    shortZh: "外联",
+    ruleEn: "For replies",
+    ruleZh: "用于回复",
     titleEn: "Turn the signal into a sharper outreach angle.",
     titleZh: "把信号变成更锐利的外联角度。",
     copyEn: "For teams that need a timely reason to contact creators, operators, or niche buyers.",
@@ -268,6 +276,10 @@ const fitPersonas = [
     eyebrowZh: "包 03",
     labelEn: "Thought Leadership Pack",
     labelZh: "观点领导力包",
+    shortEn: "Leadership",
+    shortZh: "观点",
+    ruleEn: "For POV",
+    ruleZh: "用于观点",
     titleEn: "Shape the proof into an original perspective.",
     titleZh: "把证据塑造成一个原创观点。",
     copyEn: "Best for deep-tech teams that want technical novelty, caveats, and a defensible narrative.",
@@ -313,9 +325,47 @@ const fitPipelineColumns = fitPipelineStages
       <span></span>
     </div>`)
   .join("");
+const fitMatrixRows = [
+  {
+    labelEn: "Signal summary",
+    labelZh: "信号摘要",
+    packs: ["youtube", "bilibili", "deeptech"]
+  },
+  {
+    labelEn: "Source proof",
+    labelZh: "来源证据",
+    packs: ["youtube", "bilibili", "deeptech"]
+  },
+  {
+    labelEn: "Publishing angles",
+    labelZh: "发布角度",
+    packs: ["youtube"]
+  },
+  {
+    labelEn: "Reply angle",
+    labelZh: "回复角度",
+    packs: ["bilibili"]
+  },
+  {
+    labelEn: "POV claim",
+    labelZh: "观点主张",
+    packs: ["deeptech"]
+  }
+];
+const fitMatrixHeader = fitPersonas
+  .map(persona => `<span data-matrix-column="${escapeHtml(persona.id)}" class="${persona.id === defaultFitPersona.id ? "active" : ""}" data-i18n-en="${escapeHtml(persona.shortEn)}" data-i18n-zh="${escapeHtml(persona.shortZh)}">${escapeHtml(persona.shortEn)}</span>`)
+  .join("");
+const fitMatrixBody = fitMatrixRows
+  .map(row => `<div class="fit-matrix-row">
+      <strong data-i18n-en="${escapeHtml(row.labelEn)}" data-i18n-zh="${escapeHtml(row.labelZh)}">${escapeHtml(row.labelEn)}</strong>
+      ${fitPersonas.map(persona => `<span data-matrix-column="${escapeHtml(persona.id)}" class="${persona.id === defaultFitPersona.id ? "active" : ""}">${row.packs.includes(persona.id) ? "✓" : "–"}</span>`).join("")}
+    </div>`)
+  .join("");
 const fitPersonaButtons = fitPersonas
   .map((persona, index) => `<button class="fit-persona${index === 0 ? " active" : ""}" type="button" data-fit-persona="${escapeHtml(persona.id)}" aria-pressed="${index === 0 ? "true" : "false"}"
     data-fit-pack-en="${escapeHtml(persona.labelEn)}" data-fit-pack-zh="${escapeHtml(persona.labelZh)}"
+    data-fit-short-en="${escapeHtml(persona.shortEn)}" data-fit-short-zh="${escapeHtml(persona.shortZh)}"
+    data-fit-rule-en="${escapeHtml(persona.ruleEn)}" data-fit-rule-zh="${escapeHtml(persona.ruleZh)}"
     data-fit-title-en="${escapeHtml(persona.titleEn)}" data-fit-title-zh="${escapeHtml(persona.titleZh)}"
     data-fit-copy-en="${escapeHtml(persona.copyEn)}" data-fit-copy-zh="${escapeHtml(persona.copyZh)}"
     data-fit-kit-en="${escapeHtml(persona.kitEn)}" data-fit-kit-zh="${escapeHtml(persona.kitZh)}"
@@ -329,13 +379,14 @@ const fitPersonaButtons = fitPersonas
     data-fit-url="${escapeHtml(persona.item?.url || "./issues/latest.html")}">
       <span data-i18n-en="${escapeHtml(persona.eyebrowEn)}" data-i18n-zh="${escapeHtml(persona.eyebrowZh)}">${escapeHtml(persona.eyebrowEn)}</span>
       <strong data-i18n-en="${escapeHtml(persona.labelEn)}" data-i18n-zh="${escapeHtml(persona.labelZh)}">${escapeHtml(persona.labelEn)}</strong>
+      <small data-i18n-en="${escapeHtml(persona.ruleEn)}" data-i18n-zh="${escapeHtml(persona.ruleZh)}">${escapeHtml(persona.ruleEn)}</small>
     </button>`)
   .join("");
-const fitStudio = `<section class="fit-studio" id="fit-studio" aria-label="Creator fit studio">
+const fitStudio = `<section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
       <div class="fit-copy">
-        ${dual("Signal Studio", "信号工作室", "p", ' class="section-label"')}
-        ${dual("One signal. Many product packs.", "一条信号，多种产品包。", "h2")}
-        ${dual("Choose how you sell. TrendFoundry reframes the same public proof into buyer content, outreach, or thought leadership without making the buyer rebuild the research.", "选择你的销售方式。TrendFoundry 会把同一条公开证据重组为买家内容、外联回复或观点领导力，而不是让买家重新做研究。", "p")}
+        ${dual("Product packs", "产品分法", "p", ' class="section-label"')}
+        ${dual("One signal, three packages.", "一条信号，三种交付包。", "h2")}
+        ${dual("Pick by the job you need done: publish content, start replies, or shape a point of view. The source proof stays the same; the packaging changes.", "按你要完成的工作来选：发布内容、发起回复，或形成观点。来源证据相同，交付包装不同。", "p")}
         <div class="fit-personas" aria-label="Product pack modes">${fitPersonaButtons}</div>
       </div>
       <div class="fit-device" data-fit-device="${escapeHtml(defaultFitPersona.id)}" style="--fit-progress:${escapeHtml(defaultFitPersona.progress)}%">
@@ -343,22 +394,24 @@ const fitStudio = `<section class="fit-studio" id="fit-studio" aria-label="Creat
         <div class="fit-device-screen">
           <div class="fit-console-head">
             <div>
-              <p class="fit-device-label" data-i18n-en="Signal Studio" data-i18n-zh="信号工作室">Signal Studio</p>
-              <strong><span data-i18n-en="Reframing to" data-i18n-zh="正在重组为">Reframing to</span> <b id="fit-title" data-i18n-en="${escapeHtml(defaultFitPersona.labelEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.labelZh)}">${escapeHtml(defaultFitPersona.labelEn)}</b></strong>
+              <p class="fit-device-label" data-i18n-en="What's included" data-i18n-zh="包含什么">What's included</p>
+              <strong><span data-i18n-en="Selected" data-i18n-zh="已选择">Selected</span> <b id="fit-title" data-i18n-en="${escapeHtml(defaultFitPersona.labelEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.labelZh)}">${escapeHtml(defaultFitPersona.labelEn)}</b></strong>
             </div>
             <span class="fit-live"><i></i><span data-i18n-en="Live" data-i18n-zh="实时">Live</span></span>
           </div>
-          <div class="fit-progress" aria-hidden="true"><span></span><em id="fit-progress-label">${escapeHtml(defaultFitPersona.progress)}%</em></div>
-          <div class="fit-workbench">
-            <ul class="fit-source-list" aria-label="Source lanes">${fitSourceRows}</ul>
-            <div class="fit-pipeline" aria-label="Signal pipeline">${fitPipelineColumns}</div>
-            <a class="fit-signal-card" id="fit-signal-link" href="${escapeHtml(defaultFitPersona.item?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">
-              <span id="fit-source">${escapeHtml(sourceLabel(defaultFitPersona.item || {}))}</span>
-              <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}" data-i18n-zh="${escapeHtml(defaultFitPersona.item ? (defaultFitPersona.item.deliverables?.bilibiliTitles?.[0] || defaultFitPersona.item.title) : "已排序创作者机会")}">${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}</strong>
-              <em id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.strengthEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.strengthZh)}">${escapeHtml(defaultFitPersona.strengthEn)}</em>
-              <small aria-hidden="true"></small>
-            </a>
+          <div class="fit-matrix" aria-label="Product pack inclusion matrix">
+            <div class="fit-matrix-head">
+              <strong data-i18n-en="Item" data-i18n-zh="项目">Item</strong>
+              ${fitMatrixHeader}
+            </div>
+            ${fitMatrixBody}
           </div>
+          <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="${escapeHtml(defaultFitPersona.item?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">
+            <span id="fit-source">${escapeHtml(sourceLabel(defaultFitPersona.item || {}))}</span>
+            <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}" data-i18n-zh="${escapeHtml(defaultFitPersona.item ? (defaultFitPersona.item.deliverables?.bilibiliTitles?.[0] || defaultFitPersona.item.title) : "已排序创作者机会")}">${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}</strong>
+            <p id="fit-preview-copy" data-i18n-en="${escapeHtml(defaultFitPersona.copyEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.copyZh)}">${escapeHtml(defaultFitPersona.copyEn)}</p>
+            <em id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.ruleEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.ruleZh)}">${escapeHtml(defaultFitPersona.ruleEn)}</em>
+          </a>
           <div class="fit-telemetry" aria-label="Signal studio summary">
             <span><strong data-i18n-en="Pack kit" data-i18n-zh="交付组件">Pack kit</strong><small id="fit-kit" data-i18n-en="${escapeHtml(defaultFitPersona.kitEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.kitZh)}">${escapeHtml(defaultFitPersona.kitEn)}</small></span>
             <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="${escapeHtml(defaultFitPersona.cadenceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.cadenceZh)}">${escapeHtml(defaultFitPersona.cadenceEn)}</small></span>
@@ -4248,15 +4301,19 @@ main {
   font-size: 15px;
   line-height: 1.2;
 }
+.fit-persona small {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.25;
+}
 .fit-device {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 20px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,0.94), rgba(247,248,250,0.82)),
-    #fff;
-  box-shadow: 0 36px 90px rgba(17, 17, 20, 0.12);
+  background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(247,248,250,0.86));
+  box-shadow: 0 34px 86px rgba(17, 17, 20, 0.08);
   transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
 }
 .fit-device.is-switching {
@@ -4265,22 +4322,13 @@ main {
   box-shadow: 0 40px 96px rgba(0, 113, 227, 0.14);
 }
 .fit-device::before {
-  content: "";
-  position: absolute;
-  inset: -35% -18% auto auto;
-  width: 48%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 113, 227, 0.16), transparent 62%);
-  filter: blur(2px);
-  opacity: 0.9;
-  pointer-events: none;
+  display: none;
 }
 .fit-device[data-fit-device="bilibili"]::before {
-  background: radial-gradient(circle, rgba(255, 98, 0, 0.14), transparent 62%);
+  display: none;
 }
 .fit-device[data-fit-device="deeptech"]::before {
-  background: radial-gradient(circle, rgba(22, 163, 127, 0.14), transparent 62%);
+  display: none;
 }
 .fit-device-bar {
   position: relative;
@@ -4301,8 +4349,8 @@ main {
 .fit-device-screen {
   position: relative;
   display: grid;
-  gap: 16px;
-  min-height: 520px;
+  gap: 14px;
+  min-height: 430px;
   padding: clamp(18px, 3vw, 30px);
 }
 .fit-device-label {
@@ -4373,6 +4421,59 @@ main {
   font-size: 11px;
   font-style: normal;
   font-weight: 800;
+}
+.fit-matrix {
+  display: grid;
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.7);
+}
+.fit-matrix-head,
+.fit-matrix-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) repeat(3, minmax(74px, 0.48fr));
+  align-items: center;
+}
+.fit-matrix-head {
+  min-height: 52px;
+  border-bottom: 1px solid rgba(17,17,20,0.08);
+  color: var(--ink);
+  font-weight: 850;
+}
+.fit-matrix-row {
+  min-height: 48px;
+  border-bottom: 1px solid rgba(17,17,20,0.06);
+}
+.fit-matrix-row:last-child {
+  border-bottom: 0;
+}
+.fit-matrix strong,
+.fit-matrix span {
+  min-width: 0;
+  padding: 0 14px;
+}
+.fit-matrix strong {
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.25;
+}
+.fit-matrix span {
+  display: grid;
+  min-height: inherit;
+  place-items: center;
+  border-left: 1px solid rgba(17,17,20,0.05);
+  color: rgba(17,17,20,0.38);
+  font-size: 15px;
+  font-weight: 850;
+}
+.fit-matrix-head span {
+  color: var(--muted);
+  font-size: 13px;
+}
+.fit-matrix span.active {
+  background: rgba(0, 113, 227, 0.055);
+  color: var(--accent);
 }
 .fit-workbench {
   position: relative;
@@ -4501,7 +4602,7 @@ main {
   align-self: center;
   display: grid;
   gap: 10px;
-  min-height: 176px;
+  min-height: 152px;
   border: 1px solid rgba(0, 113, 227, 0.34);
   border-radius: 12px;
   padding: 16px;
@@ -4527,9 +4628,15 @@ main {
 .fit-signal-card strong {
   max-width: 720px;
   color: var(--ink);
-  font-size: clamp(17px, 1.65vw, 23px);
-  line-height: 1.12;
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.16;
   overflow-wrap: anywhere;
+}
+.fit-preview-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
 }
 .fit-signal-card small {
   display: block;
@@ -8186,23 +8293,34 @@ input[type="email"] {
     font-size: clamp(32px, 9vw, 44px);
   }
   .fit-personas {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(154px, 48vw);
-    grid-template-columns: none;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    grid-auto-flow: row;
+    grid-auto-columns: initial;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
   }
   .fit-personas::-webkit-scrollbar {
     display: none;
   }
   .fit-persona {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    min-height: 86px;
-    scroll-snap-align: start;
+    grid-template-columns: minmax(0, 1fr) 18px;
+    gap: 4px 12px;
+    min-height: 74px;
+    scroll-snap-align: none;
+  }
+  .fit-persona::before {
+    display: none;
+  }
+  .fit-persona::after {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+  }
+  .fit-persona span,
+  .fit-persona strong,
+  .fit-persona small {
+    grid-column: 1;
   }
   .fit-device {
     border-radius: 16px;
@@ -8213,6 +8331,20 @@ input[type="email"] {
   }
   .fit-console-head {
     align-items: start;
+  }
+  .fit-matrix-head,
+  .fit-matrix-row {
+    grid-template-columns: minmax(92px, 1fr) repeat(3, minmax(48px, 0.42fr));
+  }
+  .fit-matrix strong,
+  .fit-matrix span {
+    padding: 0 8px;
+  }
+  .fit-matrix-head span {
+    font-size: 11px;
+  }
+  .fit-matrix strong {
+    font-size: 12px;
   }
   .fit-workbench {
     grid-template-columns: 1fr;
@@ -9091,6 +9223,8 @@ const fitStrengthNode = document.querySelector("#fit-strength");
 const fitVelocityNode = document.querySelector("#fit-velocity");
 const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
+const fitPreviewCopyNode = document.querySelector("#fit-preview-copy");
+const fitMatrixColumns = [...document.querySelectorAll("[data-matrix-column]")];
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
 const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
@@ -9206,12 +9340,16 @@ function activateFitPersona(button, scrollToButton = false) {
     window.requestAnimationFrame(() => fitDeviceNode.classList.add("is-switching"));
     window.setTimeout(() => fitDeviceNode.classList.remove("is-switching"), 300);
   }
+  for (const column of fitMatrixColumns) {
+    column.classList.toggle("active", column.dataset.matrixColumn === (button.dataset.fitPersona || ""));
+  }
   if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
   if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
   if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
   if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";
   if (fitSignalNode) fitSignalNode.textContent = button.dataset["fitSignal" + suffix] || "";
-  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitStrength" + suffix] || "";
+  if (fitPreviewCopyNode) fitPreviewCopyNode.textContent = button.dataset["fitCopy" + suffix] || "";
+  if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitRule" + suffix] || "";
   if (fitVelocityNode) fitVelocityNode.textContent = button.dataset["fitVelocity" + suffix] || "";
   if (fitProgressLabel) fitProgressLabel.textContent = (button.dataset.fitProgress || "72") + "%";
   if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");

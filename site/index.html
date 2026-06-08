@@ -147,13 +147,15 @@
         <span><strong><span data-i18n-en="Pack" data-i18n-zh="打包">Pack</span></strong><span data-i18n-en="Brief, CSV, risk notes, recording script" data-i18n-zh="简报、CSV、风险备注、录制脚本">Brief, CSV, risk notes, recording script</span></span>
       </div>
     </section>
-    <section class="fit-studio" id="fit-studio" aria-label="Creator fit studio">
+    <section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
       <div class="fit-copy">
-        <p class="section-label" data-i18n-en="Signal Studio" data-i18n-zh="信号工作室">Signal Studio</p>
-        <h2 data-i18n-en="One signal. Many product packs." data-i18n-zh="一条信号，多种产品包。">One signal. Many product packs.</h2>
-        <p data-i18n-en="Choose how you sell. TrendFoundry reframes the same public proof into buyer content, outreach, or thought leadership without making the buyer rebuild the research." data-i18n-zh="选择你的销售方式。TrendFoundry 会把同一条公开证据重组为买家内容、外联回复或观点领导力，而不是让买家重新做研究。">Choose how you sell. TrendFoundry reframes the same public proof into buyer content, outreach, or thought leadership without making the buyer rebuild the research.</p>
+        <p class="section-label" data-i18n-en="Product packs" data-i18n-zh="产品分法">Product packs</p>
+        <h2 data-i18n-en="One signal, three packages." data-i18n-zh="一条信号，三种交付包。">One signal, three packages.</h2>
+        <p data-i18n-en="Pick by the job you need done: publish content, start replies, or shape a point of view. The source proof stays the same; the packaging changes." data-i18n-zh="按你要完成的工作来选：发布内容、发起回复，或形成观点。来源证据相同，交付包装不同。">Pick by the job you need done: publish content, start replies, or shape a point of view. The source proof stays the same; the packaging changes.</p>
         <div class="fit-personas" aria-label="Product pack modes"><button class="fit-persona active" type="button" data-fit-persona="youtube" aria-pressed="true"
     data-fit-pack-en="Buyer Content Pack" data-fit-pack-zh="买家内容包"
+    data-fit-short-en="Content" data-fit-short-zh="内容"
+    data-fit-rule-en="For publishing" data-fit-rule-zh="用于发布"
     data-fit-title-en="Educate and convert buyers with proof-first content." data-fit-title-zh="用证据优先的内容教育并转化买家。"
     data-fit-copy-en="The same market signal becomes a buyer-facing topic, proof card, hook, and script seed." data-fit-copy-zh="同一条市场信号会变成面向买家的选题、证据卡、钩子和脚本种子。"
     data-fit-kit-en="Proof card / buyer hook / title angles / script seed" data-fit-kit-zh="证据卡 / 买家钩子 / 标题角度 / 脚本种子"
@@ -167,8 +169,11 @@
     data-fit-url="https://www.youtube.com/watch?v=JQzF5LP4VTs">
       <span data-i18n-en="Pack 01" data-i18n-zh="包 01">Pack 01</span>
       <strong data-i18n-en="Buyer Content Pack" data-i18n-zh="买家内容包">Buyer Content Pack</strong>
+      <small data-i18n-en="For publishing" data-i18n-zh="用于发布">For publishing</small>
     </button><button class="fit-persona" type="button" data-fit-persona="bilibili" aria-pressed="false"
     data-fit-pack-en="Outreach Pack" data-fit-pack-zh="外联回复包"
+    data-fit-short-en="Outreach" data-fit-short-zh="外联"
+    data-fit-rule-en="For replies" data-fit-rule-zh="用于回复"
     data-fit-title-en="Turn the signal into a sharper outreach angle." data-fit-title-zh="把信号变成更锐利的外联角度。"
     data-fit-copy-en="For teams that need a timely reason to contact creators, operators, or niche buyers." data-fit-copy-zh="适合需要及时联系创作者、运营者或垂直买家的团队。"
     data-fit-kit-en="Audience pain / reply angle / proof snippet / CTA note" data-fit-kit-zh="受众痛点 / 回复角度 / 证据片段 / CTA 备注"
@@ -182,8 +187,11 @@
     data-fit-url="http://www.bilibili.com/video/av116713756562539">
       <span data-i18n-en="Pack 02" data-i18n-zh="包 02">Pack 02</span>
       <strong data-i18n-en="Outreach Pack" data-i18n-zh="外联回复包">Outreach Pack</strong>
+      <small data-i18n-en="For replies" data-i18n-zh="用于回复">For replies</small>
     </button><button class="fit-persona" type="button" data-fit-persona="deeptech" aria-pressed="false"
     data-fit-pack-en="Thought Leadership Pack" data-fit-pack-zh="观点领导力包"
+    data-fit-short-en="Leadership" data-fit-short-zh="观点"
+    data-fit-rule-en="For POV" data-fit-rule-zh="用于观点"
     data-fit-title-en="Shape the proof into an original perspective." data-fit-title-zh="把证据塑造成一个原创观点。"
     data-fit-copy-en="Best for deep-tech teams that want technical novelty, caveats, and a defensible narrative." data-fit-copy-zh="适合深技术团队：需要技术新鲜度、限制说明和站得住的叙事。"
     data-fit-kit-en="Source rank / novelty score / caveat map / narrative claim" data-fit-kit-zh="来源排序 / 新鲜度评分 / 限制地图 / 叙事主张"
@@ -197,6 +205,7 @@
     data-fit-url="https://github.com/NousResearch/hermes-agent">
       <span data-i18n-en="Pack 03" data-i18n-zh="包 03">Pack 03</span>
       <strong data-i18n-en="Thought Leadership Pack" data-i18n-zh="观点领导力包">Thought Leadership Pack</strong>
+      <small data-i18n-en="For POV" data-i18n-zh="用于观点">For POV</small>
     </button></div>
       </div>
       <div class="fit-device" data-fit-device="youtube" style="--fit-progress:72%">
@@ -204,62 +213,39 @@
         <div class="fit-device-screen">
           <div class="fit-console-head">
             <div>
-              <p class="fit-device-label" data-i18n-en="Signal Studio" data-i18n-zh="信号工作室">Signal Studio</p>
-              <strong><span data-i18n-en="Reframing to" data-i18n-zh="正在重组为">Reframing to</span> <b id="fit-title" data-i18n-en="Buyer Content Pack" data-i18n-zh="买家内容包">Buyer Content Pack</b></strong>
+              <p class="fit-device-label" data-i18n-en="What's included" data-i18n-zh="包含什么">What's included</p>
+              <strong><span data-i18n-en="Selected" data-i18n-zh="已选择">Selected</span> <b id="fit-title" data-i18n-en="Buyer Content Pack" data-i18n-zh="买家内容包">Buyer Content Pack</b></strong>
             </div>
             <span class="fit-live"><i></i><span data-i18n-en="Live" data-i18n-zh="实时">Live</span></span>
           </div>
-          <div class="fit-progress" aria-hidden="true"><span></span><em id="fit-progress-label">72%</em></div>
-          <div class="fit-workbench">
-            <ul class="fit-source-list" aria-label="Source lanes"><li data-fit-source-row="news" style="--row-index:0">
-      <span>NE</span>
-      <strong data-i18n-en="News" data-i18n-zh="新闻">News</strong>
-      <em aria-hidden="true"></em>
-    </li><li data-fit-source-row="bilibili" style="--row-index:1">
-      <span>BI</span>
-      <strong data-i18n-en="Bilibili" data-i18n-zh="B 站">Bilibili</strong>
-      <em aria-hidden="true"></em>
-    </li><li data-fit-source-row="youtube" style="--row-index:2">
-      <span>YO</span>
-      <strong data-i18n-en="YouTube" data-i18n-zh="YouTube">YouTube</strong>
-      <em aria-hidden="true"></em>
-    </li><li data-fit-source-row="hn" style="--row-index:3">
-      <span>HA</span>
-      <strong data-i18n-en="Hacker News" data-i18n-zh="Hacker News">Hacker News</strong>
-      <em aria-hidden="true"></em>
-    </li><li data-fit-source-row="github" style="--row-index:4">
-      <span>GI</span>
-      <strong data-i18n-en="GitHub" data-i18n-zh="GitHub">GitHub</strong>
-      <em aria-hidden="true"></em>
-    </li><li data-fit-source-row="arxiv" style="--row-index:5">
-      <span>AR</span>
-      <strong data-i18n-en="arXiv" data-i18n-zh="arXiv">arXiv</strong>
-      <em aria-hidden="true"></em>
-    </li></ul>
-            <div class="fit-pipeline" aria-label="Signal pipeline"><div class="fit-pipeline-column" style="--stage-index:0">
-      <p data-i18n-en="Detect" data-i18n-zh="发现">Detect</p>
-      <span></span>
-      <span></span>
-    </div><div class="fit-pipeline-column" style="--stage-index:1">
-      <p data-i18n-en="Validate" data-i18n-zh="验证">Validate</p>
-      <span></span>
-      <span></span>
-    </div><div class="fit-pipeline-column" style="--stage-index:2">
-      <p data-i18n-en="Curate" data-i18n-zh="策划">Curate</p>
-      <span></span>
-      <span></span>
-    </div><div class="fit-pipeline-column" style="--stage-index:3">
-      <p data-i18n-en="Package" data-i18n-zh="打包">Package</p>
-      <span></span>
-      <span></span>
-    </div></div>
-            <a class="fit-signal-card" id="fit-signal-link" href="https://www.youtube.com/watch?v=JQzF5LP4VTs" target="_blank" rel="noreferrer">
-              <span id="fit-source">YouTube</span>
-              <strong id="fit-signal" data-i18n-en="YouTube creator workflow signal" data-i18n-zh="【实测】为什么 AI 视频工具栈 现在值得创作者关注">YouTube creator workflow signal</strong>
-              <em id="fit-strength" data-i18n-en="Very strong" data-i18n-zh="很强">Very strong</em>
-              <small aria-hidden="true"></small>
-            </a>
+          <div class="fit-matrix" aria-label="Product pack inclusion matrix">
+            <div class="fit-matrix-head">
+              <strong data-i18n-en="Item" data-i18n-zh="项目">Item</strong>
+              <span data-matrix-column="youtube" class="active" data-i18n-en="Content" data-i18n-zh="内容">Content</span><span data-matrix-column="bilibili" class="" data-i18n-en="Outreach" data-i18n-zh="外联">Outreach</span><span data-matrix-column="deeptech" class="" data-i18n-en="Leadership" data-i18n-zh="观点">Leadership</span>
+            </div>
+            <div class="fit-matrix-row">
+      <strong data-i18n-en="Signal summary" data-i18n-zh="信号摘要">Signal summary</strong>
+      <span data-matrix-column="youtube" class="active">✓</span><span data-matrix-column="bilibili" class="">✓</span><span data-matrix-column="deeptech" class="">✓</span>
+    </div><div class="fit-matrix-row">
+      <strong data-i18n-en="Source proof" data-i18n-zh="来源证据">Source proof</strong>
+      <span data-matrix-column="youtube" class="active">✓</span><span data-matrix-column="bilibili" class="">✓</span><span data-matrix-column="deeptech" class="">✓</span>
+    </div><div class="fit-matrix-row">
+      <strong data-i18n-en="Publishing angles" data-i18n-zh="发布角度">Publishing angles</strong>
+      <span data-matrix-column="youtube" class="active">✓</span><span data-matrix-column="bilibili" class="">–</span><span data-matrix-column="deeptech" class="">–</span>
+    </div><div class="fit-matrix-row">
+      <strong data-i18n-en="Reply angle" data-i18n-zh="回复角度">Reply angle</strong>
+      <span data-matrix-column="youtube" class="active">–</span><span data-matrix-column="bilibili" class="">✓</span><span data-matrix-column="deeptech" class="">–</span>
+    </div><div class="fit-matrix-row">
+      <strong data-i18n-en="POV claim" data-i18n-zh="观点主张">POV claim</strong>
+      <span data-matrix-column="youtube" class="active">–</span><span data-matrix-column="bilibili" class="">–</span><span data-matrix-column="deeptech" class="">✓</span>
+    </div>
           </div>
+          <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="https://www.youtube.com/watch?v=JQzF5LP4VTs" target="_blank" rel="noreferrer">
+            <span id="fit-source">YouTube</span>
+            <strong id="fit-signal" data-i18n-en="YouTube creator workflow signal" data-i18n-zh="【实测】为什么 AI 视频工具栈 现在值得创作者关注">YouTube creator workflow signal</strong>
+            <p id="fit-preview-copy" data-i18n-en="The same market signal becomes a buyer-facing topic, proof card, hook, and script seed." data-i18n-zh="同一条市场信号会变成面向买家的选题、证据卡、钩子和脚本种子。">The same market signal becomes a buyer-facing topic, proof card, hook, and script seed.</p>
+            <em id="fit-strength" data-i18n-en="For publishing" data-i18n-zh="用于发布">For publishing</em>
+          </a>
           <div class="fit-telemetry" aria-label="Signal studio summary">
             <span><strong data-i18n-en="Pack kit" data-i18n-zh="交付组件">Pack kit</strong><small id="fit-kit" data-i18n-en="Proof card / buyer hook / title angles / script seed" data-i18n-zh="证据卡 / 买家钩子 / 标题角度 / 脚本种子">Proof card / buyer hook / title angles / script seed</small></span>
             <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="7-day content sprint" data-i18n-zh="7 天内容冲刺">7-day content sprint</small></span>
