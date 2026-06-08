@@ -15,6 +15,7 @@
     "fulfill-email-orders": "node scripts/fulfill_email_orders.mjs",
     "payment-reply": "node scripts/draft_payment_reply.mjs",
     "intake-email-orders": "node scripts/intake_email_orders.mjs",
+    "sync-email-subscriptions": "node scripts/sync_email_subscriptions.mjs",
     "draft-outreach": "node scripts/draft_outreach.mjs",
     "commerce": "node scripts/export_commerce.mjs",
     "ops-report": "node scripts/report_ops.mjs",

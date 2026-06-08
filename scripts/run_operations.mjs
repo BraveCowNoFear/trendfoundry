@@ -59,6 +59,8 @@ try {
   await persistRun();
   steps.push(runStep("intake-email-orders", ["intake-email-orders"]));
   await persistRun();
+  steps.push(runStep("sync-email-subscriptions", ["sync-email-subscriptions"]));
+  await persistRun();
   steps.push(runStep("fulfill-email-orders", ["fulfill-email-orders"]));
   await persistRun();
   steps.push(runStep("fulfill-ready", ["fulfill-ready"]));

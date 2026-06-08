@@ -38,6 +38,7 @@ const publicDocs = [
   "docs/content-subscription-plan.md",
   "docs/content-subscription-retention.md",
   "docs/custom-proof-pack.md",
+  "docs/email-subscription-sync.md",
   "docs/episode-workbench.md",
   "docs/full-episode-script.md"
 ];
@@ -50,6 +51,7 @@ const privateFiles = [
   "dist/content-subscription-due/prepared.md",
   "dist/content-subscription-retention/drafts.csv",
   "dist/content-subscription-retention/drafts.md",
+  "dist/email-subscription-sync/synced.csv",
   "dist/content-sales-crm/pipeline.csv",
   "dist/content-prospecting/prospects.csv"
 ];
