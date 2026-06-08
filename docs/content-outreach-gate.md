@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Gate
 
-Generated: 2026-06-08T18:33:54.181Z
+Generated: 2026-06-08T18:45:07.253Z
 
 This gate checks reviewer-ready outreach packs before they enter the private action queue. It keeps the public report to aggregate counts only.
 
@@ -10,7 +10,7 @@ This gate checks reviewer-ready outreach packs before they enter the private act
 - Passed checks: 5
 - Failed checks: 0
 - Missing packs: 0
-- Average draft words: 120
+- Average draft words: 123
 
 ## Gate Rules
 
@@ -18,6 +18,7 @@ This gate checks reviewer-ready outreach packs before they enter the private act
 - Subject line must be 90 characters or shorter.
 - Draft must be 180 words or shorter.
 - Draft must include the free sample link and the no-promise sentence.
+- Draft must include campaign tracking parameters on buyer-facing links.
 - Draft must not contain mojibake markers.
 - Draft must not request sensitive account/payment data.
 - Draft must not promise views, subscribers, revenue, platform growth, virality, or outcomes.

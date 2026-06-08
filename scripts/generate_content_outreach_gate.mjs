@@ -139,13 +139,17 @@ function sensitiveHits(text) {
 function rowChecks(row, packText, packExists) {
   const subject = compact(row.subject);
   const draft = extractCodeBlock(packText, "Draft");
+  const hasCampaignId = Boolean(compact(row.campaign_id));
+  const hasTracking = draft.includes("tf_campaign=") && draft.includes("tf_source=content_outreach") && draft.includes("tf_offer=");
   const failures = [];
   if (!packExists) failures.push("missing_send_pack");
   if (!subject) failures.push("missing_subject");
+  if (!hasCampaignId) failures.push("missing_campaign_id");
   if (subject.length > 90) failures.push("subject_too_long");
   if (!draft) failures.push("missing_draft");
   if (wordCount(draft) > 180) failures.push("draft_too_long");
   if (!draft.includes("Free sample:")) failures.push("missing_free_sample_link");
+  if (!hasTracking) failures.push("missing_campaign_tracking");
   if (!draft.includes("No promises about views, subscribers, revenue, platform growth, or outcomes.")) failures.push("missing_no_promise_sentence");
   if (!/I noticed your/i.test(draft)) failures.push("missing_personalized_opening");
   const mojibake = mojibakeHits(`${subject}\n${draft}`);
@@ -156,10 +160,12 @@ function rowChecks(row, packText, packExists) {
   if (sensitive.length) failures.push(`sensitive_request:${sensitive.join(";")}`);
   return {
     review_id: compact(row.review_id),
+    campaign_id: compact(row.campaign_id),
     offer_sku: compact(row.offer_sku),
     subject_length: subject.length,
     draft_words: wordCount(draft),
     has_free_sample: draft.includes("Free sample:") ? "yes" : "no",
+    has_campaign_tracking: hasTracking ? "yes" : "no",
     has_no_promise_sentence: draft.includes("No promises about views, subscribers, revenue, platform growth, or outcomes.") ? "yes" : "no",
     pack_exists: packExists ? "yes" : "no",
     status: failures.length ? "failed" : "passed",
@@ -188,6 +194,7 @@ This gate checks reviewer-ready outreach packs before they enter the private act
 - Subject line must be 90 characters or shorter.
 - Draft must be 180 words or shorter.
 - Draft must include the free sample link and the no-promise sentence.
+- Draft must include campaign tracking parameters on buyer-facing links.
 - Draft must not contain mojibake markers.
 - Draft must not request sensitive account/payment data.
 - Draft must not promise views, subscribers, revenue, platform growth, virality, or outcomes.
@@ -236,10 +243,12 @@ await mkdir(docsDir, { recursive: true });
 await mkdir(outDir, { recursive: true });
 await writeFile(path.join(outDir, "checks.csv"), toCsv(checks, [
   "review_id",
+  "campaign_id",
   "offer_sku",
   "subject_length",
   "draft_words",
   "has_free_sample",
+  "has_campaign_tracking",
   "has_no_promise_sentence",
   "pack_exists",
   "status",

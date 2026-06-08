@@ -105,6 +105,7 @@ try {
 const receipt = {
   generatedAt: new Date().toISOString(),
   review_id: reviewId,
+  campaign_id: compact(row.campaign_id),
   creator: compact(row.creator),
   source: compact(row.source),
   topic: compact(row.topic),
@@ -133,6 +134,7 @@ Generated: ${receipt.generatedAt}
 Private local receipt. Do not publish.
 
 - Review ID: ${receipt.review_id}
+- Campaign ID: ${receipt.campaign_id || "not-recorded"}
 - Creator: ${receipt.creator}
 - Source: ${receipt.source}
 - Sent at: ${receipt.sent_at}
@@ -166,6 +168,7 @@ if (logResult.status !== 0) {
 
 console.log(JSON.stringify({
   review_id: reviewId,
+  campaign_id: receipt.campaign_id,
   stage: receipt.stage,
   next_due: nextDue,
   receipt: path.relative(root, path.join(outDir, receiptName)).replace(/\\/g, "/"),

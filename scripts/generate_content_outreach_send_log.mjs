@@ -82,9 +82,9 @@ Generated: ${new Date().toISOString()}
 
 Private local send receipt log. Do not publish.
 
-| Review ID | Creator | Source | Sent at | Next due | Stage | Receipt |
-| --- | --- | --- | --- | --- | --- | --- |
-${rows.map((row) => `| ${row.review_id} | ${row.creator.replace(/\|/g, "/")} | ${row.source} | ${row.sent_at} | ${row.next_due} | ${row.stage} | ${row.receipt_file} |`).join("\n") || "| - | - | - | - | - | - | No send receipts recorded. |"}
+| Review ID | Campaign | Creator | Source | Sent at | Next due | Stage | Receipt |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+${rows.map((row) => `| ${row.review_id} | ${row.campaign_id || "-"} | ${row.creator.replace(/\|/g, "/")} | ${row.source} | ${row.sent_at} | ${row.next_due} | ${row.stage} | ${row.receipt_file} |`).join("\n") || "| - | - | - | - | - | - | - | No send receipts recorded. |"}
 `;
 }
 
@@ -98,6 +98,7 @@ for (const file of files) {
   if (!receipt.review_id) continue;
   rows.push({
     review_id: compact(receipt.review_id),
+    campaign_id: compact(receipt.campaign_id),
     creator: compact(receipt.creator, "unknown"),
     source: compact(receipt.source, "unknown"),
     topic: compact(receipt.topic, "not-provided"),
@@ -125,7 +126,7 @@ const manifest = {
 };
 
 await writeFile(path.join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");
-await writeFile(path.join(outDir, "send-log.csv"), toCsv(rows, ["review_id", "creator", "source", "topic", "offer_sku", "sent_at", "next_due", "stage", "receipt_file"]), "utf8");
+await writeFile(path.join(outDir, "send-log.csv"), toCsv(rows, ["review_id", "campaign_id", "creator", "source", "topic", "offer_sku", "sent_at", "next_due", "stage", "receipt_file"]), "utf8");
 await writeFile(path.join(outDir, "send-log.md"), privateMarkdown(rows), "utf8");
 await writeFile(path.join(docsDir, "content-outreach-sends.md"), publicDoc({ rows }), "utf8");
 

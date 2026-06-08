@@ -1,12 +1,12 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T18:33:56.260Z
+Generated: 2026-06-08T18:45:09.832Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 89
+- Checked files: 94
 - Files with mojibake markers: 0
 - Bilibili items in latest dataset: 29
 - Bilibili items with readable Chinese text: 29
@@ -19,6 +19,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | --- | --- | --- | ---: | --- |
 | data/latest.json | public-or-tracked | yes | 0 | none |
 | scripts/generate_content_action_brief.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_attribution.mjs | tracked-source | no | 0 | none |
 | scripts/generate_full_episode_script.mjs | tracked-source | no | 0 | none |
 | scripts/generate_episode_workbench.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_evidence_pack.mjs | tracked-source | no | 0 | none |
@@ -29,6 +30,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/generate_content_outreach_send_log.mjs | tracked-source | no | 0 | none |
 | scripts/complete_content_outreach_send.mjs | tracked-source | no | 0 | none |
 | scripts/intake_content_replies.mjs | tracked-source | no | 0 | none |
+| scripts/generate_content_outreach_review.mjs | tracked-source | no | 0 | none |
 | scripts/generate_buyer_content_pack.mjs | tracked-source | no | 0 | none |
 | scripts/run_content_ops.mjs | tracked-source | no | 0 | none |
 | scripts/update_content_sale_status.mjs | tracked-source | no | 0 | none |
@@ -37,6 +39,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/generate_content_fulfillment_queue.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_outreach_gate.mjs | tracked-source | no | 0 | none |
 | docs/content-action-brief.md | public-or-tracked | no | 0 | none |
+| docs/content-attribution.md | public-or-tracked | no | 0 | none |
 | docs/buyer-content-pack.md | public-or-tracked | yes | 0 | none |
 | docs/content-close-pack.md | public-or-tracked | no | 0 | none |
 | docs/content-customer-success.md | public-or-tracked | no | 0 | none |
@@ -70,6 +73,8 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/full-episode-script.md | public-or-tracked | yes | 0 | none |
 | dist/content-action-brief/actions.csv | private-ignored | no | 0 | none |
 | dist/content-action-brief/action-brief.md | private-ignored | no | 0 | none |
+| dist/content-attribution/attribution-ledger.csv | private-ignored | no | 0 | none |
+| dist/content-attribution/attribution-ledger.md | private-ignored | no | 0 | none |
 | dist/full-episode-script/latest.json | private-ignored | yes | 0 | none |
 | dist/episode-workbench/latest.json | private-ignored | yes | 0 | none |
 | dist/content-delivery-gate/checks.csv | private-ignored | no | 0 | none |

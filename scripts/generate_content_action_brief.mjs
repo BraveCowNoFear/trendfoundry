@@ -84,6 +84,7 @@ function action(row) {
     title: row.title,
     actor: row.actor || "private",
     offer_sku: row.offer_sku || "",
+    campaign_id: row.campaign_id || "",
     source_ref: row.source_ref || "",
     next_action: row.next_action,
     review_file: row.review_file || "",
@@ -174,6 +175,7 @@ function fromOutreachReview(rows, passedGateIds) {
     title: `Review one-to-one send pack: ${compact(row.subject, row.topic)}`,
     actor: compact(row.creator, "private prospect"),
     offer_sku: row.offer_sku,
+    campaign_id: compact(row.campaign_id),
     source_ref: compact(row.proof_url, ""),
     next_action: "review, personalize, and send manually only if safe",
     review_file: reviewPackPath(compact(row.review_id, "")),
@@ -237,13 +239,13 @@ Private local action brief. Do not publish buyer names, contacts, channels, pros
 
 ## Top Actions
 
-| Priority | Lane | Status | Title | Actor | Review File | Command |
-| ---: | --- | --- | --- | --- | --- | --- |
-${top.map((row) => `| ${row.priority} | ${row.lane} | ${row.status} | ${row.title.replace(/\|/g, "/")} | ${row.actor.replace(/\|/g, "/")} | ${row.review_file || "-"} | ${row.command ? `\`${row.command.replace(/\|/g, "/")}\`` : "-"} |`).join("\n") || "| - | - | - | No actions ready. | - | - | - |"}
+| Priority | Lane | Status | Title | Actor | Campaign | Review File | Command |
+| ---: | --- | --- | --- | --- | --- | --- | --- |
+${top.map((row) => `| ${row.priority} | ${row.lane} | ${row.status} | ${row.title.replace(/\|/g, "/")} | ${row.actor.replace(/\|/g, "/")} | ${row.campaign_id || "-"} | ${row.review_file || "-"} | ${row.command ? `\`${row.command.replace(/\|/g, "/")}\`` : "-"} |`).join("\n") || "| - | - | - | No actions ready. | - | - | - | - |"}
 
 ## Full Queue
 
-${actions.map((row) => `- [${row.priority}] ${row.lane}: ${row.title}\n  - Actor: ${row.actor}\n  - Next: ${row.next_action}\n  - Review: ${row.review_file || "none"}\n  - Safety: ${row.safety_note}`).join("\n") || "- No content-side actions are due right now."}
+${actions.map((row) => `- [${row.priority}] ${row.lane}: ${row.title}\n  - Actor: ${row.actor}\n  - Campaign: ${row.campaign_id || "none"}\n  - Next: ${row.next_action}\n  - Review: ${row.review_file || "none"}\n  - Safety: ${row.safety_note}`).join("\n") || "- No content-side actions are due right now."}
 `;
 }
 
@@ -347,6 +349,7 @@ await writeFile(path.join(outDir, "actions.csv"), toCsv(actions, [
   "title",
   "actor",
   "offer_sku",
+  "campaign_id",
   "source_ref",
   "next_action",
   "review_file",

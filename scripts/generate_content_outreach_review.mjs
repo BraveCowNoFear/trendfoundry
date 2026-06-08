@@ -96,6 +96,24 @@ function safeFileName(value, fallback = "prospect") {
     .slice(0, 80) || fallback;
 }
 
+function withTracking(url, params) {
+  const raw = compact(url);
+  if (!raw) return raw;
+  try {
+    const parsed = new URL(raw);
+    for (const [key, value] of Object.entries(params)) {
+      parsed.searchParams.set(key, compact(value));
+    }
+    return parsed.toString();
+  } catch {
+    const separator = raw.includes("?") ? "&" : "?";
+    const query = Object.entries(params)
+      .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(compact(value))}`)
+      .join("&");
+    return `${raw}${separator}${query}`;
+  }
+}
+
 function addDaysIso(days) {
   const date = new Date();
   date.setUTCDate(date.getUTCDate() + days);
@@ -127,20 +145,31 @@ function makePack(row, product, index) {
   const proofUrl = compact(row.proof_url, product.product_url || "https://bravecownofear.github.io/trendfoundry/");
   const freeSampleUrl = compact(product.free_sample_url, "https://bravecownofear.github.io/trendfoundry/trendfoundry-free-sample-pack.zip");
   const orderUrl = compact(product.order_url, "https://bravecownofear.github.io/trendfoundry/order/");
+  const reviewId = `outreach-${String(index + 1).padStart(2, "0")}-${safeFileName(creator)}`;
+  const campaignId = `tf-${reviewId}`;
+  const tracking = {
+    tf_campaign: campaignId,
+    tf_source: "content_outreach",
+    tf_offer: product.sku || row.offer_sku || "trendfoundry-proof-script-pack"
+  };
+  const trackedFreeSampleUrl = withTracking(freeSampleUrl, tracking);
+  const trackedOrderUrl = withTracking(orderUrl, tracking);
   const question = cleanDisplayText(row.feedback_question) || "Which proof asset would you actually record this week?";
   const subject = subjectLine(row, product);
   const followUpDate = addDaysIso(index < 3 ? 3 : 5);
   const body = [
     `Hi ${creator},`,
     `I noticed your ${sourceNoun(source)} work around "${topic}". I prepared a proof-first TrendFoundry sample that turns public AI/dev signals into a recordable episode outline, with a source link and a concrete recording angle instead of generic trend text.`,
-    `Free sample: ${freeSampleUrl}`,
+    `Free sample: ${trackedFreeSampleUrl}`,
+    `Order/review page: ${trackedOrderUrl}`,
     `The most relevant paid option would be ${product.title || "TrendFoundry Proof-First Script Pack"} at USD ${product.price_usd || 9} (${product.billing || "one_time"}), but only after you review the sample and decide it is useful.`,
     `One feedback question: ${question}`,
     `Reference I used for this draft: ${proofUrl}`,
     "No promises about views, subscribers, revenue, platform growth, or outcomes. This is only a creator planning and production aid."
   ].join("\n\n");
   return {
-    review_id: `outreach-${String(index + 1).padStart(2, "0")}-${safeFileName(creator)}`,
+    review_id: reviewId,
+    campaign_id: campaignId,
     close_rank: row.close_rank,
     creator,
     source,
@@ -158,6 +187,8 @@ function makePack(row, product, index) {
     reply_capture: compact(row.reply_capture, `${source},${creator},<summary>,<objection>,replied_needs_response,<notes>`),
     free_sample_url: freeSampleUrl,
     order_url: orderUrl,
+    tracked_free_sample_url: trackedFreeSampleUrl,
+    tracked_order_url: trackedOrderUrl,
     body
   };
 }
@@ -170,6 +201,7 @@ Private local review pack. Do not publish. Do not send without human review.
 ## Decision
 
 - Review ID: ${pack.review_id}
+- Campaign ID: ${pack.campaign_id}
 - Source: ${pack.source}
 - Topic: ${pack.topic}
 - Proof URL: ${pack.proof_url}
@@ -198,6 +230,7 @@ ${pack.body}
 - [ ] Offer matches the creator need.
 - [ ] No promise of views, subscribers, revenue, platform growth, or buyer outcomes.
 - [ ] No request for password, card number, private ID, wallet seed, or sensitive account data.
+- [ ] Free sample and order links include the campaign tracking parameter.
 - [ ] Reply capture row is ready if the creator responds.
 
 ## Reply Capture Row
@@ -241,6 +274,7 @@ This step turns the private daily close queue into reviewer-ready send packs. De
 ## Current Counts
 
 - Review packs: ${packs.length}
+- Campaigns with tracked URLs: ${packs.filter((pack) => pack.tracked_free_sample_url.includes("tf_campaign=") && pack.tracked_order_url.includes("tf_campaign=")).length}
 - Products available: ${products.length}
 - Offer mix: ${Object.entries(offerCounts).map(([sku, count]) => `${sku}=${count}`).join(", ") || "none"}
 
@@ -286,6 +320,8 @@ const manifest = {
   reviewPackCount: packs.length,
   skippedNeedsCleanupCount: closeRows.filter((row) => compact(row.review_action) === "fix_text_then_review").length,
   offerSkus: [...new Set(packs.map((pack) => pack.offer_sku))],
+  campaignCount: packs.length,
+  trackedUrlCount: packs.filter((pack) => pack.tracked_free_sample_url.includes("tf_campaign=") && pack.tracked_order_url.includes("tf_campaign=")).length,
   followUpDates: [...new Set(packs.map((pack) => pack.follow_up_date))],
   safety: {
     sendsMessages: false,
@@ -301,6 +337,7 @@ const manifest = {
 await writeFile(path.join(outDir, "manifest.json"), JSON.stringify(manifest, null, 2), "utf8");
 await writeFile(path.join(outDir, "review-board.csv"), toCsv(packs, [
   "review_id",
+  "campaign_id",
   "close_rank",
   "creator",
   "source",
@@ -317,7 +354,9 @@ await writeFile(path.join(outDir, "review-board.csv"), toCsv(packs, [
   "feedback_question",
   "reply_capture",
   "free_sample_url",
-  "order_url"
+  "order_url",
+  "tracked_free_sample_url",
+  "tracked_order_url"
 ]), "utf8");
 await writeFile(path.join(outDir, "review-board.md"), reviewBoardMarkdown(packs), "utf8");
 await writeFile(path.join(docsDir, "content-outreach-review.md"), publicDoc({ packs, products }), "utf8");
