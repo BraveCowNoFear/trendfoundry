@@ -26,6 +26,7 @@ const requiredScripts = [
   "intake-email-orders",
   "draft-outreach",
   "ops-report",
+  "agent-watch",
   "launch-assets",
   "social",
   "visuals",
@@ -175,6 +176,7 @@ async function checkLocal() {
   const runOperations = await readText(path.join(root, "scripts", "run_operations.mjs"));
   assertCheck("operate runs email order intake", runOperations.includes("intake-email-orders"));
   assertCheck("operate runs paid email fulfillment", runOperations.includes("fulfill-email-orders"));
+  assertCheck("operate refreshes agent watch", runOperations.includes("agent-watch"));
 
   const latest = await readJson(path.join(root, "data", "latest.json"));
   const issueSlug = issueSlugFromGeneratedAt(latest.generatedAt);
@@ -466,6 +468,13 @@ async function checkLocal() {
   assertCheck("ops report has email fulfillment count", /Email fulfillment prepared:\s+\d+/.test(opsReport));
   assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
+
+  const agentWatchHtml = await readText(path.join(root, "dist", "agent-watch", "index.html"));
+  const agentWatchJson = await readJson(path.join(root, "dist", "agent-watch", "agent-watch.json"));
+  assertCheck("agent watch dashboard exists", agentWatchHtml.includes("Human-dependency control room.") && agentWatchHtml.includes("Human dependency queue"));
+  assertCheck("agent watch has requirements", Array.isArray(agentWatchJson.requirements) && agentWatchJson.requirements.length >= 5);
+  assertCheck("agent watch has human dependency queue", Array.isArray(agentWatchJson.humanQueue) && agentWatchJson.humanQueue.some((item) => item.type === "Payment rail"));
+  assertCheck("agent watch avoids buyer contacts", !/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(agentWatchHtml.replace("rivan_Britain@outlook.com", "")));
 
   if (skipScheduler) {
     pass("scheduled task checks skipped", "--skip-scheduler");

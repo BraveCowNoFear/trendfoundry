@@ -26,7 +26,9 @@ This runs:
 - `npm run fulfill-ready`
 - `npm run launch-assets`
 - `npm run ops-report`
+- `npm run agent-watch` before QA so the QA gate can verify the dashboard
 - `npm run qa -- --skip-scheduler`
+- `npm run agent-watch` after QA so the dashboard reflects the final run status
 
 If `site/og-image.png` is missing, it also runs `npm run social`. To force social preview regeneration:
 
@@ -43,6 +45,22 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/run_ops.ps1
 The wrapper writes logs to `logs/ops-*.log`.
 
 The existing Windows task `TrendFoundryDaily` calls `scripts/run_daily.ps1`, which now runs the full `npm run operate` pipeline and writes `logs/daily-ops-*.log`.
+
+## Agent Watch
+
+```bash
+npm run agent-watch
+```
+
+This writes a local supervision dashboard to `dist/agent-watch/index.html` plus `dist/agent-watch/agent-watch.json`. It tracks worker-agent status, current requirements, and the remaining human-dependency queue for accounts, passwords, payment rails, buyer input, startup funds, and review-only actions. It shows aggregate operational state only, not buyer contact details or secrets.
+
+To view it through the static server:
+
+```powershell
+$env:SITE_DIR="dist/agent-watch"; $env:PORT="4175"; npm start
+```
+
+Then open `http://localhost:4175`.
 
 ## GitHub Actions
 

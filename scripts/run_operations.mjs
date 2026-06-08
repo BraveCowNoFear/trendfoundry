@@ -83,7 +83,11 @@ try {
   await persistRun();
   steps.push(runStep("ops-report", ["ops-report"]));
   await persistRun();
+  steps.push(runStep("agent-watch", ["agent-watch"]));
+  await persistRun();
   steps.push(runStep("qa", ["qa", "--", "--skip-scheduler"]));
+  await persistRun("success");
+  steps.push(runStep("agent-watch", ["agent-watch"]));
   await persistRun("success");
 
   console.log(`\n[TrendFoundry operate] wrote ${path.join(distDir, "latest-run.json")}`);
