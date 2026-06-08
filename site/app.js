@@ -5,6 +5,7 @@ const resultCount = document.querySelector("#result-count");
 const languageButtons = [...document.querySelectorAll("[data-language-toggle]")];
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
+const closeHrefTargets = [...document.querySelectorAll("[data-close-href-en][data-close-href-zh]")];
 const videoCountInput = document.querySelector("#video-count");
 const researchHoursInput = document.querySelector("#research-hours");
 const videoCountOutput = document.querySelector("#video-count-output");
@@ -255,6 +256,9 @@ function setLanguage(language) {
   }
   for (const node of placeholderTargets) {
     node.setAttribute("placeholder", node.dataset[currentLanguage === "zh" ? "i18nPlaceholderZh" : "i18nPlaceholderEn"]);
+  }
+  for (const node of closeHrefTargets) {
+    node.setAttribute("href", node.dataset[currentLanguage === "zh" ? "closeHrefZh" : "closeHrefEn"]);
   }
   for (const button of languageButtons) {
     button.classList.toggle("active", button.dataset.languageToggle === currentLanguage);

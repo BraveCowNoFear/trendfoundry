@@ -2268,6 +2268,97 @@ const zhClosingHandoff = `<section class="handoff closing-handoff" id="final-act
         ${zhFinalActionChips}
       </div>
     </section>`;
+
+const checkoutCloseActions = [
+  {
+    id: "sample",
+    label: "Inspect sample",
+    labelZh: "看样品",
+    meta: `${publicSample.length} public opportunities`,
+    metaZh: `${publicSample.length} 个公开机会`,
+    body: "Confirm the product shape before choosing a paid tier.",
+    bodyZh: "先确认格式，再决定是否购买付费档。",
+    href: "#sample",
+    hrefZh: "#sample"
+  },
+  {
+    id: "order",
+    label: "Buy a pack",
+    labelZh: "买一份",
+    meta: "$9 sample starts here",
+    metaZh: "$9 样品从这里开始",
+    body: "Open the manual order page and choose a tier.",
+    bodyZh: "打开人工下单页，选择单期、周更或定制。",
+    href: "./order/",
+    hrefZh: "../order/",
+    primary: true
+  },
+  {
+    id: "brief",
+    label: "Send a brief",
+    labelZh: "发需求",
+    meta: "Custom niche desk",
+    metaZh: "垂直定制需求",
+    body: "Use email when the channel or niche needs context.",
+    bodyZh: "频道或垂类需要背景时，直接发邮件说明。",
+    href: tierOrderHref(pricingTiers[2], "en"),
+    hrefZh: tierOrderHref(pricingTiers[2], "zh")
+  }
+];
+const checkoutCloseCards = checkoutCloseActions
+  .map((item, index) => `<a class="checkout-close-card${item.primary ? " primary" : ""}" href="${escapeHtml(item.href)}" data-close-href-en="${escapeHtml(item.href)}" data-close-href-zh="${escapeHtml(item.hrefZh)}">
+      <span>0${index + 1}</span>
+      <strong>${dual(item.label, item.labelZh)}</strong>
+      ${dual(item.meta, item.metaZh, "em")}
+      ${dual(item.body, item.bodyZh, "small")}
+    </a>`)
+  .join("");
+const zhCheckoutCloseCards = checkoutCloseActions
+  .map((item, index) => `<a class="checkout-close-card${item.primary ? " primary" : ""}" href="${escapeHtml(item.hrefZh)}">
+      <span>0${index + 1}</span>
+      <strong>${escapeHtml(item.labelZh)}</strong>
+      <em>${escapeHtml(item.metaZh)}</em>
+      <small>${escapeHtml(item.bodyZh)}</small>
+    </a>`)
+  .join("");
+const checkoutClose = `<section class="checkout-close" id="final-action" aria-label="Final checkout action">
+    <div class="checkout-close-copy">
+      ${dual("Ready when you are", "最后一步", "p", ' class="section-label"')}
+      ${dual("Inspect first. Order when it fits.", "检查后再下单。", "h2")}
+      ${dual("Confirm the sample, sources, and delivery format before choosing a buying route. The product should feel legible before it asks for commitment.", "先确认样品、来源和交付格式，再选择购买方式。购买动作出现之前，产品本身必须已经讲清楚。", "p")}
+      <div class="checkout-proof-row" aria-label="Proof points">
+        ${dual("Sample visible", "样品可看", "span")}
+        ${dual("Sources traceable", "来源可追", "span")}
+        ${dual("Email order", "邮件下单", "span")}
+      </div>
+    </div>
+    <div class="checkout-close-panel">
+      <div class="checkout-close-top">
+        <span>${dual("TrendFoundry", "TrendFoundry")}</span>
+        <strong>${dual("Buyer path", "购买路径")}</strong>
+      </div>
+      <div class="checkout-close-grid">${checkoutCloseCards}</div>
+    </div>
+  </section>`;
+const zhCheckoutClose = `<section class="checkout-close" id="final-action" aria-label="Final checkout action">
+    <div class="checkout-close-copy">
+      <p class="section-label">最后一步</p>
+      <h2>检查后再下单。</h2>
+      <p>先确认样品、来源和交付格式，再选择购买方式。购买动作出现之前，产品本身必须已经讲清楚。</p>
+      <div class="checkout-proof-row" aria-label="Proof points">
+        <span>样品可看</span>
+        <span>来源可追</span>
+        <span>邮件下单</span>
+      </div>
+    </div>
+    <div class="checkout-close-panel">
+      <div class="checkout-close-top">
+        <span>TrendFoundry</span>
+        <strong>购买路径</strong>
+      </div>
+      <div class="checkout-close-grid">${zhCheckoutCloseCards}</div>
+    </div>
+  </section>`;
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -2628,9 +2719,7 @@ const html = `<!doctype html>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
-    ${proofLedger}
-    ${trustDock}
-    ${closingHandoff}
+    ${checkoutClose}
   </main>
 </body>
 </html>`;
@@ -2811,9 +2900,7 @@ const zhHtml = `<!doctype html>
       </div>
       <ul>${deliveryChecklist}</ul>
     </section>
-    ${zhProofLedger}
-    ${zhTrustDock}
-    ${zhClosingHandoff}
+    ${zhCheckoutClose}
   </main>
 </body>
 </html>`;
@@ -6165,6 +6252,134 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.checkout-close {
+  display: grid;
+  grid-template-columns: minmax(360px, 0.48fr) minmax(0, 0.52fr);
+  gap: clamp(22px, 5vw, 76px);
+  align-items: center;
+  border-top: 1px solid rgba(17, 17, 20, 0.08);
+  padding-top: clamp(44px, 8vw, 86px);
+  padding-bottom: clamp(36px, 7vw, 72px);
+}
+.checkout-close-copy {
+  min-width: 0;
+}
+.checkout-close-copy h2 {
+  max-width: 720px;
+  margin: 0 0 14px;
+  font-size: clamp(38px, 4.2vw, 58px);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+.checkout-close-copy p:not(.section-label) {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(17px, 1.8vw, 22px);
+  line-height: 1.42;
+}
+.checkout-proof-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+.checkout-proof-row span {
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 820;
+}
+.checkout-close-panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 10px;
+  padding: clamp(16px, 2.4vw, 24px);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 22px 58px rgba(17, 17, 20, 0.1);
+}
+.checkout-close-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid rgba(17, 17, 20, 0.08);
+  padding-bottom: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+.checkout-close-top strong {
+  color: var(--ink);
+}
+.checkout-close-grid {
+  display: grid;
+  gap: 10px;
+}
+.checkout-close-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(247,248,250,0.72);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+.checkout-close-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.28);
+  background: #fff;
+  box-shadow: 0 14px 32px rgba(17, 17, 20, 0.08);
+}
+.checkout-close-card.primary {
+  border-color: rgba(0, 113, 227, 0.32);
+  background: rgba(0, 113, 227, 0.08);
+}
+.checkout-close-card span {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+}
+.checkout-close-card strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.checkout-close-card em {
+  justify-self: end;
+  color: var(--accent);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+.checkout-close-card small {
+  grid-column: 2 / -1;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
 .proof-ledger {
   display: grid;
   grid-template-columns: minmax(260px, 0.38fr) minmax(0, 0.62fr);
@@ -8752,6 +8967,52 @@ input[type="email"] {
   .delivery-stack-footer small {
     white-space: normal;
   }
+  .checkout-close {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+  .checkout-close-copy h2 {
+    font-size: clamp(34px, 11vw, 52px);
+  }
+  .checkout-close-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .checkout-proof-row {
+    gap: 7px;
+    margin-top: 18px;
+  }
+  .checkout-proof-row span {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  .checkout-close-panel {
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .checkout-close-card {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 3px 10px;
+    padding: 12px;
+  }
+  .checkout-close-card span {
+    width: 26px;
+    height: 26px;
+  }
+  .checkout-close-card strong {
+    font-size: 16px;
+    white-space: normal;
+  }
+  .checkout-close-card em {
+    grid-column: 2;
+    justify-self: start;
+    white-space: normal;
+  }
+  .checkout-close-card small {
+    grid-column: 2;
+    font-size: 12px;
+  }
   .delivery-lab > ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
@@ -9208,6 +9469,7 @@ const resultCount = document.querySelector("#result-count");
 const languageButtons = [...document.querySelectorAll("[data-language-toggle]")];
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
+const closeHrefTargets = [...document.querySelectorAll("[data-close-href-en][data-close-href-zh]")];
 const videoCountInput = document.querySelector("#video-count");
 const researchHoursInput = document.querySelector("#research-hours");
 const videoCountOutput = document.querySelector("#video-count-output");
@@ -9458,6 +9720,9 @@ function setLanguage(language) {
   }
   for (const node of placeholderTargets) {
     node.setAttribute("placeholder", node.dataset[currentLanguage === "zh" ? "i18nPlaceholderZh" : "i18nPlaceholderEn"]);
+  }
+  for (const node of closeHrefTargets) {
+    node.setAttribute("href", node.dataset[currentLanguage === "zh" ? "closeHrefZh" : "closeHrefEn"]);
   }
   for (const button of languageButtons) {
     button.classList.toggle("active", button.dataset.languageToggle === currentLanguage);

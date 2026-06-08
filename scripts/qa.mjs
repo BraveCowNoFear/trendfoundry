@@ -202,9 +202,9 @@ async function checkLocal() {
   assertCheck("site has animated workflow preview", siteIndex.includes("signal-demo.svg") && siteIndex.includes('class="motion-proof"') && siteIndex.includes('class="motion-preview"'));
   assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
-  assertCheck("site has trust dock search entry", siteIndex.includes('class="trust-dock"') && siteIndex.includes("Search Pages") && siteIndex.includes("./topics/"));
-  assertCheck("site has trust dock feed entry", siteIndex.includes('data-trust-dock="feed"') && siteIndex.includes("Open RSS feed") && siteIndex.includes("./feed.json"));
-  assertCheck("site has trust dock archive entry", siteIndex.includes('data-trust-dock="archive"') && siteIndex.includes("Open latest issue") && siteIndex.includes("issues/latest.html"));
+  assertCheck("site has simplified checkout close", siteIndex.includes('class="checkout-close"') && siteIndex.includes("Inspect first. Order when it fits."));
+  assertCheck("site checkout close links order route", siteIndex.includes('class="checkout-close-card primary"') && siteIndex.includes("./order/"));
+  assertCheck("site checkout close links custom brief", siteIndex.includes("Custom niche desk") && siteIndex.includes("TrendFoundry%20order%3A%20Custom%20niche%20desk"));
   assertCheck("site links no-login order page", siteIndex.includes("./order/") && siteIndex.includes("Order without login"));
   assertCheck("site has feed alternates", siteIndex.includes('type="application/rss+xml"') && siteIndex.includes('type="application/feed+json"'));
   assertCheck("site renders 12 cards", (siteIndex.match(/<article class="card"/g) || []).length === 12);
