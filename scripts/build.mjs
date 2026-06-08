@@ -2432,22 +2432,22 @@ const html = `<!doctype html>
           <button class="language-option" type="button" data-language-toggle="zh">中文</button>
         </div>
       </div>
-      ${dual("Creator intelligence packs for AI and developer video channels", "给 AI 和开发者视频频道的创作者情报包", "h1")}
-      ${dual("Source-backed opportunities from GitHub, YouTube, Bilibili, Hacker News, and arXiv, shaped into recordable titles, hooks, demos, limitations, and buyer-ready sample assets.", "从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取有来源的趋势机会，并整理成可录制标题、钩子、演示、限制说明和可交付样品包。", "p", ' class="sub"')}
-      <div class="hero-metrics" aria-label="Product proof points">
-        <span><strong data-hero-count="12">12</strong>${dual("ranked opportunities", "条排序机会")}</span>
-        <span><strong data-hero-count="5">5</strong>${dual("source lanes", "个来源入口")}</span>
-        <span><strong data-hero-count="1">1</strong>${dual("recordable script", "份可录制脚本")}</span>
+      ${dual("Source-backed video ideas, ready to record.", "AI/开发者选题包，直接开录。", "h1")}
+      ${dual("TrendFoundry scans public signals and turns them into ranked ideas, proof links, CSV, and scripts. Choose one sample, a weekly pipeline, or a custom niche desk.", "TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。", "p", ' class="sub"')}
+      <div class="hero-metrics" aria-label="Product tiers">
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>${dual("Sample issue", "单期样品")}</span>
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>${dual("Weekly pipeline", "周更情报")}</span>
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>${dual("Custom niche desk", "垂直定制")}</span>
       </div>
       <div class="hero-actions">
         <a class="action primary" href="./public-sample.en.md">${dual("View free sample", "查看免费样品")}</a>
-        <a class="action strong" href="./order/">${dual("Order without login", "无登录下单")}</a>
+        <a class="action strong" href="#pricing">${dual("Choose a pack", "选择产品档位")}</a>
       </div>
       <div class="utility-links" aria-label="Secondary landing links">
-        <a href="./public-sample.zh-CN.md">${dual("Chinese sample", "中文样品")}</a>
+        <a href="./issues/latest.html">${dual("Latest issue", "最新期刊")}</a>
         <a href="./trendfoundry-free-sample-pack.zip">${dual("Sample pack", "样品包")}</a>
         <a href="./ready-to-record-script.md">${dual("Script", "脚本")}</a>
-        <a href="./auth/">${dual("Sign in", "账号登录")}</a>
+        <a href="./order/">${dual("Order without login", "无登录下单")}</a>
         <a href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
         <a href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
@@ -2606,22 +2606,23 @@ const zhHtml = `<!doctype html>
           <span class="language-option active">中文</span>
         </div>
       </div>
-      <h1>给 B 站和中文技术频道的 AI 创作者情报包</h1>
-      <p class="sub">每天从 GitHub、YouTube、Bilibili、Hacker News 和 arXiv 提取公开趋势信号，整理成可录制标题、钩子、演示路径、限制说明和买家可交付样品。</p>
-      <div class="hero-metrics" aria-label="Product proof points">
-        <span><strong data-hero-count="12">12</strong>条排序机会</span>
-        <span><strong data-hero-count="5">5</strong>个来源入口</span>
-        <span><strong data-hero-count="1">1</strong>份可录制脚本</span>
+      <h1>AI/开发者选题包，直接开录。</h1>
+      <p class="sub">TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。</p>
+      <div class="hero-metrics" aria-label="Product tiers">
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>单期样品</span>
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>周更情报</span>
+        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>垂直定制</span>
       </div>
       <div class="hero-actions">
         <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
-        <a class="action strong" href="../order/">无登录下单</a>
+        <a class="action strong" href="#pricing">选择产品档位</a>
       </div>
       <div class="utility-links" aria-label="Secondary landing links">
         <a href="../public-sample.en.md">English sample</a>
+        <a href="../issues/latest.html">最新期刊</a>
         <a href="../trendfoundry-free-sample-pack.zip">样品包</a>
         <a href="../ready-to-record-script.md">脚本</a>
-        <a href="../auth/">账号登录</a>
+        <a href="../order/">无登录下单</a>
         <a href="${issueOrderHref}">在 GitHub 申请</a>
         <a href="${orderHref}">邮件下单</a>
       </div>
@@ -3721,33 +3722,33 @@ body.drawer-open {
 body[data-lang="zh"] .lang-en { display: none; }
 body[data-lang="zh"] .lang-zh { display: inline; }
 h1 {
-  max-width: 900px;
+  max-width: 760px;
   margin: 0;
-  font-size: clamp(46px, 6.8vw, 92px);
-  line-height: 0.96;
+  font-size: clamp(44px, 5.6vw, 74px);
+  line-height: 1;
   letter-spacing: 0;
 }
 .sub {
-  max-width: 720px;
-  margin: 24px 0 0;
+  max-width: 680px;
+  margin: 20px 0 0;
   color: var(--muted);
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.36;
+  font-size: clamp(18px, 1.55vw, 22px);
+  line-height: 1.42;
 }
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  max-width: 640px;
-  margin-top: 26px;
+  max-width: 590px;
+  margin-top: 24px;
 }
 .hero-metrics > span {
   display: grid;
-  gap: 3px;
+  gap: 4px;
   min-height: 76px;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: var(--radius);
-  padding: 12px;
+  padding: 12px 14px;
   background: rgba(255, 255, 255, 0.68);
   color: var(--muted);
   font-size: 12px;
@@ -3755,14 +3756,25 @@ h1 {
   box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
   backdrop-filter: blur(20px);
 }
-.hero-metrics > span > strong {
+.hero-price {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
   color: var(--ink);
-  font-size: 28px;
+}
+.hero-price em {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 850;
+}
+.hero-metrics strong {
+  color: var(--ink);
+  font-size: 34px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   transition: transform 180ms ease;
 }
-.hero-metrics.is-counting > span > strong {
+.hero-metrics.is-counting strong {
   transform: translateY(-1px);
 }
 .hero-actions,
@@ -8935,14 +8947,18 @@ input[type="email"] {
     font-size: 11px;
   }
   .hero-metrics strong {
-    font-size: 24px;
+    font-size: 26px;
+  }
+  .hero-price em {
+    font-size: 13px;
   }
   .scroll-cue {
     margin-top: 16px;
     align-self: flex-start;
   }
   body[data-lang="zh"] h1 {
-    word-break: break-all;
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
   .topbar aside,
   .source-mix-panel,

@@ -11,8 +11,8 @@ const skipScheduler = process.argv.includes("--skip-scheduler");
 const publicBase = "https://bravecownofear.github.io/trendfoundry/";
 const contactEmail = "rivan_Britain@outlook.com";
 const sellerOnly = ["prospects.csv", "outreach-board.md", "latest.json"];
-const homeChineseTitle = "\u7ed9 AI \u548c\u5f00\u53d1\u8005\u89c6\u9891\u9891\u9053\u7684\u521b\u4f5c\u8005\u60c5\u62a5\u5305";
-const zhLandingTitle = "\u7ed9 B \u7ad9\u548c\u4e2d\u6587\u6280\u672f\u9891\u9053\u7684 AI \u521b\u4f5c\u8005\u60c5\u62a5\u5305";
+const homeChineseTitle = "AI/\u5f00\u53d1\u8005\u9009\u9898\u5305\uff0c\u76f4\u63a5\u5f00\u5f55\u3002";
+const zhLandingTitle = "AI/\u5f00\u53d1\u8005\u9009\u9898\u5305\uff0c\u76f4\u63a5\u5f00\u5f55\u3002";
 const emailOrderZh = "\u90ae\u4ef6\u4e0b\u5355";
 const requiredScripts = [
   "daily",
