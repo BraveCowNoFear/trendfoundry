@@ -50,6 +50,7 @@
     "content-outreach-gate": "node scripts/generate_content_outreach_gate.mjs",
     "content-outreach-sends": "node scripts/generate_content_outreach_send_log.mjs",
     "content-attribution": "node scripts/generate_content_attribution.mjs",
+    "content-experiments": "node scripts/generate_content_experiments.mjs",
     "complete-content-outreach-send": "node scripts/complete_content_outreach_send.mjs",
     "content-deal-desk": "node scripts/generate_content_deal_desk.mjs",
     "content-fulfillment-queue": "node scripts/generate_content_fulfillment_queue.mjs",

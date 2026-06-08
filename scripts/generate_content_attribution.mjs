@@ -124,6 +124,7 @@ function rowFromCampaign({ reviewRow, gateByReview, sendByReview, repliesByCampa
   return {
     campaign_id: campaignId,
     review_id: reviewId,
+    variant_id: compact(reviewRow.variant_id, "unassigned"),
     source: compact(reviewRow.source),
     creator: compact(reviewRow.creator),
     offer_sku: compact(reviewRow.offer_sku),
@@ -149,9 +150,9 @@ Generated: ${generatedAt}
 
 Private local campaign ledger. Do not publish creator names, proof URLs, tracked URLs, buyer rows, or payment references from this file.
 
-| Campaign | Review | Source | Creator | Offer | Gate | Sent | Reply | Deal | Fulfillment | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-${rows.map((row) => `| ${row.campaign_id} | ${row.review_id} | ${row.source} | ${row.creator.replace(/\|/g, "/")} | ${row.offer_sku} | ${row.gate_status} | ${row.sent_status} | ${row.reply_stage || "-"} | ${row.deal_stage || "-"} | ${row.fulfillment_status || "-"} | ${row.action_status} |`).join("\n") || "| - | - | - | - | - | - | - | - | - | - | No campaigns generated. |"}
+| Campaign | Review | Variant | Source | Creator | Offer | Gate | Sent | Reply | Deal | Fulfillment | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+${rows.map((row) => `| ${row.campaign_id} | ${row.review_id} | ${row.variant_id} | ${row.source} | ${row.creator.replace(/\|/g, "/")} | ${row.offer_sku} | ${row.gate_status} | ${row.sent_status} | ${row.reply_stage || "-"} | ${row.deal_stage || "-"} | ${row.fulfillment_status || "-"} | ${row.action_status} |`).join("\n") || "| - | - | - | - | - | - | - | - | - | - | - | No campaigns generated. |"}
 
 ## Tracked URLs
 
@@ -176,6 +177,8 @@ This report summarizes the private campaign ledger for content outreach. Detaile
 - Fulfilled rows attributed: ${manifest.fulfilledAttributedCount}
 - Active offers: ${manifest.activeOffers.join(", ") || "none"}
 - Top offer by campaign count: ${manifest.topOfferByCampaignCount.offer} (${manifest.topOfferByCampaignCount.count})
+- Active variants: ${manifest.activeVariants.join(", ") || "none"}
+- Top variant by campaign count: ${manifest.topVariantByCampaignCount.variant} (${manifest.topVariantByCampaignCount.count})
 
 ## Operator Flow
 
@@ -221,6 +224,7 @@ const rows = reviewRows.map((reviewRow) => rowFromCampaign({
 }));
 
 const [topOffer, topOfferCount] = topEntry(countBy(rows, "offer_sku"));
+const [topVariant, topVariantCount] = topEntry(countBy(rows, "variant_id"));
 const manifest = {
   generatedAt,
   campaignCount: rows.length,
@@ -231,7 +235,10 @@ const manifest = {
   fulfilledAttributedCount: rows.filter((row) => row.fulfillment_status.includes("fulfilled")).length,
   activeOffers: [...new Set(rows.map((row) => row.offer_sku).filter(Boolean))],
   topOfferByCampaignCount: { offer: topOffer, count: topOfferCount },
+  activeVariants: [...new Set(rows.map((row) => row.variant_id).filter(Boolean))],
+  topVariantByCampaignCount: { variant: topVariant, count: topVariantCount },
   actionStatusCounts: countBy(rows, "action_status"),
+  variantCounts: countBy(rows, "variant_id"),
   inputs: {
     reviewRows: reviewRows.length,
     gateRows: gateRows.length,
@@ -257,6 +264,7 @@ await mkdir(outDir, { recursive: true });
 await writeFile(path.join(outDir, "attribution-ledger.csv"), toCsv(rows, [
   "campaign_id",
   "review_id",
+  "variant_id",
   "source",
   "creator",
   "offer_sku",

@@ -105,6 +105,8 @@ ${runSteps}
 - Attribution replies: ${report.content.attributionReplies}
 - Attribution deals: ${report.content.attributionDeals}
 - Attribution top offer: ${report.content.attributionTopOffer}
+- Experiment variants: ${report.content.experimentVariants}
+- Experiment recommended: ${report.content.experimentRecommendedVariant} / ${report.content.experimentRecommendedAction}
 - Deal desk active deals: ${report.content.activeDeals}
 - Deal desk playbook rows: ${report.content.playbookRows}
 - Fulfillment queue rows: ${report.content.fulfillmentQueueRows}
@@ -166,6 +168,7 @@ const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "conte
 const outreachGateData = await readJsonIfExists(path.join(root, "dist", "content-outreach-gate", "manifest.json"), {});
 const outreachSendsData = await readJsonIfExists(path.join(root, "dist", "content-outreach-sends", "manifest.json"), {});
 const attributionData = await readJsonIfExists(path.join(root, "dist", "content-attribution", "manifest.json"), {});
+const experimentsData = await readJsonIfExists(path.join(root, "dist", "content-experiments", "manifest.json"), {});
 const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
 const emailFulfillmentData = await readJsonIfExists(path.join(root, "dist", "email-fulfillment", "email-orders.json"), { prepared: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
@@ -237,6 +240,9 @@ const report = {
     attributionReplies: attributionData.repliesAttributedCount ?? contentOpsData.contentState?.attribution?.repliesAttributed ?? "unknown",
     attributionDeals: attributionData.dealsAttributedCount ?? contentOpsData.contentState?.attribution?.dealsAttributed ?? "unknown",
     attributionTopOffer: attributionData.topOfferByCampaignCount?.offer ?? contentOpsData.contentState?.attribution?.topOfferByCampaignCount?.offer ?? "unknown",
+    experimentVariants: experimentsData.variantCount ?? contentOpsData.contentState?.experiments?.variants ?? "unknown",
+    experimentRecommendedVariant: experimentsData.recommendedVariant ?? contentOpsData.contentState?.experiments?.recommendedVariant ?? "unknown",
+    experimentRecommendedAction: experimentsData.recommendedAction ?? contentOpsData.contentState?.experiments?.recommendedAction ?? "unknown",
     activeDeals: dealDeskData.activeDealCount ?? contentOpsData.contentState?.dealDesk?.activeDealCount ?? "unknown",
     playbookRows: dealDeskData.playbookCount ?? contentOpsData.contentState?.dealDesk?.playbookCount ?? "unknown",
     fulfillmentQueueRows: fulfillmentQueueData.queueCount ?? contentOpsData.contentState?.fulfillmentQueue?.queueCount ?? "unknown",

@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Gate
 
-Generated: 2026-06-08T18:45:07.253Z
+Generated: 2026-06-08T19:01:37.894Z
 
 This gate checks reviewer-ready outreach packs before they enter the private action queue. It keeps the public report to aggregate counts only.
 

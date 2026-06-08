@@ -1,6 +1,6 @@
 # TrendFoundry Content Attribution
 
-Generated: 2026-06-08T18:45:08.489Z
+Generated: 2026-06-08T19:01:39.408Z
 
 This report summarizes the private campaign ledger for content outreach. Detailed creator rows and tracked URLs stay in ignored `dist/content-attribution/`.
 
@@ -14,6 +14,8 @@ This report summarizes the private campaign ledger for content outreach. Detaile
 - Fulfilled rows attributed: 0
 - Active offers: trendfoundry-proof-custom, trendfoundry-proof-script-pack
 - Top offer by campaign count: trendfoundry-proof-custom (4)
+- Active variants: custom-proof-niche, custom-proof-sample-first, script-pack-low-risk
+- Top variant by campaign count: custom-proof-niche (2)
 
 ## Operator Flow
 

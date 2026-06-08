@@ -140,11 +140,13 @@ function rowChecks(row, packText, packExists) {
   const subject = compact(row.subject);
   const draft = extractCodeBlock(packText, "Draft");
   const hasCampaignId = Boolean(compact(row.campaign_id));
-  const hasTracking = draft.includes("tf_campaign=") && draft.includes("tf_source=content_outreach") && draft.includes("tf_offer=");
+  const hasVariantId = Boolean(compact(row.variant_id));
+  const hasTracking = draft.includes("tf_campaign=") && draft.includes("tf_source=content_outreach") && draft.includes("tf_offer=") && draft.includes("tf_variant=");
   const failures = [];
   if (!packExists) failures.push("missing_send_pack");
   if (!subject) failures.push("missing_subject");
   if (!hasCampaignId) failures.push("missing_campaign_id");
+  if (!hasVariantId) failures.push("missing_variant_id");
   if (subject.length > 90) failures.push("subject_too_long");
   if (!draft) failures.push("missing_draft");
   if (wordCount(draft) > 180) failures.push("draft_too_long");
@@ -161,6 +163,7 @@ function rowChecks(row, packText, packExists) {
   return {
     review_id: compact(row.review_id),
     campaign_id: compact(row.campaign_id),
+    variant_id: compact(row.variant_id),
     offer_sku: compact(row.offer_sku),
     subject_length: subject.length,
     draft_words: wordCount(draft),
@@ -244,6 +247,7 @@ await mkdir(outDir, { recursive: true });
 await writeFile(path.join(outDir, "checks.csv"), toCsv(checks, [
   "review_id",
   "campaign_id",
+  "variant_id",
   "offer_sku",
   "subject_length",
   "draft_words",

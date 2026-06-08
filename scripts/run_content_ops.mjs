@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-gate", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-attribution", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-gate", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-attribution", "content-experiments", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -78,6 +78,7 @@ const outreachSendsManifest = await readJson("dist/content-outreach-sends/manife
 const dealDeskManifest = await readJson("dist/content-deal-desk/manifest.json", {});
 const fulfillmentQueueManifest = await readJson("dist/content-fulfillment-queue/manifest.json", {});
 const attributionManifest = await readJson("dist/content-attribution/manifest.json", {});
+const experimentsManifest = await readJson("dist/content-experiments/manifest.json", {});
 const customerSuccessManifest = await readJson("dist/content-customer-success/manifest.json", {});
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
 const actionBriefManifest = await readJson("dist/content-action-brief/manifest.json", {});
@@ -213,6 +214,16 @@ const run = {
       activeOffers: attributionManifest.activeOffers || [],
       topOfferByCampaignCount: attributionManifest.topOfferByCampaignCount || {}
     },
+    experiments: {
+      variants: experimentsManifest.variantCount,
+      campaigns: experimentsManifest.campaignCount,
+      manuallySent: experimentsManifest.manuallySentCount,
+      replies: experimentsManifest.replyCount,
+      deals: experimentsManifest.dealCount,
+      recommendedVariant: experimentsManifest.recommendedVariant,
+      recommendedAction: experimentsManifest.recommendedAction,
+      enoughDataToChooseWinner: experimentsManifest.enoughDataToChooseWinner
+    },
     customerSuccess: {
       completionReceiptCount: customerSuccessManifest.completionReceiptCount,
       followupCount: customerSuccessManifest.followupCount,
@@ -261,7 +272,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, deal desk, unified fulfillment queue, attribution ledger, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, deal desk, unified fulfillment queue, attribution ledger, experiment plan, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -295,6 +306,7 @@ ${stepSummary(steps)}
 - Deal desk: ${dealDeskManifest.activeDealCount ?? "unknown"} active deals, ${dealDeskManifest.playbookCount ?? "unknown"} objection playbook rows
 - Fulfillment queue: ${fulfillmentQueueManifest.queueCount ?? "unknown"} rows, ${fulfillmentQueueManifest.preparedWaitingManualSendCount ?? "unknown"} waiting manual send, ${fulfillmentQueueManifest.needsDeliveryFixCount ?? "unknown"} needing delivery fix, ${fulfillmentQueueManifest.conciseReadyCount ?? "unknown"} concise-ready
 - Attribution: ${attributionManifest.campaignCount ?? "unknown"} campaigns, ${attributionManifest.manualSentCount ?? "unknown"} sent, ${attributionManifest.repliesAttributedCount ?? "unknown"} replies, top offer ${(attributionManifest.topOfferByCampaignCount || {}).offer || "unknown"}
+- Experiments: ${experimentsManifest.variantCount ?? "unknown"} variants, recommended ${experimentsManifest.recommendedVariant || "unknown"} / ${experimentsManifest.recommendedAction || "unknown"}
 - Customer success: ${customerSuccessManifest.followupCount ?? "unknown"} follow-ups, ${customerSuccessManifest.dueNowCount ?? "unknown"} due now, ${customerSuccessManifest.completionReceiptCount ?? "unknown"} completion receipts
 - Testimonials: ${testimonialManifest.testimonialRows ?? "unknown"} private rows, ${testimonialManifest.publishCandidateCount ?? "unknown"} publish candidates, ${testimonialManifest.permissionOrReviewCount ?? "unknown"} needing permission/review
 - Action brief: ${actionBriefManifest.actionCount ?? "unknown"} actions, top lane ${actionBriefManifest.topActionLane || "none"}, ${actionBriefManifest.manualReviewCount ?? "unknown"} needing manual review
@@ -332,12 +344,13 @@ ${stepSummary(steps)}
 19. Review \`dist/content-deal-desk/deal-desk.md\` when a reply, invoice request, or payment confirmation arrives.
 20. Review \`dist/content-fulfillment-queue/fulfillment-queue.md\` before any manual buyer delivery.
 21. Review \`dist/content-attribution/attribution-ledger.md\` to compare campaign, send, reply, deal, and fulfillment status.
-22. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
-23. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
-24. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
-25. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-26. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-27. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+22. Review \`dist/content-experiments/experiment-plan.md\` before changing outreach copy or offer mix.
+23. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
+24. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
+25. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
+26. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+27. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+28. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

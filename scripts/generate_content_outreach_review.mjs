@@ -124,6 +124,28 @@ function productBySku(products, sku) {
   return products.find((product) => product.sku === sku) || products[0] || {};
 }
 
+function variantFor(row, product, index) {
+  const sku = compact(product.sku || row.offer_sku);
+  if (sku.includes("weekly")) {
+    return {
+      variant_id: "weekly-calendar",
+      variant_hypothesis: "Recurring creators may prefer a simple weekly proof queue over one-off scripts."
+    };
+  }
+  if (sku.includes("custom")) {
+    return {
+      variant_id: index % 2 === 0 ? "custom-proof-niche" : "custom-proof-sample-first",
+      variant_hypothesis: index % 2 === 0
+        ? "Niche-specific proof packs should convert creators with narrow audience needs."
+        : "A tracked free sample before the custom offer should reduce risk for custom-pack prospects."
+    };
+  }
+  return {
+    variant_id: "script-pack-low-risk",
+    variant_hypothesis: "A low-price one-off script pack should work as the first paid test."
+  };
+}
+
 function sourceNoun(source) {
   if (source === "youtube") return "YouTube channel";
   if (source === "bilibili") return "Bilibili channel";
@@ -147,10 +169,12 @@ function makePack(row, product, index) {
   const orderUrl = compact(product.order_url, "https://bravecownofear.github.io/trendfoundry/order/");
   const reviewId = `outreach-${String(index + 1).padStart(2, "0")}-${safeFileName(creator)}`;
   const campaignId = `tf-${reviewId}`;
+  const variant = variantFor(row, product, index);
   const tracking = {
     tf_campaign: campaignId,
     tf_source: "content_outreach",
-    tf_offer: product.sku || row.offer_sku || "trendfoundry-proof-script-pack"
+    tf_offer: product.sku || row.offer_sku || "trendfoundry-proof-script-pack",
+    tf_variant: variant.variant_id
   };
   const trackedFreeSampleUrl = withTracking(freeSampleUrl, tracking);
   const trackedOrderUrl = withTracking(orderUrl, tracking);
@@ -170,6 +194,8 @@ function makePack(row, product, index) {
   return {
     review_id: reviewId,
     campaign_id: campaignId,
+    variant_id: variant.variant_id,
+    variant_hypothesis: variant.variant_hypothesis,
     close_rank: row.close_rank,
     creator,
     source,
@@ -202,6 +228,8 @@ Private local review pack. Do not publish. Do not send without human review.
 
 - Review ID: ${pack.review_id}
 - Campaign ID: ${pack.campaign_id}
+- Variant: ${pack.variant_id}
+- Variant hypothesis: ${pack.variant_hypothesis}
 - Source: ${pack.source}
 - Topic: ${pack.topic}
 - Proof URL: ${pack.proof_url}
@@ -275,6 +303,7 @@ This step turns the private daily close queue into reviewer-ready send packs. De
 
 - Review packs: ${packs.length}
 - Campaigns with tracked URLs: ${packs.filter((pack) => pack.tracked_free_sample_url.includes("tf_campaign=") && pack.tracked_order_url.includes("tf_campaign=")).length}
+- Variants active: ${[...new Set(packs.map((pack) => pack.variant_id))].join(", ") || "none"}
 - Products available: ${products.length}
 - Offer mix: ${Object.entries(offerCounts).map(([sku, count]) => `${sku}=${count}`).join(", ") || "none"}
 
@@ -322,6 +351,7 @@ const manifest = {
   offerSkus: [...new Set(packs.map((pack) => pack.offer_sku))],
   campaignCount: packs.length,
   trackedUrlCount: packs.filter((pack) => pack.tracked_free_sample_url.includes("tf_campaign=") && pack.tracked_order_url.includes("tf_campaign=")).length,
+  variantIds: [...new Set(packs.map((pack) => pack.variant_id))],
   followUpDates: [...new Set(packs.map((pack) => pack.follow_up_date))],
   safety: {
     sendsMessages: false,
@@ -338,6 +368,8 @@ await writeFile(path.join(outDir, "manifest.json"), JSON.stringify(manifest, nul
 await writeFile(path.join(outDir, "review-board.csv"), toCsv(packs, [
   "review_id",
   "campaign_id",
+  "variant_id",
+  "variant_hypothesis",
   "close_rank",
   "creator",
   "source",
