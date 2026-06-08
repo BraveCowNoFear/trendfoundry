@@ -1,6 +1,6 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T07:16:21.658Z
+Generated: 2026-06-08T07:19:54.446Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 

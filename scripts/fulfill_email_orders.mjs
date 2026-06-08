@@ -23,7 +23,7 @@ function markdownReport(prepared, skipped, generatedAt) {
   const readyRows = prepared.map(
     (row) => `| ${row.orderId} | ${row.orderType} | ${row.buyerName} | ${row.buyerContact} | ${row.channel} | ${row.orderDir} |`
   );
-  const skippedRows = skipped.map((order) => `| ${order.orderId || "-"} | ${order.stage || "unknown"} | ${safeLine(order.buyerName)} | ${safeLine(order.buyerContact)} |`);
+  const skippedRows = skipped.map((order) => `| ${order.orderId || "-"} | ${order.stage || "unknown"} | ${safeLine(order.buyerName)} | ${safeLine(order.buyerContact)} | ${safeLine(order.skipReason, "not_paid_needs_fulfillment")} |`);
   return `# Email Order Fulfillment Report
 
 Generated: ${generatedAt}
@@ -31,6 +31,8 @@ Generated: ${generatedAt}
 Only local buyer delivery directories were created. No messages were sent, no files were uploaded, no payment action was attempted, and no GitHub state was changed.
 
 Eligible stage: \`paid_needs_fulfillment\`
+
+Weekly email orders are handled by the subscription workflow: \`sync-email-subscriptions\` -> \`content-subscription-crm\` -> \`content-subscription-due\`.
 
 ## Prepared Orders
 
@@ -40,9 +42,9 @@ ${readyRows.length ? readyRows.join("\n") : "| - | - | - | - | - | No paid email
 
 ## Skipped Orders
 
-| Order ID | Stage | Buyer | Contact |
-|---|---|---|---|
-${skippedRows.length ? skippedRows.join("\n") : "| - | - | - | No skipped orders. |"}
+| Order ID | Stage | Buyer | Contact | Reason |
+|---|---|---|---|---|
+${skippedRows.length ? skippedRows.join("\n") : "| - | - | - | - | No skipped orders. |"}
 
 ## Safety
 
@@ -56,8 +58,15 @@ const intakeFile = resolvePath(argValue("intake-file", "dist/email-order-intake/
 const reportDir = resolvePath(argValue("out-dir", "dist/email-fulfillment"));
 const intake = JSON.parse(await readFile(intakeFile, "utf8"));
 const orders = intake.orders || [];
-const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment");
-const skipped = orders.filter((order) => order.stage !== "paid_needs_fulfillment");
+const ready = orders.filter((order) => order.stage === "paid_needs_fulfillment" && order.tier !== "weekly-brief");
+const skipped = orders
+  .filter((order) => order.stage !== "paid_needs_fulfillment" || order.tier === "weekly-brief")
+  .map((order) => ({
+    ...order,
+    skipReason: order.tier === "weekly-brief" && order.stage === "paid_needs_fulfillment"
+      ? "weekly_subscription_handled_by_content_subscription_due"
+      : "not_paid_needs_fulfillment"
+  }));
 const prepared = [];
 
 for (const order of ready) {
@@ -86,6 +95,7 @@ const payload = {
   generatedAt,
   intakeFile,
   prepared,
+  skipped,
   skippedCount: skipped.length,
   safety: [
     "No messages were sent.",
