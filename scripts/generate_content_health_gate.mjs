@@ -32,6 +32,7 @@ const publicDocs = [
   "docs/content-revenue-model.md",
   "docs/content-sales-crm.md",
   "docs/content-sales-sequence.md",
+  "docs/content-subscription-fulfillment.md",
   "docs/content-subscription-plan.md",
   "docs/custom-proof-pack.md",
   "docs/episode-workbench.md",

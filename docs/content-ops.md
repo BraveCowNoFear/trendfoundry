@@ -1,6 +1,6 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-07T22:10:56.588Z
+Generated: 2026-06-08T06:37:59.885Z
 
 Status: success
 
@@ -36,14 +36,14 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Primary episode: NousResearch/hermes-agent
 - Buyer deliverables: full-episode-script.md, episode-workbench.md, content-editorial-audit.md
 - Custom pack: AI video creators / YouTube and Bilibili (custom-proof-pack.md)
-- Subscription plan: 4 weeks (2026-06-10, 2026-06-17, 2026-06-24, 2026-07-01)
+- Subscription plan: 4 weeks (2026-06-17, 2026-06-24, 2026-07-01, 2026-07-08)
 - Sales drafts: 6 drafts across warm_email, bilibili_dynamic, youtube_community, linkedin_or_x, followup_email, objection_reply
 - Prospects: 20 local drafts across YouTube, Bilibili
 - CRM: 20 rows, 5 due today, 20 due this week
 - Revenue model: base new MRR USD 70, base month-one cash USD 92.5
 - Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Close pack: 5 selected, 5 clean, 0 needing cleanup
-- Health gate: 18 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Health gate: 19 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
