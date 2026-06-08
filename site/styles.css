@@ -3355,6 +3355,59 @@ input[type="search"]:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
+.opportunity-gallery {
+  grid-template-columns: minmax(320px, 1.08fr) repeat(3, minmax(180px, 0.64fr));
+  grid-auto-flow: dense;
+  gap: 16px;
+  align-items: stretch;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(28px, 5vw, 56px);
+  margin-top: 10px;
+}
+.gallery-header,
+.gallery-footer {
+  grid-column: 1 / -1;
+}
+.gallery-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 4px;
+}
+.gallery-header h2 {
+  max-width: 860px;
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4.8vw, 64px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.gallery-header p:not(.section-label) {
+  max-width: 680px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.gallery-count {
+  display: grid;
+  gap: 4px;
+  min-width: 170px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 12px 30px rgba(17, 17, 20, 0.06);
+  text-align: right;
+}
+.gallery-count span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+.gallery-count strong {
+  color: var(--blue);
+  font-size: 14px;
+}
 .card {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -3363,6 +3416,168 @@ input[type="search"]:focus {
   min-height: 320px;
   box-shadow: var(--shadow);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.opportunity-gallery .card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 174px;
+  overflow: hidden;
+  border-radius: 14px;
+  padding: 15px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,250,252,0.9)),
+    radial-gradient(circle at 88% 12%, rgba(0,113,227,0.08), transparent 28%);
+  order: var(--gallery-order, 20);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, opacity 200ms ease;
+}
+.opportunity-gallery .card::before {
+  content: attr(data-rank);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+.opportunity-gallery .card::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 12px;
+  height: 4px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, var(--blue) 0 var(--score-fill, 52%), rgba(17,17,20,0.1) var(--score-fill, 52%) 100%);
+}
+.opportunity-gallery .card.is-focused {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 424px;
+  border-color: rgba(0,113,227,0.72);
+  padding: 26px;
+  box-shadow: inset 0 0 0 1px rgba(0,113,227,0.42), 0 30px 72px rgba(17, 17, 20, 0.15);
+}
+.opportunity-gallery .card.is-focused::before {
+  width: 36px;
+  height: 36px;
+  border-color: transparent;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,113,227,0.24);
+}
+.opportunity-gallery .card.is-focused::after {
+  height: 5px;
+  left: 26px;
+  right: 26px;
+  bottom: 18px;
+}
+.opportunity-gallery .card:not(.is-focused) {
+  cursor: pointer;
+}
+.opportunity-gallery .card:not(.is-focused):hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,113,227,0.24);
+}
+.opportunity-gallery .card:not(.is-focused) p,
+.opportunity-gallery .card:not(.is-focused) .why,
+.opportunity-gallery .card:not(.is-focused) .idea,
+.opportunity-gallery .card:not(.is-focused) details {
+  display: none;
+}
+.opportunity-gallery .card:not(.is-focused) .meta span:nth-child(n+4) {
+  display: none;
+}
+.opportunity-gallery .meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.opportunity-gallery .meta > span > span {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+.opportunity-gallery .card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.opportunity-gallery .card h3 a:hover {
+  color: var(--blue);
+}
+.opportunity-gallery .card:not(.is-focused) h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 22px;
+  font-size: 16px;
+  line-height: 1.28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.opportunity-gallery .card.is-focused h3 {
+  max-width: 610px;
+  margin: 0 0 16px;
+  font-size: clamp(28px, 3.8vw, 46px);
+  line-height: 1.04;
+}
+.opportunity-gallery .card.is-focused p {
+  max-width: 640px;
+}
+.opportunity-gallery .card.is-focused details {
+  margin-bottom: 20px;
+}
+.gallery-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin-top: 2px;
+}
+.gallery-meter {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(17,17,20,0.08);
+}
+.gallery-meter span {
+  display: block;
+  width: var(--gallery-progress, 8%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+  transition: width 220ms ease;
+}
+.gallery-controls {
+  display: flex;
+  gap: 8px;
+}
+.gallery-step {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+.gallery-step:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,113,227,0.28);
+  box-shadow: 0 10px 24px rgba(17,17,20,0.08);
 }
 .card:hover {
   transform: translateY(-3px);
@@ -3377,6 +3592,10 @@ input[type="search"]:focus {
   transform: translateY(-3px);
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px rgba(15, 107, 95, 0.5), 0 24px 54px rgba(17, 17, 20, 0.13);
+}
+.opportunity-gallery .card.is-focused {
+  border-color: rgba(0,113,227,0.72);
+  box-shadow: inset 0 0 0 1px rgba(0,113,227,0.42), 0 30px 72px rgba(17, 17, 20, 0.15);
 }
 .card.hidden {
   display: none;
@@ -3957,6 +4176,59 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .opportunity-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 32px;
+  }
+  .gallery-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .gallery-header h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .gallery-count {
+    min-width: 0;
+    text-align: left;
+  }
+  .opportunity-gallery .card,
+  .opportunity-gallery .card.is-focused {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .opportunity-gallery .card {
+    min-height: 132px;
+    padding: 14px;
+  }
+  .opportunity-gallery .card::before {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 8px;
+  }
+  .opportunity-gallery .card::after {
+    left: 14px;
+    right: 14px;
+    bottom: 10px;
+  }
+  .opportunity-gallery .card.is-focused {
+    min-height: 420px;
+    padding: 18px;
+  }
+  .opportunity-gallery .card.is-focused::after {
+    left: 18px;
+    right: 18px;
+    bottom: 14px;
+  }
+  .opportunity-gallery .card.is-focused h3 {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+  .gallery-footer {
+    grid-template-columns: 1fr;
+  }
+  .gallery-controls {
+    justify-content: flex-end;
+  }
   .fit-studio {
     gap: 18px;
   }

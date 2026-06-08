@@ -48,6 +48,10 @@ const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
 const localNavNode = document.querySelector(".local-nav");
+const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
+const galleryPositionNode = document.querySelector("#gallery-position");
+const galleryActiveScoreNode = document.querySelector("#gallery-active-score");
+const galleryStepButtons = [...document.querySelectorAll("[data-gallery-step]")];
 const opportunityFocusTitle = document.querySelector("#opportunity-focus-title");
 const opportunityFocusSummary = document.querySelector("#opportunity-focus-summary");
 const opportunityFocusRank = document.querySelector("#opportunity-focus-rank");
@@ -146,6 +150,46 @@ function activateFitPersona(button, scrollToButton = false) {
   if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");
 }
 
+function visibleOpportunityCards() {
+  return cards.filter((card) => !card.classList.contains("hidden"));
+}
+
+function updateGalleryState(card) {
+  if (!opportunityGalleryNode || !card) return;
+  const visibleCards = visibleOpportunityCards();
+  const activeIndex = Math.max(0, visibleCards.indexOf(card));
+  const total = Math.max(1, visibleCards.length);
+  for (const item of cards) {
+    if (item.classList.contains("hidden")) {
+      item.style.removeProperty("--gallery-order");
+      continue;
+    }
+    const visibleIndex = visibleCards.indexOf(item);
+    const offset = visibleIndex < activeIndex ? visibleIndex + total - activeIndex : visibleIndex - activeIndex;
+    item.style.setProperty("--gallery-order", String(offset + 1));
+    const score = Math.max(0, Math.min(100, Math.round(Number(item.dataset.focusScore || 0) / 2)));
+    item.style.setProperty("--score-fill", score + "%");
+  }
+  opportunityGalleryNode.style.setProperty("--gallery-progress", Math.round(((activeIndex + 1) / total) * 100) + "%");
+  if (galleryPositionNode) {
+    galleryPositionNode.textContent = currentLanguage === "zh" ? "已选择 " + (activeIndex + 1) + " / " + total : (activeIndex + 1) + " of " + total + " selected";
+  }
+  if (galleryActiveScoreNode) {
+    galleryActiveScoreNode.textContent = currentLanguage === "zh" ? "评分 " + (card.dataset.focusScore || "") : "Score " + (card.dataset.focusScore || "");
+  }
+}
+
+function stepOpportunityGallery(direction) {
+  const visibleCards = visibleOpportunityCards();
+  if (!visibleCards.length) return;
+  const currentIndex = Math.max(0, visibleCards.indexOf(activeOpportunityCard));
+  const nextIndex = (currentIndex + direction + visibleCards.length) % visibleCards.length;
+  const nextCard = visibleCards[nextIndex];
+  updateOpportunityFocus(nextCard);
+  if (nextCard.focus) nextCard.focus({ preventScroll: true });
+  if (nextCard.scrollIntoView) nextCard.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+}
+
 function updateOpportunityFocus(card) {
   if (!opportunityFocusTitle) return;
   activeOpportunityCard = card || null;
@@ -161,8 +205,10 @@ function updateOpportunityFocus(card) {
       opportunityFocusLink.setAttribute("href", "#opportunities");
       opportunityFocusLink.textContent = currentLanguage === "zh" ? "调整筛选" : "Adjust filters";
     }
+    if (opportunityGalleryNode) opportunityGalleryNode.style.setProperty("--gallery-progress", "0%");
     return;
   }
+  updateGalleryState(activeOpportunityCard);
   opportunityFocusTitle.textContent = activeOpportunityCard.dataset["focusTitle" + suffix] || "";
   opportunityFocusSummary.textContent = activeOpportunityCard.dataset["focusSummary" + suffix] || "";
   if (opportunityFocusRank) opportunityFocusRank.textContent = "#" + (activeOpportunityCard.dataset.rank || "");
@@ -213,6 +259,8 @@ function applyFilters() {
   const firstVisible = cards.find((card) => !card.classList.contains("hidden"));
   if (!activeOpportunityCard || activeOpportunityCard.classList.contains("hidden")) {
     updateOpportunityFocus(firstVisible || null);
+  } else {
+    updateGalleryState(activeOpportunityCard);
   }
   resultCount.textContent = countLabel(visible);
   resultCount.classList.remove("bump");
@@ -226,6 +274,16 @@ for (const card of cards) {
   card.addEventListener("click", (event) => {
     if (event.target.closest("a, summary, details")) return;
     updateOpportunityFocus(card);
+  });
+}
+for (const button of galleryStepButtons) {
+  button.addEventListener("click", () => stepOpportunityGallery(button.dataset.galleryStep === "prev" ? -1 : 1));
+}
+if (opportunityGalleryNode) {
+  opportunityGalleryNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    stepOpportunityGallery(event.key === "ArrowRight" ? 1 : -1);
   });
 }
 

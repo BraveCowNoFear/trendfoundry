@@ -1451,9 +1451,9 @@ function englishVideoAngle(item) {
 
 const cards = top
   .map(
-    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-gallery-index="${index}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${item.summary} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>${dual(`Score ${item.score}`, `评分 ${item.score}`)}</span><span>${dual(fitLabel(item.monetizationFit), fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? `<span>${dual("cached", "缓存")}</span>` : ""}${item.qualityFlags?.length ? `<span>${dual("review", "需复核")}</span>` : ""}</div>
-  <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
+  <h3><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   ${dual(item.summary || "No summary available.", `创作切入：${zhHook(item)}`, "p")}
   <p class="why"><strong>${dual("Why now:", "为什么现在：")}</strong> ${dual(item.deliverables.whyNow, zhWhyNow(item))}</p>
   <div class="idea">
@@ -1541,9 +1541,9 @@ const zhSourceButtons = ["all", ...Object.keys(bySource)]
 
 const zhCards = top
   .map(
-    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${zhHook(item)} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
+    (item, index) => `<article class="card" tabindex="0" data-source="${escapeHtml(item.source)}" data-fit="${escapeHtml(item.monetizationFit)}" data-rank="${index + 1}" data-gallery-index="${index}" data-focus-title-en="${escapeHtml(englishSampleTitle(item))}" data-focus-title-zh="${escapeHtml(zhSampleTitle(item))}" data-focus-summary-en="${escapeHtml(item.summary || englishSampleHook(item))}" data-focus-summary-zh="${escapeHtml(zhHook(item))}" data-focus-score="${escapeHtml(String(item.score))}" data-focus-source="${escapeHtml(sourceLabel(item))}" data-focus-url="${escapeHtml(item.url)}" data-search="${escapeHtml(`${item.title} ${zhHook(item)} ${item.deliverables.bilibiliTitles?.[0] || ""} ${item.sourceQuery} ${item.targetCreator}`.toLowerCase())}">
   <div class="meta"><span>${escapeHtml(item.source)}</span><span>评分 ${item.score}</span><span>${escapeHtml(fitLabel(item.monetizationFit, "zh"))}</span>${item.stale ? "<span>缓存</span>" : ""}${item.qualityFlags?.length ? "<span>需复核</span>" : ""}</div>
-  <h3>${index + 1}. <a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
+  <h3><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.title)}</a></h3>
   <p>创作切入：${escapeHtml(zhHook(item))}</p>
   <p class="why"><strong>为什么现在：</strong>${escapeHtml(zhWhyNow(item))}</p>
   <div class="idea"><strong>B 站角度：</strong>${escapeHtml(item.deliverables.bilibiliTitles[0])}</div>
@@ -2457,7 +2457,24 @@ const html = `<!doctype html>
       </div>
       ${opportunityFocus}
     </section>
-    <section class="grid" id="opportunity-grid">${cards}</section>
+    <section class="grid opportunity-gallery" id="opportunity-grid" aria-label="Opportunity Gallery" style="--gallery-progress: ${Math.round(100 / Math.max(1, top.length))}%;">
+      <div class="gallery-header">
+        <div>
+          ${dual("Opportunity Gallery", "机会画廊", "p", ' class="section-label"')}
+          ${dual("Twelve signals. One focused recording queue.", "12 条信号，收束成一条录制队列。", "h2")}
+          ${dual("Use the filters above, then move through the selected queue like a product gallery.", "先用上方筛选，再像浏览产品画廊一样推进当前录制队列。", "p")}
+        </div>
+        <div class="gallery-count"><span id="gallery-position">${dual(`1 of ${top.length} selected`, `已选择 1 / ${top.length}`)}</span><strong id="gallery-active-score">Score ${escapeHtml(String(top[0]?.score || ""))}</strong></div>
+      </div>
+      ${cards}
+      <div class="gallery-footer">
+        <div class="gallery-meter" aria-hidden="true"><span></span></div>
+        <div class="gallery-controls" aria-label="Opportunity gallery controls">
+          <button class="gallery-step" type="button" data-gallery-step="prev" aria-label="Previous opportunity">‹</button>
+          <button class="gallery-step" type="button" data-gallery-step="next" aria-label="Next opportunity">›</button>
+        </div>
+      </div>
+    </section>
     ${contrastSection}
     ${planningCalculator}
     <section class="pricing" id="pricing" aria-label="Pricing tiers">
@@ -2612,7 +2629,24 @@ const zhHtml = `<!doctype html>
       </div>
       ${zhOpportunityFocus}
     </section>
-    <section class="grid" id="opportunity-grid">${zhCards}</section>
+    <section class="grid opportunity-gallery" id="opportunity-grid" aria-label="Opportunity Gallery" style="--gallery-progress: ${Math.round(100 / Math.max(1, top.length))}%;">
+      <div class="gallery-header">
+        <div>
+          <p class="section-label">机会画廊</p>
+          <h2>12 条信号，收束成一条录制队列。</h2>
+          <p>先用上方筛选，再像浏览产品画廊一样推进当前录制队列。</p>
+        </div>
+        <div class="gallery-count"><span id="gallery-position">已选择 1 / ${top.length}</span><strong id="gallery-active-score">评分 ${escapeHtml(String(top[0]?.score || ""))}</strong></div>
+      </div>
+      ${zhCards}
+      <div class="gallery-footer">
+        <div class="gallery-meter" aria-hidden="true"><span></span></div>
+        <div class="gallery-controls" aria-label="Opportunity gallery controls">
+          <button class="gallery-step" type="button" data-gallery-step="prev" aria-label="上一条机会">‹</button>
+          <button class="gallery-step" type="button" data-gallery-step="next" aria-label="下一条机会">›</button>
+        </div>
+      </div>
+    </section>
     ${zhContrastSection}
     ${zhPlanningCalculator}
     <section class="pricing" id="pricing" aria-label="Pricing tiers">
@@ -6546,6 +6580,59 @@ input[type="search"]:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
+.opportunity-gallery {
+  grid-template-columns: minmax(320px, 1.08fr) repeat(3, minmax(180px, 0.64fr));
+  grid-auto-flow: dense;
+  gap: 16px;
+  align-items: stretch;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(28px, 5vw, 56px);
+  margin-top: 10px;
+}
+.gallery-header,
+.gallery-footer {
+  grid-column: 1 / -1;
+}
+.gallery-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: end;
+  margin-bottom: 4px;
+}
+.gallery-header h2 {
+  max-width: 860px;
+  margin: 0 0 8px;
+  font-size: clamp(34px, 4.8vw, 64px);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+.gallery-header p:not(.section-label) {
+  max-width: 680px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.gallery-count {
+  display: grid;
+  gap: 4px;
+  min-width: 170px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 12px 30px rgba(17, 17, 20, 0.06);
+  text-align: right;
+}
+.gallery-count span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+.gallery-count strong {
+  color: var(--blue);
+  font-size: 14px;
+}
 .card {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -6554,6 +6641,168 @@ input[type="search"]:focus {
   min-height: 320px;
   box-shadow: var(--shadow);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.opportunity-gallery .card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 174px;
+  overflow: hidden;
+  border-radius: 14px;
+  padding: 15px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,250,252,0.9)),
+    radial-gradient(circle at 88% 12%, rgba(0,113,227,0.08), transparent 28%);
+  order: var(--gallery-order, 20);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease, opacity 200ms ease;
+}
+.opportunity-gallery .card::before {
+  content: attr(data-rank);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 850;
+}
+.opportunity-gallery .card::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  bottom: 12px;
+  height: 4px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, var(--blue) 0 var(--score-fill, 52%), rgba(17,17,20,0.1) var(--score-fill, 52%) 100%);
+}
+.opportunity-gallery .card.is-focused {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 424px;
+  border-color: rgba(0,113,227,0.72);
+  padding: 26px;
+  box-shadow: inset 0 0 0 1px rgba(0,113,227,0.42), 0 30px 72px rgba(17, 17, 20, 0.15);
+}
+.opportunity-gallery .card.is-focused::before {
+  width: 36px;
+  height: 36px;
+  border-color: transparent;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0,113,227,0.24);
+}
+.opportunity-gallery .card.is-focused::after {
+  height: 5px;
+  left: 26px;
+  right: 26px;
+  bottom: 18px;
+}
+.opportunity-gallery .card:not(.is-focused) {
+  cursor: pointer;
+}
+.opportunity-gallery .card:not(.is-focused):hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,113,227,0.24);
+}
+.opportunity-gallery .card:not(.is-focused) p,
+.opportunity-gallery .card:not(.is-focused) .why,
+.opportunity-gallery .card:not(.is-focused) .idea,
+.opportunity-gallery .card:not(.is-focused) details {
+  display: none;
+}
+.opportunity-gallery .card:not(.is-focused) .meta span:nth-child(n+4) {
+  display: none;
+}
+.opportunity-gallery .meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.opportunity-gallery .meta > span > span {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+}
+.opportunity-gallery .card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.opportunity-gallery .card h3 a:hover {
+  color: var(--blue);
+}
+.opportunity-gallery .card:not(.is-focused) h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin-bottom: 22px;
+  font-size: 16px;
+  line-height: 1.28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.opportunity-gallery .card.is-focused h3 {
+  max-width: 610px;
+  margin: 0 0 16px;
+  font-size: clamp(28px, 3.8vw, 46px);
+  line-height: 1.04;
+}
+.opportunity-gallery .card.is-focused p {
+  max-width: 640px;
+}
+.opportunity-gallery .card.is-focused details {
+  margin-bottom: 20px;
+}
+.gallery-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  margin-top: 2px;
+}
+.gallery-meter {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(17,17,20,0.08);
+}
+.gallery-meter span {
+  display: block;
+  width: var(--gallery-progress, 8%);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue);
+  transition: width 220ms ease;
+}
+.gallery-controls {
+  display: flex;
+  gap: 8px;
+}
+.gallery-step {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+.gallery-step:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,113,227,0.28);
+  box-shadow: 0 10px 24px rgba(17,17,20,0.08);
 }
 .card:hover {
   transform: translateY(-3px);
@@ -6568,6 +6817,10 @@ input[type="search"]:focus {
   transform: translateY(-3px);
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px rgba(15, 107, 95, 0.5), 0 24px 54px rgba(17, 17, 20, 0.13);
+}
+.opportunity-gallery .card.is-focused {
+  border-color: rgba(0,113,227,0.72);
+  box-shadow: inset 0 0 0 1px rgba(0,113,227,0.42), 0 30px 72px rgba(17, 17, 20, 0.15);
 }
 .card.hidden {
   display: none;
@@ -7148,6 +7401,59 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .opportunity-gallery {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 32px;
+  }
+  .gallery-header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .gallery-header h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .gallery-count {
+    min-width: 0;
+    text-align: left;
+  }
+  .opportunity-gallery .card,
+  .opportunity-gallery .card.is-focused {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  .opportunity-gallery .card {
+    min-height: 132px;
+    padding: 14px;
+  }
+  .opportunity-gallery .card::before {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 8px;
+  }
+  .opportunity-gallery .card::after {
+    left: 14px;
+    right: 14px;
+    bottom: 10px;
+  }
+  .opportunity-gallery .card.is-focused {
+    min-height: 420px;
+    padding: 18px;
+  }
+  .opportunity-gallery .card.is-focused::after {
+    left: 18px;
+    right: 18px;
+    bottom: 14px;
+  }
+  .opportunity-gallery .card.is-focused h3 {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+  .gallery-footer {
+    grid-template-columns: 1fr;
+  }
+  .gallery-controls {
+    justify-content: flex-end;
+  }
   .fit-studio {
     gap: 18px;
   }
@@ -7941,6 +8247,10 @@ const selectedTierDelivery = document.querySelector("#selected-tier-delivery");
 const selectedTierRoute = document.querySelector("#selected-tier-route");
 const pricingChooserNode = document.querySelector(".pricing-chooser");
 const localNavNode = document.querySelector(".local-nav");
+const opportunityGalleryNode = document.querySelector(".opportunity-gallery");
+const galleryPositionNode = document.querySelector("#gallery-position");
+const galleryActiveScoreNode = document.querySelector("#gallery-active-score");
+const galleryStepButtons = [...document.querySelectorAll("[data-gallery-step]")];
 const opportunityFocusTitle = document.querySelector("#opportunity-focus-title");
 const opportunityFocusSummary = document.querySelector("#opportunity-focus-summary");
 const opportunityFocusRank = document.querySelector("#opportunity-focus-rank");
@@ -8039,6 +8349,46 @@ function activateFitPersona(button, scrollToButton = false) {
   if (fitSignalLink) fitSignalLink.setAttribute("href", button.dataset.fitUrl || "#");
 }
 
+function visibleOpportunityCards() {
+  return cards.filter((card) => !card.classList.contains("hidden"));
+}
+
+function updateGalleryState(card) {
+  if (!opportunityGalleryNode || !card) return;
+  const visibleCards = visibleOpportunityCards();
+  const activeIndex = Math.max(0, visibleCards.indexOf(card));
+  const total = Math.max(1, visibleCards.length);
+  for (const item of cards) {
+    if (item.classList.contains("hidden")) {
+      item.style.removeProperty("--gallery-order");
+      continue;
+    }
+    const visibleIndex = visibleCards.indexOf(item);
+    const offset = visibleIndex < activeIndex ? visibleIndex + total - activeIndex : visibleIndex - activeIndex;
+    item.style.setProperty("--gallery-order", String(offset + 1));
+    const score = Math.max(0, Math.min(100, Math.round(Number(item.dataset.focusScore || 0) / 2)));
+    item.style.setProperty("--score-fill", score + "%");
+  }
+  opportunityGalleryNode.style.setProperty("--gallery-progress", Math.round(((activeIndex + 1) / total) * 100) + "%");
+  if (galleryPositionNode) {
+    galleryPositionNode.textContent = currentLanguage === "zh" ? "已选择 " + (activeIndex + 1) + " / " + total : (activeIndex + 1) + " of " + total + " selected";
+  }
+  if (galleryActiveScoreNode) {
+    galleryActiveScoreNode.textContent = currentLanguage === "zh" ? "评分 " + (card.dataset.focusScore || "") : "Score " + (card.dataset.focusScore || "");
+  }
+}
+
+function stepOpportunityGallery(direction) {
+  const visibleCards = visibleOpportunityCards();
+  if (!visibleCards.length) return;
+  const currentIndex = Math.max(0, visibleCards.indexOf(activeOpportunityCard));
+  const nextIndex = (currentIndex + direction + visibleCards.length) % visibleCards.length;
+  const nextCard = visibleCards[nextIndex];
+  updateOpportunityFocus(nextCard);
+  if (nextCard.focus) nextCard.focus({ preventScroll: true });
+  if (nextCard.scrollIntoView) nextCard.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+}
+
 function updateOpportunityFocus(card) {
   if (!opportunityFocusTitle) return;
   activeOpportunityCard = card || null;
@@ -8054,8 +8404,10 @@ function updateOpportunityFocus(card) {
       opportunityFocusLink.setAttribute("href", "#opportunities");
       opportunityFocusLink.textContent = currentLanguage === "zh" ? "调整筛选" : "Adjust filters";
     }
+    if (opportunityGalleryNode) opportunityGalleryNode.style.setProperty("--gallery-progress", "0%");
     return;
   }
+  updateGalleryState(activeOpportunityCard);
   opportunityFocusTitle.textContent = activeOpportunityCard.dataset["focusTitle" + suffix] || "";
   opportunityFocusSummary.textContent = activeOpportunityCard.dataset["focusSummary" + suffix] || "";
   if (opportunityFocusRank) opportunityFocusRank.textContent = "#" + (activeOpportunityCard.dataset.rank || "");
@@ -8106,6 +8458,8 @@ function applyFilters() {
   const firstVisible = cards.find((card) => !card.classList.contains("hidden"));
   if (!activeOpportunityCard || activeOpportunityCard.classList.contains("hidden")) {
     updateOpportunityFocus(firstVisible || null);
+  } else {
+    updateGalleryState(activeOpportunityCard);
   }
   resultCount.textContent = countLabel(visible);
   resultCount.classList.remove("bump");
@@ -8119,6 +8473,16 @@ for (const card of cards) {
   card.addEventListener("click", (event) => {
     if (event.target.closest("a, summary, details")) return;
     updateOpportunityFocus(card);
+  });
+}
+for (const button of galleryStepButtons) {
+  button.addEventListener("click", () => stepOpportunityGallery(button.dataset.galleryStep === "prev" ? -1 : 1));
+}
+if (opportunityGalleryNode) {
+  opportunityGalleryNode.addEventListener("keydown", (event) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    stepOpportunityGallery(event.key === "ArrowRight" ? 1 : -1);
   });
 }
 
