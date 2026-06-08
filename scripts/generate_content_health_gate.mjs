@@ -22,6 +22,7 @@ const mojibakeTokens = [
 ];
 
 const publicDocs = [
+  "docs/content-action-brief.md",
   "docs/buyer-content-pack.md",
   "docs/content-close-pack.md",
   "docs/content-customer-success.md",
@@ -55,6 +56,8 @@ const publicDocs = [
 ];
 
 const privateFiles = [
+  "dist/content-action-brief/actions.csv",
+  "dist/content-action-brief/action-brief.md",
   "dist/full-episode-script/latest.json",
   "dist/episode-workbench/latest.json",
   "dist/content-delivery-gate/checks.csv",
@@ -93,6 +96,7 @@ const privateFiles = [
 ];
 
 const sourceFiles = [
+  "scripts/generate_content_action_brief.mjs",
   "scripts/generate_full_episode_script.mjs",
   "scripts/generate_episode_workbench.mjs",
   "scripts/generate_content_evidence_pack.mjs",

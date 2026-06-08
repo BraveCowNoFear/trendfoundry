@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-customer-success", "content-testimonials", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-sends", "content-deal-desk", "content-fulfillment-queue", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -78,6 +78,7 @@ const dealDeskManifest = await readJson("dist/content-deal-desk/manifest.json", 
 const fulfillmentQueueManifest = await readJson("dist/content-fulfillment-queue/manifest.json", {});
 const customerSuccessManifest = await readJson("dist/content-customer-success/manifest.json", {});
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
+const actionBriefManifest = await readJson("dist/content-action-brief/manifest.json", {});
 const healthManifest = await readJson("dist/content-health-gate/manifest.json", {});
 const allSucceeded = steps.every((step) => step.status === "success");
 
@@ -208,6 +209,13 @@ const run = {
       blockedCount: testimonialManifest.blockedCount,
       statusCounts: testimonialManifest.statusCounts || {}
     },
+    actionBrief: {
+      actionCount: actionBriefManifest.actionCount,
+      topActionLane: actionBriefManifest.topActionLane,
+      manualReviewCount: actionBriefManifest.manualReviewCount,
+      fulfillmentSensitiveCount: actionBriefManifest.fulfillmentSensitiveCount,
+      laneCounts: actionBriefManifest.laneCounts || {}
+    },
     healthGate: {
       checkedFileCount: healthManifest.checkedFileCount,
       filesWithMojibakeMarkers: healthManifest.filesWithMojibakeMarkers,
@@ -235,7 +243,7 @@ Refresh public sources: ${refresh ? "yes" : "no"}
 
 Dataset: ${compact(latest.generatedAt, "unknown")}
 
-This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach send receipts, deal desk, unified fulfillment queue, customer-success follow-ups, testimonial bank, and text health gate without sending messages, collecting payment, or building the frontend.
+This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach send receipts, deal desk, unified fulfillment queue, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
 ## Steps
 
@@ -269,6 +277,7 @@ ${stepSummary(steps)}
 - Fulfillment queue: ${fulfillmentQueueManifest.queueCount ?? "unknown"} rows, ${fulfillmentQueueManifest.preparedWaitingManualSendCount ?? "unknown"} waiting manual send, ${fulfillmentQueueManifest.needsDeliveryFixCount ?? "unknown"} needing delivery fix, ${fulfillmentQueueManifest.conciseReadyCount ?? "unknown"} concise-ready
 - Customer success: ${customerSuccessManifest.followupCount ?? "unknown"} follow-ups, ${customerSuccessManifest.dueNowCount ?? "unknown"} due now, ${customerSuccessManifest.completionReceiptCount ?? "unknown"} completion receipts
 - Testimonials: ${testimonialManifest.testimonialRows ?? "unknown"} private rows, ${testimonialManifest.publishCandidateCount ?? "unknown"} publish candidates, ${testimonialManifest.permissionOrReviewCount ?? "unknown"} needing permission/review
+- Action brief: ${actionBriefManifest.actionCount ?? "unknown"} actions, top lane ${actionBriefManifest.topActionLane || "none"}, ${actionBriefManifest.manualReviewCount ?? "unknown"} needing manual review
 - Health gate: ${healthManifest.checkedFileCount ?? "unknown"} files checked, ${healthManifest.filesWithMojibakeMarkers ?? "unknown"} with mojibake markers, ${healthManifest.publicCloseDocProspectLeaks ?? "unknown"} public prospect leaks
 - Listing SKUs: ${((listing.products || []).map((product) => product.sku)).join(", ") || "unknown"}
 - Seller-only exclusions: ${(buyerManifest.sellerOnlyExcluded || []).join(", ") || "unknown"}
@@ -303,9 +312,10 @@ ${stepSummary(steps)}
 19. Review \`dist/content-fulfillment-queue/fulfillment-queue.md\` before any manual buyer delivery.
 20. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
 21. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
-22. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-23. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-24. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+22. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
+23. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+24. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+25. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

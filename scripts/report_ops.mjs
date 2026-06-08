@@ -109,6 +109,9 @@ ${runSteps}
 - Customer success due now: ${report.content.customerDueNow}
 - Testimonial private rows: ${report.content.testimonialRows}
 - Testimonial publish candidates: ${report.content.testimonialCandidates}
+- Action brief rows: ${report.content.actionBriefRows}
+- Action brief top lane: ${report.content.actionBriefTopLane}
+- Action brief manual review: ${report.content.actionBriefManualReview}
 - Health gate: ${report.content.healthFiles} files, ${report.content.healthMojibake} mojibake, ${report.content.healthLeaks} public leaks
 
 ## Sales Pipeline
@@ -152,6 +155,7 @@ const dealDeskData = await readJsonIfExists(path.join(root, "dist", "content-dea
 const fulfillmentQueueData = await readJsonIfExists(path.join(root, "dist", "content-fulfillment-queue", "manifest.json"), {});
 const customerSuccessData = await readJsonIfExists(path.join(root, "dist", "content-customer-success", "manifest.json"), {});
 const testimonialData = await readJsonIfExists(path.join(root, "dist", "content-testimonials", "manifest.json"), {});
+const actionBriefData = await readJsonIfExists(path.join(root, "dist", "content-action-brief", "manifest.json"), {});
 const outreachReviewData = await readJsonIfExists(path.join(root, "dist", "content-outreach-review", "manifest.json"), {});
 const outreachSendsData = await readJsonIfExists(path.join(root, "dist", "content-outreach-sends", "manifest.json"), {});
 const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
@@ -229,6 +233,9 @@ const report = {
     customerDueNow: customerSuccessData.dueNowCount ?? contentOpsData.contentState?.customerSuccess?.dueNow ?? "unknown",
     testimonialRows: testimonialData.testimonialRows ?? contentOpsData.contentState?.testimonials?.testimonialRows ?? "unknown",
     testimonialCandidates: testimonialData.publishCandidateCount ?? contentOpsData.contentState?.testimonials?.publishCandidateCount ?? "unknown",
+    actionBriefRows: actionBriefData.actionCount ?? contentOpsData.contentState?.actionBrief?.actionCount ?? "unknown",
+    actionBriefTopLane: actionBriefData.topActionLane ?? contentOpsData.contentState?.actionBrief?.topActionLane ?? "unknown",
+    actionBriefManualReview: actionBriefData.manualReviewCount ?? contentOpsData.contentState?.actionBrief?.manualReviewCount ?? "unknown",
     healthFiles: contentOpsData.contentState?.healthGate?.checkedFileCount ?? "unknown",
     healthMojibake: contentOpsData.contentState?.healthGate?.filesWithMojibakeMarkers ?? "unknown",
     healthLeaks: contentOpsData.contentState?.healthGate?.publicCloseDocProspectLeaks ?? "unknown"
@@ -254,7 +261,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
-    contentOpsData.status === "success" ? "Review dist/content-reply-intake/parsed-replies.md, dist/content-outreach-review/review-board.md, dist/content-outreach-sends/send-log.md, dist/content-deal-desk/deal-desk.md, dist/content-fulfillment-queue/fulfillment-queue.md, dist/content-customer-success/followup-drafts.md, and dist/content-testimonials/testimonial-bank.md for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, fulfillment queue, customer follow-ups, and testimonial bank.",
+    contentOpsData.status === "success" ? "Review dist/content-action-brief/action-brief.md first, then open the specific private queue files it links for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, fulfillment queue, customer follow-ups, testimonial bank, and action brief.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",
     "For no-login email orders, run npm run payment-reply before sending payment instructions."
