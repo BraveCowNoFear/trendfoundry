@@ -717,12 +717,22 @@ if (hero && productVisualNode && motionSafe) {
     const rect = hero.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
+    hero.style.setProperty("--spotlight-x", ((x + 0.5) * 100).toFixed(1) + "%");
+    hero.style.setProperty("--spotlight-y", ((y + 0.5) * 100).toFixed(1) + "%");
     productVisualNode.style.transform = "rotateY(" + (x * -6).toFixed(2) + "deg) rotateX(" + (y * 4).toFixed(2) + "deg) translateY(-4px)";
   });
   hero.addEventListener("pointerleave", () => {
+    hero.style.setProperty("--spotlight-x", "68%");
+    hero.style.setProperty("--spotlight-y", "24%");
     productVisualNode.style.transform = "";
   });
 }
+
+function updateScrolledState() {
+  document.body.classList.toggle("is-scrolled", window.scrollY > 18);
+}
+updateScrolledState();
+window.addEventListener("scroll", updateScrolledState, { passive: true });
 
 function animateHeroMetrics() {
   if (!motionSafe || !heroMetricValues.length) return;

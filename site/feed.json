@@ -10,8 +10,8 @@
       "id": "https://github.com/NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "title": "#1 NousResearch/hermes-agent",
-      "content_text": "The agent that grows with you\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T16:10:05Z",
+      "content_text": "The agent that grows with you\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T12:40:36Z",
       "tags": [
         "github",
         "high",
@@ -22,8 +22,8 @@
       "id": "https://github.com/infiniflow/ragflow",
       "url": "https://github.com/infiniflow/ragflow",
       "title": "#2 infiniflow/ragflow",
-      "content_text": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-05T13:59:26Z",
+      "content_text": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T14:09:23Z",
       "tags": [
         "github",
         "high",
@@ -34,8 +34,8 @@
       "id": "https://github.com/google-gemini/gemini-cli",
       "url": "https://github.com/google-gemini/gemini-cli",
       "title": "#3 google-gemini/gemini-cli",
-      "content_text": "An open-source AI agent that brings the power of Gemini directly into your terminal.\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-05T23:58:52Z",
+      "content_text": "An open-source AI agent that brings the power of Gemini directly into your terminal.\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T14:07:41Z",
       "tags": [
         "github",
         "high",
@@ -46,8 +46,8 @@
       "id": "https://github.com/langchain-ai/langchain",
       "url": "https://github.com/langchain-ai/langchain",
       "title": "#4 langchain-ai/langchain",
-      "content_text": "The agent engineering platform.\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T09:04:18Z",
+      "content_text": "The agent engineering platform.\n\nCreator hook: 验证安装、输出和适用边界。\n\nDemo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.\n\nLimitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T09:14:25Z",
       "tags": [
         "github",
         "high",
@@ -55,23 +55,11 @@
       ]
     },
     {
-      "id": "https://www.youtube.com/watch?v=JQzF5LP4VTs",
-      "url": "https://www.youtube.com/watch?v=JQzF5LP4VTs",
-      "title": "#5 The ONLY 3 Tools You Need to Create ANY AI Video",
-      "content_text": "Tao Prompts / 4 days ago / 33,996 views\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-03T16:16:20.688Z",
-      "tags": [
-        "youtube",
-        "high",
-        "normal"
-      ]
-    },
-    {
       "id": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
       "url": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
-      "title": "#6 The Only AI Video Prompt Generator You'll Ever Need",
-      "content_text": "Youri van Hofwegen / 5 days ago / 35,332 views\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-02T16:16:20.688Z",
+      "title": "#5 Best AI Video Prompt Generator 2026 (FREE)",
+      "content_text": "Youri van Hofwegen / 7 days ago / 39,488 views\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-03T14:10:46.065Z",
       "tags": [
         "youtube",
         "high",
@@ -79,11 +67,23 @@
       ]
     },
     {
-      "id": "http://www.bilibili.com/video/av116703774115351",
-      "url": "http://www.bilibili.com/video/av116703774115351",
-      "title": "#7 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程",
-      "content_text": "一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T03:25:00.000Z",
+      "id": "https://www.youtube.com/watch?v=0v534yAyhwg",
+      "url": "https://www.youtube.com/watch?v=0v534yAyhwg",
+      "title": "#6 EXACTLY How to Make an AI Short Film (Full Workflow)",
+      "content_text": "Youri van Hofwegen / 8 days ago / 25,626 views\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-02T14:10:46.064Z",
+      "tags": [
+        "youtube",
+        "high",
+        "normal"
+      ]
+    },
+    {
+      "id": "http://www.bilibili.com/video/av116723671894628",
+      "url": "http://www.bilibili.com/video/av116723671894628",
+      "title": "#7 【1548] 凯文凯利： AI 真的会抢走人类工作吗？",
+      "content_text": "https://www.youtube.com/watch?v=Z9i_16eKvdc&t=774s\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T03:27:04.000Z",
       "tags": [
         "bilibili",
         "high",
@@ -91,11 +91,11 @@
       ]
     },
     {
-      "id": "http://www.bilibili.com/video/av116703824447305",
-      "url": "http://www.bilibili.com/video/av116703824447305",
-      "title": "#8 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程",
-      "content_text": "一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T05:25:00.000Z",
+      "id": "http://www.bilibili.com/video/av116724963740626",
+      "url": "http://www.bilibili.com/video/av116724963740626",
+      "title": "#8 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room",
+      "content_text": "这期介绍一个我下午做出来的小工具：Agent Room。 它像一个给 AI agent 开的会议室：人可以进来，AI 可以进来，另一台没有 AI 的 Windows 电脑也可以用 executor / slave 模式进来。那台电脑不需要自己会思考，只负责执行命令、返回结果；我的 AI 在房间里看到它在线，就能点名让它检查路径、查日志、跑诊断。 这个场景很普通：同事 Windows 环境装软件失败，你不在现场，他电脑上也没有 AI。以前只能截图、远程会议、来回问。现在可以让 AI 直接进入排查现场。\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T08:57:20.000Z",
       "tags": [
         "bilibili",
         "high",
@@ -103,11 +103,11 @@
       ]
     },
     {
-      "id": "http://www.bilibili.com/video/av116707230223184",
-      "url": "http://www.bilibili.com/video/av116707230223184",
-      "title": "#9 当我尝试下载 YouTube 时",
-      "content_text": "-\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T05:45:01.000Z",
+      "id": "http://www.bilibili.com/video/av116723470565894",
+      "url": "http://www.bilibili.com/video/av116723470565894",
+      "title": "#9 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示",
+      "content_text": "这个项目叫 Recordly，是一个开源的录屏加视频编辑工具。它把录制、缩放、鼠标效果、背景样式、摄像头小窗、时间线剪辑和导出放在一个软件里，适合做产品演示、教程视频、Bug 复现和操作流程录制。 项目地址：https://github.com/webadderallorg/Recordly\n\nCreator hook: 验证方法是否可复现，避免照搬原视频。\n\nDemo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.\n\nLimitation: Platform popularity is not proof of quality; validate the workflow before recommending it.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-10T11:00:00.000Z",
       "tags": [
         "bilibili",
         "high",
@@ -115,11 +115,11 @@
       ]
     },
     {
-      "id": "https://news.ycombinator.com/item?id=48420827",
-      "url": "https://news.ycombinator.com/item?id=48420827",
-      "title": "#10 Ask HN: Why is the HN crowd so anti-AI?",
-      "content_text": "Ask HN: Why is the HN crowd so anti-AI?\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-06T02:31:51Z",
+      "id": "https://gitdot.io/",
+      "url": "https://gitdot.io/",
+      "title": "#10 Show HN: Gitdot – A better GitHub. Open-source, written in Rust",
+      "content_text": "Show HN: Gitdot – A better GitHub . Open-source, written in Rust\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Cluster the top objections and strongest supporting comments into three viewer-safe claims.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-08T16:52:11Z",
       "tags": [
         "hn",
         "high",
@@ -127,11 +127,11 @@
       ]
     },
     {
-      "id": "https://vaani.media",
-      "url": "https://vaani.media",
-      "title": "#11 Show HN: We built a tool to dub any video in the original voice in 40 languages",
-      "content_text": "Show HN: We built a tool to dub any video in the original voice in 40 languages\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-07T11:51:18Z",
+      "id": "https://github.com/devenjarvis/lathe",
+      "url": "https://github.com/devenjarvis/lathe",
+      "title": "#11 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it",
+      "content_text": "Show HN: Lathe – Use LLMs to learn a new domain, not skip past it\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Cluster the top objections and strongest supporting comments into three viewer-safe claims.\n\nLimitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-07T11:16:46Z",
       "tags": [
         "hn",
         "high",
@@ -139,11 +139,11 @@
       ]
     },
     {
-      "id": "http://arxiv.org/abs/2606.06493v1",
-      "url": "http://arxiv.org/abs/2606.06493v1",
-      "title": "#12 HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers",
-      "content_text": "For a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. Existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. We instead propose a compact, explicit interface that\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.\n\nLimitation: Research papers may be too early for mainstream creators; translate into a practical demo or skip.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
-      "date_published": "2026-06-04T17:59:50Z",
+      "id": "http://arxiv.org/abs/2606.11187v1",
+      "url": "http://arxiv.org/abs/2606.11187v1",
+      "title": "#12 Next Forcing: Causal World Modeling with Multi-Chunk Prediction",
+      "content_text": "Autoregressive video generation has emerged as a powerful paradigm for World Action Models (WAMs). However, existing approaches suffer from slow training convergence and limited converged accuracy, particularly at high frame rates, as the training supervision is confined to the current chunk without explicit signals about future dynamics; they also suffer fr\n\nCreator hook: 验证来源、证据和可讲边界。\n\nDemo angle: Choose one claim that can be explained without requiring private data or unreleased code.\n\nLimitation: Research papers may be too early for mainstream creators; translate into a practical demo or skip.\n\nOrder the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20",
+      "date_published": "2026-06-09T17:59:22Z",
       "tags": [
         "arxiv",
         "medium",

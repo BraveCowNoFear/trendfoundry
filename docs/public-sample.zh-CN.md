@@ -1,6 +1,6 @@
 # TrendFoundry 公开样品（中文）
 
-生成时间：2026-06-07T16:16:38.285Z
+生成时间：2026-06-10T14:10:55.310Z
 
 语言：中文
 
@@ -10,7 +10,7 @@ English version: https://bravecownofear.github.io/trendfoundry/public-sample.en.
 
 ## 样品机会
 
-### 1. 【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注
+### 1. 【实测】为什么 agent engineering workflow 现在值得创作者关注
 
 - 评分：187
 - 匹配度：高匹配
@@ -20,12 +20,12 @@ English version: https://bravecownofear.github.io/trendfoundry/public-sample.en.
 - 目标创作者：tech explainer / developer educator
 - 为什么现在：NousResearch/hermes-agent 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。
 - 钩子：验证安装、输出和适用边界。
-- 演示：复现最小可用流程，记录输入、输出和卡住的位置。
+- 演示：用公开证据验证核心主张，并说明适合谁、不适合谁。
 - 限制：不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。
 
-### 2. 【实测】为什么 infiniflow/ragflow 现在值得创作者关注
+### 2. 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
 
-- 评分：173
+- 评分：175
 - 匹配度：高匹配
 - 来源：github / ai-agents
 - 质量：正常
@@ -33,12 +33,12 @@ English version: https://bravecownofear.github.io/trendfoundry/public-sample.en.
 - 目标创作者：tech explainer / developer educator
 - 为什么现在：infiniflow/ragflow 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。
 - 钩子：验证安装、输出和适用边界。
-- 演示：复现最小可用流程，记录输入、输出和卡住的位置。
+- 演示：用公开证据验证核心主张，并说明适合谁、不适合谁。
 - 限制：不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。
 
-### 3. 【实测】为什么 google-gemini/gemini-cli 现在值得创作者关注
+### 3. 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
 
-- 评分：171
+- 评分：172
 - 匹配度：高匹配
 - 来源：github / ai-agents
 - 质量：正常
@@ -46,7 +46,7 @@ English version: https://bravecownofear.github.io/trendfoundry/public-sample.en.
 - 目标创作者：tech explainer / developer educator
 - 为什么现在：google-gemini/gemini-cli 正出现在 github / ai-agents 的趋势信号里，适合做一次可复现的创作者工作流测试。
 - 钩子：验证安装、输出和适用边界。
-- 演示：复现最小可用流程，记录输入、输出和卡住的位置。
+- 演示：用公开证据验证核心主张，并说明适合谁、不适合谁。
 - 限制：不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。
 
 

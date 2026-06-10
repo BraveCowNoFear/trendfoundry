@@ -1,8 +1,8 @@
 # TrendFoundry Buyer Content Pack
 
-Generated: 2026-06-08T17:55:40.251Z
+Generated: 2026-06-10T14:11:00.596Z
 
-Dataset: 2026-06-08T17:50:16.053Z
+Dataset: 2026-06-10T14:10:55.310Z
 
 This pack is the buyer-facing content delivery layer for the current TrendFoundry issue. Start with `START-HERE.md`; the remaining files are reference attachments.
 

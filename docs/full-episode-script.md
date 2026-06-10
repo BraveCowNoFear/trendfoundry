@@ -1,8 +1,8 @@
 # Full Episode Script: NousResearch/hermes-agent
 
-Generated: 2026-06-08T08:20:42.329Z
+Generated: 2026-06-10T14:10:59.928Z
 
-Dataset: 2026-06-08T07:15:29.423Z
+Dataset: 2026-06-10T14:10:55.310Z
 
 Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)
 
@@ -23,7 +23,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 ## 70-Second Cold Open
 
 - 0:00-0:20: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
-- 0:20-0:55: Start with evidence, not hype: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- 0:20-0:55: Start with evidence, not hype: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - 0:55-1:10: I will use one smallest proof to judge it: can we record the input, output, setup friction, and failure boundary?
 
 ## Scene-By-Scene Script
@@ -31,7 +31,7 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 | Time | Screen | Narration | Purpose |
 | --- | --- | --- | --- |
 | 0:00-0:20 | Title card + source URL visible | 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。 | Set a proof-first frame. |
-| 0:20-0:55 | GitHub source page, score/evidence callouts | Start with evidence, not hype: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow. | Explain why the episode is timely. |
+| 0:20-0:55 | GitHub source page, score/evidence callouts | Start with evidence, not hype: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow. | Explain why the episode is timely. |
 | 0:55-1:35 | Workflow pain map with three boxes | Ask one practical question: which creator workflow step does this actually replace or improve: topic selection, research, scripting, demo capture, or packaging? If it cannot improve one step, treat it as a watchlist signal instead of a recommendation. | Translate trend into a buyer problem. |
 | 1:35-3:55 | Repository page on the left, terminal on the right, small note panel for blocker | Main proof segment: Run or inspect the smallest quickstart/example; record the exact command, input, and first output. Keep the input, output, setup friction, and failure boundary visible on screen. Do not edit it into a universal success story. | Create the core proof segment. |
 | 3:55-4:55 | Before/after comparison table | Compare before and after: what time does it save, what new checks does it add, and what still needs human judgment? The buyer value is not the tool name; it is the repeatable decision table. | Turn proof into reusable buyer value. |

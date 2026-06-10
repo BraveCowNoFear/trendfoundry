@@ -1,6 +1,6 @@
 # TrendFoundry Content Send Batch
 
-Generated: 2026-06-08T19:08:06.022Z
+Generated: 2026-06-10T14:11:08.577Z
 
 This report summarizes the private next-send batch selected from gate-passed outreach campaigns. Detailed creator rows stay in ignored `dist/content-send-batch/`.
 

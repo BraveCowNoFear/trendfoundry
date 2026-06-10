@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Gate
 
-Generated: 2026-06-08T19:01:37.894Z
+Generated: 2026-06-10T14:11:06.188Z
 
 This gate checks reviewer-ready outreach packs before they enter the private action queue. It keeps the public report to aggregate counts only.
 
@@ -10,7 +10,7 @@ This gate checks reviewer-ready outreach packs before they enter the private act
 - Passed checks: 5
 - Failed checks: 0
 - Missing packs: 0
-- Average draft words: 123
+- Average draft words: 125
 
 ## Gate Rules
 

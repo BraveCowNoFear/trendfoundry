@@ -1,8 +1,8 @@
 # TrendFoundry Editorial Audit
 
-Generated: 2026-06-07T22:10:51.579Z
+Generated: 2026-06-10T14:10:59.255Z
 
-Dataset: 2026-06-07T20:33:58.416Z
+Dataset: 2026-06-10T14:10:55.310Z
 
 This audit is the content-side control surface for TrendFoundry. It ranks the current issue by evidence, recordability, specificity, commercial handoff, and risk so the next work session improves the paid pack instead of only polishing the website.
 
@@ -21,12 +21,12 @@ Source mix: github 4 / youtube 2 / bilibili 3 / hn 2 / arxiv 1
 
 | Rank | Signal | Source | Content | Editorial issue |
 | --- | --- | --- | --- | --- |
-| 1 | infiniflow/ragflow | GitHub | 119/125 | ready |
-| 2 | google-gemini/gemini-cli | GitHub | 119/125 | ready |
-| 3 | The Only AI Video Prompt Generator You'll Ever Need | YouTube | 116/125 | ready |
-| 4 | The ONLY 3 Tools You Need to Create ANY AI Video | YouTube | 116/125 | ready |
-| 5 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 116/125 | ready |
-| 6 | 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | Bilibili | 116/125 | ready |
+| 1 | 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 | Bilibili | 122/125 | ready |
+| 2 | infiniflow/ragflow | GitHub | 119/125 | ready |
+| 3 | google-gemini/gemini-cli | GitHub | 119/125 | ready |
+| 4 | EXACTLY How to Make an AI Short Film (Full Workflow) | YouTube | 119/125 | ready |
+| 5 | 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ | Bilibili | 119/125 | ready |
+| 6 | 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room | Bilibili | 119/125 | ready |
 
 ## Rewrite Queue
 
@@ -34,59 +34,59 @@ No rewrite queue items.
 
 ## Episode Briefs
 
-### 1. infiniflow/ragflow
+### 1. 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示
 
-- Source: GitHub / score 173 / content score 119
+- Source: Bilibili / score 114 / content score 122
+- Buyer-facing angle: 【实测】为什么 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 现在值得创作者关注
+- Opening hook: 这期不照搬 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+- Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
+- Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
+
+### 2. infiniflow/ragflow
+
+- Source: GitHub / score 175 / content score 119
 - Buyer-facing angle: 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
 - Opening hook: 如果你想讲 RAG 知识库工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能把资料库问答从演示稿变成可验证输出。
 - Proof segment: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 - Limitation segment: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 - Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
 
-### 2. google-gemini/gemini-cli
+### 3. google-gemini/gemini-cli
 
-- Source: GitHub / score 171 / content score 119
+- Source: GitHub / score 172 / content score 119
 - Buyer-facing angle: 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
 - Opening hook: 如果你想讲 终端 AI agent 工作流，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头。
 - Proof segment: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 - Limitation segment: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 - Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
 
-### 3. The Only AI Video Prompt Generator You'll Ever Need
+### 4. EXACTLY How to Make an AI Short Film (Full Workflow)
 
-- Source: YouTube / score 137 / content score 116
-- Buyer-facing angle: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
-- Opening hook: 这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Source: YouTube / score 132 / content score 119
+- Buyer-facing angle: 【实测】为什么 EXACTLY How to Make an AI Short Film (Full Workflow) 现在值得创作者关注
+- Opening hook: 这期不照搬 EXACTLY How to Make an AI Short Film (Full Workflow)，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
 - Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
-### 4. The ONLY 3 Tools You Need to Create ANY AI Video
+### 5. 【1548] 凯文凯利： AI 真的会抢走人类工作吗？
 
-- Source: YouTube / score 136 / content score 116
-- Buyer-facing angle: 【实测】为什么 AI 视频工具栈 现在值得创作者关注
-- Opening hook: 这期不照搬 AI 视频工具栈，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Source: Bilibili / score 117 / content score 119
+- Buyer-facing angle: 【实测】为什么 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ 现在值得创作者关注
+- Opening hook: 这期不照搬 【1548] 凯文凯利： AI 真的会抢走人类工作吗？，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
 - Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
 - Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
 
-### 5. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+### 6. 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room
 
-- Source: Bilibili / score 135 / content score 116
-- Buyer-facing angle: 【实测】为什么 ComfyUI AI 视频工作流 现在值得创作者关注
-- Opening hook: 这期不照搬 ComfyUI AI 视频工作流，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Source: Bilibili / score 116 / content score 119
+- Buyer-facing angle: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- Opening hook: 这期不照搬 agent engineering workflow，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
 - Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
-- Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
-
-### 6. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
-
-- Source: Bilibili / score 132 / content score 116
-- Buyer-facing angle: 【实测】为什么 ComfyUI AI 视频工作流 现在值得创作者关注
-- Opening hook: 这期不照搬 ComfyUI AI 视频工作流，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
-- Proof segment: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
-- Limitation segment: Platform popularity is not proof of quality; validate the workflow before recommending it.
-- Paid-pack reason: this can become a reusable recording queue item for AI workflow creator.
+- Paid-pack reason: this can become a reusable recording queue item for tech explainer / developer educator.
 
 
 ## Issue Pattern Counts

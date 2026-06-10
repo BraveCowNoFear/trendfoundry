@@ -6,17 +6,17 @@
     <atom:link href="https://bravecownofear.github.io/trendfoundry/feed.xml" rel="self" type="application/rss+xml" />
     <description>Source-backed AI and developer creator opportunities with hooks, demo angles, and limitations.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 07 Jun 2026 16:16:38 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2026 14:10:55 GMT</lastBuildDate>
     <item>
       <title>#1 NousResearch/hermes-agent</title>
       <link>https://github.com/NousResearch/hermes-agent</link>
       <guid isPermaLink="false">https://github.com/NousResearch/hermes-agent</guid>
-      <pubDate>Sun, 07 Jun 2026 16:10:05 GMT</pubDate>
+      <pubDate>Wed, 10 Jun 2026 12:40:36 GMT</pubDate>
       <description><![CDATA[The agent that grows with you
 
 Creator hook: 验证安装、输出和适用边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
@@ -26,12 +26,12 @@ Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/ne
       <title>#2 infiniflow/ragflow</title>
       <link>https://github.com/infiniflow/ragflow</link>
       <guid isPermaLink="false">https://github.com/infiniflow/ragflow</guid>
-      <pubDate>Fri, 05 Jun 2026 13:59:26 GMT</pubDate>
+      <pubDate>Wed, 10 Jun 2026 14:09:23 GMT</pubDate>
       <description><![CDATA[RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs
 
 Creator hook: 验证安装、输出和适用边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
@@ -41,12 +41,12 @@ Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/ne
       <title>#3 google-gemini/gemini-cli</title>
       <link>https://github.com/google-gemini/gemini-cli</link>
       <guid isPermaLink="false">https://github.com/google-gemini/gemini-cli</guid>
-      <pubDate>Fri, 05 Jun 2026 23:58:52 GMT</pubDate>
+      <pubDate>Wed, 10 Jun 2026 14:07:41 GMT</pubDate>
       <description><![CDATA[An open-source AI agent that brings the power of Gemini directly into your terminal.
 
 Creator hook: 验证安装、输出和适用边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
@@ -56,132 +56,132 @@ Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/ne
       <title>#4 langchain-ai/langchain</title>
       <link>https://github.com/langchain-ai/langchain</link>
       <guid isPermaLink="false">https://github.com/langchain-ai/langchain</guid>
-      <pubDate>Sun, 07 Jun 2026 09:04:18 GMT</pubDate>
+      <pubDate>Wed, 10 Jun 2026 09:14:25 GMT</pubDate>
       <description><![CDATA[The agent engineering platform.
 
 Creator hook: 验证安装、输出和适用边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 
 Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#5 The ONLY 3 Tools You Need to Create ANY AI Video</title>
-      <link>https://www.youtube.com/watch?v=JQzF5LP4VTs</link>
-      <guid isPermaLink="false">https://www.youtube.com/watch?v=JQzF5LP4VTs</guid>
-      <pubDate>Wed, 03 Jun 2026 16:16:20 GMT</pubDate>
-      <description><![CDATA[Tao Prompts / 4 days ago / 33,996 views
-
-Creator hook: 验证方法是否可复现，避免照搬原视频。
-
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
-
-Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
-    </item>
-    <item>
-      <title>#6 The Only AI Video Prompt Generator You&apos;ll Ever Need</title>
+      <title>#5 Best AI Video Prompt Generator 2026 (FREE)</title>
       <link>https://www.youtube.com/watch?v=oT-2VO8Jzpk</link>
       <guid isPermaLink="false">https://www.youtube.com/watch?v=oT-2VO8Jzpk</guid>
-      <pubDate>Tue, 02 Jun 2026 16:16:20 GMT</pubDate>
-      <description><![CDATA[Youri van Hofwegen / 5 days ago / 35,332 views
+      <pubDate>Wed, 03 Jun 2026 14:10:46 GMT</pubDate>
+      <description><![CDATA[Youri van Hofwegen / 7 days ago / 39,488 views
 
 Creator hook: 验证方法是否可复现，避免照搬原视频。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 
 Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#7 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程</title>
-      <link>http://www.bilibili.com/video/av116703774115351</link>
-      <guid isPermaLink="false">http://www.bilibili.com/video/av116703774115351</guid>
-      <pubDate>Sun, 07 Jun 2026 03:25:00 GMT</pubDate>
-      <description><![CDATA[一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
+      <title>#6 EXACTLY How to Make an AI Short Film (Full Workflow)</title>
+      <link>https://www.youtube.com/watch?v=0v534yAyhwg</link>
+      <guid isPermaLink="false">https://www.youtube.com/watch?v=0v534yAyhwg</guid>
+      <pubDate>Tue, 02 Jun 2026 14:10:46 GMT</pubDate>
+      <description><![CDATA[Youri van Hofwegen / 8 days ago / 25,626 views
 
 Creator hook: 验证方法是否可复现，避免照搬原视频。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 
 Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#8 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程</title>
-      <link>http://www.bilibili.com/video/av116703824447305</link>
-      <guid isPermaLink="false">http://www.bilibili.com/video/av116703824447305</guid>
-      <pubDate>Sun, 07 Jun 2026 05:25:00 GMT</pubDate>
-      <description><![CDATA[一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
+      <title>#7 【1548] 凯文凯利： AI 真的会抢走人类工作吗？</title>
+      <link>http://www.bilibili.com/video/av116723671894628</link>
+      <guid isPermaLink="false">http://www.bilibili.com/video/av116723671894628</guid>
+      <pubDate>Wed, 10 Jun 2026 03:27:04 GMT</pubDate>
+      <description><![CDATA[https://www.youtube.com/watch?v=Z9i_16eKvdc&t=774s
 
 Creator hook: 验证方法是否可复现，避免照搬原视频。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 
 Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#9 当我尝试下载 YouTube 时</title>
-      <link>http://www.bilibili.com/video/av116707230223184</link>
-      <guid isPermaLink="false">http://www.bilibili.com/video/av116707230223184</guid>
-      <pubDate>Sun, 07 Jun 2026 05:45:01 GMT</pubDate>
-      <description><![CDATA[-
+      <title>#8 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room</title>
+      <link>http://www.bilibili.com/video/av116724963740626</link>
+      <guid isPermaLink="false">http://www.bilibili.com/video/av116724963740626</guid>
+      <pubDate>Wed, 10 Jun 2026 08:57:20 GMT</pubDate>
+      <description><![CDATA[这期介绍一个我下午做出来的小工具：Agent Room。 它像一个给 AI agent 开的会议室：人可以进来，AI 可以进来，另一台没有 AI 的 Windows 电脑也可以用 executor / slave 模式进来。那台电脑不需要自己会思考，只负责执行命令、返回结果；我的 AI 在房间里看到它在线，就能点名让它检查路径、查日志、跑诊断。 这个场景很普通：同事 Windows 环境装软件失败，你不在现场，他电脑上也没有 AI。以前只能截图、远程会议、来回问。现在可以让 AI 直接进入排查现场。
 
 Creator hook: 验证方法是否可复现，避免照搬原视频。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 
 Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#10 Ask HN: Why is the HN crowd so anti-AI?</title>
-      <link>https://news.ycombinator.com/item?id=48420827</link>
-      <guid isPermaLink="false">https://news.ycombinator.com/item?id=48420827</guid>
-      <pubDate>Sat, 06 Jun 2026 02:31:51 GMT</pubDate>
-      <description><![CDATA[Ask HN: Why is the HN crowd so anti-AI?
+      <title>#9 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示</title>
+      <link>http://www.bilibili.com/video/av116723470565894</link>
+      <guid isPermaLink="false">http://www.bilibili.com/video/av116723470565894</guid>
+      <pubDate>Wed, 10 Jun 2026 11:00:00 GMT</pubDate>
+      <description><![CDATA[这个项目叫 Recordly，是一个开源的录屏加视频编辑工具。它把录制、缩放、鼠标效果、背景样式、摄像头小窗、时间线剪辑和导出放在一个软件里，适合做产品演示、教程视频、Bug 复现和操作流程录制。 项目地址：https://github.com/webadderallorg/Recordly
+
+Creator hook: 验证方法是否可复现，避免照搬原视频。
+
+Demo angle: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+
+Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
+    </item>
+    <item>
+      <title>#10 Show HN: Gitdot – A better GitHub. Open-source, written in Rust</title>
+      <link>https://gitdot.io/</link>
+      <guid isPermaLink="false">https://gitdot.io/</guid>
+      <pubDate>Mon, 08 Jun 2026 16:52:11 GMT</pubDate>
+      <description><![CDATA[Show HN: Gitdot – A better GitHub . Open-source, written in Rust
 
 Creator hook: 验证来源、证据和可讲边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Cluster the top objections and strongest supporting comments into three viewer-safe claims.
 
 Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#11 Show HN: We built a tool to dub any video in the original voice in 40 languages</title>
-      <link>https://vaani.media</link>
-      <guid isPermaLink="false">https://vaani.media</guid>
-      <pubDate>Sun, 07 Jun 2026 11:51:18 GMT</pubDate>
-      <description><![CDATA[Show HN: We built a tool to dub any video in the original voice in 40 languages
+      <title>#11 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it</title>
+      <link>https://github.com/devenjarvis/lathe</link>
+      <guid isPermaLink="false">https://github.com/devenjarvis/lathe</guid>
+      <pubDate>Sun, 07 Jun 2026 11:16:46 GMT</pubDate>
+      <description><![CDATA[Show HN: Lathe – Use LLMs to learn a new domain, not skip past it
 
 Creator hook: 验证来源、证据和可讲边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Cluster the top objections and strongest supporting comments into three viewer-safe claims.
 
 Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
 Order the current pack: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20]]></description>
     </item>
     <item>
-      <title>#12 HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers</title>
-      <link>http://arxiv.org/abs/2606.06493v1</link>
-      <guid isPermaLink="false">http://arxiv.org/abs/2606.06493v1</guid>
-      <pubDate>Thu, 04 Jun 2026 17:59:50 GMT</pubDate>
-      <description><![CDATA[For a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. Existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. We instead propose a compact, explicit interface that
+      <title>#12 Next Forcing: Causal World Modeling with Multi-Chunk Prediction</title>
+      <link>http://arxiv.org/abs/2606.11187v1</link>
+      <guid isPermaLink="false">http://arxiv.org/abs/2606.11187v1</guid>
+      <pubDate>Tue, 09 Jun 2026 17:59:22 GMT</pubDate>
+      <description><![CDATA[Autoregressive video generation has emerged as a powerful paradigm for World Action Models (WAMs). However, existing approaches suffer from slow training convergence and limited converged accuracy, particularly at high frame rates, as the training supervision is confined to the current chunk without explicit signals about future dynamics; they also suffer fr
 
 Creator hook: 验证来源、证据和可讲边界。
 
-Demo angle: Reproduce the smallest useful workflow or summarize the core claim with evidence.
+Demo angle: Choose one claim that can be explained without requiring private data or unreleased code.
 
 Limitation: Research papers may be too early for mainstream creators; translate into a practical demo or skip.
 

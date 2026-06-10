@@ -1,6 +1,6 @@
 # TrendFoundry Content Testimonials
 
-Generated: 2026-06-08T17:38:42.041Z
+Generated: 2026-06-10T14:11:09.393Z
 
 This step turns private buyer feedback into a local social-proof review queue. Private buyer names, quotes, and contacts stay in ignored `dist/content-testimonials/` and `data/content-sales-crm/testimonials.csv`.
 

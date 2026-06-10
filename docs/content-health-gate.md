@@ -1,6 +1,6 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-08T19:18:34.221Z
+Generated: 2026-06-10T14:11:10.137Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
@@ -126,9 +126,9 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 
 ## Bilibili Sample
 
-- B站强推！这几位老师简直就是教 AI 漫剧的神！！！ (热爱学习的芙莉莲)
-- 【赛博古董】21年前 YouTube 被上传的第一个视频 (依然杏压抑)
-- 10K 星的 AI 虚拟人框架：把聊天框变成能说话的 Live2D 角色 (AIlazy俊)
+- 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ (YouTube深度油管)
+- 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room (骑摩托的周先森)
+- 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 (AIlazy俊)
 
 ## Safety Boundary
 

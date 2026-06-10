@@ -4,9 +4,9 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 
 ## Title Options
 
-- 【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注
-- 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
-- 【实测】NousResearch/hermes-agent: 热度、坑点、可复现演示
+- 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- 为什么 agent engineering workflow 现在值得创作者关注 (practical test)
+- 【实测】agent engineering workflow: 热度、坑点、可复现演示
 
 ## 60-Second Opening
 
@@ -42,18 +42,18 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 | 0:00-0:20 | Title card + source page | 实测 NousResearch/hermes-agent：看它能替代创作流程里的哪一步。 | Set the practical test frame. |
 | 0:20-0:55 | Source page close-up | 先看原始信号：The agent that grows with you。热度只是入口，不是结论。 | Ground the claim in evidence. |
 | 0:55-1:40 | Problem map | 观众真正关心的是它能替代哪一步：选题、资料整理、脚本、演示，还是发布资产。 | Translate trend into workflow pain. |
-| 1:40-3:50 | Demo or reproducible walkthrough | Reproduce the smallest useful workflow or summarize the core claim with evidence. | Create the main value segment. |
+| 1:40-3:50 | Demo or reproducible walkthrough | Run or inspect the smallest quickstart/example; record the exact command, input, and first output. | Create the main value segment. |
 | 3:50-4:50 | Before/after comparison | 对比使用前后：节省了什么时间，增加了什么检查成本，哪些步骤仍然必须人工判断。 | Avoid hype and show tradeoffs. |
-| 4:50-5:45 | Creator angle | 如果把它做成一期视频，标题可以是「【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注」。核心卖点不是新奇，而是可复制。 | Convert into a recordable episode. |
+| 4:50-5:45 | Creator angle | 如果把它做成一期视频，标题可以是「【实测】为什么 agent engineering workflow 现在值得创作者关注」。核心卖点不是新奇，而是可复制。 | Convert into a recordable episode. |
 | 5:45-6:30 | Limitations | Stars and recent activity can overstate production readiness; test install friction and maintenance quality. | Build trust and reduce overclaim risk. |
 | 6:30-7:00 | CTA | 如果你想每周拿到 12 个这样的来源、标题、demo 和限制说明，可以索取 TrendFoundry 样品包。 | Move viewer to sample order. |
 
 ## Demo Checklist
 
-1. Open and verify the source: https://github.com/NousResearch/hermes-agent
-2. Reproduce the smallest useful workflow or summarize the core claim with evidence.
-3. Compare the before/after creator workflow: research time, production time, or output quality.
-4. State exactly who should use it and who should skip it.
+1. Open https://github.com/NousResearch/hermes-agent and capture README promise, latest pushed date, stars, and issue count.
+2. Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+3. Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.
+4. Convert the result into one creator workflow: 判断 agent 是真能替你执行任务，还是只适合当噱头.
 
 ## Recording Outline
 
@@ -79,8 +79,8 @@ Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent
 
 ## Publishing Metadata
 
-- Bilibili title: 【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注
-- YouTube title: 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
+- Bilibili title: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- YouTube title: 为什么 agent engineering workflow 现在值得创作者关注 (practical test)
 - Description opener: 实测 NousResearch/hermes-agent：来源、复现步骤、适用场景和限制。
 - Tags: AI工具, 创作者工作流, GitHub, Bilibili, YouTube, TrendFoundry
 

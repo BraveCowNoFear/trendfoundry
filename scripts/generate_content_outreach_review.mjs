@@ -153,11 +153,27 @@ function sourceNoun(source) {
   return "creator channel";
 }
 
+function shortenSubject(subject, maxLength = 90) {
+  const clean = cleanDisplayText(subject);
+  if (clean.length <= maxLength) return clean;
+
+  const marker = " for ";
+  const markerIndex = clean.indexOf(marker);
+  if (markerIndex === -1) return `${clean.slice(0, maxLength - 1).trimEnd()}...`;
+
+  const prefix = clean.slice(0, markerIndex + marker.length);
+  const topic = clean.slice(markerIndex + marker.length);
+  const room = maxLength - prefix.length - 3;
+  if (room < 16) return `${clean.slice(0, maxLength - 3).trimEnd()}...`;
+
+  return `${prefix}${topic.slice(0, room).trimEnd()}...`;
+}
+
 function subjectLine(row, product) {
   const topic = cleanDisplayText(row.topic) || "your next proof-first episode";
-  if (row.offer_sku === "trendfoundry-proof-custom") return `Proof pack idea for ${topic}`;
-  if (row.offer_sku === "trendfoundry-proof-weekly") return `A weekly proof-first episode queue for ${topic}`;
-  return `One proof-first script idea for ${topic}`;
+  if (row.offer_sku === "trendfoundry-proof-custom") return shortenSubject(`Proof pack idea for ${topic}`);
+  if (row.offer_sku === "trendfoundry-proof-weekly") return shortenSubject(`A weekly proof-first episode queue for ${topic}`);
+  return shortenSubject(`One proof-first script idea for ${topic}`);
 }
 
 function makePack(row, product, index) {

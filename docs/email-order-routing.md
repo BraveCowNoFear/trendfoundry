@@ -1,6 +1,6 @@
 # TrendFoundry Email Order Routing Audit
 
-Generated: 2026-06-08T07:28:45.175Z
+Generated: 2026-06-10T14:11:11.918Z
 
 This audit proves which local fulfillment path each email order should use. It does not send messages, collect payment, upload files, or build the frontend.
 

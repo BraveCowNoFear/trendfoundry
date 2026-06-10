@@ -1,6 +1,6 @@
 # TrendFoundry Public Sample (English)
 
-Generated: 2026-06-07T16:16:38.285Z
+Generated: 2026-06-10T14:10:55.310Z
 
 Language: English
 
@@ -25,7 +25,7 @@ Chinese version: https://bravecownofear.github.io/trendfoundry/public-sample.zh-
 
 ### 2. infiniflow/ragflow
 
-- Score: 173
+- Score: 175
 - Fit: high
 - Source: GitHub / ai-agents
 - Quality: normal
@@ -38,7 +38,7 @@ Chinese version: https://bravecownofear.github.io/trendfoundry/public-sample.zh-
 
 ### 3. google-gemini/gemini-cli
 
-- Score: 171
+- Score: 172
 - Fit: high
 - Source: GitHub / ai-agents
 - Quality: normal
@@ -53,7 +53,7 @@ Chinese version: https://bravecownofear.github.io/trendfoundry/public-sample.zh-
 ## Upgrade
 
 - Sample issue: USD 9 one-off.
-- Weekly brief: USD 19/month.
+- Weekly pipeline: USD 19/month.
 - Custom niche: USD 49/month.
 
 Request the current issue: https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20

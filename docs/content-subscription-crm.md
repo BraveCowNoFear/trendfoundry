@@ -1,6 +1,6 @@
 # TrendFoundry Content Subscription CRM
 
-Generated: 2026-06-08T06:49:11.421Z
+Generated: 2026-06-10T14:11:12.838Z
 
 This is the content-only CRM for the USD 19/month weekly proof pack. It reads private subscriber status from ignored local files, then prepares due delivery queues and fulfillment commands without exposing subscriber contacts in tracked docs.
 

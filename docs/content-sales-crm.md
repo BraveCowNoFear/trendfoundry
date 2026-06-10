@@ -1,6 +1,6 @@
 # TrendFoundry Content Sales CRM
 
-Generated: 2026-06-08T08:29:26.599Z
+Generated: 2026-06-10T14:11:04.451Z
 
 This is the local CRM layer for first-customer sales. It turns the ignored prospecting board into a weekly review and follow-up plan. It does not send messages, post content, collect payment, or expose the private prospect list in public docs.
 

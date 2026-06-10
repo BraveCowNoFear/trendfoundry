@@ -1,6 +1,6 @@
 # TrendFoundry Weekly Subscription Plan
 
-Generated: 2026-06-07T22:10:53.811Z
+Generated: 2026-06-10T14:11:12.522Z
 
 This turns the USD 19/month weekly proof pack into a repeatable four-week fulfillment plan. It creates reviewable delivery and retention drafts; it does not send messages, collect payment, or upload files.
 
@@ -16,10 +16,10 @@ This turns the USD 19/month weekly proof pack into a repeatable four-week fulfil
 
 | Week | Week start | Delivery | Theme | Lead episode | Proof asset |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 2026-06-08 | 2026-06-10 | AI agent / developer workflow proof | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
-| 2 | 2026-06-15 | 2026-06-17 | AI video workflow proof | 为什么 AIDC-AI/Pixelle-Video 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
-| 3 | 2026-06-22 | 2026-06-24 | creator economy signal proof | 为什么 当我尝试下载 YouTube 时 现在值得创作者关注 (practical test) | source claim, tiny reproduction input, before/after table, and skip-condition slide |
-| 4 | 2026-06-29 | 2026-07-01 | AI video workflow proof | 为什么 AI Filmmaking Workflow: How To Create AI Videos With Ful 现在值得创作者关注 (practical test) | source claim, tiny reproduction input, before/after table, and skip-condition slide |
+| 1 | 2026-06-15 | 2026-06-17 | AI agent / developer workflow proof | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
+| 2 | 2026-06-22 | 2026-06-24 | AI video workflow proof | 为什么 AIDC-AI/Pixelle-Video 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
+| 3 | 2026-06-29 | 2026-07-01 | creator economy signal proof | 为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
+| 4 | 2026-07-06 | 2026-07-08 | AI agent / developer workflow proof | 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
 
 ## Subscriber Emails
 
@@ -35,7 +35,7 @@ Start with: 为什么 agent engineering workflow 现在值得创作者关注 (pr
 Source: https://github.com/NousResearch/hermes-agent
 Proof to record: README/quickstart capture, first output, and one blocker note
 
-Why this week: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+Why this week: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
 What you receive:
 - one ready-to-record script
@@ -63,7 +63,7 @@ Start with: 为什么 AIDC-AI/Pixelle-Video 现在值得创作者关注 (practic
 Source: https://github.com/AIDC-AI/Pixelle-Video
 Proof to record: README/quickstart capture, first output, and one blocker note
 
-Why this week: AIDC-AI/Pixelle-Video is worth covering now because the repo shows updated 4 days ago, 22k stars, 124 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+Why this week: AIDC-AI/Pixelle-Video is worth covering now because the repo shows updated 2 days ago, 22k stars, 124 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
 What you receive:
 - one ready-to-record script
@@ -81,17 +81,17 @@ rivan_Britain@outlook.com
 
 ## Week 3: creator economy signal proof
 
-Subject: TrendFoundry weekly proof pack - 为什么 当我尝试下载 YouTube 时 现在值得创作者关注 (practical test)
+Subject: TrendFoundry weekly proof pack - 为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注 (practical test)
 
 Hi,
 
 This week's TrendFoundry proof pack is ready.
 
-Start with: 为什么 当我尝试下载 YouTube 时 现在值得创作者关注 (practical test)
-Source: http://www.bilibili.com/video/av116707230223184
-Proof to record: source claim, tiny reproduction input, before/after table, and skip-condition slide
+Start with: 为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注 (practical test)
+Source: https://github.com/rushindrasinha/youtube-shorts-pipeline
+Proof to record: README/quickstart capture, first output, and one blocker note
 
-Why this week: 当我尝试下载 YouTube 时 is worth covering now because the Bilibili result shows updated yesterday, 531 plays, 9 reviews, creator 你的米老鼠大爹; use it to test whether the promised workflow survives a smaller reproduction.
+Why this week: AI 配音/多语种 dubbing 工作流 is worth covering now because the repo shows updated yesterday, 2.0k stars; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
 What you receive:
 - one ready-to-record script
@@ -99,7 +99,7 @@ What you receive:
 - one limitation card
 - one recording checklist
 
-Safety note: Platform popularity is not proof of quality; validate the workflow before recommending it.
+Safety note: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 This is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 
@@ -107,19 +107,19 @@ Best,
 TrendFoundry
 rivan_Britain@outlook.com
 
-## Week 4: AI video workflow proof
+## Week 4: AI agent / developer workflow proof
 
-Subject: TrendFoundry weekly proof pack - 为什么 AI Filmmaking Workflow: How To Create AI Videos With Ful 现在值得创作者关注 (practical test)
+Subject: TrendFoundry weekly proof pack - 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test)
 
 Hi,
 
 This week's TrendFoundry proof pack is ready.
 
-Start with: 为什么 AI Filmmaking Workflow: How To Create AI Videos With Ful 现在值得创作者关注 (practical test)
-Source: https://www.youtube.com/watch?v=Hjj-yiDJXTw
-Proof to record: source claim, tiny reproduction input, before/after table, and skip-condition slide
+Start with: 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test)
+Source: https://github.com/NarratorAI-Studio/narrator-ai-cli-skill
+Proof to record: README/quickstart capture, first output, and one blocker note
 
-Why this week: AI Filmmaking Workflow: How To Create AI Videos With Ful is worth covering now because the YouTube result shows updated 2 days ago, 4.5k views, AI Master / 2 days ago / 4,455 views; turn the claim into a before/after creator workflow check.
+Why this week: 终端 AI agent 工作流 is worth covering now because the repo shows updated 7 days ago, 1.2k stars, 3 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
 What you receive:
 - one ready-to-record script
@@ -127,7 +127,7 @@ What you receive:
 - one limitation card
 - one recording checklist
 
-Safety note: Platform popularity is not proof of quality; validate the workflow before recommending it.
+Safety note: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 This is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 

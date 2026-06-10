@@ -47,11 +47,11 @@
       <text x="90" y="229" class="muted">NousResearch/hermes-agent</text>
     </g><g class="demo-row" style="animation-delay:0.45s">
       <rect x="72" y="254" width="290" height="42" rx="7"></rect>
-      <text x="90" y="271">GitHub / score 173</text>
+      <text x="90" y="271">GitHub / score 175</text>
       <text x="90" y="287" class="muted">infiniflow/ragflow</text>
     </g><g class="demo-row" style="animation-delay:0.90s">
       <rect x="72" y="312" width="290" height="42" rx="7"></rect>
-      <text x="90" y="329">GitHub / score 171</text>
+      <text x="90" y="329">GitHub / score 172</text>
       <text x="90" y="345" class="muted">google-gemini/gemini-cli</text>
     </g><g class="demo-row" style="animation-delay:1.35s">
       <rect x="72" y="370" width="290" height="42" rx="7"></rect>

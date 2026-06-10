@@ -1,6 +1,6 @@
 # TrendFoundry Content Customer Success
 
-Generated: 2026-06-08T13:11:37.728Z
+Generated: 2026-06-10T14:11:08.927Z
 
 This step turns completed buyer deliveries into reviewer-ready feedback, testimonial-permission, and upgrade follow-up drafts. Private buyer rows stay in ignored `dist/content-customer-success/`.
 

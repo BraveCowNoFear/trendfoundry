@@ -1,6 +1,6 @@
 # TrendFoundry Content Prospecting
 
-Generated: 2026-06-07T22:10:54.540Z
+Generated: 2026-06-10T14:11:03.730Z
 
 This is the first-customers lane for TrendFoundry content products. It prepares local prospect lists and personalized outreach drafts, but it does not send messages, post content, collect payment, or scrape private contact data.
 
@@ -11,7 +11,7 @@ This is the first-customers lane for TrendFoundry content products. It prepares 
 - Local draft directory: `dist/content-prospecting/drafts/`
 - Prospects prepared: 20
 - Channels: YouTube, Bilibili
-- Product fits: custom-proof-pack, proof-script-pack, proof-weekly
+- Product fits: custom-proof-pack, proof-weekly, proof-script-pack
 
 ## Operating Rule
 

@@ -1,8 +1,8 @@
 # TrendFoundry Custom Proof Pack
 
-Generated: 2026-06-08T08:20:43.361Z
+Generated: 2026-06-10T14:11:01.238Z
 
-Dataset: 2026-06-08T07:15:29.423Z
+Dataset: 2026-06-10T14:10:55.310Z
 
 Buyer: custom buyer
 
@@ -19,7 +19,7 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 - Start with: 【实测】为什么 agent engineering workflow 现在值得创作者关注
 - Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)
 - Proof to record: Record the repository README, install or quickstart command, first output, and one blocker note.
-- Why now: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why now: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Safety line: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 ## Episode Ladder
@@ -30,8 +30,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 | 2 | 为什么 RAG 知识库工作流 现在值得创作者关注 (practical test) | GitHub | 222 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 | 3 | 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test) | GitHub | 219 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 | 4 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 217 | Record the repository README, install or quickstart command, first output, and one blocker note. |
-| 5 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 211 | Record the repository README, install or quickstart command, first output, and one blocker note. |
-| 6 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 207 | Record the repository README, install or quickstart command, first output, and one blocker note. |
+| 5 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 212 | Record the repository README, install or quickstart command, first output, and one blocker note. |
+| 6 | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | GitHub | 209 | Record the repository README, install or quickstart command, first output, and one blocker note. |
 
 ## Full Custom Episode Brief
 
@@ -40,7 +40,7 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 - Source: GitHub
 - URL: https://github.com/NousResearch/hermes-agent
 - Fit score: 234
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 186k stars, 19k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -115,7 +115,7 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 - Source: GitHub
 - URL: https://github.com/langchain-ai/langchain
 - Fit score: 217
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 550 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 516 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -138,8 +138,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 
 - Source: GitHub
 - URL: https://github.com/browser-use/browser-use
-- Fit score: 211
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated 2 days ago, 98k stars, 274 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Fit score: 212
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 98k stars, 282 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
@@ -162,8 +162,8 @@ This custom pack turns the current public signal set into a narrow, proof-first 
 
 - Source: GitHub
 - URL: https://github.com/affaan-m/ECC
-- Fit score: 207
-- Why this fits: agent engineering workflow is worth covering now because the repo shows updated yesterday, 210k stars, 39 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Fit score: 209
+- Why this fits: agent engineering workflow is worth covering now because the repo shows updated today, 212k stars, 58 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 - Opening hook: 如果你想讲 agent engineering workflow，别先吹 stars：先录一次最小安装和输出，证明它能不能判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Proof asset: Record the repository README, install or quickstart command, first output, and one blocker note.
 - Limitation to say on camera: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.

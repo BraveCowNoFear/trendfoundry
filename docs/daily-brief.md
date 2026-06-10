@@ -1,6 +1,6 @@
 # TrendFoundry Daily Creator Intelligence
 
-Generated: 2026-06-07T16:16:38.285Z
+Generated: 2026-06-10T14:10:55.310Z
 
 ## Executive Read
 
@@ -24,21 +24,21 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Link: https://github.com/NousResearch/hermes-agent
 - Why it matters: The agent that grows with you
 - Creator target: tech explainer / developer educator
-- Why now: NousResearch/hermes-agent is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 NousResearch/hermes-agent 现在值得创作者关注
-- YouTube title: 为什么 NousResearch/hermes-agent 现在值得创作者关注 (practical test)
+- Why now: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Bilibili title: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- YouTube title: 为什么 agent engineering workflow 现在值得创作者关注 (practical test)
 - Hook: 验证安装、输出和适用边界。
 - Demo steps:
-  - Open and verify the source: https://github.com/NousResearch/hermes-agent
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
+  - Open https://github.com/NousResearch/hermes-agent and capture README promise, latest pushed date, stars, and issue count.
+  - Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+  - Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.
+  - Convert the result into one creator workflow: 判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Thumbnail prompt: A clean tech explainer thumbnail about NousResearch/hermes-agent, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 ### 2. infiniflow/ragflow
 
-- Score: 173
+- Score: 175
 - Fit: high
 - Source: github / ai-agents
 - Freshness: fresh
@@ -46,21 +46,21 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Link: https://github.com/infiniflow/ragflow
 - Why it matters: RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs
 - Creator target: tech explainer / developer educator
-- Why now: infiniflow/ragflow is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 infiniflow/ragflow 现在值得创作者关注
-- YouTube title: 为什么 infiniflow/ragflow 现在值得创作者关注 (practical test)
+- Why now: RAG 知识库工作流 is worth covering now because the repo shows updated today, 82k stars, 3.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Bilibili title: 【实测】为什么 RAG 知识库工作流 现在值得创作者关注
+- YouTube title: 为什么 RAG 知识库工作流 现在值得创作者关注 (practical test)
 - Hook: 验证安装、输出和适用边界。
 - Demo steps:
-  - Open and verify the source: https://github.com/infiniflow/ragflow
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
+  - Open https://github.com/infiniflow/ragflow and capture README promise, latest pushed date, stars, and issue count.
+  - Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+  - Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.
+  - Convert the result into one creator workflow: 把资料库问答从演示稿变成可验证输出.
 - Thumbnail prompt: A clean tech explainer thumbnail about infiniflow/ragflow, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
 ### 3. google-gemini/gemini-cli
 
-- Score: 171
+- Score: 172
 - Fit: high
 - Source: github / ai-agents
 - Freshness: fresh
@@ -68,15 +68,15 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Link: https://github.com/google-gemini/gemini-cli
 - Why it matters: An open-source AI agent that brings the power of Gemini directly into your terminal.
 - Creator target: tech explainer / developer educator
-- Why now: google-gemini/gemini-cli is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 google-gemini/gemini-cli 现在值得创作者关注
-- YouTube title: 为什么 google-gemini/gemini-cli 现在值得创作者关注 (practical test)
+- Why now: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Bilibili title: 【实测】为什么 终端 AI agent 工作流 现在值得创作者关注
+- YouTube title: 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test)
 - Hook: 验证安装、输出和适用边界。
 - Demo steps:
-  - Open and verify the source: https://github.com/google-gemini/gemini-cli
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
+  - Open https://github.com/google-gemini/gemini-cli and capture README promise, latest pushed date, stars, and issue count.
+  - Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+  - Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.
+  - Convert the result into one creator workflow: 判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Thumbnail prompt: A clean tech explainer thumbnail about google-gemini/gemini-cli, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
@@ -90,192 +90,192 @@ Collection health: 0 fresh collection errors, 0 cached fallback items in the dis
 - Link: https://github.com/langchain-ai/langchain
 - Why it matters: The agent engineering platform.
 - Creator target: tech explainer / developer educator
-- Why now: langchain-ai/langchain is appearing in a current trend signal for ai-agents, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 langchain-ai/langchain 现在值得创作者关注
-- YouTube title: 为什么 langchain-ai/langchain 现在值得创作者关注 (practical test)
+- Why now: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 516 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+- Bilibili title: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- YouTube title: 为什么 agent engineering workflow 现在值得创作者关注 (practical test)
 - Hook: 验证安装、输出和适用边界。
 - Demo steps:
-  - Open and verify the source: https://github.com/langchain-ai/langchain
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
+  - Open https://github.com/langchain-ai/langchain and capture README promise, latest pushed date, stars, and issue count.
+  - Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
+  - Mark the adoption blockers: API key, GPU, dataset, dependency conflicts, missing docs, or slow setup.
+  - Convert the result into one creator workflow: 判断 agent 是真能替你执行任务，还是只适合当噱头.
 - Thumbnail prompt: A clean tech explainer thumbnail about langchain-ai/langchain, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-### 5. The ONLY 3 Tools You Need to Create ANY AI Video
+### 5. Best AI Video Prompt Generator 2026 (FREE)
 
-- Score: 137
-- Fit: high
-- Source: youtube / AI video tools creator workflow
-- Freshness: fresh
-- Quality: normal
-- Link: https://www.youtube.com/watch?v=JQzF5LP4VTs
-- Why it matters: Tao Prompts / 4 days ago / 33,996 views
-- Creator target: AI workflow creator
-- Why now: The ONLY 3 Tools You Need to Create ANY AI Video is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注
-- YouTube title: 为什么 The ONLY 3 Tools You Need to Create ANY AI Video 现在值得创作者关注 (practical test)
-- Hook: 验证方法是否可复现，避免照搬原视频。
-- Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=JQzF5LP4VTs
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about The ONLY 3 Tools You Need to Create ANY AI Video, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 6. The Only AI Video Prompt Generator You'll Ever Need
-
-- Score: 137
+- Score: 135
 - Fit: high
 - Source: youtube / AI video tools creator workflow
 - Freshness: fresh
 - Quality: normal
 - Link: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Why it matters: Youri van Hofwegen / 5 days ago / 35,332 views
+- Why it matters: Youri van Hofwegen / 7 days ago / 39,488 views
 - Creator target: AI workflow creator
-- Why now: The Only AI Video Prompt Generator You'll Ever Need is appearing in a current trend signal for AI video tools creator workflow, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注
-- YouTube title: 为什么 The Only AI Video Prompt Generator You'll Ever Need 现在值得创作者关注 (practical test)
+- Why now: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 7 days ago, 39k views, Youri van Hofwegen / 7 days ago / 39,488 views; turn the claim into a before/after creator workflow check.
+- Bilibili title: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
+- YouTube title: 为什么 AI 视频提示词生成器 现在值得创作者关注 (practical test)
 - Hook: 验证方法是否可复现，避免照搬原视频。
 - Demo steps:
-  - Open and verify the source: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about The Only AI Video Prompt Generator You'll Ever Need, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+  - Open the source video and capture title, creator, date, and public engagement for Best AI Video Prompt Generator 2026 (FREE).
+  - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+  - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
+  - State the skip condition: which creator should not copy this workflow yet.
+- Thumbnail prompt: A clean tech explainer thumbnail about Best AI Video Prompt Generator 2026 (FREE), showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 7. 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+### 6. EXACTLY How to Make an AI Short Film (Full Workflow)
 
-- Score: 135
+- Score: 132
 - Fit: high
-- Source: bilibili / B站AI工作流
+- Source: youtube / AI video tools creator workflow
 - Freshness: fresh
 - Quality: normal
-- Link: http://www.bilibili.com/video/av116703774115351
-- Why it matters: 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
+- Link: https://www.youtube.com/watch?v=0v534yAyhwg
+- Why it matters: Youri van Hofwegen / 8 days ago / 25,626 views
 - Creator target: AI workflow creator
-- Why now: 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
-- YouTube title: 为什么 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)
+- Why now: EXACTLY How to Make an AI Short Film (Full Workflow) is worth covering now because the YouTube result shows updated 8 days ago, 26k views, Youri van Hofwegen / 8 days ago / 25,626 views; turn the claim into a before/after creator workflow check.
+- Bilibili title: 【实测】为什么 EXACTLY How to Make an AI Short Film (Full Workflow) 现在值得创作者关注
+- YouTube title: 为什么 EXACTLY How to Make an AI Short Film (Full Workflow) 现在值得创作者关注 (practical test)
 - Hook: 验证方法是否可复现，避免照搬原视频。
 - Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116703774115351
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+  - Open the source video and capture title, creator, date, and public engagement for EXACTLY How to Make an AI Short Film (Full Workflow).
+  - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+  - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
+  - State the skip condition: which creator should not copy this workflow yet.
+- Thumbnail prompt: A clean tech explainer thumbnail about EXACTLY How to Make an AI Short Film (Full Workflow), showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 8. 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程
+### 7. 【1548] 凯文凯利： AI 真的会抢走人类工作吗？
 
-- Score: 131
-- Fit: high
-- Source: bilibili / B站AI工作流
-- Freshness: fresh
-- Quality: normal
-- Link: http://www.bilibili.com/video/av116703824447305
-- Why it matters: 一个冷知识:点赞是免费的! 但是可以让辛苦做视频的UP主开心快乐一整天!!! 视频配套的整 合 包 &工 作 流资料，官注+平论掉落~
-- Creator target: AI workflow creator
-- Why now: 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 is appearing in a current trend signal for B站AI工作流, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注
-- YouTube title: 为什么 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 现在值得创作者关注 (practical test)
-- Hook: 验证方法是否可复现，避免照搬原视频。
-- Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116703824447305
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
-
-### 9. 当我尝试下载 YouTube 时
-
-- Score: 125
+- Score: 117
 - Fit: high
 - Source: bilibili / YouTube 创作者 AI
 - Freshness: fresh
 - Quality: normal
-- Link: http://www.bilibili.com/video/av116707230223184
-- Why it matters: -
+- Link: http://www.bilibili.com/video/av116723671894628
+- Why it matters: https://www.youtube.com/watch?v=Z9i_16eKvdc&t=774s
 - Creator target: AI workflow creator
-- Why now: 当我尝试下载 YouTube 时 is appearing in a current trend signal for YouTube 创作者 AI, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 当我尝试下载 YouTube 时 现在值得创作者关注
-- YouTube title: 为什么 当我尝试下载 YouTube 时 现在值得创作者关注 (practical test)
+- Why now: 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ is worth covering now because the Bilibili result shows updated today, 182 plays, 1 reviews, creator YouTube深度油管; use it to test whether the promised workflow survives a smaller reproduction.
+- Bilibili title: 【实测】为什么 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ 现在值得创作者关注
+- YouTube title: 为什么 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ 现在值得创作者关注 (practical test)
 - Hook: 验证方法是否可复现，避免照搬原视频。
 - Demo steps:
-  - Open and verify the source: http://www.bilibili.com/video/av116707230223184
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about 当我尝试下载 YouTube 时, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+  - Open the source video and capture title, creator, date, and public engagement for 【1548] 凯文凯利： AI 真的会抢走人类工作吗？.
+  - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+  - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
+  - State the skip condition: which creator should not copy this workflow yet.
+- Thumbnail prompt: A clean tech explainer thumbnail about 【1548] 凯文凯利： AI 真的会抢走人类工作吗？, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 10. Ask HN: Why is the HN crowd so anti-AI?
+### 8. 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room
 
-- Score: 120
+- Score: 116
 - Fit: high
-- Source: hn / creator tools
+- Source: bilibili / 开源AI项目
 - Freshness: fresh
 - Quality: normal
-- Link: https://news.ycombinator.com/item?id=48420827
-- Why it matters: Ask HN: Why is the HN crowd so anti-AI?
-- Creator target: AI workflow creator
-- Why now: Ask HN: Why is the HN crowd so anti-AI? is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 Ask HN: Why is the HN crowd so anti-AI? 现在值得创作者关注
-- YouTube title: 为什么 Ask HN: Why is the HN crowd so anti-AI? 现在值得创作者关注 (practical test)
-- Hook: 验证来源、证据和可讲边界。
+- Link: http://www.bilibili.com/video/av116724963740626
+- Why it matters: 这期介绍一个我下午做出来的小工具：Agent Room。 它像一个给 AI agent 开的会议室：人可以进来，AI 可以进来，另一台没有 AI 的 Windows 电脑也可以用 executor / slave 模式进来。那台电脑不需要自己会思考，只负责执行命令、返回结果；我的 AI 在房间里看到它在线，就能点名让它检查路径、查日志、跑诊断。 这个场景很普通：同事 Windows 环境装软件失败，你不在现场，他电脑上也没有 AI。以前只能截图、远程会议、来回问。现在可以让 AI 直接进入排查现场。
+- Creator target: tech explainer / developer educator
+- Why now: agent engineering workflow is worth covering now because the Bilibili result shows updated today, 103 plays, 2 reviews, creator 骑摩托的周先森; use it to test whether the promised workflow survives a smaller reproduction.
+- Bilibili title: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- YouTube title: 为什么 agent engineering workflow 现在值得创作者关注 (practical test)
+- Hook: 验证方法是否可复现，避免照搬原视频。
 - Demo steps:
-  - Open and verify the source: https://news.ycombinator.com/item?id=48420827
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about Ask HN: Why is the HN crowd so anti-AI?, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
-- Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
+  - Open the source video and capture title, creator, date, and public engagement for 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room.
+  - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+  - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
+  - State the skip condition: which creator should not copy this workflow yet.
+- Thumbnail prompt: A clean tech explainer thumbnail about 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
-### 11. Show HN: We built a tool to dub any video in the original voice in 40 languages
+### 9. 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示
 
-- Score: 100
+- Score: 114
 - Fit: high
-- Source: hn / creator tools
+- Source: bilibili / 开源AI项目
 - Freshness: fresh
 - Quality: normal
-- Link: https://vaani.media
-- Why it matters: Show HN: We built a tool to dub any video in the original voice in 40 languages
-- Creator target: AI workflow creator
-- Why now: Show HN: We built a tool to dub any video in the original voice in 40 languages is appearing in a current discussion signal for creator tools, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 Show HN: We built a tool to dub any video in the original voice in 40 languages 现在值得创作者关注
-- YouTube title: 为什么 Show HN: We built a tool to dub any video in the original voice in 40 languages 现在值得创作者关注 (practical test)
+- Link: http://www.bilibili.com/video/av116723470565894
+- Why it matters: 这个项目叫 Recordly，是一个开源的录屏加视频编辑工具。它把录制、缩放、鼠标效果、背景样式、摄像头小窗、时间线剪辑和导出放在一个软件里，适合做产品演示、教程视频、Bug 复现和操作流程录制。 项目地址：https://github.com/webadderallorg/Recordly
+- Creator target: tech explainer / developer educator
+- Why now: 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 is worth covering now because the Bilibili result shows updated today, 101 plays, 1 reviews, creator AIlazy俊; use it to test whether the promised workflow survives a smaller reproduction.
+- Bilibili title: 【实测】为什么 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 现在值得创作者关注
+- YouTube title: 为什么 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 现在值得创作者关注 (practical test)
+- Hook: 验证方法是否可复现，避免照搬原视频。
+- Demo steps:
+  - Open the source video and capture title, creator, date, and public engagement for 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示.
+  - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
+  - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
+  - State the skip condition: which creator should not copy this workflow yet.
+- Thumbnail prompt: A clean tech explainer thumbnail about 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Platform popularity is not proof of quality; validate the workflow before recommending it.
+
+### 10. Show HN: Gitdot – A better GitHub. Open-source, written in Rust
+
+- Score: 114
+- Fit: high
+- Source: hn / GitHub trending
+- Freshness: fresh
+- Quality: normal
+- Link: https://gitdot.io/
+- Why it matters: Show HN: Gitdot – A better GitHub . Open-source, written in Rust
+- Creator target: tech explainer / developer educator
+- Why now: Show HN: Gitdot – A better GitHub. Open-source, written in Rust is worth covering now because the HN thread shows updated 2 days ago, 319 HN points, 297 comments; package the debate into specific creator do/don't guidance.
+- Bilibili title: 【实测】为什么 Show HN: Gitdot – A better GitHub. Open-source, written in Rust 现在值得创作者关注
+- YouTube title: 为什么 Show HN: Gitdot – A better GitHub. Open-source, written in Rust 现在值得创作者关注 (practical test)
 - Hook: 验证来源、证据和可讲边界。
 - Demo steps:
-  - Open and verify the source: https://vaani.media
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: We built a tool to dub any video in the original voice in 40 languages, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+  - Open the HN discussion and save the thread URL: https://gitdot.io/
+  - Cluster the top objections and strongest supporting comments into three viewer-safe claims.
+  - Turn one claim into a creator script segment with a concrete example and a counterexample.
+  - End with a do/don't checklist that avoids promising views, revenue, or model capability.
+- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: Gitdot – A better GitHub. Open-source, written in Rust, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
-### 12. HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers
+### 11. Show HN: Lathe – Use LLMs to learn a new domain, not skip past it
 
-- Score: 80
+- Score: 108
+- Fit: high
+- Source: hn / GitHub trending
+- Freshness: fresh
+- Quality: normal
+- Link: https://github.com/devenjarvis/lathe
+- Why it matters: Show HN: Lathe – Use LLMs to learn a new domain, not skip past it
+- Creator target: AI workflow creator
+- Why now: Show HN: Lathe – Use LLMs to learn a new domain, not skip past it is worth covering now because the HN thread shows updated 3 days ago, 396 HN points, 72 comments; package the debate into specific creator do/don't guidance.
+- Bilibili title: 【实测】为什么 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it 现在值得创作者关注
+- YouTube title: 为什么 Show HN: Lathe – Use LLMs to learn a new domain, not skip past it 现在值得创作者关注 (practical test)
+- Hook: 验证来源、证据和可讲边界。
+- Demo steps:
+  - Open the HN discussion and save the thread URL: https://github.com/devenjarvis/lathe
+  - Cluster the top objections and strongest supporting comments into three viewer-safe claims.
+  - Turn one claim into a creator script segment with a concrete example and a counterexample.
+  - End with a do/don't checklist that avoids promising views, revenue, or model capability.
+- Thumbnail prompt: A clean tech explainer thumbnail about Show HN: Lathe – Use LLMs to learn a new domain, not skip past it, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+- Limitation: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
+
+### 12. Next Forcing: Causal World Modeling with Multi-Chunk Prediction
+
+- Score: 82
 - Fit: medium
 - Source: arxiv / creator economy generative AI
 - Freshness: fresh
 - Quality: normal
-- Link: http://arxiv.org/abs/2606.06493v1
-- Why it matters: For a humanoid robot to be deployed in the real world, the choice of command space (i.e., the interface between task planning and whole-body control) is crucial. Existing whole-body controllers typically demand dense kinematic or spatial references that planners struggle to synthesize from task semantics. We instead propose a compact, explicit interface that
-- Creator target: tech explainer / developer educator
-- Why now: HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers is appearing in a current research signal for creator economy generative AI, which makes it a timely candidate for a practical creator test.
-- Bilibili title: 【实测】为什么 HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers 现在值得创作者关注
-- YouTube title: 为什么 HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers 现在值得创作者关注 (practical test)
+- Link: http://arxiv.org/abs/2606.11187v1
+- Why it matters: Autoregressive video generation has emerged as a powerful paradigm for World Action Models (WAMs). However, existing approaches suffer from slow training convergence and limited converged accuracy, particularly at high frame rates, as the training supervision is confined to the current chunk without explicit signals about future dynamics; they also suffer fr
+- Creator target: AI workflow creator
+- Why now: Next Forcing: Causal World Modeling with Multi-Chunk Prediction is worth covering now because the paper is updated yesterday, Autoregressive video generation has emerged as a powerful paradigm for World Action Models (WAMs). However, ex; translate one claim into a viewer-safe practical experiment.
+- Bilibili title: 【实测】为什么 Next Forcing: Causal World Modeling with Multi-Chunk Prediction 现在值得创作者关注
+- YouTube title: 为什么 Next Forcing: Causal World Modeling with Multi-Chunk Prediction 现在值得创作者关注 (practical test)
 - Hook: 验证来源、证据和可讲边界。
 - Demo steps:
-  - Open and verify the source: http://arxiv.org/abs/2606.06493v1
-  - Reproduce the smallest useful workflow or summarize the core claim with evidence.
-  - Compare the before/after creator workflow: research time, production time, or output quality.
-  - State exactly who should use it and who should skip it.
-- Thumbnail prompt: A clean tech explainer thumbnail about HANDOFF: Humanoid Agentic Task-Space Whole-Body Control via Distilled Complementary Teachers, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
+  - Open the paper and capture title, date, abstract, and one figure/table if available: http://arxiv.org/abs/2606.11187v1
+  - Choose one claim that can be explained without requiring private data or unreleased code.
+  - Create a toy input/output demo or annotated diagram that shows the mechanism.
+  - State the gap between research proof and creator-ready workflow.
+- Thumbnail prompt: A clean tech explainer thumbnail about Next Forcing: Causal World Modeling with Multi-Chunk Prediction, showing a creator desk, GitHub-style trend graph, bold Chinese title area, high contrast, no fake logos
 - Limitation: Research papers may be too early for mainstream creators; translate into a practical demo or skip.
 
 

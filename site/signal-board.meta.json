@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-07T16:47:31.581Z",
-  "dataGeneratedAt": "2026-06-07T16:16:38.285Z",
+  "generatedAt": "2026-06-10T14:10:55.475Z",
+  "dataGeneratedAt": "2026-06-10T14:10:55.310Z",
   "image": "signal-board.png",
   "demo": "signal-demo.svg",
   "width": 1200,
@@ -19,7 +19,7 @@
       "id": "infiniflow/ragflow",
       "url": "https://github.com/infiniflow/ragflow",
       "source": "github",
-      "score": 173,
+      "score": 175,
       "title": "infiniflow/ragflow"
     },
     {
@@ -27,7 +27,7 @@
       "id": "google-gemini/gemini-cli",
       "url": "https://github.com/google-gemini/gemini-cli",
       "source": "github",
-      "score": 171,
+      "score": 172,
       "title": "google-gemini/gemini-cli"
     },
     {
@@ -40,35 +40,35 @@
     },
     {
       "rank": 5,
-      "id": "JQzF5LP4VTs",
-      "url": "https://www.youtube.com/watch?v=JQzF5LP4VTs",
-      "source": "youtube",
-      "score": 137,
-      "title": "The ONLY 3 Tools You Need to Create ANY AI Video"
-    },
-    {
-      "rank": 6,
       "id": "oT-2VO8Jzpk",
       "url": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
       "source": "youtube",
-      "score": 137,
-      "title": "The Only AI Video Prompt Generator You'll Ever Need"
+      "score": 135,
+      "title": "Best AI Video Prompt Generator 2026 (FREE)"
+    },
+    {
+      "rank": 6,
+      "id": "0v534yAyhwg",
+      "url": "https://www.youtube.com/watch?v=0v534yAyhwg",
+      "source": "youtube",
+      "score": 132,
+      "title": "EXACTLY How to Make an AI Short Film (Full Workflow)"
     },
     {
       "rank": 7,
-      "id": "BV1NKEJ61EHd",
-      "url": "http://www.bilibili.com/video/av116703774115351",
+      "id": "BV18LEX6mEeD",
+      "url": "http://www.bilibili.com/video/av116723671894628",
       "source": "bilibili",
-      "score": 135,
-      "title": "【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
+      "score": 117,
+      "title": "【1548] 凯文凯利： AI 真的会抢走人类工作吗？"
     },
     {
       "rank": 8,
-      "id": "BV1d4EJ6cENS",
-      "url": "http://www.bilibili.com/video/av116703824447305",
+      "id": "BV1cLE96qEve",
+      "url": "http://www.bilibili.com/video/av116724963740626",
       "source": "bilibili",
-      "score": 131,
-      "title": "【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程"
+      "score": 116,
+      "title": "同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room"
     }
   ]
 }

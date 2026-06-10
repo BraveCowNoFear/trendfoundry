@@ -1,6 +1,6 @@
 # TrendFoundry Content Reply Intake
 
-Generated: 2026-06-08T18:54:04.032Z
+Generated: 2026-06-10T14:11:04.092Z
 
 This step parses copied creator/buyer replies from ignored `data/content-sales-crm/reply-inbox/` and updates ignored local CRM reply/status files. Private reply text stays in ignored data/dist folders.
 

@@ -4,30 +4,30 @@ Goal: get 5 replies and 1 paid USD 9 sample order.
 
 | # | Source | Creator | Topic | Status | Next Follow-Up |
 |---|---|---|---|---|---|
-| 1 | youtube | Tao Prompts | The ONLY 3 Tools You Need to Create ANY AI Video | not_contacted | 2026-06-10 |
-| 2 | youtube | Youri van Hofwegen | The Only AI Video Prompt Generator You'll Ever Need | not_contacted | 2026-06-10 |
-| 3 | bilibili | AI图生视频工作流 | 【2026最全面秋叶ComfyUI教程】B站强推！建议所有想学 AI 视频生成ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | not_contacted | 2026-06-10 |
-| 4 | youtube | Youri van Hofwegen | Best AI Video Agents in 2026 (Most Realistic) | not_contacted | 2026-06-10 |
-| 5 | youtube | Mira AI | I Fully Automated Video Editing With AI (here’s how) | not_contacted | 2026-06-10 |
-| 6 | bilibili | PR教程- | 【2026最全面ComfyUI教程】B站强推！建议所有想学ComfyUI 工作流 的同学，死磕这条视频，花了一周时间整理的ComfyUI视频生成教程 | not_contacted | 2026-06-10 |
-| 7 | youtube | AI Master | AI Filmmaking Workflow: How To Create AI Videos With Full Automation | not_contacted | 2026-06-10 |
-| 8 | bilibili | 你的米老鼠大爹 | 当我尝试下载 YouTube 时 | not_contacted | 2026-06-10 |
-| 9 | bilibili | 依然杏压抑 | 【赛博古董】21年前 YouTube 被上传的第一个视频 | not_contacted | 2026-06-10 |
-| 10 | bilibili | 鲲鹏Talk | 我睡觉的时候， AI 还在给我打工！实测爆火开源项目 gnhf：白天干自己的事，晚上让 Claude Code/Codex 自动迭代开发，醒来直接收成果！ | not_contacted | 2026-06-10 |
-| 11 | youtube | Tina Huang | Local AI Agents In 26 Minutes | not_contacted | 2026-06-10 |
-| 12 | youtube | Futurepedia and AI Agent Lab | From Zero to Your First AI Agent in 25 Minutes (No Coding) | not_contacted | 2026-06-10 |
-| 13 | youtube | IBM Technology and IBM Developer | What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop | not_contacted | 2026-06-10 |
-| 14 | youtube | Github Awesome | GitHub Trending Today #34: aipointer, rmux, Photo-agents, zerostack, opensquilla, files-sdk, concord | not_contacted | 2026-06-10 |
-| 15 | bilibili | YouTube全球洞见 | 【宏观投资】就业数据造假？美联储加息恐慌！ AI 泡沫要破？SpaceX IPO内幕 + 黄金比特币暴跌，本周市场全解读 | not_contacted | 2026-06-10 |
-| 16 | bilibili | YouTube全球洞见 | 【宏观投资】能源配给在即、 AI 泡沫破裂、比特币崩盘：Chris Whalen的残酷警告 | not_contacted | 2026-06-10 |
-| 17 | bilibili | 小牛AI_XNAI | 谷歌 NotebookLM 大更新！彻底解决痛点，这才是 AI 学习的神器 | not_contacted | 2026-06-10 |
-| 18 | bilibili | 小牛AI_XNAI | 免费调用 Claude Code！手把手教你用 智能体 工厂极速开发应用 | not_contacted | 2026-06-10 |
-| 19 | bilibili | 添柴Ai | Ideogram4 顶级美学开源模型 生图模型新里程碑 上限比肩gpt image2 空间布局控制 色彩艺术顶峰 工作流 优化详解 | not_contacted | 2026-06-10 |
-| 20 | youtube | IBM Technology | What is MCP? Integrate AI Agents with Databases & APIs | not_contacted | 2026-06-10 |
+| 1 | youtube | Youri van Hofwegen | Best AI Video Prompt Generator 2026 (FREE) | not_contacted | 2026-06-13 |
+| 2 | youtube | Youri van Hofwegen | EXACTLY How to Make an AI Short Film (Full Workflow) | not_contacted | 2026-06-13 |
+| 3 | youtube | AI Master | AI Filmmaking Workflow: How To Create AI Videos With Full Automation | not_contacted | 2026-06-13 |
+| 4 | youtube | Web Dev Simplified and Kyle Cook from Web Dev Simplified | The Best Local Agentic Coding Workflow (Complete Guide) | not_contacted | 2026-06-13 |
+| 5 | youtube | Tina Huang | Local AI Agents In 26 Minutes | not_contacted | 2026-06-13 |
+| 6 | youtube | Futurepedia and AI Agent Lab | From Zero to Your First AI Agent in 25 Minutes (No Coding) | not_contacted | 2026-06-13 |
+| 7 | youtube | IBM Technology and IBM Developer | What is OpenClaw? Inside AI Agents, LLMs and the Agentic Loop | not_contacted | 2026-06-13 |
+| 8 | bilibili | YouTube深度油管 | 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ | not_contacted | 2026-06-13 |
+| 9 | bilibili | 骑摩托的周先森 | 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room | not_contacted | 2026-06-13 |
+| 10 | bilibili | AIlazy俊 | 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 | not_contacted | 2026-06-13 |
+| 11 | bilibili | 娱惠文化空间站 | 做海外APP和 AI 工具的人，为什么都在准备英国号码？我研究了30天，终于搞懂英国号码有什么用！ | not_contacted | 2026-06-13 |
+| 12 | youtube | Dan Koe | The creator economy is dying thanks to AI | not_contacted | 2026-06-13 |
+| 13 | bilibili | 爱摸鱼的月萌 | 【中英字幕】Anthropic突袭发布Fable 5，强大到令人恐惧 / 作者： AI Revolution | not_contacted | 2026-06-13 |
+| 14 | bilibili | Youtube金融精選 | 【双语】中国投2950亿美元发展 AI ！与美国7000亿差距有多大？ | not_contacted | 2026-06-13 |
+| 15 | bilibili | 量子菠萝_ | Claude Fable-5实测：免费用到6月底，编程/视觉能力大升级 / Nate Herk / AI Automation | not_contacted | 2026-06-13 |
+| 16 | bilibili | 梨云的笔记 | GitHub 84k星！实测这个 AI 视频工具，结果让人意外... | not_contacted | 2026-06-13 |
+| 17 | bilibili | Youtube金融精選 | 【双语】 AI 板块能否延续涨势？解析市场最新动向 | not_contacted | 2026-06-13 |
+| 18 | bilibili | Comfyui下载- | 【最全面ComfyUI教程】B站强推！建议所有想学ComfyUI的同学，死磕这条视频，花了一周时间整理的ComfyUI零基础入门教程！ComfyUI视频生成 | not_contacted | 2026-06-13 |
+| 19 | bilibili | Youtube金融精選 | 【双语】为何 AI 越智能越贵？揭秘Chipflation背后的真相 / Morning Bid 2026/06/09 / 路透社 | not_contacted | 2026-06-13 |
+| 20 | bilibili | AI智能体阿辉 | 多 Agent 智能体 协作，轻松搞定复杂任务 | not_contacted | 2026-06-13 |
 
 ## Message Template
 
-你好，我看到你最近关注「The ONLY 3 Tools You Need to Create ANY AI Video」这类内容。我做了一个 TrendFoundry 样品包，可以把类似公开信号整理成可直接录制的标题、hook、demo 步骤和限制说明。如果你愿意，我可以发一份本周样品给你判断是否适合你的频道。
+你好，我看到你最近关注「Best AI Video Prompt Generator 2026 (FREE)」这类内容。我做了一个 TrendFoundry 样品包，可以把类似公开信号整理成可直接录制的标题、hook、demo 步骤和限制说明。如果你愿意，我可以发一份本周样品给你判断是否适合你的频道。
 
 ## Notes
 
