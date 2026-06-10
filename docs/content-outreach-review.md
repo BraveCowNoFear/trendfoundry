@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Review
 
-Generated: 2026-06-10T14:11:05.858Z
+Generated: 2026-06-10T14:23:35.455Z
 
 This step turns the private daily close queue into reviewer-ready send packs. Detailed prospect rows stay in ignored `dist/content-outreach-review/`.
 
@@ -10,7 +10,7 @@ This step turns the private daily close queue into reviewer-ready send packs. De
 - Campaigns with tracked URLs: 5
 - Variants active: custom-proof-niche, custom-proof-sample-first, script-pack-low-risk
 - Products available: 3
-- Offer mix: trendfoundry-proof-custom=3, trendfoundry-proof-script-pack=2
+- Offer mix: trendfoundry-proof-custom=4, trendfoundry-proof-script-pack=1
 
 ## Operator Workflow
 

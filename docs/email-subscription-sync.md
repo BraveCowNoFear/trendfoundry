@@ -1,6 +1,6 @@
 # TrendFoundry Email Subscription Sync
 
-Generated: 2026-06-10T14:11:12.214Z
+Generated: 2026-06-10T14:23:41.858Z
 
 This local automation turns paid email orders for the monthly weekly pack into ignored subscription CRM rows. It does not expose buyer contacts in tracked docs.
 

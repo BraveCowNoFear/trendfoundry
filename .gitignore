@@ -4,6 +4,7 @@ data/raw/
 data/email-orders/
 data/content-sales-crm/
 data/content-subscriptions/
+data/payment-rails.json
 data/leads.json
 docs/lead-pipeline.md
 docs/lead-replies.md

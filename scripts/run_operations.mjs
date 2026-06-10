@@ -57,6 +57,8 @@ try {
   await persistRun();
   steps.push(runStep("commerce", ["commerce"]));
   await persistRun();
+  steps.push(runStep("payment-rails", ["payment-rails"]));
+  await persistRun();
   steps.push(runStep("leads", ["leads"]));
   await persistRun();
   steps.push(runStep("intake-email-orders", ["intake-email-orders"]));

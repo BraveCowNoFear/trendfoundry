@@ -23,6 +23,7 @@ const requiredScripts = [
   "fulfill-ready",
   "fulfill-email-orders",
   "payment-reply",
+  "payment-rails",
   "intake-email-orders",
   "draft-outreach",
   "ops-report",
@@ -341,6 +342,14 @@ async function checkLocal() {
   const badCommerce = (commerce.products || []).filter((product) => sellerOnly.some((file) => String(product.fulfillment || "").includes(file)));
   assertCheck("commerce fulfillment excludes seller-only files", badCommerce.length === 0, badCommerce.map((product) => product.sku).join(", "));
 
+  const paymentRailExampleText = await readText(path.join(root, "data", "payment-rails.example.json"));
+  const paymentRailReadiness = await readJson(path.join(root, "dist", "payment-rails", "readiness.json"));
+  const paymentRailDoc = await readText(path.join(root, "docs", "payment-rail-readiness.md"));
+  assertCheck("payment rail template has all commerce SKUs", ["trendfoundry-sample-issue", "trendfoundry-weekly-brief", "trendfoundry-custom-niche"].every((sku) => paymentRailExampleText.includes(`\"${sku}\"`)));
+  assertCheck("payment rail audit covers all products", paymentRailReadiness.productCount === commerce.products?.length, String(paymentRailReadiness.productCount));
+  assertCheck("payment rail audit keeps links out of tracked docs", paymentRailDoc.includes("does not publish checkout URLs") && !/https:\/\/[^\s)]+checkout|payment-link/i.test(paymentRailDoc));
+  assertCheck("payment rail config avoids committed secrets", !/(client_secret|secret[_-]?key|api[_-]?key|access[_-]?token|refresh[_-]?token|password|card[_-]?number|cvv|wallet[_-]?seed|seed[_-]?phrase)/i.test(paymentRailExampleText));
+
   const tempOrderId = "qa-boundary-check";
   const temp = await prepareOrder({
     root,
@@ -383,6 +392,7 @@ async function checkLocal() {
   assertCheck("payment reply avoids credential collection", paymentReplyText.includes("Please do not send card numbers") && paymentInvoiceText.includes("No payment action was attempted"));
   assertCheck("payment reply manifest excludes seller-only files", sellerOnly.every((file) => (paymentManifest.excludedSellerOnlyFiles || []).includes(file)));
   assertCheck("payment reply manifest lists buyer deliverables", ["daily-brief.md", "ready-to-record-script.md", "opportunities.csv"].every((file) => (paymentManifest.buyerDeliverablesAfterPayment || []).includes(file)));
+  assertCheck("payment reply records hosted checkout readiness", paymentManifest.payment?.hostedCheckoutConfigured === false || paymentManifest.payment?.hostedCheckoutConfigured === true);
   await rm(paymentReplyDir, { recursive: true, force: true });
 
   const intakeInboxDir = path.join(root, "dist", "qa", "email-order-inbox");

@@ -1,6 +1,6 @@
 # TrendFoundry Content Prospecting
 
-Generated: 2026-06-10T14:11:03.730Z
+Generated: 2026-06-10T14:23:33.591Z
 
 This is the first-customers lane for TrendFoundry content products. It prepares local prospect lists and personalized outreach drafts, but it does not send messages, post content, collect payment, or scrape private contact data.
 

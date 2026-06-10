@@ -1,6 +1,6 @@
 # TrendFoundry Content Deal Desk
 
-Generated: 2026-06-10T14:11:07.180Z
+Generated: 2026-06-10T14:23:36.620Z
 
 This step turns private replies and CRM deal stages into reviewer-ready replies, invoice drafts, and fulfillment commands. Detailed buyer/prospect rows stay in ignored `dist/content-deal-desk/`.
 

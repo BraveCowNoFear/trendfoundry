@@ -1,8 +1,8 @@
 # TrendFoundry Episode Workbench
 
-Generated: 2026-06-10T14:10:59.562Z
+Generated: 2026-06-10T14:23:29.209Z
 
-Dataset: 2026-06-10T14:10:55.310Z
+Dataset: 2026-06-10T14:23:26.443Z
 
 This is the content-side production queue. It turns ready signals into platform-specific openings, recording proof, and buyer handoff notes without touching the frontend build.
 
@@ -168,42 +168,42 @@ This is the content-side production queue. It turns ready signals into platform-
 - Minimum demo path: Run or inspect the smallest quickstart/example; record the exact command, input, and first output.
 - Safety line to keep: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
 
-## 5. Best AI Video Prompt Generator 2026 (FREE)
+## 5. Local AI Agents In 26 Minutes
 
 - Source: YouTube
-- URL: https://www.youtube.com/watch?v=oT-2VO8Jzpk
-- Score: 135
-- Buyer-facing angle: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
-- Opening hook: 这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
-- Why now: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 7 days ago, 39k views, Youri van Hofwegen / 7 days ago / 39,488 views; turn the claim into a before/after creator workflow check.
+- URL: https://www.youtube.com/watch?v=M-NTwkM3VwM
+- Score: 122
+- Buyer-facing angle: 【实测】为什么 agent engineering workflow 现在值得创作者关注
+- Opening hook: 这期不照搬 agent engineering workflow，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- Why now: agent engineering workflow is worth covering now because the YouTube result shows updated 4 weeks ago, 279k views, Tina Huang / 1 month ago / 278,672 views; turn the claim into a before/after creator workflow check.
 
 ### Bilibili Opening Plan
 
-- 0-8s: Open with the proof-first hook: 这期不照搬 AI 视频提示词生成器，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
-- 8-18s: Say why the signal is worth testing now: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 7 days ago, 39k views, Youri van Hofwegen / 7 days ago / 39,488 views; turn the claim into a before/after creator workflow check.
+- 0-8s: Open with the proof-first hook: 这期不照搬 agent engineering workflow，只拆一个问题：原视频承诺的工作流，普通创作者能不能复现到可交付结果。
+- 8-18s: Say why the signal is worth testing now: agent engineering workflow is worth covering now because the YouTube result shows updated 4 weeks ago, 279k views, Tina Huang / 1 month ago / 278,672 views; turn the claim into a before/after creator workflow check.
 - 18-35s: Promise three deliverables: smallest reproduction, failure boundary, and who should keep using it.
 - 35-55s: Show that weak proof becomes a watchlist note, not a recommendation.
 - 55-70s: Close the opening with the boundary: Platform popularity is not proof of quality; validate the workflow before recommending it.
-- Title card: 【实测】为什么 AI 视频提示词生成器 现在值得创作者关注
+- Title card: 【实测】为什么 agent engineering workflow 现在值得创作者关注
 
 ### YouTube Opening
 
-- 0-7s: Best AI Video Prompt Generator 2026 (FREE) is only worth covering if the smallest proof can be recorded.
-- 7-18s: The signal is specific: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 7 days ago, 39k views, Youri van Hofwegen / 7 days ago / 39,488 views; turn the claim into a before/after creator workflow check.
+- 0-7s: Local AI Agents In 26 Minutes is only worth covering if the smallest proof can be recorded.
+- 7-18s: The signal is specific: agent engineering workflow is worth covering now because the YouTube result shows updated 4 weeks ago, 279k views, Tina Huang / 1 month ago / 278,672 views; turn the claim into a before/after creator workflow check.
 - 18-32s: I will test the promise, show the smallest reproducible output, and mark the adoption blockers.
 - 32-48s: No view promises, no hype recap; this is a buyer-ready workflow check.
 - 48-60s: The boundary is simple: Platform popularity is not proof of quality; validate the workflow before recommending it.
 
 ### Recording Proof
 
-- Open the source video and capture title, creator, date, and public engagement for Best AI Video Prompt Generator 2026 (FREE).
+- Open the source video and capture title, creator, date, and public engagement for Local AI Agents In 26 Minutes.
 - Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Build a three-column comparison: source promise, local result, and what a buyer can reuse.
 - State the skip condition: which creator should not copy this workflow yet.
 
 ### Buyer Handoff
 
-- Use this as a YouTube proof episode for AI workflow creator.
+- Use this as a YouTube proof episode for tech explainer / developer educator.
 - Primary asset to record: browser capture: source claim, tiny reproduction input, before/after comparison table, and skip-condition slide.
 - Minimum demo path: Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video.
 - Safety line to keep: Platform popularity is not proof of quality; validate the workflow before recommending it.

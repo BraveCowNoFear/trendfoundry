@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { contactEmail, deliverables, sellerOnlyFiles, slug } from "./fulfillment.mjs";
 
@@ -44,6 +44,31 @@ export function paymentMoney(product) {
   return `USD ${product.priceUsd}${product.billing === "monthly" ? " / month" : ""}`;
 }
 
+async function readJsonMaybe(file, fallback = {}) {
+  try {
+    return JSON.parse((await readFile(file, "utf8")).replace(/^\uFEFF/, ""));
+  } catch {
+    return fallback;
+  }
+}
+
+async function configuredCheckoutLink(root, product) {
+  const config = await readJsonMaybe(path.join(root, "data", "payment-rails.json"), {});
+  const link = config?.links?.[product.sku] || "";
+  try {
+    const parsed = new URL(link);
+    if (parsed.protocol === "https:" && parsed.hostname.includes(".")) {
+      return {
+        provider: config.provider || "configured hosted checkout",
+        link: parsed.toString()
+      };
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
 function markdownList(items) {
   return items.map((item) => `- ${item}`).join("\n");
 }
@@ -62,6 +87,13 @@ export async function preparePaymentReply({
   orderId
 } = {}) {
   const product = findPaymentProduct(tier);
+  const checkout = await configuredCheckoutLink(root, product);
+  const resolvedPaymentMethod = checkout && paymentMethod === "verified hosted checkout link or manual invoice"
+    ? `${checkout.provider} hosted checkout link`
+    : paymentMethod;
+  const resolvedPaymentReference = checkout && paymentReference === "TBD-after-review"
+    ? checkout.link
+    : paymentReference;
   const safeOrderId = orderId || `${new Date().toISOString().slice(0, 10)}-${slug(buyerName)}-${product.tier}`;
   const outDir = path.join(paymentRepliesDir, safeOrderId);
 
@@ -87,8 +119,8 @@ Order summary:
 
 Payment step:
 
-- Payment method to use: ${paymentMethod}
-- Payment reference or link to insert after review: ${paymentReference}
+- Payment method to use: ${resolvedPaymentMethod}
+- Payment reference or link to insert after review: ${resolvedPaymentReference}
 - Please do not send card numbers, private IDs, passwords, wallet seeds, or payment credentials by email or in a public GitHub issue.
 
 After payment is confirmed, the delivery pack will include:
@@ -160,6 +192,11 @@ npm run fulfill -- --buyer="${buyerName}" --contact="${buyerContact}" --channel=
     generatedAt: new Date().toISOString(),
     orderId: safeOrderId,
     product,
+    payment: {
+      method: resolvedPaymentMethod,
+      reference: resolvedPaymentReference,
+      hostedCheckoutConfigured: Boolean(checkout)
+    },
     buyer: {
       name: buyerName,
       contact: buyerContact,

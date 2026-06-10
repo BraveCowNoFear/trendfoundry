@@ -1,6 +1,6 @@
 # TrendFoundry Content Close Pack
 
-Generated: 2026-06-10T14:11:05.501Z
+Generated: 2026-06-10T14:23:35.152Z
 
 This document describes the daily close workflow without publishing the private prospect table. Detailed review rows stay in ignored `dist/content-close-pack/`.
 

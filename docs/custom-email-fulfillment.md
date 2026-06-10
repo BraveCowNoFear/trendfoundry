@@ -1,6 +1,6 @@
 # Custom Email Order Fulfillment
 
-Generated: 2026-06-10T14:11:13.937Z
+Generated: 2026-06-10T14:23:43.500Z
 
 This prepares buyer-only custom proof pack directories for paid email orders with `tier=custom-niche`. It does not send messages, collect payment, upload files, or build the frontend.
 

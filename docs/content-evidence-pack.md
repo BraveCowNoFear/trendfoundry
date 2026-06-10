@@ -1,8 +1,8 @@
 # TrendFoundry Content Evidence Pack
 
-Generated: 2026-06-10T14:11:00.274Z
+Generated: 2026-06-10T14:23:29.836Z
 
-Dataset: 2026-06-10T14:10:55.310Z
+Dataset: 2026-06-10T14:23:26.443Z
 
 This buyer-facing evidence pack turns the current script and episode queue into a fact-check and recording-proof checklist. It is designed to make the paid pack more trustworthy: every recommendation should point to a public source, a proof asset, a verification step, and a limitation.
 
@@ -14,7 +14,7 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 | 2 | backup_episode | GitHub | [infiniflow/ragflow](https://github.com/infiniflow/ragflow) | README promise, install or quickstart command, first output, dependency friction, and one blocker note. | normal |
 | 3 | backup_episode | GitHub | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | README promise, install or quickstart command, first output, dependency friction, and one blocker note. | normal |
 | 4 | backup_episode | GitHub | [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | README promise, install or quickstart command, first output, dependency friction, and one blocker note. | normal |
-| 5 | backup_episode | YouTube | [Best AI Video Prompt Generator 2026 (FREE)](https://www.youtube.com/watch?v=oT-2VO8Jzpk) | Source claim, tiny reproduction input, before/after comparison, and skip-condition slide. | normal |
+| 5 | backup_episode | YouTube | [Local AI Agents In 26 Minutes](https://www.youtube.com/watch?v=M-NTwkM3VwM) | Source claim, tiny reproduction input, before/after comparison, and skip-condition slide. | normal |
 
 ## Claim Checklist
 
@@ -29,7 +29,7 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 ### 1. timeliness (primary_episode)
 
 - Claim: agent engineering workflow is worth covering now because the repo shows updated today, 190k stars, 20k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- Evidence: Repository signal: Python, 189573 stars, 19655 open issues/comments, updated 2026-06-10T12:40:36Z.
+- Evidence: Repository signal: Python, 189588 stars, 19660 open issues/comments, updated 2026-06-10T14:22:57Z.
 - Verification: Re-check visible date, update, stars/views/comments, or thread/paper metadata on recording day.
 - Risk: low
 - Buyer use: Use as why-now line after manual recency check.
@@ -93,7 +93,7 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 ### 3. timeliness (backup_episode)
 
 - Claim: 终端 AI agent 工作流 is worth covering now because the repo shows updated today, 105k stars, 1.3k open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- Evidence: Repository signal: TypeScript, 105128 stars, 1299 open issues/comments, updated 2026-06-10T14:07:41Z.
+- Evidence: Repository signal: TypeScript, 105129 stars, 1297 open issues/comments, updated 2026-06-10T14:22:58Z.
 - Verification: Re-check visible date, update, stars/views/comments, or thread/paper metadata on recording day.
 - Risk: low
 - Buyer use: Use as why-now line after manual recency check.
@@ -125,7 +125,7 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 ### 4. timeliness (backup_episode)
 
 - Claim: agent engineering workflow is worth covering now because the repo shows updated today, 139k stars, 516 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
-- Evidence: Repository signal: Python, 138964 stars, 516 open issues/comments, updated 2026-06-10T09:14:25Z.
+- Evidence: Repository signal: Python, 138967 stars, 516 open issues/comments, updated 2026-06-10T14:22:54Z.
 - Verification: Re-check visible date, update, stars/views/comments, or thread/paper metadata on recording day.
 - Risk: low
 - Buyer use: Use as why-now line after manual recency check.
@@ -149,15 +149,15 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 ### 5. source_exists (backup_episode)
 
 - Claim: YouTube source exists and is the basis for this episode.
-- Evidence: https://www.youtube.com/watch?v=oT-2VO8Jzpk
+- Evidence: https://www.youtube.com/watch?v=M-NTwkM3VwM
 - Verification: Open URL before recording; keep the address visible in the capture.
 - Risk: low
 - Buyer use: Use as source citation.
 
 ### 5. timeliness (backup_episode)
 
-- Claim: AI 视频提示词生成器 is worth covering now because the YouTube result shows updated 7 days ago, 39k views, Youri van Hofwegen / 7 days ago / 39,488 views; turn the claim into a before/after creator workflow check.
-- Evidence: Creator-platform signal: unknown creator, 135 visible engagement score, published or updated 2026-06-03T14:10:46.065Z.
+- Claim: agent engineering workflow is worth covering now because the YouTube result shows updated 4 weeks ago, 279k views, Tina Huang / 1 month ago / 278,672 views; turn the claim into a before/after creator workflow check.
+- Evidence: Creator-platform signal: unknown creator, 122 visible engagement score, published or updated 2026-05-11T14:23:11.595Z.
 - Verification: Re-check visible date, update, stars/views/comments, or thread/paper metadata on recording day.
 - Risk: low
 - Buyer use: Use as why-now line after manual recency check.
@@ -165,7 +165,7 @@ This buyer-facing evidence pack turns the current script and episode queue into 
 ### 5. recordable_proof (backup_episode)
 
 - Claim: The episode can be framed around this proof: Source claim, tiny reproduction input, before/after comparison, and skip-condition slide.
-- Evidence: Open the source video and capture title, creator, date, and public engagement for Best AI Video Prompt Generator 2026 (FREE). | Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video. | Build a three-column comparison: source promise, local result, and what a buyer can reuse. | State the skip condition: which creator should not copy this workflow yet.
+- Evidence: Open the source video and capture title, creator, date, and public engagement for Local AI Agents In 26 Minutes. | Pick one promised technique and reproduce it with a tiny input instead of summarizing the full video. | Build a three-column comparison: source promise, local result, and what a buyer can reuse. | State the skip condition: which creator should not copy this workflow yet.
 - Verification: Record the smallest proof before polishing title, thumbnail, or CTA.
 - Risk: medium
 - Buyer use: Use as recording checklist.

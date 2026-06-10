@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Sends
 
-Generated: 2026-06-10T14:11:06.497Z
+Generated: 2026-06-10T14:23:36.032Z
 
 This step summarizes private receipts for outreach messages that were manually reviewed and sent outside the script. Private prospect rows stay in ignored `dist/content-outreach-sends/`.
 

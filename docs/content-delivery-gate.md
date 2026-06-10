@@ -1,6 +1,6 @@
 # TrendFoundry Content Delivery Gate
 
-Generated: 2026-06-10T14:11:00.902Z
+Generated: 2026-06-10T14:23:30.555Z
 
 This gate checks the buyer content pack before paid delivery. It verifies START-HERE plus the four reference files, seller-only boundaries, sensitive-data wording, outcome guarantees, concise first-read guidance, and mojibake markers. It does not send messages, collect payment, upload files, or build the frontend.
 
@@ -38,20 +38,20 @@ This gate checks the buyer content pack before paid delivery. It verifies START-
 | pass | no_seller_only_references | full-episode-script.md | clean |
 | pass | no_outcome_guarantees | full-episode-script.md | clean |
 | pass | no_sensitive_data_requests | full-episode-script.md | clean |
-| pass | deliverable_file_exists | episode-workbench.md | 16723 bytes |
-| pass | reference_file_length | episode-workbench.md | words=2244; max=2600 |
+| pass | deliverable_file_exists | episode-workbench.md | 16681 bytes |
+| pass | reference_file_length | episode-workbench.md | words=2247; max=2600 |
 | pass | no_mojibake_markers | episode-workbench.md | clean |
 | pass | no_seller_only_references | episode-workbench.md | clean |
 | pass | no_outcome_guarantees | episode-workbench.md | clean |
 | pass | no_sensitive_data_requests | episode-workbench.md | clean |
-| pass | deliverable_file_exists | content-evidence-pack.md | 12258 bytes |
-| pass | reference_file_length | content-evidence-pack.md | words=1730; max=2600 |
+| pass | deliverable_file_exists | content-evidence-pack.md | 12227 bytes |
+| pass | reference_file_length | content-evidence-pack.md | words=1728; max=2600 |
 | pass | no_mojibake_markers | content-evidence-pack.md | clean |
 | pass | no_seller_only_references | content-evidence-pack.md | clean |
 | pass | no_outcome_guarantees | content-evidence-pack.md | clean |
 | pass | no_sensitive_data_requests | content-evidence-pack.md | clean |
-| pass | deliverable_file_exists | content-editorial-audit.md | 6509 bytes |
-| pass | reference_file_length | content-editorial-audit.md | words=830; max=2600 |
+| pass | deliverable_file_exists | content-editorial-audit.md | 6562 bytes |
+| pass | reference_file_length | content-editorial-audit.md | words=829; max=2600 |
 | pass | no_mojibake_markers | content-editorial-audit.md | clean |
 | pass | no_seller_only_references | content-editorial-audit.md | clean |
 | pass | no_outcome_guarantees | content-editorial-audit.md | clean |

@@ -135,6 +135,7 @@ ${leadCounts}
 - Outreach drafts: ${report.assets.outreachDraftCount}
 - Launch asset files: ${report.assets.launchAssetCount}
 - Commerce products: ${report.assets.commerceProductCount}
+- Payment rail: ${report.assets.paymentRailConfiguredCount}/${report.assets.paymentRailProductCount} checkout links configured (${report.assets.paymentRailReady ? "ready" : "manual-review"})
 - Payment reply packets: ${report.assets.paymentReplyCount}
 - Email order intake records: ${report.assets.emailOrderCount}
 - Email fulfillment prepared: ${report.assets.emailFulfillmentCount}
@@ -157,6 +158,7 @@ ${nextActions}
 const latest = await readJsonIfExists(path.join(root, "data", "latest.json"), {});
 const leadsData = await readJsonIfExists(path.join(root, "data", "leads.json"), { leads: [] });
 const commerceData = await readJsonIfExists(path.join(root, "dist", "commerce", "products.json"), { products: [] });
+const paymentRailData = await readJsonIfExists(path.join(root, "dist", "payment-rails", "readiness.json"), { readyForHostedCheckout: false, configuredCount: 0, productCount: 0 });
 const qaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-qa.json"), { checks: [] });
 const onlineQaData = await readJsonIfExists(path.join(root, "dist", "qa", "latest-online-qa.json"), qaData);
 const runData = await readJsonIfExists(path.join(root, "dist", "ops-run", "latest-run.json"), { steps: [] });
@@ -276,6 +278,9 @@ const report = {
     outreachDraftCount: outreachFiles.filter((file) => file.endsWith(".md") && file !== "outreach-drafts.md").length,
     launchAssetCount: launchAssetFiles.length,
     commerceProductCount: commerceData.products?.length || 0,
+    paymentRailReady: Boolean(paymentRailData.readyForHostedCheckout),
+    paymentRailConfiguredCount: paymentRailData.configuredCount || 0,
+    paymentRailProductCount: paymentRailData.productCount || 0,
     paymentReplyCount: paymentReplyDirs.length,
     emailOrderCount: emailOrderData.orders?.length || 0,
     emailFulfillmentCount: emailFulfillmentData.prepared?.length || 0,
@@ -289,6 +294,7 @@ const report = {
     outreachFiles.length ? "Review dist/outreach-drafts/outreach-drafts.md before any one-to-one outreach." : "Run npm run daily to refresh outreach drafts.",
     launchAssetFiles.length ? "Review dist/launch-assets/launch-posts.md before any manual launch post." : "Run npm run launch-assets before manual launch posting.",
     commerceData.products?.length ? "Commerce SKU fields are ready in dist/commerce/." : "Run npm run commerce before setting up a hosted checkout page.",
+    paymentRailData.readyForHostedCheckout ? "Hosted checkout links are configured; payment replies can insert the configured private checkout link after review." : "Configure ignored data/payment-rails.json from data/payment-rails.example.json to unlock hosted checkout links.",
     contentOpsData.status === "success" ? "Review dist/content-action-brief/action-brief.md first, then open the specific private queue files it links for today's content sales work." : "Run npm run content-ops to refresh buyer packs, reply intake, outreach review, send receipts, deal desk, fulfillment queue, customer follow-ups, testimonial bank, and action brief.",
     "Drop copied buyer email text into data/email-orders/ and run npm run intake-email-orders to generate local payment replies.",
     "For paid email orders, run npm run fulfill-email-orders after verifying payment externally.",

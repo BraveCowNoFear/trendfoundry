@@ -1,6 +1,6 @@
 # TrendFoundry Content Subscription Retention
 
-Generated: 2026-06-10T14:11:13.557Z
+Generated: 2026-06-10T14:23:43.205Z
 
 This content-only step turns private subscription CRM actions into retention drafts for payment review and renewal checks. It does not send messages and does not expose subscriber contacts in tracked docs.
 

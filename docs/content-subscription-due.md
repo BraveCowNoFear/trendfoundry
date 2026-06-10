@@ -1,6 +1,6 @@
 # TrendFoundry Content Subscription Due Fulfillment
 
-Generated: 2026-06-10T14:11:13.193Z
+Generated: 2026-06-10T14:23:42.895Z
 
 This content-only batch step prepares weekly subscription delivery directories for subscriber rows that the private CRM marked as `prepare_delivery`. It writes private order details under ignored `dist/` paths and does not expose subscriber contacts in tracked docs.
 

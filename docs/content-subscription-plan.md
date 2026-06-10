@@ -1,6 +1,6 @@
 # TrendFoundry Weekly Subscription Plan
 
-Generated: 2026-06-10T14:11:12.522Z
+Generated: 2026-06-10T14:23:42.201Z
 
 This turns the USD 19/month weekly proof pack into a repeatable four-week fulfillment plan. It creates reviewable delivery and retention drafts; it does not send messages, collect payment, or upload files.
 
@@ -19,7 +19,7 @@ This turns the USD 19/month weekly proof pack into a repeatable four-week fulfil
 | 1 | 2026-06-15 | 2026-06-17 | AI agent / developer workflow proof | 为什么 agent engineering workflow 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
 | 2 | 2026-06-22 | 2026-06-24 | AI video workflow proof | 为什么 AIDC-AI/Pixelle-Video 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
 | 3 | 2026-06-29 | 2026-07-01 | creator economy signal proof | 为什么 AI 配音/多语种 dubbing 工作流 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
-| 4 | 2026-07-06 | 2026-07-08 | AI agent / developer workflow proof | 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test) | README/quickstart capture, first output, and one blocker note |
+| 4 | 2026-07-06 | 2026-07-08 | AI agent / developer workflow proof | 为什么 Show HN: NoSuggest – Watch YouTube without the recommendation algorithm 现在值得创作者关注 (practical test) | thread URL, three comment clusters, one do/don't checklist, and one counterexample |
 
 ## Subscriber Emails
 
@@ -63,7 +63,7 @@ Start with: 为什么 AIDC-AI/Pixelle-Video 现在值得创作者关注 (practic
 Source: https://github.com/AIDC-AI/Pixelle-Video
 Proof to record: README/quickstart capture, first output, and one blocker note
 
-Why this week: AIDC-AI/Pixelle-Video is worth covering now because the repo shows updated 2 days ago, 22k stars, 124 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+Why this week: AIDC-AI/Pixelle-Video is worth covering now because the repo shows updated 2 days ago, 22k stars, 125 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
 
 What you receive:
 - one ready-to-record script
@@ -109,17 +109,17 @@ rivan_Britain@outlook.com
 
 ## Week 4: AI agent / developer workflow proof
 
-Subject: TrendFoundry weekly proof pack - 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test)
+Subject: TrendFoundry weekly proof pack - 为什么 Show HN: NoSuggest – Watch YouTube without the recommendation algorithm 现在值得创作者关注 (practical test)
 
 Hi,
 
 This week's TrendFoundry proof pack is ready.
 
-Start with: 为什么 终端 AI agent 工作流 现在值得创作者关注 (practical test)
-Source: https://github.com/NarratorAI-Studio/narrator-ai-cli-skill
-Proof to record: README/quickstart capture, first output, and one blocker note
+Start with: 为什么 Show HN: NoSuggest – Watch YouTube without the recommendation algorithm 现在值得创作者关注 (practical test)
+Source: https://www.nosuggest.com/
+Proof to record: thread URL, three comment clusters, one do/don't checklist, and one counterexample
 
-Why this week: 终端 AI agent 工作流 is worth covering now because the repo shows updated 7 days ago, 1.2k stars, 3 open issues; that is enough evidence to test install friction before creators copy it into an agent workflow.
+Why this week: Show HN: NoSuggest – Watch YouTube without the recommendation algorithm is worth covering now because the HN thread shows updated 7 days ago, 59 HN points, 62 comments; package the debate into specific creator do/don't guidance.
 
 What you receive:
 - one ready-to-record script
@@ -127,7 +127,7 @@ What you receive:
 - one limitation card
 - one recording checklist
 
-Safety note: Stars and recent activity can overstate production readiness; test install friction and maintenance quality.
+Safety note: Treat this as a signal, not a guarantee of views, revenue, or technical maturity.
 
 This is a creator planning and production aid. It does not promise views, subscribers, revenue, platform growth, or buyer outcomes.
 

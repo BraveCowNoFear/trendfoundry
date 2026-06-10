@@ -1,6 +1,6 @@
 # TrendFoundry Content Action Brief
 
-Generated: 2026-06-10T14:11:09.768Z
+Generated: 2026-06-10T14:23:38.797Z
 
 This public report summarizes the private content-sales action queue. It does not expose buyer names, contacts, prospect rows, channels, private replies, or payment references.
 

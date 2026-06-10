@@ -1,6 +1,6 @@
 # TrendFoundry Content Outreach Follow-ups
 
-Generated: 2026-06-10T14:11:06.834Z
+Generated: 2026-06-10T14:23:36.316Z
 
 This report summarizes private follow-up drafts for sent outreach campaigns that are due and have no recorded reply. Detailed creator rows stay in ignored `dist/content-outreach-followups/`.
 

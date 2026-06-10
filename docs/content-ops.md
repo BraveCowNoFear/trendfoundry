@@ -1,12 +1,12 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-10T14:11:10.361Z
+Generated: 2026-06-10T14:23:39.257Z
 
 Status: success
 
 Refresh public sources: no
 
-Dataset: 2026-06-10T14:10:55.310Z
+Dataset: 2026-06-10T14:23:26.443Z
 
 This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, due outreach follow-ups, deal desk, unified fulfillment queue, attribution ledger, experiment plan, next-send batch, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
@@ -50,7 +50,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 ## Current Content State
 
 - Total source items: 126
-- Source errors: 0
+- Source errors: 1
 - Primary episode: NousResearch/hermes-agent
 - Evidence pack: 5 evidence items, 20 claims
 - Buyer deliverables: START-HERE.md, full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md
@@ -68,7 +68,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Close pack: 5 selected, 5 clean, 0 needing cleanup
 - Outreach review: 5 send packs, 0 skipped for text cleanup
-- Outreach gate: 5 passed, 0 failed, 125 average draft words
+- Outreach gate: 5 passed, 0 failed, 123 average draft words
 - Outreach sends: 0 receipts, 0 sent today, 0 waiting reply
 - Outreach follow-ups: 0 due drafts from 0 send receipts
 - Deal desk: 0 active deals, 4 objection playbook rows

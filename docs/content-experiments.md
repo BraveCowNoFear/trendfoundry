@@ -1,6 +1,6 @@
 # TrendFoundry Content Experiments
 
-Generated: 2026-06-10T14:11:08.232Z
+Generated: 2026-06-10T14:23:37.541Z
 
 This report summarizes the private outreach experiment plan. Detailed prospect rows and tracked URLs stay in ignored `dist/content-experiments/` and `dist/content-attribution/`.
 

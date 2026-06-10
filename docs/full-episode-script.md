@@ -1,8 +1,8 @@
 # Full Episode Script: NousResearch/hermes-agent
 
-Generated: 2026-06-10T14:10:59.928Z
+Generated: 2026-06-10T14:23:29.517Z
 
-Dataset: 2026-06-10T14:10:55.310Z
+Dataset: 2026-06-10T14:23:26.443Z
 
 Source: [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)
 

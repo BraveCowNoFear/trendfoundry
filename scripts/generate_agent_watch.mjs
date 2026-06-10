@@ -65,6 +65,7 @@ const emailOrders = await readJsonIfExists(path.join(root, "dist", "email-order-
 const emailFulfillment = await readJsonIfExists(path.join(root, "dist", "email-fulfillment", "email-orders.json"), { prepared: [] });
 const authConfig = await readJsonIfExists(path.join(root, "site", "auth", "auth.config.json"), { brokerBaseUrl: "", providers: {} });
 const commerce = await readJsonIfExists(path.join(root, "dist", "commerce", "products.json"), { products: [] });
+const paymentRail = await readJsonIfExists(path.join(root, "dist", "payment-rails", "readiness.json"), { readyForHostedCheckout: false, configuredCount: 0, productCount: 0 });
 
 const steps = run.steps || [];
 const leadRows = leads.leads || [];
@@ -80,16 +81,17 @@ const customerDueNow = Number(ops.content?.customerDueNow || 0);
 const crmDueToday = Number(ops.content?.crmDueToday || 0);
 const authConfigured = Boolean(authConfig.brokerBaseUrl) && Object.values(authConfig.providers || {}).some((provider) => provider.enabled && provider.clientId);
 const commerceReady = Number(ops.assets?.commerceProductCount ?? commerce.products?.length ?? 0) >= 3;
+const paymentRailReady = Boolean(paymentRail.readyForHostedCheckout);
 
 const humanQueue = [
   humanQueueItem({
     type: "Payment rail",
-    priority: commerceReady ? "High" : "Medium",
-    status: "Needs external account",
-    need: "Hosted checkout, invoice provider, or payment account connection is still outside the autonomous local pipeline.",
-    why: "Agents can draft payment replies and buyer packages, but cannot collect money without an approved payment rail.",
+    priority: paymentRailReady ? "Low" : commerceReady ? "High" : "Medium",
+    status: paymentRailReady ? "Configured" : "Needs external account",
+    need: paymentRailReady ? "Hosted checkout links are configured for all current commerce SKUs." : "Hosted checkout, invoice provider, or payment account connection is still outside the autonomous local pipeline.",
+    why: paymentRailReady ? "Payment reply drafts can insert the configured private checkout link after review." : "Agents can draft payment replies and buyer packages, but cannot collect money without an approved payment rail.",
     owner: "Human only if the business wants fully unattended checkout.",
-    evidencePath: "dist/commerce/",
+    evidencePath: "dist/payment-rails/readiness.json",
     unlocks: "Real paid orders without manual invoice handling."
   }),
   humanQueueItem({
@@ -181,9 +183,9 @@ const agentCards = [
     mandate: "Prepare SKU fields, payment replies, and listing copy.",
     status: commerceReady ? "attention" : "blocked",
     lastStep: stepStatus(steps, "commerce"),
-    humanNeed: "Needs an external payment rail for fully unattended checkout.",
-    autonomousNext: "Keep SKU fields and invoice drafts ready.",
-    evidencePath: "dist/commerce/products.json",
+    humanNeed: paymentRailReady ? "Hosted checkout links are configured; no payment-rail setup request." : "Needs an external payment rail for fully unattended checkout.",
+    autonomousNext: paymentRailReady ? "Use configured payment rail in payment reply drafts after review." : "Keep SKU fields and invoice drafts ready.",
+    evidencePath: paymentRailReady ? "dist/payment-rails/readiness.json" : "dist/commerce/products.json",
     tags: ["payment", "SKU", "checkout"]
   },
   {
@@ -278,6 +280,8 @@ const payload = {
     emailOrders: emailOrderRows.length,
     paidEmailOrders: paidEmailOrders.length,
     commerceProducts: ops.assets?.commerceProductCount ?? commerce.products?.length ?? 0,
+    paymentRailConfigured: paymentRail.configuredCount || 0,
+    paymentRailProducts: paymentRail.productCount || 0,
     crmDueToday,
     activeDeals,
     customerDueNow,

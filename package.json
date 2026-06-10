@@ -16,6 +16,7 @@
     "fulfill-ready": "node scripts/fulfill_ready_leads.mjs",
     "fulfill-email-orders": "node scripts/fulfill_email_orders.mjs",
     "payment-reply": "node scripts/draft_payment_reply.mjs",
+    "payment-rails": "node scripts/audit_payment_rails.mjs",
     "intake-email-orders": "node scripts/intake_email_orders.mjs",
     "audit-email-order-routing": "node scripts/audit_email_order_routing.mjs",
     "sync-email-subscriptions": "node scripts/sync_email_subscriptions.mjs",

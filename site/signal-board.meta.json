@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-10T14:10:55.475Z",
-  "dataGeneratedAt": "2026-06-10T14:10:55.310Z",
+  "generatedAt": "2026-06-10T14:23:26.604Z",
+  "dataGeneratedAt": "2026-06-10T14:23:26.443Z",
   "image": "signal-board.png",
   "demo": "signal-demo.svg",
   "width": 1200,
@@ -40,35 +40,35 @@
     },
     {
       "rank": 5,
-      "id": "oT-2VO8Jzpk",
-      "url": "https://www.youtube.com/watch?v=oT-2VO8Jzpk",
+      "id": "M-NTwkM3VwM",
+      "url": "https://www.youtube.com/watch?v=M-NTwkM3VwM",
       "source": "youtube",
-      "score": 135,
-      "title": "Best AI Video Prompt Generator 2026 (FREE)"
+      "score": 122,
+      "title": "Local AI Agents In 26 Minutes"
     },
     {
       "rank": 6,
-      "id": "0v534yAyhwg",
-      "url": "https://www.youtube.com/watch?v=0v534yAyhwg",
+      "id": "EH5jx5qPabU",
+      "url": "https://www.youtube.com/watch?v=EH5jx5qPabU",
       "source": "youtube",
-      "score": 132,
-      "title": "EXACTLY How to Make an AI Short Film (Full Workflow)"
+      "score": 121,
+      "title": "From Zero to Your First AI Agent in 25 Minutes (No Coding)"
     },
     {
       "rank": 7,
+      "id": "48390175",
+      "url": "https://www.nosuggest.com/",
+      "source": "hn",
+      "score": 118,
+      "title": "Show HN: NoSuggest – Watch YouTube without the recommendation algorithm"
+    },
+    {
+      "rank": 8,
       "id": "BV18LEX6mEeD",
       "url": "http://www.bilibili.com/video/av116723671894628",
       "source": "bilibili",
       "score": 117,
       "title": "【1548] 凯文凯利： AI 真的会抢走人类工作吗？"
-    },
-    {
-      "rank": 8,
-      "id": "BV1cLE96qEve",
-      "url": "http://www.bilibili.com/video/av116724963740626",
-      "source": "bilibili",
-      "score": 116,
-      "title": "同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room"
     }
   ]
 }
