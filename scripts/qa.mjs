@@ -26,6 +26,7 @@ const requiredScripts = [
   "payment-rails",
   "intake-email-orders",
   "draft-outreach",
+  "content-outreach-export",
   "ops-report",
   "agent-watch",
   "launch-assets",
@@ -479,6 +480,7 @@ async function checkLocal() {
   assertCheck("ops report has email order intake count", /Email order intake records:\s+\d+/.test(opsReport));
   assertCheck("ops report has email fulfillment count", /Email fulfillment prepared:\s+\d+/.test(opsReport));
   assertCheck("ops report has launch asset count", /Launch asset files:\s+\d+/.test(opsReport));
+  assertCheck("ops report has outreach export count", /Outreach export drafts:\s+\d+/.test(opsReport));
   assertCheck("ops report has QA gate summary", opsReport.includes("## QA Gate") && /Latest online QA:\s+\d+\/\d+ passed/.test(opsReport));
 
   const agentWatchHtml = await readText(path.join(root, "dist", "agent-watch", "index.html"));
@@ -486,7 +488,14 @@ async function checkLocal() {
   assertCheck("agent watch dashboard exists", agentWatchHtml.includes("Human-dependency control room.") && agentWatchHtml.includes("Human dependency queue"));
   assertCheck("agent watch has requirements", Array.isArray(agentWatchJson.requirements) && agentWatchJson.requirements.length >= 5);
   assertCheck("agent watch has human dependency queue", Array.isArray(agentWatchJson.humanQueue) && agentWatchJson.humanQueue.some((item) => item.type === "Payment rail"));
+  assertCheck("agent watch has outreach send review row", Array.isArray(agentWatchJson.humanQueue) && agentWatchJson.humanQueue.some((item) => item.type === "Outreach send review"));
   assertCheck("agent watch avoids buyer contacts", !/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(agentWatchHtml.replace("rivan_Britain@outlook.com", "")));
+
+  const outreachExportManifest = await readJson(path.join(root, "dist", "content-outreach-export", "manifest.json"));
+  const outreachExportPublic = await readText(path.join(root, "docs", "content-outreach-export.md"));
+  assertCheck("outreach export manifest avoids auto-send", outreachExportManifest.safety?.sendsMessages === false && outreachExportManifest.safety?.collectsPayment === false && outreachExportManifest.safety?.requiresManualRecipientEntry === true);
+  assertCheck("outreach export public doc keeps draft bodies private", outreachExportPublic.includes("Public-safe draft bodies exposed here: 0") && !/```[\s\S]*?Hi /.test(outreachExportPublic));
+  assertCheck("outreach export draft count matches send batch", typeof outreachExportManifest.draftCount === "number" && outreachExportManifest.draftCount <= outreachExportManifest.sourceBatchRows + 0);
 
   if (skipScheduler) {
     pass("scheduled task checks skipped", "--skip-scheduler");

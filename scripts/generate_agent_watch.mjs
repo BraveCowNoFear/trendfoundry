@@ -66,6 +66,7 @@ const emailFulfillment = await readJsonIfExists(path.join(root, "dist", "email-f
 const authConfig = await readJsonIfExists(path.join(root, "site", "auth", "auth.config.json"), { brokerBaseUrl: "", providers: {} });
 const commerce = await readJsonIfExists(path.join(root, "dist", "commerce", "products.json"), { products: [] });
 const paymentRail = await readJsonIfExists(path.join(root, "dist", "payment-rails", "readiness.json"), { readyForHostedCheckout: false, configuredCount: 0, productCount: 0 });
+const outreachExport = await readJsonIfExists(path.join(root, "dist", "content-outreach-export", "manifest.json"), { draftCount: 0, recommendedVariantCount: 0 });
 
 const steps = run.steps || [];
 const leadRows = leads.leads || [];
@@ -82,6 +83,7 @@ const crmDueToday = Number(ops.content?.crmDueToday || 0);
 const authConfigured = Boolean(authConfig.brokerBaseUrl) && Object.values(authConfig.providers || {}).some((provider) => provider.enabled && provider.clientId);
 const commerceReady = Number(ops.assets?.commerceProductCount ?? commerce.products?.length ?? 0) >= 3;
 const paymentRailReady = Boolean(paymentRail.readyForHostedCheckout);
+const outreachExportDrafts = Number(outreachExport.draftCount || 0);
 
 const humanQueue = [
   humanQueueItem({
@@ -133,6 +135,16 @@ const humanQueue = [
     owner: "Growth agent.",
     evidencePath: "dist/launch-assets/ and dist/outreach-drafts/",
     unlocks: "Traffic and first buyer conversations."
+  }),
+  humanQueueItem({
+    type: "Outreach send review",
+    priority: outreachExportDrafts ? "High" : "Low",
+    status: outreachExportDrafts ? "Waiting" : "Idle",
+    need: outreachExportDrafts ? `${outreachExportDrafts} reviewed draft(s) ready for manual recipient and send.` : "No reviewed draft is waiting for manual send right now.",
+    why: "Drafts ship with empty From/To headers; the human reviewer must add the verified recipient address before sending.",
+    owner: "Growth agent.",
+    evidencePath: "dist/content-outreach-export/drafts.md",
+    unlocks: "First reply, deal, or paid order from the gate-passed batch."
   }),
   humanQueueItem({
     type: "Startup funds",
@@ -286,6 +298,9 @@ const payload = {
     activeDeals,
     customerDueNow,
     preparedEmailFulfillments: emailFulfillment.prepared?.length || 0
+    ,
+    outreachExportDrafts,
+    outreachExportRecommended: Number(outreachExport.recommendedVariantCount || 0)
   },
   agents: agentCards,
   humanQueue,
