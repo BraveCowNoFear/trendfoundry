@@ -210,7 +210,8 @@ async function checkLocal() {
   assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
   assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
-  assertCheck("site has simplified checkout close", siteIndex.includes('class="checkout-close"') && siteIndex.includes("Inspect first. Order when it fits."));
+  assertCheck("site has combined delivery checkout", siteIndex.includes('class="delivery delivery-lab delivery-checkout"') && siteIndex.includes("See the pack. Then order.") && siteIndex.includes("TrendFoundry turns public AI and developer signals into ranked creator ideas"));
+  assertCheck("site removes standalone checkout close section", siteIndex.includes('<div class="checkout-close" id="final-action"') && !siteIndex.includes('<section class="checkout-close"'));
   assertCheck("site checkout close links order route", siteIndex.includes('class="checkout-close-card primary"') && siteIndex.includes("./order/"));
   assertCheck("site checkout close links custom brief", siteIndex.includes("Custom niche desk") && siteIndex.includes("TrendFoundry%20order%3A%20Custom%20niche%20desk"));
   assertCheck("site links no-login order page", siteIndex.includes("./order/") && siteIndex.includes("Order without login"));
@@ -236,6 +237,7 @@ async function checkLocal() {
   assertCheck("Chinese landing page has product signal board", zhIndex.includes("../signal-board.png") && zhIndex.includes('class="product-visual"'));
   assertCheck("Chinese landing page removes repeated explainer sections", !zhIndex.includes('id="fit-studio"') && !zhIndex.includes('id="product-proof"') && !zhIndex.includes('class="sample-preview"') && !zhIndex.includes('class="visual-proof"') && !zhIndex.includes('class="motion-proof"') && !zhIndex.includes('class="signal-runway"'));
   assertCheck("Chinese landing page links downloadable sample pack", zhIndex.includes("../trendfoundry-free-sample-pack.zip") && zhIndex.includes("下载样品包"));
+  assertCheck("Chinese landing page has combined delivery checkout", zhIndex.includes('class="delivery delivery-lab delivery-checkout"') && zhIndex.includes("先看交付包，再下单。") && zhIndex.includes("三档产品只按深度划分") && !zhIndex.includes('<section class="checkout-close"'));
 
   const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
   assertCheck("order page exists", orderIndex.includes('<link rel="canonical" href="https://bravecownofear.github.io/trendfoundry/order/">') && orderIndex.includes("Order TrendFoundry"));

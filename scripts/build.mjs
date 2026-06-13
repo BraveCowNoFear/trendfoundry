@@ -2557,16 +2557,11 @@ const zhCheckoutCloseCards = checkoutCloseActions
       <small>${escapeHtml(item.bodyZh)}</small>
     </a>`)
   .join("");
-const checkoutClose = `<section class="checkout-close" id="final-action" aria-label="Final checkout action">
+const checkoutClose = `<div class="checkout-close" id="final-action" aria-label="Final checkout action">
     <div class="checkout-close-copy">
-      ${dual("Ready when you are", "最后一步", "p", ' class="section-label"')}
-      ${dual("Inspect first. Order when it fits.", "检查后再下单。", "h2")}
-      ${dual("Confirm the sample, sources, and delivery format before choosing a buying route. The product should feel legible before it asks for commitment.", "先确认样品、来源和交付格式，再选择购买方式。购买动作出现之前，产品本身必须已经讲清楚。", "p")}
-      <div class="checkout-proof-row" aria-label="Proof points">
-        ${dual("Sample visible", "样品可看", "span")}
-        ${dual("Sources traceable", "来源可追", "span")}
-        ${dual("Email order", "邮件下单", "span")}
-      </div>
+      ${dual("Buyer path", "购买路径", "p", ' class="section-label"')}
+      ${dual("Pick the next step.", "选择下一步。", "h3")}
+      ${dual("View the public sample, order one pack, or send context for a custom niche.", "看公开样品、买一份情报包，或发送垂直定制需求。", "p")}
     </div>
     <div class="checkout-close-panel">
       <div class="checkout-close-top">
@@ -2575,17 +2570,12 @@ const checkoutClose = `<section class="checkout-close" id="final-action" aria-la
       </div>
       <div class="checkout-close-grid">${checkoutCloseCards}</div>
     </div>
-  </section>`;
-const zhCheckoutClose = `<section class="checkout-close" id="final-action" aria-label="Final checkout action">
+  </div>`;
+const zhCheckoutClose = `<div class="checkout-close" id="final-action" aria-label="Final checkout action">
     <div class="checkout-close-copy">
-      <p class="section-label">最后一步</p>
-      <h2>检查后再下单。</h2>
-      <p>先确认样品、来源和交付格式，再选择购买方式。购买动作出现之前，产品本身必须已经讲清楚。</p>
-      <div class="checkout-proof-row" aria-label="Proof points">
-        <span>样品可看</span>
-        <span>来源可追</span>
-        <span>邮件下单</span>
-      </div>
+      <p class="section-label">购买路径</p>
+      <h3>选择下一步。</h3>
+      <p>看公开样品、买一份情报包，或发送垂直定制需求。</p>
     </div>
     <div class="checkout-close-panel">
       <div class="checkout-close-top">
@@ -2594,7 +2584,7 @@ const zhCheckoutClose = `<section class="checkout-close" id="final-action" aria-
       </div>
       <div class="checkout-close-grid">${zhCheckoutCloseCards}</div>
     </div>
-  </section>`;
+  </div>`;
 const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -2889,24 +2879,31 @@ const html = `<!doctype html>
         ${pricingChooser}
       </div>
     </section>
-    <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
+    <section class="delivery delivery-lab delivery-checkout" id="delivery-pack" aria-label="Delivery pack and buyer path">
       <div class="delivery-copy">
-        ${dual("What arrives", "交付内容", "p", ' class="section-label"')}
-        ${dual("Open the pack before you buy it.", "购买前，先看清交付包。", "h2")}
-        ${dual("A creator does not need another digest. They need a small set of files that can move from source check to recording queue without rebuilding the research.", "创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。", "p")}
-      </div>
-      <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
-        <div class="deliverable-tabs" aria-label="Delivery file preview">${deliveryPreviewButtons}</div>
-        <div class="deliverable-screen">${deliveryPreviewPanels}</div>
-        <div class="delivery-stack-footer">
-          <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
-          <p data-deliverable-status>${dual("Brief selected", "已选择 Brief")}</p>
-          ${dual("Click a tab or use arrow keys to explore each deliverable.", "点击标签或使用方向键查看每份交付文件。", "small")}
+        ${dual("Delivery + order", "交付和下单", "p", ' class="section-label"')}
+        ${dual("See the pack. Then order.", "先看交付包，再下单。", "h2")}
+        ${dual("TrendFoundry turns public AI and developer signals into ranked creator ideas with sources, CSV, script notes, and a clear buying route. The three tiers only change depth: test once, keep a weekly queue, or own a custom niche.", "TrendFoundry 把公开 AI 和开发者信号整理成可录制选题，附来源、CSV、脚本备注和清晰购买路径。三档产品只按深度划分：先试一次、保持周更队列、或占住一个垂直领域。", "p")}
+        <div class="checkout-proof-row" aria-label="Proof points">
+          ${dual("Source-backed", "来源可追", "span")}
+          ${dual("Three tiers", "三档清楚", "span")}
+          ${dual("No-login order", "无登录下单", "span")}
         </div>
+        <ul class="delivery-rule-list">${deliveryChecklist}</ul>
       </div>
-      <ul>${deliveryChecklist}</ul>
+      <div class="delivery-checkout-board">
+        <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
+          <div class="deliverable-tabs" aria-label="Delivery file preview">${deliveryPreviewButtons}</div>
+          <div class="deliverable-screen">${deliveryPreviewPanels}</div>
+          <div class="delivery-stack-footer">
+            <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
+            <p data-deliverable-status>${dual("Brief selected", "已选择 Brief")}</p>
+            ${dual("Switch files to inspect what arrives after checkout.", "切换文件，检查付款后会收到什么。", "small")}
+          </div>
+        </div>
+        ${checkoutClose}
+      </div>
     </section>
-    ${checkoutClose}
   </main>
 </body>
 </html>`;
@@ -3014,24 +3011,31 @@ const zhHtml = `<!doctype html>
         ${pricingChooser}
       </div>
     </section>
-    <section class="delivery delivery-lab" id="delivery-pack" aria-label="What the buyer receives">
+    <section class="delivery delivery-lab delivery-checkout" id="delivery-pack" aria-label="Delivery pack and buyer path">
       <div class="delivery-copy">
-        <p class="section-label">交付内容</p>
-        <h2>购买前，先看清交付包。</h2>
-        <p>创作者不需要又一份摘要，而是需要一小组文件：从来源核验到录制队列，中间不用重建研究。</p>
-      </div>
-      <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
-        <div class="deliverable-tabs" aria-label="Delivery file preview">${zhDeliveryPreviewButtons}</div>
-        <div class="deliverable-screen">${zhDeliveryPreviewPanels}</div>
-        <div class="delivery-stack-footer">
-          <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
-          <p data-deliverable-status>已选择 Brief</p>
-          <small>点击标签或使用方向键查看每份交付文件。</small>
+        <p class="section-label">交付和下单</p>
+        <h2>先看交付包，再下单。</h2>
+        <p>TrendFoundry 把公开 AI 和开发者信号整理成可录制选题，附来源、CSV、脚本备注和清晰购买路径。三档产品只按深度划分：先试一次、保持周更队列、或占住一个垂直领域。</p>
+        <div class="checkout-proof-row" aria-label="Proof points">
+          <span>来源可追</span>
+          <span>三档清楚</span>
+          <span>无登录下单</span>
         </div>
+        <ul class="delivery-rule-list">${deliveryChecklist}</ul>
       </div>
-      <ul>${deliveryChecklist}</ul>
+      <div class="delivery-checkout-board">
+        <div class="deliverable-viewer" data-active-deliverable="brief" style="--delivery-progress: 25%;" tabindex="0">
+          <div class="deliverable-tabs" aria-label="Delivery file preview">${zhDeliveryPreviewButtons}</div>
+          <div class="deliverable-screen">${zhDeliveryPreviewPanels}</div>
+          <div class="delivery-stack-footer">
+            <span class="delivery-stack-meter" aria-hidden="true"><span></span></span>
+            <p data-deliverable-status>已选择 Brief</p>
+            <small>切换文件，检查付款后会收到什么。</small>
+          </div>
+        </div>
+        ${zhCheckoutClose}
+      </div>
     </section>
-    ${zhCheckoutClose}
   </main>
 </body>
 </html>`;
@@ -6459,16 +6463,56 @@ main {
   align-items: start;
 }
 .delivery-lab {
-  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
-  gap: clamp(20px, 4vw, 48px);
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+  gap: clamp(18px, 4vw, 42px);
+  align-items: stretch;
 }
 .delivery-copy {
   min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+.delivery-copy h2 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 0.98;
+  letter-spacing: 0;
 }
 .delivery-copy p:not(.section-label) {
-  margin: 10px 0 0;
+  margin: 0;
   color: var(--muted);
+  font-size: 17px;
   line-height: 1.5;
+}
+.delivery-checkout-board {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+.delivery-rule-list {
+  display: grid;
+  gap: 0;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.delivery-rule-list li {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid rgba(17, 17, 20, 0.08);
+  padding: 12px 0;
+}
+.delivery-rule-list strong {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 880;
+}
+.delivery-rule-list span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.42;
 }
 .deliverable-viewer {
   display: grid;
@@ -6559,7 +6603,7 @@ main {
 }
 .deliverable-screen {
   position: relative;
-  min-height: 430px;
+  min-height: 356px;
   overflow: hidden;
   border: 1px solid rgba(17, 17, 20, 0.06);
   border-radius: 18px;
@@ -6580,12 +6624,12 @@ main {
 }
 .deliverable-panel {
   position: absolute;
-  inset: clamp(16px, 3vw, 28px) clamp(18px, 4vw, 60px);
+  inset: clamp(14px, 2.4vw, 24px) clamp(16px, 3.4vw, 48px);
   display: grid;
   align-content: start;
-  gap: 14px;
+  gap: 12px;
   min-width: 0;
-  padding: clamp(18px, 2.8vw, 28px);
+  padding: clamp(16px, 2.5vw, 24px);
   border: 1px solid rgba(17, 17, 20, 0.09);
   border-radius: 16px;
   background: rgba(255,255,255,0.94);
@@ -6659,7 +6703,7 @@ main {
   margin: 0;
   max-width: 460px;
   color: var(--ink);
-  font-size: clamp(24px, 3vw, 34px);
+  font-size: clamp(22px, 2.6vw, 30px);
   line-height: 1.1;
 }
 .deliverable-sheet-caption {
@@ -6756,54 +6800,51 @@ main {
 }
 .checkout-close {
   display: grid;
-  grid-template-columns: minmax(360px, 0.48fr) minmax(0, 0.52fr);
-  gap: clamp(22px, 5vw, 76px);
-  align-items: center;
+  grid-template-columns: minmax(170px, 0.3fr) minmax(0, 0.7fr);
+  gap: 14px;
+  align-items: start;
   border-top: 1px solid rgba(17, 17, 20, 0.08);
-  padding-top: clamp(44px, 8vw, 86px);
-  padding-bottom: clamp(36px, 7vw, 72px);
+  padding-top: 14px;
 }
 .checkout-close-copy {
   min-width: 0;
+  display: grid;
+  gap: 6px;
 }
-.checkout-close-copy h2 {
-  max-width: 720px;
-  margin: 0 0 14px;
-  font-size: clamp(38px, 4.2vw, 58px);
-  line-height: 0.96;
+.checkout-close-copy h3 {
+  max-width: 360px;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(21px, 2.2vw, 28px);
+  line-height: 1.05;
   letter-spacing: 0;
 }
 .checkout-close-copy p:not(.section-label) {
-  max-width: 560px;
+  max-width: 340px;
   margin: 0;
   color: var(--muted);
-  font-size: clamp(17px, 1.8vw, 22px);
-  line-height: 1.42;
+  font-size: 13px;
+  line-height: 1.45;
 }
 .checkout-proof-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 7px;
+  margin-top: 0;
 }
 .checkout-proof-row span {
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 999px;
-  padding: 8px 12px;
+  padding: 7px 10px;
   background: rgba(255,255,255,0.72);
   color: var(--ink);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 820;
 }
 .checkout-close-panel {
   display: grid;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
-  border: 1px solid rgba(17, 17, 20, 0.1);
-  border-radius: 10px;
-  padding: clamp(16px, 2.4vw, 24px);
-  background: rgba(255,255,255,0.9);
-  box-shadow: 0 22px 58px rgba(17, 17, 20, 0.1);
 }
 .checkout-close-top {
   display: flex;
@@ -6811,9 +6852,9 @@ main {
   justify-content: space-between;
   gap: 14px;
   border-bottom: 1px solid rgba(17, 17, 20, 0.08);
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
 }
 .checkout-close-top strong {
@@ -6821,17 +6862,17 @@ main {
 }
 .checkout-close-grid {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 .checkout-close-card {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) auto;
-  gap: 4px 12px;
-  align-items: center;
+  gap: 6px;
+  align-content: start;
   min-width: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 8px;
-  padding: 14px;
+  padding: 12px;
   background: rgba(247,248,250,0.72);
   color: var(--ink);
   text-decoration: none;
@@ -6847,12 +6888,11 @@ main {
   border-color: rgba(0, 113, 227, 0.32);
   background: rgba(0, 113, 227, 0.08);
 }
-.checkout-close-card span {
-  grid-row: span 2;
+.checkout-close-card > span {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 999px;
   background: #fff;
   color: var(--accent);
@@ -6862,24 +6902,20 @@ main {
 .checkout-close-card strong {
   overflow: hidden;
   color: var(--ink);
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.1;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .checkout-close-card em {
-  justify-self: end;
   color: var(--accent);
   font-style: normal;
   font-size: 12px;
   font-weight: 850;
-  white-space: nowrap;
 }
 .checkout-close-card small {
-  grid-column: 2 / -1;
   min-width: 0;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.35;
 }
 .proof-ledger {
@@ -9826,8 +9862,33 @@ input[type="email"] {
   .delivery-copy {
     position: static;
   }
+  .delivery-copy h2 {
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.04;
+  }
   .delivery-copy p:not(.section-label) {
     font-size: 15px;
+  }
+  .delivery-rule-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .delivery-rule-list li {
+    min-height: 84px;
+    border: 1px solid rgba(17, 17, 20, 0.08);
+    border-radius: 8px;
+    padding: 9px;
+    background: rgba(255,255,255,0.72);
+  }
+  .delivery-rule-list strong {
+    font-size: 12px;
+  }
+  .delivery-rule-list span {
+    font-size: 11px;
+    line-height: 1.3;
+  }
+  .delivery-checkout-board {
+    gap: 12px;
   }
   .deliverable-viewer {
     border-radius: 14px;
@@ -9848,7 +9909,7 @@ input[type="email"] {
     display: none;
   }
   .deliverable-screen {
-    min-height: 344px;
+    min-height: 266px;
     border-radius: 14px;
   }
   .deliverable-panel {
@@ -9858,7 +9919,7 @@ input[type="email"] {
     border-radius: 12px;
   }
   .deliverable-panel h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
   .deliverable-lines {
     gap: 7px;
@@ -9881,65 +9942,52 @@ input[type="email"] {
   }
   .checkout-close {
     grid-template-columns: 1fr;
-    gap: 18px;
-    padding-top: 34px;
-    padding-bottom: 34px;
+    gap: 12px;
+    padding-top: 12px;
   }
-  .checkout-close-copy h2 {
-    font-size: clamp(34px, 11vw, 52px);
+  .checkout-close-copy h3 {
+    font-size: 22px;
   }
   .checkout-close-copy p:not(.section-label) {
-    font-size: 16px;
+    font-size: 13px;
   }
   .checkout-proof-row {
     gap: 7px;
-    margin-top: 18px;
   }
   .checkout-proof-row span {
     padding: 7px 10px;
     font-size: 12px;
   }
   .checkout-close-panel {
-    border-radius: 8px;
-    padding: 12px;
+    gap: 8px;
+  }
+  .checkout-close-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .checkout-close-card {
-    grid-template-columns: 30px minmax(0, 1fr);
-    gap: 3px 10px;
-    padding: 12px;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    min-height: 120px;
+    padding: 10px;
   }
-  .checkout-close-card span {
+  .checkout-close-card > span {
     width: 26px;
     height: 26px;
   }
   .checkout-close-card strong {
+    grid-column: auto;
     font-size: 16px;
     white-space: normal;
   }
   .checkout-close-card em {
-    grid-column: 2;
+    grid-column: auto;
     justify-self: start;
     white-space: normal;
   }
   .checkout-close-card small {
-    grid-column: 2;
+    grid-column: auto;
     font-size: 12px;
-  }
-  .delivery-lab > ul {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .delivery-lab > ul > li {
-    min-height: 100px;
-    padding: 10px;
-  }
-  .delivery-lab > ul > li strong {
-    font-size: 13px;
-    line-height: 1.25;
-  }
-  .delivery-lab > ul > li span {
-    font-size: 12px;
-    line-height: 1.35;
+    display: none;
   }
   .proof-ledger {
     gap: 16px;
