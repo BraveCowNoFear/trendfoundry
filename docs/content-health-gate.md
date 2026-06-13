@@ -1,15 +1,15 @@
 # TrendFoundry Content Health Gate
 
-Generated: 2026-06-10T14:23:39.202Z
+Generated: 2026-06-13T00:17:38.843Z
 
 This gate checks text integrity and sales-safety boundaries for the content-only operating lane. It uses UTF-8 file reads, so it is authoritative when PowerShell console output visually garbles Chinese text.
 
 ## Summary
 
-- Checked files: 106
+- Checked files: 110
 - Files with mojibake markers: 0
-- Bilibili items in latest dataset: 29
-- Bilibili items with readable Chinese text: 29
+- Bilibili items in latest dataset: 30
+- Bilibili items with readable Chinese text: 30
 - Close pack selected rows: 5
 - Public close doc prospect leaks: 0
 
@@ -31,6 +31,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | scripts/update_content_testimonial_status.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_outreach_send_log.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_outreach_followups.mjs | tracked-source | no | 0 | none |
+| scripts/export_content_outreach_drafts.mjs | tracked-source | no | 0 | none |
 | scripts/complete_content_outreach_send.mjs | tracked-source | no | 0 | none |
 | scripts/intake_content_replies.mjs | tracked-source | no | 0 | none |
 | scripts/generate_content_outreach_review.mjs | tracked-source | no | 0 | none |
@@ -60,6 +61,7 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | docs/content-outreach-gate.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-sends.md | public-or-tracked | no | 0 | none |
 | docs/content-outreach-followups.md | public-or-tracked | no | 0 | none |
+| docs/content-outreach-export.md | public-or-tracked | no | 0 | none |
 | docs/content-ops.md | public-or-tracked | no | 0 | none |
 | docs/content-product-listing.md | public-or-tracked | no | 0 | none |
 | docs/content-prospecting.md | public-or-tracked | no | 0 | none |
@@ -103,6 +105,8 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 | dist/content-outreach-gate/checks.csv | private-ignored | no | 0 | none |
 | dist/content-outreach-followups/followups.csv | private-ignored | no | 0 | none |
 | dist/content-outreach-followups/followups.md | private-ignored | no | 0 | none |
+| dist/content-outreach-export/drafts.csv | private-ignored | no | 0 | none |
+| dist/content-outreach-export/drafts.md | private-ignored | no | 0 | none |
 | dist/content-deal-desk/deal-desk.csv | private-ignored | no | 0 | none |
 | dist/content-deal-desk/deal-desk.md | private-ignored | no | 0 | none |
 | dist/content-deal-desk/response-drafts.md | private-ignored | no | 0 | none |
@@ -126,9 +130,9 @@ This gate checks text integrity and sales-safety boundaries for the content-only
 
 ## Bilibili Sample
 
-- 【1548] 凯文凯利： AI 真的会抢走人类工作吗？ (YouTube深度油管)
-- 同事电脑没 AI ，也能让我的 AI 远程排查？我做了个 Agent Room (骑摩托的周先森)
-- 16.7K 星的开源录屏编辑器：把普通录屏直接做成产品演示 (AIlazy俊)
+- 3个开源项目打造 AI 分身！以后更新视频，可以不用我了 (IT咖啡馆)
+- 16岁，一部手机，代码一行没跑过。我把我的认知推理中间件开源了——安全只是推理做对之后自然溢出的结果。 (大一统意识与美学系统)
+- 【目前最强LTX2.3 Ai 视频模型】B站搭建最详细LTX2.3模型手把手教你搭建音画同步 工作流 一个视频最直接教会你（附现成 工作流 +模型+插件）双击启动 (秋叶aaeki)
 
 ## Safety Boundary
 
