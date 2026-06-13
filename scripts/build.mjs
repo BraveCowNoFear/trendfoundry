@@ -3236,6 +3236,7 @@ const authHtml = `<!doctype html>
       <h1>Access the signal room.</h1>
       <p class="sub">Log in to keep ranked opportunities, source proof, and delivery notes attached to the account your team already uses.</p>
       <div class="auth-quick-logins" aria-label="Primary sign-in choices">${authQuickLogins}</div>
+      <div class="auth-provider-rail" aria-label="Supported login platforms">${authProviderRail}</div>
       <div class="hero-actions">
         <a class="action" href="../order/">Order page</a>
         <a class="action" href="../zh/">Chinese entry</a>
@@ -3261,7 +3262,6 @@ const authHtml = `<!doctype html>
         <small id="auth-visual-copy">Choose a provider to preview the access path before you leave the page.</small>
       </figcaption>
     </figure>
-    <div class="auth-provider-rail" aria-label="Supported login platforms">${authProviderRail}</div>
   </header>
   <main>
     <section class="auth-status-panel" aria-label="Account status">
@@ -8590,17 +8590,17 @@ li { margin: 6px 0; }
   color: var(--success);
 }
 .auth-hero .sub {
-  max-width: 620px;
+  max-width: 560px;
   color: #495263;
-  font-size: clamp(18px, 2vw, 24px);
+  font-size: clamp(17px, 1.7vw, 21px);
   line-height: 1.45;
 }
 .auth-hero {
   display: grid;
-  grid-template-columns: minmax(300px, 0.42fr) minmax(420px, 0.58fr);
-  gap: clamp(30px, 6vw, 82px);
+  grid-template-columns: minmax(300px, 0.44fr) minmax(420px, 0.56fr);
+  gap: clamp(28px, 5vw, 70px);
   align-items: center;
-  min-height: min(780px, 94svh);
+  min-height: min(700px, 88svh);
   overflow: hidden;
   background: linear-gradient(180deg, #fff 0%, #f8f9fb 100%);
 }
@@ -8608,17 +8608,17 @@ li { margin: 6px 0; }
   min-width: 0;
 }
 .auth-hero-copy h1 {
-  max-width: 720px;
-  margin-bottom: 18px;
-  font-size: clamp(54px, 8vw, 104px);
-  line-height: 0.93;
+  max-width: 640px;
+  margin-bottom: 16px;
+  font-size: clamp(52px, 7vw, 88px);
+  line-height: 0.95;
   letter-spacing: 0;
 }
 .auth-quick-logins {
   display: grid;
-  gap: 12px;
-  width: min(100%, 470px);
-  margin: 30px 0 22px;
+  gap: 10px;
+  width: min(100%, 440px);
+  margin: 24px 0 12px;
 }
 .auth-quick-login {
   display: grid;
@@ -8673,7 +8673,7 @@ li { margin: 6px 0; }
 }
 .auth-image-stack {
   position: relative;
-  min-height: clamp(480px, 52vw, 660px);
+  min-height: clamp(430px, 45vw, 560px);
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 8px;
   background:
@@ -8706,9 +8706,9 @@ li { margin: 6px 0; }
   position: relative;
   z-index: 1;
   display: block;
-  width: min(84%, 720px);
+  width: min(82%, 660px);
   height: auto;
-  margin: 58px 4% 0 auto;
+  margin: 52px 4% 0 auto;
   border: 1px solid rgba(17, 17, 20, 0.1);
   border-radius: 8px;
   background: #fff;
@@ -8826,32 +8826,32 @@ li { margin: 6px 0; }
   transform: translateY(-5px) scale(1.08);
 }
 .auth-provider-rail {
-  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(78px, 1fr));
-  gap: 8px;
-  align-items: stretch;
-  width: min(100%, 1180px);
-  margin: clamp(12px, 3vw, 28px) auto 0;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  justify-content: start;
+  gap: 6px;
+  width: min(100%, 520px);
+  margin: 0 0 16px;
   border: 1px solid rgba(17, 17, 20, 0.1);
   border-radius: 8px;
-  padding: 14px;
+  padding: 8px;
+  overflow: visible;
   background: rgba(255,255,255,0.82);
-  box-shadow: 0 20px 58px rgba(17, 17, 20, 0.08);
+  box-shadow: 0 12px 32px rgba(17, 17, 20, 0.06);
   backdrop-filter: blur(16px);
 }
 .auth-rail-avatar {
   display: grid;
   place-items: center;
-  gap: 8px;
-  min-height: 92px;
+  gap: 5px;
+  min-height: 62px;
   border: 1px solid transparent;
   border-radius: 8px;
-  padding: 8px 6px;
+  padding: 6px 4px;
   background: transparent;
   color: var(--ink);
   font: inherit;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
   transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -8863,8 +8863,8 @@ li { margin: 6px 0; }
   transform: translateY(-2px);
 }
 .auth-rail-avatar .provider-avatar {
-  width: 46px;
-  height: 46px;
+  width: 34px;
+  height: 34px;
 }
 @keyframes authChipFloat {
   0%, 100% { transform: translateY(0); }
@@ -10066,60 +10066,92 @@ input[type="email"] {
   }
   .auth-hero {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
     min-height: 0;
+    padding-top: 34px;
   }
   .auth-hero-copy h1 {
-    font-size: clamp(48px, 14vw, 72px);
+    max-width: 350px;
+    margin-bottom: 12px;
+    font-size: clamp(38px, 11.5vw, 54px);
+    line-height: 0.97;
+  }
+  .auth-hero .sub {
+    font-size: 16px;
+    line-height: 1.42;
   }
   .auth-quick-logins {
     width: 100%;
-    margin: 22px 0 16px;
+    margin: 18px 0 10px;
+    gap: 8px;
   }
   .auth-quick-login {
-    min-height: 58px;
+    min-height: 54px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+    padding: 8px 14px;
     font-size: 16px;
+  }
+  .auth-quick-login .provider-avatar {
+    width: 38px;
+    height: 38px;
+  }
+  .auth-hero .hero-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .auth-hero .hero-actions .action {
+    min-width: 0;
+    padding: 9px 8px;
+    font-size: 13px;
+    white-space: normal;
   }
   .auth-hero-visual {
     justify-self: stretch;
   }
   .auth-image-stack {
-    min-height: 390px;
+    min-height: 250px;
   }
   .auth-main-shot {
-    width: 100%;
-    max-height: 250px;
-    margin: 58px 0 0;
+    width: 92%;
+    max-height: 178px;
+    margin: 48px 0 0 auto;
     object-fit: cover;
     object-position: left top;
     border-radius: 8px;
     transform: none;
   }
   .auth-preview-card {
-    padding: 8px;
+    gap: 5px;
+    padding: 7px;
+  }
+  .auth-preview-card span {
+    font-size: 11px;
   }
   .auth-preview-sample {
     left: 10px;
-    bottom: 70px;
-    width: min(54%, 230px);
+    bottom: 42px;
+    width: min(50%, 178px);
   }
   .auth-preview-proof {
     right: 10px;
-    bottom: 18px;
-    width: min(48%, 210px);
+    bottom: 14px;
+    width: min(46%, 166px);
   }
   .auth-hero-visual figcaption {
     right: 12px;
     left: 12px;
-    top: 12px;
+    top: 10px;
     width: auto;
-    padding: 12px;
+    padding: 10px;
   }
   .auth-hero-visual figcaption strong {
-    font-size: 14px;
+    font-size: 13px;
   }
   .auth-hero-visual figcaption small {
-    font-size: 12px;
+    display: none;
   }
   .auth-provider-orbit {
     display: none;
@@ -10127,22 +10159,26 @@ input[type="email"] {
   .auth-provider-rail {
     grid-template-columns: none;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(74px, 82px);
-    justify-content: start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    padding: 10px;
+    grid-auto-columns: minmax(55px, 60px);
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 7px;
     gap: 5px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+  .auth-provider-rail::-webkit-scrollbar {
+    display: none;
   }
   .auth-rail-avatar {
-    min-height: 82px;
+    min-height: 58px;
+    font-size: 10px;
     scroll-snap-align: start;
-    font-size: 12px;
   }
   .auth-rail-avatar .provider-avatar {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
   .provider-avatar-small {
     width: 22px;
