@@ -1292,36 +1292,36 @@ main {
 }
 .fit-studio.product-rules {
   grid-template-columns: 1fr;
-  gap: 22px;
-  padding: 4px 0 42px;
+  gap: 16px;
+  padding: 0 0 32px;
 }
 .fit-studio.product-rules .fit-copy {
-  max-width: 960px;
+  max-width: 920px;
 }
 .fit-studio.product-rules .fit-copy h2 {
-  max-width: 780px;
-  margin: 0 0 10px;
-  font-size: clamp(34px, 5vw, 62px);
-  line-height: 1.02;
+  max-width: 680px;
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.06;
 }
 .fit-studio.product-rules .fit-copy > p:not(.section-label) {
-  max-width: 760px;
+  max-width: 620px;
   margin: 0;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.45;
 }
 .fit-studio.product-rules .fit-personas {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 24px;
+  gap: 8px;
+  margin-top: 16px;
 }
 .fit-studio.product-rules .fit-persona {
   grid-template-columns: 1fr auto;
-  gap: 8px 14px;
-  min-height: 150px;
-  border-radius: 14px;
-  padding: 18px;
+  gap: 6px 12px;
+  min-height: 96px;
+  border-radius: 12px;
+  padding: 14px 16px;
   background: rgba(255,255,255,0.76);
 }
 .fit-studio.product-rules .fit-persona::before {
@@ -1347,47 +1347,56 @@ main {
   text-transform: none;
 }
 .fit-studio.product-rules .fit-persona strong {
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.1;
 }
 .fit-studio.product-rules .fit-persona b {
   color: var(--ink);
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 850;
   line-height: 1;
 }
 .fit-studio.product-rules .fit-persona small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 .fit-studio.product-rules .fit-persona.active {
   border-color: rgba(0,113,227,0.44);
   background: #fff;
 }
 .fit-studio.product-rules .fit-device {
-  border-radius: 16px;
-  box-shadow: 0 24px 62px rgba(17,17,20,0.07);
+  border-radius: 14px;
+  box-shadow: 0 18px 46px rgba(17,17,20,0.06);
 }
 .fit-studio.product-rules .fit-device-screen {
-  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+  grid-template-columns: minmax(210px, 0.32fr) minmax(0, 0.68fr);
   align-items: stretch;
   min-height: 0;
-  padding: clamp(18px, 3vw, 28px);
+  gap: 12px;
+  padding: clamp(15px, 2.4vw, 20px);
 }
 .fit-studio.product-rules .fit-console-head {
   grid-column: 1;
   grid-row: 1 / span 2;
   align-content: start;
   display: grid;
-  gap: 18px;
+  gap: 10px;
   border-right: 1px solid rgba(17,17,20,0.08);
-  padding-right: 22px;
+  padding-right: 18px;
 }
 .fit-studio.product-rules .fit-console-head strong {
-  margin: 10px 0 0;
+  margin: 7px 0 0;
   color: var(--ink);
-  font-size: clamp(28px, 3vw, 44px);
-  line-height: 1.02;
+  font-size: clamp(23px, 2.5vw, 34px);
+  line-height: 1.05;
+}
+.fit-studio.product-rules .fit-device-label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-price {
+  font-size: clamp(34px, 4.4vw, 54px);
+  line-height: 0.96;
 }
 .fit-price {
   color: var(--accent);
@@ -1402,10 +1411,10 @@ main {
   margin: 0;
   border: 1px solid rgba(0,113,227,0.18);
   border-radius: 999px;
-  padding: 9px 14px;
+  padding: 7px 12px;
   background: rgba(0,113,227,0.08);
   color: var(--accent);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 820;
 }
 .fit-studio.product-rules .fit-preview-card {
@@ -1413,7 +1422,8 @@ main {
   grid-row: 2;
   min-height: 0;
   border-color: rgba(17,17,20,0.08);
-  border-radius: 14px;
+  border-radius: 12px;
+  padding: 14px;
   box-shadow: none;
 }
 .fit-studio.product-rules .fit-preview-card span,
@@ -1422,9 +1432,12 @@ main {
 }
 .fit-studio.product-rules .fit-telemetry {
   grid-column: 1 / -1;
+  gap: 8px;
 }
 .fit-studio.product-rules .fit-telemetry span {
   background: rgba(247,249,252,0.72);
+  border-radius: 10px;
+  padding: 10px 12px;
 }
 .product-proof {
   display: grid;
@@ -5549,33 +5562,76 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .fit-studio.product-rules .fit-personas {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 12px;
   }
   .fit-studio.product-rules .fit-persona {
+    grid-template-columns: 1fr;
+    gap: 4px;
     min-height: 0;
-    padding: 15px;
+    padding: 10px;
+    border-radius: 11px;
+  }
+  .fit-studio.product-rules .fit-persona::after {
+    display: none;
+  }
+  .fit-studio.product-rules .fit-persona b {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: auto;
+    font-size: 19px;
+  }
+  .fit-studio.product-rules .fit-persona strong {
+    font-size: 14px;
+  }
+  .fit-studio.product-rules .fit-persona small {
+    font-size: 11px;
+    line-height: 1.2;
   }
   .fit-studio.product-rules .fit-device-screen {
     grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
   }
   .fit-studio.product-rules .fit-console-head {
     grid-column: auto;
     grid-row: auto;
+    display: flex;
+    align-items: flex-end;
     border-right: 0;
     border-bottom: 1px solid rgba(17,17,20,0.08);
     padding-right: 0;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
   }
   .fit-studio.product-rules .fit-console-head strong {
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: clamp(21px, 6vw, 27px);
   }
-  .fit-price {
-    font-size: clamp(40px, 14vw, 58px);
+  .fit-studio.product-rules .fit-price {
+    font-size: clamp(30px, 9vw, 40px);
+    white-space: nowrap;
   }
   .fit-tier-rule,
   .fit-studio.product-rules .fit-preview-card {
     grid-column: auto;
     grid-row: auto;
+  }
+  .fit-studio.product-rules .fit-preview-card {
+    padding: 12px;
+  }
+  .fit-studio.product-rules .fit-preview-card strong {
+    font-size: 16px;
+    line-height: 1.22;
+  }
+  .fit-studio.product-rules .fit-preview-card p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .fit-studio.product-rules .fit-telemetry {
+    gap: 6px;
+  }
+  .fit-studio.product-rules .fit-telemetry span {
+    padding: 9px 10px;
   }
   .sample-actions { justify-content: flex-start; }
   .sample-spotlight {

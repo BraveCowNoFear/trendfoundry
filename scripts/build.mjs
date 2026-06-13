@@ -230,20 +230,20 @@ const fitPersonas = [
     shortZh: "单期",
     priceEn: "$9",
     priceZh: "$9",
-    ruleEn: "Test once",
-    ruleZh: "先试一次",
-    titleEn: "Buy one pack and see whether the signal format fits your channel.",
-    titleZh: "先买一份，确认这种选题包是否适合你的频道。",
-    copyEn: "One ranked issue with proof links, CSV, risk notes, and a first recording script.",
-    copyZh: "一次性交付排序选题、来源证据、CSV、风险备注和第一版录制脚本。",
-    kitEn: "12 ranked ideas / CSV / risk notes / 1 script",
-    kitZh: "12 个排序选题 / CSV / 风险备注 / 1 份脚本",
-    cadenceEn: "one-time delivery",
-    cadenceZh: "一次性交付",
+    ruleEn: "Test one issue",
+    ruleZh: "先试一份",
+    titleEn: "Use when you want to test one issue before subscribing.",
+    titleZh: "适合先买一份，确认格式和选题质量。",
+    copyEn: "A one-time issue with 12 ranked ideas, CSV, risk notes, and one script.",
+    copyZh: "一次交付 12 个排序选题、CSV、风险备注和一版脚本。",
+    kitEn: "12 ideas + CSV + risk notes",
+    kitZh: "12 个选题 + CSV + 风险备注",
+    cadenceEn: "one-time",
+    cadenceZh: "一次交付",
     progress: 72,
     strengthEn: "Lowest commitment",
     strengthZh: "最低投入",
-    velocityEn: "Proof check",
+    velocityEn: "first validation",
     velocityZh: "先验证质量",
     item: fitPersonaItems["sample-issue"]
   },
@@ -257,21 +257,21 @@ const fitPersonas = [
     shortZh: "周更",
     priceEn: "$19/mo",
     priceZh: "$19/月",
-    ruleEn: "Steady topic queue",
-    ruleZh: "稳定选题队列",
-    titleEn: "Keep a weekly queue alive without reopening five public feeds.",
-    titleZh: "不用反复刷五个信息源，也能保持每周选题队列。",
-    copyEn: "A fresh 12-idea issue every week, with sources, angles, outlines, and recording notes.",
-    copyZh: "每周补充 12 个可录制选题，附来源、角度、大纲和录制备注。",
-    kitEn: "Weekly issue / source mix / Bilibili + YouTube angles / outlines",
-    kitZh: "周更期刊 / 来源组合 / B 站 + YouTube 角度 / 大纲",
-    cadenceEn: "weekly issue",
+    ruleEn: "Keep the queue warm",
+    ruleZh: "持续供题",
+    titleEn: "Use when your channel needs a stable weekly topic queue.",
+    titleZh: "适合需要稳定周更选题队列的创作者。",
+    copyEn: "A fresh 12-idea issue every week with sources, angles, outlines, and notes.",
+    copyZh: "每周补充 12 个可录制选题，附来源、角度、大纲和备注。",
+    kitEn: "weekly 12-idea issue",
+    kitZh: "每周 12 个新选题",
+    cadenceEn: "weekly",
     cadenceZh: "每周更新",
     progress: 64,
     strengthEn: "Default subscription",
     strengthZh: "默认订阅档",
-    velocityEn: "Queue stays warm",
-    velocityZh: "队列不断档",
+    velocityEn: "steady publishing",
+    velocityZh: "稳定更新",
     item: fitPersonaItems["weekly-pipeline"]
   },
   {
@@ -284,20 +284,20 @@ const fitPersonas = [
     shortZh: "定制",
     priceEn: "$49/mo",
     priceZh: "$49/月",
-    ruleEn: "Your niche only",
+    ruleEn: "Only your niche",
     ruleZh: "只看你的赛道",
-    titleEn: "Narrow the desk to one niche, one channel, and stricter filters.",
-    titleZh: "把情报台收窄到你的垂类、频道和筛选标准。",
-    copyEn: "Custom source queries, niche scoring, stricter filters, and lead angles for one lane.",
-    copyZh: "定制来源查询、垂类评分、严格过滤和只服务一个赛道的选题角度。",
-    kitEn: "Custom sources / niche scoring / strict filters / lead angles",
-    kitZh: "定制来源 / 垂类评分 / 严格过滤 / 线索角度",
-    cadenceEn: "monthly custom desk",
-    cadenceZh: "每月定制情报台",
+    titleEn: "Use when one niche needs its own sources and stricter filters.",
+    titleZh: "适合只服务一个赛道，并需要专属来源和筛选规则。",
+    copyEn: "Custom sources, niche scoring, stricter filters, and lead angles for one lane.",
+    copyZh: "定制来源、垂类评分、严格过滤和只服务一个赛道的角度。",
+    kitEn: "custom sources + niche scoring",
+    kitZh: "定制来源 + 垂类评分",
+    cadenceEn: "monthly custom",
+    cadenceZh: "每月定制",
     progress: 81,
     strengthEn: "Highest focus",
     strengthZh: "最高聚焦",
-    velocityEn: "Own one lane",
+    velocityEn: "own one lane",
     velocityZh: "占住一个赛道",
     item: fitPersonaItems["custom-niche"]
   }
@@ -380,10 +380,10 @@ const fitPersonaButtons = fitPersonas
     data-fit-strength-en="${escapeHtml(persona.strengthEn)}" data-fit-strength-zh="${escapeHtml(persona.strengthZh)}"
     data-fit-velocity-en="${escapeHtml(persona.velocityEn)}" data-fit-velocity-zh="${escapeHtml(persona.velocityZh)}"
     data-fit-progress="${escapeHtml(persona.progress)}"
-    data-fit-source="${escapeHtml(sourceLabel(persona.item || {}))}" data-fit-score="${escapeHtml(persona.item?.score || "-")}"
-    data-fit-signal-en="${escapeHtml(persona.item ? fitSignalTitle(persona.item) : "Ranked creator opportunity")}"
-    data-fit-signal-zh="${escapeHtml(persona.item ? (persona.item.deliverables?.bilibiliTitles?.[0] || persona.item.title) : "已排序创作者机会")}"
-    data-fit-url="${escapeHtml(persona.item?.url || "./issues/latest.html")}">
+    data-fit-source-en="When to choose" data-fit-source-zh="适用场景"
+    data-fit-signal-en="${escapeHtml(persona.titleEn)}"
+    data-fit-signal-zh="${escapeHtml(persona.titleZh)}"
+    data-fit-url="#pricing">
       <span data-i18n-en="${escapeHtml(persona.eyebrowEn)}" data-i18n-zh="${escapeHtml(persona.eyebrowZh)}">${escapeHtml(persona.eyebrowEn)}</span>
       <strong data-i18n-en="${escapeHtml(persona.labelEn)}" data-i18n-zh="${escapeHtml(persona.labelZh)}">${escapeHtml(persona.labelEn)}</strong>
       <b data-i18n-en="${escapeHtml(persona.priceEn)}" data-i18n-zh="${escapeHtml(persona.priceZh)}">${escapeHtml(persona.priceEn)}</b>
@@ -392,9 +392,9 @@ const fitPersonaButtons = fitPersonas
   .join("");
 const fitStudio = `<section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
       <div class="fit-copy">
-        ${dual("Tiers", "分档", "p", ' class="section-label"')}
-        ${dual("Choose by commitment.", "产品只按投入程度分三档。", "h2")}
-        ${dual("The same public signal becomes one sample issue, a weekly queue, or a custom niche desk depending on the cadence you need.", "同一条公开信号，按你需要的节奏变成单期样品、周更队列或垂直定制。", "p")}
+        ${dual("How to choose", "怎么选档", "p", ' class="section-label"')}
+        ${dual("Pick the tier by how often you need decisions.", "按你需要决策的频率选档。", "h2")}
+        ${dual("Sample validates the format. Weekly keeps your queue supplied. Custom narrows the desk to your niche.", "单期先验证，周更保持队列，定制只看你的赛道。", "p")}
         <div class="fit-personas" aria-label="Product pack modes">${fitPersonaButtons}</div>
       </div>
       <div class="fit-device" data-fit-device="${escapeHtml(defaultFitPersona.id)}" style="--fit-progress:${escapeHtml(defaultFitPersona.progress)}%">
@@ -407,12 +407,12 @@ const fitStudio = `<section class="fit-studio product-rules" id="fit-studio" ari
             <span class="fit-price" id="fit-price" data-i18n-en="${escapeHtml(defaultFitPersona.priceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.priceZh)}">${escapeHtml(defaultFitPersona.priceEn)}</span>
           </div>
           <p class="fit-tier-rule" id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.ruleEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.ruleZh)}">${escapeHtml(defaultFitPersona.ruleEn)}</p>
-          <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="${escapeHtml(defaultFitPersona.item?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">
-            <span id="fit-source">${escapeHtml(sourceLabel(defaultFitPersona.item || {}))}</span>
-            <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}" data-i18n-zh="${escapeHtml(defaultFitPersona.item ? (defaultFitPersona.item.deliverables?.bilibiliTitles?.[0] || defaultFitPersona.item.title) : "已排序创作者机会")}">${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}</strong>
+          <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="#pricing">
+            <span id="fit-source" data-i18n-en="When to choose" data-i18n-zh="适用场景">When to choose</span>
+            <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.titleEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.titleZh)}">${escapeHtml(defaultFitPersona.titleEn)}</strong>
             <p id="fit-preview-copy" data-i18n-en="${escapeHtml(defaultFitPersona.copyEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.copyZh)}">${escapeHtml(defaultFitPersona.copyEn)}</p>
           </a>
-          <div class="fit-telemetry" aria-label="Signal studio summary">
+          <div class="fit-telemetry" aria-label="Tier summary facts">
             <span><strong data-i18n-en="Delivery" data-i18n-zh="交付">Delivery</strong><small id="fit-kit" data-i18n-en="${escapeHtml(defaultFitPersona.kitEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.kitZh)}">${escapeHtml(defaultFitPersona.kitEn)}</small></span>
             <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="${escapeHtml(defaultFitPersona.cadenceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.cadenceZh)}">${escapeHtml(defaultFitPersona.cadenceEn)}</small></span>
             <span><strong data-i18n-en="Best for" data-i18n-zh="适合">Best for</strong><small id="fit-velocity" data-i18n-en="${escapeHtml(defaultFitPersona.velocityEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.velocityZh)}">${escapeHtml(defaultFitPersona.velocityEn)}</small></span>
@@ -4803,36 +4803,36 @@ main {
 }
 .fit-studio.product-rules {
   grid-template-columns: 1fr;
-  gap: 22px;
-  padding: 4px 0 42px;
+  gap: 16px;
+  padding: 0 0 32px;
 }
 .fit-studio.product-rules .fit-copy {
-  max-width: 960px;
+  max-width: 920px;
 }
 .fit-studio.product-rules .fit-copy h2 {
-  max-width: 780px;
-  margin: 0 0 10px;
-  font-size: clamp(34px, 5vw, 62px);
-  line-height: 1.02;
+  max-width: 680px;
+  margin: 0 0 8px;
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.06;
 }
 .fit-studio.product-rules .fit-copy > p:not(.section-label) {
-  max-width: 760px;
+  max-width: 620px;
   margin: 0;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 15px;
+  line-height: 1.45;
 }
 .fit-studio.product-rules .fit-personas {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 24px;
+  gap: 8px;
+  margin-top: 16px;
 }
 .fit-studio.product-rules .fit-persona {
   grid-template-columns: 1fr auto;
-  gap: 8px 14px;
-  min-height: 150px;
-  border-radius: 14px;
-  padding: 18px;
+  gap: 6px 12px;
+  min-height: 96px;
+  border-radius: 12px;
+  padding: 14px 16px;
   background: rgba(255,255,255,0.76);
 }
 .fit-studio.product-rules .fit-persona::before {
@@ -4858,47 +4858,56 @@ main {
   text-transform: none;
 }
 .fit-studio.product-rules .fit-persona strong {
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1.1;
 }
 .fit-studio.product-rules .fit-persona b {
   color: var(--ink);
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 850;
   line-height: 1;
 }
 .fit-studio.product-rules .fit-persona small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 .fit-studio.product-rules .fit-persona.active {
   border-color: rgba(0,113,227,0.44);
   background: #fff;
 }
 .fit-studio.product-rules .fit-device {
-  border-radius: 16px;
-  box-shadow: 0 24px 62px rgba(17,17,20,0.07);
+  border-radius: 14px;
+  box-shadow: 0 18px 46px rgba(17,17,20,0.06);
 }
 .fit-studio.product-rules .fit-device-screen {
-  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+  grid-template-columns: minmax(210px, 0.32fr) minmax(0, 0.68fr);
   align-items: stretch;
   min-height: 0;
-  padding: clamp(18px, 3vw, 28px);
+  gap: 12px;
+  padding: clamp(15px, 2.4vw, 20px);
 }
 .fit-studio.product-rules .fit-console-head {
   grid-column: 1;
   grid-row: 1 / span 2;
   align-content: start;
   display: grid;
-  gap: 18px;
+  gap: 10px;
   border-right: 1px solid rgba(17,17,20,0.08);
-  padding-right: 22px;
+  padding-right: 18px;
 }
 .fit-studio.product-rules .fit-console-head strong {
-  margin: 10px 0 0;
+  margin: 7px 0 0;
   color: var(--ink);
-  font-size: clamp(28px, 3vw, 44px);
-  line-height: 1.02;
+  font-size: clamp(23px, 2.5vw, 34px);
+  line-height: 1.05;
+}
+.fit-studio.product-rules .fit-device-label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-price {
+  font-size: clamp(34px, 4.4vw, 54px);
+  line-height: 0.96;
 }
 .fit-price {
   color: var(--accent);
@@ -4913,10 +4922,10 @@ main {
   margin: 0;
   border: 1px solid rgba(0,113,227,0.18);
   border-radius: 999px;
-  padding: 9px 14px;
+  padding: 7px 12px;
   background: rgba(0,113,227,0.08);
   color: var(--accent);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 820;
 }
 .fit-studio.product-rules .fit-preview-card {
@@ -4924,7 +4933,8 @@ main {
   grid-row: 2;
   min-height: 0;
   border-color: rgba(17,17,20,0.08);
-  border-radius: 14px;
+  border-radius: 12px;
+  padding: 14px;
   box-shadow: none;
 }
 .fit-studio.product-rules .fit-preview-card span,
@@ -4933,9 +4943,12 @@ main {
 }
 .fit-studio.product-rules .fit-telemetry {
   grid-column: 1 / -1;
+  gap: 8px;
 }
 .fit-studio.product-rules .fit-telemetry span {
   background: rgba(247,249,252,0.72);
+  border-radius: 10px;
+  padding: 10px 12px;
 }
 .product-proof {
   display: grid;
@@ -9060,33 +9073,76 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .fit-studio.product-rules .fit-personas {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 12px;
   }
   .fit-studio.product-rules .fit-persona {
+    grid-template-columns: 1fr;
+    gap: 4px;
     min-height: 0;
-    padding: 15px;
+    padding: 10px;
+    border-radius: 11px;
+  }
+  .fit-studio.product-rules .fit-persona::after {
+    display: none;
+  }
+  .fit-studio.product-rules .fit-persona b {
+    grid-column: 1;
+    grid-row: auto;
+    align-self: auto;
+    font-size: 19px;
+  }
+  .fit-studio.product-rules .fit-persona strong {
+    font-size: 14px;
+  }
+  .fit-studio.product-rules .fit-persona small {
+    font-size: 11px;
+    line-height: 1.2;
   }
   .fit-studio.product-rules .fit-device-screen {
     grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
   }
   .fit-studio.product-rules .fit-console-head {
     grid-column: auto;
     grid-row: auto;
+    display: flex;
+    align-items: flex-end;
     border-right: 0;
     border-bottom: 1px solid rgba(17,17,20,0.08);
     padding-right: 0;
-    padding-bottom: 16px;
+    padding-bottom: 10px;
   }
   .fit-studio.product-rules .fit-console-head strong {
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: clamp(21px, 6vw, 27px);
   }
-  .fit-price {
-    font-size: clamp(40px, 14vw, 58px);
+  .fit-studio.product-rules .fit-price {
+    font-size: clamp(30px, 9vw, 40px);
+    white-space: nowrap;
   }
   .fit-tier-rule,
   .fit-studio.product-rules .fit-preview-card {
     grid-column: auto;
     grid-row: auto;
+  }
+  .fit-studio.product-rules .fit-preview-card {
+    padding: 12px;
+  }
+  .fit-studio.product-rules .fit-preview-card strong {
+    font-size: 16px;
+    line-height: 1.22;
+  }
+  .fit-studio.product-rules .fit-preview-card p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .fit-studio.product-rules .fit-telemetry {
+    gap: 6px;
+  }
+  .fit-studio.product-rules .fit-telemetry span {
+    padding: 9px 10px;
   }
   .sample-actions { justify-content: flex-start; }
   .sample-spotlight {
@@ -10421,7 +10477,7 @@ function activateFitPersona(button, scrollToButton = false) {
   if (fitPriceNode) fitPriceNode.textContent = button.dataset["fitPrice" + suffix] || "";
   if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
   if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
-  if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";
+  if (fitSourceNode) fitSourceNode.textContent = button.dataset["fitSource" + suffix] || "";
   if (fitSignalNode) fitSignalNode.textContent = button.dataset["fitSignal" + suffix] || "";
   if (fitPreviewCopyNode) fitPreviewCopyNode.textContent = button.dataset["fitCopy" + suffix] || "";
   if (fitStrengthNode) fitStrengthNode.textContent = button.dataset["fitRule" + suffix] || "";
