@@ -902,6 +902,46 @@ const zhMotionProof = `<section class="motion-proof" id="workflow-motion" aria-l
       </div>
       <img class="motion-preview" src="../signal-demo.svg" alt="TrendFoundry 动态工作流：排序信号、整理选题、打包样品并准备订单" width="960" height="540">
     </section>`;
+const productProof = `<section class="product-proof" id="product-proof" aria-label="Product proof preview">
+      <div class="product-proof-copy">
+        ${dual("Proof before purchase", "购买前证明", "p", ' class="section-label"')}
+        ${dual("Inspect the sample before choosing a tier.", "先看真实样品，再决定买哪一档。", "h2")}
+        ${dual("The board, source links, scores, and script structure live in the same sample, so quality is visible before a buyer orders.", "看板、来源、评分和脚本结构都在同一份样品里，购买前就能判断质量。", "p")}
+        <div class="product-proof-actions">
+          <a class="action primary" href="./public-sample.en.md">${dual("Open sample", "打开样品")}</a>
+          <a class="action" href="./issues/latest.html">${dual("View latest issue", "查看最新期")}</a>
+        </div>
+      </div>
+      <figure class="product-proof-visual">
+        <img src="./signal-board.png" alt="TrendFoundry product signal board preview" width="1200" height="760">
+        <figcaption>${dual("Current issue", "当前期")} · ${dual("verifiable", "可验证")}</figcaption>
+      </figure>
+      <div class="product-proof-points" aria-label="Proof points">
+        <span><strong>${dual("Board", "看板")}</strong>${dual("Source and score", "来源与评分")}</span>
+        <span><strong>${dual("Sample", "样品")}</strong>Markdown + CSV</span>
+        <span><strong>${dual("Script", "脚本")}</strong>${dual("Ready to record", "可直接开录")}</span>
+      </div>
+    </section>`;
+const zhProductProof = `<section class="product-proof" id="product-proof" aria-label="Product proof preview">
+      <div class="product-proof-copy">
+        <p class="section-label">购买前证明</p>
+        <h2>先看真实样品，再决定买哪一档。</h2>
+        <p>看板、来源、评分和脚本结构都在同一份样品里，购买前就能判断质量。</p>
+        <div class="product-proof-actions">
+          <a class="action primary" href="../public-sample.zh-CN.md">打开样品</a>
+          <a class="action" href="../issues/latest.html">查看最新期</a>
+        </div>
+      </div>
+      <figure class="product-proof-visual">
+        <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
+        <figcaption>当前期 · 可验证</figcaption>
+      </figure>
+      <div class="product-proof-points" aria-label="Proof points">
+        <span><strong>看板</strong>来源与评分</span>
+        <span><strong>样品</strong>Markdown + CSV</span>
+        <span><strong>脚本</strong>可直接开录</span>
+      </div>
+    </section>`;
 const decisionFlowItems = [
   ["01", "Signal", "信号", "GitHub, YouTube, Bilibili, HN, arXiv", "GitHub、YouTube、B站、HN、arXiv", "Track public changes worth checking.", "追踪值得确认的公开变化。"],
   ["02", "Filter", "筛选", "Evidence, novelty, risk", "证据、新鲜度、风险", "Keep only ideas with sources, angles, and recording fit.", "只保留有来源、有角度、能开录的机会。"],
@@ -2702,9 +2742,7 @@ const html = `<!doctype html>
       </div>
       ${sampleSpotlight}
     </section>
-    ${socialProof}
-    ${motionProof}
-    ${signalRunway}
+    ${productProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         ${dual("Sample signals", "样品信号", "p", ' class="section-label"')}
@@ -2841,16 +2879,7 @@ const zhHtml = `<!doctype html>
       </div>
       ${zhSampleSpotlight}
     </section>
-    <section class="visual-proof" aria-label="Product preview">
-      <div>
-        <p class="section-label">产品预览</p>
-        <h2>这是一张真实信号看板，不是只有文字的销售页。</h2>
-        <p>看板图来自当前排序期次，买家打开样品文件前就能看到来源入口、评分和选题密度。</p>
-      </div>
-      <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
-    </section>
-    ${zhMotionProof}
-    ${zhSignalRunway}
+    ${zhProductProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         <p class="section-label">样品信号</p>
@@ -4916,9 +4945,89 @@ main {
 .fit-studio.product-rules .fit-telemetry span {
   background: rgba(247,249,252,0.72);
 }
+.product-proof {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding: 6px 0 44px;
+  margin-bottom: 34px;
+}
+.product-proof-copy h2 {
+  max-width: 700px;
+  margin: 0 0 12px;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1.02;
+}
+.product-proof-copy p:not(.section-label) {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.product-proof-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.product-proof-visual {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 18px;
+  padding: 10px;
+  background: rgba(255,255,255,0.76);
+  box-shadow: 0 30px 80px rgba(17,17,20,0.09);
+}
+.product-proof-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.product-proof-visual figcaption {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(255,255,255,0.88);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  backdrop-filter: blur(16px);
+}
+.product-proof-points {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.product-proof-points span {
+  display: grid;
+  gap: 5px;
+  min-height: 72px;
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: rgba(247,249,252,0.68);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+.product-proof-points strong {
+  color: var(--ink);
+  font-size: 17px;
+}
 .pricing,
 .sample-preview,
 .fit-studio,
+.product-proof,
 .visual-proof,
 .motion-proof,
 .signal-runway,
@@ -8747,6 +8856,7 @@ input[type="email"] {
   .offer,
   .fit-studio,
   .sample-preview,
+  .product-proof,
   .visual-proof,
   .motion-proof,
   .signal-runway,
@@ -9032,6 +9142,27 @@ input[type="email"] {
   }
   .opportunity-focus .action {
     width: 100%;
+  }
+  .product-proof {
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+  .product-proof-copy h2 {
+    font-size: clamp(32px, 9vw, 44px);
+  }
+  .product-proof-copy p:not(.section-label) {
+    font-size: 16px;
+  }
+  .product-proof-points {
+    grid-template-columns: 1fr;
+  }
+  .product-proof-visual {
+    border-radius: 14px;
+    padding: 8px;
+  }
+  .product-proof-visual figcaption {
+    top: 14px;
+    left: 14px;
   }
   .visual-proof img { justify-self: start; max-width: 100%; }
   .motion-preview { max-width: 100%; }
@@ -10038,6 +10169,7 @@ body.is-scrolled .local-nav {
   filter: blur(0);
 }
 .sample-preview,
+.product-proof,
 .visual-proof,
 .motion-proof,
 .signal-runway,

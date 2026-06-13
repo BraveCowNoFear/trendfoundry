@@ -202,9 +202,8 @@ async function checkLocal() {
   assertCheck("site has Chinese product copy", siteIndex.includes(homeChineseTitle) && siteIndex.includes(emailOrderZh));
   assertCheck("site sample signal shelf is localized", siteIndex.includes('class="signal-shelf"') && siteIndex.includes("先看 3 条，再决定买哪一档。") && siteIndex.includes("单期 = 先试一包"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
-  assertCheck("site has visual preview section", siteIndex.includes('class="visual-proof"'));
+  assertCheck("site has consolidated product proof", siteIndex.includes('id="product-proof"') && siteIndex.includes("Proof before purchase") && !siteIndex.includes('class="visual-proof"') && !siteIndex.includes('class="motion-proof"') && !siteIndex.includes('class="signal-runway"'));
   assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
-  assertCheck("site has animated workflow preview", siteIndex.includes("signal-demo.svg") && siteIndex.includes('class="motion-proof"') && siteIndex.includes('class="motion-preview"'));
   assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
   assertCheck("site links ready-to-record script", siteIndex.includes("ready-to-record-script.md"));
   assertCheck("site has simplified checkout close", siteIndex.includes('class="checkout-close"') && siteIndex.includes("Inspect first. Order when it fits."));
@@ -228,7 +227,7 @@ async function checkLocal() {
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
   assertCheck("Chinese landing page has product signal board", zhIndex.includes("../signal-board.png") && zhIndex.includes('class="product-visual"'));
-  assertCheck("Chinese landing page has animated workflow preview", zhIndex.includes("../signal-demo.svg") && zhIndex.includes('class="motion-proof"'));
+  assertCheck("Chinese landing page has consolidated product proof", zhIndex.includes('id="product-proof"') && zhIndex.includes("购买前证明") && !zhIndex.includes('class="visual-proof"') && !zhIndex.includes('class="motion-proof"') && !zhIndex.includes('class="signal-runway"'));
   assertCheck("Chinese landing page links downloadable sample pack", zhIndex.includes("../trendfoundry-free-sample-pack.zip") && zhIndex.includes("下载样品包"));
 
   const orderIndex = await readText(path.join(root, "site", "order", "index.html"));
@@ -549,7 +548,7 @@ async function checkOnline() {
   assertCheck("online index has OG image", index.text.includes("og-image.png"));
   assertCheck("online index has email CTA", index.text.includes("Email order"));
   assertCheck("online index has product signal board", index.text.includes("signal-board.png") && index.text.includes('class="product-visual"'));
-  assertCheck("online index has animated workflow preview", index.text.includes("signal-demo.svg") && index.text.includes('class="motion-proof"'));
+  assertCheck("online index has consolidated product proof", index.text.includes('id="product-proof"') && index.text.includes("Proof before purchase") && !index.text.includes('class="visual-proof"') && !index.text.includes('class="motion-proof"') && !index.text.includes('class="signal-runway"'));
   assertCheck("online index links downloadable sample pack", index.text.includes("trendfoundry-free-sample-pack.zip"));
 
   const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);
