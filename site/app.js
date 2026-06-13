@@ -40,6 +40,7 @@ const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
 const fitPreviewCopyNode = document.querySelector("#fit-preview-copy");
 const fitMatrixColumns = [...document.querySelectorAll("[data-matrix-column]")];
+const heroTierButtons = [...document.querySelectorAll("[data-hero-tier]")];
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
 const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
@@ -107,6 +108,11 @@ function updateSelectedTier(card, scrollToCard = false) {
     const active = railButton.dataset.tierJump === card.dataset.tierCard;
     railButton.classList.toggle("active", active);
     railButton.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  for (const heroButton of heroTierButtons) {
+    const active = heroButton.dataset.heroTier === card.dataset.tierCard;
+    heroButton.classList.toggle("is-selected", active);
+    heroButton.setAttribute("aria-pressed", active ? "true" : "false");
   }
   for (const button of tierSelectButtons) {
     const active = button.dataset.tierSelect === card.dataset.tierCard;
@@ -347,6 +353,18 @@ for (const button of tierRailButtons) {
   });
   if (finePointer) button.addEventListener("pointerenter", () => {
     const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card);
+  });
+}
+for (const button of heroTierButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.heroTier);
+    updateSelectedTier(card, false);
+    const pricingNode = document.querySelector("#pricing");
+    if (pricingNode?.scrollIntoView) pricingNode.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+  if (finePointer) button.addEventListener("pointerenter", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.heroTier);
     updateSelectedTier(card);
   });
 }

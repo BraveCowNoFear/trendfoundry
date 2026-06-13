@@ -411,19 +411,44 @@ h1 {
   max-width: 590px;
   margin-top: 24px;
 }
-.hero-metrics > span {
+.hero-tier-card {
   display: grid;
-  gap: 4px;
-  min-height: 76px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 88px;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: var(--radius);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.68);
   color: var(--muted);
-  font-size: 12px;
+  font: inherit;
   font-weight: 750;
+  text-align: left;
+  cursor: pointer;
   box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
   backdrop-filter: blur(20px);
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.hero-tier-card:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.42);
+  outline-offset: 3px;
+}
+.hero-tier-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.hero-tier-copy strong {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.15;
+}
+.hero-tier-copy small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.2;
 }
 .hero-price {
   display: flex;
@@ -436,14 +461,14 @@ h1 {
   font-style: normal;
   font-weight: 850;
 }
-.hero-metrics strong {
+.hero-price strong {
   color: var(--ink);
   font-size: 34px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   transition: transform 180ms ease;
 }
-.hero-metrics.is-counting strong {
+.hero-metrics.is-counting .hero-price strong {
   transform: translateY(-1px);
 }
 .hero-actions,
@@ -6090,13 +6115,20 @@ input[type="email"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 100%;
   }
-  .hero-metrics > span {
+  .hero-tier-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
     min-height: 62px;
     padding: 9px;
-    font-size: 11px;
   }
-  .hero-metrics strong {
+  .hero-price strong {
     font-size: 26px;
+  }
+  .hero-tier-copy strong {
+    font-size: 12px;
+  }
+  .hero-tier-copy small {
+    font-size: 11px;
   }
   .hero-price em {
     font-size: 13px;
@@ -6204,7 +6236,7 @@ input[type="email"] {
 }
 .topbar .brand-mark,
 .topbar .language-switch,
-.topbar .hero-metrics > span,
+.topbar .hero-tier-card,
 .topbar .source-mix-panel,
 .topbar .board-summary li {
   border-color: rgba(255,255,255,0.18);
@@ -6222,14 +6254,25 @@ input[type="email"] {
   background: rgba(255,255,255,0.9);
   color: #111114;
 }
-.topbar .hero-metrics > span {
-  transform: translateY(0);
-  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+.topbar .hero-tier-card {
+  color: rgba(255,255,255,0.74);
 }
-.topbar .hero-metrics > span:hover {
+.topbar .hero-tier-card:hover,
+.topbar .hero-tier-card.is-selected,
+.topbar .hero-tier-card[aria-pressed="true"] {
   transform: translateY(-4px);
   border-color: rgba(255,255,255,0.34);
   background: rgba(255,255,255,0.16);
+}
+.topbar .hero-tier-card.is-selected,
+.topbar .hero-tier-card[aria-pressed="true"] {
+  box-shadow: 0 22px 54px rgba(0,113,227,0.2), inset 0 0 0 1px rgba(255,255,255,0.2);
+}
+.topbar .hero-tier-copy strong {
+  color: #fff;
+}
+.topbar .hero-tier-copy small {
+  color: rgba(245,245,247,0.82);
 }
 .topbar .action {
   border-color: rgba(255,255,255,0.2);

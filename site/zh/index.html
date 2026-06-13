@@ -33,11 +33,27 @@
       </div>
       <h1>AI/开发者选题包，直接开录。</h1>
       <p class="sub">TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。</p>
-      <div class="hero-metrics" aria-label="Product tiers">
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>单期样品</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>周更情报</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>垂直定制</span>
-      </div>
+      <div class="hero-metrics hero-tier-selector" aria-label="产品分档选择器">
+    <button class="hero-tier-card" type="button" data-hero-tier="sample-issue" aria-pressed="false">
+      <span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Sample issue" data-i18n-zh="单期样品">单期样品</strong>
+        <small data-i18n-en="Test once" data-i18n-zh="先试一次">先试一次</small>
+      </span>
+    </button><button class="hero-tier-card is-selected" type="button" data-hero-tier="weekly-pipeline" aria-pressed="true">
+      <span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Weekly pipeline" data-i18n-zh="周更情报">周更情报</strong>
+        <small data-i18n-en="Keep queue alive" data-i18n-zh="保持选题队列">保持选题队列</small>
+      </span>
+    </button><button class="hero-tier-card" type="button" data-hero-tier="custom-niche-desk" aria-pressed="false">
+      <span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Custom niche desk" data-i18n-zh="垂直定制">垂直定制</strong>
+        <small data-i18n-en="Own a niche" data-i18n-zh="占住一个垂类">占住一个垂类</small>
+      </span>
+    </button>
+  </div>
       <div class="hero-actions">
         <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
         <a class="action strong" href="#pricing">选择产品档位</a>
@@ -91,12 +107,11 @@
   <nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-word">TrendFoundry</span></span></a>
     <div class="local-links">
-      <a href="#fit-studio" data-local-link="fit-studio">适配</a>
+      <a href="#decision-flow" data-local-link="decision-flow">怎么做</a>
       <a href="#sample" data-local-link="sample">样品</a>
-      <a href="#decision-flow" data-local-link="decision-flow">系统</a>
+      <a href="#fit-studio" data-local-link="fit-studio">分档</a>
       <a href="#opportunities" data-local-link="opportunities">信号</a>
-      <a href="#planning-calculator" data-local-link="planning-calculator">估算</a>
-      <a href="#pricing" data-local-link="pricing">定价</a>
+      <a href="#pricing" data-local-link="pricing">价格</a>
     </div>
     <a class="local-cta" href="../order/">下单</a>
     <span class="local-progress" aria-hidden="true"></span>

@@ -36,11 +36,27 @@
       </div>
       <h1 data-i18n-en="Source-backed video ideas, ready to record." data-i18n-zh="AI/开发者选题包，直接开录。">Source-backed video ideas, ready to record.</h1>
       <p class="sub" data-i18n-en="TrendFoundry scans public signals and turns them into ranked ideas, proof links, CSV, and scripts. Choose one sample, a weekly pipeline, or a custom niche desk." data-i18n-zh="TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。">TrendFoundry scans public signals and turns them into ranked ideas, proof links, CSV, and scripts. Choose one sample, a weekly pipeline, or a custom niche desk.</p>
-      <div class="hero-metrics" aria-label="Product tiers">
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span><span data-i18n-en="Sample issue" data-i18n-zh="单期样品">Sample issue</span></span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span><span data-i18n-en="Weekly pipeline" data-i18n-zh="周更情报">Weekly pipeline</span></span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span><span data-i18n-en="Custom niche desk" data-i18n-zh="垂直定制">Custom niche desk</span></span>
-      </div>
+      <div class="hero-metrics hero-tier-selector" aria-label="Product tier selector">
+    <button class="hero-tier-card" type="button" data-hero-tier="sample-issue" aria-pressed="false">
+      <span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Sample issue" data-i18n-zh="单期样品">Sample issue</strong>
+        <small data-i18n-en="Test once" data-i18n-zh="先试一次">Test once</small>
+      </span>
+    </button><button class="hero-tier-card is-selected" type="button" data-hero-tier="weekly-pipeline" aria-pressed="true">
+      <span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Weekly pipeline" data-i18n-zh="周更情报">Weekly pipeline</strong>
+        <small data-i18n-en="Keep queue alive" data-i18n-zh="保持选题队列">Keep queue alive</small>
+      </span>
+    </button><button class="hero-tier-card" type="button" data-hero-tier="custom-niche-desk" aria-pressed="false">
+      <span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="Custom niche desk" data-i18n-zh="垂直定制">Custom niche desk</strong>
+        <small data-i18n-en="Own a niche" data-i18n-zh="占住一个垂类">Own a niche</small>
+      </span>
+    </button>
+  </div>
       <div class="hero-actions">
         <a class="action primary" href="./public-sample.en.md"><span data-i18n-en="View free sample" data-i18n-zh="查看免费样品">View free sample</span></a>
         <a class="action strong" href="#pricing"><span data-i18n-en="Choose a pack" data-i18n-zh="选择产品档位">Choose a pack</span></a>
@@ -93,12 +109,11 @@
   <nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-word">TrendFoundry</span></span></a>
     <div class="local-links">
-      <a href="#fit-studio" data-local-link="fit-studio"><span data-i18n-en="Fit" data-i18n-zh="适配">Fit</span></a>
+      <a href="#decision-flow" data-local-link="decision-flow"><span data-i18n-en="How it works" data-i18n-zh="怎么做">How it works</span></a>
       <a href="#sample" data-local-link="sample"><span data-i18n-en="Sample" data-i18n-zh="样品">Sample</span></a>
-      <a href="#decision-flow" data-local-link="decision-flow"><span data-i18n-en="System" data-i18n-zh="系统">System</span></a>
+      <a href="#fit-studio" data-local-link="fit-studio"><span data-i18n-en="Rules" data-i18n-zh="分档">Rules</span></a>
       <a href="#opportunities" data-local-link="opportunities"><span data-i18n-en="Signals" data-i18n-zh="信号">Signals</span></a>
-      <a href="#planning-calculator" data-local-link="planning-calculator"><span data-i18n-en="Estimate" data-i18n-zh="估算">Estimate</span></a>
-      <a href="#pricing" data-local-link="pricing"><span data-i18n-en="Pricing" data-i18n-zh="定价">Pricing</span></a>
+      <a href="#pricing" data-local-link="pricing"><span data-i18n-en="Pricing" data-i18n-zh="价格">Pricing</span></a>
     </div>
     <a class="local-cta" href="./order/"><span data-i18n-en="Order" data-i18n-zh="下单">Order</span></a>
     <span class="local-progress" aria-hidden="true"></span>

@@ -574,6 +574,30 @@ function langAttr(en, zh, name = "placeholder") {
   return `data-i18n-${name}-en="${escapeHtml(en)}" data-i18n-${name}-zh="${escapeHtml(zh)}" ${name}="${escapeHtml(en)}"`;
 }
 
+function heroTierSelector(lang = "en") {
+  const isZh = lang === "zh";
+  return `<div class="hero-metrics hero-tier-selector" aria-label="${isZh ? "产品分档选择器" : "Product tier selector"}">
+    ${pricingTiers
+      .map((tier) => {
+        const selected = tier.featured ? " is-selected" : "";
+        const priceNumber = tier.price.replace(/^\$/, "");
+        const name = isZh ? tier.nameZh : tier.name;
+        const commitment = isZh ? tier.commitmentZh : tier.commitment;
+        return `<button class="hero-tier-card${selected}" type="button" data-hero-tier="${escapeHtml(tierSlug(tier))}" aria-pressed="${tier.featured ? "true" : "false"}">
+      <span class="hero-price"><em>$</em><strong data-hero-count="${escapeHtml(priceNumber)}">${escapeHtml(priceNumber)}</strong></span>
+      <span class="hero-tier-copy">
+        <strong data-i18n-en="${escapeHtml(tier.name)}" data-i18n-zh="${escapeHtml(tier.nameZh)}">${escapeHtml(name)}</strong>
+        <small data-i18n-en="${escapeHtml(tier.commitment)}" data-i18n-zh="${escapeHtml(tier.commitmentZh)}">${escapeHtml(commitment)}</small>
+      </span>
+    </button>`;
+      })
+      .join("")}
+  </div>`;
+}
+
+const heroTiers = heroTierSelector("en");
+const zhHeroTiers = heroTierSelector("zh");
+
 function tierSlug(tier) {
   return tier.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
@@ -1026,12 +1050,11 @@ const zhPlanningCalculator = `<section class="planning-calculator" id="planning-
 const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top">${brandLogo()}</a>
     <div class="local-links">
-      <a href="#fit-studio" data-local-link="fit-studio">${dual("Fit", "适配")}</a>
+      <a href="#decision-flow" data-local-link="decision-flow">${dual("How it works", "怎么做")}</a>
       <a href="#sample" data-local-link="sample">${dual("Sample", "样品")}</a>
-      <a href="#decision-flow" data-local-link="decision-flow">${dual("System", "系统")}</a>
+      <a href="#fit-studio" data-local-link="fit-studio">${dual("Rules", "分档")}</a>
       <a href="#opportunities" data-local-link="opportunities">${dual("Signals", "信号")}</a>
-      <a href="#planning-calculator" data-local-link="planning-calculator">${dual("Estimate", "估算")}</a>
-      <a href="#pricing" data-local-link="pricing">${dual("Pricing", "定价")}</a>
+      <a href="#pricing" data-local-link="pricing">${dual("Pricing", "价格")}</a>
     </div>
     <a class="local-cta" href="./order/">${dual("Order", "下单")}</a>
     <span class="local-progress" aria-hidden="true"></span>
@@ -1039,12 +1062,11 @@ const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigatio
 const zhLocalNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top">${brandLogo()}</a>
     <div class="local-links">
-      <a href="#fit-studio" data-local-link="fit-studio">适配</a>
+      <a href="#decision-flow" data-local-link="decision-flow">怎么做</a>
       <a href="#sample" data-local-link="sample">样品</a>
-      <a href="#decision-flow" data-local-link="decision-flow">系统</a>
+      <a href="#fit-studio" data-local-link="fit-studio">分档</a>
       <a href="#opportunities" data-local-link="opportunities">信号</a>
-      <a href="#planning-calculator" data-local-link="planning-calculator">估算</a>
-      <a href="#pricing" data-local-link="pricing">定价</a>
+      <a href="#pricing" data-local-link="pricing">价格</a>
     </div>
     <a class="local-cta" href="../order/">下单</a>
     <span class="local-progress" aria-hidden="true"></span>
@@ -2612,11 +2634,7 @@ const html = `<!doctype html>
       </div>
       ${dual("Source-backed video ideas, ready to record.", "AI/开发者选题包，直接开录。", "h1")}
       ${dual("TrendFoundry scans public signals and turns them into ranked ideas, proof links, CSV, and scripts. Choose one sample, a weekly pipeline, or a custom niche desk.", "TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。", "p", ' class="sub"')}
-      <div class="hero-metrics" aria-label="Product tiers">
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>${dual("Sample issue", "单期样品")}</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>${dual("Weekly pipeline", "周更情报")}</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>${dual("Custom niche desk", "垂直定制")}</span>
-      </div>
+      ${heroTiers}
       <div class="hero-actions">
         <a class="action primary" href="./public-sample.en.md">${dual("View free sample", "查看免费样品")}</a>
         <a class="action strong" href="#pricing">${dual("Choose a pack", "选择产品档位")}</a>
@@ -2766,11 +2784,7 @@ const zhHtml = `<!doctype html>
       </div>
       <h1>AI/开发者选题包，直接开录。</h1>
       <p class="sub">TrendFoundry 从公开信号里筛选机会，交付排序选题、来源证据、CSV 和脚本。产品只分三档：单期样品、周更情报、垂直定制。</p>
-      <div class="hero-metrics" aria-label="Product tiers">
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="9">9</strong></span>单期样品</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="19">19</strong></span>周更情报</span>
-        <span><span class="hero-price"><em>$</em><strong data-hero-count="49">49</strong></span>垂直定制</span>
-      </div>
+      ${zhHeroTiers}
       <div class="hero-actions">
         <a class="action primary" href="../public-sample.zh-CN.md">查看免费样品</a>
         <a class="action strong" href="#pricing">选择产品档位</a>
@@ -3880,19 +3894,44 @@ h1 {
   max-width: 590px;
   margin-top: 24px;
 }
-.hero-metrics > span {
+.hero-tier-card {
   display: grid;
-  gap: 4px;
-  min-height: 76px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 88px;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: var(--radius);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.68);
   color: var(--muted);
-  font-size: 12px;
+  font: inherit;
   font-weight: 750;
+  text-align: left;
+  cursor: pointer;
   box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
   backdrop-filter: blur(20px);
+  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.hero-tier-card:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.42);
+  outline-offset: 3px;
+}
+.hero-tier-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.hero-tier-copy strong {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.15;
+}
+.hero-tier-copy small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.2;
 }
 .hero-price {
   display: flex;
@@ -3905,14 +3944,14 @@ h1 {
   font-style: normal;
   font-weight: 850;
 }
-.hero-metrics strong {
+.hero-price strong {
   color: var(--ink);
   font-size: 34px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   transition: transform 180ms ease;
 }
-.hero-metrics.is-counting strong {
+.hero-metrics.is-counting .hero-price strong {
   transform: translateY(-1px);
 }
 .hero-actions,
@@ -9559,13 +9598,20 @@ input[type="email"] {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 100%;
   }
-  .hero-metrics > span {
+  .hero-tier-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
     min-height: 62px;
     padding: 9px;
-    font-size: 11px;
   }
-  .hero-metrics strong {
+  .hero-price strong {
     font-size: 26px;
+  }
+  .hero-tier-copy strong {
+    font-size: 12px;
+  }
+  .hero-tier-copy small {
+    font-size: 11px;
   }
   .hero-price em {
     font-size: 13px;
@@ -9673,7 +9719,7 @@ input[type="email"] {
 }
 .topbar .brand-mark,
 .topbar .language-switch,
-.topbar .hero-metrics > span,
+.topbar .hero-tier-card,
 .topbar .source-mix-panel,
 .topbar .board-summary li {
   border-color: rgba(255,255,255,0.18);
@@ -9691,14 +9737,25 @@ input[type="email"] {
   background: rgba(255,255,255,0.9);
   color: #111114;
 }
-.topbar .hero-metrics > span {
-  transform: translateY(0);
-  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease;
+.topbar .hero-tier-card {
+  color: rgba(255,255,255,0.74);
 }
-.topbar .hero-metrics > span:hover {
+.topbar .hero-tier-card:hover,
+.topbar .hero-tier-card.is-selected,
+.topbar .hero-tier-card[aria-pressed="true"] {
   transform: translateY(-4px);
   border-color: rgba(255,255,255,0.34);
   background: rgba(255,255,255,0.16);
+}
+.topbar .hero-tier-card.is-selected,
+.topbar .hero-tier-card[aria-pressed="true"] {
+  box-shadow: 0 22px 54px rgba(0,113,227,0.2), inset 0 0 0 1px rgba(255,255,255,0.2);
+}
+.topbar .hero-tier-copy strong {
+  color: #fff;
+}
+.topbar .hero-tier-copy small {
+  color: rgba(245,245,247,0.82);
 }
 .topbar .action {
   border-color: rgba(255,255,255,0.2);
@@ -9885,6 +9942,7 @@ const fitProgressLabel = document.querySelector("#fit-progress-label");
 const fitSignalLink = document.querySelector("#fit-signal-link");
 const fitPreviewCopyNode = document.querySelector("#fit-preview-copy");
 const fitMatrixColumns = [...document.querySelectorAll("[data-matrix-column]")];
+const heroTierButtons = [...document.querySelectorAll("[data-hero-tier]")];
 const tierCards = [...document.querySelectorAll("[data-tier-card]")];
 const tierSelectButtons = [...document.querySelectorAll("[data-tier-select]")];
 const tierRailButtons = [...document.querySelectorAll("[data-tier-jump]")];
@@ -9952,6 +10010,11 @@ function updateSelectedTier(card, scrollToCard = false) {
     const active = railButton.dataset.tierJump === card.dataset.tierCard;
     railButton.classList.toggle("active", active);
     railButton.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  for (const heroButton of heroTierButtons) {
+    const active = heroButton.dataset.heroTier === card.dataset.tierCard;
+    heroButton.classList.toggle("is-selected", active);
+    heroButton.setAttribute("aria-pressed", active ? "true" : "false");
   }
   for (const button of tierSelectButtons) {
     const active = button.dataset.tierSelect === card.dataset.tierCard;
@@ -10192,6 +10255,18 @@ for (const button of tierRailButtons) {
   });
   if (finePointer) button.addEventListener("pointerenter", () => {
     const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.tierJump);
+    updateSelectedTier(card);
+  });
+}
+for (const button of heroTierButtons) {
+  button.addEventListener("click", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.heroTier);
+    updateSelectedTier(card, false);
+    const pricingNode = document.querySelector("#pricing");
+    if (pricingNode?.scrollIntoView) pricingNode.scrollIntoView({ block: "start", behavior: "smooth" });
+  });
+  if (finePointer) button.addEventListener("pointerenter", () => {
+    const card = tierCards.find((item) => item.dataset.tierCard === button.dataset.heroTier);
     updateSelectedTier(card);
   });
 }
