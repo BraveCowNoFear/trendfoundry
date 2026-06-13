@@ -2761,9 +2761,9 @@ const html = `<!doctype html>
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
-          ${dual("Offer", "购买选题包", "p", ' class="section-label"')}
-          ${dual("Choose by commitment.", "按投入程度选择。", "h2")}
-          ${dual("Start with one pack, keep a weekly queue, or ask for a narrow desk. Every tier uses the same proof-first format; only depth and cadence change.", "先买一份测试，持续更新选周更，需要窄垂类就定制。每档都沿用同一套证据优先格式，只改变深度和节奏。", "p")}
+          ${dual("Pricing", "定价", "p", ' class="section-label"')}
+          ${dual("Confirm your intelligence pack.", "确认你的情报包。", "h2")}
+          ${dual("The rules are already above. Here you only confirm the tier, price, and order route.", "前面已经说明怎么选档。这里确认档位、价格和下单路径。", "p")}
         </div>
         <div class="pricing-proof-points" aria-label="Offer division rules">
           ${dual("Test once", "先试一次", "span")}
@@ -2772,7 +2772,8 @@ const html = `<!doctype html>
         </div>
       </div>
       <div class="pricing-workbench">
-        <div class="tier-grid">${pricingCards}</div>
+        ${pricingRail}
+        <div class="tier-grid pricing-data-store" aria-hidden="true">${pricingCards}</div>
         ${pricingChooser}
       </div>
     </section>
@@ -2898,9 +2899,9 @@ const zhHtml = `<!doctype html>
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
-          <p class="section-label">购买选题包</p>
-          <h2>按投入程度选择。</h2>
-          <p>先买一份测试，持续更新选周更，需要窄垂类就定制。每档都沿用同一套证据优先格式，只改变深度和节奏。</p>
+          <p class="section-label">定价</p>
+          <h2>确认你的情报包。</h2>
+          <p>前面已经说明怎么选档。这里确认档位、价格和下单路径。</p>
         </div>
         <div class="pricing-proof-points" aria-label="产品划分规则">
           <span>先试一次</span>
@@ -2909,7 +2910,8 @@ const zhHtml = `<!doctype html>
         </div>
       </div>
       <div class="pricing-workbench">
-        <div class="tier-grid">${pricingCards}</div>
+        ${pricingRail}
+        <div class="tier-grid pricing-data-store" aria-hidden="true">${pricingCards}</div>
         ${pricingChooser}
       </div>
     </section>
@@ -5827,8 +5829,8 @@ main {
   line-height: 1.5;
 }
 .pricing-studio {
-  gap: 20px;
-  padding-top: clamp(28px, 5vw, 58px);
+  gap: 16px;
+  padding-top: clamp(24px, 4vw, 42px);
   border-top: 1px solid var(--line);
 }
 .pricing-studio .section-head {
@@ -5836,10 +5838,15 @@ main {
   align-items: start;
 }
 .pricing-studio .section-head h2 {
-  max-width: 760px;
-  font-size: clamp(38px, 5.2vw, 64px);
-  line-height: 1;
+  max-width: 620px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.05;
   letter-spacing: 0;
+}
+.pricing-studio .section-head p:not(.section-label) {
+  max-width: 560px;
+  font-size: 15px;
+  line-height: 1.45;
 }
 .pricing-proof-points {
   display: flex;
@@ -5864,9 +5871,9 @@ main {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   border: 1px solid rgba(17, 17, 20, 0.16);
-  border-radius: 8px;
+  border-radius: 14px;
   background: rgba(255,255,255,0.82);
-  box-shadow: 0 16px 44px rgba(17, 17, 20, 0.06);
+  box-shadow: 0 14px 36px rgba(17, 17, 20, 0.055);
   overflow: hidden;
 }
 .pricing-rail::after {
@@ -5884,10 +5891,10 @@ main {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 2px 14px;
   align-items: center;
-  min-height: 86px;
+  min-height: 76px;
   border: 0;
   border-right: 1px solid rgba(17, 17, 20, 0.1);
-  padding: 16px 18px;
+  padding: 13px 16px;
   background: transparent;
   color: var(--ink);
   font: inherit;
@@ -5911,7 +5918,7 @@ main {
   font-weight: 850;
 }
 .pricing-rail-option strong {
-  font-size: 19px;
+  font-size: 17px;
   line-height: 1.1;
 }
 .pricing-rail-option small {
@@ -5944,8 +5951,11 @@ main {
 .pricing-workbench {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 28px);
+  gap: 12px;
   align-items: start;
+}
+.pricing-studio .pricing-data-store {
+  display: none;
 }
 .tier-grid {
   display: grid;
@@ -6103,14 +6113,14 @@ main {
 .pricing-studio .pricing-chooser {
   position: relative;
   top: auto;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(190px, 0.28fr);
   min-height: 0;
   margin-top: 0;
   border-color: rgba(17, 17, 20, 0.1);
-  border-radius: 8px;
-  padding: clamp(18px, 2.5vw, 28px);
+  border-radius: 14px;
+  padding: clamp(14px, 2.2vw, 20px);
   background: rgba(255,255,255,0.86);
-  box-shadow: 0 18px 48px rgba(17, 17, 20, 0.08);
+  box-shadow: 0 16px 42px rgba(17, 17, 20, 0.07);
   overflow: hidden;
 }
 .pricing-studio .pricing-chooser::before {
@@ -6133,8 +6143,8 @@ main {
   color: var(--accent);
   font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 .pricing-chooser h3 {
   margin: 0 0 6px;
@@ -6142,7 +6152,7 @@ main {
   line-height: 1.12;
 }
 .pricing-studio .pricing-chooser h3 {
-  font-size: clamp(28px, 3.4vw, 42px);
+  font-size: clamp(24px, 2.8vw, 34px);
   letter-spacing: 0;
 }
 .pricing-chooser p:not(.pricing-chooser-label) {
@@ -6153,7 +6163,7 @@ main {
 }
 .selected-tier-commitment {
   width: fit-content;
-  margin-top: 10px !important;
+  margin-top: 8px !important;
   border-radius: 999px;
   padding: 6px 10px;
   background: #111114;
@@ -6169,8 +6179,8 @@ main {
 }
 .pricing-studio .pricing-configurator {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 22px;
+  gap: 8px;
+  margin-top: 14px;
   border-top: 0;
 }
 .pricing-configurator > div {
@@ -6189,7 +6199,7 @@ main {
   min-height: 0;
   border: 1px solid rgba(17, 17, 20, 0.07);
   border-radius: 8px;
-  padding: 12px;
+  padding: 10px;
   background: rgba(247,248,250,0.64);
 }
 .pricing-configurator span {
@@ -6233,10 +6243,10 @@ main {
 .pricing-studio .pricing-chooser-action strong {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 12px;
   color: var(--accent);
-  font-size: clamp(42px, 6vw, 64px);
+  font-size: clamp(34px, 4.8vw, 50px);
 }
 .pricing-chooser-action small {
   color: var(--muted);
@@ -9432,26 +9442,43 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .pricing-studio .section-head h2 {
-    font-size: clamp(34px, 11vw, 52px);
+    font-size: clamp(28px, 8vw, 38px);
+  }
+  .pricing-studio .section-head p:not(.section-label) {
+    font-size: 14px;
   }
   .pricing-proof-points {
-    max-width: none;
-    justify-content: start;
-  }
-  .pricing-rail {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(230px, 78vw);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .pricing-rail::-webkit-scrollbar {
     display: none;
   }
+  .pricing-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: hidden;
+  }
   .pricing-rail-option {
-    scroll-snap-align: start;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    min-height: 88px;
+    padding: 10px 8px;
+    text-align: left;
+  }
+  .pricing-rail-option > span {
+    width: auto;
+    height: auto;
+    place-items: start;
+    border: 0;
+    font-size: 11px;
+  }
+  .pricing-rail-option strong {
+    font-size: 14px;
+  }
+  .pricing-rail-option small {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  .pricing-rail-option em {
+    grid-column: 1;
+    padding: 2px 6px;
+    font-size: 10px;
   }
   .pricing-workbench {
     grid-template-columns: 1fr;
@@ -9464,7 +9491,8 @@ input[type="email"] {
     top: auto;
     grid-template-columns: 1fr;
     min-height: 0;
-    border-radius: 8px;
+    border-radius: 14px;
+    padding: 12px;
   }
   .pricing-studio .tier-grid {
     display: grid;
@@ -9473,6 +9501,9 @@ input[type="email"] {
     grid-template-columns: 1fr;
     overflow: visible;
     padding: 0;
+  }
+  .pricing-studio .pricing-data-store {
+    display: none;
   }
   .pricing-studio .tier {
     min-height: 0;
@@ -9484,17 +9515,21 @@ input[type="email"] {
   .pricing-studio .tier-price {
     font-size: 30px;
   }
-  .pricing-configurator {
+  .pricing-studio .pricing-configurator {
     grid-template-columns: 1fr;
+    gap: 6px;
+    margin-top: 10px;
   }
-  .pricing-configurator > div {
+  .pricing-studio .pricing-configurator > div {
     min-height: 0;
+    padding: 8px 9px;
   }
   .pricing-chooser-action {
     justify-items: stretch;
   }
-  .pricing-chooser-action strong {
-    font-size: 24px;
+  .pricing-studio .pricing-chooser-action strong {
+    justify-content: flex-start;
+    font-size: 30px;
   }
   .delivery-lab {
     gap: 16px;
