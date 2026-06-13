@@ -205,6 +205,34 @@ function fromSendBatch(rows) {
   }));
 }
 
+function fromOutreachRoutes(rows) {
+  const byReview = new Map();
+  for (const row of rows) {
+    const reviewId = compact(row.review_id);
+    if (!reviewId) continue;
+    const previous = byReview.get(reviewId);
+    const previousRank = previous?.confidence === "high" ? 2 : previous?.confidence === "medium" ? 1 : 0;
+    const rowRank = row.confidence === "high" ? 2 : row.confidence === "medium" ? 1 : 0;
+    if (!previous || rowRank > previousRank) byReview.set(reviewId, row);
+  }
+  return [...byReview.values()].map((row, index) => action({
+    action_id: `contact-research-${index + 1}-${compact(row.review_id, "review")}`,
+    priority: 76 - index,
+    lane: "contact_research",
+    status: compact(row.confidence) === "high" ? "route_candidate_high_confidence" : "route_candidate_needs_verification",
+    title: `Verify public contact route before sending: ${compact(row.creator, row.review_id)}`,
+    actor: compact(row.creator, "private prospect"),
+    offer_sku: "",
+    campaign_id: compact(row.campaign_id),
+    variant_id: "",
+    source_ref: compact(row.route_url),
+    next_action: compact(row.next_check, "verify public contact path; keep campaign unsent if no verified recipient exists"),
+    review_file: "dist/content-outreach-routes/routes.md",
+    command: "",
+    safety_note: "route candidates are not permission to send; do not guess emails and do not send until a verified public recipient or platform-native contact path exists"
+  }));
+}
+
 function fromOutreachFollowups(rows) {
   return rows.map((row, index) => action({
     action_id: compact(row.followup_id, `followup-${index + 1}`),
@@ -336,6 +364,7 @@ const retentionRows = parseCsv(await readText("dist/content-subscription-retenti
 const outreachRows = parseCsv(await readText("dist/content-outreach-review/review-board.csv"));
 const outreachGateRows = parseCsv(await readText("dist/content-outreach-gate/checks.csv"));
 const sendBatchRows = parseCsv(await readText("dist/content-send-batch/send-batch.csv"));
+const outreachRouteRows = parseCsv(await readText("dist/content-outreach-routes/routes.csv"));
 const outreachFollowupRows = parseCsv(await readText("dist/content-outreach-followups/followups.csv"));
 const closeRows = parseCsv(await readText("dist/content-close-pack/today-close-queue.csv"));
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
@@ -348,6 +377,7 @@ const actions = [
   ...fromCustomerSuccess(customerRows),
   ...fromRetention(retentionRows),
   ...fromOutreachFollowups(outreachFollowupRows),
+  ...fromOutreachRoutes(outreachRouteRows),
   ...fromSendBatch(sendBatchRows),
   ...fromOutreachReview(outreachRows, passedGateIds),
   ...fromCloseQueue(closeRows, outreachIds),
@@ -367,6 +397,7 @@ const manifest = {
     customerRows: customerRows.length,
     retentionRows: retentionRows.length,
     outreachFollowupRows: outreachFollowupRows.length,
+    outreachRouteRows: outreachRouteRows.length,
     outreachRows: outreachRows.length,
     sendBatchRows: sendBatchRows.length,
     outreachGatePassedRows: passedGateIds.size,

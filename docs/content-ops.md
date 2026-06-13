@@ -1,12 +1,12 @@
 # TrendFoundry Content Ops
 
-Generated: 2026-06-13T00:17:38.922Z
+Generated: 2026-06-13T00:31:34.073Z
 
 Status: success
 
 Refresh public sources: no
 
-Dataset: 2026-06-11T11:09:01.918Z
+Dataset: 2026-06-13T00:28:51.023Z
 
 This is the content-only operating lane. It refreshes editorial audit, episode workbench, full episode script, source evidence pack, buyer content pack, buyer delivery gate, custom proof pack, content product listing, weekly subscription plan, sales drafts, local prospecting drafts, reply intake, local sales CRM, revenue model, feedback learning loop, daily close pack, outreach review packs, outreach gate, outreach send receipts, due outreach follow-ups, deal desk, unified fulfillment queue, attribution ledger, experiment plan, next-send batch, customer-success follow-ups, testimonial bank, prioritized action brief, and text health gate without sending messages, collecting payment, or building the frontend.
 
@@ -43,6 +43,7 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 | content-experiments | success | 0 |
 | content-send-batch | success | 0 |
 | content-outreach-export | success | 0 |
+| content-outreach-routes | success | 0 |
 | content-customer-success | success | 0 |
 | content-testimonials | success | 0 |
 | content-action-brief | success | 0 |
@@ -50,8 +51,8 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 
 ## Current Content State
 
-- Total source items: 127
-- Source errors: 3
+- Total source items: 125
+- Source errors: 2
 - Primary episode: NousResearch/hermes-agent
 - Evidence pack: 5 evidence items, 20 claims
 - Buyer deliverables: START-HERE.md, full-episode-script.md, episode-workbench.md, content-evidence-pack.md, content-editorial-audit.md
@@ -69,19 +70,20 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 - Feedback loop: 3 learnings, 4 questions, 0 private replies
 - Close pack: 5 selected, 5 clean, 0 needing cleanup
 - Outreach review: 5 send packs, 0 skipped for text cleanup
-- Outreach gate: 5 passed, 0 failed, 124 average draft words
+- Outreach gate: 5 passed, 0 failed, 125 average draft words
 - Outreach sends: 0 receipts, 0 sent today, 0 waiting reply
 - Outreach follow-ups: 0 due drafts from 0 send receipts
 - Deal desk: 0 active deals, 4 objection playbook rows
 - Fulfillment queue: 0 rows, 0 waiting manual send, 0 needing delivery fix, 0 concise-ready
-- Attribution: 5 campaigns, 0 sent, 0 replies, top offer trendfoundry-proof-script-pack
+- Attribution: 5 campaigns, 0 sent, 0 replies, top offer trendfoundry-proof-custom
 - Experiments: 4 variants, recommended custom-proof-niche / collect_more_manual_sends
 - Send batch: 3 rows, 1 matching recommended variant
 - Outreach export: 3 drafts (1 recommended, 2 fallback, 0 skipped)
+- Outreach routes: 9 route candidates across 3/3 send-batch rows, 3 high-confidence
 - Customer success: 0 follow-ups, 0 due now, 0 completion receipts
 - Testimonials: 0 private rows, 0 publish candidates, 0 needing permission/review
-- Action brief: 8 actions, top lane send_batch, 8 needing manual review
-- Health gate: 110 files checked, 0 with mojibake markers, 0 public prospect leaks
+- Action brief: 11 actions, top lane contact_research, 8 needing manual review
+- Health gate: 114 files checked, 0 with mojibake markers, 0 public prospect leaks
 - Listing SKUs: trendfoundry-proof-script-pack, trendfoundry-proof-weekly, trendfoundry-proof-custom
 - Seller-only exclusions: prospects.csv, outreach-board.md, data/latest.json, data/raw/, data/leads.json, docs/lead-pipeline.md, docs/lead-replies.md, sensitive payment data, account data
 
@@ -119,9 +121,10 @@ This is the content-only operating lane. It refreshes editorial audit, episode w
 23. Review `dist/content-experiments/experiment-plan.md` before changing outreach copy or offer mix.
 24. Review `dist/content-send-batch/send-batch.md` for the next three reviewed send candidates.
 25. Review `dist/content-outreach-export/drafts.md` and open the matching `.eml` or `.mailto.txt` after personalizing each draft and adding the verified recipient address.
-26. Review `dist/content-customer-success/followup-drafts.md` after any delivered order enters `fulfilled_waiting_feedback`.
-27. Review `dist/content-testimonials/testimonial-bank.md` before reusing any quote in sales copy.
-28. Review `dist/content-action-brief/action-brief.md` for the prioritized private action queue.
-29. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
-30. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
-31. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.
+26. Review `dist/content-outreach-routes/routes.md` for public contact-route candidates; these are not permission to send.
+27. Review `dist/content-customer-success/followup-drafts.md` after any delivered order enters `fulfilled_waiting_feedback`.
+28. Review `dist/content-testimonials/testimonial-bank.md` before reusing any quote in sales copy.
+29. Review `dist/content-action-brief/action-brief.md` for the prioritized private action queue.
+30. Review `docs/content-health-gate.md` before trusting console-rendered Chinese text.
+31. If approved, use `dist/buyer-content-pack/delivery-email.md` as the human-reviewed send draft.
+32. If the buyer requests a custom niche, run `npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."`.

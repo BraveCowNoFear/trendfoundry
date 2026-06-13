@@ -55,6 +55,7 @@
     "content-experiments": "node scripts/generate_content_experiments.mjs",
     "content-send-batch": "node scripts/generate_content_send_batch.mjs",
     "content-outreach-export": "node scripts/export_content_outreach_drafts.mjs",
+    "content-outreach-routes": "node scripts/discover_content_outreach_routes.mjs",
     "complete-content-outreach-send": "node scripts/complete_content_outreach_send.mjs",
     "content-deal-desk": "node scripts/generate_content_deal_desk.mjs",
     "content-fulfillment-queue": "node scripts/generate_content_fulfillment_queue.mjs",

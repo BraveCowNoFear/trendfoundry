@@ -27,6 +27,7 @@ const requiredScripts = [
   "intake-email-orders",
   "draft-outreach",
   "content-outreach-export",
+  "content-outreach-routes",
   "ops-report",
   "agent-watch",
   "launch-assets",
@@ -496,6 +497,16 @@ async function checkLocal() {
   assertCheck("outreach export manifest avoids auto-send", outreachExportManifest.safety?.sendsMessages === false && outreachExportManifest.safety?.collectsPayment === false && outreachExportManifest.safety?.requiresManualRecipientEntry === true);
   assertCheck("outreach export public doc keeps draft bodies private", outreachExportPublic.includes("Public-safe draft bodies exposed here: 0") && !/```[\s\S]*?Hi /.test(outreachExportPublic));
   assertCheck("outreach export draft count matches send batch", typeof outreachExportManifest.draftCount === "number" && outreachExportManifest.draftCount <= outreachExportManifest.sourceBatchRows + 0);
+
+  const outreachRoutesManifest = await readJson(path.join(root, "dist", "content-outreach-routes", "manifest.json"));
+  const outreachRoutesJson = await readJson(path.join(root, "dist", "content-outreach-routes", "routes.json"));
+  const outreachRoutesPublic = await readText(path.join(root, "docs", "content-outreach-routes.md"));
+  const actionBriefManifest = await readJson(path.join(root, "dist", "content-action-brief", "manifest.json"));
+  assertCheck("outreach routes avoid external actions", outreachRoutesManifest.safety?.sendsMessages === false && outreachRoutesManifest.safety?.logsIn === false && outreachRoutesManifest.safety?.collectsPrivateEmails === false && outreachRoutesManifest.safety?.guessesPrivateRecipients === false && outreachRoutesManifest.safety?.requiresVerifiedRecipientBeforeSend === true);
+  assertCheck("outreach routes cover exported drafts", outreachRoutesManifest.rowsWithRoutes >= outreachExportManifest.draftCount && outreachRoutesManifest.routeCandidateCount >= outreachRoutesManifest.rowsWithRoutes);
+  assertCheck("outreach routes public doc keeps details private", outreachRoutesPublic.includes("Detailed creator rows stay in ignored") && outreachRoutesPublic.includes("Verified recipient addresses exposed here: 0") && !/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(outreachRoutesPublic.replace(contactEmail, "")));
+  assertCheck("outreach routes JSON has no private emails", !/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(JSON.stringify(outreachRoutesJson)));
+  assertCheck("action brief prioritizes contact research before sending", actionBriefManifest.topActionLane === "contact_research" && actionBriefManifest.laneCounts?.contact_research >= 1);
 
   if (skipScheduler) {
     pass("scheduled task checks skipped", "--skip-scheduler");

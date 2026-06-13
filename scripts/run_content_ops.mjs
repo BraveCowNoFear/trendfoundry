@@ -48,7 +48,7 @@ function stepSummary(steps) {
 
 const steps = [];
 if (refresh) steps.push(npmRun("collect"));
-for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-gate", "content-outreach-sends", "content-outreach-followups", "content-deal-desk", "content-fulfillment-queue", "content-attribution", "content-experiments", "content-send-batch", "content-outreach-export", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
+for (const scriptName of ["content-audit", "episode-workbench", "full-script", "content-evidence", "buyer-pack", "content-delivery-gate", "custom-proof-pack", "content-listing", "content-subscription", "content-subscription-crm", "content-subscription-due", "content-subscription-retention", "content-sales", "content-prospects", "content-reply-intake", "content-crm", "content-revenue", "content-feedback", "content-close", "content-outreach-review", "content-outreach-gate", "content-outreach-sends", "content-outreach-followups", "content-deal-desk", "content-fulfillment-queue", "content-attribution", "content-experiments", "content-send-batch", "content-outreach-export", "content-outreach-routes", "content-customer-success", "content-testimonials", "content-action-brief", "content-health"]) {
   steps.push(npmRun(scriptName));
   if (steps.at(-1).status !== "success") break;
 }
@@ -82,6 +82,7 @@ const attributionManifest = await readJson("dist/content-attribution/manifest.js
 const experimentsManifest = await readJson("dist/content-experiments/manifest.json", {});
 const sendBatchManifest = await readJson("dist/content-send-batch/manifest.json", {});
 const outreachExportManifest = await readJson("dist/content-outreach-export/manifest.json", {});
+const outreachRoutesManifest = await readJson("dist/content-outreach-routes/manifest.json", {});
 const customerSuccessManifest = await readJson("dist/content-customer-success/manifest.json", {});
 const testimonialManifest = await readJson("dist/content-testimonials/manifest.json", {});
 const actionBriefManifest = await readJson("dist/content-action-brief/manifest.json", {});
@@ -246,6 +247,12 @@ const run = {
       sourceBatchRows: outreachExportManifest.sourceBatchRows,
       skipped: outreachExportManifest.skippedCount
     },
+    outreachRoutes: {
+      rowsWithRoutes: outreachRoutesManifest.rowsWithRoutes,
+      routeCandidateCount: outreachRoutesManifest.routeCandidateCount,
+      highConfidenceRoutes: outreachRoutesManifest.highConfidenceRoutes,
+      sourceBatchRows: outreachRoutesManifest.sourceBatchRows
+    },
     customerSuccess: {
       completionReceiptCount: customerSuccessManifest.completionReceiptCount,
       followupCount: customerSuccessManifest.followupCount,
@@ -332,6 +339,7 @@ ${stepSummary(steps)}
 - Experiments: ${experimentsManifest.variantCount ?? "unknown"} variants, recommended ${experimentsManifest.recommendedVariant || "unknown"} / ${experimentsManifest.recommendedAction || "unknown"}
 - Send batch: ${sendBatchManifest.batchCount ?? "unknown"} rows, ${sendBatchManifest.recommendedVariantBatchCount ?? "unknown"} matching recommended variant
 - Outreach export: ${outreachExportManifest.draftCount ?? "unknown"} drafts (${outreachExportManifest.recommendedVariantCount ?? "unknown"} recommended, ${outreachExportManifest.fallbackVariantCount ?? "unknown"} fallback, ${outreachExportManifest.skippedCount ?? "unknown"} skipped)
+- Outreach routes: ${outreachRoutesManifest.routeCandidateCount ?? "unknown"} route candidates across ${outreachRoutesManifest.rowsWithRoutes ?? "unknown"}/${outreachRoutesManifest.sourceBatchRows ?? "unknown"} send-batch rows, ${outreachRoutesManifest.highConfidenceRoutes ?? "unknown"} high-confidence
 - Customer success: ${customerSuccessManifest.followupCount ?? "unknown"} follow-ups, ${customerSuccessManifest.dueNowCount ?? "unknown"} due now, ${customerSuccessManifest.completionReceiptCount ?? "unknown"} completion receipts
 - Testimonials: ${testimonialManifest.testimonialRows ?? "unknown"} private rows, ${testimonialManifest.publishCandidateCount ?? "unknown"} publish candidates, ${testimonialManifest.permissionOrReviewCount ?? "unknown"} needing permission/review
 - Action brief: ${actionBriefManifest.actionCount ?? "unknown"} actions, top lane ${actionBriefManifest.topActionLane || "none"}, ${actionBriefManifest.manualReviewCount ?? "unknown"} needing manual review
@@ -373,12 +381,13 @@ ${stepSummary(steps)}
 23. Review \`dist/content-experiments/experiment-plan.md\` before changing outreach copy or offer mix.
 24. Review \`dist/content-send-batch/send-batch.md\` for the next three reviewed send candidates.
 25. Review \`dist/content-outreach-export/drafts.md\` and open the matching \`.eml\` or \`.mailto.txt\` after personalizing each draft and adding the verified recipient address.
-26. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
-27. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
-28. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
-29. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
-30. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
-31. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
+26. Review \`dist/content-outreach-routes/routes.md\` for public contact-route candidates; these are not permission to send.
+27. Review \`dist/content-customer-success/followup-drafts.md\` after any delivered order enters \`fulfilled_waiting_feedback\`.
+28. Review \`dist/content-testimonials/testimonial-bank.md\` before reusing any quote in sales copy.
+29. Review \`dist/content-action-brief/action-brief.md\` for the prioritized private action queue.
+30. Review \`docs/content-health-gate.md\` before trusting console-rendered Chinese text.
+31. If approved, use \`dist/buyer-content-pack/delivery-email.md\` as the human-reviewed send draft.
+32. If the buyer requests a custom niche, run \`npm run custom-proof-pack -- --niche="..." --platform="..." --buyer="..." --channel="..."\`.
 `;
 
 await mkdir(docsDir, { recursive: true });

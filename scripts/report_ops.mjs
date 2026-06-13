@@ -111,6 +111,7 @@ ${runSteps}
 - Send batch rows: ${report.content.sendBatchRows}
 - Send batch recommended-variant rows: ${report.content.sendBatchRecommendedRows}
 - Outreach export drafts: ${report.content.outreachExportDrafts} (${report.content.outreachExportRecommended} recommended, ${report.content.outreachExportFallback} fallback)
+- Outreach route candidates: ${report.content.outreachRouteCandidates} across ${report.content.outreachRowsWithRoutes}/${report.content.outreachRouteSourceRows} send-batch rows (${report.content.outreachHighConfidenceRoutes} high-confidence)
 - Deal desk active deals: ${report.content.activeDeals}
 - Deal desk playbook rows: ${report.content.playbookRows}
 - Fulfillment queue rows: ${report.content.fulfillmentQueueRows}
@@ -178,6 +179,7 @@ const attributionData = await readJsonIfExists(path.join(root, "dist", "content-
 const experimentsData = await readJsonIfExists(path.join(root, "dist", "content-experiments", "manifest.json"), {});
 const sendBatchData = await readJsonIfExists(path.join(root, "dist", "content-send-batch", "manifest.json"), {});
 const outreachExportData = await readJsonIfExists(path.join(root, "dist", "content-outreach-export", "manifest.json"), {});
+const outreachRoutesData = await readJsonIfExists(path.join(root, "dist", "content-outreach-routes", "manifest.json"), {});
 const emailOrderData = await readJsonIfExists(path.join(root, "dist", "email-order-intake", "orders.json"), { orders: [] });
 const emailFulfillmentData = await readJsonIfExists(path.join(root, "dist", "email-fulfillment", "email-orders.json"), { prepared: [] });
 const publishing = publishingSummary(await readTextIfExists(path.join(root, "docs", "publishing.md")));
@@ -258,6 +260,10 @@ const report = {
     outreachExportDrafts: outreachExportData.draftCount ?? contentOpsData.contentState?.outreachExport?.drafts ?? "unknown",
     outreachExportRecommended: outreachExportData.recommendedVariantCount ?? contentOpsData.contentState?.outreachExport?.recommendedVariant ?? "unknown",
     outreachExportFallback: outreachExportData.fallbackVariantCount ?? contentOpsData.contentState?.outreachExport?.fallbackVariant ?? "unknown",
+    outreachRouteCandidates: outreachRoutesData.routeCandidateCount ?? contentOpsData.contentState?.outreachRoutes?.routeCandidateCount ?? "unknown",
+    outreachRowsWithRoutes: outreachRoutesData.rowsWithRoutes ?? contentOpsData.contentState?.outreachRoutes?.rowsWithRoutes ?? "unknown",
+    outreachRouteSourceRows: outreachRoutesData.sourceBatchRows ?? contentOpsData.contentState?.outreachRoutes?.sourceBatchRows ?? "unknown",
+    outreachHighConfidenceRoutes: outreachRoutesData.highConfidenceRoutes ?? contentOpsData.contentState?.outreachRoutes?.highConfidenceRoutes ?? "unknown",
     activeDeals: dealDeskData.activeDealCount ?? contentOpsData.contentState?.dealDesk?.activeDealCount ?? "unknown",
     playbookRows: dealDeskData.playbookCount ?? contentOpsData.contentState?.dealDesk?.playbookCount ?? "unknown",
     fulfillmentQueueRows: fulfillmentQueueData.queueCount ?? contentOpsData.contentState?.fulfillmentQueue?.queueCount ?? "unknown",
