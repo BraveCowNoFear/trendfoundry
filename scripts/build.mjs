@@ -945,73 +945,82 @@ const zhProductProof = `<section class="product-proof" id="product-proof" aria-l
         <span><strong>脚本</strong>可直接开录</span>
       </div>
     </section>`;
-const decisionFlowItems = [
-  ["01", "Signal", "信号", "GitHub, YouTube, Bilibili, HN, arXiv", "GitHub、YouTube、B站、HN、arXiv", "Track public changes worth checking.", "追踪值得确认的公开变化。"],
-  ["02", "Filter", "筛选", "Evidence, novelty, risk", "证据、新鲜度、风险", "Keep only ideas with sources, angles, and recording fit.", "只保留有来源、有角度、能开录的机会。"],
-  ["03", "Pack", "打包", "Brief, CSV, risk note, script", "简报、CSV、风险备注、脚本", "Turn the chosen ideas into a creator-ready handoff.", "把通过筛选的机会变成交付包。"],
-  ["04", "Deliver", "交付", "Single issue, weekly queue, custom desk", "单期、周更、定制", "The product tiers differ by commitment, not by mystery.", "产品按投入程度分档，不靠复杂规则。"]
+const productMapTierCards = pricingTiers
+  .map((tier, index) => {
+    const slug = tierSlug(tier);
+    const priceEn = tier.cadence === "monthly" ? `${tier.price}/mo` : `${tier.price} one-time`;
+    const priceZh = tier.cadenceZh === "每月" ? `${tier.price} 每月` : `${tier.price} 一次`;
+    return `<a class="product-tier-card${tier.featured ? " active" : ""}" href="#pricing" data-tier-jump="${escapeHtml(slug)}" aria-label="${escapeHtml(tier.name)}">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${dual(tier.name, tier.nameZh)}</strong>
+          <b data-i18n-en="${escapeHtml(priceEn)}" data-i18n-zh="${escapeHtml(priceZh)}">${escapeHtml(priceEn)}</b>
+          ${dual(tier.commitment, tier.commitmentZh, "small")}
+        </a>`;
+  })
+  .join("");
+const zhProductMapTierCards = pricingTiers
+  .map((tier, index) => {
+    const slug = tierSlug(tier);
+    const priceZh = tier.cadenceZh === "每月" ? `${tier.price} 每月` : `${tier.price} 一次`;
+    return `<a class="product-tier-card${tier.featured ? " active" : ""}" href="#pricing" data-tier-jump="${escapeHtml(slug)}" aria-label="${escapeHtml(tier.nameZh)}">
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${escapeHtml(tier.nameZh)}</strong>
+          <b>${escapeHtml(priceZh)}</b>
+          <small>${escapeHtml(tier.commitmentZh)}</small>
+        </a>`;
+  })
+  .join("");
+const productPathItems = [
+  ["Signal", "信号", "public AI/dev changes", "公开 AI/开发者变化"],
+  ["Proof", "证据", "source links and risk notes", "来源链接与风险备注"],
+  ["Pack", "选题包", "ranked topics, CSV, script notes", "排序选题、CSV、脚本备注"],
+  ["Order", "下单", "sample, weekly, or custom", "单期、周更或定制"]
 ];
-const decisionFlowSteps = decisionFlowItems
-  .map(([number, label, labelZh, kicker, kickerZh, text, textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
-          <button class="flow-step-button" type="button">
-            <span>${number}</span>
-            <strong>${dual(label, labelZh)}</strong>
-            ${dual(kicker, kickerZh, "small")}
-            ${dual(text, textZh, "em")}
-          </button>
+const productPathSteps = productPathItems
+  .map(([label, labelZh, copy, copyZh], index) => `<li>
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${dual(label, labelZh)}</strong>
+          ${dual(copy, copyZh, "small")}
         </li>`)
   .join("");
-const zhDecisionFlowSteps = decisionFlowItems
-  .map(([number, , labelZh, , kickerZh, , textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
-          <button class="flow-step-button" type="button">
-            <span>${number}</span>
-            <strong>${escapeHtml(labelZh)}</strong>
-            <small>${escapeHtml(kickerZh)}</small>
-            <em>${escapeHtml(textZh)}</em>
-          </button>
+const zhProductPathSteps = productPathItems
+  .map(([, labelZh, , copyZh], index) => `<li>
+          <span>${String(index + 1).padStart(2, "0")}</span>
+          <strong>${escapeHtml(labelZh)}</strong>
+          <small>${escapeHtml(copyZh)}</small>
         </li>`)
   .join("");
-const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="How TrendFoundry turns public signals into product packs">
+const decisionFlow = `<section class="decision-flow product-map" id="decision-flow" aria-label="TrendFoundry product map">
       <div class="decision-copy">
-        ${dual("How it works", "怎么做", "p", ' class="section-label"')}
-        ${dual("Four steps to a topic pack.", "四步生成选题包。", "h2")}
-        ${dual("Source, recording value, pack contents, and tier fit are answered in one pass.", "来源、录制价值、内容、档位，一次说明。", "p")}
-        <div class="workflow-pills" aria-label="Product tier rule">
-          <span>${dual("Single issue", "单期")}</span>
-          <span>${dual("Weekly queue", "周更")}</span>
-          <span>${dual("Custom desk", "定制")}</span>
-        </div>
+        ${dual("Product map", "产品地图", "p", ' class="section-label"')}
+        ${dual("What it does. How to choose.", "先看它做什么，再看怎么选。", "h2")}
+        ${dual("TrendFoundry scans public AI and developer signals, then turns them into ranked, proof-backed topic packs you can record from.", "TrendFoundry 把公开 AI/开发者信号，变成可直接开录的选题包。", "p")}
       </div>
-      <div class="decision-panel">
-        <ol class="flow-steps">${decisionFlowSteps}</ol>
-        <div class="pack-preview" aria-label="Topic pack preview">
+      <div class="decision-panel product-map-panel">
+        <div class="product-tier-strip" aria-label="Product tiers by decision frequency">${productMapTierCards}</div>
+        <div class="pack-preview product-path" aria-label="Signal to order path">
           <div class="pack-preview-head">
-            <span>${dual("Pack preview", "选题包预览")}</span>
-            <strong>${dual("Ready to record", "可直接开录")}</strong>
+            <span>${dual("How the pack moves", "产品路径")}</span>
+            <strong>${dual("Signal → Proof → Pack → Order", "信号 → 证据 → 选题包 → 下单")}</strong>
           </div>
-          <div class="pack-preview-title">${dual("Deliverable", "交付")} = ${dual("ranked ideas", "排序选题")} + ${dual("proof links", "来源证据")} + CSV + ${dual("script", "脚本")}</div>
+          <ol class="product-path-steps">${productPathSteps}</ol>
         </div>
       </div>
     </section>`;
-const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry 如何把公开信号变成产品包">
+const zhDecisionFlow = `<section class="decision-flow product-map" id="decision-flow" aria-label="TrendFoundry 产品地图">
       <div class="decision-copy">
-        <p class="section-label">怎么做</p>
-        <h2>四步生成选题包。</h2>
-        <p>来源、录制价值、内容、档位，一次说明。</p>
-        <div class="workflow-pills" aria-label="产品分档规则">
-          <span>单期</span>
-          <span>周更</span>
-          <span>定制</span>
-        </div>
+        <p class="section-label">产品地图</p>
+        <h2>先看它做什么，再看怎么选。</h2>
+        <p>TrendFoundry 把公开 AI/开发者信号，变成可直接开录的选题包。</p>
       </div>
-      <div class="decision-panel">
-        <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
-        <div class="pack-preview" aria-label="选题包预览">
+      <div class="decision-panel product-map-panel">
+        <div class="product-tier-strip" aria-label="按决策频率划分的产品档位">${zhProductMapTierCards}</div>
+        <div class="pack-preview product-path" aria-label="信号到下单路径">
           <div class="pack-preview-head">
-            <span>选题包预览</span>
-            <strong>可直接开录</strong>
+            <span>产品路径</span>
+            <strong>信号 → 证据 → 选题包 → 下单</strong>
           </div>
-          <div class="pack-preview-title">交付 = 排序选题 + 来源证据 + CSV + 脚本</div>
+          <ol class="product-path-steps">${zhProductPathSteps}</ol>
         </div>
       </div>
     </section>`;
@@ -1113,11 +1122,10 @@ const zhPlanningCalculator = `<section class="planning-calculator" id="planning-
 const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top">${brandLogo()}</a>
     <div class="local-links">
-      <a href="#decision-flow" data-local-link="decision-flow">${dual("How it works", "怎么做")}</a>
-      <a href="#sample" data-local-link="sample">${dual("Sample", "样品")}</a>
-      <a href="#fit-studio" data-local-link="fit-studio">${dual("Rules", "分档")}</a>
-      <a href="#opportunities" data-local-link="opportunities">${dual("Signals", "信号")}</a>
+      <a href="#decision-flow" data-local-link="decision-flow">${dual("Product", "产品")}</a>
+      <a href="#opportunities" data-local-link="opportunities">${dual("Sample", "样品")}</a>
       <a href="#pricing" data-local-link="pricing">${dual("Pricing", "价格")}</a>
+      <a href="#delivery-pack" data-local-link="delivery-pack">${dual("Delivery", "交付")}</a>
     </div>
     <a class="local-cta" href="./order/">${dual("Order", "下单")}</a>
     <span class="local-progress" aria-hidden="true"></span>
@@ -1125,11 +1133,10 @@ const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigatio
 const zhLocalNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top">${brandLogo()}</a>
     <div class="local-links">
-      <a href="#decision-flow" data-local-link="decision-flow">怎么做</a>
-      <a href="#sample" data-local-link="sample">样品</a>
-      <a href="#fit-studio" data-local-link="fit-studio">分档</a>
-      <a href="#opportunities" data-local-link="opportunities">信号</a>
+      <a href="#decision-flow" data-local-link="decision-flow">产品</a>
+      <a href="#opportunities" data-local-link="opportunities">样品</a>
       <a href="#pricing" data-local-link="pricing">价格</a>
+      <a href="#delivery-pack" data-local-link="delivery-pack">交付</a>
     </div>
     <a class="local-cta" href="../order/">下单</a>
     <span class="local-progress" aria-hidden="true"></span>
@@ -2710,7 +2717,7 @@ const html = `<!doctype html>
         <a href="${issueOrderHref}">${dual("Request on GitHub", "在 GitHub 申请")}</a>
         <a href="${orderHref}">${dual("Email order", "邮件下单")}</a>
       </div>
-      <a class="scroll-cue" href="#sample" aria-label="Scroll to sample">${dual("Scroll", "下滑")}<span aria-hidden="true"></span></a>
+      <a class="scroll-cue" href="#decision-flow" aria-label="Scroll to product map">${dual("Scroll", "下滑")}<span aria-hidden="true"></span></a>
     </div>
     <aside>${productVisual}</aside>
   </header>
@@ -2718,24 +2725,6 @@ const html = `<!doctype html>
   ${sampleDrawer}
   <main>
     ${decisionFlow}
-    ${fitStudio}
-    <section class="sample-preview" id="sample" aria-label="Free public sample">
-      <div>
-        ${dual("Free sample", "免费样品", "p", ' class="section-label"')}
-        ${dual("Inspect three current opportunities before ordering.", "下单前先检查 3 个当前机会。", "h2")}
-        ${dual("The public sample reveals format, scoring, source links, and quality notes without exposing the full paid pack.", "公开样品展示格式、评分、来源链接和质量备注，但不暴露完整付费包。", "p")}
-      </div>
-      <div class="sample-actions">
-        <button class="action primary" type="button" data-sample-open>${dual("Preview in page", "页面内预览")}</button>
-        <a class="action strong" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
-        <a class="action" href="./public-sample.en.md">${dual("Open English sample", "打开英文样品")}</a>
-        <a class="action" href="./public-sample.en.csv">${dual("English CSV", "英文 CSV")}</a>
-        <a class="action primary" href="./public-sample.zh-CN.md">${dual("Open Chinese sample", "打开中文样品")}</a>
-        <a class="action" href="./public-sample.zh-CN.csv">${dual("Chinese CSV", "中文 CSV")}</a>
-      </div>
-      ${sampleSpotlight}
-    </section>
-    ${productProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         ${dual("Signal sample", "样品速览", "p", ' class="section-label"')}
@@ -2754,6 +2743,12 @@ const html = `<!doctype html>
       <div class="signal-shelf-actions">
         <a class="action primary" href="./trendfoundry-free-sample-pack.zip">${dual("Download sample pack", "下载样品包")}</a>
         <a class="action strong" href="./issues/latest.html">${dual("Open all 12 signals", "打开完整 12 条")}</a>
+      </div>
+      <div class="signal-file-links" aria-label="Sample files">
+        <a href="./public-sample.en.md">EN sample</a>
+        <a href="./public-sample.en.csv">EN CSV</a>
+        <a href="./public-sample.zh-CN.md">中文样品</a>
+        <a href="./public-sample.zh-CN.csv">中文 CSV</a>
       </div>
     </section>
     ${contrastSection}
@@ -2848,7 +2843,7 @@ const zhHtml = `<!doctype html>
         <a href="${issueOrderHref}">在 GitHub 申请</a>
         <a href="${orderHref}">邮件下单</a>
       </div>
-      <a class="scroll-cue" href="#sample" aria-label="Scroll to sample">下滑<span aria-hidden="true"></span></a>
+      <a class="scroll-cue" href="#decision-flow" aria-label="Scroll to product map">下滑<span aria-hidden="true"></span></a>
     </div>
     <aside>${zhProductVisual}</aside>
   </header>
@@ -2856,24 +2851,6 @@ const zhHtml = `<!doctype html>
   ${zhSampleDrawer}
   <main>
     ${zhDecisionFlow}
-    ${fitStudio}
-    <section class="sample-preview" id="sample" aria-label="Free public sample">
-      <div>
-        <p class="section-label">免费样品</p>
-        <h2>下单前先看 3 个当前机会。</h2>
-        <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
-      </div>
-      <div class="sample-actions">
-        <button class="action primary" type="button" data-sample-open>页面内预览</button>
-        <a class="action strong" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
-        <a class="action" href="../public-sample.zh-CN.md">打开中文样品</a>
-        <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
-        <a class="action primary" href="../public-sample.en.md">Open English sample</a>
-        <a class="action" href="../public-sample.en.csv">English CSV</a>
-      </div>
-      ${zhSampleSpotlight}
-    </section>
-    ${zhProductProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         <p class="section-label">样品速览</p>
@@ -2892,6 +2869,12 @@ const zhHtml = `<!doctype html>
       <div class="signal-shelf-actions">
         <a class="action primary" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
         <a class="action strong" href="../issues/latest.html">打开完整 12 条</a>
+      </div>
+      <div class="signal-file-links" aria-label="样品文件">
+        <a href="../public-sample.zh-CN.md">中文样品</a>
+        <a href="../public-sample.zh-CN.csv">中文 CSV</a>
+        <a href="../public-sample.en.md">EN sample</a>
+        <a href="../public-sample.en.csv">EN CSV</a>
       </div>
     </section>
     ${zhContrastSection}
@@ -5056,6 +5039,10 @@ main {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+.product-map.reveal-item {
+  opacity: 1;
+  transform: none;
+}
 .sample-preview {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -5447,41 +5434,90 @@ main {
 }
 .decision-flow {
   display: grid;
-  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
-  gap: clamp(22px, 4vw, 48px);
+  grid-template-columns: minmax(260px, 0.32fr) minmax(0, 0.68fr);
+  gap: clamp(18px, 3vw, 36px);
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 4px 0 36px;
-  margin-bottom: 28px;
+  padding: 0 0 28px;
+  margin-bottom: 12px;
 }
 .decision-copy {
   max-width: 560px;
 }
 .decision-copy h2 {
-  max-width: 540px;
-  margin: 0 0 12px;
-  font-size: clamp(30px, 4vw, 48px);
+  max-width: 520px;
+  margin: 0 0 10px;
+  font-size: clamp(29px, 3.8vw, 46px);
   line-height: 1.04;
 }
 .decision-copy p:not(.section-label) {
   margin: 0;
   color: var(--muted);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.45;
 }
 .decision-panel {
   position: relative;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   min-height: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 18px;
-  padding: clamp(12px, 2vw, 18px);
+  border-radius: 16px;
+  padding: clamp(11px, 1.8vw, 16px);
   background:
     linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,249,252,0.78)),
     linear-gradient(180deg, rgba(0, 113, 227, 0.06), transparent 42%);
-  box-shadow: var(--shadow);
+  box-shadow: 0 18px 52px rgba(17, 17, 20, 0.08);
   backdrop-filter: blur(20px);
+}
+.product-map-panel {
+  align-self: stretch;
+}
+.product-tier-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.product-tier-card {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  min-height: 126px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--ink);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 22px rgba(17, 17, 20, 0.045);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.product-tier-card:hover,
+.product-tier-card:focus-visible,
+.product-tier-card.active {
+  transform: translateY(-2px);
+  border-color: rgba(0, 113, 227, 0.36);
+  box-shadow: 0 14px 32px rgba(17, 17, 20, 0.08);
+}
+.product-tier-card span {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+.product-tier-card strong {
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.1;
+}
+.product-tier-card b {
+  font-size: 17px;
+  line-height: 1;
+}
+.product-tier-card small {
+  align-self: end;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.25;
 }
 .flow-steps {
   position: relative;
@@ -5586,6 +5622,53 @@ main {
   font-size: clamp(21px, 1.7vw, 27px);
   font-weight: 850;
   line-height: 1.05;
+}
+.product-path {
+  padding: 12px;
+}
+.product-path .pack-preview-head {
+  align-items: center;
+}
+.product-path .pack-preview-head strong {
+  white-space: nowrap;
+}
+.product-path-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.product-path-steps li {
+  display: grid;
+  gap: 6px;
+  min-height: 92px;
+  border: 1px solid rgba(17, 17, 20, 0.07);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(247, 249, 252, 0.72);
+}
+.product-path-steps span {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+}
+.product-path-steps strong {
+  font-size: 14px;
+  line-height: 1.12;
+}
+.product-path-steps small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 680;
+  line-height: 1.25;
 }
 .pack-preview ul {
   display: grid;
@@ -7777,6 +7860,21 @@ input[type="search"]:focus {
   flex-wrap: wrap;
   gap: 8px;
 }
+.signal-file-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: -4px;
+}
+.signal-file-links a {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+  text-decoration: none;
+}
+.signal-file-links a:hover {
+  color: var(--accent);
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -9338,6 +9436,51 @@ input[type="email"] {
   .decision-panel {
     min-height: 0;
     border-radius: 14px;
+    padding: 10px;
+  }
+  .product-tier-strip {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+  .product-tier-card {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+    min-height: 0;
+    gap: 5px 9px;
+    padding: 10px;
+  }
+  .product-tier-card span {
+    grid-row: 1 / span 2;
+  }
+  .product-tier-card strong {
+    font-size: 16px;
+  }
+  .product-tier-card b {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .product-tier-card small {
+    grid-column: 2 / -1;
+    font-size: 11px;
+  }
+  .product-path {
+    padding: 10px;
+  }
+  .product-path .pack-preview-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .product-path .pack-preview-head strong {
+    white-space: normal;
+  }
+  .product-path-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .product-path-steps li {
+    min-height: 84px;
+    padding: 9px;
   }
   .flow-steps {
     grid-template-columns: 1fr;
@@ -10331,6 +10474,10 @@ body.is-scrolled .local-nav {
 .reveal-item.is-visible {
   transform: translateY(0) scale(1);
   filter: blur(0);
+}
+.product-map.reveal-item {
+  transform: none;
+  filter: none;
 }
 .sample-preview,
 .product-proof,

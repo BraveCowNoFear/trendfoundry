@@ -67,7 +67,7 @@
         <a href="https://github.com/BraveCowNoFear/trendfoundry/issues/new?template=order-sample-pack.yml&title=Sample%20pack%20request%3A%20">在 GitHub 申请</a>
         <a href="mailto:rivan_Britain@outlook.com?subject=TrendFoundry%20sample%20pack%20order&body=Hi%2C%20I%20want%20to%20order%20the%20TrendFoundry%20%249%20sample%20pack.%20Please%20send%20the%20latest%20issue%20and%20payment%20instructions.">邮件下单</a>
       </div>
-      <a class="scroll-cue" href="#sample" aria-label="Scroll to sample">下滑<span aria-hidden="true"></span></a>
+      <a class="scroll-cue" href="#decision-flow" aria-label="Scroll to product map">下滑<span aria-hidden="true"></span></a>
     </div>
     <aside><div class="product-visual" aria-label="TrendFoundry signal board preview">
         <div class="product-screen">
@@ -107,11 +107,10 @@
   <nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top"><span class="brand-lockup"><span class="brand-mark" aria-hidden="true"><span></span></span><span class="brand-word">TrendFoundry</span></span></a>
     <div class="local-links">
-      <a href="#decision-flow" data-local-link="decision-flow">怎么做</a>
-      <a href="#sample" data-local-link="sample">样品</a>
-      <a href="#fit-studio" data-local-link="fit-studio">分档</a>
-      <a href="#opportunities" data-local-link="opportunities">信号</a>
+      <a href="#decision-flow" data-local-link="decision-flow">产品</a>
+      <a href="#opportunities" data-local-link="opportunities">样品</a>
       <a href="#pricing" data-local-link="pricing">价格</a>
+      <a href="#delivery-pack" data-local-link="delivery-pack">交付</a>
     </div>
     <a class="local-cta" href="../order/">下单</a>
     <span class="local-progress" aria-hidden="true"></span>
@@ -148,231 +147,52 @@
     </section>
   </div>
   <main>
-    <section class="decision-flow" id="decision-flow" aria-label="TrendFoundry 如何把公开信号变成产品包">
+    <section class="decision-flow product-map" id="decision-flow" aria-label="TrendFoundry 产品地图">
       <div class="decision-copy">
-        <p class="section-label">怎么做</p>
-        <h2>四步生成选题包。</h2>
-        <p>来源、录制价值、内容、档位，一次说明。</p>
-        <div class="workflow-pills" aria-label="产品分档规则">
-          <span>单期</span>
-          <span>周更</span>
-          <span>定制</span>
-        </div>
+        <p class="section-label">产品地图</p>
+        <h2>先看它做什么，再看怎么选。</h2>
+        <p>TrendFoundry 把公开 AI/开发者信号，变成可直接开录的选题包。</p>
       </div>
-      <div class="decision-panel">
-        <ol class="flow-steps"><li class="is-current" data-flow-step="0">
-          <button class="flow-step-button" type="button">
-            <span>01</span>
-            <strong>信号</strong>
-            <small>GitHub、YouTube、B站、HN、arXiv</small>
-            <em>追踪值得确认的公开变化。</em>
-          </button>
-        </li><li class="" data-flow-step="1">
-          <button class="flow-step-button" type="button">
-            <span>02</span>
-            <strong>筛选</strong>
-            <small>证据、新鲜度、风险</small>
-            <em>只保留有来源、有角度、能开录的机会。</em>
-          </button>
-        </li><li class="" data-flow-step="2">
-          <button class="flow-step-button" type="button">
-            <span>03</span>
-            <strong>打包</strong>
-            <small>简报、CSV、风险备注、脚本</small>
-            <em>把通过筛选的机会变成交付包。</em>
-          </button>
-        </li><li class="" data-flow-step="3">
-          <button class="flow-step-button" type="button">
-            <span>04</span>
-            <strong>交付</strong>
-            <small>单期、周更、定制</small>
-            <em>产品按投入程度分档，不靠复杂规则。</em>
-          </button>
-        </li></ol>
-        <div class="pack-preview" aria-label="选题包预览">
+      <div class="decision-panel product-map-panel">
+        <div class="product-tier-strip" aria-label="按决策频率划分的产品档位"><a class="product-tier-card" href="#pricing" data-tier-jump="sample-issue" aria-label="单期样品">
+          <span>01</span>
+          <strong>单期样品</strong>
+          <b>$9 一次</b>
+          <small>先试一次</small>
+        </a><a class="product-tier-card active" href="#pricing" data-tier-jump="weekly-pipeline" aria-label="周更情报">
+          <span>02</span>
+          <strong>周更情报</strong>
+          <b>$19 每月</b>
+          <small>保持选题队列</small>
+        </a><a class="product-tier-card" href="#pricing" data-tier-jump="custom-niche-desk" aria-label="垂直定制">
+          <span>03</span>
+          <strong>垂直定制</strong>
+          <b>$49 每月</b>
+          <small>占住一个垂类</small>
+        </a></div>
+        <div class="pack-preview product-path" aria-label="信号到下单路径">
           <div class="pack-preview-head">
-            <span>选题包预览</span>
-            <strong>可直接开录</strong>
+            <span>产品路径</span>
+            <strong>信号 → 证据 → 选题包 → 下单</strong>
           </div>
-          <div class="pack-preview-title">交付 = 排序选题 + 来源证据 + CSV + 脚本</div>
+          <ol class="product-path-steps"><li>
+          <span>01</span>
+          <strong>信号</strong>
+          <small>公开 AI/开发者变化</small>
+        </li><li>
+          <span>02</span>
+          <strong>证据</strong>
+          <small>来源链接与风险备注</small>
+        </li><li>
+          <span>03</span>
+          <strong>选题包</strong>
+          <small>排序选题、CSV、脚本备注</small>
+        </li><li>
+          <span>04</span>
+          <strong>下单</strong>
+          <small>单期、周更或定制</small>
+        </li></ol>
         </div>
-      </div>
-    </section>
-    <section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
-      <div class="fit-copy">
-        <p class="section-label" data-i18n-en="How to choose" data-i18n-zh="怎么选档">How to choose</p>
-        <h2 data-i18n-en="Pick the tier by how often you need decisions." data-i18n-zh="按你需要决策的频率选档。">Pick the tier by how often you need decisions.</h2>
-        <p data-i18n-en="Sample validates the format. Weekly keeps your queue supplied. Custom narrows the desk to your niche." data-i18n-zh="单期先验证，周更保持队列，定制只看你的赛道。">Sample validates the format. Weekly keeps your queue supplied. Custom narrows the desk to your niche.</p>
-        <div class="fit-personas" aria-label="Product pack modes"><button class="fit-persona active" type="button" data-fit-persona="sample-issue" aria-pressed="true"
-    data-fit-pack-en="Sample issue" data-fit-pack-zh="单期样品"
-    data-fit-short-en="Sample" data-fit-short-zh="单期"
-    data-fit-price-en="$9" data-fit-price-zh="$9"
-    data-fit-rule-en="Test one issue" data-fit-rule-zh="先试一份"
-    data-fit-title-en="Use when you want to test one issue before subscribing." data-fit-title-zh="适合先买一份，确认格式和选题质量。"
-    data-fit-copy-en="A one-time issue with 12 ranked ideas, CSV, risk notes, and one script." data-fit-copy-zh="一次交付 12 个排序选题、CSV、风险备注和一版脚本。"
-    data-fit-kit-en="12 ideas + CSV + risk notes" data-fit-kit-zh="12 个选题 + CSV + 风险备注"
-    data-fit-cadence-en="one-time" data-fit-cadence-zh="一次交付"
-    data-fit-strength-en="Lowest commitment" data-fit-strength-zh="最低投入"
-    data-fit-velocity-en="first validation" data-fit-velocity-zh="先验证质量"
-    data-fit-progress="72"
-    data-fit-source-en="When to choose" data-fit-source-zh="适用场景"
-    data-fit-signal-en="Use when you want to test one issue before subscribing."
-    data-fit-signal-zh="适合先买一份，确认格式和选题质量。"
-    data-fit-url="#pricing">
-      <span data-i18n-en="Tier 01" data-i18n-zh="档 01">Tier 01</span>
-      <strong data-i18n-en="Sample issue" data-i18n-zh="单期样品">Sample issue</strong>
-      <b data-i18n-en="$9" data-i18n-zh="$9">$9</b>
-      <small data-i18n-en="Test one issue" data-i18n-zh="先试一份">Test one issue</small>
-    </button><button class="fit-persona" type="button" data-fit-persona="weekly-pipeline" aria-pressed="false"
-    data-fit-pack-en="Weekly pipeline" data-fit-pack-zh="周更情报"
-    data-fit-short-en="Weekly" data-fit-short-zh="周更"
-    data-fit-price-en="$19/mo" data-fit-price-zh="$19/月"
-    data-fit-rule-en="Keep the queue warm" data-fit-rule-zh="持续供题"
-    data-fit-title-en="Use when your channel needs a stable weekly topic queue." data-fit-title-zh="适合需要稳定周更选题队列的创作者。"
-    data-fit-copy-en="A fresh 12-idea issue every week with sources, angles, outlines, and notes." data-fit-copy-zh="每周补充 12 个可录制选题，附来源、角度、大纲和备注。"
-    data-fit-kit-en="weekly 12-idea issue" data-fit-kit-zh="每周 12 个新选题"
-    data-fit-cadence-en="weekly" data-fit-cadence-zh="每周更新"
-    data-fit-strength-en="Default subscription" data-fit-strength-zh="默认订阅档"
-    data-fit-velocity-en="steady publishing" data-fit-velocity-zh="稳定更新"
-    data-fit-progress="64"
-    data-fit-source-en="When to choose" data-fit-source-zh="适用场景"
-    data-fit-signal-en="Use when your channel needs a stable weekly topic queue."
-    data-fit-signal-zh="适合需要稳定周更选题队列的创作者。"
-    data-fit-url="#pricing">
-      <span data-i18n-en="Tier 02" data-i18n-zh="档 02">Tier 02</span>
-      <strong data-i18n-en="Weekly pipeline" data-i18n-zh="周更情报">Weekly pipeline</strong>
-      <b data-i18n-en="$19/mo" data-i18n-zh="$19/月">$19/mo</b>
-      <small data-i18n-en="Keep the queue warm" data-i18n-zh="持续供题">Keep the queue warm</small>
-    </button><button class="fit-persona" type="button" data-fit-persona="custom-niche" aria-pressed="false"
-    data-fit-pack-en="Custom niche desk" data-fit-pack-zh="垂直定制"
-    data-fit-short-en="Custom" data-fit-short-zh="定制"
-    data-fit-price-en="$49/mo" data-fit-price-zh="$49/月"
-    data-fit-rule-en="Only your niche" data-fit-rule-zh="只看你的赛道"
-    data-fit-title-en="Use when one niche needs its own sources and stricter filters." data-fit-title-zh="适合只服务一个赛道，并需要专属来源和筛选规则。"
-    data-fit-copy-en="Custom sources, niche scoring, stricter filters, and lead angles for one lane." data-fit-copy-zh="定制来源、垂类评分、严格过滤和只服务一个赛道的角度。"
-    data-fit-kit-en="custom sources + niche scoring" data-fit-kit-zh="定制来源 + 垂类评分"
-    data-fit-cadence-en="monthly custom" data-fit-cadence-zh="每月定制"
-    data-fit-strength-en="Highest focus" data-fit-strength-zh="最高聚焦"
-    data-fit-velocity-en="own one lane" data-fit-velocity-zh="占住一个赛道"
-    data-fit-progress="81"
-    data-fit-source-en="When to choose" data-fit-source-zh="适用场景"
-    data-fit-signal-en="Use when one niche needs its own sources and stricter filters."
-    data-fit-signal-zh="适合只服务一个赛道，并需要专属来源和筛选规则。"
-    data-fit-url="#pricing">
-      <span data-i18n-en="Tier 03" data-i18n-zh="档 03">Tier 03</span>
-      <strong data-i18n-en="Custom niche desk" data-i18n-zh="垂直定制">Custom niche desk</strong>
-      <b data-i18n-en="$49/mo" data-i18n-zh="$49/月">$49/mo</b>
-      <small data-i18n-en="Only your niche" data-i18n-zh="只看你的赛道">Only your niche</small>
-    </button></div>
-      </div>
-      <div class="fit-device" data-fit-device="sample-issue" style="--fit-progress:72%">
-        <div class="fit-device-screen">
-          <div class="fit-console-head">
-            <div>
-              <p class="fit-device-label" data-i18n-en="Selected tier" data-i18n-zh="已选档位">Selected tier</p>
-              <strong id="fit-title" data-i18n-en="Sample issue" data-i18n-zh="单期样品">Sample issue</strong>
-            </div>
-            <span class="fit-price" id="fit-price" data-i18n-en="$9" data-i18n-zh="$9">$9</span>
-          </div>
-          <p class="fit-tier-rule" id="fit-strength" data-i18n-en="Test one issue" data-i18n-zh="先试一份">Test one issue</p>
-          <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="#pricing">
-            <span id="fit-source" data-i18n-en="When to choose" data-i18n-zh="适用场景">When to choose</span>
-            <strong id="fit-signal" data-i18n-en="Use when you want to test one issue before subscribing." data-i18n-zh="适合先买一份，确认格式和选题质量。">Use when you want to test one issue before subscribing.</strong>
-            <p id="fit-preview-copy" data-i18n-en="A one-time issue with 12 ranked ideas, CSV, risk notes, and one script." data-i18n-zh="一次交付 12 个排序选题、CSV、风险备注和一版脚本。">A one-time issue with 12 ranked ideas, CSV, risk notes, and one script.</p>
-          </a>
-          <div class="fit-telemetry" aria-label="Tier summary facts">
-            <span><strong data-i18n-en="Delivery" data-i18n-zh="交付">Delivery</strong><small id="fit-kit" data-i18n-en="12 ideas + CSV + risk notes" data-i18n-zh="12 个选题 + CSV + 风险备注">12 ideas + CSV + risk notes</small></span>
-            <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="one-time" data-i18n-zh="一次交付">one-time</small></span>
-            <span><strong data-i18n-en="Best for" data-i18n-zh="适合">Best for</strong><small id="fit-velocity" data-i18n-en="first validation" data-i18n-zh="先验证质量">first validation</small></span>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="sample-preview" id="sample" aria-label="Free public sample">
-      <div>
-        <p class="section-label">免费样品</p>
-        <h2>下单前先看 3 个当前机会。</h2>
-        <p>公开样品展示格式、评分、来源链接和质量备注；完整 12 条机会、CSV 和脚本结构仍作为付费/请求交付。</p>
-      </div>
-      <div class="sample-actions">
-        <button class="action primary" type="button" data-sample-open>页面内预览</button>
-        <a class="action strong" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
-        <a class="action" href="../public-sample.zh-CN.md">打开中文样品</a>
-        <a class="action" href="../public-sample.zh-CN.csv">中文 CSV</a>
-        <a class="action primary" href="../public-sample.en.md">Open English sample</a>
-        <a class="action" href="../public-sample.en.csv">English CSV</a>
-      </div>
-      <div class="sample-spotlight" aria-label="Sample opportunity spotlight">
-      <div class="sample-spotlight-tabs"><button class="sample-spotlight-tab active" type="button" data-sample-spotlight="0" aria-pressed="true">
-      <span>#1</span>
-      <strong>GitHub</strong>
-      <em>评分 187</em>
-    </button><button class="sample-spotlight-tab" type="button" data-sample-spotlight="1" aria-pressed="false">
-      <span>#2</span>
-      <strong>GitHub</strong>
-      <em>评分 175</em>
-    </button><button class="sample-spotlight-tab" type="button" data-sample-spotlight="2" aria-pressed="false">
-      <span>#3</span>
-      <strong>GitHub</strong>
-      <em>评分 172</em>
-    </button></div>
-      <div class="sample-spotlight-stage"><article class="sample-spotlight-panel active" data-sample-spotlight-panel="0">
-      <div class="sample-spotlight-meta">
-        <span>GitHub</span>
-        <span>评分 187</span>
-      </div>
-      <h3>【实测】为什么 agent engineering workflow 现在值得创作者关注</h3>
-      <p>验证安装、输出和适用边界。</p>
-      <div class="sample-spotlight-proof">
-        <strong>证据备注</strong>
-        <span>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</span>
-      </div>
-      <a class="action primary" href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noreferrer">打开来源</a>
-    </article><article class="sample-spotlight-panel" data-sample-spotlight-panel="1">
-      <div class="sample-spotlight-meta">
-        <span>GitHub</span>
-        <span>评分 175</span>
-      </div>
-      <h3>【实测】为什么 RAG 知识库工作流 现在值得创作者关注</h3>
-      <p>验证安装、输出和适用边界。</p>
-      <div class="sample-spotlight-proof">
-        <strong>证据备注</strong>
-        <span>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</span>
-      </div>
-      <a class="action primary" href="https://github.com/infiniflow/ragflow" target="_blank" rel="noreferrer">打开来源</a>
-    </article><article class="sample-spotlight-panel" data-sample-spotlight-panel="2">
-      <div class="sample-spotlight-meta">
-        <span>GitHub</span>
-        <span>评分 172</span>
-      </div>
-      <h3>【实测】为什么 终端 AI agent 工作流 现在值得创作者关注</h3>
-      <p>验证安装、输出和适用边界。</p>
-      <div class="sample-spotlight-proof">
-        <strong>证据备注</strong>
-        <span>不要只看星标和近期活跃；必须测试安装摩擦、维护质量和真实可复现性。</span>
-      </div>
-      <a class="action primary" href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noreferrer">打开来源</a>
-    </article></div>
-    </div>
-    </section>
-    <section class="product-proof" id="product-proof" aria-label="Product proof preview">
-      <div class="product-proof-copy">
-        <p class="section-label">购买前证明</p>
-        <h2>先看真实样品，再决定买哪一档。</h2>
-        <p>看板、来源、评分和脚本结构都在同一份样品里，购买前就能判断质量。</p>
-        <div class="product-proof-actions">
-          <a class="action primary" href="../public-sample.zh-CN.md">打开样品</a>
-          <a class="action" href="../issues/latest.html">查看最新期</a>
-        </div>
-      </div>
-      <figure class="product-proof-visual">
-        <img src="../signal-board.png" alt="TrendFoundry 当前创作者机会看板预览" width="1200" height="760">
-        <figcaption>当前期 · 可验证</figcaption>
-      </figure>
-      <div class="product-proof-points" aria-label="Proof points">
-        <span><strong>看板</strong>来源与评分</span>
-        <span><strong>样品</strong>Markdown + CSV</span>
-        <span><strong>脚本</strong>可直接开录</span>
       </div>
     </section>
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
@@ -433,6 +253,12 @@
       <div class="signal-shelf-actions">
         <a class="action primary" href="../trendfoundry-free-sample-pack.zip">下载样品包</a>
         <a class="action strong" href="../issues/latest.html">打开完整 12 条</a>
+      </div>
+      <div class="signal-file-links" aria-label="样品文件">
+        <a href="../public-sample.zh-CN.md">中文样品</a>
+        <a href="../public-sample.zh-CN.csv">中文 CSV</a>
+        <a href="../public-sample.en.md">EN sample</a>
+        <a href="../public-sample.en.csv">EN CSV</a>
       </div>
     </section>
     <section class="contrast-lab" aria-label="Before and after TrendFoundry">
