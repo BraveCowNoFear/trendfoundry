@@ -2738,13 +2738,13 @@ const html = `<!doctype html>
     ${productProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
-        ${dual("Sample signals", "样品信号", "p", ' class="section-label"')}
-        ${dual("See three signals, then choose the right tier.", "先看 3 条，再决定买哪一档。", "h2", ' id="signal-shelf-title"')}
-        ${dual("TrendFoundry turns public AI and developer trends into recordable topics, proof links, CSV, and script handoff. Products only differ by commitment: one issue, weekly queue, or custom niche desk.", "TrendFoundry 把公开 AI/开发者趋势整理成可录制选题、来源证据、CSV 和脚本。产品只按投入程度分三档：单期、周更、定制。", "p")}
-        <div class="product-rule-strip" aria-label="Product division rules">
-          ${dual("Single issue = test one pack", "单期 = 先试一包", "span")}
-          ${dual("Weekly = keep a queue alive", "周更 = 保持队列", "span")}
-          ${dual("Custom = own a niche", "定制 = 占住垂类", "span")}
+        ${dual("Signal sample", "样品速览", "p", ' class="section-label"')}
+        ${dual("Three signals are enough to judge quality.", "三条信号，够你判断质量。", "h2", ' id="signal-shelf-title"')}
+        ${dual("Each row keeps the source, score, proof link, and recording angle visible so the sample stays inspectable without slowing the page down.", "每条都保留来源、评分、证据链接和录制角度；能检查质量，也不拖慢阅读。", "p")}
+        <div class="product-rule-strip signal-proof-strip" aria-label="Sample proof fields">
+          ${dual("Source", "来源", "span")}
+          ${dual("Score", "评分", "span")}
+          ${dual("Proof", "证据", "span")}
         </div>
       </div>
       <div class="signal-shelf-board">
@@ -2876,13 +2876,13 @@ const zhHtml = `<!doctype html>
     ${zhProductProof}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
-        <p class="section-label">样品信号</p>
-        <h2 id="signal-shelf-title">先看 3 条，再决定买哪一档。</h2>
-        <p>TrendFoundry 把公开 AI/开发者趋势整理成可录制选题、来源证据、CSV 和脚本。产品只按投入程度分三档：单期、周更、定制。</p>
-        <div class="product-rule-strip" aria-label="产品划分规则">
-          <span>单期 = 先试一包</span>
-          <span>周更 = 保持队列</span>
-          <span>定制 = 占住垂类</span>
+        <p class="section-label">样品速览</p>
+        <h2 id="signal-shelf-title">三条信号，够你判断质量。</h2>
+        <p>每条都保留来源、评分、证据链接和录制角度；能检查质量，也不拖慢阅读。</p>
+        <div class="product-rule-strip signal-proof-strip" aria-label="样品证据字段">
+          <span>来源</span>
+          <span>评分</span>
+          <span>证据</span>
         </div>
       </div>
       <div class="signal-shelf-board">
@@ -7580,47 +7580,48 @@ input[type="search"]:focus {
 .opportunity-focus {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
+  gap: 14px;
   align-items: center;
-  margin-top: 14px;
+  margin-top: 12px;
   border: 1px solid rgba(17, 17, 20, 0.1);
-  border-radius: var(--radius);
-  padding: 18px;
+  border-radius: 14px;
+  padding: 14px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 251, 250, 0.84)),
     radial-gradient(circle at 16% 14%, rgba(15, 107, 95, 0.11), transparent 32%);
-  box-shadow: 0 22px 54px rgba(17, 17, 20, 0.1);
+  box-shadow: 0 16px 42px rgba(17, 17, 20, 0.08);
   backdrop-filter: blur(18px);
 }
 .opportunity-focus h3 {
-  margin: 4px 0 8px;
-  max-width: 760px;
-  font-size: clamp(22px, 3vw, 36px);
-  line-height: 1.05;
+  margin: 3px 0 6px;
+  max-width: 680px;
+  font-size: clamp(21px, 2.4vw, 30px);
+  line-height: 1.12;
   letter-spacing: 0;
 }
 .opportunity-focus p {
   max-width: 740px;
   margin: 0;
   color: var(--muted);
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.42;
 }
 .opportunity-focus-card {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   justify-items: end;
-  min-width: min(320px, 100%);
+  min-width: min(260px, 100%);
 }
 .opportunity-focus-meta {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 6px;
 }
 .opportunity-focus-meta span {
   border: 1px solid #dbe2e8;
   border-radius: 999px;
-  padding: 7px 10px;
+  padding: 4px 8px;
   background: #fff;
   color: var(--ink);
   font-size: 12px;
@@ -7628,30 +7629,30 @@ input[type="search"]:focus {
 }
 .signal-shelf {
   display: grid;
-  gap: 22px;
+  gap: 16px;
   scroll-margin-top: 118px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: clamp(34px, 6vw, 74px) 0;
+  padding: clamp(26px, 4vw, 46px) 0;
 }
 .signal-shelf-copy {
   display: grid;
-  gap: 14px;
-  max-width: 960px;
+  gap: 10px;
+  max-width: 820px;
 }
 .signal-shelf-copy h2 {
   margin: 0;
-  max-width: 900px;
-  font-size: clamp(34px, 5.6vw, 72px);
-  line-height: 0.98;
+  max-width: 680px;
+  font-size: clamp(30px, 4.2vw, 50px);
+  line-height: 1.05;
   letter-spacing: 0;
 }
 .signal-shelf-copy > p:not(.section-label) {
   margin: 0;
-  max-width: 780px;
+  max-width: 620px;
   color: var(--muted);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.42;
+  font-size: 15px;
+  line-height: 1.45;
 }
 .product-rule-strip {
   display: flex;
@@ -7662,32 +7663,32 @@ input[type="search"]:focus {
 .product-rule-strip span {
   border: 1px solid rgba(17, 17, 20, 0.1);
   border-radius: 999px;
-  padding: 8px 11px;
+  padding: 6px 10px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--ink);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 850;
-  box-shadow: 0 10px 24px rgba(17, 17, 20, 0.05);
+  box-shadow: 0 8px 20px rgba(17, 17, 20, 0.045);
 }
 .signal-shelf-board {
   display: grid;
-  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
-  gap: 14px;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.05fr);
+  gap: 10px;
   align-items: stretch;
 }
 .sample-signal-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 .sample-signal-card.card {
   position: relative;
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) 34px;
-  gap: 12px;
+  grid-template-columns: 34px minmax(0, 1fr) 30px;
+  gap: 9px;
   align-items: start;
   min-height: 0;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.86);
   cursor: pointer;
 }
@@ -7708,12 +7709,12 @@ input[type="search"]:focus {
 .sample-signal-rank {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   background: #f5f7f9;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
 }
 .sample-signal-card.is-focused .sample-signal-rank {
@@ -7723,24 +7724,24 @@ input[type="search"]:focus {
 .sample-signal-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin: 0 0 7px;
+  gap: 4px;
+  margin: 0 0 5px;
 }
 .sample-signal-meta span {
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 999px;
-  padding: 4px 7px;
+  padding: 3px 6px;
   background: #fff;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 850;
 }
 .sample-signal-card h3 {
   display: -webkit-box;
   overflow: hidden;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
   color: var(--ink);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.22;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -7750,16 +7751,16 @@ input[type="search"]:focus {
   overflow: hidden;
   margin: 0;
   color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.38;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
 .sample-signal-link {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border: 1px solid rgba(17, 17, 20, 0.1);
   border-radius: 999px;
   color: var(--blue);
@@ -7774,7 +7775,7 @@ input[type="search"]:focus {
 .signal-shelf-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 .grid {
   display: grid;
@@ -8919,23 +8920,39 @@ input[type="email"] {
     grid-template-columns: 1fr;
   }
   .price { text-align: left; }
+  .signal-shelf {
+    gap: 12px;
+    padding: 20px 0 24px;
+  }
   .signal-shelf-board {
     grid-template-columns: 1fr;
   }
   .signal-shelf-copy h2 {
-    font-size: clamp(32px, 9vw, 48px);
+    font-size: clamp(25px, 7vw, 30px);
+    line-height: 1.08;
+  }
+  .signal-shelf-copy > p:not(.section-label) {
+    font-size: 13px;
+    line-height: 1.38;
+  }
+  .signal-proof-strip {
+    margin-top: 0;
+  }
+  .signal-proof-strip span {
+    padding: 5px 8px;
+    font-size: 11px;
   }
   .sample-signal-card.card {
-    grid-template-columns: 38px minmax(0, 1fr) 32px;
-    gap: 10px;
-    padding: 12px;
+    grid-template-columns: 30px minmax(0, 1fr) 28px;
+    gap: 8px;
+    padding: 9px;
   }
   .signal-shelf .opportunity-focus {
     min-height: 0;
   }
   .signal-shelf-actions .action {
-    flex: 1 1 100%;
-    width: 100%;
+    flex: 1 1 calc(50% - 4px);
+    width: auto;
     min-width: 0;
     max-width: 100%;
     white-space: normal;
@@ -9196,14 +9213,22 @@ input[type="email"] {
   }
   .feed-actions { justify-content: flex-start; }
   .opportunity-focus {
-    gap: 14px;
-    border-radius: 14px;
-    padding: 14px;
+    gap: 10px;
+    border-radius: 12px;
+    padding: 11px;
   }
   .opportunity-focus h3 {
-    font-size: clamp(24px, 8vw, 32px);
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: clamp(18px, 5.8vw, 22px);
+    line-height: 1.12;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
   .opportunity-focus-card {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
     justify-items: stretch;
     min-width: 0;
   }
@@ -9211,7 +9236,10 @@ input[type="email"] {
     justify-content: flex-start;
   }
   .opportunity-focus .action {
-    width: 100%;
+    width: auto;
+    min-height: 36px;
+    padding: 0 14px;
+    white-space: nowrap;
   }
   .product-proof {
     gap: 18px;
