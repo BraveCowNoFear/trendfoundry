@@ -413,20 +413,19 @@ if ("IntersectionObserver" in window) {
 
 const flowSteps = [...document.querySelectorAll("[data-flow-step]")];
 function activateFlowStep(step) {
-  for (const item of flowSteps) item.classList.toggle("is-current", item === step);
+  for (const item of flowSteps) {
+    const isCurrent = item === step;
+    item.classList.toggle("is-current", isCurrent);
+    const button = item.querySelector("button");
+    if (button) button.setAttribute("aria-pressed", String(isCurrent));
+  }
 }
 for (const step of flowSteps) {
   const button = step.querySelector("button");
-  if (button) button.addEventListener("click", () => activateFlowStep(step));
-}
-if ("IntersectionObserver" in window && flowSteps.length) {
-  const flowObserver = new IntersectionObserver((entries) => {
-    const visibleEntries = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-    if (visibleEntries[0]) activateFlowStep(visibleEntries[0].target);
-  }, { threshold: [0.42, 0.7] });
-  for (const step of flowSteps) flowObserver.observe(step);
+  if (button) {
+    button.setAttribute("aria-pressed", String(step.classList.contains("is-current")));
+    button.addEventListener("click", () => activateFlowStep(step));
+  }
 }
 
 const contrastButtons = [...document.querySelectorAll("[data-contrast-set]")];

@@ -148,16 +148,59 @@
     </section>
   </div>
   <main>
-    <section class="offer product-path" aria-label="How TrendFoundry turns signals into packs">
-      <div>
-        <p class="section-label">交付路径</p>
-        <h2>输入公开信号，输出可录制选题包。</h2>
-        <p>TrendFoundry 不是另一个信息流。它把嘈杂公开来源筛成少量选题，每个选题都带来源证据、创作角度、风险备注和第一版脚本。</p>
+    <section class="decision-flow" id="decision-flow" aria-label="TrendFoundry 如何把公开信号变成产品包">
+      <div class="decision-copy">
+        <p class="section-label">怎么做</p>
+        <h2>公开信号进来，可录制选题包出去。</h2>
+        <p>TrendFoundry 把 GitHub、YouTube、B站、HN、arXiv 的公开变化筛成创作者能马上开录的选题包：证据、角度、风险、脚本一次交付。</p>
+        <div class="workflow-pills" aria-label="产品分档规则">
+          <span>单期</span>
+          <span>周更</span>
+          <span>定制</span>
+        </div>
       </div>
-      <div class="path-steps" aria-label="交付路径">
-        <span><strong>信号</strong>GitHub、YouTube、Bilibili、HN、arXiv</span>
-        <span><strong>筛选</strong>按匹配度、证据、新鲜度和风险评分</span>
-        <span><strong>打包</strong>简报、CSV、风险备注、录制脚本</span>
+      <div class="decision-panel">
+        <ol class="flow-steps"><li class="is-current" data-flow-step="0">
+          <button class="flow-step-button" type="button">
+            <span>01</span>
+            <strong>信号</strong>
+            <small>GitHub、YouTube、B站、HN、arXiv</small>
+            <em>追踪值得确认的公开变化。</em>
+          </button>
+        </li><li class="" data-flow-step="1">
+          <button class="flow-step-button" type="button">
+            <span>02</span>
+            <strong>筛选</strong>
+            <small>证据、新鲜度、风险</small>
+            <em>只保留有来源、有角度、能开录的机会。</em>
+          </button>
+        </li><li class="" data-flow-step="2">
+          <button class="flow-step-button" type="button">
+            <span>03</span>
+            <strong>打包</strong>
+            <small>简报、CSV、风险备注、脚本</small>
+            <em>把通过筛选的机会变成交付包。</em>
+          </button>
+        </li><li class="" data-flow-step="3">
+          <button class="flow-step-button" type="button">
+            <span>04</span>
+            <strong>交付</strong>
+            <small>单期、周更、定制</small>
+            <em>产品按投入程度分档，不靠复杂规则。</em>
+          </button>
+        </li></ol>
+        <div class="pack-preview" aria-label="选题包预览">
+          <div class="pack-preview-head">
+            <span>选题包预览</span>
+            <strong>可直接开录</strong>
+          </div>
+          <div class="pack-preview-title">AI 视频工作流信号</div>
+          <ul>
+            <li>证据链接已附</li>
+            <li>三个标题角度</li>
+            <li>风险备注和第一版脚本</li>
+          </ul>
+        </div>
       </div>
     </section>
     <section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
@@ -399,43 +442,6 @@
           <strong>交付</strong>
           <em>打包 Markdown、CSV、脚本和期刊页，让买家可以开录。</em>
         </button></div>
-      </div>
-    </section>
-    <section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
-      <div class="decision-copy">
-        <p class="section-label">决策系统</p>
-        <h2>产品的价值在筛选，不在搬运信息流。</h2>
-        <p>TrendFoundry 卖的是公开噪声和下一次录制之间的判断层：证据、匹配度、创作角度和交付物必须一起出现。</p>
-      </div>
-      <div class="decision-panel">
-        <div class="flow-orbit" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <ol class="flow-steps"><li class="is-current" data-flow-step="0">
-          <button class="flow-step-button" type="button">
-            <span>01</span>
-            <strong>先看证据</strong>
-            <em>只有保留原始公开来源的信号，才进入情报包。</em>
-          </button>
-        </li><li class="" data-flow-step="1">
-          <button class="flow-step-button" type="button">
-            <span>02</span>
-            <strong>创作者匹配</strong>
-            <em>先评估新鲜度、可录制性、观众痛点和版权风险，再进入选题队列。</em>
-          </button>
-        </li><li class="" data-flow-step="2">
-          <button class="flow-step-button" type="button">
-            <span>03</span>
-            <strong>录制组件</strong>
-            <em>每个通过筛选的机会都会变成标题角度、钩子、演示路径和限制说明。</em>
-          </button>
-        </li><li class="" data-flow-step="3">
-          <button class="flow-step-button" type="button">
-            <span>04</span>
-            <strong>买家交付</strong>
-            <em>周更包以样品、CSV、脚本和当前期刊形式交付，让创作者快速开录。</em>
-          </button>
-        </li></ol>
       </div>
     </section>
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">

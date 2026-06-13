@@ -903,53 +903,83 @@ const zhMotionProof = `<section class="motion-proof" id="workflow-motion" aria-l
       <img class="motion-preview" src="../signal-demo.svg" alt="TrendFoundry 动态工作流：排序信号、整理选题、打包样品并准备订单" width="960" height="540">
     </section>`;
 const decisionFlowItems = [
-  ["01", "Proof first", "先看证据", "A signal enters the pack only when the original public source stays attached.", "只有保留原始公开来源的信号，才进入情报包。"],
-  ["02", "Creator fit", "创作者匹配", "Novelty, recordability, audience pain, and rights risk are scored before an idea reaches the queue.", "先评估新鲜度、可录制性、观众痛点和版权风险，再进入选题队列。"],
-  ["03", "Recording kit", "录制组件", "Each accepted idea becomes title angles, a hook, a demo path, and a limitation note.", "每个通过筛选的机会都会变成标题角度、钩子、演示路径和限制说明。"],
-  ["04", "Buyer handoff", "买家交付", "The weekly pack lands as a sample, CSV, script, and current issue so a creator can act quickly.", "周更包以样品、CSV、脚本和当前期刊形式交付，让创作者快速开录。"]
+  ["01", "Signal", "信号", "GitHub, YouTube, Bilibili, HN, arXiv", "GitHub、YouTube、B站、HN、arXiv", "Track public changes worth checking.", "追踪值得确认的公开变化。"],
+  ["02", "Filter", "筛选", "Evidence, novelty, risk", "证据、新鲜度、风险", "Keep only ideas with sources, angles, and recording fit.", "只保留有来源、有角度、能开录的机会。"],
+  ["03", "Pack", "打包", "Brief, CSV, risk note, script", "简报、CSV、风险备注、脚本", "Turn the chosen ideas into a creator-ready handoff.", "把通过筛选的机会变成交付包。"],
+  ["04", "Deliver", "交付", "Single issue, weekly queue, custom desk", "单期、周更、定制", "The product tiers differ by commitment, not by mystery.", "产品按投入程度分档，不靠复杂规则。"]
 ];
 const decisionFlowSteps = decisionFlowItems
-  .map(([number, label, labelZh, text, textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
+  .map(([number, label, labelZh, kicker, kickerZh, text, textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
           <button class="flow-step-button" type="button">
             <span>${number}</span>
             <strong>${dual(label, labelZh)}</strong>
+            ${dual(kicker, kickerZh, "small")}
             ${dual(text, textZh, "em")}
           </button>
         </li>`)
   .join("");
 const zhDecisionFlowSteps = decisionFlowItems
-  .map(([number, , labelZh, , textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
+  .map(([number, , labelZh, , kickerZh, , textZh], index) => `<li class="${index === 0 ? "is-current" : ""}" data-flow-step="${index}">
           <button class="flow-step-button" type="button">
             <span>${number}</span>
             <strong>${escapeHtml(labelZh)}</strong>
+            <small>${escapeHtml(kickerZh)}</small>
             <em>${escapeHtml(textZh)}</em>
           </button>
         </li>`)
   .join("");
-const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
+const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="How TrendFoundry turns public signals into product packs">
       <div class="decision-copy">
-        ${dual("Decision system", "决策系统", "p", ' class="section-label"')}
-        ${dual("The product is the filter, not the feed.", "产品的价值在筛选，不在搬运信息流。", "h2")}
-        ${dual("TrendFoundry sells the judgment layer between public noise and a creator's next recording session: proof, fit, angle, and handoff all travel together.", "TrendFoundry 卖的是公开噪声和下一次录制之间的判断层：证据、匹配度、创作角度和交付物必须一起出现。", "p")}
+        ${dual("How it works", "怎么做", "p", ' class="section-label"')}
+        ${dual("Public signals go in. A recordable pack comes out.", "公开信号进来，可录制选题包出去。", "h2")}
+        ${dual("TrendFoundry turns public changes across GitHub, YouTube, Bilibili, HN, and arXiv into creator-ready topic packs: proof, angle, risk, and script handoff.", "TrendFoundry 把 GitHub、YouTube、B站、HN、arXiv 的公开变化筛成创作者能马上开录的选题包：证据、角度、风险、脚本一次交付。", "p")}
+        <div class="workflow-pills" aria-label="Product tier rule">
+          <span>${dual("Single issue", "单期")}</span>
+          <span>${dual("Weekly queue", "周更")}</span>
+          <span>${dual("Custom desk", "定制")}</span>
+        </div>
       </div>
       <div class="decision-panel">
-        <div class="flow-orbit" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-        </div>
         <ol class="flow-steps">${decisionFlowSteps}</ol>
+        <div class="pack-preview" aria-label="Topic pack preview">
+          <div class="pack-preview-head">
+            <span>${dual("Pack preview", "选题包预览")}</span>
+            <strong>${dual("Ready to record", "可直接开录")}</strong>
+          </div>
+          <div class="pack-preview-title">${dual("AI video workflow signal", "AI 视频工作流信号")}</div>
+          <ul>
+            <li>${dual("Proof link attached", "证据链接已附")}</li>
+            <li>${dual("Three title angles", "三个标题角度")}</li>
+            <li>${dual("Risk note and first script pass", "风险备注和第一版脚本")}</li>
+          </ul>
+        </div>
       </div>
     </section>`;
-const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry decision system">
+const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry 如何把公开信号变成产品包">
       <div class="decision-copy">
-        <p class="section-label">决策系统</p>
-        <h2>产品的价值在筛选，不在搬运信息流。</h2>
-        <p>TrendFoundry 卖的是公开噪声和下一次录制之间的判断层：证据、匹配度、创作角度和交付物必须一起出现。</p>
+        <p class="section-label">怎么做</p>
+        <h2>公开信号进来，可录制选题包出去。</h2>
+        <p>TrendFoundry 把 GitHub、YouTube、B站、HN、arXiv 的公开变化筛成创作者能马上开录的选题包：证据、角度、风险、脚本一次交付。</p>
+        <div class="workflow-pills" aria-label="产品分档规则">
+          <span>单期</span>
+          <span>周更</span>
+          <span>定制</span>
+        </div>
       </div>
       <div class="decision-panel">
-        <div class="flow-orbit" aria-hidden="true">
-          <span></span><span></span><span></span><span></span>
-        </div>
         <ol class="flow-steps">${zhDecisionFlowSteps}</ol>
+        <div class="pack-preview" aria-label="选题包预览">
+          <div class="pack-preview-head">
+            <span>选题包预览</span>
+            <strong>可直接开录</strong>
+          </div>
+          <div class="pack-preview-title">AI 视频工作流信号</div>
+          <ul>
+            <li>证据链接已附</li>
+            <li>三个标题角度</li>
+            <li>风险备注和第一版脚本</li>
+          </ul>
+        </div>
       </div>
     </section>`;
 const beforeAfterRows = [
@@ -2654,18 +2684,7 @@ const html = `<!doctype html>
   ${localNav}
   ${sampleDrawer}
   <main>
-    <section class="offer product-path" aria-label="How TrendFoundry turns signals into packs">
-      <div>
-        ${dual("How it works", "交付路径", "p", ' class="section-label"')}
-        ${dual("Public signals go in. A recordable pack comes out.", "输入公开信号，输出可录制选题包。", "h2")}
-        ${dual("TrendFoundry is not another feed. It filters noisy public sources into a small set of ideas that already carry proof, angle, risk, and a first script pass.", "TrendFoundry 不是另一个信息流。它把嘈杂公开来源筛成少量选题，每个选题都带来源证据、创作角度、风险备注和第一版脚本。", "p")}
-      </div>
-      <div class="path-steps" aria-label="Delivery path">
-        <span><strong>${dual("Signal", "信号")}</strong>${dual("GitHub, YouTube, Bilibili, HN, arXiv", "GitHub、YouTube、Bilibili、HN、arXiv")}</span>
-        <span><strong>${dual("Filter", "筛选")}</strong>${dual("Score fit, proof, novelty, and risk", "按匹配度、证据、新鲜度和风险评分")}</span>
-        <span><strong>${dual("Pack", "打包")}</strong>${dual("Brief, CSV, risk notes, recording script", "简报、CSV、风险备注、录制脚本")}</span>
-      </div>
-    </section>
+    ${decisionFlow}
     ${fitStudio}
     <section class="sample-preview" id="sample" aria-label="Free public sample">
       <div>
@@ -2686,7 +2705,6 @@ const html = `<!doctype html>
     ${socialProof}
     ${motionProof}
     ${signalRunway}
-    ${decisionFlow}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         ${dual("Sample signals", "样品信号", "p", ' class="section-label"')}
@@ -2805,18 +2823,7 @@ const zhHtml = `<!doctype html>
   ${zhLocalNav}
   ${zhSampleDrawer}
   <main>
-    <section class="offer product-path" aria-label="How TrendFoundry turns signals into packs">
-      <div>
-        <p class="section-label">交付路径</p>
-        <h2>输入公开信号，输出可录制选题包。</h2>
-        <p>TrendFoundry 不是另一个信息流。它把嘈杂公开来源筛成少量选题，每个选题都带来源证据、创作角度、风险备注和第一版脚本。</p>
-      </div>
-      <div class="path-steps" aria-label="交付路径">
-        <span><strong>信号</strong>GitHub、YouTube、Bilibili、HN、arXiv</span>
-        <span><strong>筛选</strong>按匹配度、证据、新鲜度和风险评分</span>
-        <span><strong>打包</strong>简报、CSV、风险备注、录制脚本</span>
-      </div>
-    </section>
+    ${zhDecisionFlow}
     ${fitStudio}
     <section class="sample-preview" id="sample" aria-label="Free public sample">
       <div>
@@ -2844,7 +2851,6 @@ const zhHtml = `<!doctype html>
     </section>
     ${zhMotionProof}
     ${zhSignalRunway}
-    ${zhDecisionFlow}
     <section class="signal-shelf" id="opportunities" aria-labelledby="signal-shelf-title">
       <div class="signal-shelf-copy">
         <p class="section-label">样品信号</p>
@@ -4292,42 +4298,24 @@ main {
 }
 .offer h2 { max-width: 780px; margin: 0 0 8px; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.08; }
 .offer p { margin: 0; color: var(--muted); }
-.product-path {
-  grid-template-columns: minmax(0, 0.88fr) minmax(360px, 0.72fr);
-  align-items: stretch;
-  padding-bottom: 42px;
-}
-.product-path h2 {
-  max-width: 760px;
-}
-.product-path p:not(.section-label) {
-  max-width: 720px;
-  line-height: 1.5;
-}
-.path-steps {
-  display: grid;
-  grid-template-columns: 1fr;
+.workflow-pills {
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  min-width: 0;
+  margin-top: 22px;
 }
-.path-steps span {
-  display: grid;
-  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
-  gap: 12px;
+.workflow-pills span {
+  display: inline-flex;
   align-items: center;
-  min-height: 56px;
-  border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 8px;
-  padding: 12px 14px;
-  background: rgba(255,255,255,0.72);
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.35;
-  box-shadow: 0 10px 28px rgba(17, 17, 20, 0.05);
-}
-.path-steps strong {
+  min-height: 34px;
+  border: 1px solid rgba(17, 17, 20, 0.1);
+  border-radius: 999px;
+  padding: 0 14px;
+  background: rgba(255,255,255,0.82);
   color: var(--ink);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 760;
+  box-shadow: 0 8px 20px rgba(17, 17, 20, 0.04);
 }
 .price {
   text-align: right;
@@ -5207,81 +5195,48 @@ main {
 }
 .decision-flow {
   display: grid;
-  grid-template-columns: minmax(260px, 0.44fr) minmax(0, 0.56fr);
-  gap: clamp(24px, 5vw, 70px);
+  grid-template-columns: minmax(260px, 0.4fr) minmax(0, 0.6fr);
+  gap: clamp(24px, 5vw, 64px);
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 10px 0 44px;
-  margin-bottom: 34px;
+  padding: 8px 0 46px;
+  margin-bottom: 32px;
 }
 .decision-copy {
-  position: sticky;
-  top: 22px;
+  max-width: 650px;
 }
 .decision-copy h2 {
-  max-width: 620px;
+  max-width: 650px;
   margin: 0 0 12px;
-  font-size: clamp(34px, 4.8vw, 68px);
-  line-height: 0.98;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1.02;
 }
 .decision-copy p:not(.section-label) {
   margin: 0;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.5;
 }
 .decision-panel {
   position: relative;
-  min-height: 520px;
-  overflow: hidden;
+  display: grid;
+  gap: 14px;
+  min-height: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 18px;
-  padding: clamp(16px, 2.4vw, 28px);
+  border-radius: 16px;
+  padding: clamp(14px, 2.4vw, 22px);
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.86), rgba(246,249,252,0.72)),
-    radial-gradient(circle at 72% 22%, rgba(0, 113, 227, 0.12), transparent 34%);
+    linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,249,252,0.78)),
+    linear-gradient(180deg, rgba(0, 113, 227, 0.06), transparent 42%);
   box-shadow: var(--shadow);
   backdrop-filter: blur(20px);
-}
-.flow-orbit {
-  position: absolute;
-  inset: 26px;
-  border: 1px solid rgba(0, 113, 227, 0.16);
-  border-radius: 50%;
-  opacity: 0.86;
-  animation: orbitTurn 18s linear infinite;
-}
-.flow-orbit::before,
-.flow-orbit::after {
-  content: "";
-  position: absolute;
-  inset: 17%;
-  border: 1px solid rgba(17, 17, 20, 0.07);
-  border-radius: 50%;
-}
-.flow-orbit::after {
-  inset: 33%;
-}
-.flow-orbit span {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 8px rgba(0, 113, 227, 0.1);
-}
-.flow-orbit span:nth-child(1) { top: 11%; left: 23%; }
-.flow-orbit span:nth-child(2) { top: 24%; right: 13%; background: var(--success); }
-.flow-orbit span:nth-child(3) { right: 24%; bottom: 12%; background: #a45a00; }
-.flow-orbit span:nth-child(4) { bottom: 25%; left: 12%; background: #111114; }
-@keyframes orbitTurn {
-  to { transform: rotate(360deg); }
 }
 .flow-steps {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -5291,14 +5246,14 @@ main {
 }
 .flow-step-button {
   display: grid;
-  grid-template-columns: 58px minmax(0, 1fr);
-  gap: 8px 14px;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 5px 12px;
   width: 100%;
-  min-height: 104px;
+  min-height: 122px;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: var(--radius);
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.76);
   color: var(--ink);
   font: inherit;
   text-align: left;
@@ -5308,34 +5263,83 @@ main {
 }
 .flow-step-button:hover,
 .flow-steps li.is-current .flow-step-button {
-  transform: translateX(-4px);
+  transform: translateY(-3px);
   border-color: rgba(0, 113, 227, 0.42);
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
 }
 .flow-step-button span {
-  grid-row: span 2;
+  grid-row: span 3;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--accent-soft);
   color: var(--accent);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 850;
 }
 .flow-step-button strong {
-  align-self: end;
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.15;
+}
+.flow-step-button small {
+  min-height: 0;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.35;
 }
 .flow-step-button em {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   line-height: 1.4;
+}
+.pack-preview {
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(255,255,255,0.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+}
+.pack-preview-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 760;
+}
+.pack-preview-head strong {
+  color: var(--accent);
+}
+.pack-preview-title {
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: clamp(23px, 2vw, 31px);
+  font-weight: 850;
+  line-height: 1.05;
+}
+.pack-preview ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pack-preview li {
+  min-height: 48px;
+  border: 1px solid rgba(17, 17, 20, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+  background: rgba(247,249,252,0.72);
 }
 .contrast-lab {
   display: grid;
@@ -8931,9 +8935,6 @@ input[type="email"] {
     gap: 18px;
     padding-bottom: 30px;
   }
-  .decision-copy {
-    position: static;
-  }
   .decision-copy h2 {
     font-size: clamp(32px, 10vw, 46px);
   }
@@ -8944,18 +8945,28 @@ input[type="email"] {
     min-height: 0;
     border-radius: 14px;
   }
-  .flow-orbit {
-    inset: 18px;
-    opacity: 0.5;
+  .flow-steps {
+    grid-template-columns: 1fr;
   }
   .flow-step-button {
-    grid-template-columns: 46px minmax(0, 1fr);
-    min-height: 96px;
-    padding: 13px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    min-height: 0;
+    padding: 11px;
   }
   .flow-step-button span {
-    width: 38px;
-    height: 38px;
+    grid-row: span 3;
+    width: 34px;
+    height: 34px;
+  }
+  .flow-step-button strong {
+    font-size: 18px;
+  }
+  .pack-preview {
+    padding: 14px;
+  }
+  .pack-preview ul {
+    grid-template-columns: 1fr;
+    margin-top: 12px;
   }
   .contrast-lab {
     gap: 16px;
@@ -9568,15 +9579,6 @@ input[type="email"] {
   .language-switch { width: 100%; }
   .language-option { flex: 1 1 0; }
   .order-steps li { grid-template-columns: 1fr; }
-  .product-path {
-    grid-template-columns: 1fr;
-    padding-bottom: 32px;
-  }
-  .path-steps span {
-    grid-template-columns: 1fr;
-    gap: 4px;
-    min-height: 0;
-  }
   .mail-drafts pre { min-height: 180px; }
   h1 {
     width: 100%;
@@ -10315,20 +10317,19 @@ if ("IntersectionObserver" in window) {
 
 const flowSteps = [...document.querySelectorAll("[data-flow-step]")];
 function activateFlowStep(step) {
-  for (const item of flowSteps) item.classList.toggle("is-current", item === step);
+  for (const item of flowSteps) {
+    const isCurrent = item === step;
+    item.classList.toggle("is-current", isCurrent);
+    const button = item.querySelector("button");
+    if (button) button.setAttribute("aria-pressed", String(isCurrent));
+  }
 }
 for (const step of flowSteps) {
   const button = step.querySelector("button");
-  if (button) button.addEventListener("click", () => activateFlowStep(step));
-}
-if ("IntersectionObserver" in window && flowSteps.length) {
-  const flowObserver = new IntersectionObserver((entries) => {
-    const visibleEntries = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-    if (visibleEntries[0]) activateFlowStep(visibleEntries[0].target);
-  }, { threshold: [0.42, 0.7] });
-  for (const step of flowSteps) flowObserver.observe(step);
+  if (button) {
+    button.setAttribute("aria-pressed", String(step.classList.contains("is-current")));
+    button.addEventListener("click", () => activateFlowStep(step));
+  }
 }
 
 const contrastButtons = [...document.querySelectorAll("[data-contrast-set]")];
