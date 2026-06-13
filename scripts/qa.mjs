@@ -225,6 +225,7 @@ async function checkLocal() {
   assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
   assertCheck("Chinese landing page has 3 sample signal cards", (zhIndex.match(/<article class="sample-signal-card card/g) || []).length === 3);
   assertCheck("Chinese landing page hero tier prices are fixed labels", zhIndex.includes('data-hero-tier="weekly-pipeline"') && zhIndex.includes("$19") && !zhIndex.includes("data-hero-count"));
+  assertCheck("Chinese landing page has compact workflow title", zhIndex.includes("\u56db\u6b65\u751f\u6210\u9009\u9898\u5305\u3002") && !zhIndex.includes("\u516c\u5f00\u4fe1\u53f7\u8fdb\u6765\uff0c\u53ef\u5f55\u5236\u9009\u9898\u5305\u51fa\u53bb\u3002"));
   assertCheck("Chinese landing page explains product rules", zhIndex.includes("产品只按投入程度分三档") && zhIndex.includes("单期 = 先试一包") && zhIndex.includes("打开完整 12 条"));
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));

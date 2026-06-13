@@ -974,8 +974,8 @@ const zhDecisionFlowSteps = decisionFlowItems
 const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="How TrendFoundry turns public signals into product packs">
       <div class="decision-copy">
         ${dual("How it works", "怎么做", "p", ' class="section-label"')}
-        ${dual("Public signals go in. A recordable pack comes out.", "公开信号进来，可录制选题包出去。", "h2")}
-        ${dual("TrendFoundry turns public changes across GitHub, YouTube, Bilibili, HN, and arXiv into creator-ready topic packs: proof, angle, risk, and script handoff.", "TrendFoundry 把 GitHub、YouTube、B站、HN、arXiv 的公开变化筛成创作者能马上开录的选题包：证据、角度、风险、脚本一次交付。", "p")}
+        ${dual("Four steps to a topic pack.", "四步生成选题包。", "h2")}
+        ${dual("Source, recording value, pack contents, and tier fit are answered in one pass.", "来源、录制价值、内容、档位，一次说明。", "p")}
         <div class="workflow-pills" aria-label="Product tier rule">
           <span>${dual("Single issue", "单期")}</span>
           <span>${dual("Weekly queue", "周更")}</span>
@@ -989,20 +989,15 @@ const decisionFlow = `<section class="decision-flow" id="decision-flow" aria-lab
             <span>${dual("Pack preview", "选题包预览")}</span>
             <strong>${dual("Ready to record", "可直接开录")}</strong>
           </div>
-          <div class="pack-preview-title">${dual("AI video workflow signal", "AI 视频工作流信号")}</div>
-          <ul>
-            <li>${dual("Proof link attached", "证据链接已附")}</li>
-            <li>${dual("Three title angles", "三个标题角度")}</li>
-            <li>${dual("Risk note and first script pass", "风险备注和第一版脚本")}</li>
-          </ul>
+          <div class="pack-preview-title">${dual("Deliverable", "交付")} = ${dual("ranked ideas", "排序选题")} + ${dual("proof links", "来源证据")} + CSV + ${dual("script", "脚本")}</div>
         </div>
       </div>
     </section>`;
 const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-label="TrendFoundry 如何把公开信号变成产品包">
       <div class="decision-copy">
         <p class="section-label">怎么做</p>
-        <h2>公开信号进来，可录制选题包出去。</h2>
-        <p>TrendFoundry 把 GitHub、YouTube、B站、HN、arXiv 的公开变化筛成创作者能马上开录的选题包：证据、角度、风险、脚本一次交付。</p>
+        <h2>四步生成选题包。</h2>
+        <p>来源、录制价值、内容、档位，一次说明。</p>
         <div class="workflow-pills" aria-label="产品分档规则">
           <span>单期</span>
           <span>周更</span>
@@ -1016,12 +1011,7 @@ const zhDecisionFlow = `<section class="decision-flow" id="decision-flow" aria-l
             <span>选题包预览</span>
             <strong>可直接开录</strong>
           </div>
-          <div class="pack-preview-title">AI 视频工作流信号</div>
-          <ul>
-            <li>证据链接已附</li>
-            <li>三个标题角度</li>
-            <li>风险备注和第一版脚本</li>
-          </ul>
+          <div class="pack-preview-title">交付 = 排序选题 + 来源证据 + CSV + 脚本</div>
         </div>
       </div>
     </section>`;
@@ -5442,21 +5432,21 @@ main {
 }
 .decision-flow {
   display: grid;
-  grid-template-columns: minmax(260px, 0.4fr) minmax(0, 0.6fr);
-  gap: clamp(24px, 5vw, 64px);
+  grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+  gap: clamp(22px, 4vw, 48px);
   align-items: center;
   border-bottom: 1px solid var(--line);
-  padding: 8px 0 46px;
-  margin-bottom: 32px;
+  padding: 4px 0 36px;
+  margin-bottom: 28px;
 }
 .decision-copy {
-  max-width: 650px;
+  max-width: 560px;
 }
 .decision-copy h2 {
-  max-width: 650px;
+  max-width: 540px;
   margin: 0 0 12px;
-  font-size: clamp(34px, 5vw, 62px);
-  line-height: 1.02;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.04;
 }
 .decision-copy p:not(.section-label) {
   margin: 0;
@@ -5467,11 +5457,11 @@ main {
 .decision-panel {
   position: relative;
   display: grid;
-  gap: 14px;
+  gap: 12px;
   min-height: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 16px;
-  padding: clamp(14px, 2.4vw, 22px);
+  border-radius: 18px;
+  padding: clamp(12px, 2vw, 18px);
   background:
     linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,249,252,0.78)),
     linear-gradient(180deg, rgba(0, 113, 227, 0.06), transparent 42%);
@@ -5482,24 +5472,34 @@ main {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.flow-steps::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 9%;
+  right: 9%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0,113,227,0.38), rgba(0,113,227,0.08));
 }
 .flow-steps li {
   margin: 0;
 }
 .flow-step-button {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 5px 12px;
+  justify-items: start;
+  gap: 7px;
   width: 100%;
-  min-height: 122px;
+  min-height: 118px;
   border: 1px solid rgba(17, 17, 20, 0.08);
   border-radius: 12px;
-  padding: 14px;
+  padding: 13px;
   background: rgba(255, 255, 255, 0.76);
   color: var(--ink);
   font: inherit;
@@ -5510,18 +5510,19 @@ main {
 }
 .flow-step-button:hover,
 .flow-steps li.is-current .flow-step-button {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   border-color: rgba(0, 113, 227, 0.42);
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 18px 42px rgba(17, 17, 20, 0.1);
+  box-shadow: 0 14px 34px rgba(17, 17, 20, 0.09);
 }
 .flow-step-button span {
-  grid-row: span 3;
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--accent-soft);
   color: var(--accent);
@@ -5529,7 +5530,7 @@ main {
   font-weight: 850;
 }
 .flow-step-button strong {
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.15;
 }
 .flow-step-button small {
@@ -5540,6 +5541,7 @@ main {
   line-height: 1.35;
 }
 .flow-step-button em {
+  display: none;
   color: var(--muted);
   font-size: 12px;
   font-style: normal;
@@ -5547,8 +5549,8 @@ main {
 }
 .pack-preview {
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 14px;
-  padding: 18px;
+  border-radius: 12px;
+  padding: 14px 16px;
   background: rgba(255,255,255,0.72);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
 }
@@ -5564,9 +5566,9 @@ main {
   color: var(--accent);
 }
 .pack-preview-title {
-  margin-top: 14px;
+  margin-top: 10px;
   color: var(--ink);
-  font-size: clamp(23px, 2vw, 31px);
+  font-size: clamp(21px, 1.7vw, 27px);
   font-weight: 850;
   line-height: 1.05;
 }
@@ -5574,15 +5576,15 @@ main {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin: 16px 0 0;
+  margin: 12px 0 0;
   padding: 0;
   list-style: none;
 }
 .pack-preview li {
-  min-height: 48px;
+  min-height: 0;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: 10px;
-  padding: 10px 12px;
+  border-radius: 999px;
+  padding: 8px 11px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.35;
@@ -9231,10 +9233,10 @@ input[type="email"] {
   }
   .decision-flow {
     gap: 18px;
-    padding-bottom: 30px;
+    padding-bottom: 28px;
   }
   .decision-copy h2 {
-    font-size: clamp(32px, 10vw, 46px);
+    font-size: clamp(29px, 8.5vw, 40px);
   }
   .decision-copy p:not(.section-label) {
     font-size: 16px;
@@ -9245,26 +9247,49 @@ input[type="email"] {
   }
   .flow-steps {
     grid-template-columns: 1fr;
+    gap: 7px;
+  }
+  .flow-steps::before {
+    top: 22px;
+    bottom: 22px;
+    left: 27px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(0,113,227,0.38), rgba(0,113,227,0.08));
   }
   .flow-step-button {
-    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-columns: 36px minmax(0, 1fr);
+    align-items: center;
     min-height: 0;
-    padding: 11px;
+    gap: 4px 11px;
+    padding: 10px 11px;
   }
   .flow-step-button span {
-    grid-row: span 3;
-    width: 34px;
-    height: 34px;
+    grid-row: 1 / span 2;
+    width: 32px;
+    height: 32px;
   }
   .flow-step-button strong {
     font-size: 18px;
   }
+  .flow-step-button small {
+    font-size: 12px;
+  }
   .pack-preview {
     padding: 14px;
+  }
+  .pack-preview-title {
+    font-size: 22px;
   }
   .pack-preview ul {
     grid-template-columns: 1fr;
     margin-top: 12px;
+  }
+  .pack-preview li {
+    min-height: 0;
+    border-radius: 10px;
+    padding: 8px 10px;
   }
   .contrast-lab {
     gap: 16px;
