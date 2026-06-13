@@ -30,6 +30,7 @@ const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotli
 const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
 const fitDeviceNode = document.querySelector(".fit-device");
 const fitTitleNode = document.querySelector("#fit-title");
+const fitPriceNode = document.querySelector("#fit-price");
 const fitKitNode = document.querySelector("#fit-kit");
 const fitCadenceNode = document.querySelector("#fit-cadence");
 const fitSourceNode = document.querySelector("#fit-source");
@@ -171,6 +172,7 @@ function activateFitPersona(button, scrollToButton = false) {
     column.classList.toggle("active", column.dataset.matrixColumn === (button.dataset.fitPersona || ""));
   }
   if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
+  if (fitPriceNode) fitPriceNode.textContent = button.dataset["fitPrice" + suffix] || "";
   if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
   if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
   if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";

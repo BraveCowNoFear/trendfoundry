@@ -215,85 +215,91 @@ const productVisual = `<div class="product-visual" aria-label="TrendFoundry sign
         ${sourceMixPanel}
       </div>`;
 const fitPersonaItems = {
-  youtube: top.find((item) => item.source === "youtube") || top[0] || null,
-  bilibili: top.find((item) => item.source === "bilibili") || top[1] || top[0] || null,
-  deeptech: top.find((item) => item.source === "github" || item.source === "arxiv") || top[2] || top[0] || null
+  "sample-issue": top[0] || null,
+  "weekly-pipeline": top.find((item) => item.source === "bilibili" || item.source === "youtube") || top[1] || top[0] || null,
+  "custom-niche": top.find((item) => item.source === "github" || item.source === "arxiv") || top[2] || top[0] || null
 };
 const fitPersonas = [
   {
-    id: "youtube",
-    eyebrowEn: "Pack 01",
-    eyebrowZh: "包 01",
-    labelEn: "Buyer Content Pack",
-    labelZh: "买家内容包",
-    shortEn: "Content",
-    shortZh: "内容",
-    ruleEn: "For publishing",
-    ruleZh: "用于发布",
-    titleEn: "Educate and convert buyers with proof-first content.",
-    titleZh: "用证据优先的内容教育并转化买家。",
-    copyEn: "The same market signal becomes a buyer-facing topic, proof card, hook, and script seed.",
-    copyZh: "同一条市场信号会变成面向买家的选题、证据卡、钩子和脚本种子。",
-    kitEn: "Proof card / buyer hook / title angles / script seed",
-    kitZh: "证据卡 / 买家钩子 / 标题角度 / 脚本种子",
-    cadenceEn: "7-day content sprint",
-    cadenceZh: "7 天内容冲刺",
+    id: "sample-issue",
+    eyebrowEn: "Tier 01",
+    eyebrowZh: "档 01",
+    labelEn: "Sample issue",
+    labelZh: "单期样品",
+    shortEn: "Sample",
+    shortZh: "单期",
+    priceEn: "$9",
+    priceZh: "$9",
+    ruleEn: "Test once",
+    ruleZh: "先试一次",
+    titleEn: "Buy one pack and see whether the signal format fits your channel.",
+    titleZh: "先买一份，确认这种选题包是否适合你的频道。",
+    copyEn: "One ranked issue with proof links, CSV, risk notes, and a first recording script.",
+    copyZh: "一次性交付排序选题、来源证据、CSV、风险备注和第一版录制脚本。",
+    kitEn: "12 ranked ideas / CSV / risk notes / 1 script",
+    kitZh: "12 个排序选题 / CSV / 风险备注 / 1 份脚本",
+    cadenceEn: "one-time delivery",
+    cadenceZh: "一次性交付",
     progress: 72,
-    strengthEn: "Very strong",
-    strengthZh: "很强",
-    velocityEn: "Accelerating",
-    velocityZh: "正在加速",
-    item: fitPersonaItems.youtube
+    strengthEn: "Lowest commitment",
+    strengthZh: "最低投入",
+    velocityEn: "Proof check",
+    velocityZh: "先验证质量",
+    item: fitPersonaItems["sample-issue"]
   },
   {
-    id: "bilibili",
-    eyebrowEn: "Pack 02",
-    eyebrowZh: "包 02",
-    labelEn: "Outreach Pack",
-    labelZh: "外联回复包",
-    shortEn: "Outreach",
-    shortZh: "外联",
-    ruleEn: "For replies",
-    ruleZh: "用于回复",
-    titleEn: "Turn the signal into a sharper outreach angle.",
-    titleZh: "把信号变成更锐利的外联角度。",
-    copyEn: "For teams that need a timely reason to contact creators, operators, or niche buyers.",
-    copyZh: "适合需要及时联系创作者、运营者或垂直买家的团队。",
-    kitEn: "Audience pain / reply angle / proof snippet / CTA note",
-    kitZh: "受众痛点 / 回复角度 / 证据片段 / CTA 备注",
-    cadenceEn: "48-hour reply window",
-    cadenceZh: "48 小时回复窗口",
+    id: "weekly-pipeline",
+    eyebrowEn: "Tier 02",
+    eyebrowZh: "档 02",
+    labelEn: "Weekly pipeline",
+    labelZh: "周更情报",
+    shortEn: "Weekly",
+    shortZh: "周更",
+    priceEn: "$19/mo",
+    priceZh: "$19/月",
+    ruleEn: "Steady topic queue",
+    ruleZh: "稳定选题队列",
+    titleEn: "Keep a weekly queue alive without reopening five public feeds.",
+    titleZh: "不用反复刷五个信息源，也能保持每周选题队列。",
+    copyEn: "A fresh 12-idea issue every week, with sources, angles, outlines, and recording notes.",
+    copyZh: "每周补充 12 个可录制选题，附来源、角度、大纲和录制备注。",
+    kitEn: "Weekly issue / source mix / Bilibili + YouTube angles / outlines",
+    kitZh: "周更期刊 / 来源组合 / B 站 + YouTube 角度 / 大纲",
+    cadenceEn: "weekly issue",
+    cadenceZh: "每周更新",
     progress: 64,
-    strengthEn: "Focused",
-    strengthZh: "聚焦",
-    velocityEn: "Fresh window",
-    velocityZh: "新鲜窗口",
-    item: fitPersonaItems.bilibili
+    strengthEn: "Default subscription",
+    strengthZh: "默认订阅档",
+    velocityEn: "Queue stays warm",
+    velocityZh: "队列不断档",
+    item: fitPersonaItems["weekly-pipeline"]
   },
   {
-    id: "deeptech",
-    eyebrowEn: "Pack 03",
-    eyebrowZh: "包 03",
-    labelEn: "Thought Leadership Pack",
-    labelZh: "观点领导力包",
-    shortEn: "Leadership",
-    shortZh: "观点",
-    ruleEn: "For POV",
-    ruleZh: "用于观点",
-    titleEn: "Shape the proof into an original perspective.",
-    titleZh: "把证据塑造成一个原创观点。",
-    copyEn: "Best for deep-tech teams that want technical novelty, caveats, and a defensible narrative.",
-    copyZh: "适合深技术团队：需要技术新鲜度、限制说明和站得住的叙事。",
-    kitEn: "Source rank / novelty score / caveat map / narrative claim",
-    kitZh: "来源排序 / 新鲜度评分 / 限制地图 / 叙事主张",
-    cadenceEn: "Custom niche desk",
-    cadenceZh: "垂直定制包",
+    id: "custom-niche",
+    eyebrowEn: "Tier 03",
+    eyebrowZh: "档 03",
+    labelEn: "Custom niche desk",
+    labelZh: "垂直定制",
+    shortEn: "Custom",
+    shortZh: "定制",
+    priceEn: "$49/mo",
+    priceZh: "$49/月",
+    ruleEn: "Your niche only",
+    ruleZh: "只看你的赛道",
+    titleEn: "Narrow the desk to one niche, one channel, and stricter filters.",
+    titleZh: "把情报台收窄到你的垂类、频道和筛选标准。",
+    copyEn: "Custom source queries, niche scoring, stricter filters, and lead angles for one lane.",
+    copyZh: "定制来源查询、垂类评分、严格过滤和只服务一个赛道的选题角度。",
+    kitEn: "Custom sources / niche scoring / strict filters / lead angles",
+    kitZh: "定制来源 / 垂类评分 / 严格过滤 / 线索角度",
+    cadenceEn: "monthly custom desk",
+    cadenceZh: "每月定制情报台",
     progress: 81,
-    strengthEn: "High confidence",
-    strengthZh: "高置信度",
-    velocityEn: "Technical lift",
-    velocityZh: "技术抬升",
-    item: fitPersonaItems.deeptech
+    strengthEn: "Highest focus",
+    strengthZh: "最高聚焦",
+    velocityEn: "Own one lane",
+    velocityZh: "占住一个赛道",
+    item: fitPersonaItems["custom-niche"]
   }
 ];
 const defaultFitPersona = fitPersonas[0];
@@ -365,6 +371,7 @@ const fitPersonaButtons = fitPersonas
   .map((persona, index) => `<button class="fit-persona${index === 0 ? " active" : ""}" type="button" data-fit-persona="${escapeHtml(persona.id)}" aria-pressed="${index === 0 ? "true" : "false"}"
     data-fit-pack-en="${escapeHtml(persona.labelEn)}" data-fit-pack-zh="${escapeHtml(persona.labelZh)}"
     data-fit-short-en="${escapeHtml(persona.shortEn)}" data-fit-short-zh="${escapeHtml(persona.shortZh)}"
+    data-fit-price-en="${escapeHtml(persona.priceEn)}" data-fit-price-zh="${escapeHtml(persona.priceZh)}"
     data-fit-rule-en="${escapeHtml(persona.ruleEn)}" data-fit-rule-zh="${escapeHtml(persona.ruleZh)}"
     data-fit-title-en="${escapeHtml(persona.titleEn)}" data-fit-title-zh="${escapeHtml(persona.titleZh)}"
     data-fit-copy-en="${escapeHtml(persona.copyEn)}" data-fit-copy-zh="${escapeHtml(persona.copyZh)}"
@@ -379,43 +386,36 @@ const fitPersonaButtons = fitPersonas
     data-fit-url="${escapeHtml(persona.item?.url || "./issues/latest.html")}">
       <span data-i18n-en="${escapeHtml(persona.eyebrowEn)}" data-i18n-zh="${escapeHtml(persona.eyebrowZh)}">${escapeHtml(persona.eyebrowEn)}</span>
       <strong data-i18n-en="${escapeHtml(persona.labelEn)}" data-i18n-zh="${escapeHtml(persona.labelZh)}">${escapeHtml(persona.labelEn)}</strong>
+      <b data-i18n-en="${escapeHtml(persona.priceEn)}" data-i18n-zh="${escapeHtml(persona.priceZh)}">${escapeHtml(persona.priceEn)}</b>
       <small data-i18n-en="${escapeHtml(persona.ruleEn)}" data-i18n-zh="${escapeHtml(persona.ruleZh)}">${escapeHtml(persona.ruleEn)}</small>
     </button>`)
   .join("");
 const fitStudio = `<section class="fit-studio product-rules" id="fit-studio" aria-label="Product pack rules">
       <div class="fit-copy">
-        ${dual("Product packs", "产品分法", "p", ' class="section-label"')}
-        ${dual("One signal, three packages.", "一条信号，三种交付包。", "h2")}
-        ${dual("Pick by the job you need done: publish content, start replies, or shape a point of view. The source proof stays the same; the packaging changes.", "按你要完成的工作来选：发布内容、发起回复，或形成观点。来源证据相同，交付包装不同。", "p")}
+        ${dual("Tiers", "分档", "p", ' class="section-label"')}
+        ${dual("Choose by commitment.", "产品只按投入程度分三档。", "h2")}
+        ${dual("The same public signal becomes one sample issue, a weekly queue, or a custom niche desk depending on the cadence you need.", "同一条公开信号，按你需要的节奏变成单期样品、周更队列或垂直定制。", "p")}
         <div class="fit-personas" aria-label="Product pack modes">${fitPersonaButtons}</div>
       </div>
       <div class="fit-device" data-fit-device="${escapeHtml(defaultFitPersona.id)}" style="--fit-progress:${escapeHtml(defaultFitPersona.progress)}%">
-        <div class="fit-device-bar" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="fit-device-screen">
           <div class="fit-console-head">
             <div>
-              <p class="fit-device-label" data-i18n-en="What's included" data-i18n-zh="包含什么">What's included</p>
-              <strong><span data-i18n-en="Selected" data-i18n-zh="已选择">Selected</span> <b id="fit-title" data-i18n-en="${escapeHtml(defaultFitPersona.labelEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.labelZh)}">${escapeHtml(defaultFitPersona.labelEn)}</b></strong>
+              <p class="fit-device-label" data-i18n-en="Selected tier" data-i18n-zh="已选档位">Selected tier</p>
+              <strong id="fit-title" data-i18n-en="${escapeHtml(defaultFitPersona.labelEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.labelZh)}">${escapeHtml(defaultFitPersona.labelEn)}</strong>
             </div>
-            <span class="fit-live"><i></i><span data-i18n-en="Live" data-i18n-zh="实时">Live</span></span>
+            <span class="fit-price" id="fit-price" data-i18n-en="${escapeHtml(defaultFitPersona.priceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.priceZh)}">${escapeHtml(defaultFitPersona.priceEn)}</span>
           </div>
-          <div class="fit-matrix" aria-label="Product pack inclusion matrix">
-            <div class="fit-matrix-head">
-              <strong data-i18n-en="Item" data-i18n-zh="项目">Item</strong>
-              ${fitMatrixHeader}
-            </div>
-            ${fitMatrixBody}
-          </div>
+          <p class="fit-tier-rule" id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.ruleEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.ruleZh)}">${escapeHtml(defaultFitPersona.ruleEn)}</p>
           <a class="fit-signal-card fit-preview-card" id="fit-signal-link" href="${escapeHtml(defaultFitPersona.item?.url || "./issues/latest.html")}" target="_blank" rel="noreferrer">
             <span id="fit-source">${escapeHtml(sourceLabel(defaultFitPersona.item || {}))}</span>
             <strong id="fit-signal" data-i18n-en="${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}" data-i18n-zh="${escapeHtml(defaultFitPersona.item ? (defaultFitPersona.item.deliverables?.bilibiliTitles?.[0] || defaultFitPersona.item.title) : "已排序创作者机会")}">${escapeHtml(defaultFitPersona.item ? fitSignalTitle(defaultFitPersona.item) : "Ranked creator opportunity")}</strong>
             <p id="fit-preview-copy" data-i18n-en="${escapeHtml(defaultFitPersona.copyEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.copyZh)}">${escapeHtml(defaultFitPersona.copyEn)}</p>
-            <em id="fit-strength" data-i18n-en="${escapeHtml(defaultFitPersona.ruleEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.ruleZh)}">${escapeHtml(defaultFitPersona.ruleEn)}</em>
           </a>
           <div class="fit-telemetry" aria-label="Signal studio summary">
-            <span><strong data-i18n-en="Pack kit" data-i18n-zh="交付组件">Pack kit</strong><small id="fit-kit" data-i18n-en="${escapeHtml(defaultFitPersona.kitEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.kitZh)}">${escapeHtml(defaultFitPersona.kitEn)}</small></span>
+            <span><strong data-i18n-en="Delivery" data-i18n-zh="交付">Delivery</strong><small id="fit-kit" data-i18n-en="${escapeHtml(defaultFitPersona.kitEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.kitZh)}">${escapeHtml(defaultFitPersona.kitEn)}</small></span>
             <span><strong data-i18n-en="Cadence" data-i18n-zh="节奏">Cadence</strong><small id="fit-cadence" data-i18n-en="${escapeHtml(defaultFitPersona.cadenceEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.cadenceZh)}">${escapeHtml(defaultFitPersona.cadenceEn)}</small></span>
-            <span><strong data-i18n-en="Market velocity" data-i18n-zh="市场速度">Market velocity</strong><small id="fit-velocity" data-i18n-en="${escapeHtml(defaultFitPersona.velocityEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.velocityZh)}">${escapeHtml(defaultFitPersona.velocityEn)}</small></span>
+            <span><strong data-i18n-en="Best for" data-i18n-zh="适合">Best for</strong><small id="fit-velocity" data-i18n-en="${escapeHtml(defaultFitPersona.velocityEn)}" data-i18n-zh="${escapeHtml(defaultFitPersona.velocityZh)}">${escapeHtml(defaultFitPersona.velocityEn)}</small></span>
           </div>
         </div>
       </div>
@@ -4780,6 +4780,142 @@ main {
   font-weight: 760;
   overflow-wrap: anywhere;
 }
+.fit-studio.product-rules {
+  grid-template-columns: 1fr;
+  gap: 22px;
+  padding: 4px 0 42px;
+}
+.fit-studio.product-rules .fit-copy {
+  max-width: 960px;
+}
+.fit-studio.product-rules .fit-copy h2 {
+  max-width: 780px;
+  margin: 0 0 10px;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1.02;
+}
+.fit-studio.product-rules .fit-copy > p:not(.section-label) {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.fit-studio.product-rules .fit-personas {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+.fit-studio.product-rules .fit-persona {
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+  min-height: 150px;
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(255,255,255,0.76);
+}
+.fit-studio.product-rules .fit-persona::before {
+  display: none;
+}
+.fit-studio.product-rules .fit-persona::after {
+  width: 8px;
+  height: 8px;
+  border-right-color: rgba(0,113,227,0.55);
+  border-bottom-color: rgba(0,113,227,0.55);
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+.fit-studio.product-rules .fit-persona span,
+.fit-studio.product-rules .fit-persona strong,
+.fit-studio.product-rules .fit-persona small,
+.fit-studio.product-rules .fit-persona b {
+  grid-column: 1;
+}
+.fit-studio.product-rules .fit-persona span {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-persona strong {
+  font-size: 22px;
+  line-height: 1.1;
+}
+.fit-studio.product-rules .fit-persona b {
+  color: var(--ink);
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1;
+}
+.fit-studio.product-rules .fit-persona small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.fit-studio.product-rules .fit-persona.active {
+  border-color: rgba(0,113,227,0.44);
+  background: #fff;
+}
+.fit-studio.product-rules .fit-device {
+  border-radius: 16px;
+  box-shadow: 0 24px 62px rgba(17,17,20,0.07);
+}
+.fit-studio.product-rules .fit-device-screen {
+  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+  align-items: stretch;
+  min-height: 0;
+  padding: clamp(18px, 3vw, 28px);
+}
+.fit-studio.product-rules .fit-console-head {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-content: start;
+  display: grid;
+  gap: 18px;
+  border-right: 1px solid rgba(17,17,20,0.08);
+  padding-right: 22px;
+}
+.fit-studio.product-rules .fit-console-head strong {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.02;
+}
+.fit-price {
+  color: var(--accent);
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 850;
+  line-height: 0.92;
+}
+.fit-tier-rule {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+  border: 1px solid rgba(0,113,227,0.18);
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(0,113,227,0.08);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 820;
+}
+.fit-studio.product-rules .fit-preview-card {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+  border-color: rgba(17,17,20,0.08);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.fit-studio.product-rules .fit-preview-card span,
+.fit-studio.product-rules .fit-preview-card em {
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-telemetry {
+  grid-column: 1 / -1;
+}
+.fit-studio.product-rules .fit-telemetry span {
+  background: rgba(247,249,252,0.72);
+}
 .pricing,
 .sample-preview,
 .fit-studio,
@@ -8809,6 +8945,35 @@ input[type="email"] {
   .fit-telemetry {
     grid-template-columns: 1fr;
   }
+  .fit-studio.product-rules .fit-personas {
+    grid-template-columns: 1fr;
+  }
+  .fit-studio.product-rules .fit-persona {
+    min-height: 0;
+    padding: 15px;
+  }
+  .fit-studio.product-rules .fit-device-screen {
+    grid-template-columns: 1fr;
+  }
+  .fit-studio.product-rules .fit-console-head {
+    grid-column: auto;
+    grid-row: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(17,17,20,0.08);
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+  .fit-studio.product-rules .fit-console-head strong {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+  .fit-price {
+    font-size: clamp(40px, 14vw, 58px);
+  }
+  .fit-tier-rule,
+  .fit-studio.product-rules .fit-preview-card {
+    grid-column: auto;
+    grid-row: auto;
+  }
   .sample-actions { justify-content: flex-start; }
   .sample-spotlight {
     grid-template-columns: 1fr;
@@ -9934,6 +10099,7 @@ const sampleSpotlightPanels = [...document.querySelectorAll("[data-sample-spotli
 const fitPersonaButtons = [...document.querySelectorAll("[data-fit-persona]")];
 const fitDeviceNode = document.querySelector(".fit-device");
 const fitTitleNode = document.querySelector("#fit-title");
+const fitPriceNode = document.querySelector("#fit-price");
 const fitKitNode = document.querySelector("#fit-kit");
 const fitCadenceNode = document.querySelector("#fit-cadence");
 const fitSourceNode = document.querySelector("#fit-source");
@@ -10075,6 +10241,7 @@ function activateFitPersona(button, scrollToButton = false) {
     column.classList.toggle("active", column.dataset.matrixColumn === (button.dataset.fitPersona || ""));
   }
   if (fitTitleNode) fitTitleNode.textContent = button.dataset["fitPack" + suffix] || "";
+  if (fitPriceNode) fitPriceNode.textContent = button.dataset["fitPrice" + suffix] || "";
   if (fitKitNode) fitKitNode.textContent = button.dataset["fitKit" + suffix] || "";
   if (fitCadenceNode) fitCadenceNode.textContent = button.dataset["fitCadence" + suffix] || "";
   if (fitSourceNode) fitSourceNode.textContent = button.dataset.fitSource || "";

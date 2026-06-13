@@ -1291,6 +1291,142 @@ main {
   font-weight: 760;
   overflow-wrap: anywhere;
 }
+.fit-studio.product-rules {
+  grid-template-columns: 1fr;
+  gap: 22px;
+  padding: 4px 0 42px;
+}
+.fit-studio.product-rules .fit-copy {
+  max-width: 960px;
+}
+.fit-studio.product-rules .fit-copy h2 {
+  max-width: 780px;
+  margin: 0 0 10px;
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1.02;
+}
+.fit-studio.product-rules .fit-copy > p:not(.section-label) {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.fit-studio.product-rules .fit-personas {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+.fit-studio.product-rules .fit-persona {
+  grid-template-columns: 1fr auto;
+  gap: 8px 14px;
+  min-height: 150px;
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(255,255,255,0.76);
+}
+.fit-studio.product-rules .fit-persona::before {
+  display: none;
+}
+.fit-studio.product-rules .fit-persona::after {
+  width: 8px;
+  height: 8px;
+  border-right-color: rgba(0,113,227,0.55);
+  border-bottom-color: rgba(0,113,227,0.55);
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+.fit-studio.product-rules .fit-persona span,
+.fit-studio.product-rules .fit-persona strong,
+.fit-studio.product-rules .fit-persona small,
+.fit-studio.product-rules .fit-persona b {
+  grid-column: 1;
+}
+.fit-studio.product-rules .fit-persona span {
+  letter-spacing: 0;
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-persona strong {
+  font-size: 22px;
+  line-height: 1.1;
+}
+.fit-studio.product-rules .fit-persona b {
+  color: var(--ink);
+  font-size: 30px;
+  font-weight: 850;
+  line-height: 1;
+}
+.fit-studio.product-rules .fit-persona small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.fit-studio.product-rules .fit-persona.active {
+  border-color: rgba(0,113,227,0.44);
+  background: #fff;
+}
+.fit-studio.product-rules .fit-device {
+  border-radius: 16px;
+  box-shadow: 0 24px 62px rgba(17,17,20,0.07);
+}
+.fit-studio.product-rules .fit-device-screen {
+  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 0.58fr);
+  align-items: stretch;
+  min-height: 0;
+  padding: clamp(18px, 3vw, 28px);
+}
+.fit-studio.product-rules .fit-console-head {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-content: start;
+  display: grid;
+  gap: 18px;
+  border-right: 1px solid rgba(17,17,20,0.08);
+  padding-right: 22px;
+}
+.fit-studio.product-rules .fit-console-head strong {
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.02;
+}
+.fit-price {
+  color: var(--accent);
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 850;
+  line-height: 0.92;
+}
+.fit-tier-rule {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  margin: 0;
+  border: 1px solid rgba(0,113,227,0.18);
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(0,113,227,0.08);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 820;
+}
+.fit-studio.product-rules .fit-preview-card {
+  grid-column: 2;
+  grid-row: 2;
+  min-height: 0;
+  border-color: rgba(17,17,20,0.08);
+  border-radius: 14px;
+  box-shadow: none;
+}
+.fit-studio.product-rules .fit-preview-card span,
+.fit-studio.product-rules .fit-preview-card em {
+  text-transform: none;
+}
+.fit-studio.product-rules .fit-telemetry {
+  grid-column: 1 / -1;
+}
+.fit-studio.product-rules .fit-telemetry span {
+  background: rgba(247,249,252,0.72);
+}
 .pricing,
 .sample-preview,
 .fit-studio,
@@ -5319,6 +5455,35 @@ input[type="email"] {
   }
   .fit-telemetry {
     grid-template-columns: 1fr;
+  }
+  .fit-studio.product-rules .fit-personas {
+    grid-template-columns: 1fr;
+  }
+  .fit-studio.product-rules .fit-persona {
+    min-height: 0;
+    padding: 15px;
+  }
+  .fit-studio.product-rules .fit-device-screen {
+    grid-template-columns: 1fr;
+  }
+  .fit-studio.product-rules .fit-console-head {
+    grid-column: auto;
+    grid-row: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(17,17,20,0.08);
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+  .fit-studio.product-rules .fit-console-head strong {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+  .fit-price {
+    font-size: clamp(40px, 14vw, 58px);
+  }
+  .fit-tier-rule,
+  .fit-studio.product-rules .fit-preview-card {
+    grid-column: auto;
+    grid-row: auto;
   }
   .sample-actions { justify-content: flex-start; }
   .sample-spotlight {
