@@ -261,53 +261,44 @@
         <a href="../public-sample.en.csv">EN CSV</a>
       </div>
     </section>
-    <section class="contrast-lab" aria-label="Before and after TrendFoundry">
-      <div class="contrast-copy">
-        <p class="section-label">前后对比</p>
-        <h2>从追热点，变成选择下一条该录什么。</h2>
-        <p>商业承诺不是更多信息，而是在创作者开录前减少决策疲劳。</p>
+    <section class="decision-payoff" id="decision-payoff" aria-label="TrendFoundry 价值与产品规则" style="--payoff-progress:66%;">
+      <div class="payoff-copy">
+        <p class="section-label">为什么值得买</p>
+        <h2>把热点变成可录制选题。</h2>
+        <p>TrendFoundry 在开录前完成慢判断：扫描来源、核验证据、标注风险，并整理成脚本轮廓。</p>
+        <ol class="payoff-rules" aria-label="产品划分规则">
+          <li><span>01</span><strong>单期样品：先试一次是否适合。</strong></li>
+          <li><span>02</span><strong>周更情报：保持录制队列不断档。</strong></li>
+          <li><span>03</span><strong>垂直定制：围绕一个垂类调参。</strong></li>
+        </ol>
       </div>
-      <div class="contrast-panel" data-contrast-mode="after">
-        <div class="contrast-toggle" aria-label="Compare workflow">
-          <button class="contrast-option" type="button" data-contrast-set="before">不用它</button>
-          <button class="contrast-option active" type="button" data-contrast-set="after">使用 TrendFoundry</button>
+      <div class="payoff-panel">
+        <div class="payoff-switch" role="tablist" aria-label="选择发布节奏"><button class="payoff-scenario" type="button" role="tab" aria-selected="false" data-payoff-scenario="sample" data-hours="4h" data-tier-en="Suggested: Sample issue" data-tier-zh="建议：单期样品" data-copy-en="Buy one issue to see whether the ranked signals fit your channel." data-copy-zh="先买一份，看排序信号是否适合你的频道。" data-progress="34">
+          <span>先试一次</span>
+          <strong>1 份样品</strong>
+        </button><button class="payoff-scenario active" type="button" role="tab" aria-selected="true" data-payoff-scenario="weekly" data-hours="9h" data-tier-en="Suggested: Weekly pipeline" data-tier-zh="建议：周更情报" data-copy-en="Use each weekly issue as a ready queue for recordable topic decisions." data-copy-zh="把每周情报当成可录制选题队列。" data-progress="66">
+          <span>稳定周更</span>
+          <strong>12 条信号</strong>
+        </button><button class="payoff-scenario" type="button" role="tab" aria-selected="false" data-payoff-scenario="custom" data-hours="18h" data-tier-en="Suggested: Custom niche" data-tier-zh="建议：垂直定制" data-copy-en="Ask for one niche, one evidence standard, and one publishing rhythm." data-copy-zh="按你的垂类、证据标准和发布节奏交付。" data-progress="100">
+          <span>垂直定制</span>
+          <strong>专属赛道</strong>
+        </button></div>
+        <div class="payoff-result" aria-live="polite">
+          <div class="payoff-metric">
+            <span>释放时间</span>
+            <strong id="payoff-hours">9h</strong>
+          </div>
+          <div class="payoff-recommendation">
+            <em id="payoff-tier" data-i18n-en="Suggested: Weekly pipeline" data-i18n-zh="建议：周更情报">建议：周更情报</em>
+            <p id="payoff-copy" data-i18n-en="Use each weekly issue as a ready queue for recordable topic decisions." data-i18n-zh="把每周情报当成可录制选题队列。">把每周情报当成可录制选题队列。</p>
+            <a href="#pricing">确认价格 <span aria-hidden="true">→</span></a>
+          </div>
         </div>
-        <div class="contrast-table"><div class="contrast-row">
-          <strong>找选题</strong>
-          <span class="before-copy">创作者打开五个信息源，最后仍要自己判断什么能录。</span>
-          <span class="after-copy">交付时已经是排序候选、来源链接和风险备注。</span>
-        </div><div class="contrast-row">
-          <strong>写脚本</strong>
-          <span class="before-copy">第一个小时常被标题角度、开场钩子和演示结构吃掉。</span>
-          <span class="after-copy">每个机会已经带标题角度、钩子、演示路径和限制说明。</span>
-        </div><div class="contrast-row">
-          <strong>更新节奏</strong>
-          <span class="before-copy">好选题随机出现，录制队列反复重置。</span>
-          <span class="after-copy">每周期刊把公开信号变成稳定录制队列。</span>
-        </div></div>
-      </div>
-    </section>
-    <section class="planning-calculator" id="planning-calculator" aria-label="Creator planning time estimator">
-      <div class="calculator-copy">
-        <p class="section-label">规划估算器</p>
-        <h2>估算开录前能省回多少时间。</h2>
-        <p>当瓶颈不是按下录制键，而是判断什么值得录时，TrendFoundry 的价值最大。</p>
-      </div>
-      <div class="calculator-panel">
-        <label class="range-control">
-          <span>每周视频数</span>
-          <strong><output id="video-count-output">2</output></strong>
-          <input id="video-count" type="range" min="1" max="5" step="1" value="2">
-        </label>
-        <label class="range-control">
-          <span>每条找选题小时</span>
-          <strong><output id="research-hours-output">2</output>h</strong>
-          <input id="research-hours" type="range" min="1" max="6" step="1" value="2">
-        </label>
-        <div class="calculator-result" aria-live="polite">
-          <span id="saved-hours">9h</span>
-          <p id="saved-hours-copy">预计每月释放的规划时间</p>
-          <em id="tier-suggestion">建议：周更情报</em>
+        <div class="payoff-path" aria-label="TrendFoundry 工作流">
+          <span>信号</span>
+          <span>证据</span>
+          <span>选题包</span>
+          <span>下单</span>
         </div>
       </div>
     </section>

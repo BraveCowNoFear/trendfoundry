@@ -6,6 +6,11 @@ const languageButtons = [...document.querySelectorAll("[data-language-toggle]")]
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
 const closeHrefTargets = [...document.querySelectorAll("[data-close-href-en][data-close-href-zh]")];
+const payoffButtons = [...document.querySelectorAll("[data-payoff-scenario]")];
+const payoffNode = document.querySelector(".decision-payoff");
+const payoffHours = document.querySelector("#payoff-hours");
+const payoffTier = document.querySelector("#payoff-tier");
+const payoffCopy = document.querySelector("#payoff-copy");
 const videoCountInput = document.querySelector("#video-count");
 const researchHoursInput = document.querySelector("#research-hours");
 const videoCountOutput = document.querySelector("#video-count-output");
@@ -69,6 +74,7 @@ const opportunityFocusSource = document.querySelector("#opportunity-focus-source
 const opportunityFocusScore = document.querySelector("#opportunity-focus-score");
 const opportunityFocusLink = document.querySelector("#opportunity-focus-link");
 let selectedTierCard = tierCards.find((card) => card.classList.contains("selected")) || tierCards[0] || null;
+let activePayoffButton = payoffButtons.find((button) => button.classList.contains("active")) || payoffButtons[0] || null;
 let activeFitPersonaButton = fitPersonaButtons.find((button) => button.classList.contains("active")) || fitPersonaButtons[0] || null;
 let activeOpportunityCard = cards[0] || null;
 let activeSource = "all";
@@ -99,6 +105,21 @@ function updatePlanningCalculator() {
     if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
     tierSuggestion.textContent = suggestion;
   }
+}
+
+function updatePayoffScenario(button) {
+  if (!button) return;
+  activePayoffButton = button;
+  for (const item of payoffButtons) {
+    const active = item === button;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (payoffNode) payoffNode.style.setProperty("--payoff-progress", (button.dataset.progress || "66") + "%");
+  if (payoffHours) payoffHours.textContent = button.dataset.hours || "";
+  if (payoffTier) payoffTier.textContent = button.dataset["tier" + suffix] || "";
+  if (payoffCopy) payoffCopy.textContent = button.dataset["copy" + suffix] || "";
 }
 
 function updateSelectedTier(card, scrollToCard = false) {
@@ -274,6 +295,7 @@ function setLanguage(language) {
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
   if (resultCount) resultCount.textContent = countLabel(visible);
   updatePlanningCalculator();
+  updatePayoffScenario(activePayoffButton);
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
   updateOpportunityFocus(activeOpportunityCard);
@@ -340,6 +362,12 @@ for (const button of buttons) {
 
 for (const button of languageButtons) {
   button.addEventListener("click", () => setLanguage(button.dataset.languageToggle));
+}
+
+for (const button of payoffButtons) {
+  button.addEventListener("click", () => updatePayoffScenario(button));
+  button.addEventListener("focusin", () => updatePayoffScenario(button));
+  if (finePointer) button.addEventListener("pointerenter", () => updatePayoffScenario(button));
 }
 
 for (const button of tierSelectButtons) {

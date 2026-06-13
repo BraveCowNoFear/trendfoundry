@@ -204,6 +204,8 @@ async function checkLocal() {
   assertCheck("site sample signal shelf is localized", siteIndex.includes('class="signal-shelf"') && siteIndex.includes("三条信号，够你判断质量。") && siteIndex.includes("证据"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has simplified product map", siteIndex.includes('class="decision-flow product-map"') && siteIndex.includes("What it does. How to choose.") && siteIndex.includes("Signal \u2192 Proof \u2192 Pack \u2192 Order"));
+  assertCheck("site has compact payoff section", siteIndex.includes('id="decision-payoff"') && siteIndex.includes("Turn public signals into recordable ideas.") && siteIndex.includes('data-payoff-scenario="weekly"') && siteIndex.indexOf('id="decision-payoff"') < siteIndex.indexOf('id="pricing"'));
+  assertCheck("site removes old bulky payoff sections", !siteIndex.includes('class="contrast-lab"') && !siteIndex.includes('id="planning-calculator"'));
   assertCheck("site removes repeated explainer sections", !siteIndex.includes('id="fit-studio"') && !siteIndex.includes('id="product-proof"') && !siteIndex.includes('class="sample-preview"') && !siteIndex.includes('class="visual-proof"') && !siteIndex.includes('class="motion-proof"') && !siteIndex.includes('class="signal-runway"'));
   assertCheck("site has product signal board", siteIndex.includes("signal-board.png") && siteIndex.includes('class="product-visual"') && siteIndex.includes('class="signal-ticker"'));
   assertCheck("site links downloadable sample pack", siteIndex.includes("trendfoundry-free-sample-pack.zip") && siteIndex.includes("Download sample pack"));
@@ -227,6 +229,7 @@ async function checkLocal() {
   assertCheck("Chinese landing page has 3 sample signal cards", (zhIndex.match(/<article class="sample-signal-card card/g) || []).length === 3);
   assertCheck("Chinese landing page hero tier prices are fixed labels", zhIndex.includes('data-hero-tier="weekly-pipeline"') && zhIndex.includes("$19") && !zhIndex.includes("data-hero-count"));
   assertCheck("Chinese landing page has simplified product map title", zhIndex.includes("\u5148\u770b\u5b83\u505a\u4ec0\u4e48\uff0c\u518d\u770b\u600e\u4e48\u9009\u3002") && !zhIndex.includes("\u56db\u6b65\u751f\u6210\u9009\u9898\u5305\u3002") && !zhIndex.includes("\u516c\u5f00\u4fe1\u53f7\u8fdb\u6765\uff0c\u53ef\u5f55\u5236\u9009\u9898\u5305\u51fa\u53bb\u3002"));
+  assertCheck("Chinese landing page has compact payoff section", zhIndex.includes('id="decision-payoff"') && zhIndex.includes("把热点变成可录制选题。") && zhIndex.includes("周更情报：保持录制队列不断档。") && !zhIndex.includes('class="contrast-lab"') && !zhIndex.includes('id="planning-calculator"'));
   assertCheck("Chinese landing page keeps product rules and samples clear", zhIndex.includes("\u4ea7\u54c1\u5730\u56fe") && zhIndex.includes("\u4fe1\u53f7 \u2192 \u8bc1\u636e \u2192 \u9009\u9898\u5305 \u2192 \u4e0b\u5355") && zhIndex.includes("三条信号，够你判断质量。") && zhIndex.includes("打开完整 12 条"));
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));
@@ -553,6 +556,7 @@ async function checkOnline() {
   assertCheck("online index has email CTA", index.text.includes("Email order"));
   assertCheck("online index has product signal board", index.text.includes("signal-board.png") && index.text.includes('class="product-visual"'));
   assertCheck("online index has simplified product map", index.text.includes('class="decision-flow product-map"') && index.text.includes("What it does. How to choose.") && !index.text.includes('id="product-proof"') && !index.text.includes('id="fit-studio"'));
+  assertCheck("online index has compact payoff section", index.text.includes('id="decision-payoff"') && index.text.includes("Turn public signals into recordable ideas.") && !index.text.includes('class="contrast-lab"') && !index.text.includes('id="planning-calculator"'));
   assertCheck("online index links downloadable sample pack", index.text.includes("trendfoundry-free-sample-pack.zip"));
 
   const zhIndex = await fetchText(`${publicBase}zh/?qa=${Date.now()}`);

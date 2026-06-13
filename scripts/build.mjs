@@ -1119,6 +1119,124 @@ const zhPlanningCalculator = `<section class="planning-calculator" id="planning-
         </div>
       </div>
     </section>`;
+const payoffScenarios = [
+  {
+    key: "sample",
+    label: "Test once",
+    labelZh: "先试一次",
+    note: "1 pack",
+    noteZh: "1 份样品",
+    hours: "4h",
+    tier: "Suggested: Sample issue",
+    tierZh: "建议：单期样品",
+    copy: "Buy one issue to see whether the ranked signals fit your channel.",
+    copyZh: "先买一份，看排序信号是否适合你的频道。",
+    progress: "34"
+  },
+  {
+    key: "weekly",
+    label: "Publish weekly",
+    labelZh: "稳定周更",
+    note: "12 signals",
+    noteZh: "12 条信号",
+    hours: "9h",
+    tier: "Suggested: Weekly pipeline",
+    tierZh: "建议：周更情报",
+    copy: "Use each weekly issue as a ready queue for recordable topic decisions.",
+    copyZh: "把每周情报当成可录制选题队列。",
+    progress: "66"
+  },
+  {
+    key: "custom",
+    label: "Own a niche",
+    labelZh: "垂直定制",
+    note: "custom lane",
+    noteZh: "专属赛道",
+    hours: "18h",
+    tier: "Suggested: Custom niche",
+    tierZh: "建议：垂直定制",
+    copy: "Ask for one niche, one evidence standard, and one publishing rhythm.",
+    copyZh: "按你的垂类、证据标准和发布节奏交付。",
+    progress: "100"
+  }
+];
+const defaultPayoffScenario = payoffScenarios[1];
+const payoffScenarioButtons = payoffScenarios
+  .map((item) => `<button class="payoff-scenario${item.key === defaultPayoffScenario.key ? " active" : ""}" type="button" role="tab" aria-selected="${item.key === defaultPayoffScenario.key ? "true" : "false"}" data-payoff-scenario="${escapeHtml(item.key)}" data-hours="${escapeHtml(item.hours)}" data-tier-en="${escapeHtml(item.tier)}" data-tier-zh="${escapeHtml(item.tierZh)}" data-copy-en="${escapeHtml(item.copy)}" data-copy-zh="${escapeHtml(item.copyZh)}" data-progress="${escapeHtml(item.progress)}">
+          ${dual(item.label, item.labelZh, "span")}
+          ${dual(item.note, item.noteZh, "strong")}
+        </button>`)
+  .join("");
+const zhPayoffScenarioButtons = payoffScenarios
+  .map((item) => `<button class="payoff-scenario${item.key === defaultPayoffScenario.key ? " active" : ""}" type="button" role="tab" aria-selected="${item.key === defaultPayoffScenario.key ? "true" : "false"}" data-payoff-scenario="${escapeHtml(item.key)}" data-hours="${escapeHtml(item.hours)}" data-tier-en="${escapeHtml(item.tier)}" data-tier-zh="${escapeHtml(item.tierZh)}" data-copy-en="${escapeHtml(item.copy)}" data-copy-zh="${escapeHtml(item.copyZh)}" data-progress="${escapeHtml(item.progress)}">
+          <span>${escapeHtml(item.labelZh)}</span>
+          <strong>${escapeHtml(item.noteZh)}</strong>
+        </button>`)
+  .join("");
+const decisionPayoff = `<section class="decision-payoff" id="decision-payoff" aria-label="TrendFoundry value and product rules" style="--payoff-progress:${defaultPayoffScenario.progress}%;">
+      <div class="payoff-copy">
+        ${dual("Why it matters", "为什么值得买", "p", ' class="section-label"')}
+        ${dual("Turn public signals into recordable ideas.", "把热点变成可录制选题。", "h2")}
+        ${dual("TrendFoundry does the slow judgment work before recording: source scanning, evidence checks, risk notes, and a script-shaped outline.", "TrendFoundry 在开录前完成慢判断：扫描来源、核验证据、标注风险，并整理成脚本轮廓。", "p")}
+        <ol class="payoff-rules" aria-label="Product division rules">
+          <li><span>01</span>${dual("Sample issue: test fit once.", "单期样品：先试一次是否适合。", "strong")}</li>
+          <li><span>02</span>${dual("Weekly pipeline: keep the queue alive.", "周更情报：保持录制队列不断档。", "strong")}</li>
+          <li><span>03</span>${dual("Custom niche: tune one vertical lane.", "垂直定制：围绕一个垂类调参。", "strong")}</li>
+        </ol>
+      </div>
+      <div class="payoff-panel">
+        <div class="payoff-switch" role="tablist" aria-label="Choose publishing rhythm">${payoffScenarioButtons}</div>
+        <div class="payoff-result" aria-live="polite">
+          <div class="payoff-metric">
+            <span>${dual("Time back", "释放时间")}</span>
+            <strong id="payoff-hours">${escapeHtml(defaultPayoffScenario.hours)}</strong>
+          </div>
+          <div class="payoff-recommendation">
+            <em id="payoff-tier" data-i18n-en="${escapeHtml(defaultPayoffScenario.tier)}" data-i18n-zh="${escapeHtml(defaultPayoffScenario.tierZh)}">${escapeHtml(defaultPayoffScenario.tier)}</em>
+            <p id="payoff-copy" data-i18n-en="${escapeHtml(defaultPayoffScenario.copy)}" data-i18n-zh="${escapeHtml(defaultPayoffScenario.copyZh)}">${escapeHtml(defaultPayoffScenario.copy)}</p>
+            <a href="#pricing">${dual("Confirm price", "确认价格")} <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="payoff-path" aria-label="TrendFoundry workflow">
+          ${dual("Signal", "信号", "span")}
+          ${dual("Proof", "证据", "span")}
+          ${dual("Topic pack", "选题包", "span")}
+          ${dual("Order", "下单", "span")}
+        </div>
+      </div>
+    </section>`;
+const zhDecisionPayoff = `<section class="decision-payoff" id="decision-payoff" aria-label="TrendFoundry 价值与产品规则" style="--payoff-progress:${defaultPayoffScenario.progress}%;">
+      <div class="payoff-copy">
+        <p class="section-label">为什么值得买</p>
+        <h2>把热点变成可录制选题。</h2>
+        <p>TrendFoundry 在开录前完成慢判断：扫描来源、核验证据、标注风险，并整理成脚本轮廓。</p>
+        <ol class="payoff-rules" aria-label="产品划分规则">
+          <li><span>01</span><strong>单期样品：先试一次是否适合。</strong></li>
+          <li><span>02</span><strong>周更情报：保持录制队列不断档。</strong></li>
+          <li><span>03</span><strong>垂直定制：围绕一个垂类调参。</strong></li>
+        </ol>
+      </div>
+      <div class="payoff-panel">
+        <div class="payoff-switch" role="tablist" aria-label="选择发布节奏">${zhPayoffScenarioButtons}</div>
+        <div class="payoff-result" aria-live="polite">
+          <div class="payoff-metric">
+            <span>释放时间</span>
+            <strong id="payoff-hours">${escapeHtml(defaultPayoffScenario.hours)}</strong>
+          </div>
+          <div class="payoff-recommendation">
+            <em id="payoff-tier" data-i18n-en="${escapeHtml(defaultPayoffScenario.tier)}" data-i18n-zh="${escapeHtml(defaultPayoffScenario.tierZh)}">${escapeHtml(defaultPayoffScenario.tierZh)}</em>
+            <p id="payoff-copy" data-i18n-en="${escapeHtml(defaultPayoffScenario.copy)}" data-i18n-zh="${escapeHtml(defaultPayoffScenario.copyZh)}">${escapeHtml(defaultPayoffScenario.copyZh)}</p>
+            <a href="#pricing">确认价格 <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+        <div class="payoff-path" aria-label="TrendFoundry 工作流">
+          <span>信号</span>
+          <span>证据</span>
+          <span>选题包</span>
+          <span>下单</span>
+        </div>
+      </div>
+    </section>`;
 const localNav = `<nav class="local-nav" aria-label="TrendFoundry page navigation">
     <a class="local-brand" href="#top">${brandLogo()}</a>
     <div class="local-links">
@@ -2751,8 +2869,7 @@ const html = `<!doctype html>
         <a href="./public-sample.zh-CN.csv">中文 CSV</a>
       </div>
     </section>
-    ${contrastSection}
-    ${planningCalculator}
+    ${decisionPayoff}
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
@@ -2877,8 +2994,7 @@ const zhHtml = `<!doctype html>
         <a href="../public-sample.en.csv">EN CSV</a>
       </div>
     </section>
-    ${zhContrastSection}
-    ${zhPlanningCalculator}
+    ${zhDecisionPayoff}
     <section class="pricing pricing-studio" id="pricing" aria-label="Pricing tiers" style="--pricing-progress:66%;">
       <div class="section-head">
         <div>
@@ -8987,6 +9103,7 @@ input[type="email"] {
   .motion-proof,
   .signal-runway,
   .decision-flow,
+  .decision-payoff,
   .contrast-lab,
   .planning-calculator,
   .section-head,
@@ -10496,6 +10613,177 @@ body.is-scrolled .local-nav {
 .deliverable-panel.active {
   box-shadow: 0 26px 70px rgba(17,17,20,0.12);
 }
+.decision-payoff {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.48fr) minmax(360px, 0.52fr);
+  gap: clamp(24px, 5vw, 70px);
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0 42px;
+  margin: 2px 0 34px;
+}
+.payoff-copy h2 {
+  margin: 0 0 12px;
+  max-width: 640px;
+  font-size: clamp(34px, 4.6vw, 62px);
+  line-height: 0.98;
+}
+.payoff-copy > p:not(.section-label) {
+  margin: 0;
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.payoff-rules {
+  display: grid;
+  gap: 0;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.payoff-rules li {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 54px;
+  border-bottom: 1px solid var(--line);
+}
+.payoff-rules span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+}
+.payoff-rules strong {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.payoff-panel {
+  border: 1px solid rgba(17,17,20,0.08);
+  border-radius: 20px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,249,252,0.82));
+  box-shadow: 0 24px 80px rgba(17,17,20,0.08);
+}
+.payoff-switch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.payoff-scenario {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  min-height: 76px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 12px;
+  background: #fff;
+  color: var(--muted);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+.payoff-scenario span {
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.1;
+}
+.payoff-scenario strong {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.1;
+}
+.payoff-scenario.active,
+.payoff-scenario:hover,
+.payoff-scenario:focus-visible {
+  border-color: rgba(0,113,227,0.42);
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0,113,227,0.11);
+}
+.payoff-result {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 0.34fr) minmax(0, 0.66fr);
+  gap: 16px;
+  overflow: hidden;
+  margin-top: 14px;
+  border: 1px solid rgba(17,17,20,0.06);
+  border-radius: 18px;
+  padding: 18px;
+  background: #f5f5f7;
+}
+.payoff-result::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: var(--payoff-progress, 66%);
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), rgba(0,113,227,0.28));
+  transition: width 240ms ease;
+}
+.payoff-metric {
+  display: grid;
+  align-content: center;
+  gap: 2px;
+}
+.payoff-metric span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+.payoff-metric strong {
+  color: var(--accent);
+  font-size: clamp(44px, 6vw, 78px);
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+.payoff-recommendation {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+}
+.payoff-recommendation em {
+  color: var(--ink);
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 900;
+}
+.payoff-recommendation p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.payoff-recommendation a {
+  width: fit-content;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.payoff-path {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.payoff-path span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 10px;
+  color: var(--muted);
+  background: #fff;
+  font-size: 12px;
+  font-weight: 850;
+  text-align: center;
+}
 @media (max-width: 900px) {
   .topbar {
     min-height: auto;
@@ -10506,6 +10794,48 @@ body.is-scrolled .local-nav {
   }
   .product-screen {
     border-radius: 18px;
+  }
+  .decision-payoff {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-bottom: 30px;
+  }
+  .payoff-copy h2 {
+    font-size: clamp(34px, 10vw, 50px);
+  }
+  .payoff-copy > p:not(.section-label) {
+    font-size: 16px;
+  }
+  .payoff-panel {
+    border-radius: 16px;
+    padding: 12px;
+  }
+  .payoff-switch {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .payoff-scenario {
+    min-height: 64px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .payoff-scenario span {
+    font-size: 12px;
+  }
+  .payoff-scenario strong {
+    font-size: 13px;
+  }
+  .payoff-result {
+    grid-template-columns: minmax(88px, 0.32fr) minmax(0, 0.68fr);
+    gap: 10px;
+    padding: 14px;
+  }
+  .payoff-path {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+  .payoff-path span {
+    padding: 7px 6px;
   }
 }
 `;
@@ -10518,6 +10848,11 @@ const languageButtons = [...document.querySelectorAll("[data-language-toggle]")]
 const translatable = [...document.querySelectorAll("[data-i18n-en][data-i18n-zh]")];
 const placeholderTargets = [...document.querySelectorAll("[data-i18n-placeholder-en][data-i18n-placeholder-zh]")];
 const closeHrefTargets = [...document.querySelectorAll("[data-close-href-en][data-close-href-zh]")];
+const payoffButtons = [...document.querySelectorAll("[data-payoff-scenario]")];
+const payoffNode = document.querySelector(".decision-payoff");
+const payoffHours = document.querySelector("#payoff-hours");
+const payoffTier = document.querySelector("#payoff-tier");
+const payoffCopy = document.querySelector("#payoff-copy");
 const videoCountInput = document.querySelector("#video-count");
 const researchHoursInput = document.querySelector("#research-hours");
 const videoCountOutput = document.querySelector("#video-count-output");
@@ -10581,6 +10916,7 @@ const opportunityFocusSource = document.querySelector("#opportunity-focus-source
 const opportunityFocusScore = document.querySelector("#opportunity-focus-score");
 const opportunityFocusLink = document.querySelector("#opportunity-focus-link");
 let selectedTierCard = tierCards.find((card) => card.classList.contains("selected")) || tierCards[0] || null;
+let activePayoffButton = payoffButtons.find((button) => button.classList.contains("active")) || payoffButtons[0] || null;
 let activeFitPersonaButton = fitPersonaButtons.find((button) => button.classList.contains("active")) || fitPersonaButtons[0] || null;
 let activeOpportunityCard = cards[0] || null;
 let activeSource = "all";
@@ -10611,6 +10947,21 @@ function updatePlanningCalculator() {
     if (videos >= 4 || hours >= 5) suggestion = currentLanguage === "zh" ? "建议：垂直定制" : "Suggested: Custom niche";
     tierSuggestion.textContent = suggestion;
   }
+}
+
+function updatePayoffScenario(button) {
+  if (!button) return;
+  activePayoffButton = button;
+  for (const item of payoffButtons) {
+    const active = item === button;
+    item.classList.toggle("active", active);
+    item.setAttribute("aria-selected", active ? "true" : "false");
+  }
+  const suffix = currentLanguage === "zh" ? "Zh" : "En";
+  if (payoffNode) payoffNode.style.setProperty("--payoff-progress", (button.dataset.progress || "66") + "%");
+  if (payoffHours) payoffHours.textContent = button.dataset.hours || "";
+  if (payoffTier) payoffTier.textContent = button.dataset["tier" + suffix] || "";
+  if (payoffCopy) payoffCopy.textContent = button.dataset["copy" + suffix] || "";
 }
 
 function updateSelectedTier(card, scrollToCard = false) {
@@ -10786,6 +11137,7 @@ function setLanguage(language) {
   const visible = [...cards].filter((card) => !card.classList.contains("hidden")).length;
   if (resultCount) resultCount.textContent = countLabel(visible);
   updatePlanningCalculator();
+  updatePayoffScenario(activePayoffButton);
   updateSelectedTier(selectedTierCard);
   activateFitPersona(activeFitPersonaButton);
   updateOpportunityFocus(activeOpportunityCard);
@@ -10852,6 +11204,12 @@ for (const button of buttons) {
 
 for (const button of languageButtons) {
   button.addEventListener("click", () => setLanguage(button.dataset.languageToggle));
+}
+
+for (const button of payoffButtons) {
+  button.addEventListener("click", () => updatePayoffScenario(button));
+  button.addEventListener("focusin", () => updatePayoffScenario(button));
+  if (finePointer) button.addEventListener("pointerenter", () => updatePayoffScenario(button));
 }
 
 for (const button of tierSelectButtons) {
