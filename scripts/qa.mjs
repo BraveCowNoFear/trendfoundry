@@ -200,6 +200,7 @@ async function checkLocal() {
   assertCheck("site has GitHub request CTA", siteIndex.includes("Request on GitHub"));
   assertCheck("site has language switch", siteIndex.includes('data-language-toggle="en"') && siteIndex.includes('data-language-toggle="zh"'));
   assertCheck("site has Chinese product copy", siteIndex.includes(homeChineseTitle) && siteIndex.includes(emailOrderZh));
+  assertCheck("site hero tier prices are fixed labels", siteIndex.includes('data-hero-tier="weekly-pipeline"') && siteIndex.includes("$19") && !siteIndex.includes("data-hero-count"));
   assertCheck("site sample signal shelf is localized", siteIndex.includes('class="signal-shelf"') && siteIndex.includes("先看 3 条，再决定买哪一档。") && siteIndex.includes("单期 = 先试一包"));
   assertCheck("site has OG image metadata", siteIndex.includes('property="og:image"') && siteIndex.includes("og-image.png"));
   assertCheck("site has consolidated product proof", siteIndex.includes('id="product-proof"') && siteIndex.includes("Proof before purchase") && !siteIndex.includes('class="visual-proof"') && !siteIndex.includes('class="motion-proof"') && !siteIndex.includes('class="signal-runway"'));
@@ -223,6 +224,7 @@ async function checkLocal() {
   assertCheck("Chinese landing page exists", zhIndex.includes('<html lang="zh-CN">') && zhIndex.includes(zhLandingTitle));
   assertCheck("Chinese landing page has canonical", zhIndex.includes(`<link rel="canonical" href="${publicBase}zh/">`));
   assertCheck("Chinese landing page has 3 sample signal cards", (zhIndex.match(/<article class="sample-signal-card card/g) || []).length === 3);
+  assertCheck("Chinese landing page hero tier prices are fixed labels", zhIndex.includes('data-hero-tier="weekly-pipeline"') && zhIndex.includes("$19") && !zhIndex.includes("data-hero-count"));
   assertCheck("Chinese landing page explains product rules", zhIndex.includes("产品只按投入程度分三档") && zhIndex.includes("单期 = 先试一包") && zhIndex.includes("打开完整 12 条"));
   assertCheck("Chinese landing page links buyer actions", zhIndex.includes("在 GitHub 申请") && zhIndex.includes("邮件下单") && zhIndex.includes("../public-sample.zh-CN.md") && zhIndex.includes("../public-sample.en.md"));
   assertCheck("Chinese landing page links order page", zhIndex.includes("../order/") && zhIndex.includes("无登录下单"));

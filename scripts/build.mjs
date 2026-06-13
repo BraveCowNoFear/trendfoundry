@@ -578,16 +578,19 @@ function heroTierSelector(lang = "en") {
   const isZh = lang === "zh";
   return `<div class="hero-metrics hero-tier-selector" aria-label="${isZh ? "产品分档选择器" : "Product tier selector"}">
     ${pricingTiers
-      .map((tier) => {
+      .map((tier, index) => {
         const selected = tier.featured ? " is-selected" : "";
-        const priceNumber = tier.price.replace(/^\$/, "");
         const name = isZh ? tier.nameZh : tier.name;
         const commitment = isZh ? tier.commitmentZh : tier.commitment;
+        const cadence = isZh ? tier.cadenceZh : tier.cadence;
+        const priceCadence = isZh
+          ? (tier.cadenceZh === "每月" ? `${tier.price}/月` : `${tier.price} ${cadence}`)
+          : (tier.cadence === "monthly" ? `${tier.price}/mo` : `${tier.price} ${cadence}`);
         return `<button class="hero-tier-card${selected}" type="button" data-hero-tier="${escapeHtml(tierSlug(tier))}" aria-pressed="${tier.featured ? "true" : "false"}">
-      <span class="hero-price"><em>$</em><strong data-hero-count="${escapeHtml(priceNumber)}">${escapeHtml(priceNumber)}</strong></span>
+      <span class="hero-tier-number">${String(index + 1).padStart(2, "0")}</span>
       <span class="hero-tier-copy">
         <strong data-i18n-en="${escapeHtml(tier.name)}" data-i18n-zh="${escapeHtml(tier.nameZh)}">${escapeHtml(name)}</strong>
-        <small data-i18n-en="${escapeHtml(tier.commitment)}" data-i18n-zh="${escapeHtml(tier.commitmentZh)}">${escapeHtml(commitment)}</small>
+        <small><b>${escapeHtml(priceCadence)}</b> · <span data-i18n-en="${escapeHtml(tier.commitment)}" data-i18n-zh="${escapeHtml(tier.commitmentZh)}">${escapeHtml(commitment)}</span></small>
       </span>
     </button>`;
       })
@@ -3926,17 +3929,17 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  max-width: 590px;
-  margin-top: 24px;
+  max-width: 680px;
+  margin-top: 22px;
 }
 .hero-tier-card {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 11px;
   align-items: center;
-  min-height: 88px;
+  min-height: 76px;
   border: 1px solid rgba(17, 17, 20, 0.08);
-  border-radius: var(--radius);
+  border-radius: 14px;
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.68);
   color: var(--muted);
@@ -3952,9 +3955,22 @@ h1 {
   outline: 3px solid rgba(0, 113, 227, 0.42);
   outline-offset: 3px;
 }
+.hero-tier-number {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0,113,227,0.2);
+  border-radius: 999px;
+  background: rgba(0,113,227,0.1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+}
 .hero-tier-copy {
   display: grid;
-  gap: 3px;
+  gap: 5px;
   min-width: 0;
 }
 .hero-tier-copy strong {
@@ -3968,26 +3984,12 @@ h1 {
   font-weight: 760;
   line-height: 1.2;
 }
-.hero-price {
-  display: flex;
-  align-items: baseline;
-  gap: 2px;
+.hero-tier-copy small b {
   color: var(--ink);
-}
-.hero-price em {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 850;
-}
-.hero-price strong {
-  color: var(--ink);
-  font-size: 34px;
-  line-height: 1;
+  margin-right: 4px;
+  font-size: 15px;
+  font-weight: 880;
   font-variant-numeric: tabular-nums;
-  transition: transform 180ms ease;
-}
-.hero-metrics.is-counting .hero-price strong {
-  transform: translateY(-1px);
 }
 .hero-actions,
 .handoff-links {
@@ -9895,15 +9897,18 @@ input[type="email"] {
   .hero-metrics {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 100%;
+    gap: 8px;
+    margin-top: 18px;
   }
   .hero-tier-card {
     grid-template-columns: 1fr;
-    gap: 6px;
-    min-height: 62px;
-    padding: 9px;
+    gap: 8px;
+    min-height: 80px;
+    padding: 10px;
   }
-  .hero-price strong {
-    font-size: 26px;
+  .hero-tier-number {
+    width: 28px;
+    height: 28px;
   }
   .hero-tier-copy strong {
     font-size: 12px;
@@ -9911,8 +9916,13 @@ input[type="email"] {
   .hero-tier-copy small {
     font-size: 11px;
   }
-  .hero-price em {
-    font-size: 13px;
+  .hero-tier-copy small b {
+    display: block;
+    margin: 0 0 2px;
+    font-size: 15px;
+  }
+  .utility-links {
+    display: none;
   }
   .scroll-cue {
     margin-top: 16px;
@@ -9934,6 +9944,12 @@ input[type="email"] {
   .product-screen img {
     min-height: 150px;
     object-fit: cover;
+  }
+  .topbar .source-mix-panel {
+    display: none;
+  }
+  .topbar .product-visual {
+    gap: 0;
   }
   .signal-ticker {
     display: none;
@@ -10000,7 +10016,6 @@ input[type="email"] {
 .topbar .brand-word,
 .topbar .brand-lockup,
 .topbar h1,
-.topbar .hero-price,
 .topbar .hero-metrics strong,
 .topbar aside strong {
   color: #fff;
@@ -10029,6 +10044,11 @@ input[type="email"] {
 .topbar .brand-mark::after,
 .topbar .brand-mark span {
   background: #fff;
+}
+.topbar .hero-tier-number {
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
 }
 .topbar .language-option { color: rgba(255,255,255,0.72); }
 .topbar .language-option.active {
